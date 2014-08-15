@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Middle Town Project \n Start Date:03:05:15</string>
+		<key>company</key>
+		<string>PrimeENG</string>
+		<key>street</key>
+		<string>55 Capital Blvd</string>
+		<key>city</key>
+		<string>Rocky Hill</string>
+		<key>state</key>
+		<string>CT</string>
+		<key>zip</key>
+		<string>06107</string>
+		<key>url</key>
+		<string>Art Choquette</string>
+		<key> Inspector phone</key>
+		<string>(860)6905507</string>
+		<key>latitude</key>
+		<real>41.650639</real>
+		<key>longitude</key>
+		<real>-72.66589500000001</real>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Project-2</string>
+		<key>company</key>
+		<string>PrimeAE</string>
+		<key>street</key>
+		<string>250 Main Stree</string>
+		<key>city</key>
+		<string>HartFord</string>
+		<key>state</key>
+		<string>CT</string>
+		<key>zip</key>
+		<string>06107</string>
+		<key>phone</key>
+		<string>(860)6701655</string>
+		<key>url</key>
+		<string>Art Choquette</string>
+		<key>latitude</key>
+		<real>41.649699</real>
+		<key>longitude</key>
+		<real>-72.668531</real>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Project-3</string>
+		<key>company</key>
+		<string>PrimeTECH</string>
+		<key>street</key>
+		<string>50 Capital Blvd</string>
+		<key>city</key>
+		<string>Rocky Hill</string>
+		<key>state</key>
+		<string>CT</string>
+		<key>zip</key>
+		<string>06107</string>
+		<key>phone</key>
+		<string>(860)6901655</string>
+		<key>url</key>
+		<string>Art Choquette</string>
+		<key>latitude</key>
+		<real>41.65701</real>
+		<key>longitude</key>
+		<real>-72.682114</real>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Project-4</string>
+		<key>company</key>
+		<string>3SG</string>
+		<key>street</key>
+		<string>600 Enterprice Drive</string>
+		<key>city</key>
+		<string>Rocky Hill</string>
+		<key>state</key>
+		<string>CT</string>
+		<key>zip</key>
+		<string>06107</string>
+		<key>phone</key>
+		<string>(860) 397-7700</string>
+		<key>url</key>
+		<string>Art Choquette</string>
+		<key>latitude</key>
+		<real>41.637769</real>
+		<key>longitude</key>
+		<real>-72.657051</real>
+	</dict>
+</array>
+</plist>
