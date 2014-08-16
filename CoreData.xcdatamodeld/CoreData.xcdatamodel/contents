@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Assign_project" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Assign_project" representedClassName="Assign_project" syncable="YES">
         <attribute name="assign_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="projectid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ComplianceForm" syncable="YES">
+    <entity name="ComplianceForm" representedClassName="ComplianceForm" syncable="YES">
         <attribute name="comHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="complianceNoticeNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contractNo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -34,14 +34,31 @@
         <attribute name="to" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="DailyInspectionForm" syncable="YES">
+    <entity name="DailyInspectionForm" representedClassName="DailyInspectionForm" syncable="YES">
+        <attribute name="calendar_Days_Used" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="competentPerson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="con_Name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contractor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contractorsHoursOfWork" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dIFHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="e_Mail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_Desc1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_Desc2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_Desc3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_Desc4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_Desc5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_No1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_No2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_No3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_No4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_No5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_QTY1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_QTY2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_QTY3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_QTY4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="i_QTY5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="iFName1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iFName2" optional="YES" attributeType="String" syncable="YES"/>
@@ -54,6 +71,7 @@
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inspectionID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inspectorSign" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="original_Calendar_Days" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="oVJName1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="oVJName2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="oVJName3" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,11 +81,14 @@
         <attribute name="oVJTitle3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="oVJTitle4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p_o_Box" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="printedName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="report_No" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sketch_images" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephone_No" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="town_city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wDODepartmentOrCompany1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wDODepartmentOrCompany2" optional="YES" attributeType="String" syncable="YES"/>
@@ -77,22 +98,31 @@
         <attribute name="wDODescriptionOfWork2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wDODescriptionOfWork3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wDODescriptionOfWork4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workDoneBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip_Code" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Expensedata" syncable="YES">
+    <entity name="DailyInspectionItem" representedClassName="DailyInspectionItem" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="inspectionID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Expensedata" representedClassName="Expensedata" syncable="YES">
         <attribute name="eRDate1" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eRDescription1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eRJobNo1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eRPAMilage1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="eRPARate1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRPARate1" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="eRTotal1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="eRType1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eXReportNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ExpenseReport" syncable="YES">
+    <entity name="ExpenseReport" representedClassName="ExpenseReport" syncable="YES">
         <attribute name="approvedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attachment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="checkNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -109,13 +139,13 @@
         <attribute name="signature" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weekEnding" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
-    <entity name="NonComplianceForm" syncable="YES">
+    <entity name="NonComplianceForm" representedClassName="NonComplianceForm" syncable="YES">
         <attribute name="contractNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contractorResponsible" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dateContractorCompleted" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateContractorCompleted" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateContractorStarted" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dateCRTCB" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCRTCB" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateIssued" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateOfDWRReported" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionOfNonCompliance" optional="YES" attributeType="String" syncable="YES"/>
@@ -133,7 +163,7 @@
         <attribute name="to" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Projects" syncable="YES">
+    <entity name="Projects" representedClassName="Projects" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="client_name" optional="YES" attributeType="String" syncable="YES"/>
@@ -141,7 +171,7 @@
         <attribute name="created_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="inspecter" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="p_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="p_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="p_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p_latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p_longitude" optional="YES" attributeType="String" syncable="YES"/>
@@ -155,7 +185,25 @@
         <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="SummarySheet1" syncable="YES">
+    <entity name="QuantitySummaryDetails" representedClassName="QuantitySummaryDetails" syncable="YES">
+        <attribute name="est_qty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="item_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="unit_price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="QuantitySummaryItems" representedClassName="QuantitySummaryItems" syncable="YES">
+        <attribute name="accum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="daily" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="item_no" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location_station" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity_sum_details_no" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="SummarySheet1" representedClassName="SummarySheet1" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="conPeWork" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="constructionOrder" optional="YES" attributeType="String" syncable="YES"/>
@@ -163,15 +211,15 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="federalAidNumber" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="healWelAndPension" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="healWelAndPension" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="insAndTaxesOnItem1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="itemDescount20per" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lAAmount1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lAAmount2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lAAmount3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lAAmount4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lAAmount5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="insAndTaxesOnItem1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemDescount20per" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lAAmount1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lAAmount2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lAAmount3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lAAmount4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lAAmount5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lAClass1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lAClass2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lAClass3" optional="YES" attributeType="String" syncable="YES"/>
@@ -182,17 +230,18 @@
         <attribute name="lANo3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lANo4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lANo5" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lARate1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lARate2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lARate3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lARate4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lARate5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lATotalHours1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lATotalHours2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lATotalHours3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lATotalHours4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lATotalHours5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lARate1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lARate2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lARate3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lARate4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lARate5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lATotalHours1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lATotalHours2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lATotalHours3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lATotalHours4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lATotalHours5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pOBox" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="printedName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="projectNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reportNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -200,49 +249,49 @@
         <attribute name="sSHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephoneNo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="total" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="totalLabor" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalLabor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="SummarySheet2" syncable="YES">
-        <attribute name="additionalDiscount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="lessDiscount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEAmount1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEAmount2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEAmount3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEAmount4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEAmount5" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    <entity name="SummarySheet2" representedClassName="SummarySheet2" syncable="YES">
+        <attribute name="additionalDiscount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lessDiscount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEAmount1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEAmount2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEAmount3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEAmount4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEAmount5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mEDescription1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mEDescription2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mEDescription3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mEDescription4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mEDescription5" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mEQuantity1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEQuantity2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEQuantity3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEQuantity4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEQuantity5" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEUnitPrice1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEUnitPrice2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEUnitPrice3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEUnitPrice4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mEUnitPrice5" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mEQuantity1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEQuantity2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEQuantity3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEQuantity4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEQuantity5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEUnitPrice1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEUnitPrice2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEUnitPrice3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEUnitPrice4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mEUnitPrice5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sMSSheetNo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="total1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="total2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="total3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="total1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total3" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="SummarySheet3" syncable="YES">
+    <entity name="SummarySheet3" representedClassName="SummarySheet3" syncable="YES">
         <attribute name="contractorRepresentative" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dailyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="dailyTotal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date1" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="date2" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="eQAmount1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQAmount2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQAmount3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQAmount4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQAmount5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="eQAmount1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQAmount2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQAmount3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQAmount4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQAmount5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQIdleActive1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQIdleActive2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQIdleActive3" optional="YES" attributeType="String" syncable="YES"/>
@@ -253,29 +302,29 @@
         <attribute name="eQNo3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQNo4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQNo5" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eQRAte1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQRAte2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQRAte3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQRAte4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQRAte5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="eQRAte1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQRAte2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQRAte3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQRAte4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQRAte5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQSizeandClass1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQSizeandClass2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQSizeandClass3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQSizeandClass4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eQSizeandClass5" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eQTotalHours1" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQTotalHours2" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQTotalHours3" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQTotalHours4" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="eQTotalHours5" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="eQTotalHours1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQTotalHours2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQTotalHours3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQTotalHours4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eQTotalHours5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inspector" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="signature1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="signature2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sMSheetNo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="total_to_date" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="total_to_date" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Users" syncable="YES">
+    <entity name="Users" representedClassName="Users" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -290,14 +339,17 @@
     <elements>
         <element name="Assign_project" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="ComplianceForm" positionX="-36" positionY="90" width="128" height="435"/>
-        <element name="DailyInspectionForm" positionX="0" positionY="171" width="128" height="705"/>
+        <element name="DailyInspectionForm" positionX="0" positionY="171" width="128" height="1035"/>
         <element name="Expensedata" positionX="-18" positionY="162" width="128" height="195"/>
         <element name="ExpenseReport" positionX="18" positionY="180" width="128" height="270"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="375"/>
-        <element name="Projects" positionX="-9" positionY="135" width="128" height="343"/>
-        <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="750"/>
-        <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="448"/>
+        <element name="Projects" positionX="-9" positionY="135" width="128" height="345"/>
+        <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="763"/>
+        <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="450"/>
         <element name="SummarySheet3" positionX="18" positionY="162" width="128" height="645"/>
         <element name="Users" positionX="-54" positionY="18" width="128" height="195"/>
+        <element name="DailyInspectionItem" positionX="-9" positionY="135" width="128" height="135"/>
+        <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="165"/>
+        <element name="QuantitySummaryItems" positionX="9" positionY="153" width="128" height="135"/>
     </elements>
 </model>

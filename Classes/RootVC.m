@@ -1386,8 +1386,8 @@ didReceiveResponse:(NSURLResponse *)response
     NSString *CNo=[dict valueForKey:@"ConNo"];
     
     ExpenseReport *expnse=[[ExpenseReport alloc]init];
-    expnse.ExNo=CNo;
-    expnse.title=[NSString stringWithFormat:@"Expense Report"];
+    expnse.eXReportNo=CNo;
+    //expnse.=[NSString stringWithFormat:@"Expense Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:expnse]];
 }
 

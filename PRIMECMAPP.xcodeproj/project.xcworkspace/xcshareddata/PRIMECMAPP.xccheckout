@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4E9D3228-F062-4159-A62F-9F400D1857C8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PRIMECMAPP</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>79C70F66-5240-4F38-976B-CB1BBE33EBE2</key>
+		<string>https://github.com/kasundissanayake/Primetec.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PRIMECMAPP.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>79C70F66-5240-4F38-976B-CB1BBE33EBE2</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kasundissanayake/Primetec.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>79C70F66-5240-4F38-976B-CB1BBE33EBE2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>79C70F66-5240-4F38-976B-CB1BBE33EBE2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>final_app 2 3 2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
