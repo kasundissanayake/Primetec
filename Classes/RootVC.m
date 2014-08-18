@@ -371,7 +371,7 @@ typedef enum {
     // use core-data
     NSLog(@"Tag: %ld", (long) appDelegate.Tag);
     
-    if(appDelegate.Tag==9)
+    if(appDelegate.Tag==1)
     {
         if (indexPath.section == 0) {
             
@@ -385,7 +385,7 @@ typedef enum {
             self.searchBar.hidden=true;
         }
     }
-    else if (appDelegate.Tag==1)
+    else if (appDelegate.Tag==4)
     {
         if (indexPath.section == 0) {
             
