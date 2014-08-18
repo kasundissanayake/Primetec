@@ -903,17 +903,17 @@ didReceiveResponse:(NSURLResponse *)response
 		Hotel *theHotel = [[Hotel alloc] init];
         
         
-        theHotel.name =[hotel objectForKey:@"p_name"];
+        theHotel.name =[hotel valueForKey:@"p_name"];
         
         
-		theHotel.street = [hotel objectForKey:@"street"];
-		theHotel.city = [hotel objectForKey:@"city"];
-		theHotel.state = [hotel objectForKey:@"state"];
-		theHotel.zip = [hotel objectForKey:@"zip"];
-		theHotel.phone = [hotel objectForKey:@"phone"];
+		theHotel.street = [hotel valueForKey:@"street"];
+		theHotel.city = [hotel valueForKey:@"city"];
+		theHotel.state = [hotel valueForKey:@"state"];
+		theHotel.zip = [hotel valueForKey:@"zip"];
+		theHotel.phone = [hotel valueForKey:@"phone"];
 		//theHotel.url = [hotel objectForKey:@"url"];
-		theHotel.latitude = [[hotel objectForKey:@"p_latitude"] doubleValue];
-		theHotel.longitude = [[hotel objectForKey:@"p_longitude"] doubleValue];
+		theHotel.latitude = [[hotel valueForKey:@"p_latitude"] doubleValue];
+		theHotel.longitude = [[hotel valueForKey:@"p_longitude"] doubleValue];
 		
 		HotelAnnotation *annotation = [[HotelAnnotation alloc] initWithLatitude:theHotel.latitude longitude:theHotel.longitude];
 		annotation.hotel = theHotel;

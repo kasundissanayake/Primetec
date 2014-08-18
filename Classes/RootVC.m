@@ -79,23 +79,10 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    /* NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
-     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Projects"];
-     self.devices = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-     
-     [self.table reloadData];*/
-    
-    
-    //  appDelegate.myViewController = self;
-    
     UIBarButtonItem *btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
     UIBarButtonItem *btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Delete"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
     UIImage* toolbarBackground = [UIImage imageNamed:@"Bar1.png"];
-    //    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
     btnEdit.width = 400;
-    
-    
     CGRect rect2 = CGRectMake(0,660 , self.view.frame.size.width , 0);
     
     toolbar = [[UIToolbar alloc]initWithFrame:rect2];
@@ -118,7 +105,7 @@ typedef enum {
     table.hidden = TRUE;
     // [self.proStatusSeg setHidden:FALSE];
     //end brin
-    appDelegate.tag=1;
+    appDelegate.Tag=4;
     self.table.backgroundColor = [UIColor clearColor];
     self.table.opaque = NO;
     
@@ -144,12 +131,16 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
     
-    [proStatusSeg addTarget:self
-                     action:@selector(pickOne:)
-           forControlEvents:UIControlEventValueChanged];
-    NSLog(@"------- %@",projectDetails);
-    [self getAllProjects];
+    [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
+    projectDetails=[[NSMutableArray alloc]init];
+    projectDetailsSearch=[[NSMutableArray alloc]init];
+    projectDetailsFiltered=[[NSMutableArray alloc]init];
+    
+    [self populateProjectList];
+    [self.table reloadData];
+    
+    //NSLog(@"------- %@",projectDetails);
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"hideToolbar" object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideToolbar) name:@"hideToolbar" object:nil];
 }
@@ -180,54 +171,8 @@ typedef enum {
     toolbar.hidden=FALSE;
 }
 
-
--(void)getAllProjects
+-(void) populateProjectList
 {
-    /*
-     NSString *strURL;
-     
-     if([self connected]){
-     
-     if ([appDelegate.userType isEqualToString:@"I"]) {
-     strURL= [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/get/list/%@",appDelegate.username];
-     NSLog(@"Inspector");
-     }
-     else
-     {
-     strURL= [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/pmget/pmlist/%@",appDelegate.username];
-     
-     }
-     
-     NSURL *apiURL =
-     [NSURL URLWithString:strURL];
-     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-     [urlRequest setHTTPMethod:@"GET"];
-     
-     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];    _receivedData = [[NSMutableData alloc] init];    [connection start];
-     NSLog(@"URL---%@",strURL);
-     
-     HUD = [[MBProgressHUD alloc] initWithView:self.view];
-     [self.navigationController.view addSubview:HUD];
-     HUD.labelText=@"";
-     HUD.dimBackground = YES;
-     HUD.delegate = self;
-     [HUD show:YES];
-     }else if (![self connected]){
-     NSLog(@"Internet Not Connected for URL-------------");
-     NSLog(@"User Type------%@", appDelegate.userTypeOffline);
-     [self selectAllProjects];
-     }
-    NSLog(@"Internet Not Connected for URL-------------");
-    NSLog(@"User Type------%@", appDelegate.userTypeOffline);
-     */
-    
-    [self selectAllProjects];
-}
-
-
-
--(void) selectAllProjects{
-    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
@@ -235,98 +180,38 @@ typedef enum {
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    id objectInstance;
-    NSUInteger indexKey = 0;
-    NSMutableDictionary *responseObject = [[NSMutableDictionary alloc] init];
-    for (objectInstance in objects)
-        [responseObject setObject:objectInstance forKey:[NSNumber numberWithUnsignedInt:indexKey++]];
-    
-    //NSLog(@"response obj------%@", responseObject);
-    
-    projectDetails=[[NSMutableArray alloc]init];
-    projectDetailsSearch=[[NSMutableArray alloc]init];
-    projectDetailsFiltered=[[NSMutableArray alloc]init];
-//    projectDetails=[[[responseObject ]]mutableCopy];
     [projectDetails removeAllObjects];
-    [projectDetails addObject:responseObject];
+    [projectDetailsFiltered removeAllObjects];
+    [projectDetailsSearch removeAllObjects];
+    [appDelegate.projectsArray removeAllObjects];
     
-    NSLog(@"Project Details: %@", [projectDetails description] );
+    id objectInstance;
+    for (objectInstance in objects){
+        [projectDetails addObject:objectInstance];
+        [projectDetailsFiltered addObject:objectInstance];
+        [projectDetailsSearch addObject:objectInstance];
+        [appDelegate.projectsArray addObject:objectInstance];
+    }
+    
+    appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
     
     if ([objects count]>0) {
         for (NSManagedObject *aContact in objects) {
             NSLog(@"name=%@, address=%@, phone=%@",[aContact valueForKey:@"p_name"],[aContact valueForKey:@"city"],[aContact valueForKey:@"phone"]);
-            
         }
     }
-    else{
+    else {
         NSLog(@"no matches found");
     }
-    [self.table reloadData];
 }
 
--(void) viewWillAppear: (BOOL) animated { [self selectAllProjects]; }
-
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
-    [_receivedData appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    [HUD setHidden:YES];
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    NSInteger count =[[responseObject valueForKey:@"project"] count];
-    NSLog(@"count--- %i",count);
-    projectDetails=[[NSMutableArray alloc]init];
-    projectDetailsSearch=[[NSMutableArray alloc]init];
-    projectDetailsFiltered=[[NSMutableArray alloc]init];
-    projectDetails=[[responseObject valueForKey:@"project"]mutableCopy];
-    
-    
-    //    NSLog(@"response--- %@",arrayOfUsers);
-    //    NSLog(@"response Address--- %@",[projectDetails valueForKey:@"address"]);
-    //   p
-    //   projectDetails=[responseObject valueForKey:@"project"];
-    projectDetailsSearch=[[responseObject valueForKey:@"project"] mutableCopy];
-    projectDetailsFiltered=[[responseObject valueForKey:@"project"] mutableCopy];
-    appDelegate.projectsArray=[[responseObject valueForKey:@"project"] mutableCopy];
-    appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
-    
-    NSLog(@"response obj------%@",projectDetails);
-    [table reloadData];
-    // NSString *loginStatus = [[responseObject  valueForKey:@"message"]valueForKey:@"status"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
-}
 
 -(void) pickOne:(id)sender{
     appDelegate.Tag=4;
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    NSLog(@"Segmented ---------%i",[segmentedControl selectedSegmentIndex]);
     NSString *text = [segmentedControl titleForSegmentAtIndex: [segmentedControl selectedSegmentIndex]];
-    NSLog(@"Segmented ---------%@",text);
     NSString *status=@"";
     if([text isEqualToString:@"Current"])
     {
@@ -338,14 +223,10 @@ didReceiveResponse:(NSURLResponse *)response
     }
     
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(status contains[c] %@)",
-                         status];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(status contains[c] %@)", status];
     filteredProjects = [projectDetailsSearch filteredArrayUsingPredicate:pred];
-    NSLog(@"------- filter---%@",filteredProjects);
-    
     [projectDetails removeAllObjects];
     [projectDetails addObjectsFromArray:filteredProjects];
-    NSLog(@"------- filter---%@",filteredProjects);
     
     if([text isEqualToString:@""]|| text ==NULL || [segmentedControl selectedSegmentIndex]==0)
     {
@@ -356,17 +237,12 @@ didReceiveResponse:(NSURLResponse *)response
     [projectDetailsFiltered removeAllObjects];
     [projectDetailsFiltered addObjectsFromArray:projectDetails];
     if (searchBar.text.length!=0) {
-        
         NSPredicate *predSearch = [NSPredicate predicateWithFormat:@"(p_name contains[c] %@ OR projecct_id contains[c] %@ OR address contains[c] %@)",
                                    searchBar.text,searchBar.text,searchBar.text];
-        //[filteredProjects ]
-        filteredProjects = [projectDetails filteredArrayUsingPredicate:predSearch];
-        NSLog(@"------- filter---%@",filteredProjects);
         
+        filteredProjects = [projectDetails filteredArrayUsingPredicate:predSearch];
         [projectDetails removeAllObjects];
         [projectDetails addObjectsFromArray:filteredProjects];
-        
-        
     }
     else if([searchBar.text isEqualToString:@""]|| searchBar.text ==NULL )
     {
@@ -390,9 +266,7 @@ didReceiveResponse:(NSURLResponse *)response
     }
     
     [self.table reloadData];
-    NSLog(@"------- %@",projectDetails);
 }
-
 
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
 {
@@ -467,23 +341,19 @@ didReceiveResponse:(NSURLResponse *)response
 {
     if(appDelegate.Tag==1)
     {
-        //return projectDetails.count;
-        
         return 5;
-        
         self.proStatusSeg.hidden=true;
     }
     else if (appDelegate.Tag==4)
     {
-        return projectDetails.count;
+        return [projectDetails count];
     }
-    
     else if (appDelegate.Tag==5)
     {
         return 4;
     }
     
-    return projectDetails.count;
+    return [projectDetails count];;
 }
 
 
@@ -494,12 +364,12 @@ didReceiveResponse:(NSURLResponse *)response
     ProjectDetailsCell *cell =(ProjectDetailsCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
-        //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         NSArray *nib=[[NSBundle mainBundle]loadNibNamed:@"ProjectDetailsCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
     
     // use core-data
+    NSLog(@"Tag: %ld", (long) appDelegate.Tag);
     
     if(appDelegate.Tag==9)
     {
@@ -519,120 +389,25 @@ didReceiveResponse:(NSURLResponse *)response
     {
         if (indexPath.section == 0) {
             
-            //replace coredata value to cell
-            //appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-            NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext]; // [appDelegate managedObjectContext];
-            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
-            [fetchRequest setEntity:entity];
+            [self populateProjectList];
             
-            NSError *error = nil;
-            NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-            if ([objects count]>0) {
-                
-                for (NSManagedObject *aContact in objects) {
-                    cell.lblProjectName.text = [aContact valueForKey:@"p_name"];
+            NSLog(@"Count: %ld", (long) [projectDetails count]);
+            NSLog(@"Row: %ld", (long)indexPath.row);
+            
+            if ([projectDetails count] > indexPath.row) {
+                NSManagedObject *aProject;
+                for (aProject in projectDetails) {
+                    NSLog(@"Project item %@", [aProject valueForKey:@"p_name"]);
+                    cell.lblProjectName.text = [aProject valueForKey:@"p_name"];
                 }
+                cell.lblProjectName.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"p_name"];
+                cell.lblProjectNo.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"projecct_id"];
+                cell.lblProjectAddress.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"street"];
+                cell.lblCity.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"city"];
             }
-
+            
         }
     }
-    
-    /*
-    if([self connected]){
-        if(appDelegate.Tag==1)
-        {
-            if (indexPath.section == 0) {
-                
-                NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet", @""];
-                cell.lblProjectName.text = titles[indexPath.row];
-                cell.lblProjectNo.text =@"";
-                cell.lblProjectAddress.text=@"";
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.lblCity.text=@"";
-                cell.imageTag.hidden=YES;
-                self.searchBar.hidden=true;
-            }
-        }
-        else if (appDelegate.Tag==4)
-        {
-            if (indexPath.section == 0) {
-                
-                //replace coredata value to cell
-                appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-                
-                NSManagedObjectContext *context = [appDelegate managedObjectContext];
-                
-                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-                NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
-                [fetchRequest setEntity:entity];
-                
-                NSError *error = nil;
-                NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-                if ([objects count]>0) {
-                    
-                    for (NSManagedObject *aContact in objects) {
-                        cell.lblProjectName.text = [aContact valueForKey:@"p_name"];
-                    }
-                }
-                //start brin
-                if ([self connected]) {
-                    cell.lblProjectName.text = [[projectDetails objectAtIndex:indexPath.row ]objectForKey:@"p_name"];
-                    cell.lblProjectNo.text = [[projectDetails valueForKey:@"projecct_id"]objectAtIndex:indexPath.row];
-                    cell.lblProjectAddress.text = [[projectDetails valueForKey:@"street"]objectAtIndex:indexPath.row];
-                    cell.lblCity.text = [[projectDetails valueForKey:@"city"]objectAtIndex:indexPath.row];                }
-                
-                else if (![self connected]){
-                    
-                    //replace coredata value to cell
-                    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    
-                    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-                    
-                    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
-                    [fetchRequest setEntity:entity];
-                    
-                    NSError *error = nil;
-                    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-                    if ([objects count]>0) {
-                        
-                        for (NSManagedObject *aContact in objects) {
-                            
-                            cell.lblProjectName.text = [aContact valueForKey:@"p_name"];
-                            //                cell.lblProjectNo.text = [[projectDetails valueForKey:@"projecct_id"]objectAtIndex:indexPath.row];
-                            //                cell.lblProjectAddress.text = [[projectDetails valueForKey:@"street"]objectAtIndex:indexPath.row];
-                            //                cell.lblCity.text = [[projectDetails valueForKey:@"city"]objectAtIndex:indexPath.row];
-                            
-                        }
-                    }
-                    else{
-                    }
-                }
-                
-                //end brin
-                
-                //            if([[[projectDetails valueForKey:@"status"]objectAtIndex:indexPath.row]isEqualToString:@"0"])
-                //            {
-                //
-                //                cell.imageTag.image=[UIImage imageNamed:@"current12.png"];
-                //            }
-                //            else if([[[projectDetails valueForKey:@"status"]objectAtIndex:indexPath.row]isEqualToString:@"1"]){
-                //
-                //                cell.imageTag.image=[UIImage imageNamed:@"final.png"];
-                //
-                //            }
-                //            else
-                //            {
-                //
-                //            cell.imageTag.image=nil;
-                //
-                //            }
-            }
-        }
-    }
-    */
-    
     return cell;
 }
 
@@ -677,7 +452,7 @@ didReceiveResponse:(NSURLResponse *)response
         }
     }
     
-    [self getAllProjects];
+    [self populateProjectList];
     self.Frontimage.hidden=YES;
     [self showToolbar];
     
