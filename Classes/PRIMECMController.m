@@ -36,17 +36,18 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         
         if (error) {
+          NSLog(@"Failed to download complete json");
           //  [_delegate resourceFailed:error];
         } else {
             NSString *responsestr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-            NSLog(@"%@",responsestr);
+            //NSLog(@"%@",responsestr);
+            NSLog(@"Successfully downloaded complete json");
             
             NSError *jsonError;
             id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
             
             if (!jsonError) {
-               // [self parseResponse:jsonResponse];
-                
+               [self parseResponse:jsonResponse];
                // [_delegate resourceLoaded];
             } else {
                 NSLog(@"%@", [jsonError description]);
@@ -57,31 +58,23 @@
 }
 
 - (void)parseResponse:(id)responseObject {
-    
-    NSLog(@"%@", responseObject);
-    
+    //NSLog(@"Response object: %@", responseObject);
     NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-    
     if (responseDictionary) {
         
         NSArray *assignProjectArray = [responseDictionary objectForKey:@"assign_project"];
-        
         if (assignProjectArray) {
             for (NSDictionary *assignProject in assignProjectArray) {
                 [self parseAssignProject:assignProject];
             }
         }
-        
         NSArray *complianceFormArray = [responseDictionary objectForKey:@"complianceForm"];
-        
         if (complianceFormArray) {
             for (NSDictionary *complianceForm in complianceFormArray) {
                 [self parseComplianceForm:complianceForm];
             }
         }
-        
         NSArray *dailyInspectionFormArray = [responseDictionary objectForKey:@"dailyInspectionForm"];
-        
         if (dailyInspectionFormArray) {
             for (NSDictionary *dailyInspectionForm in dailyInspectionFormArray) {
                 [self parsedailyInspectionForm:dailyInspectionForm];
@@ -177,8 +170,7 @@
             }
         }
         
-    }
-    
+    }    
     [[NSNotificationCenter defaultCenter] postNotificationName:ROOT_RELOAD_NOTIFICATION object:self];
 }
 
@@ -239,11 +231,11 @@
         
         NSError *retrieveError;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"complianceForm"
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ComplianceNoticeNo = %@)", [payload objectForKey:@"ComplianceNoticeNo"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", [payload objectForKey:@"ComplianceNoticeNo"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -254,7 +246,7 @@
         
         if (!assp) {
             assp = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"complianceForm"
+                    insertNewObjectForEntityForName:@"ComplianceForm"
                     inManagedObjectContext:managedContext];
         }
         
@@ -669,6 +661,7 @@
 }
 
 - (void)parseProjects:(id)payload {
+    //NSLog(@"Project payload: %@", payload);
     
     if ([payload objectForKey:@"id"]) {
         
@@ -735,6 +728,8 @@
         NSError *saveError;
         if (![managedContext save:&saveError]) {
             NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        }else{
+            NSLog(@"Successfully saved Project with id: %@", [assp id]);
         }
     }
 }
@@ -940,7 +935,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SMSSheetNo = %@)", [payload objectForKey:@"id"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSSheetNo = %@)", [payload objectForKey:@"id"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -1003,7 +998,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SMSheetNo = %@)", [payload objectForKey:@"id"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)", [payload objectForKey:@"id"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];

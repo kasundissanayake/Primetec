@@ -18,6 +18,7 @@
 #import "reportDashboard.h"
 #import "ProjectDetailsCell.h"
 #import "Reachability.h"
+#import "PRIMECMAPPUtils.h"
 
 typedef enum {
 	kkDirections,
@@ -227,23 +228,45 @@ typedef enum {
 
 -(void) selectAllProjects{
     
-    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    id objectInstance;
+    NSUInteger indexKey = 0;
+    NSMutableDictionary *responseObject = [[NSMutableDictionary alloc] init];
+    for (objectInstance in objects)
+        [responseObject setObject:objectInstance forKey:[NSNumber numberWithUnsignedInt:indexKey++]];
+    
+    //NSLog(@"response obj------%@", responseObject);
+    
+    projectDetails=[[NSMutableArray alloc]init];
+    projectDetailsSearch=[[NSMutableArray alloc]init];
+    projectDetailsFiltered=[[NSMutableArray alloc]init];
+//    projectDetails=[[[responseObject ]]mutableCopy];
+    [projectDetails removeAllObjects];
+    [projectDetails addObject:responseObject];
+    
+    NSLog(@"Project Details: %@", [projectDetails description] );
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
+    
     if ([objects count]>0) {
         for (NSManagedObject *aContact in objects) {
             NSLog(@"name=%@, address=%@, phone=%@",[aContact valueForKey:@"p_name"],[aContact valueForKey:@"city"],[aContact valueForKey:@"phone"]);
-            [self.table reloadData];
+            
         }
     }
     else{
         NSLog(@"no matches found");
     }
+    [self.table reloadData];
 }
+
+-(void) viewWillAppear: (BOOL) animated { [self selectAllProjects]; }
 
 
 - (void)connection:(NSURLConnection *)connection
@@ -498,9 +521,7 @@ didReceiveResponse:(NSURLResponse *)response
             
             //replace coredata value to cell
             appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-            
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
-            
+            NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext]; // [appDelegate managedObjectContext];
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
             [fetchRequest setEntity:entity];

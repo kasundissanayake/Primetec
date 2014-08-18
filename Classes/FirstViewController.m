@@ -152,7 +152,7 @@
 	self.calloutDetailController = controller;
 	
     
-	    NSLog(@"Annotations===== %@",hotelAnnotations);
+    NSLog(@"Annotations===== %@",hotelAnnotations);
     
     if([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"])
     {
@@ -196,7 +196,7 @@
     
     
     popMenu=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
-        [popMenu presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
+    [popMenu presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                     permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
     
@@ -243,42 +243,42 @@
     
     
     [self saveNewProject];
-  }
+}
 -(void)saveNewProject
 {
     
     
     
     if([self connected]){
-    
-    
-    
-    
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/",appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
-    
-    
-    
-    NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"URL---- %@",strURL);
-   
-    NSURL *apiURL =
-    [NSURL URLWithString:uencodedUrl];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    [urlRequest setHTTPMethod:@"POST"];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+        
+        
+        
+        
+        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/",appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
+        
+        
+        
+        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"URL---- %@",strURL);
+        
+        NSURL *apiURL =
+        [NSURL URLWithString:uencodedUrl];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+        [urlRequest setHTTPMethod:@"POST"];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+        
+        _receivedData = [[NSMutableData alloc] init];
+        
+        [connection start];
+        NSLog(@"URL---%@",strURL);
+        
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.navigationController.view addSubview:HUD];
+        HUD.labelText=@"";
+        HUD.dimBackground = YES;
+        HUD.delegate = self;
+        [HUD show:YES];
         
         
         
@@ -291,19 +291,19 @@
         
         
         [self saveOffProject];
-    
-    
-    
+        
+        
+        
     }
     
     
 }
 
-//save project details in core data project table 
+//save project details in core data project table
 
 -(void)saveOffProject{
-
-
+    
+    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -331,8 +331,8 @@
         
         
     }
-
-
+    
+    
 }
 
 
@@ -406,7 +406,7 @@ didReceiveResponse:(NSURLResponse *)response
 -(void)displayPopupView
 {
     PopUpViewController *controller = [[PopUpViewController alloc] initWithNibName:@"PopUpViewController" bundle:nil];
-
+    
     
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     [self presentViewController:controller animated:YES completion:nil];
@@ -458,7 +458,7 @@ didReceiveResponse:(NSURLResponse *)response
          
          
      }];
-    }
+}
 -(void)displayBottomBar
 
 {
@@ -658,7 +658,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        if (isMapTypes) {
+    if (isMapTypes) {
         
         if (indexPath.section == 0 && indexPath.row == 0)
         {
@@ -779,15 +779,34 @@ didReceiveResponse:(NSURLResponse *)response
         if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
         {
             NSLog(@"syncing all!");
+            HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.navigationController.view addSubview:HUD];
+            HUD.labelText=@"";
+            HUD.dimBackground = YES;
+            HUD.delegate = self;
+            [HUD show:YES];
+            
             [con synchronizeWithServer:url];
+            
+            [HUD setHidden:YES];
         }
         
         
         if (indexPath.section == 0 && indexPath.row == 4 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
         {
             NSLog(@"syncing all!");
+            HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.navigationController.view addSubview:HUD];
+            HUD.labelText=@"";
+            HUD.dimBackground = YES;
+            HUD.delegate = self;
+            [HUD show:YES];
+            
+            
             [con synchronizeWithServer:url];
-        }        
+            
+            [HUD setHidden:YES];
+        }
     }
     //[popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
@@ -800,7 +819,7 @@ didReceiveResponse:(NSURLResponse *)response
 {
     
     isMapTypes=NO;
-  
+    
     [tblView reloadData];
     UIView *popoverView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
     
@@ -813,7 +832,7 @@ didReceiveResponse:(NSURLResponse *)response
     tblView.dataSource=self;
     
     popMap=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
-      [popMap presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
+    [popMap presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                    permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
     
@@ -959,7 +978,7 @@ didReceiveResponse:(NSURLResponse *)response
 
 
 - (NSArray *)hotels {
-       hotels = [appDelegate.projectsArray mutableCopy];
+    hotels = [appDelegate.projectsArray mutableCopy];
     NSLog(@"Hotels----%@",hotels);
 	return hotels;
 }
