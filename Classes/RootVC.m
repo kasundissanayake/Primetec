@@ -501,7 +501,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     // use core-data
     
-    if(appDelegate.Tag==1)
+    if(appDelegate.Tag==9)
     {
         if (indexPath.section == 0) {
             
@@ -515,12 +515,12 @@ didReceiveResponse:(NSURLResponse *)response
             self.searchBar.hidden=true;
         }
     }
-    else if (appDelegate.Tag==4)
+    else if (appDelegate.Tag==1)
     {
         if (indexPath.section == 0) {
             
             //replace coredata value to cell
-            appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+            //appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
             NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext]; // [appDelegate managedObjectContext];
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];

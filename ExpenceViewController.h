@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "PRIMECMController.h"
 
 @interface ExpenceViewController : UIViewController<UIPickerViewDelegate,UIPopoverControllerDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, MBProgressHUDDelegate >
 
@@ -42,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *ERDescription;
 @property (weak, nonatomic) IBOutlet UITextField *ERJobNo;
 @property (weak, nonatomic) IBOutlet UITextField *ERType;
+
+@property (strong, nonatomic) PRIMECMController *controller;
 
 
 @end

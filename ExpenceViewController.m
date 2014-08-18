@@ -13,6 +13,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
+#import "PopUpViewController.h"
 
 
 @interface ExpenceViewController ()
@@ -94,7 +95,7 @@
 {
     [super viewDidLoad];
     [self deleteAllFiles];
-    
+    _controller = [[PRIMECMController alloc]init];
      count=0;
     
     comNoticeNo=@"";
@@ -134,11 +135,28 @@
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
     
+    NSString *expID = [_controller getExpenceIdByProjID:appDelegate.projId];
+    
+    if(expID != nil)
+        
+    {
+        
+        ExpID=expID;
+        
+        NSLog(@"Inthe");
+    }
+    
+    else{
+        
+        
+        ExpID=@"0";
+         NSLog(@"Intheeeee");
+        
+    }
     
     
     
-    
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
+    /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -155,7 +173,7 @@
     
     
     [connection start];
-    NSLog(@"URL---%@",strURL);
+    NSLog(@"URL---%@",strURL);*/
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
@@ -1176,6 +1194,7 @@
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
+    
     
     NSURL *apiURL =
     [NSURL URLWithString:unicodeLink];

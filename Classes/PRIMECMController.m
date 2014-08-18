@@ -47,12 +47,11 @@
             id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
             
             if (!jsonError) {
-<<<<<<< HEAD
+
                [self parseResponse:jsonResponse];
-=======
+
                 [self parseResponse:jsonResponse];
                 
->>>>>>> FETCH_HEAD
                // [_delegate resourceLoaded];
             } else {
                 NSLog(@"%@", [jsonError description]);
@@ -1128,10 +1127,508 @@
     }
 }
 
+- (NSString *) getExpenceIdByProjID:(NSString *)projId{
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %d)", projId];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *speakers = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (speakers && [speakers count] > 0) {
+        return [speakers objectAtIndex:0];
+    }
+    
+    return nil;
+}
+
+
+//ComplienceForm
+-(void)uploadComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName{
+    
+    ComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:imageName forKey:@"images_uploaded"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+    
+    
+}
+
+-(void)uploadComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature{
+    
+    ComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:signature forKey:@"signature"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+-(void)uploadComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
+    
+    ComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:sketch forKey:@"sketch_images"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+- (void)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
+                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
+{
+    
+    ComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"complianceNoticeNo"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+        
+        NSString *str = [dict valueForKey:@"complianceNoticeNo"] ;
+        NSArray *arr = [str componentsSeparatedByString:@"M"];
+        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"CM%d",newID];
+
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"complianceNoticeNo"];
+    [assp setValue:contractNo forKey:@"contractNo"];
+    [assp setValue:title forKey:@"comHeader"];
+    [assp setValue:proDesc forKey:@"projectDescription"];
+    [assp setValue:comTitle forKey:@"title"];
+    [assp setValue:project forKey:@"project"];
+    [assp setValue:projId forKey:@"Project_id"];
+    [assp setValue:conRespon forKey:@"contractorResponsible"];
+    [assp setValue:to forKey:@"To"];
+    [assp setValue:userId forKey:@"userID"];
+    [assp setValue:correctiveAct forKey:@"correctiveActionCompliance"];
+    [assp setValue:signature forKey:@"signature"];
+    [assp setValue:printedName forKey:@"printedName"];
+    [assp setValue:dateIssued forKey:@"dateIssued"];
+    [assp setValue:dateConStarted forKey:@"dateContractorStarted"];
+    [assp setValue:dateConCopleted forKey:@"dateContractorCompleted"];
+    [assp setValue:dateRawReport forKey:@"dateOfDWRReported"];
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+//Non complience
+
+-(void)uploadNonComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName{
+    
+    NonComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"NonComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:imageName forKey:@"images_uploaded"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+    
+    
+}
+
+-(void)uploadNonComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature{
+    
+    NonComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"NonComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:signature forKey:@"signature"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+-(void)uploadNonComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
+    
+    NonComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %@)", comNotiseNo];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"NonComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:sketch forKey:@"sketch_images"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+- (void)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
+                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
+{
+    
+    NonComplianceForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+     
+        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"%d",newID];
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"NonComplianceForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"id"];
+    [assp setValue:contractNo forKey:@"contractNo"];
+    [assp setValue:title forKey:@"comHeader"];
+    [assp setValue:proDesc forKey:@"projectDescription"];
+    [assp setValue:comTitle forKey:@"title"];
+    [assp setValue:project forKey:@"project"];
+    [assp setValue:projId forKey:@"Project_id"];
+    [assp setValue:conRespon forKey:@"contractorResponsible"];
+    [assp setValue:to forKey:@"To"];
+    [assp setValue:userId forKey:@"userID"];
+    [assp setValue:correctiveAct forKey:@"correctiveActionCompliance"];
+    [assp setValue:signature forKey:@"signature"];
+    [assp setValue:printedName forKey:@"printedName"];
+    [assp setValue:dateIssued forKey:@"dateIssued"];
+    [assp setValue:dateConStarted forKey:@"dateContractorStarted"];
+    [assp setValue:dateConCopleted forKey:@"dateContractorCompleted"];
+    [assp setValue:dateRawReport forKey:@"dateOfDWRReported"];
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+
+//Expences
+
+-(void)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
+    
+    Expensedata *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %@)", RecId];
+    [fetchRequest setPredicate:predicate];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Expensedata"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:username forKey:@"username"];
+    [assp setValue:imageName forKey:@"images_uploaded"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+    
+    
+}
+
+
+
+- (void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
+{
+    
+    Expensedata *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+        
+        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"%d",newID];
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Expensedata"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:expId forKey:@"id"];
+    [assp setValue:date forKey:@"eRDate1"];
+    [assp setValue:desc forKey:@"eRDescription1"];
+    [assp setValue:jobNo forKey:@"eRJobNo1"];
+    [assp setValue:mil forKey:@"eRPAMilage1"];
+    [assp setValue:rate forKey:@"eRPARate1"];
+   
+    [assp setValue:totl forKey:@"eRTotal1"];
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
 
 
 
 
+
+
+- (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
+{
+    
+    ExpenseReport *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReport"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+        
+        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"%d",newID];
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ExpenseReport"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:expId forKey:@"id"];
+    [assp setValue:header forKey:@"eRFHeader"];
+    [assp setValue:projId forKey:@"project_id"];
+
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
 
 
 
