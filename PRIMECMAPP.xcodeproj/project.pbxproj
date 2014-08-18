@@ -180,8 +180,8 @@
 		52771E831951A9F300B5F7C6 /* lin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52771E821951A9F300B5F7C6 /* lin1.png */; };
 		52E73C7E1973CB6E004A0418 /* userdetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C7D1973CB6E004A0418 /* userdetails.m */; };
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
-		55BC138819A143B4005C79B4 /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A5A199F1EF70091D5D8 /* ComplianceForm.m */; };
 		9401EBDC1988D54900A8FE7F /* projectCodata.m in Sources */ = {isa = PBXBuildFile; fileRef = 9401EBDB1988D54900A8FE7F /* projectCodata.m */; };
+		980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 980D518219A1E55300EBD57D /* ComplianceForm.m */; };
 		9821A0FA199DC3B200F9E96C /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9821A0F9199DC3B200F9E96C /* libBlocksKit.a */; };
 		98D14A58199F19040091D5D8 /* PRIMECMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A57199F19040091D5D8 /* PRIMECMController.m */; };
 		98D14A67199F1EF80091D5D8 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A66199F1EF80091D5D8 /* Users.m */; };
@@ -575,11 +575,11 @@
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9401EBDA1988D54900A8FE7F /* projectCodata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = projectCodata.h; sourceTree = "<group>"; };
 		9401EBDB1988D54900A8FE7F /* projectCodata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = projectCodata.m; sourceTree = "<group>"; };
+		980D518119A1E55300EBD57D /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
+		980D518219A1E55300EBD57D /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		9821A0F9199DC3B200F9E96C /* libBlocksKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBlocksKit.a; path = "DrawingLib/3rd Party/BlocksKit/libBlocksKit.a"; sourceTree = "<group>"; };
 		98D14A56199F19040091D5D8 /* PRIMECMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRIMECMController.h; sourceTree = "<group>"; };
 		98D14A57199F19040091D5D8 /* PRIMECMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRIMECMController.m; sourceTree = "<group>"; };
-		98D14A59199F1EF70091D5D8 /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
-		98D14A5A199F1EF70091D5D8 /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		98D14A62199F1EF80091D5D8 /* ExpenseReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpenseReport.h; path = ../ExpenseReport.h; sourceTree = "<group>"; };
 		98D14A63199F1EF80091D5D8 /* ExpenseReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpenseReport.m; path = ../ExpenseReport.m; sourceTree = "<group>"; };
 		98D14A65199F1EF80091D5D8 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = ../Users.h; sourceTree = "<group>"; };
@@ -732,7 +732,7 @@
 		FCD7A9EB18EB30A6006008D9 /* Hotels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Hotels.plist; sourceTree = "<group>"; };
 		FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GIKMapView.xib; sourceTree = "<group>"; };
 		FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotelDetailTableView.xib; sourceTree = "<group>"; };
-		FCD7AA1118EB30DD006008D9 /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplianceForm.h; sourceTree = "<group>"; };
+		FCD7AA1118EB30DD006008D9 /* ComplianceFormVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplianceFormVC.h; sourceTree = "<group>"; };
 		FCD7AA1218EB30DD006008D9 /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplianceForm.m; sourceTree = "<group>"; };
 		FCD7AA1318EB30DD006008D9 /* ComplianceForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComplianceForm.xib; sourceTree = "<group>"; };
 		FCD7AA1618EB30FE006008D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1350,6 +1350,8 @@
 		98D14A7A199F1F1C0091D5D8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				980D518119A1E55300EBD57D /* ComplianceForm.h */,
+				980D518219A1E55300EBD57D /* ComplianceForm.m */,
 				98D14AC1199F6DB10091D5D8 /* SummarySheet3.h */,
 				98D14AC2199F6DB10091D5D8 /* SummarySheet3.m */,
 				98D14ABE199F6A0C0091D5D8 /* SummarySheet2.h */,
@@ -1376,8 +1378,6 @@
 				98D14A66199F1EF80091D5D8 /* Users.m */,
 				98D14A62199F1EF80091D5D8 /* ExpenseReport.h */,
 				98D14A63199F1EF80091D5D8 /* ExpenseReport.m */,
-				98D14A59199F1EF70091D5D8 /* ComplianceForm.h */,
-				98D14A5A199F1EF70091D5D8 /* ComplianceForm.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1501,7 +1501,7 @@
 		FCD7A9C018EB30A6006008D9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FCD7AA1118EB30DD006008D9 /* ComplianceForm.h */,
+				FCD7AA1118EB30DD006008D9 /* ComplianceFormVC.h */,
 				FCD7AA1218EB30DD006008D9 /* ComplianceForm.m */,
 				FCD7A9DC18EB30A6006008D9 /* ComplainceView.m */,
 				FCD7AA1318EB30DD006008D9 /* ComplianceForm.xib */,
@@ -1940,7 +1940,7 @@
 				4B8CE21A19418749001F8E3B /* SDRectangleFillTool.m in Sources */,
 				FC245ACF18EC899E00950C49 /* Summary_3_ViewController.m in Sources */,
 				E98754671462A4D800E603C6 /* FirstViewController.m in Sources */,
-				55BC138819A143B4005C79B4 /* ComplianceForm.m in Sources */,
+				980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */,
 				4B8CE21519418749001F8E3B /* SDEraserTool.m in Sources */,
 				4B8CE1F619418749001F8E3B /* BGRSLoupeLayer.m in Sources */,
 				FC245AB118EC60C200950C49 /* DailyInspectionViewController.m in Sources */,
