@@ -20,6 +20,8 @@
 @property(nonatomic,strong)IBOutlet UISegmentedControl *proStatusSeg;
 @property(nonatomic,strong)IBOutlet UISearchBar *searchBar;
 
++ (void) reloadData;
+
 @end
 
 

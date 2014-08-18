@@ -23,21 +23,22 @@
 #import "SummarySheet3.h"
 #import "Users.h"
 
+
 @implementation PRIMECMController
 
 - (void)synchronizeWithServer:(NSString *)url {
     
     NSURL *endpoint = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:endpoint cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
-  
+    
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         
         if (error) {
-          NSLog(@"Failed to download complete json");
-          //  [_delegate resourceFailed:error];
+            NSLog(@"Failed to download complete json");
+            //  [_delegate resourceFailed:error];
         } else {
             NSString *responsestr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             //NSLog(@"%@",responsestr);
@@ -47,15 +48,11 @@
             id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
             
             if (!jsonError) {
-
-               [self parseResponse:jsonResponse];
-
                 [self parseResponse:jsonResponse];
-                
-               // [_delegate resourceLoaded];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];                
             } else {
                 NSLog(@"%@", [jsonError description]);
-              //  [_delegate resourceFailed:error];
+                //  [_delegate resourceFailed:error];
             }
         }
     }];
@@ -174,7 +171,7 @@
             }
         }
         
-    }    
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:ROOT_RELOAD_NOTIFICATION object:self];
 }
 
@@ -203,8 +200,8 @@
         
         if (!assp) {
             assp = [NSEntityDescription
-                         insertNewObjectForEntityForName:@"Assign_project"
-                         inManagedObjectContext:managedContext];
+                    insertNewObjectForEntityForName:@"Assign_project"
+                    inManagedObjectContext:managedContext];
         }
         
         [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
@@ -400,11 +397,11 @@
         [assp setI_QTY3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY3"]]];
         [assp setI_QTY4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY4"]]];
         [assp setI_QTY5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY5"]]];
-
+        
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-
+        
         
         if ([payload objectForKey:@"Date"]) {
             [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"Date"]]];
@@ -825,7 +822,7 @@
         if ([payload objectForKey:@"date"]) {
             [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"date"]]];
         }
-
+        
         NSError *saveError;
         if (![managedContext save:&saveError]) {
             NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
@@ -953,7 +950,7 @@
                     insertNewObjectForEntityForName:@"SummarySheet2"
                     inManagedObjectContext:managedContext];
         }
-
+        
         [assp setSMSSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSSheetNo"]]];
         [assp setMEDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription1"]]];
         [assp setMEDescription2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription2"]]];
@@ -1112,7 +1109,7 @@
         [assp setUser_type:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"user_type"]]];
         [assp setId_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"id_no"]]];
         [assp setActive:[NSNumber numberWithInt:[[payload objectForKey:@"active"] intValue]]];
-
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
@@ -1277,7 +1274,7 @@
     }
     
     NSString *newIDD = [NSString stringWithFormat:@"CM%d",newID];
-
+    
     
     if (!assp) {
         assp = [NSEntityDescription
@@ -1402,7 +1399,7 @@
 }
 
 - (void)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
-                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
+                   dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
 {
     
     NonComplianceForm *assp;
@@ -1430,7 +1427,7 @@
     NSInteger newID = 0;
     
     for (NSDictionary *dict in existingIDs) {
-     
+        
         NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
         
         if (IDToCompare >= newID) {
@@ -1559,7 +1556,7 @@
     [assp setValue:jobNo forKey:@"eRJobNo1"];
     [assp setValue:mil forKey:@"eRPAMilage1"];
     [assp setValue:rate forKey:@"eRPARate1"];
-   
+    
     [assp setValue:totl forKey:@"eRTotal1"];
     
     
@@ -1622,7 +1619,7 @@
     [assp setValue:expId forKey:@"id"];
     [assp setValue:header forKey:@"eRFHeader"];
     [assp setValue:projId forKey:@"project_id"];
-
+    
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {

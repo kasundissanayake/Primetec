@@ -14,14 +14,13 @@
 #import "Reachability.h"
 #import "projectCodata.h"
 #import "PRIMECMController.h"
-
+#import "RootVC.h"
 
 #define METERS_PER_MILE 1609.344
 
 @interface FirstViewController ()
 {
     NSMutableArray *hotelAnnotations;
-    
     UITableView *tblView;
     NSArray *tableData;
     UIViewController *popoverContent;
@@ -43,18 +42,14 @@
     UIBarButtonItem *btnMapType;
     BOOL isMapTypes;
     NSArray *menuItems;
-    
     UIPopoverController *popMap;
     UIPopoverController *popMenu;
     NSMutableArray *hotels;
     MBProgressHUD *HUD;
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    
 }
 
 
@@ -191,42 +186,29 @@
     popoverContent.view=tblView; //Adding tableView to popover
     tblView.delegate=self;
     tblView.dataSource=self;
-    
-    
-    
-    
     popMenu=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popMenu presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                     permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-    
     [popMap dismissPopoverAnimated:YES];
-    
-    
-    
 }
+
+
 -(void)addMapGesture
 {
     addPinsTrue = @"1";
-    
-    
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self
-                                                                         action:@selector(handleGesture:)];
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
     tgr.numberOfTapsRequired = 1;
-    
     [mapView addGestureRecognizer:tgr];
     
 }
+
+
 -(IBAction)addNewMapPoint:(id)sender
 {
-    
-    
     self.mapView.userInteractionEnabled = YES;
-    
-    
     Hotel *theHotel = [[Hotel alloc] init];
     theHotel.name = [defaults objectForKey:@"Project Name"];
-    
     theHotel.street = [defaults objectForKey:@"Street"];
     theHotel.city = [defaults objectForKey:@"City"];
     theHotel.state = [defaults objectForKey:@"State"];
@@ -240,24 +222,14 @@
     annotation.hotel = theHotel;
     
     [self.mapView addAnnotation:annotation];
-    
-    
     [self saveNewProject];
 }
+
+
 -(void)saveNewProject
 {
-    
-    
-    
     if([self connected]){
-        
-        
-        
-        
         NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/",appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
-        
-        
-        
         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"URL---- %@",strURL);
         
@@ -279,24 +251,10 @@
         HUD.dimBackground = YES;
         HUD.delegate = self;
         [HUD show:YES];
-        
-        
-        
     }
-    
-    
-    
-    
     else if (![self connected]){
-        
-        
         [self saveOffProject];
-        
-        
-        
     }
-    
-    
 }
 
 //save project details in core data project table
@@ -469,10 +427,6 @@ didReceiveResponse:(NSURLResponse *)response
     {
         
         bottomView.backgroundColor=[UIColor whiteColor];
-        
-        
-        
-        
         // first reduce the view to 1/100th of its original dimension
         CGAffineTransform trans = CGAffineTransformScale(bottomView.transform, 0.01, 0.01);
         bottomView.transform = trans;	// do it instantly, no animation
@@ -494,10 +448,6 @@ didReceiveResponse:(NSURLResponse *)response
         [buttonMaps setTitle:@"Maps" forState:UIControlStateNormal];
         buttonMaps.frame = CGRectMake(10.0, 10.0, 20.0, 30.0);
         [bottomView addSubview:buttonMaps];
-        
-        
-        
-        
     }
     else
     {
@@ -516,9 +466,6 @@ didReceiveResponse:(NSURLResponse *)response
     
     
 }
-
-
-
 
 
 -(IBAction)showDashboard:(id)sender
@@ -551,17 +498,8 @@ didReceiveResponse:(NSURLResponse *)response
         CLLocationCoordinate2D coordinate;
         
         CGPoint touchPoint = [gestureRecognizer locationInView:mapView];
-        
-        
-        
         coordinate = [mapView convertPoint:touchPoint toCoordinateFromView:mapView];
-        
-        
-        
         NSLog(@"latitude  %f longitude %f",coordinate.latitude,coordinate.longitude);
-        
-        
-        
         CGPoint point = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D locCoord = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
         
@@ -571,22 +509,11 @@ didReceiveResponse:(NSURLResponse *)response
         
         //brin
         GIKAnnotation *newAnnotation = [[GIKAnnotation alloc] init];
-        
-        
-        
         [newAnnotation setCoordinate:locCoord];
         [self.mapView addAnnotation:newAnnotation];
-        
-        
         addPinsTrue = @"0";
-        
         self.mapView.userInteractionEnabled = NO;
-        
     }
-    
-    
-    
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -598,10 +525,6 @@ didReceiveResponse:(NSURLResponse *)response
     }
     return 1;
 }
-
-
-
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -652,9 +575,6 @@ didReceiveResponse:(NSURLResponse *)response
 
 
 
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -680,49 +600,26 @@ didReceiveResponse:(NSURLResponse *)response
             NSLog(@"0000000000000000000000000000000000");
             [self.mapView showsUserLocation];
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     else
     {
         if (indexPath.section == 0 && indexPath.row == 0)
-            
         {
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showSProject" object:nil];
-            
-            
-            
         }
         
         
         if(indexPath.section==0 && indexPath.row==1 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
-            
-            
         {
-            
             [self displayPopupView];
             appDelegate.Tag=5;
-            
         }
         if(indexPath.section==0 && indexPath.row==1 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
             
         {
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showFirst" object:nil];
-            
-            
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"logoutView" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"logouttableView" object:nil];
             
@@ -802,7 +699,6 @@ didReceiveResponse:(NSURLResponse *)response
             HUD.delegate = self;
             [HUD show:YES];
             
-            
             [con synchronizeWithServer:url];
             
             [HUD setHidden:YES];
@@ -834,13 +730,7 @@ didReceiveResponse:(NSURLResponse *)response
     popMap=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popMap presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                    permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
-    
-    
-    
     [popMenu dismissPopoverAnimated:YES];
-    
-    
 }
 
 
@@ -859,10 +749,6 @@ didReceiveResponse:(NSURLResponse *)response
     CGRect frame;
     
     frame = CGRectMake(648,136, 40,40);
-    
-    
-    
-    
     btnCloseAddImage = [[UIButton alloc]initWithFrame:frame];
     [btnCloseAddImage setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [btnCloseAddImage setBackgroundImage:imageHighLighted forState:UIControlStateHighlighted];
@@ -878,15 +764,9 @@ didReceiveResponse:(NSURLResponse *)response
 {
     imageSubView.layer.cornerRadius=5;
     imageSubView.layer.masksToBounds=YES;
-    
     imageSubView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     imageSubView.layer.borderWidth = 3.0f;
-    
-    
-    
     NSLog(@"hello");
-    
-    
 }
 
 
@@ -896,16 +776,8 @@ didReceiveResponse:(NSURLResponse *)response
     hotels = [appDelegate.projectsArray mutableCopy];
 	hotelAnnotations = [[NSMutableArray alloc]init];
 	for (NSDictionary *hotel in self.hotels) {
-        
-        
-        
-		
 		Hotel *theHotel = [[Hotel alloc] init];
-        
-        
         theHotel.name =[hotel valueForKey:@"p_name"];
-        
-        
 		theHotel.street = [hotel valueForKey:@"street"];
 		theHotel.city = [hotel valueForKey:@"city"];
 		theHotel.state = [hotel valueForKey:@"state"];
@@ -979,7 +851,7 @@ didReceiveResponse:(NSURLResponse *)response
 
 - (NSArray *)hotels {
     hotels = [appDelegate.projectsArray mutableCopy];
-    NSLog(@"Hotels----%@",hotels);
+    //NSLog(@"Hotels----%@",hotels);
 	return hotels;
 }
 

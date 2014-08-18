@@ -130,7 +130,8 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpeseForm) name:@"changeDExpeseForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
+
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
     projectDetails=[[NSMutableArray alloc]init];
@@ -171,6 +172,14 @@ typedef enum {
     toolbar.hidden=FALSE;
 }
 
+
+-(void) reloadTableData
+{
+    [self populateProjectList];
+    appDelegate.Tag = 4;
+    [self.table reloadData];
+}
+
 -(void) populateProjectList
 {
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
@@ -191,16 +200,12 @@ typedef enum {
         [projectDetailsFiltered addObject:objectInstance];
         [projectDetailsSearch addObject:objectInstance];
         [appDelegate.projectsArray addObject:objectInstance];
-    }
-    
-    appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
+    }    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
     
     if ([objects count]>0) {
-        for (NSManagedObject *aContact in objects) {
-            NSLog(@"name=%@, address=%@, phone=%@",[aContact valueForKey:@"p_name"],[aContact valueForKey:@"city"],[aContact valueForKey:@"phone"]);
-        }
+        appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
     }
     else {
         NSLog(@"no matches found");
