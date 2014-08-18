@@ -13,7 +13,7 @@
 #import "GIKPinAnnotationView.h"
 #import "Reachability.h"
 #import "projectCodata.h"
-
+#import "PRIMECMController.h"
 
 
 #define METERS_PER_MILE 1609.344
@@ -156,11 +156,11 @@
     
     if([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"])
     {
-        menuItems = [NSArray arrayWithObjects:@"Dashboard", @"Add Project", @"Sign Out", @"Help", nil];
+        menuItems = [NSArray arrayWithObjects:@"Dashboard", @"Add Project", @"Sign Out", @"Help", @"Sync" , nil];
     }
     else
     {
-        menuItems = [NSArray arrayWithObjects:@"Dashboard", @"Sign Out", @"Help", nil];
+        menuItems = [NSArray arrayWithObjects:@"Dashboard", @"Sign Out", @"Help", @"Sync" , nil];
     }
     
     
@@ -765,7 +765,7 @@ didReceiveResponse:(NSURLResponse *)response
         }
         
         
-        if (indexPath.section == 0 && indexPath.row == 3)
+        if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
         {
             
             
@@ -774,7 +774,20 @@ didReceiveResponse:(NSURLResponse *)response
         
         
         
+        NSString *url = @"http://construction.ravihansa3000.com/contructionapi.php/api/syncall";
+        PRIMECMController *con = [[PRIMECMController alloc] init];
+        if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
+        {
+            NSLog(@"syncing all!");
+            [con synchronizeWithServer:url];
+        }
         
+        
+        if (indexPath.section == 0 && indexPath.row == 4 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
+        {
+            NSLog(@"syncing all!");
+            [con synchronizeWithServer:url];
+        }        
     }
     //[popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
