@@ -45,7 +45,7 @@
             id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
             
             if (!jsonError) {
-               // [self parseResponse:jsonResponse];
+                [self parseResponse:jsonResponse];
                 
                // [_delegate resourceLoaded];
             } else {
@@ -239,11 +239,11 @@
         
         NSError *retrieveError;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"complianceForm"
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ComplianceNoticeNo = %@)", [payload objectForKey:@"ComplianceNoticeNo"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", [payload objectForKey:@"ComplianceNoticeNo"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -254,7 +254,7 @@
         
         if (!assp) {
             assp = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"complianceForm"
+                    insertNewObjectForEntityForName:@"ComplianceForm"
                     inManagedObjectContext:managedContext];
         }
         
@@ -940,7 +940,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SMSSheetNo = %@)", [payload objectForKey:@"id"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSSheetNo = %@)", [payload objectForKey:@"id"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -1003,7 +1003,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SMSheetNo = %@)", [payload objectForKey:@"id"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)", [payload objectForKey:@"id"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];

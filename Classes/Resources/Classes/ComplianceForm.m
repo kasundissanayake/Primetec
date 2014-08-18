@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Lingeswaran Kandasamy. All rights reserved.
 //
 
-#import "ComplianceForm.h"
+#import "ComplianceFormVC.h"
 
-@interface ComplianceForm ()
+@interface ComplianceFormVC ()
 
 @end
 
-@implementation ComplianceForm
+@implementation ComplianceFormVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
