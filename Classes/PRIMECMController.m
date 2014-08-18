@@ -47,12 +47,7 @@
             id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
             
             if (!jsonError) {
-<<<<<<< HEAD
-               [self parseResponse:jsonResponse];
-=======
                 [self parseResponse:jsonResponse];
-                
->>>>>>> FETCH_HEAD
                // [_delegate resourceLoaded];
             } else {
                 NSLog(@"%@", [jsonError description]);
