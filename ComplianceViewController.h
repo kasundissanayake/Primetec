@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "PRIMECMController.h"
 
 @interface ComplianceViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,MBProgressHUDDelegate>
 {
@@ -70,6 +71,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTo;
 @property (weak, nonatomic) IBOutlet UITextField *txtUserId;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
+
+@property (strong, nonatomic) PRIMECMController *controller;
 
 
 

@@ -756,6 +756,8 @@ typedef enum {
         appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
         appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
         appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
+        //appDelegate.userId = [[projectDetails objectAtIndex:indexPath.row]valueForKey:@"userId"];
+        //appDelegate.projPrintedName = [[projectDetails objectAtIndex:indexPath.row]valueForKey:@"userId"];
     }
 }
 

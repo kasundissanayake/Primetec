@@ -109,6 +109,7 @@ UILabel *cno;
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
+    _controller = [[PRIMECMController alloc] init];
     
     self.imagePicker=[[UIImagePickerController alloc]init];
     
@@ -173,13 +174,6 @@ UILabel *cno;
     txtPrintedName.text=appDelegate.projPrintedName;
     txtDate.text=dateString;
     txtUserId.text=appDelegate.userId;
-    
-    
-    
-    
-    
-    
-    
     
 }
 -(void)tapDetectedTextField
@@ -249,11 +243,6 @@ UILabel *cno;
     
 }
 
-
-
-
-
-
 -(void)uploadSignature
 {
     
@@ -311,13 +300,6 @@ UILabel *cno;
     NSLog(@"sent");
     
 }
-
-
-
-
-
-
-
 
 -(void)uploadSketch
 
@@ -557,7 +539,9 @@ UILabel *cno;
         uploadingsketch=NO;
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,txtTitle.text,txtContactNo.text,txtProDesc.text,COtextTitle.text,COtextProject.text,txtDateIssued.text,conRes.text,txtTo.text,txtDateContractorStarted.text,txtDateContractorCompleted.text,txtDateofRawReprote.text,txtUserId.text,correctAction.text,sigName,txtPrintedName.text,appDelegate.projId];
+        [_controller saveComplianceForm:appDelegate.username title:txtTitle.text contractNo:txtContactNo.text proDesc:txtProDesc.text comTitle:COtextTitle.text project:COtextProject.text dateIssued:txtDateIssued.text conRespon:conRes.text to:txtTo.text dateConStarted:txtDateContractorStarted.text dateConComplteted:txtDateContractorCompleted.text dateRawReport:txtDateofRawReprote userId:txtUserId.text correctiveAction:correctAction.text signature:sigName printedName:txtPrintedName.text projId:appDelegate.projId];
+        
+        /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,txtTitle.text,txtContactNo.text,txtProDesc.text,COtextTitle.text,COtextProject.text,txtDateIssued.text,conRes.text,txtTo.text,txtDateContractorStarted.text,txtDateContractorCompleted.text,txtDateofRawReprote.text,txtUserId.text,correctAction.text,sigName,txtPrintedName.text,appDelegate.projId];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -612,7 +596,7 @@ UILabel *cno;
         _receivedData = [[NSMutableData alloc] init];
         
         [connection start];
-        NSLog(@"URL---%@",strURL);
+        NSLog(@"URL---%@",strURL);*/
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
