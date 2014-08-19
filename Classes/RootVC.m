@@ -39,11 +39,10 @@ typedef enum {
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    //woornika
-    MBProgressHUD *HUD;
     NSUserDefaults *defaults;
     int no;
+    MBProgressHUD *hud;
+    reportDashboard *report;
 }
 
 @property (weak, nonatomic, readonly) NSArray *directions;
@@ -55,6 +54,7 @@ typedef enum {
 @synthesize directions, table, Frontimage;
 @synthesize proStatusSeg;
 @synthesize searchBar;
+@synthesize hud;
 
 -(IBAction)showFirst:(id)sender
 {
@@ -131,7 +131,7 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
-
+    
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
     projectDetails=[[NSMutableArray alloc]init];
@@ -141,7 +141,6 @@ typedef enum {
     [self populateProjectList];
     [self.table reloadData];
     
-    //NSLog(@"------- %@",projectDetails);
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"hideToolbar" object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideToolbar) name:@"hideToolbar" object:nil];
 }
@@ -175,9 +174,12 @@ typedef enum {
 
 -(void) reloadTableData
 {
-    [self populateProjectList];
     appDelegate.Tag = 4;
-    [self.table reloadData];
+    [self populateProjectList];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.table reloadData];
+    }];
 }
 
 -(void) populateProjectList
@@ -200,7 +202,7 @@ typedef enum {
         [projectDetailsFiltered addObject:objectInstance];
         [projectDetailsSearch addObject:objectInstance];
         [appDelegate.projectsArray addObject:objectInstance];
-    }    
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
     
@@ -208,7 +210,7 @@ typedef enum {
         appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
     }
     else {
-        NSLog(@"no matches found");
+        NSLog(@"No matches found for Projects");
     }
 }
 
@@ -373,9 +375,6 @@ typedef enum {
         cell=[nib objectAtIndex:0];
     }
     
-    // use core-data
-    NSLog(@"Tag: %ld", (long) appDelegate.Tag);
-    
     if(appDelegate.Tag==1)
     {
         if (indexPath.section == 0) {
@@ -393,24 +392,12 @@ typedef enum {
     else if (appDelegate.Tag==4)
     {
         if (indexPath.section == 0) {
-            
-            [self populateProjectList];
-            
-            NSLog(@"Count: %ld", (long) [projectDetails count]);
-            NSLog(@"Row: %ld", (long)indexPath.row);
-            
             if ([projectDetails count] > indexPath.row) {
-                NSManagedObject *aProject;
-                for (aProject in projectDetails) {
-                    NSLog(@"Project item %@", [aProject valueForKey:@"p_name"]);
-                    cell.lblProjectName.text = [aProject valueForKey:@"p_name"];
-                }
                 cell.lblProjectName.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"p_name"];
                 cell.lblProjectNo.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"projecct_id"];
                 cell.lblProjectAddress.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"street"];
                 cell.lblCity.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"city"];
             }
-            
         }
     }
     return cell;
@@ -419,7 +406,6 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //brin
     return 100;
 }
 
@@ -430,7 +416,6 @@ typedef enum {
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
     fdvc.title=[NSString stringWithFormat:@"Map"];
 }
-
 
 
 -(void)dashboard
@@ -617,7 +602,7 @@ typedef enum {
     }
     
     ProjectDetailsCell *selectedCell=(ProjectDetailsCell *)[tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"Index---- %i",indexPath.row);
+    
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:selectedCell.frame];
     bgView.backgroundColor = [UIColor orangeColor];
     selectedCell.selectedBackgroundView  = bgView;
@@ -714,8 +699,6 @@ typedef enum {
         
         else if (appDelegate.Tag==4)
         {
-            NSLog(@"Select Proj----------------------");
-            
             FirstViewController*fdvc=[[FirstViewController alloc] init];
             fdvc.title=[NSString stringWithFormat:@"Map View"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
@@ -737,13 +720,10 @@ typedef enum {
     
     else if(appDelegate.Tag==4)
     {
-        NSLog(@"-_---%i",indexPath.row);
         NSMutableDictionary *selectedValueDic = [[NSMutableDictionary alloc] init];
         selectedValueDic=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                           [NSString stringWithFormat:@"%i", indexPath.row],@"mapId",
                           nil];
-        NSLog(@"-_---%@",selectedValueDic);
-        
         
         appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
@@ -761,19 +741,38 @@ typedef enum {
     }
 }
 
+- (void)showInfoAlert {
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.detailedNavigationController.view];
+    [self.detailedNavigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    hud.userInteractionEnabled = false;
+    [hud show:true];
+}
+
+- (void)hudWasHidden {
+    [self.hud hide:YES];
+}
 
 
 - (void)changeCompliance:(NSNotification *)notification
 {
-    NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
+    [self showInfoAlert];
     
-    NSString *CNo=[dict valueForKey:@"ConNo"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        ComplianceReport *comp=[[ComplianceReport alloc] init];
+        comp.title=[NSString stringWithFormat:@"Compliance Report"];
+        comp.CNo=CNo;
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:comp]];
+        [self hudWasHidden];
+    });
     
-    ComplianceReport*comp=[[ComplianceReport alloc] init];
-    comp.title=[NSString stringWithFormat:@"Compliance Report"];
-    comp.CNo=CNo;
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:comp]];
     
 }
 
@@ -781,7 +780,7 @@ typedef enum {
 - (void)changeNonCompliance:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
+    //NSLog(@"Map====%@",dict);
     NSString *CNo=[dict valueForKey:@"ConNo"];
     NonComplianceReport *noncom=[[NonComplianceReport alloc]init];
     noncom.title=[NSString stringWithFormat:@"Non-Compliance Report"];
@@ -793,7 +792,7 @@ typedef enum {
 - (void)changeInspection:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
+    //NSLog(@"Map====%@",dict);
     
     NSString *CNo=[dict valueForKey:@"ConNo"];
     DailyInspectionReport *daily=[[DailyInspectionReport alloc]init];
@@ -810,7 +809,7 @@ typedef enum {
 - (void)changeDExpese:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
+    //NSLog(@"Map====%@",dict);
     NSString *CNo=[dict valueForKey:@"ConNo"];
     ExpenseReport *expnse=[[ExpenseReport alloc]init];
     expnse.eXReportNo=CNo;
@@ -823,7 +822,7 @@ typedef enum {
 
 {
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
+    //NSLog(@"Map====%@",dict);
     
     NSString *CNo=[dict valueForKey:@"ConNo"];
     
@@ -838,27 +837,22 @@ typedef enum {
     ComplianceViewController *com=[[ComplianceViewController alloc]init];
     com.title=[NSString stringWithFormat:@"Compliance View"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
-    
 }
 
 
 - (void)changeNonComplianceForm
 {
-    
     nonComplianceViewController *noncom=[[nonComplianceViewController alloc]init];
     noncom.title=[NSString stringWithFormat:@"Non-Compliance View"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
+    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];    
 }
 
 
 - (void)changeInspectionForm
 {
-    
     DailyInspectionViewController *daily=[[DailyInspectionViewController alloc]init];
     daily.title=[NSString stringWithFormat:@"Daily Inspection Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:daily]];
-    
-    
 }
 
 
@@ -871,9 +865,7 @@ typedef enum {
 
 
 - (void)changeSummaryForm
-
 {
-    
     SummaryReportViewController *summary=[[SummaryReportViewController alloc]init];
     summary.title=[NSString stringWithFormat:@"Summary Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
@@ -884,7 +876,7 @@ typedef enum {
 {
     int type = [[[notification userInfo] valueForKey:@"index"] intValue];
     
-    reportDashboard *report=[[reportDashboard alloc]init];
+    report=[[reportDashboard alloc]init];
     report.title=[NSString stringWithFormat:@"Report"];
     report.proType=type;
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:report]];

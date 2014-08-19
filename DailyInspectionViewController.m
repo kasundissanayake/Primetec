@@ -13,8 +13,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
-
-
+#import "PRIMECMAPPUtils.h"
 
 @interface DailyInspectionViewController ()
 {
@@ -666,8 +665,6 @@
     }
     else
     {
-        
-        // http://data.privytext.us/contructionapi.php/api/dailyinspection
         uploading = NO;
         uploadingsketch=NO;
         
@@ -803,10 +800,8 @@
         
         
         
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,@"town",txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName];
-        
-        
-      
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,@"town",txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName];
         
         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
@@ -957,7 +952,8 @@
 {
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/uploadimages/%@/%@/%@/",appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -1016,7 +1012,8 @@
 {
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/uploadimages/%@/%@/%@/",appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -1077,7 +1074,8 @@
 
 {
     uploadingsketch=YES;
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/uploadsketches/%@/%@/%@/",appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadsketches/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);

@@ -11,6 +11,7 @@
 #import "ImageCell.h"
 #import "ImageHeaderCell.h"
 #import "TabAndSplitAppAppDelegate.h"
+#import "PRIMECMAPPUtils.h"
 
 @interface ComplianceReport ()
 {
@@ -20,14 +21,9 @@
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    //woornika
-    MBProgressHUD *HUD;
-     TabAndSplitAppAppDelegate *appDelegate;
+    MBProgressHUD *hud;
+    TabAndSplitAppAppDelegate *appDelegate;
     UIBarButtonItem  *btnPrint;
-    
-   // NSArray *images;
-
 }
 
 @end
@@ -40,7 +36,6 @@
 @synthesize CNo;
 @synthesize txtNoticeNo;
 @synthesize imgSignature;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,8 +75,8 @@
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-   UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
-                  initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
+    UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
     
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
@@ -102,164 +97,176 @@
                                action:@selector(showSCompliance:)];
     
     UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Edit", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(fnEdit:)];
+                                initWithTitle:NSLocalizedString(@"Edit", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnEdit:)];
     
-
+    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    
     self.navigationItem.leftBarButtonItem=Button2;
-
-
+    
     //self.navigationItem.rightBarButtonItem = Button;
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
-
     arrayImages=[[NSMutableArray alloc]init];
     sketchesArray=[[NSMutableArray alloc]init];
-    [self loadComplianceForm];
-
-
     
-    
-    // Do any additional setup after loading the view from its nib.
-}
--(void)loadComplianceForm
-{
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/single/%@/%@",appDelegate.username,CNo];
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
-    
-    
+    [self populateComplianceForm];
     
 }
 
-
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+-(void) populateComplianceForm
 {
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY complianceNoticeNo == %@", CNo];
+    [fetchRequest setPredicate:predicate];
     
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [HUD setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSLog(@"count--- %@",responseObject);
-    txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"comHeader"];
-    comNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
-    lblProjDec.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ProjectDescription"];
-    txtContractNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project_id"];
-    
-    txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Title"];
-
-    txtProject.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project"];
-
-    txtDateIssued.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateIssued"];
-     lblConRes.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ContractorResponsible"];
-
-    txtTo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"To"];
-    txtDateContracStarted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorStarted"];
-    
-     txtDateContactCompleted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorCompleted"];
-     txtDateRawReport.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateOfDWRReported"];
-     lblCorrective.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"CorrectiveActionCompliance"];
-     txtPrintedName.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"PrintedName"];
-     txtdate.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Date"];
-     txtNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
-     arrayImages  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
-    sketchesArray  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Signature"]]]];
-    NSLog(@"url----%@",url);
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    imgSignature.image=image;
-    
-    
-    for (int i=1; i<sketchesArray.count; i++) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]]];
-        NSLog(@"url----%@",url);
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
-        
-        
+    id obj;
+    for (obj in objects){
+        NSLog(@"compliance no: %@", [obj valueForKey:@"complianceNoticeNo"]);
     }
-
     
-    NSLog(@"array Images---%@",arrayImages);
-    
-    
-    
-    
-    for (int i=1; i<arrayImages.count; i++) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
+    if([objects count] > 0){
+        NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
+        NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"complianceNoticeNo"]);
+        
+        txtTitle.text=[complianceReportObject valueForKey:@"comHeader"];
+        comNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
+        lblProjDec.text=[complianceReportObject valueForKey:@"projectDescription"];
+        txtContractNo.text=[complianceReportObject valueForKey:@"project_id"];
+        txtTitle.text=[complianceReportObject valueForKey:@"title"];
+        txtProject.text=[complianceReportObject valueForKey:@"Project"];
+        txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateIssued"]
+                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        lblConRes.text=[complianceReportObject valueForKey:@"ContractorResponsible"];
+        txtTo.text=[complianceReportObject valueForKey:@"to"];
+        txtDateContracStarted.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateContractorStarted"]
+                                                                  dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateContactCompleted.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateContractorCompleted"]
+                                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateRawReport.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateOfDWRReported"]
+                                                             dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        lblCorrective.text=[complianceReportObject valueForKey:@"correctiveActionCompliance"];
+        txtPrintedName.text=[complianceReportObject valueForKey:@"printedName"];
+        txtdate.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"date"]
+                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
+        arrayImages  = [[[complianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
+        sketchesArray  = [[[complianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",
+                                           [NSString stringWithFormat:@"%@.jpg",
+                                            [complianceReportObject valueForKey:@"signature"]]]];
         NSLog(@"url----%@",url);
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
-        [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
+        imgSignature.image=image;
         
         
-       }
-
+        for (int i=1; i<sketchesArray.count; i++) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",
+                                               [NSString stringWithFormat:@"%@.jpg",
+                                                [sketchesArray objectAtIndex:i]]]];
+            NSLog(@"url----%@",url);
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
+            
+            
+        }
+        
+        NSLog(@"array Images---%@",arrayImages);
+        
+        for (int i=1; i<arrayImages.count; i++) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
+            NSLog(@"url----%@",url);
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
+        }
+    }else{
+        NSLog(@"No matching ComplianceForm with ID: %@", CNo);
+    }    
     
-    [self.tblView reloadData];
-    
+    [self.tblView reloadData];    
 }
+
+/*
+ - (void)connectionDidFinishLoading:(NSURLConnection *)connection
+ {
+ [HUD setHidden:YES];
+ 
+ NSError *parseError = nil;
+ NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
+ NSLog(@"count--- %@",responseObject);
+ 
+ txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"comHeader"];
+ comNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
+ lblProjDec.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ProjectDescription"];
+ txtContractNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project_id"];
+ 
+ txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Title"];
+ 
+ txtProject.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project"];
+ 
+ txtDateIssued.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateIssued"];
+ lblConRes.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ContractorResponsible"];
+ 
+ txtTo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"To"];
+ txtDateContracStarted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorStarted"];
+ 
+ txtDateContactCompleted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorCompleted"];
+ txtDateRawReport.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateOfDWRReported"];
+ lblCorrective.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"CorrectiveActionCompliance"];
+ txtPrintedName.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"PrintedName"];
+ txtdate.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Date"];
+ txtNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
+ arrayImages  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
+ sketchesArray  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
+ NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Signature"]]]];
+ NSLog(@"url----%@",url);
+ NSData *imageData = [NSData dataWithContentsOfURL:url];
+ UIImage *image = [[UIImage alloc] initWithData:imageData];
+ imgSignature.image=image;
+ 
+ 
+ for (int i=1; i<sketchesArray.count; i++) {
+ NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]]];
+ NSLog(@"url----%@",url);
+ NSData *imageData = [NSData dataWithContentsOfURL:url];
+ UIImage *image = [[UIImage alloc] initWithData:imageData];
+ [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
+ 
+ 
+ }
+ 
+ NSLog(@"array Images---%@",arrayImages);
+ 
+ for (int i=1; i<arrayImages.count; i++) {
+ NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
+ NSLog(@"url----%@",url);
+ NSData *imageData = [NSData dataWithContentsOfURL:url];
+ UIImage *image = [[UIImage alloc] initWithData:imageData];
+ [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
+ }
+ [self.tblView reloadData];
+ }
+ */
+
+
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
 {
     //store image in ducument directory.
@@ -273,23 +280,23 @@ didReceiveResponse:(NSURLResponse *)response
         NSError *error;
         if(  [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error])
             ;// success
-        
-        
         else
         {
             NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
         }
     }
-
+    
     NSData *imagData = UIImageJPEGRepresentation(imageNew,0.75f);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:imgName];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
 }
+
+
 -(void)printReport
 {
     
-       [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -347,27 +354,20 @@ didReceiveResponse:(NSURLResponse *)response
         printController.printingItem = pdfData;
         void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if (!completed && error) {
-                            }
+            }
         };
         [printController presentFromBarButtonItem:btnPrint animated:YES completionHandler:completionHandler];
     }
-    
-    
-    
     [self.tblView setContentOffset:CGPointMake(self.tblView.contentOffset.x, -self.tblView.contentInset.top) animated:YES];
-    
-    
-    
-    
 }
 
 
 
 -(void)createPDF
 {
-   
+    
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *directroyPath = nil;
@@ -375,7 +375,7 @@ didReceiveResponse:(NSURLResponse *)response
     NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
     NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
     
-
+    
     NSError *error;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         
@@ -419,7 +419,7 @@ didReceiveResponse:(NSURLResponse *)response
         [mailer setSubject:@"Inspection Report"];
         
         [mailer addAttachmentData:pdfData mimeType:@"application/pdf" fileName:[NSString stringWithFormat:@"%@.pdf",self.navigationItem.title]];
-
+        
         
         NSString *emailBody = [NSString stringWithFormat:@"Inspection Report of  %@",@"Pro 001"];
         [mailer setMessageBody:emailBody isHTML:NO];
@@ -433,22 +433,16 @@ didReceiveResponse:(NSURLResponse *)response
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        
     }
-    
-    
     [self.tblView setContentOffset:CGPointMake(self.tblView.contentOffset.x, -self.tblView.contentInset.top) animated:YES];
-    
-    
-    
 }
+
+
 - (CGContextRef) createPDFContext:(CGRect)inMediaBox path:(CFStringRef) path
 {
     CGContextRef myOutContext = NULL;
     CFURLRef url;
-    url = CFURLCreateWithFileSystemPath (NULL, path,
-                                         kCFURLPOSIXPathStyle,
-                                         false);
+    url = CFURLCreateWithFileSystemPath (NULL, path, kCFURLPOSIXPathStyle, false);
     
     if (url != NULL) {
         myOutContext = CGPDFContextCreateWithURL (url,
@@ -458,6 +452,7 @@ didReceiveResponse:(NSURLResponse *)response
     }
     return myOutContext;
 }
+
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
@@ -480,20 +475,16 @@ didReceiveResponse:(NSURLResponse *)response
             statusMessage = @"Mail not sent.";
             break;
     }
-   
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
+
+
 -(void)createPDFfromUIView:(UIScrollView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
 {
     NSMutableData *pdfData = [NSMutableData data];
-    
     UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, nil);
     UIGraphicsBeginPDFPage();
     CGContextRef pdfContext = UIGraphicsGetCurrentContext();
-    
-    
-    
     [aView.layer renderInContext:pdfContext];
     
     UIGraphicsEndPDFContext();
@@ -504,14 +495,8 @@ didReceiveResponse:(NSURLResponse *)response
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         mailer.mailComposeDelegate = self;
         [mailer setSubject:@"Inspection Form"];
-        
-        
-        
-        
         [mailer addAttachmentData:pdfData mimeType:@"application/pdf" fileName:[NSString stringWithFormat:@"%@.pdf",aFilename]];
         NSString *emailBody = [NSString stringWithFormat:@"Inspection Report of  %@",@"Pro 001"];
-        
-        
         [mailer setMessageBody:emailBody isHTML:NO];
         [self presentViewController:mailer animated:YES completion:nil];
     }
@@ -525,17 +510,14 @@ didReceiveResponse:(NSURLResponse *)response
         [alert show];
         
     }
-    
-    
-
 }
 
 
 -(void)changeTableView
 {
     
-   
-   }
+    
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -544,19 +526,19 @@ didReceiveResponse:(NSURLResponse *)response
     // Dispose of any resources that can be recreated.
 }
 
+
 -(IBAction)showSCompliance:(id)sender
 {
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
     
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSLog(@"aaaaaaaaaaaaaaaaaa");
     return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"bbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
     if(section==0)
     {
         return [arrayImages count];
@@ -566,6 +548,8 @@ didReceiveResponse:(NSURLResponse *)response
         return [sketchesArray count];
     }
 }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if((indexPath.section==0 && indexPath.row==0) || (indexPath.section==1 && indexPath.row==0))
@@ -578,7 +562,6 @@ didReceiveResponse:(NSURLResponse *)response
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageHeaderCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        NSLog(@"ddddddddddddddddddddd");
         if(indexPath.section==0)
         {
             cell.lblAttachement.text=@"Image attachments";
@@ -589,13 +572,10 @@ didReceiveResponse:(NSURLResponse *)response
         }
         
         return cell;
-        
     }
     
     else
     {
-        
-        
         static NSString *simpleTableIdentifier = @"ImageCell";
         
         ImageCell *cell = (ImageCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -604,32 +584,21 @@ didReceiveResponse:(NSURLResponse *)response
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        NSLog(@"ddddddddddddddddddddd");
-        
         
         if(indexPath.section==0)
         {
             cell.lblTitle.hidden=NO;
-
-            
-            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];
-
-            
-            
-        }
+            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];        }
         else
         {
-            
             cell.lblTitle.hidden=YES;
             cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[sketchesArray objectAtIndex:indexPath.row]]];
-            
         }
-        
-        
-
         return cell;
     }
 }
+
+
 -(UIImage *)getImageFromFileName:(NSString *)fileName
 {
     //get images from document directory
@@ -638,7 +607,7 @@ didReceiveResponse:(NSURLResponse *)response
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     NSString *folderPath;
-       
+    
     folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:fileName];
     current_img=[UIImage imageWithContentsOfFile:fullPath];

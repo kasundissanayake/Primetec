@@ -11,20 +11,29 @@
 
 @implementation PRIMECMAPPUtils
 
-NSString * const SERVER_PATH = @"SERVER_PATH";
+NSString * const API_ENDPOINT_KEY = @"SERVER_API_ENDPOINT";
 NSString * const ROOT_RELOAD_NOTIFICATION = @"ROOT_RELOAD_NOTIFICATION";
 NSString * const CACHE_CREDENTIALS = @"cache_credentials";
 NSString * const USERNAME = @"USERNAME";
 NSString * const PASSWORD = @"PASSWORD";
 
 
-+ (NSString *)getServerPath {
-    NSString *path = [[NSBundle mainBundle] bundlePath];
-    NSString *finalPath = [path stringByAppendingPathComponent:@"Resource.plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
++ (NSString *)getAPIEndpoint {
+    //NSString *path = [[NSBundle mainBundle] bundlePath];
+    //NSString *finalPath = [path stringByAppendingPathComponent:@"PRIMECMAPP-Info.plist"];
+    //NSLog(@"final path: %@", finalPath);
+    //NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
     
-    return [plistData objectForKey:SERVER_PATH];
+    NSString *endpoint = @"http://construction.ravihansa3000.com/contructionapi.php";
+    return endpoint;
 }
+
+
++ (NSString *)getServerImagePath {
+    NSString *endpoint = @"http://construction.ravihansa3000.com/images";
+    return endpoint;
+}
+
 
 + (NSManagedObjectContext *)getManagedObjectContext {
     TabAndSplitAppAppDelegate *appDelegate = (TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];

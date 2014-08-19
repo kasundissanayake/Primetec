@@ -11,7 +11,7 @@
 #import "SignatureViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TabAndSplitAppAppDelegate.h"
-
+#import "PRIMECMAPPUtils.h"
 
 @interface SummaryReportViewController ()
 {
@@ -578,10 +578,8 @@ didReceiveResponse:(NSURLResponse *)response
             
         }
         
-        
-            //   http://data.privytext.us/contructionapi.php/api/summary1/list/shyamal/sdsd
-        
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.projId,header.text,sumContracter.text,sumAddress.text,sumCity.text,sumState.text,summeryZip.text,sumTel.text,sumDate.text,@"hi",sumPW.text,sumFAN.text,sumProjectNum.text,sumDescription.text,sumConOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,sumTotLbr.text,sumHealth.text,sumIns.text,sum20.text,sumTotal.text,appDelegate.projPrintedName];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                            appDelegate.username,appDelegate.projId,header.text,sumContracter.text,sumAddress.text,sumCity.text,sumState.text,summeryZip.text,sumTel.text,sumDate.text,@"hi",sumPW.text,sumFAN.text,sumProjectNum.text,sumDescription.text,sumConOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,sumTotLbr.text,sumHealth.text,sumIns.text,sum20.text,sumTotal.text,appDelegate.projPrintedName];
         
         
         // NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

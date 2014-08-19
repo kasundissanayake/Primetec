@@ -14,6 +14,7 @@
 #import "Reachability.h"
 #import "projectCodata.h"
 #import "PRIMECMController.h"
+#import "PRIMECMAPPUtils.h"
 #import "RootVC.h"
 
 #define METERS_PER_MILE 1609.344
@@ -45,7 +46,6 @@
     UIPopoverController *popMap;
     UIPopoverController *popMenu;
     NSMutableArray *hotels;
-    MBProgressHUD *HUD;
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
@@ -64,6 +64,7 @@
 @synthesize detailedNavigationController;
 @synthesize imageSubView;
 @synthesize viewTapHere;
+@synthesize hud;
 
 - (id)init {
 	if (!(self = [super initWithNibName:@"GIKMapView" bundle:nil])) {
@@ -132,9 +133,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     MKCoordinateRegion startupRegion;
-    
-    
-    
 	
 	// Coordinates for part of downtown San Francisco - around Moscone West, no less.
 	startupRegion.center = CLLocationCoordinate2DMake(41.650639, -72.665895);
@@ -159,6 +157,21 @@
     }
     
     
+}
+
+- (void)showInfoAlert {
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    hud.userInteractionEnabled = false;
+    [hud show:true];
+}
+
+- (void)hudWasHidden {
+    [self.hud hide:YES afterDelay:2];
 }
 
 
@@ -229,7 +242,8 @@
 -(void)saveNewProject
 {
     if([self connected]){
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/",appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                            appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"URL---- %@",strURL);
         
@@ -243,14 +257,7 @@
         _receivedData = [[NSMutableData alloc] init];
         
         [connection start];
-        NSLog(@"URL---%@",strURL);
-        
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
+        [self showInfoAlert];
     }
     else if (![self connected]){
         [self saveOffProject];
@@ -312,17 +319,16 @@ didReceiveResponse:(NSURLResponse *)response
                                                                    *)error
 {
     NSLog(@"eeeeee");
-    [HUD setHidden:YES];
+    [self hudWasHidden];
     _connectionError = error;
 }
-
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 
 {
     
-    [HUD setHidden:YES];
+    [self hudWasHidden];
     
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
@@ -669,46 +675,39 @@ didReceiveResponse:(NSURLResponse *)response
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.primetgrp.com/technical-support/"]];
         }
         
-        
-        
-        NSString *url = @"http://construction.ravihansa3000.com/contructionapi.php/api/syncall";
-        PRIMECMController *con = [[PRIMECMController alloc] init];
         if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
         {
-            NSLog(@"syncing all!");
-            HUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.navigationController.view addSubview:HUD];
-            HUD.labelText=@"";
-            HUD.dimBackground = YES;
-            HUD.delegate = self;
-            [HUD show:YES];
-            
-            [con synchronizeWithServer:url];
-            
-            [HUD setHidden:YES];
+            [self syncAll];
         }
         
         
         if (indexPath.section == 0 && indexPath.row == 4 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
         {
-            NSLog(@"syncing all!");
-            HUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.navigationController.view addSubview:HUD];
-            HUD.labelText=@"";
-            HUD.dimBackground = YES;
-            HUD.delegate = self;
-            [HUD show:YES];
-            
-            [con synchronizeWithServer:url];
-            
-            [HUD setHidden:YES];
+            [self syncAll];
         }
     }
     //[popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
     [popMap dismissPopoverAnimated:YES];
+}
+
+-(void) syncAll
+{
+    NSLog(@"syncing all!");
+    NSString *url = [NSString stringWithFormat:@"%@/api/syncall", [PRIMECMAPPUtils getAPIEndpoint]];
+    PRIMECMController *con = [[PRIMECMController alloc] init];
+    [self showInfoAlert];
     
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        [con synchronizeWithServer:url];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self reloadInputViews];
+            [self hudWasHidden];
+        });
+        
+    });
 }
 
 -(IBAction)selectItem:(id)sender

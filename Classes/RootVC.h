@@ -19,8 +19,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *table;
 @property(nonatomic,strong)IBOutlet UISegmentedControl *proStatusSeg;
 @property(nonatomic,strong)IBOutlet UISearchBar *searchBar;
-
-+ (void) reloadData;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 

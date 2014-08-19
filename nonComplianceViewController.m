@@ -7,7 +7,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
-
+#import "PRIMECMAPPUtils.h"
 
 @interface nonComplianceViewController ()
 
@@ -182,7 +182,8 @@
     
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/noncompliance/uploadimages/%@/%@/%@/",appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/noncompliance/uploadimages/%@/%@/%@/",  [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -241,7 +242,8 @@
 
 {
     uploadingsketch=YES;
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/noncompliance/uploadsketches/%@/%@/%@/",appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/noncompliance/uploadsketches/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -300,7 +302,8 @@
     
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/uploadimages/%@/%@/%@/",appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/compliance/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -385,7 +388,8 @@
         
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/noncompliance/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,txtTitle.text,txtContactNo.text,projectDesc.text,nonCOtextTitle.text,nonCOtextProject.text,NtxtDateIssued.text,contractorResp.text,txtTo.text,NtxtDateofRawReprote.text,NtxtDateContractorStarted.text,NtxtDateContractorCompleted.text,NtxtDateofRawReprote.text,txtUserId.text,correctiveAction.text,sigName,txtPrintedName.text,appDelegate.projId];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                            appDelegate.username,txtTitle.text,txtContactNo.text,projectDesc.text,nonCOtextTitle.text,nonCOtextProject.text,NtxtDateIssued.text,contractorResp.text,txtTo.text,NtxtDateofRawReprote.text,NtxtDateContractorStarted.text,NtxtDateContractorCompleted.text,NtxtDateofRawReprote.text,txtUserId.text,correctiveAction.text,sigName,txtPrintedName.text,appDelegate.projId];
         
         NSLog(@"URL---- %@",strURL);
         

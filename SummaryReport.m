@@ -7,6 +7,7 @@
 //
 
 #import "SummaryReport.h"
+#import "PRIMECMAPPUtils.h"
 
 @interface SummaryReport ()
 {
@@ -165,7 +166,7 @@
 
 -(void)loadSummerySheet
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary1/single/%@",SMNo];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/single/%@", [PRIMECMAPPUtils getAPIEndpoint], SMNo];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -224,7 +225,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSLog(@"count--- %@",responseObject);
+    //NSLog(@"count--- %@",responseObject);
     txtContractor.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Contractor"];
     txtPOBox.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"POBox"];
     txtCity.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"City"];

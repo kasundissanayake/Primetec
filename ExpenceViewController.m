@@ -14,7 +14,7 @@
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
 #import "PopUpViewController.h"
-
+#import "PRIMECMAPPUtils.h"
 
 @interface ExpenceViewController ()
 {
@@ -96,7 +96,7 @@
     [super viewDidLoad];
     [self deleteAllFiles];
     _controller = [[PRIMECMController alloc]init];
-     count=0;
+    count=0;
     
     comNoticeNo=@"";
     count1=0;
@@ -150,30 +150,30 @@
         
         
         ExpID=@"0";
-         NSLog(@"Intheeeee");
+        NSLog(@"Intheeeee");
         
     }
     
     
     
     /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    first=YES;
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);*/
+     
+     NSURL *apiURL =
+     [NSURL URLWithString:strURL];
+     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+     
+     
+     [urlRequest setHTTPMethod:@"GET"];
+     first=YES;
+     
+     
+     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+     
+     _receivedData = [[NSMutableData alloc] init];
+     
+     
+     [connection start];
+     NSLog(@"URL---%@",strURL);*/
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
@@ -344,7 +344,7 @@
     tblView.dataSource=self;
     
     popoverController=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
-   
+    
     [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
@@ -377,7 +377,7 @@
     [popoverView addSubview:pickerToolbar];
     [popoverView addSubview:pickerViewCities];
     popoverContent.view = popoverView;
-   
+    
     popoverContent.contentSizeForViewInPopover = CGSizeMake(320, 244);
     
     //create a popover controller
@@ -415,7 +415,7 @@
         [self createDatePicker:ERtxtWeek];
         pickerTag=18;
     }
-   
+    
     
     if(textField==ERdate6)
     {
@@ -505,8 +505,8 @@
                 txtMil1.enabled=YES;
                 txtRate1.enabled=YES;
                 cashAdvance.enabled=YES;
-
-
+                
+                
                 return NO;
             }
             else{
@@ -546,28 +546,28 @@
         [txtTotal1 resignFirstResponder];
     }
     
-        double cash  = [self.cashAdvance.text doubleValue];
-        double sum = [appDelegate.reImp doubleValue];
+    double cash  = [self.cashAdvance.text doubleValue];
+    double sum = [appDelegate.reImp doubleValue];
     if (sum > 0)
-      {
-    
-          double totdate = sum;
-          double result = totdate - cash;
-           reimburs.text =  [NSString stringWithFormat:@"%.2f", result];
-           if (totdate < cash)
-            {
-                reimburs.text = @"00.00";
-                            }
-    
-
-       }
+    {
         
+        double totdate = sum;
+        double result = totdate - cash;
+        reimburs.text =  [NSString stringWithFormat:@"%.2f", result];
+        if (totdate < cash)
+        {
+            reimburs.text = @"00.00";
+        }
+        
+        
+    }
+    
     
     if(textField.text.length==0)
     {
         textField.text=@" ";
     }
-   }
+}
 
 - (void)TextChange:(id)sender{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -579,7 +579,7 @@
     {
         ERtxtWeek.text=[df stringFromDate:datePicker.date];
     }
-     if(pickerTag==25)
+    if(pickerTag==25)
     {
         ERdate6.text=[df stringFromDate:datePicker.date];
     }
@@ -616,7 +616,7 @@
         ERType.text=[pickerDataArray objectAtIndex:[pickerView selectedRowInComponent:0]];
         
     }
-      
+    
 }
 
 
@@ -717,7 +717,7 @@
 -(IBAction)saveImage:(id)sender
 {
     NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
-       if(txvDescription.text.length==0)
+    if(txvDescription.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
                                                         message:@"Please add photo Description."
@@ -772,7 +772,7 @@
         nextView.isFromReport=NO;
         [nextView setModalPresentationStyle:UIModalPresentationFormSheet];
         [self presentViewController:nextView animated:true completion:nil];
-           }
+    }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -924,20 +924,13 @@
     {
         
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
-        
-        
-        //http://data.privytext.us/contructionapi.php/api/expense/username/
-        
-        
-        //http://data.privytext.us/contructionapi.php/api/expense/update/EXReportNo/`ERFHeader`/`ERCashAdvance`/ `ERReimbursement`/ `EMPName`/`WeekEnding`/ `Signature`/`EmployeeNo`/`ApprovedBy`/`Date`/ `Attachment`/ `CheckNo`/ `images_uploaded`
-        
-        
         third=YES;
         first=NO;
         Second=NO;
         
         
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/update/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",ExpID,header.text,cashAdvance.text,reimburs.text,ERtxtEmpName.text,ERtxtWeek.text,sigName,ERtxtEmpNum.text,ERtxtApprovedBy.text,ERtextDate6.text,@"hi",ERtxtCheckNum.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/update/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                            ExpID,header.text,cashAdvance.text,reimburs.text,ERtxtEmpName.text,ERtxtWeek.text,sigName,ERtxtEmpNum.text,ERtxtApprovedBy.text,ERtextDate6.text,@"hi",ERtxtCheckNum.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -946,9 +939,6 @@
         [NSURL URLWithString:uencodedUrl];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
         [urlRequest setHTTPMethod:@"POST"];
-        
-        
-        
         
         //signature
         
@@ -1046,31 +1036,14 @@
     else
     {
         
-        
         Second=YES;
-        
-        
-        
         uploading = NO;
-        
         uploadingsketch=NO;
-        
         first=NO;
-        
         NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
         
-        
-        //http://data.privytext.us/contructionapi.php/api/expense/username/
-        
-        
-        //  http://data.privytext.us/contructionapi.php/api/expense/create/`EXReportNo`/ `Project_id`/ `ERFHeader`/`ERDate1`/ `ERDescription1`/ `ERJobNo1`/ `ERType1`/ `ERPAMilage1`,
-        // `ERPARate1`/ `ERTotal1`
-        
-        
-        
-        
-        
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",ExpID,appDelegate.projId,header.text,ERdate6.text,ERDescription.text,ERJobNo.text,ERType.text,txtMil1.text,txtRate1.text,txtTotal1.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                            ExpID,appDelegate.projId,header.text,ERdate6.text,ERDescription.text,ERJobNo.text,ERType.text,txtMil1.text,txtRate1.text,txtTotal1.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -1190,7 +1163,8 @@
     
     //  Second=YES;
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/uploadimages/%@/%@/%@/",appDelegate.username,RecID,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/expense/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,RecID,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -1300,7 +1274,7 @@ didReceiveResponse:(NSURLResponse *)response
             ExpID=[responseObject valueForKey:@"id"];
             
             NSLog(@"exp id---------%@",ExpID);
-                }
+        }
         
         else{
             
@@ -1369,7 +1343,7 @@ didReceiveResponse:(NSURLResponse *)response
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
         
-            }
+    }
     
 }
 @end

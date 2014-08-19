@@ -49,7 +49,7 @@
             
             if (!jsonError) {
                 [self parseResponse:jsonResponse];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];
             } else {
                 NSLog(@"%@", [jsonError description]);
                 //  [_delegate resourceFailed:error];

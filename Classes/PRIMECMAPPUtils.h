@@ -21,7 +21,7 @@ extern NSString * const TOKEN_URL;
 extern NSString * const ACCESS_TOKEN;
 extern NSString * const REFRESH_TOKEN;
 
-+ (NSString *)getServerPath;
++ (NSString *)getAPIEndpoint;
 
 + (NSManagedObjectContext *)getManagedObjectContext;
 

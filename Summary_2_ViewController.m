@@ -9,6 +9,7 @@
 #import "Summary_2_ViewController.h"
 #import "Summary_3_ViewController.h"
 #import "TabAndSplitAppAppDelegate.h"
+#import "PRIMECMAPPUtils.h"
 
 @interface Summary_2_ViewController ()
 
@@ -425,27 +426,7 @@
             
         }
         
-        
-        
-        
-        
-        // NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
-        
-        
-        /* http://data.privytext.us/contructionapi.php/api/summary2/create/user/`SMSSheetNo`, `Project_id`, `MEDescription1`, `MEQuantity1`, `MEUnitPrice1`, `MEAmount1`,
-         `MEDescription2`, `MEQuantity2`, `MEUnitPrice2`, `MEAmount2`, `MEDescription3`, `MEQuantity3`, `MEUnitPrice3`,
-         `MEAmount3`, `MEDescription4`, `MEQuantity4`, `MEUnitPrice4`, `MEAmount4`, `MEDescription5`, `MEQuantity5`,
-         `MEUnitPrice5`, `MEAmount5`, `Total1`, `LessDiscount`, `Total2`, `AdditionalDiscount`, `Total3`*/
-        
-        
-        // NSString *savedValue = [[NSUserDefaults standardUserDefaults]
-        //stringForKey:@"summery id"];
-        
-        
-        
-        
-        
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -454,10 +435,6 @@
         [NSURL URLWithString:uencodedUrl];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
         [urlRequest setHTTPMethod:@"POST"];
-        
-        
-        
-        
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
         
         _receivedData = [[NSMutableData alloc] init];
@@ -471,9 +448,6 @@
         HUD.dimBackground = YES;
         HUD.delegate = self;
         [HUD show:YES];
-        
-        
-        
         tTotal.text=NULL ;
         txtInsu.text=NULL ;
         txtLTotal.text=NULL ;
@@ -500,61 +474,41 @@
         txtTotal3.text=@"";
         txtTotal4.text=@"";
         txtTotal5.text=@"";
-        
-        
     }
-    
-    
 }
 
-
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"uuuuu");
-    
     _receivedResponse = response;
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    NSLog(@"ddddd");
     [_receivedData appendData:data];
 }
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"eeeeee");
     [HUD setHidden:YES];
     _connectionError = error;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
     [HUD setHidden:YES];
-    
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    NSLog(@"response---%@",responseObject);
-    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-   
     
     if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
     {
-        
         Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
         su.title=@"Summary Sheet";
         [self.navigationController pushViewController:su animated:YES];
         
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
-        
     }
     else
     {

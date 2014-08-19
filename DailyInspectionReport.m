@@ -10,7 +10,7 @@
 #import "ImageHeaderCell.h"
 #import "ImageCell.h"
 #import "TabAndSplitAppAppDelegate.h"
-
+#import "PRIMECMAPPUtils.h"
 
 
 @interface DailyInspectionReport (){
@@ -111,7 +111,8 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 }
 -(void)loadInspectionForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/single/%@/%@",appDelegate.username,CNo];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/single/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                        appDelegate.username,CNo];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -173,7 +174,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSLog(@"count--- %@",responseObject);
+    //NSLog(@"count--- %@",responseObject);
     txtContractor.text=[[responseObject valueForKey:@"dailyinspection"]valueForKey:@"Contractor"];
     txtAdressPOBox.text=[[responseObject valueForKey:@"dailyinspection"]valueForKey:@"P_O_Box"];
     txtCity.text=[[responseObject valueForKey:@"dailyinspection"]valueForKey:@"City"];

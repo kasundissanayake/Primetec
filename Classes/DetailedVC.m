@@ -1,6 +1,3 @@
-
-
-
 #import "DetailedVC.h"
 #import "FirstViewController.h"
 #import "TabAndSplitAppAppDelegate.h"
@@ -8,46 +5,29 @@
 #import "MenuOption.h"
 #import "Reachability.h"
 #import "userdetails.h"
-
+#import "PRIMECMAPPUtils.h"
 
 @interface DetailedVC ()
 {
     TabAndSplitAppAppDelegate *appDelegate;
     RootVC *root;
     FirstViewController *frst;
-    
     NSMutableArray *hotelAnnotations;
-    
     UIPopoverController *popoverController;
     UITableView *tblView;
     NSArray *tableData;
-    
-    
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    //woornika
     MBProgressHUD *HUD;
-    
-    
     Reachability *internetReachableFoo;
-
-    
     NSArray *fetchedObjects;
-    
     NSManagedObject *selectedObject;
-
-
-    
 }
 @end
 
 @implementation DetailedVC
-
-
 
 -(IBAction)showFirst
 {
@@ -68,16 +48,9 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
-      appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    
+    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
-    
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"home.jpg"]];
@@ -88,8 +61,6 @@
     
     if(appDelegate.Tag==1)
     {
-        
-        
         UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                    initWithTitle:NSLocalizedString(@"Menu", @"")
                                    style:UIBarButtonItemStyleDone
@@ -106,8 +77,6 @@
     }
     else
     {
-        
-        
         UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                    initWithTitle:NSLocalizedString(@"", @"")
                                    style:UIBarButtonItemStyleDone
@@ -117,12 +86,7 @@
         self.navigationItem.rightBarButtonItem = Button;
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
-    
-    
-    
 }
-
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -134,41 +98,30 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
     cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
     return cell;
 }
 
+
 -(IBAction)selectType:(id)sender
 {
     tableData = [NSArray arrayWithObjects:@"Map", @"Compliance Form", nil];
-    
     UIViewController *popoverContent=[[UIViewController alloc] init];
-    
     UIView *popoverView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
-    
     popoverView.backgroundColor=[UIColor whiteColor];
-    
     popoverContent.view=popoverView;
     popoverContent.preferredContentSize=CGSizeMake(200, 420);
     popoverContent.view=tblView; //Adding tableView to popover
     tblView.delegate=self;
     tblView.dataSource=self;
-    
     popoverController=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
-
-
-
-
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -179,54 +132,23 @@
 
 - (IBAction)LoginUser:(id)sender {
     
-    
-    
-    
-    
-    
     if ([_usernameField.text isEqualToString:@""] || [_passwordField.text isEqualToString:@"" ]) {
-        UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Oooops" message:@"Your username and password does not match" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Oooops" message:@"Your username and password are empty." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         
         [loginAlert show];
     }else{
-        
-
-        
-        
-        
         if ([self connected]) {
             
+            NSLog(@"Login in online mode");
             
-            
-            
-            NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/user/login/check/%@/%@",_usernameField.text, _passwordField.text];
-            
-            
-            
-            
+            NSString *strURL = [NSString stringWithFormat:@"%@/api/user/login/check/%@/%@", [PRIMECMAPPUtils getAPIEndpoint] , _usernameField.text, _passwordField.text];
             NSURL *apiURL =
             [NSURL URLWithString:strURL];
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-            
-            
-            
-            
-            
             [urlRequest setHTTPMethod:@"GET"];
-            
-            
             NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-            
-            
-            
             _receivedData = [[NSMutableData alloc] init];
-            
-            
             [connection start];
-            
-            
-            NSLog(@"URL---%@",strURL);
-            
             HUD = [[MBProgressHUD alloc] initWithView:self.view];
             [self.navigationController.view addSubview:HUD];
             HUD.labelText=@"";
@@ -234,70 +156,43 @@
             HUD.delegate = self;
             [HUD show:YES];
             
-            
-            
-
         } else if(![self connected]){
             
-            appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+            NSLog(@"Login in offline mode");
             
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *entity = [NSEntityDescription
                                            entityForName:@"Users" inManagedObjectContext:context];
             [fetchRequest setEntity:entity];
             NSError *error;
-            
-            
-            
             fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-            
-            
             NSFetchRequest *request = [[NSFetchRequest alloc] init];
             [request setEntity:entity];
             
-            
-            
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(username == %@ && password == %@)", [_TUserName text], [_TPassword text]];
             [request setPredicate:predicate];
+            NSArray *result = [context executeFetchRequest:request error:&error];
             
-            NSArray *result = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-            
-
-            for (NSManagedObject *obj in fetchedObjects) {
-                NSLog(@"username: %@", [obj valueForKey:@"username"]);
-                NSLog(@"password: %@", [obj valueForKey:@"password"]);
-                NSLog(@"type: %@", [obj valueForKey:@"user_type"]);
-
-            }
-
-            
-            if ((result != nil) && ([result count]) && (error == nil)){
-                
-   
-
+            if ((result != nil) && ([result count] > 0) && (error == nil)){
                 NSManagedObject *obj = [result objectAtIndex:0];
-
                 appDelegate.userTypeOffline= [obj valueForKey:@"user_type"];
-                
                 selectedObject = obj;
-
                 
-               NSLog(@"type======%@",[obj valueForKey:@"user_type"]);
-
+                NSString *fname=[obj valueForKey:@"firstname"];
+                NSString *lname=[obj valueForKey:@"lastname"];
+                NSString *combined = [NSString stringWithFormat:@"%@ %@", fname, lname];
+                
+                appDelegate.userId=[obj valueForKey:@"id_no"];
+                appDelegate.projPrintedName=combined;
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
                 
-                   NSLog(@"--------Login Success Offline---------");
-                
+                NSLog(@"--------Login Success Offline---------");
             }
             else{
-                
                 NSLog(@"-------Login Error Offline------------");
-                
-                
-                
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed"
                                                                 message:@"Incorrect username or password.Please try again"
                                                                delegate:self
@@ -305,123 +200,85 @@
                                                       otherButtonTitles:nil];
                 alert.delegate=self;
                 [alert show];
-                
-                
-                
-                
-                
-                
-                }
-                
-            
-        
+            }
         }
-        
     }
-    
-    
 }
-
-
-
 
 
 -(void)displayManagedObject:(NSManagedObject *)obj {
     appDelegate.userTypeOffline = [obj valueForKey:@"user_type"];
-    
 }
-
 
 
 - (void) saveData
 {
-    
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSManagedObject *newContact;
-    
-
-    
     newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:context];
-    
     [newContact setValue:@"lin" forKey:@"username"];
     [newContact setValue:@"12345" forKey:@"password"];
-    
+    [newContact setValue:@"Lingeshwaran" forKey:@"firstname"];
+    [newContact setValue:@"Kandasami" forKey:@"lastname"];
+    [newContact setValue:@"id_no" forKey:@"000"];
     
     NSError *error;
     [context save:&error];
-    
     NSLog(@"-----------user saved--------");
-    
-    
 }
 
 
 
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    
     _receivedResponse = response;
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData  *)data
 {
-    
     [_receivedData appendData:data];
 }
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
+
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [HUD setHidden:YES];
     _connectionError = error;
 }
 
 
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
     [HUD setHidden:YES];
-    
     NSError *parseError = nil;
     NSArray *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:0
                                                                 error:&parseError];
     
     
-    NSLog(@"response obj------%@",responseObject);
+    //NSLog(@"response obj------%@",responseObject);
     NSString *loginStatus = [[responseObject  valueForKey:@"message"]valueForKey:@"status"];
-       NSString *fname=[responseObject valueForKey:@"firstname"];
+    NSString *fname=[responseObject valueForKey:@"firstname"];
     NSString *lname=[responseObject valueForKey:@"lastname"];
     
     NSString *combined = [NSString stringWithFormat:@"%@ %@", fname, lname];
     
     appDelegate.userId=[responseObject valueForKey:@"id_no"];
     appDelegate.projPrintedName=combined;
-       if ([loginStatus isEqualToString: @"sucess"] ) {
+    if ([loginStatus isEqualToString: @"sucess"] ) {
         
         appDelegate.username=_usernameField.text;
-  
+        
         appDelegate.userType=[responseObject  valueForKey:@"user_type"];
         
         appDelegate.Tag=4;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
-        
-        
-        
-        
         [root.Frontimage setHidden:TRUE];
-           
-        
-           
     }
     else
     {
-        
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed"
                                                         message:@"Incorrect username or password.Please try again"
                                                        delegate:self
@@ -429,19 +286,13 @@ didReceiveResponse:(NSURLResponse *)response
                                               otherButtonTitles:nil];
         alert.delegate=self;
         [alert show];
-        
-        
-        
     }
-    
-    
 }
 
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc. that aren't in use.
 }
 
@@ -451,8 +302,4 @@ didReceiveResponse:(NSURLResponse *)response
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-
-
-
 @end

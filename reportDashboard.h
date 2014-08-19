@@ -27,6 +27,4 @@
 //@property (strong, nonatomic) IBOutlet UIImageView *dashboardImage;
 @property(nonatomic,assign) NSInteger proType;
 
-
-
 @end

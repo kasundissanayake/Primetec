@@ -9,6 +9,8 @@
 #import "reportDashboard.h"
 #import "ReportDetailsCell.h"
 #import "TabAndSplitAppAppDelegate.h"
+#import "PRIMECMAPPUtils.h"
+#import "ComplianceReport.h"
 
 @interface reportDashboard ()
 {
@@ -22,7 +24,7 @@
     NSArray *resPonse;
     
     //woornika
-    MBProgressHUD *HUD;
+    MBProgressHUD *hud;
     int type;
     
 }
@@ -33,8 +35,6 @@
 @synthesize detailedNavigationController;
 @synthesize table;
 @synthesize proType;
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,7 +57,7 @@
     self.navigationItem.rightBarButtonItem = newButton;
     
     
-        UIBarButtonItem  *newButton1 = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
+    UIBarButtonItem  *newButton1 = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
     self.navigationItem.leftBarButtonItem = newButton1;
     
     
@@ -116,7 +116,7 @@
     return reports.count;
     
     
-
+    
 }
 
 
@@ -126,13 +126,13 @@
     ReportDetailsCell *cell =(ReportDetailsCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
-      
+        
         NSArray *nib=[[NSBundle mainBundle]loadNibNamed:@"ReportDetailsCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
     
     if (indexPath.section == 0) {
-               if(proType==2)
+        if(proType==2)
         {
             cell.lblReportName.text =[[reports valueForKey:@"DIFHeader"]objectAtIndex:indexPath.row];
             cell.lblReportDate.text =[[reports valueForKey:@"Date"]objectAtIndex:indexPath.row];
@@ -188,24 +188,16 @@
 
 
 
-
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *noticeNo;
-      if (proType == 0)
-        
+    if (proType == 0)
     {
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"ComplianceNoticeNo"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                              noticeNo forKey:@"ConNo"];
-        
+        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeCompliance" object:nil userInfo:dict];
-        
     }
     
     
@@ -242,9 +234,9 @@
     
     if (proType == 4)
     {
-                noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"SMSheetNo"];
-                NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                                      noticeNo forKey:@"ConNo"];
+        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"SMSheetNo"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:
+                              noticeNo forKey:@"ConNo"];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummary" object:nil userInfo:dict];
     }
@@ -254,7 +246,8 @@
 }
 -(void)loadComplianceForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/list/%@/%@",appDelegate.username,appDelegate.projId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/compliance/list/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                        appDelegate.username,appDelegate.projId];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -277,18 +270,19 @@
     [connection start];
     NSLog(@"URL---%@",strURL);
     
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
     
     
     
 }-(void)loadNonComplianceForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/noncompliance/list/%@/%@",appDelegate.username,appDelegate.projId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/list/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                        appDelegate.username,appDelegate.projId];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -311,19 +305,20 @@
     [connection start];
     NSLog(@"URL---%@",strURL);
     
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
     
     
     
 }
 -(void)loadDailyInspectionForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/dailyinspection/list/%@/%@",appDelegate.username,appDelegate.projId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/list/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                        appDelegate.username,appDelegate.projId];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -346,120 +341,82 @@
     [connection start];
     NSLog(@"URL---%@",strURL);
     
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
     
     
     
 }
 -(void)loadExpenseForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/list/%@/%@",appDelegate.username,appDelegate.projId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/list/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+                        appDelegate.username,appDelegate.projId];
     
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
+    NSURL *apiURL = [NSURL URLWithString:strURL];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
     
-    
-    
-    
-    
     [urlRequest setHTTPMethod:@"GET"];
-    
-    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
     _receivedData = [[NSMutableData alloc] init];
-    
-    
     [connection start];
     NSLog(@"URL---%@",strURL);
     
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
-    
-    
-    
-}
--(void)loadSummeryForm
-{
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary1/list/%@/%@",appDelegate.username,appDelegate.projId];
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
-    
-    
-    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
 }
 
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+-(void)loadSummeryForm
 {
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/list/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.projId];
+    NSURL *apiURL =
+    [NSURL URLWithString:strURL];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+    [urlRequest setHTTPMethod:@"GET"];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    _receivedData = [[NSMutableData alloc] init];
+    [connection start];
+    NSLog(@"URL---%@",strURL);
     
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
     _receivedResponse = response;
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData  *)data
 {
-    
     [_receivedData appendData:data];
 }
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [HUD setHidden:YES];
+    [hud setHidden:YES];
     _connectionError = error;
 }
 
 
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
-    [HUD setHidden:YES];
-    
+    [hud setHidden:YES];
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
+    NSInteger count =[[responseObject valueForKey:@"complianceForm"] count];
     
-   NSInteger count =[[responseObject valueForKey:@"complianceForm"] count];
-    NSLog(@"count--- %@",responseObject);
-
     if(type==0)
     {
         reports=[[responseObject valueForKey:@"complianceForm"]mutableCopy];
@@ -481,8 +438,9 @@ didReceiveResponse:(NSURLResponse *)response
         reports=[[responseObject valueForKey:@"summarySheet1"]mutableCopy];
     }
     [table reloadData];
-    
 }
+
+
 -(void)reloadProjectList:(NSNotification *)notification
 {
     type = [[[notification userInfo] valueForKey:@"index"] intValue];
@@ -490,54 +448,52 @@ didReceiveResponse:(NSURLResponse *)response
     if(type==0)
     {
         [self loadComplianceForm];
-           }
+    }
     else if(type==1)
     {
-               [self loadNonComplianceForm];
+        [self loadNonComplianceForm];
     }
     
     else if(type==2)
     {
-               [self loadDailyInspectionForm];
+        [self loadDailyInspectionForm];
     }
     else if(type==3)
     {        [self loadExpenseForm];
     }
     else if(type==4)
     {
-              [self loadSummeryForm];
+        [self loadSummeryForm];
     }
-    
-    
-    
-    
 }
+
+
 -(void)reloadProjectInLoad
 {
     type =proType;
     [reports removeAllObjects];
     if(type==0)
     {
-                [self loadComplianceForm];
+        [self loadComplianceForm];
     }
     else if(type==1)
     {
-                [self loadNonComplianceForm];
+        [self loadNonComplianceForm];
     }
     
     else if(type==2)
     {
-               [self loadDailyInspectionForm];
+        [self loadDailyInspectionForm];
     }
     else if(type==3)
     {
-                [self loadExpenseForm];
+        [self loadExpenseForm];
     }
     else if(type==4)
     {
-               [self loadSummeryForm];
+        [self loadSummeryForm];
     }
-      
+    
 }
 
 

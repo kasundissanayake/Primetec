@@ -4,7 +4,7 @@
 #import "SignatureViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TabAndSplitAppAppDelegate.h"
-
+#import "PRIMECMAPPUtils.h"
 
 @interface Summary_3_ViewController ()
 {
@@ -596,7 +596,7 @@
         NSLog(@"saved val%@",savedValue);
         
         
-        NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary3/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,inspecter.text,sigName1,StxtDateINS.text,pm.text,sigName2,StxtDateCR.text,txtDailyTotal5.text,txtTotaToDatel5.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary3/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,inspecter.text,sigName1,StxtDateINS.text,pm.text,sigName2,StxtDateCR.text,txtDailyTotal5.text,txtTotaToDatel5.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -682,7 +682,7 @@
     
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary3/uploadimages/%@/%@",appDelegate.username,sigName2];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/summary3/uploadimages/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,sigName2];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);
@@ -741,7 +741,7 @@
     
     
     
-    NSString *urlLink = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary3/uploadimages/%@/%@",appDelegate.username,sigName1];
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/summary3/uploadimages/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,sigName1];
     
     NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL---%@",unicodeLink);

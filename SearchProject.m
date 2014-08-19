@@ -59,7 +59,7 @@
     projectDetails=[[NSMutableArray alloc]init];
     projectDetailsSearch=[[NSMutableArray alloc]init];
     projectDetails=[appDelegate.projectsArray mutableCopy];
-     projectDetailsSearch=[appDelegate.projectsArray mutableCopy];
+    projectDetailsSearch=[appDelegate.projectsArray mutableCopy];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDashboard) name:@"showDashboard" object:nil];
 }
@@ -96,8 +96,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Array 1----- %i",projectDetails.count);
-
     return [projectDetails count];
 }
 
@@ -138,29 +136,15 @@
     
     for (NSInteger j = 0; j < [tableView numberOfSections]; ++j)
     {
-        
-        
-        
-        
         for (NSInteger i = 0; i < [tableView numberOfRowsInSection:j]; ++i)
         {
             [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
-            
-            
-            
             cell.lblCity.textColor=[UIColor blackColor];
             cell.lblProjectAddress.textColor=[UIColor blackColor];
             cell.lblProjectName.textColor=[UIColor blackColor];
             cell.lblProjectNo.textColor=[UIColor blackColor];
-            
-            
         }
-        
-        
-        
-        
-        
     }
     
     ProjectDetailsCell *selectedCell=(ProjectDetailsCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -177,50 +161,38 @@
     selectedCell.lblProjectName.textColor=[UIColor whiteColor];
     selectedCell.lblProjectNo.textColor=[UIColor whiteColor];
     
+    Dashboard *das=[[Dashboard alloc] init];
+    das.title=@"";
+    [self.navigationController pushViewController:das animated:YES];
+    self.navigationController.navigationBar.translucent = NO;
     
-    
-
-    
-        Dashboard *das=[[Dashboard alloc] init];
-        das.title=@"";
-        [self.navigationController pushViewController:das animated:YES];
-        self.navigationController.navigationBar.translucent = NO;
-
     NSDictionary* dict = [NSDictionary dictionaryWithObject:
                           [NSNumber numberWithInt:0]
                                                      forKey:@"index"];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil userInfo:dict];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil userInfo:dict];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
     appDelegate.Tag=1;
-    
-    
 }
+
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
 {
-
- 
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(projectName contains[c] %@ OR projectNo contains[c] %@ OR address contains[c] %@)",
-                             text,text,text];
-        filteredProjects = [projectDetailsSearch filteredArrayUsingPredicate:pred];
-      
-       [projectDetails removeAllObjects];
-        [projectDetails addObjectsFromArray:filteredProjects];
-       
-        if([text isEqualToString:@""]|| text ==NULL)
-        {
-            [projectDetails removeAllObjects];
-            [projectDetails addObjectsFromArray:projectDetailsSearch];
-
-        }
-       [self.table reloadData];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(projectName contains[c] %@ OR projectNo contains[c] %@ OR address contains[c] %@)",
+                         text,text,text];
+    filteredProjects = [projectDetailsSearch filteredArrayUsingPredicate:pred];
+    [projectDetails removeAllObjects];
+    [projectDetails addObjectsFromArray:filteredProjects];
+    
+    if([text isEqualToString:@""]|| text ==NULL)
+    {
+        [projectDetails removeAllObjects];
+        [projectDetails addObjectsFromArray:projectDetailsSearch];
         
-
+    }
+    [self.table reloadData];
 }
 
 - (void)didReceiveMemoryWarning

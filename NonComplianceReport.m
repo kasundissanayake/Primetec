@@ -10,6 +10,7 @@
 #import "ImageCell.h"
 #import "ImageHeaderCell.h"
 #import "TabAndSplitAppAppDelegate.h"
+#import "PRIMECMAPPUtils.h"
 
 @interface NonComplianceReport ()
 {
@@ -116,7 +117,7 @@
 }
 -(void)loadNonComplianceForm
 {
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/noncompliance/single/%@/%@",appDelegate.username,CNo];
+    NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/single/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,CNo];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
@@ -178,7 +179,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSLog(@"count--- %@",responseObject);
+    //NSLog(@"count--- %@",responseObject);
     txtTitle.text=[[responseObject valueForKey:@"nonComplianceForm"]valueForKey:@"Non_ComHeader"];
     nonComNotNo.text=[[responseObject valueForKey:@"nonComplianceForm"]valueForKey:@"Non_ComplianceNoticeNo"];
     lblProjDec.text=[[responseObject valueForKey:@"nonComplianceForm"]valueForKey:@"ProjectDescription"];

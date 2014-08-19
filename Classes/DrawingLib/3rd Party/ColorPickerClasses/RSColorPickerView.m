@@ -15,7 +15,6 @@
 #define MY_MIN3(x,y,z) MIN(x,MIN(y,z))
 #define MY_MAX3(x,y,z) MAX(x,MAX(y,z))
 
-// Concept-code from http://www.easyrgb.com/index.php?X=MATH&H=21#text21
 BMPixel pixelFromHSV(CGFloat H, CGFloat S, CGFloat V) {
 	if (S == 0) {
 		return BMPixelMake(V, V, V, 1.0);
