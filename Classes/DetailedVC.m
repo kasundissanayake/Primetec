@@ -178,12 +178,14 @@
                 NSManagedObject *obj = [result objectAtIndex:0];
                 appDelegate.userTypeOffline= [obj valueForKey:@"user_type"];
                 selectedObject = obj;
+                appDelegate.Tag=4;
                 
                 NSString *fname=[obj valueForKey:@"firstname"];
                 NSString *lname=[obj valueForKey:@"lastname"];
                 NSString *combined = [NSString stringWithFormat:@"%@ %@", fname, lname];
                 
                 appDelegate.userId=[obj valueForKey:@"id_no"];
+                appDelegate.username=[obj valueForKey:@"username"];
                 appDelegate.projPrintedName=combined;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
@@ -216,7 +218,7 @@
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSManagedObject *newContact;
     newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:context];
-    [newContact setValue:@"lin" forKey:@"username"];
+    [newContact setValue:@"Lin" forKey:@"username"];
     [newContact setValue:@"12345" forKey:@"password"];
     [newContact setValue:@"Lingeshwaran" forKey:@"firstname"];
     [newContact setValue:@"Kandasami" forKey:@"lastname"];

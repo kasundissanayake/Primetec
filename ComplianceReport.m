@@ -134,11 +134,6 @@
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    id obj;
-    for (obj in objects){
-        NSLog(@"compliance no: %@", [obj valueForKey:@"complianceNoticeNo"]);
-    }
-    
     if([objects count] > 0){
         NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"complianceNoticeNo"]);

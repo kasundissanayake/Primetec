@@ -177,19 +177,39 @@ typedef enum {
     appDelegate.Tag = 4;
     [self populateProjectList];
     
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self.table reloadData];
-    }];
+    });
 }
 
 -(void) populateProjectList
 {
-    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
     NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *assign_project_fetchRequest = [[NSFetchRequest alloc] init];
+    NSFetchRequest *project_fetchRequest = [[NSFetchRequest alloc] init];
+    
+    
+    NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
+    NSEntityDescription *assign_project_Entity = [NSEntityDescription entityForName:@"Assign_project" inManagedObjectContext:context];
+    
+    NSPredicate *user_predicate = [NSPredicate predicateWithFormat:@"ANY username == %@", appDelegate.username];
+    [assign_project_fetchRequest setPredicate:user_predicate];
+    [assign_project_fetchRequest setEntity:assign_project_Entity];
+    NSArray *assign_project_Objects = [context executeFetchRequest:assign_project_fetchRequest error:&error];
+    
+    NSMutableArray * projectIDs = [NSMutableArray array];
+    
+    id assign_project_Instance;
+    for (assign_project_Instance in assign_project_Objects){
+        [projectIDs addObject:[assign_project_Instance valueForKey:@"projectid"]];
+    }
+    
+    [project_fetchRequest setEntity:projectEntity];
+    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"ANY projecct_id in %@", projectIDs];
+    [project_fetchRequest setPredicate:project_predicate];
+    NSArray *projectObjects = [context executeFetchRequest:project_fetchRequest error:&error];
     
     [projectDetails removeAllObjects];
     [projectDetailsFiltered removeAllObjects];
@@ -197,7 +217,7 @@ typedef enum {
     [appDelegate.projectsArray removeAllObjects];
     
     id objectInstance;
-    for (objectInstance in objects){
+    for (objectInstance in projectObjects){
         [projectDetails addObject:objectInstance];
         [projectDetailsFiltered addObject:objectInstance];
         [projectDetailsSearch addObject:objectInstance];
@@ -206,12 +226,16 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
     
-    if ([objects count]>0) {
+    if ([projectObjects count]>0) {
         appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
     }
     else {
         NSLog(@"No matches found for Projects");
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.table reloadData];
+    });
 }
 
 
