@@ -1503,8 +1503,6 @@
     
 }
 
-
-
 - (void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     
@@ -1566,11 +1564,6 @@
     }
 }
 
-
-
-
-
-
 - (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     
@@ -1627,7 +1620,181 @@
     }
 }
 
+//Summery3
 
+
+- (void)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
+{
+    
+    SummarySheet3*assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet3"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+        
+        NSString *str = [dict valueForKey:@"sMSheetNo"] ;
+        NSArray *arr = [str componentsSeparatedByString:@"M"];
+        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"SM%d",newID];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"SummarySheet3"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"sMSheetNo"];
+    [assp setValue:projId forKey:@"project_id"];
+    [assp setValue:class1 forKey:@"eQSizeandClass1"];
+    [assp setValue:class2 forKey:@"eQSizeandClass2"];
+    [assp setValue:class3 forKey:@"eQSizeandClass3"];
+    [assp setValue:class4 forKey:@"eQSizeandClass4"];
+    [assp setValue:class5 forKey:@"eQSizeandClass5"];
+    [assp setValue:active1 forKey:@"eQIdleActive1"];
+    [assp setValue:active2 forKey:@"eQIdleActive2"];
+    [assp setValue:active3 forKey:@"eQIdleActive3"];
+    [assp setValue:active4 forKey:@"eQIdleActive4"];
+    [assp setValue:active5 forKey:@"eQIdleActive5"];
+    [assp setValue:no1 forKey:@"eQNo1"];
+    [assp setValue:no2 forKey:@"eQNo2"];
+    [assp setValue:no3 forKey:@"eQNo3"];
+    [assp setValue:no4 forKey:@"eQNo4"];
+    [assp setValue:no5 forKey:@"eQNo5"];
+    [assp setValue:hours1 forKey:@"eQTotalHours1"];
+    [assp setValue:hours2 forKey:@"eQTotalHours2"];
+    [assp setValue:hours3 forKey:@"eQTotalHours3"];
+    [assp setValue:hours4 forKey:@"eQTotalHours4"];
+    [assp setValue:hours5 forKey:@"eQTotalHours5"];
+    [assp setValue:rate1 forKey:@"eQRAte1"];
+    [assp setValue:rate2 forKey:@"eQRAte2"];
+    [assp setValue:rate3 forKey:@"eQRAte3"];
+    [assp setValue:rate4 forKey:@"eQRAte4"];
+    [assp setValue:rate5 forKey:@"eQRAte5"];
+    [assp setValue:total1 forKey:@"eQTotalHours1"];
+    [assp setValue:total2 forKey:@"eQTotalHours2"];
+    [assp setValue:total3 forKey:@"eQTotalHours3"];
+    [assp setValue:total4 forKey:@"eQTotalHours4"];
+    [assp setValue:total5 forKey:@"eQTotalHours5"];
+    [assp setValue:inspecter forKey:@"inspector"];
+    [assp setValue:signame1 forKey:@"signature1"];
+    [assp setValue:signame2 forKey:@"signature2"];
+    [assp setValue:dateIns forKey:@""];
+    [assp setValue:projMan forKey:@"contractorRepresentative"];
+    [assp setValue:projId forKey:@"project_id"];
+    [assp setValue:dateCr forKey:@"date1"];
+    [assp setValue:totalToDate forKey:@"dailyTotal"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
+
+
+//Summary2
+
+
+/*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];*/
+
+
+- (void)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
+{
+    
+    SummarySheet2*assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet2"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
+    
+    NSError *error = nil;
+    
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if (error != nil) {
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+    
+    NSInteger newID = 0;
+    
+    for (NSDictionary *dict in existingIDs) {
+        
+        NSString *str = [dict valueForKey:@"sMSSheetNo"] ;
+        NSArray *arr = [str componentsSeparatedByString:@"M"];
+        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        
+        if (IDToCompare >= newID) {
+            newID = IDToCompare + 1;
+        }
+    }
+    
+    NSString *newIDD = [NSString stringWithFormat:@"SM%d",newID];
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"SummarySheet2"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"sMSSheetNo"];
+    [assp setValue:projId forKey:@"project_id"];
+    [assp setValue:desc1 forKey:@"mEDescription1"];
+    [assp setValue:desc2 forKey:@"mEDescription2"];
+    [assp setValue:desc3 forKey:@"mEDescription3"];
+    [assp setValue:desc4 forKey:@"mEDescription4"];
+    [assp setValue:desc5 forKey:@"mEDescription5"];
+    [assp setValue:qty1 forKey:@"mEQuantity1"];
+    [assp setValue:qty2 forKey:@"mEQuantity2"];
+    [assp setValue:qty3 forKey:@"mEQuantity3"];
+    [assp setValue:qty4 forKey:@"mEQuantity4"];
+    [assp setValue:qty5 forKey:@"mEQuantity5"];
+    [assp setValue:rate1 forKey:@"mEUnitPrice1"];
+    [assp setValue:rate2 forKey:@"mEUnitPrice2"];
+    [assp setValue:rate3 forKey:@"mEUnitPrice3"];
+    [assp setValue:rate4 forKey:@"mEUnitPrice4"];
+    [assp setValue:rate5 forKey:@"mEUnitPrice5"];
+    [assp setValue:total1 forKey:@"total1"];
+    [assp setValue:total2 forKey:@"total2"];
+    [assp setValue:total3 forKey:@"total3"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+    }
+}
 
 
 
