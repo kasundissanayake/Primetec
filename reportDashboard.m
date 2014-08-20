@@ -169,8 +169,9 @@
     // Compliance Report
     if (proType == 0)
     {
+        NSLog(@"report at index: %@",  [[reports objectAtIndex: indexPath.row]valueForKey:@"complianceNoticeNo"] );
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"complianceNoticeNo"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"contractNo"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeCompliance" object:nil userInfo:dict];
     }
     
@@ -179,7 +180,7 @@
     {
         
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"non_ComplianceNoticeNo"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"contractNo"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonCompliance" object:nil userInfo:dict];
     }
     
