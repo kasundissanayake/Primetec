@@ -124,6 +124,13 @@
 
 -(void) populateComplianceForm
 {
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm" inManagedObjectContext:context];
@@ -194,72 +201,11 @@
         }
     }else{
         NSLog(@"No matching ComplianceForm with ID: %@", CNo);
-    }    
+    }
     
-    [self.tblView reloadData];    
+    [self.tblView reloadData];
+    [hud setHidden:YES];
 }
-
-/*
- - (void)connectionDidFinishLoading:(NSURLConnection *)connection
- {
- [HUD setHidden:YES];
- 
- NSError *parseError = nil;
- NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
- NSLog(@"count--- %@",responseObject);
- 
- txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"comHeader"];
- comNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
- lblProjDec.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ProjectDescription"];
- txtContractNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project_id"];
- 
- txtTitle.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Title"];
- 
- txtProject.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Project"];
- 
- txtDateIssued.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateIssued"];
- lblConRes.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ContractorResponsible"];
- 
- txtTo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"To"];
- txtDateContracStarted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorStarted"];
- 
- txtDateContactCompleted.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateContractorCompleted"];
- txtDateRawReport.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"DateOfDWRReported"];
- lblCorrective.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"CorrectiveActionCompliance"];
- txtPrintedName.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"PrintedName"];
- txtdate.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Date"];
- txtNoticeNo.text=[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"ComplianceNoticeNo"];
- arrayImages  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
- sketchesArray  = [[[[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
- NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [[responseObject valueForKey:@"ComplianceNoticeNo"]valueForKey:@"Signature"]]]];
- NSLog(@"url----%@",url);
- NSData *imageData = [NSData dataWithContentsOfURL:url];
- UIImage *image = [[UIImage alloc] initWithData:imageData];
- imgSignature.image=image;
- 
- 
- for (int i=1; i<sketchesArray.count; i++) {
- NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]]];
- NSLog(@"url----%@",url);
- NSData *imageData = [NSData dataWithContentsOfURL:url];
- UIImage *image = [[UIImage alloc] initWithData:imageData];
- [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
- 
- 
- }
- 
- NSLog(@"array Images---%@",arrayImages);
- 
- for (int i=1; i<arrayImages.count; i++) {
- NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
- NSLog(@"url----%@",url);
- NSData *imageData = [NSData dataWithContentsOfURL:url];
- UIImage *image = [[UIImage alloc] initWithData:imageData];
- [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
- }
- [self.tblView reloadData];
- }
- */
 
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
@@ -525,13 +471,13 @@
 -(IBAction)showSCompliance:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
-    
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section==0)
@@ -568,7 +514,6 @@
         
         return cell;
     }
-    
     else
     {
         static NSString *simpleTableIdentifier = @"ImageCell";

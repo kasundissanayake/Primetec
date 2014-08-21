@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PRIMECMController : NSObject
-- (void)synchronizeWithServer:(NSString *)url;
+- (int)synchronizeWithServer:(NSString *)url;
 - (void)parseResponse:(id)responseObject;
 
 - (NSString *) getExpenceIdByProjID:(NSString *)projId;

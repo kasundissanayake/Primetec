@@ -224,14 +224,15 @@ typedef enum {
         [appDelegate.projectsArray addObject:objectInstance];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
-    
     if ([projectObjects count]>0) {
         appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
+        NSLog(@"Selected Project ID: %@", appDelegate.projId);
     }
     else {
         NSLog(@"No matches found for Projects");
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadAnnotations" object:nil];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.table reloadData];
@@ -723,7 +724,7 @@ typedef enum {
         
         else if (appDelegate.Tag==4)
         {
-            FirstViewController*fdvc=[[FirstViewController alloc] init];
+            FirstViewController* fdvc=[[FirstViewController alloc] init];
             fdvc.title=[NSString stringWithFormat:@"Map View"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
             
@@ -745,9 +746,7 @@ typedef enum {
     else if(appDelegate.Tag==4)
     {
         NSMutableDictionary *selectedValueDic = [[NSMutableDictionary alloc] init];
-        selectedValueDic=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                          [NSString stringWithFormat:@"%i", indexPath.row],@"mapId",
-                          nil];
+        selectedValueDic=[NSMutableDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%i", indexPath.row],@"mapId", nil];
         
         appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
@@ -803,57 +802,75 @@ typedef enum {
 
 - (void)changeNonCompliance:(NSNotification *)notification
 {
-    NSDictionary *dict = [notification userInfo];
-    //NSLog(@"Map====%@",dict);
-    NSString *CNo=[dict valueForKey:@"ConNo"];
-    NonComplianceReport *noncom=[[NonComplianceReport alloc]init];
-    noncom.title=[NSString stringWithFormat:@"Non-Compliance Report"];
-    noncom.CNo=CNo;
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
+    [self showInfoAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        NonComplianceReport *noncom=[[NonComplianceReport alloc]init];
+        noncom.title=[NSString stringWithFormat:@"Non-Compliance Report"];
+        noncom.CNo=CNo;
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
+        [self hudWasHidden];
+    });
 }
 
 
 - (void)changeInspection:(NSNotification *)notification
 {
-    NSDictionary *dict = [notification userInfo];
-    //NSLog(@"Map====%@",dict);
+    [self showInfoAlert];
     
-    NSString *CNo=[dict valueForKey:@"ConNo"];
-    DailyInspectionReport *daily=[[DailyInspectionReport alloc]init];
-    daily.CNo=CNo;
-    daily.title=[NSString stringWithFormat:@"Daily Inspection Report"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:daily]];
-    
-    self.proStatusSeg.hidden=TRUE;
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        DailyInspectionReport *daily=[[DailyInspectionReport alloc]init];
+        daily.CNo=CNo;
+        daily.title=[NSString stringWithFormat:@"Daily Inspection Report"];
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:daily]];
+        self.proStatusSeg.hidden=TRUE;
+        [self hudWasHidden];
+    });
 }
 
 
 
 - (void)changeDExpese:(NSNotification *)notification
 {
-    NSDictionary *dict = [notification userInfo];
-    //NSLog(@"Map====%@",dict);
-    NSString *CNo=[dict valueForKey:@"ConNo"];
-    ExpenseReport *expnse=[[ExpenseReport alloc]init];
-    expnse.eXReportNo=CNo;
-    //expnse.=[NSString stringWithFormat:@"Expense Report"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:expnse]];
+    [self showInfoAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        ExpenseReport *expnse=[[ExpenseReport alloc]init];
+        expnse.ExNo=CNo;
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:expnse]];
+        [self hudWasHidden];
+    });
 }
 
 
 - (void)changeSummary:(NSNotification *)notification
-
 {
-    NSDictionary *dict = [notification userInfo];
-    //NSLog(@"Map====%@",dict);
+    [self showInfoAlert];
     
-    NSString *CNo=[dict valueForKey:@"ConNo"];
-    
-    SummaryReport *sumarry=[[SummaryReport alloc]init];
-    sumarry.SMNo=CNo;
-    sumarry.title=[NSString stringWithFormat:@"Summary Sheet"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:sumarry]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        
+        SummaryReport *sumarry=[[SummaryReport alloc]init];
+        sumarry.SMNo=CNo;
+        sumarry.title=[NSString stringWithFormat:@"Summary Sheet"];
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:sumarry]];
+        [self hudWasHidden];
+    });
 }
 
 - (void)changeComplianceForm
@@ -868,7 +885,7 @@ typedef enum {
 {
     nonComplianceViewController *noncom=[[nonComplianceViewController alloc]init];
     noncom.title=[NSString stringWithFormat:@"Non-Compliance View"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];    
+    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
 }
 
 
@@ -916,7 +933,6 @@ typedef enum {
             isFound=YES;
             Dashboard *dashViewController = (Dashboard*)viewController;
             [self.navigationController popToViewController:dashViewController animated:YES];
-            
         }
     }
     if(!isFound)
@@ -926,12 +942,11 @@ typedef enum {
         [self.navigationController pushViewController:das animated:YES];
     }
 }
+
 -(IBAction)showSProject:(id)sender
 {
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSProject" object:nil];
-    
 }
 
 -(void)showSProject
@@ -952,7 +967,6 @@ typedef enum {
         search.title=@"Dashboard";
         [self.navigationController pushViewController:search animated:YES];
     }
-    
 }
 
 

@@ -16,9 +16,6 @@
 #import "SummaryReport.h"
 #import "ProjectDetailsCell.h"
 
-
-
-
 @interface SearchProject ()
 {
     TabAndSplitAppAppDelegate *appDelegate;
@@ -29,10 +26,6 @@
 }
 
 @end
-
-
-
-
 
 @implementation SearchProject
 
@@ -63,6 +56,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDashboard) name:@"showDashboard" object:nil];
 }
+
 -(void)showDashboard
 {
     BOOL isFound=NO;
@@ -73,13 +67,10 @@
             isFound=YES;
             Dashboard *dashViewController = (Dashboard*)viewController;
             [self.navigationController popToViewController:dashViewController animated:YES];
-            
         }
     }
     if(!isFound)
     {
-        
-        
         // Dashboard *das=[[Dashboard alloc] init];
         das.title=@"Dashboard";
         [self.navigationController pushViewController:das animated:YES];
@@ -148,7 +139,7 @@
     }
     
     ProjectDetailsCell *selectedCell=(ProjectDetailsCell *)[tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"Index---- %i",indexPath.row);
+    
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:selectedCell.frame];
     bgView.backgroundColor = [UIColor orangeColor];
     

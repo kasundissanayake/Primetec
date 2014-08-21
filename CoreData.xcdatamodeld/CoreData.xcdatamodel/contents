@@ -122,7 +122,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ExpenseReport" representedClassName="ExpenseReport" syncable="YES">
+    <entity name="ExpenseReportModel" representedClassName="ExpenseReportModel" syncable="YES">
         <attribute name="approvedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attachment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="checkNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -342,7 +342,7 @@
         <element name="DailyInspectionForm" positionX="0" positionY="171" width="128" height="1035"/>
         <element name="DailyInspectionItem" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Expensedata" positionX="-18" positionY="162" width="128" height="195"/>
-        <element name="ExpenseReport" positionX="18" positionY="180" width="128" height="270"/>
+        <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="268"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="375"/>
         <element name="Projects" positionX="-9" positionY="135" width="128" height="345"/>
         <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="165"/>

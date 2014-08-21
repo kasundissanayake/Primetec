@@ -122,8 +122,6 @@
                   target:self
                   action:@selector(selectMapType:)];
     
-    
-    
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -131,10 +129,8 @@
     self.navigationItem.rightBarButtonItem = Button;
     self.navigationItem.leftBarButtonItem = btnMapType;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
+    // Coordinates for part of downtown San Francisco - around Moscone West, no less.
     MKCoordinateRegion startupRegion;
-	
-	// Coordinates for part of downtown San Francisco - around Moscone West, no less.
 	startupRegion.center = CLLocationCoordinate2DMake(41.650639, -72.665895);
 	startupRegion.span = MKCoordinateSpanMake(0.003515, 0.007129);
 	[self.mapView setRegion:startupRegion animated:YES];
@@ -144,8 +140,7 @@
 	HotelDetailViewController *controller = [[HotelDetailViewController alloc] initWithNibName:@"HotelDetailTableView" bundle:nil];
 	self.calloutDetailController = controller;
 	
-    
-    NSLog(@"Annotations===== %@",hotelAnnotations);
+    [self showAnnotations];
     
     if([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"])
     {
@@ -155,8 +150,6 @@
     {
         menuItems = [NSArray arrayWithObjects:@"Dashboard", @"Sign Out", @"Help", @"Sync" , nil];
     }
-    
-    
 }
 
 - (void)showInfoAlert {
@@ -171,7 +164,7 @@
 }
 
 - (void)hudWasHidden {
-    [self.hud hide:YES afterDelay:2];
+    [self.hud hide:YES];
 }
 
 
@@ -318,28 +311,18 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
                                                                    *)error
 {
-    NSLog(@"eeeeee");
     [self hudWasHidden];
     _connectionError = error;
 }
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
     [self hudWasHidden];
-    
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
     NSLog(@"response---%@",responseObject);
     self.navigationItem.rightBarButtonItem = Button;
-    
-    
-    
-    
-    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
@@ -353,25 +336,20 @@ didReceiveResponse:(NSURLResponse *)response
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
     }
-    
-    
 }
-
 
 
 -(void)changeToolBar
 {
-    
     self.navigationItem.rightBarButtonItem = Done;
     TapHereSubViewController *controllerTap = [[TapHereSubViewController alloc] initWithNibName:@"TapHereSubViewController" bundle:nil];
     [self presentViewController:controllerTap animated:YES completion:nil];
-    
 }
+
+
 -(void)displayPopupView
 {
     PopUpViewController *controller = [[PopUpViewController alloc] initWithNibName:@"PopUpViewController" bundle:nil];
-    
-    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     [self presentViewController:controller animated:YES completion:nil];
 }
@@ -380,16 +358,13 @@ didReceiveResponse:(NSURLResponse *)response
 
 //setting up the pin and getting the location accuracy
 
--(void)locationDetails:(NSString*)latitudecode longitudeVal:(NSString*)longitudecode{
-    
+-(void)locationDetails:(NSString*)latitudecode longitudeVal:(NSString*)longitudecode
+{
     CLLocationCoordinate2D cordinates;
     cordinates.latitude = [latitudecode floatValue];
     cordinates.longitude = [longitudecode floatValue];
-    
     CLLocation *location = [[CLLocation alloc] initWithCoordinate:cordinates altitude:1 horizontalAccuracy:1 verticalAccuracy:-1 timestamp:nil];
-    
     _geocoder = [[CLGeocoder alloc] init];
-    
     [_geocoder reverseGeocodeLocation: location completionHandler:
      ^(NSArray *placemarks, NSError *error) {
          
@@ -399,13 +374,10 @@ didReceiveResponse:(NSURLResponse *)response
                                                             delegate:nil
                                                    cancelButtonTitle:@"OK"
                                                    otherButtonTitles:nil];
-             
              [alert show];
-             
          }
          else
          {
-             
              //Get address
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
              
@@ -416,19 +388,13 @@ didReceiveResponse:(NSURLResponse *)response
              
              //Print the location in the console
              NSLog(@"Currently address is: %@",locatedaddress);
-             
-             
          }
-         
-         
      }];
 }
--(void)displayBottomBar
 
+
+-(void)displayBottomBar
 {
-    NSLog(@"Bottom Bar-------");
-    
-    
     if(!isDisplayBottomBar)
     {
         
@@ -457,7 +423,6 @@ didReceiveResponse:(NSURLResponse *)response
     }
     else
     {
-        NSLog(@"Removeeeeeeeeeeeee----------------------------");
         [bottomView removeFromSuperview];
         // bottomView.hidden=YES;
         isDisplayBottomBar=NO;
@@ -466,18 +431,12 @@ didReceiveResponse:(NSURLResponse *)response
                          animations:^{
                              bottomView.frame = CGRectMake(600, 580, 50, 50);//place where to end animating
                          }];
-        
-        
     }
-    
-    
 }
 
 
 -(IBAction)showDashboard:(id)sender
 {
-    
-    
     Dashboard *das=[[Dashboard alloc] init];
     das.title=@"Dashboard";
     [self.navigationController pushViewController:das animated:YES];
@@ -526,7 +485,6 @@ didReceiveResponse:(NSURLResponse *)response
 {
     if(isMapTypes)
     {
-        NSLog(@"gsasygysagdysagdysafdasfdfasdysafdsaydfasydfa");
         return 2;
     }
     return 1;
@@ -603,7 +561,6 @@ didReceiveResponse:(NSURLResponse *)response
         }
         else if (indexPath.section == 1 && indexPath.row == 0)
         {
-            NSLog(@"0000000000000000000000000000000000");
             [self.mapView showsUserLocation];
         }
     }
@@ -700,11 +657,35 @@ didReceiveResponse:(NSURLResponse *)response
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        [con synchronizeWithServer:url];
+        int syncStatus = [con synchronizeWithServer:url];
         
         dispatch_async( dispatch_get_main_queue(), ^{
+            
             [self reloadInputViews];
             [self hudWasHidden];
+            
+            if(syncStatus == 0)
+            {
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully synchronized with the server." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [exportAlert show];
+            }
+            else
+            {
+                NSString *errMsg;
+                if (syncStatus == 1){
+                    errMsg=@"No Internet connection";
+                }
+                else if (syncStatus == 2){
+                    errMsg=@"Server is not responding.";
+                }
+                else if (syncStatus == 3){
+                    errMsg=@"Invalid response received from server.";
+                }
+                
+                errMsg=[NSString stringWithFormat:@"Failed to synchronize. Please try again. Failed reason: %@", errMsg];
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [exportAlert show];
+            }
         });
         
     });
@@ -759,13 +740,11 @@ didReceiveResponse:(NSURLResponse *)response
 
 
 -(IBAction)showAddImageView:(id)sender
-
 {
     imageSubView.layer.cornerRadius=5;
     imageSubView.layer.masksToBounds=YES;
     imageSubView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     imageSubView.layer.borderWidth = 3.0f;
-    NSLog(@"hello");
 }
 
 
@@ -788,15 +767,10 @@ didReceiveResponse:(NSURLResponse *)response
 		
 		HotelAnnotation *annotation = [[HotelAnnotation alloc] initWithLatitude:theHotel.latitude longitude:theHotel.longitude];
 		annotation.hotel = theHotel;
-        
-        
-		
 		[hotelAnnotations addObject:annotation];
-		
 	}
 	
 	[self.mapView addAnnotations:hotelAnnotations];
-    
 }
 
 
@@ -813,14 +787,9 @@ didReceiveResponse:(NSURLResponse *)response
 -(void)reloadMapData:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"Map====%@",dict);
-    
     mapId=[dict valueForKey:@"mapId"];
-    NSLog(@"Map====%@",mapId);
-    
-    
     HotelAnnotation *annotation=[hotelAnnotations objectAtIndex:[mapId intValue]];
-    NSLog(@"Coordinate====%f",annotation.coordinate.latitude);
+    
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude =annotation.coordinate.latitude;
     zoomLocation.longitude= annotation.coordinate.longitude;
@@ -831,7 +800,6 @@ didReceiveResponse:(NSURLResponse *)response
     [mapView setRegion:viewRegion animated:YES];
     
     [mapView selectAnnotation:annotation animated:YES];
-    NSLog(@"Reloading-----");
 }
 
 

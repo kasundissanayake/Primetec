@@ -1,11 +1,3 @@
-//
-//  SummaryReport.m
-//  ComSMART
-//
-//  Created by Lingeswaran Kandasamy on 5/2/14.
-//
-//
-
 #import "SummaryReport.h"
 #import "PRIMECMAPPUtils.h"
 
@@ -15,9 +7,8 @@
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-     MBProgressHUD *HUD;
+    MBProgressHUD *HUD;
     UIBarButtonItem  *btnPrint;
-    
 }
 
 @end
@@ -38,10 +29,10 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     [txvDesWork.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [txvDesWork.layer setBorderColor: [[UIColor grayColor] CGColor]];
@@ -66,10 +57,10 @@
     
     
     UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Edit", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(fnEdit:)];
+                                initWithTitle:NSLocalizedString(@"Edit", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnEdit:)];
     
     
     
@@ -82,10 +73,10 @@
     
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-        self.navigationItem.leftBarButtonItem=Button2;
-    [self loadSummerySheet];
-
+    self.navigationItem.leftBarButtonItem=Button2;
+    [self populateSummerySheet];
 }
+
 
 -(void)printReport
 {
@@ -99,8 +90,6 @@
     directroyPath = [documentsDirectory stringByAppendingPathComponent:@"PDF"];
     NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
     NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
-    
-    
     NSError *error;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         
@@ -116,7 +105,6 @@
     int count=5;
     for (int i = 0 ; i<count ; i++)
     {
-        
         // page 1
         CGContextBeginPage (pdfContext,nil);
         
@@ -130,10 +118,9 @@
         [self.scrollView.layer renderInContext:pdfContext];
         CGContextEndPage (pdfContext);
         [self.scrollView setContentOffset:CGPointMake(0, (i+1) * 900) animated:NO];
-        
     }
-    CGContextRelease (pdfContext);
     
+    CGContextRelease (pdfContext);
     NSData *pdfData = [NSData dataWithContentsOfFile:filePath];
     
     printController = [UIPrintInteractionController sharedPrintController];
@@ -148,45 +135,24 @@
         printController.printingItem = pdfData;
         void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if (!completed && error) {
-        
+                
             }
         };
         [printController presentFromBarButtonItem:btnPrint animated:YES completionHandler:completionHandler];
     }
-    
-    
-    
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.scrollView.contentInset.top) animated:YES];
-    
-    
-    
-    
 }
 
-
--(void)loadSummerySheet
+-(void)populateSummerySheet
 {
+    /*
     NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/single/%@", [PRIMECMAPPUtils getAPIEndpoint], SMNo];
-    
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-  
-    
-    
-    
     [urlRequest setHTTPMethod:@"GET"];
-    
-    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
+    */
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
@@ -194,165 +160,147 @@
     HUD.dimBackground = YES;
     HUD.delegate = self;
     [HUD show:YES];
-}
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
-{
     
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sMSheetNo == %@", SMNo];
+    [fetchRequest setPredicate:predicate];
     
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if([objects count] > 0){
+        
+        NSManagedObject *summaryReportObject = (NSManagedObject *) [objects objectAtIndex:0];
+        NSLog(@"Summary Sheet Form object sMSheetNo: %@", [summaryReportObject valueForKey:@"sMSheetNo"]);
+        
+        txtContractor.text=[summaryReportObject valueForKey:@"contractor"];
+        txtPOBox.text=[summaryReportObject valueForKey:@"pOBox"];
+        txtCity.text=[summaryReportObject valueForKey:@"city"];
+        txtState.text=[summaryReportObject valueForKey:@"state"];
+        txtTpNumber.text=[summaryReportObject valueForKey:@"telephoneNo"];
+        
+        txtDate.text=[NSDateFormatter localizedStringFromDate:[summaryReportObject valueForKey:@"date"]
+                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateOfWork.text=[NSDateFormatter localizedStringFromDate:[summaryReportObject valueForKey:@"date"]
+                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        
+        txtContactorPerform.text=[summaryReportObject valueForKey:@"conPeWork"];
+        txtFederalAid.text=[summaryReportObject valueForKey:@"federalAidNumber"];
+        txtProjectNo.text=[summaryReportObject valueForKey:@"projectNo"];
+        txvDesWork.text=[summaryReportObject valueForKey:@"descr"];
+        txvConsOrder.text=[summaryReportObject valueForKey:@"constructionOrder"];
+        txtClass1.text=[summaryReportObject valueForKey:@"lAClass1"];
+        txtClass2.text=[summaryReportObject valueForKey:@"lAClass2"];
+        txtClass3.text=[summaryReportObject valueForKey:@"lAClass3"];
+        txtClass4.text=[summaryReportObject valueForKey:@"lAClass4"];
+        txtClass5.text=[summaryReportObject valueForKey:@"lAClass5"];
+        txtNo1.text=[summaryReportObject valueForKey:@"lANo1"];
+        txtNo2.text=[summaryReportObject valueForKey:@"lANo2"];
+        txtNo3.text=[summaryReportObject valueForKey:@"lANo3"];
+        txtNo4.text=[summaryReportObject valueForKey:@"lANo4"];
+        txtNo5.text=[summaryReportObject valueForKey:@"lANo5"];
+        txtTotal1.text=[summaryReportObject valueForKey:@"lATotalHours1"];
+        txtTotal2.text=[summaryReportObject valueForKey:@"lATotalHours2"];
+        txtTotal3.text=[summaryReportObject valueForKey:@"lATotalHours3"];
+        txtTotal4.text=[summaryReportObject valueForKey:@"lATotalHours4"];
+        txtTotal5.text=[summaryReportObject valueForKey:@"lATotalHours5"];
+        txtRate1.text=[summaryReportObject valueForKey:@"lARate1"];
+        txtRate2.text=[summaryReportObject valueForKey:@"lARate2"];
+        txtRate3.text=[summaryReportObject valueForKey:@"lARate3"];
+        txtRate4.text=[summaryReportObject valueForKey:@"lARate4"];
+        txtRate5.text=[summaryReportObject valueForKey:@"lARate5"];
+        txtAmt1.text=[summaryReportObject valueForKey:@"lAAmount1"];
+        txtAmt2.text=[summaryReportObject valueForKey:@"lAAmount2"];
+        txtAmt3.text=[summaryReportObject valueForKey:@"lAAmount3"];
+        txtAmt4.text=[summaryReportObject valueForKey:@"lAAmount4"];
+        txtAmt5.text=[summaryReportObject valueForKey:@"lAAmount5"];
+        txtTotalLabor.text=[summaryReportObject valueForKey:@"totalLabor"];
+        txtHealth.text=[summaryReportObject valueForKey:@"healWelAndPension"];
+        txtInsTax.text=[summaryReportObject valueForKey:@"insAndTaxesOnItem1"];
+        txt20Items.text=[summaryReportObject valueForKey:@"itemDescount20per"];
+        txtTotalItems.text=[summaryReportObject valueForKey:@"total"];
+        txtDes1.text=[summaryReportObject valueForKey:@"mEDescription1"];
+        txtDes2.text=[summaryReportObject valueForKey:@"mEDescription2"];
+        txtDes3.text=[summaryReportObject valueForKey:@"mEDescription3"];
+        txtDes4.text=[summaryReportObject valueForKey:@"mEDescription4"];
+        txtDES5.text=[summaryReportObject valueForKey:@"mEDescription5"];
+        txtQuantity1.text=[summaryReportObject valueForKey:@"mEQuantity1"];
+        txtQuantity2.text=[summaryReportObject valueForKey:@"mEQuantity2"];
+        txtQuantity3.text=[summaryReportObject valueForKey:@"mEQuantity3"];
+        txtQuantity4.text=[summaryReportObject valueForKey:@"mEQuantity4"];
+        txtQuantity5.text=[summaryReportObject valueForKey:@"mEQuantity5"];
+        txtUnitPrice1.text=[summaryReportObject valueForKey:@"mEUnitPrice1"];
+        txtUnitPrice2.text=[summaryReportObject valueForKey:@"mEUnitPrice2"];
+        txtUnitPrice3.text=[summaryReportObject valueForKey:@"mEUnitPrice3"];
+        txtUnitPrice4.text=[summaryReportObject valueForKey:@"mEUnitPrice4"];
+        txtUnitPrice5.text=[summaryReportObject valueForKey:@"mEUnitPrice5"];
+        txtMAmt1.text=[summaryReportObject valueForKey:@"mEAmount1"];
+        txtMAmt2.text=[summaryReportObject valueForKey:@"mEAmount2"];
+        txtMAmt3.text=[summaryReportObject valueForKey:@"mEAmount3"];
+        txtMAmt4.text=[summaryReportObject valueForKey:@"mEAmount4"];
+        txtMAmt5.text=[summaryReportObject valueForKey:@"mEAmount5"];
+        txtTotalMeterial.text=[summaryReportObject valueForKey:@"total1"];
+        txtLessDiscount.text=[summaryReportObject valueForKey:@"lessDiscount"];
+        txtLessDisTotal.text=[summaryReportObject valueForKey:@"total2"];
+        txtAdditional.text=[summaryReportObject valueForKey:@"additionalDiscount"];
+        txtAddTotal.text=[summaryReportObject valueForKey:@"total3"];
+        txtSize1.text=[summaryReportObject valueForKey:@"eQSizeandClass1"];
+        txtSize2.text=[summaryReportObject valueForKey:@"eQSizeandClass2"];
+        txtSize3.text=[summaryReportObject valueForKey:@"eQSizeandClass3"];
+        txtSize4.text=[summaryReportObject valueForKey:@"eQSizeandClass4"];
+        txtSize5.text=[summaryReportObject valueForKey:@"eQSizeandClass5"];
+        txtActive1.text=[summaryReportObject valueForKey:@"eQAmount1"];
+        txtActive2.text=[summaryReportObject valueForKey:@"eQAmount2"];
+        txtActive3.text=[summaryReportObject valueForKey:@"eQAmount3"];
+        txtActive4.text=[summaryReportObject valueForKey:@"eQAmount4"];
+        txtActive5.text=[summaryReportObject valueForKey:@"eQAmount5"];
+        txtENo1.text=[summaryReportObject valueForKey:@"eQNo1"];
+        txtENo2.text=[summaryReportObject valueForKey:@"eQNo2"];
+        txtENo3.text=[summaryReportObject valueForKey:@"eQNo3"];
+        txtENo4.text=[summaryReportObject valueForKey:@"eQNo4"];
+        txtENo5.text=[summaryReportObject valueForKey:@"eQNo5"];
+        txtETotal1.text=[summaryReportObject valueForKey:@"eQTotalHours1"];
+        txtETotal2.text=[summaryReportObject valueForKey:@"eQTotalHours2"];
+        txtEtotal3.text=[summaryReportObject valueForKey:@"eQTotalHours3"];
+        txtETotal4.text=[summaryReportObject valueForKey:@"eQTotalHours4"];
+        txtETotal5.text=[summaryReportObject valueForKey:@"eQTotalHours5"];
+        txtERate1.text=[summaryReportObject valueForKey:@"eQRAte1"];
+        txtERate2.text=[summaryReportObject valueForKey:@"eQRAte2"];
+        txtERate3.text=[summaryReportObject valueForKey:@"eQRAte3"];
+        txtERate4.text=[summaryReportObject valueForKey:@"eQRAte4"];
+        txtERate5.text=[summaryReportObject valueForKey:@"eQRAte5"];
+        txtEAmt1.text=[summaryReportObject valueForKey:@"eQAmount1"];
+        txtEAmt2.text=[summaryReportObject valueForKey:@"eQAmount2"];
+        txtEAmt3.text=[summaryReportObject valueForKey:@"eQAmount3"];
+        txtEAmt4.text=[summaryReportObject valueForKey:@"eQAmount4"];
+        txtEAmt5.text=[summaryReportObject valueForKey:@"eQTotalHours5"];
+        txtInspector.text=[summaryReportObject valueForKey:@"inspector"];
+        //txtEDate.text=[responseObject valueForKey:@"Date1"];
+        txtContractorRepresentative.text=[summaryReportObject valueForKey:@"contractorRepresentative"];
+        txtConReDate.text=[summaryReportObject valueForKey:@"date2"];
+        txtDailyTotal.text=[summaryReportObject valueForKey:@"dailyTotal"];
+        txtTotalDate.text=[summaryReportObject valueForKey:@"total_to_date"];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
+                                           [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature1"]]]];
+        NSLog(@"url----%@",url);
+        NSData *imageData1 = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [[UIImage alloc] initWithData:imageData1];
+        imgSignature.image=image;
+        
+        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
+                                            [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature2"]]]];
+        NSLog(@"url----%@",url2);
+        NSData *imageData2 = [NSData dataWithContentsOfURL:url2];
+        UIImage *image1 = [[UIImage alloc] initWithData:imageData2];
+        imgSignature2.image=image1;
+    }
+    
     [HUD setHidden:YES];
-    _connectionError = error;
-   
 }
-
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [HUD setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    //NSLog(@"count--- %@",responseObject);
-    txtContractor.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Contractor"];
-    txtPOBox.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"POBox"];
-    txtCity.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"City"];
-    txtState.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"State"];
-    txtTpNumber.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"TelephoneNo"];
-    //txtCheckedBy.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"POBox"];
-    txtDate.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Date"];
-    txtDateOfWork.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Date"];
-   // txtReportNum.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"POBox"];
-    txtContactorPerform.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"ConPeWork"];
-    txtFederalAid.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"FederalAidNumber"];
-    txtProjectNo.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"ProjectNo"];
-    txvDesWork.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Description"];
-    txvConsOrder.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"ConstructionOrder"];
-    txtClass1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAClass1"];
-    txtClass2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAClass2"];
-    txtClass3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAClass3"];
-    txtClass4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAClass4"];
-    txtClass5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAClass5"];
-    txtNo1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LANo1"];
-    txtNo2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LANo2"];
-    txtNo3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LANo3"];
-    txtNo4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LANo4"];
-    txtNo5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LANo5"];
-    txtTotal1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LATotalHours1"];
-    txtTotal2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LATotalHours2"];
-    txtTotal3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LATotalHours3"];
-    txtTotal4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LATotalHours4"];
-    txtTotal5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LATotalHours5"];
-    txtRate1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LARate1"];
-    txtRate2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LARate2"];
-    txtRate3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LARate3"];
-    txtRate4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LARate4"];
-    txtRate5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LARate5"];
-    txtAmt1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAAmount1"];
-    txtAmt2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAAmount2"];
-    txtAmt3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAAmount3"];
-    txtAmt4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAAmount4"];
-    txtAmt5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LAAmount5"];
-    txtTotalLabor.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"TotalLabor"];
-    txtHealth.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"HealWelAndPension"];
-    txtInsTax.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"InsAndTaxesOnItem1"];
-    txt20Items.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"itemDescount20per"];
-    txtTotalItems.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"total"];
-    txtDes1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEDescription1"];
-    txtDes2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEDescription2"];
-    txtDes3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEDescription3"];
-    txtDes4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEDescription4"];
-    txtDES5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEDescription5"];
-    txtQuantity1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEQuantity1"];
-    txtQuantity2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEQuantity2"];
-    txtQuantity3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEQuantity3"];
-    txtQuantity4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEQuantity4"];
-    txtQuantity5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEQuantity5"];
-    txtUnitPrice1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEUnitPrice1"];
-    txtUnitPrice2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEUnitPrice2"];
-    txtUnitPrice3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEUnitPrice3"];
-    txtUnitPrice4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEUnitPrice4"];
-    txtUnitPrice5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEUnitPrice5"];
-    txtMAmt1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEAmount1"];
-    txtMAmt2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEAmount2"];
-    txtMAmt3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEAmount3"];
-    txtMAmt4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEAmount4"];
-    txtMAmt5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"MEAmount5"];
-    txtTotalMeterial.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Total1"];
-    txtLessDiscount.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"LessDiscount"];
-    txtLessDisTotal.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Total2"];
-    txtAdditional.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"AdditionalDiscount"];
-    txtAddTotal.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Total3"];
-    txtSize1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQSizeandClass1"];
-    txtSize2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQSizeandClass2"];
-    txtSize3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQSizeandClass3"];
-    txtSize4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQSizeandClass4"];
-    txtSize5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQSizeandClass5"];
-    txtActive1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount1"];
-    txtActive2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount2"];
-    txtActive3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount3"];
-    txtActive4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount4"];
-    txtActive5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount5"];
-    txtENo1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQNo1"];
-    txtENo2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQNo2"];
-    txtENo3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQNo3"];
-    txtENo4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQNo4"];
-    txtENo5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQNo5"];
-    txtETotal1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours1"];
-    txtETotal2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours2"];
-    txtEtotal3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours3"];
-    txtETotal4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours4"];
-    txtETotal5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours5"];
-    txtERate1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQRAte1"];
-    txtERate2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQRAte2"];
-    txtERate3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQRAte3"];
-    txtERate4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQRAte4"];
-    txtERate5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQRAte5"];
-    txtEAmt1.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount1"];
-    txtEAmt2.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount2"];
-    txtEAmt3.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount3"];
-    txtEAmt4.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQAmount4"];
-    txtEAmt5.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"EQTotalHours5"];
-    txtInspector.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Inspector"];
-    //txtEDate.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Date1"];
-    txtContractorRepresentative.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"ContractorRepresentative"];
-    txtConReDate.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"Date2"];
-    txtDailyTotal.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"DailyTotal"];
-    txtTotalDate.text=[[responseObject valueForKey:@"expenseReport"]valueForKey:@"total_to_date"];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",[NSString stringWithFormat:@"%@.jpg", [[responseObject valueForKey:@"expenseReport"]valueForKey:@"Signature1"]]]];
-    NSLog(@"url----%@",url);
-    NSData *imageData1 = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData1];
-    imgSignature.image=image;
-
-    NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",[NSString stringWithFormat:@"%@.jpg", [[responseObject valueForKey:@"expenseReport"]valueForKey:@"Signature2"]]]];
-    NSLog(@"url----%@",url2);
-    NSData *imageData2 = [NSData dataWithContentsOfURL:url2];
-    UIImage *image1 = [[UIImage alloc] initWithData:imageData2];
-    imgSignature2.image=image1;
-
-    
-    
-
-    
-    
-}
-
-
-
 
 -(void)createPDF
 {
@@ -383,7 +331,6 @@ didReceiveResponse:(NSURLResponse *)response
     int count=3;
     for (int i = 0 ; i<count ; i++)
     {
-        
         // page 1
         CGContextBeginPage (pdfContext,nil);
         
@@ -401,7 +348,6 @@ didReceiveResponse:(NSURLResponse *)response
     }
     CGContextRelease (pdfContext);
     // [self createImagesPDF];
-    
     
     NSData *pdfData = [NSData dataWithContentsOfFile:filePath];
     
@@ -427,13 +373,10 @@ didReceiveResponse:(NSURLResponse *)response
         [alert show];
         
     }
-    
-    
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.scrollView.contentInset.top) animated:YES];
-    
-    
-    
 }
+
+
 - (CGContextRef) createPDFContext:(CGRect)inMediaBox path:(CFStringRef) path
 {
     CGContextRef myOutContext = NULL;
@@ -462,14 +405,11 @@ didReceiveResponse:(NSURLResponse *)response
     UIGraphicsBeginPDFPage();
     CGContextRef pdfContext = UIGraphicsGetCurrentContext();
     
-    
     // draws rect to the view and thus this is captured by UIGraphicsBeginPDFContextToData
-    
     [aView.layer renderInContext:pdfContext];
     
     // remove PDF rendering context
     UIGraphicsEndPDFContext();
-    
     
     if ([MFMailComposeViewController canSendMail])
     {
@@ -494,14 +434,8 @@ didReceiveResponse:(NSURLResponse *)response
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        
     }
-    
-    
 }
-
-
-
 
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
@@ -528,18 +462,13 @@ didReceiveResponse:(NSURLResponse *)response
     [self dismissViewControllerAnimated:YES completion:nil];
     viewImageAttachmentTitle.hidden=NO;
     lblImageAttachmentTitle.hidden=NO;
-    
-    
 }
-
-
 
 
 -(IBAction)showSCompliance:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];
 }
-
 
 
 - (void)didReceiveMemoryWarning
