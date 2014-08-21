@@ -1467,10 +1467,7 @@
     }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> FETCH_HEAD
 - (void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     Expensedata *assp;
@@ -1516,10 +1513,7 @@
     }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> FETCH_HEAD
 - (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     
@@ -1574,11 +1568,8 @@
     }
 }
 
-<<<<<<< HEAD
-=======
+
 //Summery3
-
-
 - (void)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
 {
     
@@ -1752,11 +1743,4 @@
     }
 }
 
-
-
-
-
-
-
->>>>>>> FETCH_HEAD
 @end
