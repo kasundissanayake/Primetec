@@ -145,15 +145,6 @@
 
 -(void)populateSummerySheet
 {
-    /*
-    NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/single/%@", [PRIMECMAPPUtils getAPIEndpoint], SMNo];
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    [urlRequest setHTTPMethod:@"GET"];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    */
-    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     HUD.labelText=@"";
@@ -163,17 +154,49 @@
     
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sMSheetNo == %@", SMNo];
-    [fetchRequest setPredicate:predicate];
-    
     NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    NSEntityDescription *summarySheet1Entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:context];
+    NSEntityDescription *summarySheet2Entity = [NSEntityDescription entityForName:@"SummarySheet2" inManagedObjectContext:context];
+    NSEntityDescription *summarySheet3Entity = [NSEntityDescription entityForName:@"SummarySheet3" inManagedObjectContext:context];
     
-    if([objects count] > 0){
+    [fetchRequest setEntity:summarySheet1Entity];
+    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"ANY sMSheetNo == %@", SMNo];
+    [fetchRequest setPredicate:predicate1];
+    NSArray *summary1 = [context executeFetchRequest:fetchRequest error:&error];
+    
+    NSManagedObject *summary1Obj = (NSManagedObject *) [summary1 objectAtIndex:0];
+    NSArray *keys = [[[summary1Obj entity] attributesByName] allKeys];
+    NSMutableDictionary *summary1Dict =  [[summary1Obj dictionaryWithValuesForKeys:keys] mutableCopy];
+    
+    NSLog(@"ARRAYYYY: %@", summary1Dict);
+    
+    [fetchRequest setEntity:summarySheet2Entity];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"ANY sMSSheetNo == %@", SMNo];
+    [fetchRequest setPredicate:predicate2];
+    NSArray *summary2 = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([summary2 count] > 0){
+        NSManagedObject *summary2Obj = (NSManagedObject *) [summary2 objectAtIndex:0];
+        NSArray *keys = [[[summary2Obj entity] attributesByName] allKeys];
+        NSDictionary *summary2Dict = [summary2Obj dictionaryWithValuesForKeys:keys];
+        [summary1Dict addEntriesFromDictionary:summary2Dict];
+    }
+    
+    [fetchRequest setEntity:summarySheet3Entity];
+    NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"ANY sMSheetNo == %@", SMNo];
+    [fetchRequest setPredicate:predicate3];
+    NSArray *summary3 = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([summary3 count] > 0){
+        NSManagedObject *summary3Obj = (NSManagedObject *) [summary3 objectAtIndex:0];
+        NSArray *keys = [[[summary3Obj entity] attributesByName] allKeys];
+        NSDictionary *summary3Dict = [summary3Obj dictionaryWithValuesForKeys:keys];
+        [summary1Dict addEntriesFromDictionary:summary3Dict];
+    }
+    
+    if([summary1Dict count] > 0){
         
-        NSManagedObject *summaryReportObject = (NSManagedObject *) [objects objectAtIndex:0];
+        id summaryReportObject = summary1Dict;
         NSLog(@"Summary Sheet Form object sMSheetNo: %@", [summaryReportObject valueForKey:@"sMSheetNo"]);
         
         txtContractor.text=[summaryReportObject valueForKey:@"contractor"];
@@ -280,7 +303,9 @@
         txtInspector.text=[summaryReportObject valueForKey:@"inspector"];
         //txtEDate.text=[responseObject valueForKey:@"Date1"];
         txtContractorRepresentative.text=[summaryReportObject valueForKey:@"contractorRepresentative"];
-        txtConReDate.text=[summaryReportObject valueForKey:@"date2"];
+        txtConReDate.text=[NSDateFormatter localizedStringFromDate:[summaryReportObject valueForKey:@"date2"]
+                                                         dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        
         txtDailyTotal.text=[summaryReportObject valueForKey:@"dailyTotal"];
         txtTotalDate.text=[summaryReportObject valueForKey:@"total_to_date"];
         

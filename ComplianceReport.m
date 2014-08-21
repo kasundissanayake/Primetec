@@ -49,35 +49,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [lblProjDec.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [lblProjDec.layer setBorderColor: [[UIColor grayColor] CGColor]];
     [lblProjDec.layer setBorderWidth: 1.0];
     [lblProjDec.layer setCornerRadius:8.0f];
-    
     [lblCorrective.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [lblCorrective.layer setBorderColor: [[UIColor grayColor] CGColor]];
     [lblCorrective.layer setBorderWidth: 1.0];
     [lblCorrective.layer setCornerRadius:8.0f];
-    
-    
     [lblConRes.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [lblConRes.layer setBorderColor: [[UIColor grayColor] CGColor]];
     [lblConRes.layer setBorderWidth: 1.0];
     [lblConRes.layer setCornerRadius:8.0f];
-    
-    
     scrollView.scrollsToTop=NO;
     self.tblView.scrollsToTop=YES;
     self.tblView.tableHeaderView = headerView;
-    
-    
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
-    
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithTitle:NSLocalizedString(@"", @"")
@@ -85,7 +74,6 @@
                                   target:self
                                   action:@selector(showFirst:)];
     self.navigationItem.leftBarButtonItem = addButton;
-    
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName : [UIColor clearColor]
                                                                       }];
@@ -102,7 +90,6 @@
                                 target:self
                                 action:@selector(fnEdit:)];
     
-    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
@@ -114,12 +101,9 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
-    
     arrayImages=[[NSMutableArray alloc]init];
     sketchesArray=[[NSMutableArray alloc]init];
-    
     [self populateComplianceForm];
-    
 }
 
 -(void) populateComplianceForm

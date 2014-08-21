@@ -103,7 +103,7 @@
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Expensedata object eXReportNo: %@", [expensedataObject valueForKey:@"eXReportNo"]);
         
-        arrayExpenses=[NSMutableArray arrayWithArray:objects];; //[expensedataObject mutableCopy];
+        arrayExpenses=[NSMutableArray arrayWithArray:objects];
         NSInteger sum;
         
         for(int i=0; i<arrayExpenses.count; i++)
@@ -113,13 +113,12 @@
             for(int i=1; i<tempImageArray.count; i++)
             {
                 [arrayImages addObject:[tempImageArray objectAtIndex:i]];
-            }
-            
+            }            
         }
         
         NSLog(@"Array Images--- %@",arrayImages);
         isSubTableView=NO;
-        appDelegate.reImp=[NSString stringWithFormat: @"%d", (int)sum]; //[expensedataObject valueForKey:@"total"];
+        appDelegate.reImp=[NSString stringWithFormat: @"%d", (int)sum];
         txtReimbursement.text =  [NSString stringWithFormat:@"%@", appDelegate.reImp];
         appDelegate.reImp=txtReimbursement.text;
         NSLog(@"appdelegate value: %@", appDelegate.reImp);

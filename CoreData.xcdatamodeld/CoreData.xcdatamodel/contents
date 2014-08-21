@@ -348,7 +348,7 @@
         <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="165"/>
         <element name="QuantitySummaryItems" positionX="9" positionY="153" width="128" height="135"/>
         <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="763"/>
-        <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="450"/>
+        <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="30"/>
         <element name="SummarySheet3" positionX="18" positionY="162" width="128" height="645"/>
         <element name="Users" positionX="-54" positionY="18" width="128" height="195"/>
     </elements>
