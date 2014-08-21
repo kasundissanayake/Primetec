@@ -7,7 +7,7 @@
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    MBProgressHUD *HUD;
+    MBProgressHUD *hud;
     UIBarButtonItem  *btnPrint;
 }
 
@@ -145,12 +145,12 @@
 
 -(void)populateSummerySheet
 {
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
     
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -167,8 +167,6 @@
     NSManagedObject *summary1Obj = (NSManagedObject *) [summary1 objectAtIndex:0];
     NSArray *keys = [[[summary1Obj entity] attributesByName] allKeys];
     NSMutableDictionary *summary1Dict =  [[summary1Obj dictionaryWithValuesForKeys:keys] mutableCopy];
-    
-    NSLog(@"ARRAYYYY: %@", summary1Dict);
     
     [fetchRequest setEntity:summarySheet2Entity];
     NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"ANY sMSSheetNo == %@", SMNo];
@@ -324,7 +322,7 @@
         imgSignature2.image=image1;
     }
     
-    [HUD setHidden:YES];
+    [hud setHidden:YES];
 }
 
 -(void)createPDF

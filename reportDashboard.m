@@ -41,11 +41,13 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProjectList:) name:@"reloadProjectList" object:nil];
     [self reloadProjectInLoad];
+    /*
     UIBarButtonItem  *newButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(addNewForm)];
     self.navigationItem.rightBarButtonItem = newButton;
-    UIBarButtonItem  *newButton1 = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
-    self.navigationItem.leftBarButtonItem = newButton1;
+    UIBarButtonItem  *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
+    self.navigationItem.leftBarButtonItem = deleteButton;
     self.table.scrollEnabled=YES;
+     */
 }
 
 
@@ -90,7 +92,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:FALSE];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
     [reports sortUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     return reports.count;
 }

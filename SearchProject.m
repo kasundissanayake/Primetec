@@ -59,11 +59,10 @@
 
 -(void)showDashboard
 {
+    NSLog(@"In SearchProject, showDashboard");
     BOOL isFound=NO;
-    Dashboard *das=[[Dashboard alloc] init];
     for (UIViewController* viewController in self.navigationController.viewControllers) {
-        
-        if ([viewController isKindOfClass:[das class]] ) {
+        if ([viewController isKindOfClass:[Dashboard class]] ) {
             isFound=YES;
             Dashboard *dashViewController = (Dashboard*)viewController;
             [self.navigationController popToViewController:dashViewController animated:YES];
@@ -71,17 +70,15 @@
     }
     if(!isFound)
     {
-        // Dashboard *das=[[Dashboard alloc] init];
+        Dashboard *das=[[Dashboard alloc] init];
         das.title=@"Dashboard";
         [self.navigationController pushViewController:das animated:YES];
     }
 }
 
 
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
 	return 1;
 }
 

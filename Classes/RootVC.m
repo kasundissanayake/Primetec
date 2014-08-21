@@ -42,7 +42,6 @@ typedef enum {
     NSUserDefaults *defaults;
     int no;
     MBProgressHUD *hud;
-    reportDashboard *report;
 }
 
 @property (weak, nonatomic, readonly) NSArray *directions;
@@ -58,12 +57,9 @@ typedef enum {
 
 -(IBAction)showFirst:(id)sender
 {
-    if(appDelegate.Tag==1)
-    {
-        appDelegate.Tag=4;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
-    }
+    appDelegate.Tag=4;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
 }
 
 
@@ -146,6 +142,23 @@ typedef enum {
 }
 
 
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    BOOL found = FALSE;
+    for (UIViewController* viewController in self.navigationController.viewControllers) {
+        if ([viewController isKindOfClass:[SearchProject class]] || [viewController isKindOfClass:[reportDashboard class]]) {
+            found = TRUE;
+        }
+    }
+    
+    if (!found && appDelegate.Tag == 1){
+        [self reloadTableData];
+        appDelegate.Tag=4;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
+        NSLog(@"Back pressed filtered");
+    }
+}
 
 -(void)btnEdit{
     // [self.table setEditing:YES animated:YES];
@@ -471,22 +484,22 @@ typedef enum {
     self.Frontimage.hidden=YES;
     [self showToolbar];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                  initWithTitle:NSLocalizedString(@"Project List", @"")
-                                  style:UIBarButtonItemStyleDone
-                                  target:self
-                                  action:@selector(showFirst:)];
-    self.navigationItem.leftBarButtonItem = addButton;
+    UIBarButtonItem *projectListButton = [[UIBarButtonItem alloc]
+                                          initWithTitle:NSLocalizedString(@"Project List", @"")
+                                          style:UIBarButtonItemStyleDone
+                                          target:self
+                                          action:@selector(showFirst:)];
+    self.navigationItem.leftBarButtonItem = projectListButton;
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName : [UIColor clearColor]
                                                                       }];
     
-    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Search", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(showSProject:)];
-    self.navigationItem.rightBarButtonItem = Button;
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc]
+                                     initWithTitle:NSLocalizedString(@"Search", @"")
+                                     style:UIBarButtonItemStyleDone
+                                     target:self
+                                     action:@selector(showSProject:)];
+    self.navigationItem.rightBarButtonItem = searchButton;
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -917,7 +930,7 @@ typedef enum {
 {
     int type = [[[notification userInfo] valueForKey:@"index"] intValue];
     
-    report=[[reportDashboard alloc]init];
+    reportDashboard *report=[[reportDashboard alloc]init];
     report.title=[NSString stringWithFormat:@"Report"];
     report.proType=type;
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:report]];
@@ -926,10 +939,9 @@ typedef enum {
 -(void)showDashboard
 {
     BOOL isFound=NO;
-    Dashboard *das=[[Dashboard alloc] init];
     for (UIViewController* viewController in self.navigationController.viewControllers) {
         
-        if ([viewController isKindOfClass:[das class]] ) {
+        if ([viewController isKindOfClass:[Dashboard class]] ) {
             isFound=YES;
             Dashboard *dashViewController = (Dashboard*)viewController;
             [self.navigationController popToViewController:dashViewController animated:YES];
@@ -937,10 +949,11 @@ typedef enum {
     }
     if(!isFound)
     {
-        // Dashboard *das=[[Dashboard alloc] init];
+        Dashboard *das=[[Dashboard alloc] init];
         das.title=@"Dashboard";
         [self.navigationController pushViewController:das animated:YES];
     }
+    NSLog(@"In RootVC, showDashboard");
 }
 
 -(IBAction)showSProject:(id)sender
@@ -952,10 +965,9 @@ typedef enum {
 -(void)showSProject
 {
     BOOL isFound=NO;
-    SearchProject *search=[[SearchProject alloc] init];
     for (UIViewController* viewController in self.navigationController.viewControllers) {
         
-        if ([viewController isKindOfClass:[search class]] ) {
+        if ([viewController isKindOfClass:[SearchProject class]] ) {
             isFound=YES;
             SearchProject *searchViewController = (SearchProject*)viewController;
             [self.navigationController popToViewController:searchViewController animated:YES];
@@ -964,6 +976,7 @@ typedef enum {
     }
     if(!isFound)
     {
+        SearchProject *search=[[SearchProject alloc] init];
         search.title=@"Dashboard";
         [self.navigationController pushViewController:search animated:YES];
     }

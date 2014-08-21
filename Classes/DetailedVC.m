@@ -4,7 +4,6 @@
 #import "RootVC.h"
 #import "MenuOption.h"
 #import "Reachability.h"
-#import "userdetails.h"
 #import "PRIMECMAPPUtils.h"
 
 @interface DetailedVC ()

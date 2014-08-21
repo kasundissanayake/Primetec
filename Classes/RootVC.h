@@ -21,6 +21,8 @@
 @property(nonatomic,strong)IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) MBProgressHUD *hud;
 
+- (void)didMoveToParentViewController:(UIViewController *)parent;
+
 @end
 
 

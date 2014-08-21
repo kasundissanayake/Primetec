@@ -1,5 +1,3 @@
-
-
 #import "FirstViewController.h"
 #import "Hotel.h"
 #import "HotelAnnotation.h"
@@ -12,7 +10,6 @@
 #import "TapHereSubViewController.h"
 #import "GIKPinAnnotationView.h"
 #import "Reachability.h"
-#import "projectCodata.h"
 #import "PRIMECMController.h"
 #import "PRIMECMAPPUtils.h"
 #import "RootVC.h"
@@ -57,7 +54,6 @@
 - (void)showAnnotations;
 @end
 
-
 @implementation FirstViewController
 @synthesize hotels;
 @synthesize mapId;
@@ -92,12 +88,9 @@
     isMapTypes=NO;
     bottomView =[[UIView alloc] init];
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 580, 0, 0) style:UITableViewStyleGrouped];
     hotels=[[NSMutableArray alloc]init];
-    
     popoverContent=[[UIViewController alloc] init];
-    
     
     //loadAnnotations
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
@@ -153,7 +146,6 @@
 }
 
 - (void)showInfoAlert {
-    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
     hud.labelText=@"";
@@ -176,17 +168,13 @@
 }
 
 
-
 -(IBAction)selectMapType:(id)sender
 {
     isMapTypes=YES;
     tableData = [NSArray arrayWithObjects:@"Standard", @"Satellite", @"Hybrid", @"Locate", nil];
-    
     [tblView reloadData];
     UIView *popoverView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
-    
     popoverView.backgroundColor=[UIColor whiteColor];
-    
     popoverContent.view=popoverView;
     popoverContent.preferredContentSize=CGSizeMake(250, 250);
     popoverContent.view=tblView; //Adding tableView to popover
@@ -195,7 +183,6 @@
     popMenu=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popMenu presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                     permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
     [popMap dismissPopoverAnimated:YES];
 }
 
@@ -223,10 +210,8 @@
     theHotel.url = [defaults objectForKey:@"Url"];
     theHotel.latitude = latitude;
     theHotel.longitude = longitude;
-    
     HotelAnnotation *annotation = [[HotelAnnotation alloc] initWithLatitude:theHotel.latitude longitude:theHotel.longitude];
     annotation.hotel = theHotel;
-    
     [self.mapView addAnnotation:annotation];
     [self saveNewProject];
 }
@@ -261,60 +246,23 @@
 
 -(void)saveOffProject{
     
-    
-    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    projectCodata *failedBankInfo = [NSEntityDescription
-                                     insertNewObjectForEntityForName:@"Projects"
-                                     inManagedObjectContext:context];
-    
-    
-    
-    failedBankInfo.projecct_id = [defaults objectForKey:@"Project Id"];
-    failedBankInfo.p_title = [defaults objectForKey:@"Project Title"];
-    failedBankInfo.p_name=[defaults objectForKey:@"Project Name"];
-    
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    
-    // Test listing all FailedBankInfos from the store
-    // NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    else{
-        
-        NSLog(@"Projects Saved-------------%@", failedBankInfo.p_name);
-        
-        
-    }
-    
-    
 }
 
 
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"uuuuu");
-    
     _receivedResponse = response;
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    NSLog(@"ddddd");
     [_receivedData appendData:data];
 }
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [self hudWasHidden];
     _connectionError = error;
 }
-
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -355,9 +303,7 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 
-
 //setting up the pin and getting the location accuracy
-
 -(void)locationDetails:(NSString*)latitudecode longitudeVal:(NSString*)longitudecode
 {
     CLLocationCoordinate2D cordinates;
@@ -397,7 +343,6 @@ didReceiveResponse:(NSURLResponse *)response
 {
     if(!isDisplayBottomBar)
     {
-        
         bottomView.backgroundColor=[UIColor whiteColor];
         // first reduce the view to 1/100th of its original dimension
         CGAffineTransform trans = CGAffineTransformScale(bottomView.transform, 0.01, 0.01);
@@ -439,6 +384,7 @@ didReceiveResponse:(NSURLResponse *)response
 {
     Dashboard *das=[[Dashboard alloc] init];
     das.title=@"Dashboard";
+    NSLog(@"In FirstViewCon, showDashboard");
     [self.navigationController pushViewController:das animated:YES];
 }
 
@@ -451,7 +397,6 @@ didReceiveResponse:(NSURLResponse *)response
     // [popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
     [popMap dismissPopoverAnimated:YES];
-    
 }
 
 
@@ -543,13 +488,9 @@ didReceiveResponse:(NSURLResponse *)response
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (isMapTypes) {
-        
         if (indexPath.section == 0 && indexPath.row == 0)
         {
-            
             self.mapView.mapType=MKMapTypeStandard;
-            
-            
         }
         else if (indexPath.section == 0 && indexPath.row == 1)
         {
@@ -599,15 +540,9 @@ didReceiveResponse:(NSURLResponse *)response
         
         if (indexPath.section == 0 && indexPath.row == 2 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
         {
-            
-            NSLog(@"type----");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showFirst" object:nil];
-            
-            
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"logoutView" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"logouttableView" object:nil];
-            
             UIBarButtonItem *btn = [[UIBarButtonItem alloc]
                                     initWithTitle:NSLocalizedString(@"", @"")
                                     style:UIBarButtonItemStyleDone
@@ -620,15 +555,12 @@ didReceiveResponse:(NSURLResponse *)response
         
         if (indexPath.section == 0 && indexPath.row == 2 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
         {
-            
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.primetgrp.com/technical-support/"]];
         }
         
         
         if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"R"] || [appDelegate.userTypeOffline isEqualToString:@"R"]))
         {
-            
-            
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.primetgrp.com/technical-support/"]];
         }
         
@@ -693,20 +625,15 @@ didReceiveResponse:(NSURLResponse *)response
 
 -(IBAction)selectItem:(id)sender
 {
-    
     isMapTypes=NO;
-    
     [tblView reloadData];
     UIView *popoverView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
-    
     popoverView.backgroundColor=[UIColor whiteColor];
-    
     popoverContent.view=popoverView;
     popoverContent.preferredContentSize=CGSizeMake(250, 250);
     popoverContent.view=tblView; //Adding tableView to popover
     tblView.delegate=self;
     tblView.dataSource=self;
-    
     popMap=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popMap presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                    permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
@@ -720,14 +647,11 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 
-
 -(void)createAddImageCloseBtn
 {
     UIImage* imageNormal = [UIImage imageNamed:@"closeBtn.png"];
     UIImage* imageHighLighted = [UIImage imageNamed:@"closeBtn.png"];
-    
     CGRect frame;
-    
     frame = CGRectMake(648,136, 40,40);
     btnCloseAddImage = [[UIButton alloc]initWithFrame:frame];
     [btnCloseAddImage setBackgroundImage:imageNormal forState:UIControlStateNormal];
@@ -748,8 +672,6 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 
-
-
 - (void)showAnnotations {
     hotels = [appDelegate.projectsArray mutableCopy];
 	hotelAnnotations = [[NSMutableArray alloc]init];
@@ -764,12 +686,10 @@ didReceiveResponse:(NSURLResponse *)response
 		//theHotel.url = [hotel objectForKey:@"url"];
 		theHotel.latitude = [[hotel valueForKey:@"p_latitude"] doubleValue];
 		theHotel.longitude = [[hotel valueForKey:@"p_longitude"] doubleValue];
-		
 		HotelAnnotation *annotation = [[HotelAnnotation alloc] initWithLatitude:theHotel.latitude longitude:theHotel.longitude];
 		annotation.hotel = theHotel;
 		[hotelAnnotations addObject:annotation];
 	}
-	
 	[self.mapView addAnnotations:hotelAnnotations];
 }
 
@@ -779,10 +699,10 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 
-
 - (void)viewDidUnload {
 	[super viewDidUnload];
 }
+
 
 -(void)reloadMapData:(NSNotification *)notification
 {
@@ -811,7 +731,6 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -821,7 +740,5 @@ didReceiveResponse:(NSURLResponse *)response
     //NSLog(@"Hotels----%@",hotels);
 	return hotels;
 }
-
-
 
 @end

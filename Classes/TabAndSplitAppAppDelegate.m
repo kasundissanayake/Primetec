@@ -11,7 +11,6 @@
 #import "GIKCalloutAnnotation.h"
 #import "GIKCalloutContentView.h"
 #import "GIKCalloutView.h"
-#import "userdetails.h"
 #import "DetailedVC.h"
 
 

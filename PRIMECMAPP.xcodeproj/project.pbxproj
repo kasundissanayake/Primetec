@@ -178,10 +178,8 @@
 		523CDC8B1946AFBC008C2C9B /* popupcell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523CDC891946AFBC008C2C9B /* popupcell.m */; };
 		523CDC8C1946AFBC008C2C9B /* popupcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523CDC8A1946AFBC008C2C9B /* popupcell.xib */; };
 		52771E831951A9F300B5F7C6 /* lin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52771E821951A9F300B5F7C6 /* lin1.png */; };
-		52E73C7E1973CB6E004A0418 /* userdetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C7D1973CB6E004A0418 /* userdetails.m */; };
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
-		9401EBDC1988D54900A8FE7F /* projectCodata.m in Sources */ = {isa = PBXBuildFile; fileRef = 9401EBDB1988D54900A8FE7F /* projectCodata.m */; };
 		980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 980D518219A1E55300EBD57D /* ComplianceForm.m */; };
 		9821A0FA199DC3B200F9E96C /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9821A0F9199DC3B200F9E96C /* libBlocksKit.a */; };
 		98D14A58199F19040091D5D8 /* PRIMECMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A57199F19040091D5D8 /* PRIMECMController.m */; };
@@ -569,13 +567,9 @@
 		523CDC891946AFBC008C2C9B /* popupcell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = popupcell.m; sourceTree = "<group>"; };
 		523CDC8A1946AFBC008C2C9B /* popupcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = popupcell.xib; sourceTree = "<group>"; };
 		52771E821951A9F300B5F7C6 /* lin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lin1.png; sourceTree = "<group>"; };
-		52E73C7C1973CB6E004A0418 /* userdetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userdetails.h; sourceTree = "<group>"; };
-		52E73C7D1973CB6E004A0418 /* userdetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userdetails.m; sourceTree = "<group>"; };
 		52E73C811973DADF004A0418 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		52E73C821973DADF004A0418 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		9401EBDA1988D54900A8FE7F /* projectCodata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = projectCodata.h; sourceTree = "<group>"; };
-		9401EBDB1988D54900A8FE7F /* projectCodata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = projectCodata.m; sourceTree = "<group>"; };
 		980D518119A1E55300EBD57D /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
 		980D518219A1E55300EBD57D /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		9821A0F9199DC3B200F9E96C /* libBlocksKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBlocksKit.a; path = "DrawingLib/3rd Party/BlocksKit/libBlocksKit.a"; sourceTree = "<group>"; };
@@ -787,12 +781,8 @@
 				284F764010B34E8A00D7BA5B /* SecondViewController.m */,
 				FCCE5B57190A3538009ECF16 /* MenuOption.h */,
 				FCCE5B58190A3539009ECF16 /* MenuOption.m */,
-				52E73C7C1973CB6E004A0418 /* userdetails.h */,
-				52E73C7D1973CB6E004A0418 /* userdetails.m */,
 				52E73C811973DADF004A0418 /* Reachability.h */,
 				52E73C821973DADF004A0418 /* Reachability.m */,
-				9401EBDA1988D54900A8FE7F /* projectCodata.h */,
-				9401EBDB1988D54900A8FE7F /* projectCodata.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1845,7 +1835,6 @@
 				4B8CE1EB19418749001F8E3B /* BitmapContextRep.m in Sources */,
 				55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */,
 				4B8CE21819418749001F8E3B /* SDPenTool.m in Sources */,
-				52E73C7E1973CB6E004A0418 /* userdetails.m in Sources */,
 				FCBE154D19136F26003D7A85 /* ExpenseReport.m in Sources */,
 				4B8CE1FC19418749001F8E3B /* FSFileViewController.m in Sources */,
 				4B8CE1F019418749001F8E3B /* CGImageContainer.m in Sources */,
@@ -1911,7 +1900,6 @@
 				52E73C831973DADF004A0418 /* Reachability.m in Sources */,
 				FC245ABB18EC60FA00950C49 /* SummaryReportViewController.m in Sources */,
 				4B8CE24F19418749001F8E3B /* SDBrushSettingsViewController.m in Sources */,
-				9401EBDC1988D54900A8FE7F /* projectCodata.m in Sources */,
 				FCBE155319136F4C003D7A85 /* SummaryReport.m in Sources */,
 				FCCE5B59190A3539009ECF16 /* MenuOption.m in Sources */,
 				4B914CA9193454EE00F6E1F4 /* ProjectDetailsCell.m in Sources */,

@@ -32,47 +32,23 @@
     SignatureViewController *signatureViewController;
     NSString *ifImage;
     TabAndSplitAppAppDelegate *appDelegate;
-    
     NSInteger count;
-    
     NSInteger count1;
-    
     NSInteger count2;
-    
-    
-    
-    BOOL uploading ;
-    
+    BOOL uploading;
     BOOL uploadingsketch;
-    
-    
     NSString *comNoticeNo;
-    
-    
     BOOL isUploadingSignature;
-    
-    
-    
-    
     MBProgressHUD *HUD;
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    
     NSString *ExpID;
-    
     NSString *RecID;
-    
     BOOL first;
-    
     BOOL Second;
-    
     BOOL third;
-    
-    
 }
 
 @end
@@ -97,10 +73,8 @@
     [self deleteAllFiles];
     _controller = [[PRIMECMController alloc]init];
     count=0;
-    
     comNoticeNo=@"";
     count1=0;
-    
     
     [[self ERdate6] setTintColor:[UIColor clearColor]];
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -118,45 +92,32 @@
     scrollView.frame = CGRectMake(0,0, 720, 1988);
     [scrollView setContentSize:CGSizeMake(500, 2300)];
     
-    
     UITapGestureRecognizer *singleTapInspec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedInspector)];
     imgSignatureEx.userInteractionEnabled = YES;
     [imgSignatureEx addGestureRecognizer:singleTapInspec];
-    
     
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
-    
     ERtxtEmpNum.text=appDelegate.userId;
     ERtxtEmpName.text=appDelegate.projPrintedName;
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
-    
     NSString *expID = [_controller getExpenceIdByProjID:appDelegate.projId];
     
     if(expID != nil)
-        
     {
-        
         ExpID=expID;
-        
         NSLog(@"Inthe");
     }
-    
     else{
-        
-        
         ExpID=@"0";
-        NSLog(@"Intheeeee");
-        
     }
     
     
-    
-    /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
+    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
      
      NSURL *apiURL =
      [NSURL URLWithString:strURL];
@@ -173,7 +134,7 @@
      
      
      [connection start];
-     NSLog(@"URL---%@",strURL);*/
+     NSLog(@"URL---%@",strURL);
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
@@ -249,9 +210,7 @@
 {
     UIImage* imageNormal = [UIImage imageNamed:@"closeBtn.png"];
     UIImage* imageHighLighted = [UIImage imageNamed:@"closeBtn.png"];
-    
     CGRect frame;
-    
     frame = CGRectMake(617,115,40,40);
     
     btnCloseSignView = [[UIButton alloc]initWithFrame:frame];
@@ -295,40 +254,27 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     if (indexPath.section == 0 && indexPath.row == 0)
-        
     {
         
     }
     if(indexPath.section==0 && indexPath.row==1)
     {
-        
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showSProject" object:nil];
-        
     }
-    
-    
     
     if(indexPath.section==0 && indexPath.row==2)
     {
         
     }
     
-    
     [popoverController dismissPopoverAnimated:YES];
 }
 
 
-
-//brin
 -(IBAction)selectType:(id)sender
 {
-    
-    
-    
     tableData = [NSArray arrayWithObjects:@"",@"Dashboard", @"Help",nil];
     
     UIViewController *popoverContent=[[UIViewController alloc] init];
@@ -344,15 +290,12 @@
     tblView.dataSource=self;
     
     popoverController=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
-    
     [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 -(void)createPicker:(UITextField *)txtField
 {
-    
-    
     UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     pickerToolbar.barStyle = UIBarStyleBlackOpaque;
     [pickerToolbar sizeToFit];
@@ -361,13 +304,9 @@
     [barItems addObject:doneBtn];
     
     [pickerToolbar setItems:barItems animated:YES];
-    
-    
     pickerViewCities = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 320, 300)];
     pickerViewCities.delegate = self;
-    
     pickerViewCities.showsSelectionIndicator = YES;
-    
     
     UIViewController* popoverContent = [[UIViewController alloc] init];
     UIView* popoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 344)];
@@ -387,25 +326,19 @@
     
     popoverRect.size.width = MIN(popoverRect.size.width, 100) ;
     popoverRect.origin.x  = popoverRect.origin.x;
-    // popoverRect.size.height  = ;
-    
-    [popoverController
-     presentPopoverFromRect:popoverRect
-     inView:self.view
-     permittedArrowDirections:UIPopoverArrowDirectionUp
-     animated:YES];
+    [popoverController presentPopoverFromRect:popoverRect inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
 }
+
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if(textField==ERType)
     {
         [ERType resignFirstResponder];
         pickerDataArray=[[NSMutableArray alloc]initWithObjects:@"Office",@"Auto",@"EMPL",@"ENT",@"Travel",@"MISC",@"Personal/Auto",nil];
-        
         [self createPicker:ERType];
         pickerTag=1;
-        
     }
     
     
@@ -423,15 +356,12 @@
         [self createDatePicker:ERdate6];
         pickerTag=25;
     }
-    
-    
 }
+
 
 -(void)selectionDone
 {
-    
     [popoverController dismissPopoverAnimated:YES];
-    
 }
 
 
@@ -483,10 +413,6 @@
      inView:self.view
      permittedArrowDirections:UIPopoverArrowDirectionAny
      animated:YES];
-    
-    
-    
-    
 }
 
 
@@ -501,48 +427,27 @@
             unichar c = [string characterAtIndex:i];
             if (![myCharSet characterIsMember:c])
             {
-                
                 txtMil1.enabled=YES;
                 txtRate1.enabled=YES;
                 cashAdvance.enabled=YES;
-                
-                
                 return NO;
             }
             else{
                 
-                
-                
             }
-            
-            
-            
         }
-        
-        
-        
-        
         return YES;
     }
-    
-    
-    
     return YES;
 }
-
-
-
-
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField==txtTotal1)
     {
-        
         double dist1 = [self.txtMil1.text doubleValue];
         double mileage1 = [self.txtRate1.text doubleValue];
         txtTotal1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
-        
         [txtTotal1 resignFirstResponder];
     }
     
@@ -558,8 +463,6 @@
         {
             reimburs.text = @"00.00";
         }
-        
-        
     }
     
     
@@ -569,12 +472,10 @@
     }
 }
 
+
 - (void)TextChange:(id)sender{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    
-    
     [df setDateFormat:@"yyyy-MM-dd"];
-    
     if(pickerTag==18)
     {
         ERtxtWeek.text=[df stringFromDate:datePicker.date];
@@ -583,8 +484,6 @@
     {
         ERdate6.text=[df stringFromDate:datePicker.date];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -595,9 +494,8 @@
 #pragma mark-
 #pragma UIPickerView Delegate Methods
 #pragma mark-
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    
     return pickerDataArray.count;
 }
 
@@ -609,14 +507,10 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
-    
     if(pickerTag==1)
     {
         ERType.text=[pickerDataArray objectAtIndex:[pickerView selectedRowInComponent:0]];
-        
     }
-    
 }
 
 
@@ -633,19 +527,19 @@
 	
 	return componentWidth;
 }
+
+
 -(void)showAddImageView
 {
     imageAddSubView.layer.cornerRadius=5;
     imageAddSubView.layer.masksToBounds=YES;
     imageAddSubView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     imageAddSubView.layer.borderWidth = 3.0f;
-    
     [self.view addSubview:imageAddSubView];
     [self.view bringSubviewToFront:imageAddSubView];
-    
-    NSLog(@"hello");
-    // NSLog(@"Add Image----------------%@",imgName);
 }
+
+
 -(IBAction)attachImage:(id)sender
 {
     
@@ -658,8 +552,9 @@
     alert.delegate=self;
     alert.tag=200;
     [alert show];
-    //    }
+    
 }
+
 #pragma mark -
 #pragma mark imagePicker delegates
 #pragma mark -
@@ -674,6 +569,7 @@
     imgViewAdd.image=newImage;
     [self showAddImageView];
 }
+
 -(NSString*)getCurrentDateTimeAsNSString
 {
     //get current datetime as image name
@@ -697,16 +593,9 @@
     NSLog(@"folderPath--- %@",folderPath);
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath]){
-        
         NSError *error;
-        if(  [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error])
-            ;// success
-        
-        
-        else
-        {
+        if( !( [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error]))
             NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
-        }
     }
     
     NSData *imagData = UIImageJPEGRepresentation(image,0.75f);
@@ -714,6 +603,8 @@
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
 }
+
+
 -(IBAction)saveImage:(id)sender
 {
     NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
@@ -729,30 +620,20 @@
     }
     else
     {
-        
-        
         NSLog(@"Add Image----------------%@",imgName);
-        
-        
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
         imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i",count], @"tag",
                          txvDescription.text, @"description",
                          imgName, @"name",
                          nil];
-        
-        
-        NSLog(@"Add Image objjjjjjj-------");
         [arrayImages addObject:imageDictionary];
         [self saveImageTaken:imgViewAdd.image imgName:imgName];
         [self removeAddImageView];
-        
-        
     }
-    
-    
-    
 }
+
+
 -(void)removeAddImageView
 {
     txvDescription.text=@"";
@@ -762,11 +643,9 @@
 }
 -(IBAction)gotoImageLibrary:(id)sender
 {
-    
     if(arrayImages.count!=0)
     {
         CMShowImagesViewController *nextView= [[CMShowImagesViewController alloc]initWithNibName:@"CMShowImagesViewController" bundle:nil];
-        NSLog(@"Arrayyy--------- %i",arrayImages.count);
         nextView.arrayImages=arrayImages;
         nextView.isFromSketches=NO;
         nextView.isFromReport=NO;
@@ -785,6 +664,8 @@
     }
     
 }
+
+
 -(UIImage *)getImageFromFileName:(NSString *)fileName
 {
     //get images from document directory
@@ -800,7 +681,6 @@
     }
     else
     {
-        
         folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
     }
     
@@ -809,15 +689,16 @@
     NSLog(@"current_img %@",current_img);
     return current_img;
 }
+
 -(IBAction)doneViewImages:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 #pragma mark -
 #pragma mark Alert Delegates
 #pragma mark -
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag==200)
@@ -836,14 +717,15 @@
                 break;
         }
     }
-    
-    
 }
+
 
 -(IBAction)camera:(id)sender
 {
     [self openCamera];
 }
+
+
 -(IBAction)library:(id)sender
 {
     [self openLibrary];
@@ -852,14 +734,13 @@
 -(void)openCamera
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
-        
-        
         [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:self.imagePicker animated:YES completion:nil];
         self.imagePicker.delegate=self;
     }
-    
 }
+
+
 -(void)openLibrary
 {
     
@@ -875,14 +756,12 @@
     }
     popoverController = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
     popoverController.delegate = self;
-    
     [popoverController
      presentPopoverFromRect:CGRectMake(120.0,  500.0, 300.0, 300.0)  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-    
-    
-    
     self.imagePicker.delegate=self;
 }
+
+
 -(void)deleteAllFiles
 {
     NSFileManager *fileMgr = [[NSFileManager alloc] init];
@@ -896,12 +775,10 @@
             BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
             if (!removeSuccess) {
                 // Error handling
-                
             }
         }
     } else {
         // Error handling
-        
     }
 }
 
@@ -917,18 +794,13 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        
-        
     }
     else
     {
-        
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         third=YES;
         first=NO;
         Second=NO;
-        
-        
         NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/update/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
                             ExpID,header.text,cashAdvance.text,reimburs.text,ERtxtEmpName.text,ERtxtWeek.text,sigName,ERtxtEmpNum.text,ERtxtApprovedBy.text,ERtextDate6.text,@"hi",ERtxtCheckNum.text];
         
@@ -941,18 +813,11 @@
         [urlRequest setHTTPMethod:@"POST"];
         
         //signature
-        
-        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        
         NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-        
-        
         UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
         NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-        
-        
         NSMutableData *postbody = [NSMutableData data];
         
         
@@ -1003,24 +868,13 @@
         ERtxtEmpNum.text=NULL;
         ERtxtCheckNum.text=NULL;
         ERtxtCheckNum.text=NULL;
-        
-        
-        
-        
     }
-    
-    
 }
 
 
 - (IBAction)butExp:(id)sender {
-    
-    
-    
     uploading = NO;
-    
     uploadingsketch=NO;
-    
     if(ERdate6.text==NULL || ERdate6.text.length==0 || ERDescription.text==NULL || ERDescription.text.length==0 || ERJobNo.text==NULL || ERJobNo.text.length==0 || ERType.text==NULL ||  ERType.text.length==0 || txtMil1.text.length==0 || txtMil1.text==NULL || txtRate1.text==NULL || txtRate1.text.length==0 || txtTotal1.text==NULL || txtTotal1.text.length==0)
     {
         
@@ -1030,12 +884,9 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        
-        
     }
     else
     {
-        
         Second=YES;
         uploading = NO;
         uploadingsketch=NO;
@@ -1054,20 +905,12 @@
         [urlRequest setHTTPMethod:@"POST"];
         
         //signature
-        
-        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        
         NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-        
-        
         UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
         NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-        
-        
         NSMutableData *postbody = [NSMutableData data];
-        
         
         NSString *boundary = @"---------------------------14737809831466499882746641449";
         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
@@ -1078,15 +921,7 @@
         [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [postbody appendData:[NSData dataWithData:imaData]];
         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSLog(@"^^^^^^^^^^^^^%@",postbody);
-        
         [urlRequest setHTTPBody:postbody];
-        // uploading=YES;
-        
-        NSLog(@"sent");
-        
-        
         
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
         
@@ -1109,11 +944,7 @@
         txtMil1.text=NULL ;
         txtRate1.text=NULL;
         txtTotal1.text=NULL;
-        
-        
     }
-    
-    
 }
 
 
@@ -1132,7 +963,6 @@
     }
     else
     {
-        
         folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature_R"];
     }
     
@@ -1143,10 +973,8 @@
 }
 
 
-
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
 {
-    
     //get images from document directory
     NSLog(@"image name......%@",fileName);
     UIImage *current_img;
@@ -1154,15 +982,10 @@
     current_img=[UIImage imageWithContentsOfFile:fullPath];
     NSLog(@"current_img %@",current_img);
     return current_img;
-    
 }
 
 -(void)uploadImage
 {
-    
-    
-    //  Second=YES;
-    
     NSString *urlLink = [NSString stringWithFormat:@"%@/api/expense/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
                          appDelegate.username,RecID,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
@@ -1181,14 +1004,8 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    
-    
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
     NSMutableData *postbody = [NSMutableData data];
-    
-    
-    
     UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
     NSData *imaData = UIImageJPEGRepresentation(image,0.3);
     // NSLog(@"********************* UPloadinggggg %i  %@",count1,[arrayImages objectAtIndex:count1]);
@@ -1201,9 +1018,6 @@
     [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [postbody appendData:[NSData dataWithData:imaData]];
     [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"^^^^^^^^^^^^^%@",postbody);
-    
     [urlRequest setHTTPBody:postbody];
     uploading=YES;
     first=NO;
@@ -1211,32 +1025,23 @@
     third=NO;
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
     _receivedData = [[NSMutableData alloc] init];
-    
     [connection start];
-    
-    
-    NSLog(@"sent");
-    
 }
 
 
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"uuuuu");
-    
     _receivedResponse = response;
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData  *)data
 {
-    NSLog(@"ddddd");
     [_receivedData appendData:data];
 }
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
+
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"eeeeee");
     [HUD setHidden:YES];
@@ -1244,60 +1049,34 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
     [HUD setHidden:YES];
-    
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     
     NSLog(@"response---%@",responseObject);
-    
-    
-    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     if (first) {
-        
-        
-        NSLog(@"first---------");
-        
-        
         if(![[responseObject valueForKey:@"status"]isEqualToString:@"not found"])
-            
         {
-            
             ExpID=[responseObject valueForKey:@"id"];
-            
             NSLog(@"exp id---------%@",ExpID);
         }
-        
         else{
-            
-            
             ExpID=@"0";
-            
             NSLog(@"exp id---------%@",ExpID);
         }
-        
-        
-        
     }
     else if(Second){
         NSLog(@"rec id---------second secon sec");
         
         if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-            
         {
-            
             RecID=[responseObject valueForKey:@"record_id"];
-            
             NSLog(@"rec id---------%@",RecID);
-            
             // Second=NO;
             if(arrayImages.count>0)
             {
@@ -1308,42 +1087,26 @@ didReceiveResponse:(NSURLResponse *)response
             {
                 UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [exportAlert show];
-                
             }
-            
-            
         }
     }
     else if (uploading) {
         
         uploading=NO;
         count1 ++;
-        
         if(count1< arrayImages.count)
-            
         {
-            
             [self uploadImage];
         }
         else
         {
-            
-            
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
-            
         }
-        
     }
-    
-    
     else if(third){
-        
-        
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
-        
     }
-    
 }
 @end

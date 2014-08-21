@@ -62,16 +62,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"Inside dashboard cell row: %ld", (long)indexPath.section);
+    
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     if (indexPath.section == 0) {
+        
         NSArray *titles = @[@"Compliance Report", @"Non-Compliance Report", @"Daily Inspection Report", @"Expense Report", @"Summary Sheet", @"", @""];
         cell.textLabel.text = titles[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showToolbar" object:nil];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showToolbar" object:nil];
 	return cell;
@@ -79,13 +81,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row){
-        case 0:
-            if(indexPath.section==0)
-                return 70.0; // first row is 123px high
-        default:
-            return 70.0; // all other rows are 40px high
-    }
+    return 70.0;
 }
 
 
