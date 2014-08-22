@@ -1303,7 +1303,7 @@
     [assp setValue:printedName forKey:@"printedName"];
     
     NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
-    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
     NSDate *dateIssued_Date = [myXMLdateReader dateFromString:dateIssued];
     NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateConStarted];
     NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateConCopleted];
@@ -1468,7 +1468,7 @@
     [assp setValue:printedName forKey:@"printedName"];
     
     NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
-    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
     NSDate *dateIssued_Date = [myXMLdateReader dateFromString:dateIssued];
     NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateConStarted];
     NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateConCopleted];
