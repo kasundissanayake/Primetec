@@ -447,9 +447,6 @@ UILabel *cno;
 
 -(IBAction)saveCompliance:(id)sender
 {
-    uploading = NO;
-    uploadingsketch=NO;
-    
     if(txtTitle.text==NULL || txtTitle.text.length==0|| txtContactNo.text==NULL || txtContactNo.text.length==0 ||  txtProDesc.text==NULL || txtProDesc.text.length==0 || COtextTitle.text==NULL || COtextTitle.text.length==0||COtextProject.text==NULL || COtextProject.text.length==0||txtDateIssued.text==NULL || txtDateIssued.text.length==0||conRes.text==NULL || conRes.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| txtDateContractorStarted.text==NULL || txtDateContractorStarted.text.length==0|| txtDateContractorCompleted.text==NULL || txtDateContractorCompleted.text.length==0||txtDateofRawReprote.text==NULL || txtDateofRawReprote.text.length==0 || correctAction.text==NULL || correctAction.text.length==0 || txtSignature.image== NULL || txtPrintedName.text==NULL || txtPrintedName.text.length==0 )
     {
         
@@ -471,28 +468,26 @@ UILabel *cno;
         hud.delegate = self;
         [hud show:YES];
         
-        uploading = NO;
-        uploadingsketch=NO;
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
-        [PRIMECMController
-         saveComplianceForm: appDelegate.username
-         title:txtTitle.text
-         contractNo:txtContactNo.text
-         proDesc:txtProDesc.text
-         comTitle:COtextTitle.text
-         project:COtextProject.text
-         dateIssued:txtDateIssued.text
-         conRespon:conRes.text
-         to:txtTo.text
-         dateConStarted:txtDateContractorStarted.text
-         dateConComplteted:txtDateContractorCompleted.text
-         dateRawReport:txtDateofRawReprote.text
-         userId:txtUserId.text
-         correctiveAction:correctAction.text
-         signature:sigName
-         printedName:txtPrintedName.text
-         projId:appDelegate.projId];
+        BOOL saveStatus = [PRIMECMController
+                           saveComplianceForm: appDelegate.username
+                           title:txtTitle.text
+                           contractNo:txtContactNo.text
+                           proDesc:txtProDesc.text
+                           comTitle:COtextTitle.text
+                           project:COtextProject.text
+                           dateIssued:txtDateIssued.text
+                           conRespon:conRes.text
+                           to:txtTo.text
+                           dateConStarted:txtDateContractorStarted.text
+                           dateConComplteted:txtDateContractorCompleted.text
+                           dateRawReport:txtDateofRawReprote.text
+                           userId:txtUserId.text
+                           correctiveAction:correctAction.text
+                           signature:sigName
+                           printedName:txtPrintedName.text
+                           projId:appDelegate.projId];
         
         txtContactNo.text = @"";
         txtProDesc.text=@"";
@@ -513,8 +508,13 @@ UILabel *cno;
         
         [hud setHidden:YES];
         
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
     }
 }
 

@@ -238,8 +238,8 @@ typedef enum {
     }
     
     if ([projectObjects count]>0) {
-        appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
-        NSLog(@"Selected Project ID: %@", appDelegate.projId);
+        //appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
+        NSLog(@"Total projects count: %lu", (unsigned long)[projectDetails count]);
     }
     else {
         NSLog(@"No matches found for Projects");
@@ -739,11 +739,10 @@ typedef enum {
         {
             FirstViewController* fdvc=[[FirstViewController alloc] init];
             fdvc.title=[NSString stringWithFormat:@"Map View"];
-            [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
+            NSLog(@"RootVC, in Tag == 1 / 4");
             
+            [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
         }
-        
-        
         else if (appDelegate.Tag==5)
         {
             if (indexPath.section == 0 && indexPath.row == 0)
@@ -753,9 +752,7 @@ typedef enum {
                 comR.title=[NSString stringWithFormat:@"Dashboard"];
             }
         }
-        
-    }
-    
+    }    
     else if(appDelegate.Tag==4)
     {
         NSMutableDictionary *selectedValueDic = [[NSMutableDictionary alloc] init];
@@ -772,8 +769,8 @@ typedef enum {
         appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
         appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
         appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
-        //appDelegate.userId = [[projectDetails objectAtIndex:indexPath.row]valueForKey:@"userId"];
-        //appDelegate.projPrintedName = [[projectDetails objectAtIndex:indexPath.row]valueForKey:@"userId"];
+        
+        NSLog(@"RootVC, in TAg == 4 ");
     }
 }
 

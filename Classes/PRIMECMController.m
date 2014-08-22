@@ -1270,7 +1270,7 @@
     while (hasConflicts){
         hasConflicts = FALSE;
         randNum = rand() % (100000000) + 100000; //create the random number.
-        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, username, randNum];
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, userId, randNum];
         
         for (NSDictionary *dict in existingIDs) {
             NSString *str = [dict valueForKey:@"complianceNoticeNo"];
@@ -1434,7 +1434,7 @@
     while (hasConflicts){
         hasConflicts = FALSE;
         randNum = rand() % (100000000) + 100000; //create the random number.
-        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, username, randNum];
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, userId, randNum];
         
         for (NSDictionary *dict in existingIDs) {
             NSString *str = [dict valueForKey:@"non_ComplianceNoticeNo"];
@@ -1455,7 +1455,7 @@
     
     [assp setValue:newIDD forKey:@"non_ComplianceNoticeNo"];
     [assp setValue:contractNo forKey:@"contractNo"];
-    [assp setValue:title forKey:@"comHeader"];
+    [assp setValue:title forKey:@"non_ComHeader"];
     [assp setValue:proDesc forKey:@"projectDescription"];
     [assp setValue:comTitle forKey:@"title"];
     [assp setValue:project forKey:@"project"];
@@ -1463,7 +1463,7 @@
     [assp setValue:conRespon forKey:@"contractorResponsible"];
     [assp setValue:to forKey:@"to"];
     [assp setValue:userId forKey:@"userID"];
-    [assp setValue:correctiveAct forKey:@"correctiveActionCompliance"];
+    [assp setValue:correctiveAct forKey:@"descriptionOfNonCompliance"];
     [assp setValue:signature forKey:@"signature"];
     [assp setValue:printedName forKey:@"printedName"];
     

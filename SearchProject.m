@@ -141,6 +141,15 @@
     bgView.backgroundColor = [UIColor orangeColor];
     
     appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
+    appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
+    appDelegate.projTitle=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_title"];
+    appDelegate.projName=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_name"];
+    appDelegate.address=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"street"];
+    appDelegate.city=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"city"];
+    appDelegate.state=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"state"];
+    appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
+    appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
+    appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
     
     selectedCell.selectedBackgroundView  = bgView;
     [selectedCell setSelected:YES animated:NO];
