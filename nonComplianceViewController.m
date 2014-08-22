@@ -1,5 +1,3 @@
-
-
 #import "nonComplianceViewController.h"
 #import "SignatureViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -12,7 +10,6 @@
 @interface nonComplianceViewController ()
 
 {
-    
     UIDatePicker *datePicker;
     NSMutableArray *hotelAnnotations;
     UIPopoverController *popoverController;
@@ -28,33 +25,18 @@
     NSString *ifImage;
     TabAndSplitAppAppDelegate *appDelegate;
     
-    
-    
     NSInteger count;
     MBProgressHUD *HUD;
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
-    
-    
     BOOL *uploading;
     int count1;
     NSString *comNoticeNo;
-    
-    
     int count2;
-    
     BOOL *uploadingsketch;
-    
-    
     BOOL isUploadingSignature;
-    
-    
-    
-    
 }
 
 @end
@@ -72,10 +54,6 @@
 @synthesize imgViewAdd,txvDescription;
 @synthesize txtContactNo,txtUserId,txtPrintedName,txtTo,txtNonCompNoticeNo;
 
-
-
-
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -89,9 +67,9 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
-    [self deleteAllFiles];
+    //[self deleteAllFiles];
     
-      count=0;
+    count=0;
     pickerTag=0;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
@@ -119,7 +97,7 @@
     
     
     
-
+    
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
@@ -160,7 +138,7 @@
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
     imgSignature.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
     
-   
+    
 }
 -(UIImage *)getImageFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
 {
@@ -208,7 +186,7 @@
     
     UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
     NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-  
+    
     NSString *boundary = @"---------------------------14737809831466499882746641449";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
@@ -365,7 +343,7 @@
 -(IBAction)saveCompliance:(id)sender
 
 {
-  
+    
     
     if(txtTitle.text==NULL || txtTitle.text.length==0|| txtContactNo.text==NULL || txtContactNo.text.length==0 || projectDesc.text==NULL || projectDesc.text.length==0 || nonCOtextTitle.text==NULL || nonCOtextTitle.text.length==0||nonCOtextProject.text==NULL || nonCOtextProject.text.length==0||NtxtDateIssued.text==NULL || NtxtDateIssued.text.length==0||contractorResp.text==NULL || contractorResp.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| NtxtDateContractorStarted.text==NULL || NtxtDateContractorStarted.text.length==0|| NtxtDateContractorCompleted.text==NULL || NtxtDateContractorCompleted.text.length==0||NtxtDateofRawReprote.text==NULL || NtxtDateofRawReprote.text.length==0 || correctiveAction.text==NULL || correctiveAction.text.length==0 ||imgSignature.image==NULL||txtPrintedName.text==NULL || txtPrintedName.text.length==0 || txtUserId.text==NULL || txtUserId.text.length==0 )
     {
@@ -700,7 +678,7 @@ didReceiveResponse:(NSURLResponse *)response
     if (indexPath.section == 0 && indexPath.row == 0)
         
     {
-                
+        
     }
     if(indexPath.section==0 && indexPath.row==1)
     {
@@ -960,12 +938,12 @@ didReceiveResponse:(NSURLResponse *)response
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-        if(textField==txtTitle)
+    if(textField==txtTitle)
     {
         txtTitle.borderStyle=UITextBorderStyleNone;
     }
     
-   }
+}
 
 
 - (void)TextChange:(id)sender{
@@ -1103,7 +1081,7 @@ didReceiveResponse:(NSURLResponse *)response
     [popoverController dismissPopoverAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     
-        imgViewAdd.image=newImage;
+    imgViewAdd.image=newImage;
     [self showAddImageView];
 }
 -(NSString*)getCurrentDateTimeAsNSString
@@ -1149,7 +1127,7 @@ didReceiveResponse:(NSURLResponse *)response
 -(IBAction)saveImage:(id)sender
 {
     NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
-        if(txvDescription.text.length==0)
+    if(txvDescription.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
                                                         message:@"Please add photo Description."
@@ -1189,7 +1167,7 @@ didReceiveResponse:(NSURLResponse *)response
     txvDescription.text=@"";
     imgViewAdd.image=nil;
     [self.imageAddSubView removeFromSuperview];
-   
+    
 }
 -(IBAction)gotoImageLibrary:(id)sender
 {

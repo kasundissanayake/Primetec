@@ -931,8 +931,7 @@ typedef enum {
     int type = [[[notification userInfo] valueForKey:@"index"] intValue];
     
     reportDashboard *report=[[reportDashboard alloc]init];
-    report.title=[NSString stringWithFormat:@"Report"];
-    NSLog(@"proType in RootVC: %d",type);
+    report.title=[NSString stringWithFormat:@"Report"];    
     report.proType=type;
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:report]];
 }

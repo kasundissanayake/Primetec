@@ -71,8 +71,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self deleteAllFiles];
-    PRIMECMController *controller = [[PRIMECMController alloc]init];
+    //[self deleteAllFiles];
     count=0;
     comNoticeNo=@"";
     count1=0;
@@ -128,23 +127,16 @@
      
      [urlRequest setHTTPMethod:@"GET"];
      first=YES;
-     
-     
      NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-     
      _receivedData = [[NSMutableData alloc] init];
-     
-     
      [connection start];
      NSLog(@"URL---%@",strURL);
-    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     HUD.labelText=@"";
     HUD.dimBackground = YES;
     HUD.delegate = self;
     [HUD show:YES];
-    
 }
 
 

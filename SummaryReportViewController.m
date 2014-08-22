@@ -19,25 +19,19 @@
     UIPopoverController *popoverController;
     UITableView *tblView;
     NSArray *tableData;
-    
     UIDatePicker *datePicker;
     NSInteger pickerTag;
-    
-    
     UIPickerView *pickerView;
     NSMutableArray *pickerDataArray;
     SignatureViewController *signatureViewController;
-    
     NSString *isSignature;
     UIButton *btnCloseSignView;
     NSInteger count;
     MBProgressHUD *HUD;
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
     BOOL *uploading;
     BOOL *uploadingsketch;
     int count1;
@@ -45,7 +39,6 @@
     NSString *comNoticeNo;
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
-    
 }
 
 @end
@@ -68,15 +61,12 @@
 {
     [super viewDidLoad];
     
-    
     comNoticeNo=@"";
     count=0;
     count1=0;
     
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
-    
     
     [sumDescription.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [sumDescription.layer setBorderColor: [[UIColor grayColor] CGColor]];
@@ -89,24 +79,18 @@
     [sumConOrder.layer setBorderWidth: 1.0];
     [sumConOrder.layer setCornerRadius:8.0f];
     [sumConOrder.layer setMasksToBounds:YES];
-    
 
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
-    
     // Do any additional setup after loading the view from its nib.
     scrollView.frame = CGRectMake(0,-10, 770, 2088);
     [scrollView setContentSize:CGSizeMake(620, 2300)];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
     
-    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
-    
     
     sumContracter.text=appDelegate.projId;
     sumAddress.text=appDelegate.address;

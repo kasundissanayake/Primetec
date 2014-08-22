@@ -14,6 +14,7 @@
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface ComplianceViewController ()
 {
@@ -85,7 +86,7 @@ UILabel *cno;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self deleteAllFiles];
+    //[self deleteAllFiles];
     
     comNoticeNo=@"";
     count=0;
@@ -116,40 +117,21 @@ UILabel *cno;
     [txtProDesc.layer setBorderWidth: 1.0];
     [txtProDesc.layer setCornerRadius:8.0f];
     [txtProDesc.layer setMasksToBounds:YES];
-    
-    
-    
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
-    
-    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
     cno.layer.borderWidth = 1.0f;
     cno.layer.cornerRadius = 5.0f;
     cno.layer.borderColor = [UIColor blueColor].CGColor;
-    // Do any additional setup after loading the view from its nib.
-    
-    
-    
     scrollView.frame = CGRectMake(0,860, 820, 1500);
     [scrollView setContentSize:CGSizeMake(420, 2700)];
-    //    scrollView.frame = CGRectMake(0,0, 720, 1988);
-    //    [scrollView setContentSize:CGSizeMake(500, 2200)];
-    
-    
     UITapGestureRecognizer *singleTapInspec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedInspector)];
-    
     txtSignature.userInteractionEnabled = YES;
     [txtSignature addGestureRecognizer:singleTapInspec];
     arrayImages=[[NSMutableArray alloc]init];
-    
-    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormat stringFromDate:today];
-    
-    
-    
     txtContactNo.text=appDelegate.projId;
     txtProDesc.text=appDelegate.projDescription;
     COtextTitle.text=appDelegate.projTitle;
@@ -157,8 +139,9 @@ UILabel *cno;
     txtPrintedName.text=appDelegate.projPrintedName;
     txtDate.text=dateString;
     txtUserId.text=appDelegate.userId;
-    
 }
+
+
 -(void)tapDetectedTextField
 {
     txtTitle.userInteractionEnabled = YES;
@@ -167,7 +150,6 @@ UILabel *cno;
 
 -(void)uploadImage
 {
-    
     NSString *urlLink = [NSString stringWithFormat:@"%@/api/compliance/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
                          appDelegate.username, comNoticeNo, [[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
     
@@ -822,10 +804,10 @@ UILabel *cno;
 	
 	return componentWidth;
 }
+
+
 - (void)TextChange:(id)sender{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    
-    
     [df setDateFormat:@"yyyy-MM-dd"];
     if(pickerTag==1)
     {
@@ -850,6 +832,7 @@ UILabel *cno;
     }
     
 }
+
 -(void)selectDone
 {
     [popoverController dismissPopoverAnimated:YES];
@@ -887,8 +870,9 @@ UILabel *cno;
     alert.delegate=self;
     alert.tag=200;
     [alert show];
-    //    }
 }
+
+
 - (IBAction)handwritingButtonClicked:(id)sender
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NAVIGATE_TO_DRAW"];
@@ -905,6 +889,7 @@ UILabel *cno;
     //present the view controller
     [self presentViewController:viewController animated:YES completion:nil];
 }
+
 #pragma mark -
 #pragma mark imagePicker delegates
 #pragma mark -
@@ -920,6 +905,7 @@ UILabel *cno;
     imgViewAdd.image=newImage;
     [self showAddImageView];
 }
+
 -(NSString*)getCurrentDateTimeAsNSString
 {
     //get current datetime as image name
@@ -955,6 +941,7 @@ UILabel *cno;
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
 }
+
 -(IBAction)saveImage:(id)sender
 {
     imgName=[NSString stringWithFormat:@"CM_%i",count];
@@ -972,11 +959,7 @@ UILabel *cno;
     }
     else
     {
-        
-        
         NSLog(@"Add Image----------------%@",imgName);
-        
-        
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
         imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i",count], @"tag",
@@ -991,6 +974,7 @@ UILabel *cno;
         [self removeAddImageView];
     }
 }
+
 
 -(IBAction)gotoImageLibrary:(id)sender
 {
@@ -1048,9 +1032,6 @@ UILabel *cno;
 }
 
 
-
-
-
 -(UIImage *)getImageFromFileName:(NSString *)fileName
 {
     //get images from document directory
@@ -1103,9 +1084,6 @@ UILabel *cno;
 }
 
 
-
-
-
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     pageControlBeingUsed = NO;
 }
@@ -1125,12 +1103,11 @@ UILabel *cno;
     txtDescription.text=[[arrayImages objectAtIndex:page]valueForKey:@"description"];
     pageControlBeingUsed = YES;
 }
+
 -(IBAction)doneViewImages:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
-
 
 
 -(void)removeAddImageView
@@ -1170,6 +1147,7 @@ UILabel *cno;
 {
     [self openCamera];
 }
+
 -(IBAction)library:(id)sender
 {
     [self openLibrary];
@@ -1178,17 +1156,14 @@ UILabel *cno;
 -(void)openCamera
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
-        
-        
         [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:self.imagePicker animated:YES completion:nil];
         self.imagePicker.delegate=self;
     }
-    
 }
+
 -(void)openLibrary
 {
-    
     [self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     
     if([popoverController isPopoverVisible])
@@ -1204,11 +1179,9 @@ UILabel *cno;
     
     [popoverController
      presentPopoverFromRect:CGRectMake(120.0,  500.0, 300.0, 300.0)  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-    
-    
-    
     self.imagePicker.delegate=self;
 }
+
 -(void)deleteAllFiles
 {
     NSFileManager *fileMgr = [[NSFileManager alloc] init];
@@ -1227,7 +1200,6 @@ UILabel *cno;
         }
     } else {
         // Error handling
-        
     }
 }
 

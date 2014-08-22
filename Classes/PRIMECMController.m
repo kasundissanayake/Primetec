@@ -1165,7 +1165,7 @@
 
 
 //ComplienceForm
-+(void)uploadComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
++(BOOL)uploadComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1189,9 +1189,10 @@
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
     }
+    return TRUE;
 }
 
-+(void)uploadComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
++(BOOL)uploadComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1214,9 +1215,10 @@
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
     }
+    return TRUE;
 }
 
-+(void)uploadComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch
++(BOOL)uploadComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1240,9 +1242,10 @@
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
     }
+    return TRUE;
 }
 
-+ (void)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
++ (BOOL)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
                 dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
 {
     ComplianceForm *assp;
@@ -1260,21 +1263,25 @@
     if (error != nil) {
         NSLog(@"Error: %@", [error localizedDescription]);
     }
-    
-    NSInteger newID = 0;
-    
-    for (NSDictionary *dict in existingIDs) {
+
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, username, randNum];
         
-        NSString *str = [dict valueForKey:@"complianceNoticeNo"] ;
-        NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
-        
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"complianceNoticeNo"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
         }
     }
+    NSLog(@"New Compliance Report complianceNoticeNo: %@", newIDD);
     
-    NSString *newIDD = [NSString stringWithFormat:@"CM%d",newID];
     if (!assp) {
         assp = [NSEntityDescription
                 insertNewObjectForEntityForName:@"ComplianceForm"
@@ -1296,25 +1303,29 @@
     [assp setValue:printedName forKey:@"printedName"];
     
     NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
-    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"]; // for example
+    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"];
     NSDate *dateIssued_Date = [myXMLdateReader dateFromString:dateIssued];
-    NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateIssued];
-    NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateIssued];
-    NSDate *dateOfDWRReported_Date = [myXMLdateReader dateFromString:dateIssued];
+    NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateConStarted];
+    NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateConCopleted];
+    NSDate *dateOfDWRReported_Date = [myXMLdateReader dateFromString:dateRawReport];
     
     [assp setValue:dateIssued_Date forKey:@"dateIssued"];
     [assp setValue:dateContractorStarted_Date forKey:@"dateContractorStarted"];
     [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
     [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
+    [assp setValue:[NSDate date] forKeyPath:@"date"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription ]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
 //Non complience
-+(void)uploadNonComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
++(BOOL)saveNonComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
 {
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1338,10 +1349,11 @@
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
     }
+    return TRUE;
 }
 
 
-+(void)uploadNonComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
++(BOOL)saveNonComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
 {
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1362,10 +1374,13 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
-+(void)uploadNonComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
++(BOOL)saveNonComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
     
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1388,10 +1403,13 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
-+(void)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
++(BOOL)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
                    dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
 {
     
@@ -1402,7 +1420,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"non_ComplianceNoticeNo"]];
     NSError *error = nil;
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
@@ -1410,22 +1428,32 @@
         NSLog(@"Error: %@", [error localizedDescription]);
     }
     
-    NSInteger newID = 0;
-    for (NSDictionary *dict in existingIDs) {
-        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, username, randNum];
+        
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"non_ComplianceNoticeNo"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
         }
     }
+    NSLog(@"New Non-Compliance Report non-ComplianceNoticeNo: %@", newIDD);
     
-    NSString *newIDD = [NSString stringWithFormat:@"%d",newID];
+    
     if (!assp) {
         assp = [NSEntityDescription
                 insertNewObjectForEntityForName:@"NonComplianceForm"
                 inManagedObjectContext:managedContext];
     }
     
-    [assp setValue:newIDD forKey:@"id"];
+    [assp setValue:newIDD forKey:@"non_ComplianceNoticeNo"];
     [assp setValue:contractNo forKey:@"contractNo"];
     [assp setValue:title forKey:@"comHeader"];
     [assp setValue:proDesc forKey:@"projectDescription"];
@@ -1433,24 +1461,36 @@
     [assp setValue:project forKey:@"project"];
     [assp setValue:projId forKey:@"Project_id"];
     [assp setValue:conRespon forKey:@"contractorResponsible"];
-    [assp setValue:to forKey:@"To"];
+    [assp setValue:to forKey:@"to"];
     [assp setValue:userId forKey:@"userID"];
     [assp setValue:correctiveAct forKey:@"correctiveActionCompliance"];
     [assp setValue:signature forKey:@"signature"];
     [assp setValue:printedName forKey:@"printedName"];
-    [assp setValue:dateIssued forKey:@"dateIssued"];
-    [assp setValue:dateConStarted forKey:@"dateContractorStarted"];
-    [assp setValue:dateConCopleted forKey:@"dateContractorCompleted"];
-    [assp setValue:dateRawReport forKey:@"dateOfDWRReported"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"];
+    NSDate *dateIssued_Date = [myXMLdateReader dateFromString:dateIssued];
+    NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateConStarted];
+    NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateConCopleted];
+    NSDate *dateOfDWRReported_Date = [myXMLdateReader dateFromString:dateRawReport];
+    
+    [assp setValue:dateIssued_Date forKey:@"dateIssued"];
+    [assp setValue:dateContractorStarted_Date forKey:@"dateContractorStarted"];
+    [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
+    [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
+    [assp setValue:[NSDate date] forKeyPath:@"date"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
 
-+(void)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
++(BOOL)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
     Expensedata *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -1473,10 +1513,11 @@
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
     }
+    return TRUE;
 }
 
 
-+(void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
++(BOOL)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     Expensedata *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1518,11 +1559,14 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+     return TRUE;
     }
 }
 
 
-+ (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
++ (BOOL)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     
     ExpenseReportModel *assp;
@@ -1573,12 +1617,15 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
 
 //Summery3
-+ (void)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
++ (BOOL)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
 {
     
     SummarySheet3*assp;
@@ -1668,6 +1715,9 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 
@@ -1678,7 +1728,7 @@
 /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];*/
 
 
-+ (void)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
++ (BOOL)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
 {
     
     SummarySheet2*assp;
@@ -1748,6 +1798,9 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
     }
 }
 

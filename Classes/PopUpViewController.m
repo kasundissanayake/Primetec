@@ -10,8 +10,6 @@
 #import "popupcell.h"
 #import "CMShowImagesViewController.h"
 
-
-
 @interface PopUpViewController ()
 {
     NSArray *tableData;
@@ -19,15 +17,11 @@
     UIPopoverController *popoverController;
     int imgTag;
     UIActionSheet *sheet;
-    
-    
     NSInteger count;
     UIPickerView *pickerViewInspectors;
     int pickerTag;
     NSArray *pickerDataArray;
     NSIndexPath *index;
-    
-    
 }
 
 @end
@@ -45,9 +39,6 @@
 @synthesize isFromReport,isFromSketches;
 @synthesize imageAddSubView;
 @synthesize datePicker;
-
-
-
 @synthesize imgViewAttach,imgViewAttach1,imgViewAttach3,imgViewAttach2,imgViewAttach4,imgViewAttach5,imgViewAttach6,
 imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,imgViewAttach12,imgViewAttach13,imgViewAttach14,imgViewAttach15;
 @synthesize imagePicker;
@@ -66,18 +57,10 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     defaults=[NSUserDefaults standardUserDefaults];
     imgTag=0;
-    
-    
-    
-    
     self.imagePicker=[[UIImagePickerController alloc]init];
-    
-    
     arrayImages=[[NSMutableArray alloc]init];
-    
     UITapGestureRecognizer* gestureImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImageAttachOptions:)];
     // if labelView is not set userInteractionEnabled, you must do so
     gestureImageTap.numberOfTapsRequired=1;
@@ -146,26 +129,13 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     [imgViewAttach15 setUserInteractionEnabled:YES];
     [imgViewAttach15 addGestureRecognizer:gestureImageTap15];
     
-    
     tableData = [NSArray arrayWithObjects:@"Project Id",@"Project Title",@"Project Name",@"Project Description",@"Street",@"City",@"State",@"Zip",@"Phone No",@"Date",@"Client Name",@"Project Manager",@"Inspector",nil];
-    
-    
     
     button.enabled=NO;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     defaults=[NSUserDefaults standardUserDefaults];
-    
-    // Do any additional setup after loading the view from its nib.
-}
-
-
-
-
-//start brin attach and view image
-
-
+    }
 
 
 #pragma mark -
@@ -190,32 +160,23 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
                 break;
         }
     }
-    
-    
 }
 
 
 -(void)createDatePicker:(UILabel *)txtField{
-    
-    
-    
     UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     pickerToolbar.barStyle = UIBarStyleBlackOpaque;
     [pickerToolbar sizeToFit];
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(selectionDone)];
     [barItems addObject:doneBtn];
-    
     [pickerToolbar setItems:barItems animated:YES];
-    
-    
     datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, 320, 300)];
     
     //distancePickerView.dataSource = self;
     datePicker.datePickerMode = UIDatePickerModeDate;
     datePicker.hidden = NO;
     datePicker.date = [NSDate date];
-    
     
     [datePicker addTarget:self
                    action:@selector(TextChangee:)
@@ -242,18 +203,11 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     CGRect popoverRect = [self.view convertRect:[txtField frame]
                                        fromView:[txtField superview]];
     
-    
-    
-    
     [popoverController
      presentPopoverFromRect:popoverRect
      inView:self.view
      permittedArrowDirections:UIPopoverArrowDirectionAny
      animated:YES];
-    
-    
-    
-    
 }
 
 
@@ -277,9 +231,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 
 
 -(void)lablelDidBeginEditing:(UITableViewCell *)label
-
 {
-    
     if(label==[defaults objectForKey:@"Date"])
     {
         [[defaults objectForKey:@"Date"] resignFirstResponder];
@@ -289,28 +241,19 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 }
 
 
-
-
-
 -(void)selectionDone
 {
     [popoverController dismissPopoverAnimated:YES];
 }
 
 
-
 -(void)openCamera
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
-        
-        
         [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:self.imagePicker animated:YES completion:nil];
         self.imagePicker.delegate=self;
-        
-        
     }
-    
 }
 
 
@@ -327,24 +270,16 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     {
         [popoverController dismissPopoverAnimated:YES];
     }
-    
-    
     popoverController = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
     popoverController.delegate = self;
-    
     [popoverController
      presentPopoverFromRect:CGRectMake(10.0,  100.0, 300.0, 300.0)  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-    
-    
-    
     self.imagePicker.delegate=self;
-    
-    
 }
+
 
 -(void)createPicker:(UILabel *)lable
 {
-    
     UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     pickerToolbar.barStyle = UIBarStyleBlackOpaque;
     [pickerToolbar sizeToFit];
@@ -353,21 +288,17 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     [barItems addObject:doneBtn];
     [pickerToolbar setItems:barItems animated:YES];
     
-    
     pickerViewInspectors = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 320, 300)];
     pickerViewInspectors.delegate = self;
     pickerViewInspectors.showsSelectionIndicator = YES;
-    
     
     UIViewController* popoverContent = [[UIViewController alloc] init];
     UIView* popoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 344)];
     popoverView.backgroundColor = [UIColor whiteColor];
     
-    
     [popoverView addSubview:pickerToolbar];
     [popoverView addSubview:pickerViewInspectors];
     popoverContent.view = popoverView;
-    
     
     //resize the popover view shown
     //in the current view to the view's size
@@ -387,12 +318,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
      inView:self.view
      permittedArrowDirections:UIPopoverArrowDirectionUp
      animated:YES];
-    
 }
-
-
-
-
 
 -(IBAction)saveImage:(id)sender
 {
@@ -410,11 +336,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     }
     else
     {
-        
-        
         NSLog(@"Add Image----------------%@",imgName);
-        
-        
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
         imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i",count], @"tag",
@@ -422,18 +344,12 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
                          imgName, @"name",
                          nil];
         
-        
-        NSLog(@"Add Image objjjjjjj-------");
         [arrayImages addObject:imageDictionary];
         [self saveImageTaken:imgViewAdd.image imgName:imgName];
         [self removeAddImageView];
-        
-        
     }
-    
-    
-    
 }
+
 -(void)removeAddImageView
 {
     txvDescription.text=@"";
@@ -441,23 +357,14 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     [self.imageAddSubView removeFromSuperview];
     }
 
-
-
-
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     count++;
     UIImage *newImage=[info objectForKey:UIImagePickerControllerOriginalImage];
-    
     [popoverController dismissPopoverAnimated:YES];
-    
     [self showAddImageView];
     imgViewAdd.image=newImage;
-    
-    
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    
 }
 
 
@@ -467,14 +374,9 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     imageAddSubView.layer.masksToBounds=YES;
     imageAddSubView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     imageAddSubView.layer.borderWidth = 3.0f;
-    
     [self.view addSubview:imageAddSubView];
     [self.view bringSubviewToFront:imageAddSubView];
-    
-    
-    
-    NSLog(@"hello");
-    }
+}
 
 
 -(IBAction)attachImage:(id)sender
@@ -489,11 +391,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     alert.delegate=self;
     alert.tag=200;
     [alert show];
-    //    }
 }
-
-
-
 
 
 -(IBAction)gotoImageLibrary:(id)sender
@@ -506,13 +404,8 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         nextView.arrayImages=arrayImages;
         nextView.isFromSketches=NO;
         nextView.isFromReport=NO;
-        
         [nextView setModalPresentationStyle:UIModalPresentationFormSheet];
         [self presentViewController:nextView animated:true completion:nil];
-        
-        
-        
-        
     }
     else
     {
@@ -522,13 +415,9 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles: nil];
         [alert show];
-        
     }
     
 }
-
-
-
 
 
 -(UIImage *)getImageFromFileName:(NSString *)fileName
@@ -601,12 +490,6 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
    
     return 13;
 }
-
-
-
-
-
-
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -713,40 +596,24 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         NSLog(@"inspector %@",[defaults objectForKey:@"Inspector"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
-    
-    
-  
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    
-    
     return cell;
-    
 }
 
 
-
-
-//brin start
 -(void)saveImageTaken:(UIImage *)image imgName:(NSString *)imgNam
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     NSString *folderPath;
     folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-    
     NSLog(@"folderPath--- %@",folderPath);
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath]){
         
         NSError *error;
-        if(  [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error])
-            ;// success
-        
-        
-        else
-        {
-            NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
-        }
+        if(  !([[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error]))
+                        NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
     }
     
     NSData *imagData = UIImageJPEGRepresentation(image,0.75f);
@@ -765,43 +632,22 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         pickerDataArray = [NSArray arrayWithObjects:@"Art",nil];
         pickerTag=2;
         [self createPicker:cell.lblpopupvalue];
-        
     }
-    
-    
     else if (indexPath.row==9){
-        
-        
-        
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        
-        
         [df setDateFormat:@"yyyy-MM-dd"];
         pickerTag=3;
-        
         [self createDatePicker:cell.lblpopupvalue];
-        
     }
     else
     {
-        
-        
         NSLog(@"selected----%@",cell.lblHeading.text);
         lblTitle.text=cell.lblHeading.text;
-        
         [self.view addSubview:viewProjectName];
-        
-        
-        
         txtViewProjectName.text=[defaults objectForKey:lblTitle.text];
         [txtViewProjectName becomeFirstResponder];
     }
-    
-    
 }
-
-//-----------------------------------------------------------------------//
-
 
 #pragma mark -
 #pragma mark ALPickerView delegate methods
@@ -809,9 +655,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 
 -(IBAction)doneAddProject:(id)sender
 {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 -(IBAction)doneProjectNameView:(id)sender
@@ -819,15 +663,11 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     [defaults setObject:txtViewProjectName.text forKey:lblTitle.text];
     [txtViewProjectName resignFirstResponder];
     [self.viewProjectName removeFromSuperview];
-    
     button.enabled=YES;
     [tblView reloadData];
-    
-    
-    
 }
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
     return pickerDataArray.count;
 }
 
@@ -866,15 +706,12 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 // tell the picker the width of each row for a given component
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     CGFloat componentWidth = 0.0;
-	componentWidth = 320.0;
-	
+	componentWidth = 320.0;	
 	return componentWidth;
 }
 
 - (void) showImageAttachOptions:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"Craaaaaaa-------------------000000");
-    //UIImageView *btn=(UIImageView*)sender;
     switch (sender.view.tag) {
         case 0:
             imgTag=0;
@@ -1104,15 +941,8 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         default:
             break;
     }
-    
-    
     [self.viewAttachImage removeFromSuperview];
-    
-    
-    
-    
 }
-
 
 
 -(UIImage *)getImageFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
