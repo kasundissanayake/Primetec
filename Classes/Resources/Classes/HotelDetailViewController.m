@@ -45,76 +45,76 @@ typedef enum {
 
 @implementation HotelDetailViewController
 
-    @synthesize table, hotel;
-    @synthesize directions;
-    @synthesize detailedNavigationController;
+@synthesize table, hotel;
+@synthesize directions;
+@synthesize detailedNavigationController;
 
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-        {
-            if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
-        {
-            return nil;
-        }
+{
+    if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+    {
+        return nil;
+    }
 	
-            return self;
-        }
+    return self;
+}
 
 
 
 - (void)viewDidLoad
-    {
+{
     [super viewDidLoad];
-        
-        
-  //  appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
+    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
 	self.table.backgroundColor = [UIColor clearColor];
 	UIImage *backgroundImage = [[UIImage imageNamed:@"CalloutTableBackground.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:6];
 	UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
 	backgroundImageView.frame = self.view.bounds;
 	self.table.backgroundView = backgroundImageView;
-        
-        
-        
-    }
+    
+    
+    
+}
 
 
 -(BOOL)shouldAutorotate
-    {
+{
     if (UIInterfaceOrientationIsLandscape( [[UIDevice currentDevice] orientation])) {
         return  YES;
     }
     else
         return NO;
-    }
+}
 
 
 - (void)viewWillAppear:(BOOL)animated
-    {
+{
 	[super viewWillAppear:animated];
 	[self.table reloadData];
-    }
+}
 
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    }
+}
 
 
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.table = nil;
-    }
+}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	//if (indexPath.section == kAddress) {
-		//return 80.0f;
+    //return 80.0f;
 	//}
 	return 44.0f;
-    }
+}
 
 
 
@@ -128,7 +128,7 @@ typedef enum {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:workingCellIdentifier];
 	if (cell == nil) {
 		if ([workingCellIdentifier isEqualToString:kDirectionCellIdentifier]) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:workingCellIdentifier];			
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:workingCellIdentifier];
 		}
 		else {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:workingCellIdentifier];
@@ -214,7 +214,7 @@ typedef enum {
 										 self.hotel.city];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:16.0f];
             
-           break;
+            break;
             
             
         case kState:
@@ -229,11 +229,11 @@ typedef enum {
             //	cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
 			cell.detailTextLabel.numberOfLines = 1;
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
-
+                                         
 										 self.hotel.state];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:16.0f];
             
-          break;
+            break;
             
         case kZip:
             
@@ -249,7 +249,7 @@ typedef enum {
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
 										 self.hotel.zip];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:16.0f];
-
+            
 			break;
             
             //end brin
@@ -294,77 +294,42 @@ typedef enum {
 }
 
 
-
-
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-        
-        if (indexPath.section == 0 && indexPath.row == 0)
-            
-        {
-            
-           
-            
-            
-            
-        }
-        
-        
-        if (indexPath.section == 0 && indexPath.row == 1)
-        {
-            
-            
-            
-            
-            
-        }
-        
-        if (indexPath.section == 0 && indexPath.row == 2)
-        {
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"showDashboard" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
-            
-            [self.table setHidden:FALSE];
-
-        }
-    
-        
-        if (indexPath.section == 0 && indexPath.row == 3)
-        {
-            
-            
-           [[NSNotificationCenter defaultCenter] postNotificationName:@"popchangeView" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"popchangeTableView" object:nil];
-            
-            
-  
-            
-        }
-        
-        
-        if (indexPath.section == 0 && indexPath.row == 4)
-        {
-            
-            
-            
-        }
-        
-        
-        if (indexPath.section == 0 && indexPath.row == 6)
-        {
-            
-            
-            
-        }
-        
+    if (indexPath.section == 0 && indexPath.row == 0)
+    {
         
     }
+    if (indexPath.section == 0 && indexPath.row == 1)
+    {
+        
+    }
+    if (indexPath.section == 0 && indexPath.row == 2)
+    {
+        appDelegate.tag=4;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showDashboard" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+        NSLog(@"HotelDetail in 0,2");
+        [self.table setHidden:FALSE];
+        
+    }
+    
+    
+    if (indexPath.section == 0 && indexPath.row == 3)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"popchangeView" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"popchangeTableView" object:nil];
+    }
+    if (indexPath.section == 0 && indexPath.row == 4)
+    {
+        
+    }
+    if (indexPath.section == 0 && indexPath.row == 6)
+    {
+        
+    }
+}
 
 
 

@@ -19,6 +19,7 @@
 #import "ProjectDetailsCell.h"
 #import "Reachability.h"
 #import "PRIMECMAPPUtils.h"
+#import "HotelDetailViewController.h"
 
 typedef enum {
 	kkDirections,
@@ -146,16 +147,20 @@ typedef enum {
 {
     BOOL found = FALSE;
     for (UIViewController* viewController in self.navigationController.viewControllers) {
-        if ([viewController isKindOfClass:[SearchProject class]] || [viewController isKindOfClass:[reportDashboard class]]) {
+        if ([viewController isKindOfClass:[SearchProject class]] ||
+            [viewController isKindOfClass:[reportDashboard class]]
+            )
+        {
             found = TRUE;
         }
     }
+    NSLog(@"Tag: %ld", (long)appDelegate.Tag);
     
     if (!found && appDelegate.Tag == 1){
         [self reloadTableData];
         appDelegate.Tag=4;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
+       // [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
         NSLog(@"Back pressed filtered");
     }
 }
@@ -752,7 +757,7 @@ typedef enum {
                 comR.title=[NSString stringWithFormat:@"Dashboard"];
             }
         }
-    }    
+    }
     else if(appDelegate.Tag==4)
     {
         NSMutableDictionary *selectedValueDic = [[NSMutableDictionary alloc] init];
@@ -928,7 +933,7 @@ typedef enum {
     int type = [[[notification userInfo] valueForKey:@"index"] intValue];
     
     reportDashboard *report=[[reportDashboard alloc]init];
-    report.title=[NSString stringWithFormat:@"Report"];    
+    report.title=[NSString stringWithFormat:@"Report"];
     report.proType=type;
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:report]];
 }
@@ -946,6 +951,8 @@ typedef enum {
     }
     if(!isFound)
     {
+        NSLog(@"In RootVC, showDashboard, not found");
+        
         Dashboard *das=[[Dashboard alloc] init];
         das.title=@"Dashboard";
         [self.navigationController pushViewController:das animated:YES];
@@ -976,7 +983,9 @@ typedef enum {
         SearchProject *search=[[SearchProject alloc] init];
         search.title=@"Dashboard";
         [self.navigationController pushViewController:search animated:YES];
+        NSLog(@"In RootVC, showSProject, not found");
     }
+    NSLog(@"In RootVC, showSProject");
 }
 
 

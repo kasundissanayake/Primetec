@@ -627,7 +627,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     popupcell *cell =(popupcell *) [tableView cellForRowAtIndexPath:indexPath];
-      if(indexPath.row==11)
+    if(indexPath.row==11)
     {
         pickerDataArray = [NSArray arrayWithObjects:@"Art",nil];
         pickerTag=2;
