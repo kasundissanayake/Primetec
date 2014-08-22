@@ -10,7 +10,6 @@
 		1D3623260D0F684500981E51 /* TabAndSplitAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* SecondView.xib */; };
-		284F764110B34E8A00D7BA5B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F764010B34E8A00D7BA5B /* SecondViewController.m */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		4B4EB9E3193831C1009917E8 /* TapHereSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4EB9E1193831C1009917E8 /* TapHereSubViewController.m */; };
@@ -271,7 +270,6 @@
 		FCD7A9FA18EB30A6006008D9 /* Hotel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD7A9D418EB30A6006008D9 /* Hotel.m */; };
 		FCD7A9FB18EB30A6006008D9 /* HotelAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD7A9D618EB30A6006008D9 /* HotelAnnotation.m */; };
 		FCD7A9FC18EB30A6006008D9 /* HotelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD7A9D818EB30A6006008D9 /* HotelDetailViewController.m */; };
-		FCD7A9FE18EB30A6006008D9 /* ComplainceView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD7A9DC18EB30A6006008D9 /* ComplainceView.m */; };
 		FCD7A9FF18EB30A6006008D9 /* Button_DisclosureAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9DE18EB30A6006008D9 /* Button_DisclosureAccessory.png */; };
 		FCD7AA0018EB30A6006008D9 /* CalloutPopoverBottomLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9DF18EB30A6006008D9 /* CalloutPopoverBottomLeft.png */; };
 		FCD7AA0118EB30A6006008D9 /* CalloutPopoverBottomMiddle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9E018EB30A6006008D9 /* CalloutPopoverBottomMiddle.png */; };
@@ -288,7 +286,6 @@
 		FCD7AA0C18EB30A6006008D9 /* Hotels.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9EB18EB30A6006008D9 /* Hotels.plist */; };
 		FCD7AA0E18EB30A6006008D9 /* GIKMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */; };
 		FCD7AA0F18EB30A6006008D9 /* HotelDetailTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */; };
-		FCD7AA1518EB30DD006008D9 /* ComplianceForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD7AA1318EB30DD006008D9 /* ComplianceForm.xib */; };
 		FCD7AA1718EB30FE006008D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD7AA1618EB30FE006008D9 /* QuartzCore.framework */; };
 		FCD7AA1918EB3159006008D9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD7AA1818EB3159006008D9 /* MapKit.framework */; };
 		FCD7AA1B18EB3161006008D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD7AA1A18EB3161006008D9 /* CoreLocation.framework */; };
@@ -300,10 +297,7 @@
 		1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabAndSplitAppAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* PRIMECMAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRIMECMAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282CCBFD0DB6C98000C4EA27 /* SecondView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
-		284F763F10B34E8A00D7BA5B /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		284F764010B34E8A00D7BA5B /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28A0AB4B0D9B1048005BE974 /* PRIMECMAPP_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRIMECMAPP_Prefix.pch; sourceTree = "<group>"; };
 		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4B4EB9E0193831C1009917E8 /* TapHereSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapHereSubViewController.h; sourceTree = "<group>"; };
@@ -710,7 +704,6 @@
 		FCD7A9D718EB30A6006008D9 /* HotelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelDetailViewController.h; sourceTree = "<group>"; };
 		FCD7A9D818EB30A6006008D9 /* HotelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelDetailViewController.m; sourceTree = "<group>"; };
 		FCD7A9DB18EB30A6006008D9 /* ComplainceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainceView.h; sourceTree = "<group>"; };
-		FCD7A9DC18EB30A6006008D9 /* ComplainceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplainceView.m; path = ../ComplainceView.m; sourceTree = "<group>"; };
 		FCD7A9DE18EB30A6006008D9 /* Button_DisclosureAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_DisclosureAccessory.png; sourceTree = "<group>"; };
 		FCD7A9DF18EB30A6006008D9 /* CalloutPopoverBottomLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutPopoverBottomLeft.png; sourceTree = "<group>"; };
 		FCD7A9E018EB30A6006008D9 /* CalloutPopoverBottomMiddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutPopoverBottomMiddle.png; sourceTree = "<group>"; };
@@ -727,9 +720,6 @@
 		FCD7A9EB18EB30A6006008D9 /* Hotels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Hotels.plist; sourceTree = "<group>"; };
 		FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GIKMapView.xib; sourceTree = "<group>"; };
 		FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotelDetailTableView.xib; sourceTree = "<group>"; };
-		FCD7AA1118EB30DD006008D9 /* ComplianceFormVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplianceFormVC.h; sourceTree = "<group>"; };
-		FCD7AA1218EB30DD006008D9 /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplianceForm.m; sourceTree = "<group>"; };
-		FCD7AA1318EB30DD006008D9 /* ComplianceForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComplianceForm.xib; sourceTree = "<group>"; };
 		FCD7AA1618EB30FE006008D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FCD7AA1818EB3159006008D9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FCD7AA1A18EB3161006008D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -777,8 +767,6 @@
 				E98754651462A4D800E603C6 /* FirstViewController.m */,
 				1D3623240D0F684500981E51 /* TabAndSplitAppAppDelegate.h */,
 				1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */,
-				284F763F10B34E8A00D7BA5B /* SecondViewController.h */,
-				284F764010B34E8A00D7BA5B /* SecondViewController.m */,
 				FCCE5B57190A3538009ECF16 /* MenuOption.h */,
 				FCCE5B58190A3539009ECF16 /* MenuOption.m */,
 				52E73C811973DADF004A0418 /* Reachability.h */,
@@ -815,7 +803,6 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				28A0AB4B0D9B1048005BE974 /* PRIMECMAPP_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -1492,10 +1479,6 @@
 		FCD7A9C018EB30A6006008D9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FCD7AA1118EB30DD006008D9 /* ComplianceFormVC.h */,
-				FCD7AA1218EB30DD006008D9 /* ComplianceForm.m */,
-				FCD7A9DC18EB30A6006008D9 /* ComplainceView.m */,
-				FCD7AA1318EB30DD006008D9 /* ComplianceForm.xib */,
 				FCD7A9C318EB30A6006008D9 /* GIK */,
 				FCD7A9D318EB30A6006008D9 /* Hotel.h */,
 				FCD7A9D418EB30A6006008D9 /* Hotel.m */,
@@ -1706,7 +1689,6 @@
 				FC181BF818EC58320084F7C5 /* nonComplianceViewController.xib in Resources */,
 				4B8CE24819418749001F8E3B /* text-capital-mini@2x.png in Resources */,
 				4B8CE23A19418749001F8E3B /* layer-mini@2x.png in Resources */,
-				FCD7AA1518EB30DD006008D9 /* ComplianceForm.xib in Resources */,
 				FC245AC618EC856800950C49 /* menu.png in Resources */,
 				FCBE1514190CC8C4003D7A85 /* butt.png in Resources */,
 				4B914CA319343D8300F6E1F4 /* ProjectDetailsCell.xib in Resources */,
@@ -1839,7 +1821,6 @@
 				4B8CE1FC19418749001F8E3B /* FSFileViewController.m in Sources */,
 				4B8CE1F019418749001F8E3B /* CGImageContainer.m in Sources */,
 				FCD7A9FC18EB30A6006008D9 /* HotelDetailViewController.m in Sources */,
-				284F764110B34E8A00D7BA5B /* SecondViewController.m in Sources */,
 				4B8CE24C19418749001F8E3B /* SDDrawingViewController.m in Sources */,
 				4B8CE1F419418749001F8E3B /* BitmapScaleManipulator.m in Sources */,
 				FCD7A9F818EB30A6006008D9 /* GIKMapViewController.m in Sources */,
@@ -1909,7 +1890,6 @@
 				4B8CE21B19418749001F8E3B /* SDRectangleStrokeTool.m in Sources */,
 				FCD71F85191B63AF00413A3D /* SignatureViewController.m in Sources */,
 				4B8CE1F119418749001F8E3B /* BitmapContextManipulator.m in Sources */,
-				FCD7A9FE18EB30A6006008D9 /* ComplainceView.m in Sources */,
 				98D14AC3199F6DB10091D5D8 /* SummarySheet3.m in Sources */,
 				98D14AAE199F596C0091D5D8 /* Projects.m in Sources */,
 				98D14AAB199F54B70091D5D8 /* NonComplianceForm.m in Sources */,

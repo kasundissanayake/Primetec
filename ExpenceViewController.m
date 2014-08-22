@@ -15,6 +15,7 @@
 #import "SDDrawingsViewController.h"
 #import "PopUpViewController.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface ExpenceViewController ()
 {
@@ -71,7 +72,7 @@
 {
     [super viewDidLoad];
     [self deleteAllFiles];
-    _controller = [[PRIMECMController alloc]init];
+    PRIMECMController *controller = [[PRIMECMController alloc]init];
     count=0;
     comNoticeNo=@"";
     count1=0;
@@ -105,7 +106,8 @@
     ERtxtEmpName.text=appDelegate.projPrintedName;
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
-    NSString *expID = [_controller getExpenceIdByProjID:appDelegate.projId];
+    
+    NSString *expID = [PRIMECMController getExpenceIdByProjID:appDelegate.projId];
     
     if(expID != nil)
     {

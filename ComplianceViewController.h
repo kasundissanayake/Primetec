@@ -72,9 +72,4 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtUserId;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
 
-@property (strong, nonatomic) PRIMECMController *controller;
-
-
-
-
 @end

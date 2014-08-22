@@ -41,13 +41,13 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProjectList:) name:@"reloadProjectList" object:nil];
     [self reloadProjectInLoad];
-    /*
+    
     UIBarButtonItem  *newButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(addNewForm)];
     self.navigationItem.rightBarButtonItem = newButton;
     UIBarButtonItem  *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
     self.navigationItem.leftBarButtonItem = deleteButton;
     self.table.scrollEnabled=YES;
-     */
+    
 }
 
 
@@ -142,16 +142,20 @@
         }
         
         // Compliance and Non-compliance Reports
-        else
+        else if (proType==0 || proType==1)
         {
             cell.lblReportName.text =[[reports valueForKey:@"title"]objectAtIndex:indexPath.row];
             cell.lblReportDate.text =[NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
                                       dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
+            
+            //NSLog(@"TEST in cell");
+            
         }
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
+    
 	return cell;
 }
 

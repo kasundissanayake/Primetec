@@ -26,7 +26,7 @@
 
 @implementation PRIMECMController
 
-- (int)synchronizeWithServer:(NSString *)url {
++ (int)synchronizeWithServer:(NSString *)url {
     
     if (![self connected]) {
         return 1;
@@ -71,7 +71,7 @@
     return status;
 }
 
-- (void)parseResponse:(id)responseObject {
++ (void)parseResponse:(id)responseObject {
     //NSLog(@"Response object: %@", responseObject);
     NSDictionary *responseDictionary = (NSDictionary *)responseObject;
     if (responseDictionary) {
@@ -188,14 +188,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:ROOT_RELOAD_NOTIFICATION object:self];
 }
 
-- (BOOL)connected
++ (BOOL)connected
 {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
 }
 
-- (void)parseAssignProject:(id)payload {
++ (void)parseAssignProject:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -242,7 +242,7 @@
     }
 }
 
-- (void)parseComplianceForm:(id)payload {
++ (void)parseComplianceForm:(id)payload {
     
     if ([payload objectForKey:@"ComplianceNoticeNo"]) {
         
@@ -323,7 +323,7 @@
     }
 }
 
-- (void)parsedailyInspectionForm:(id)payload {
++ (void)parsedailyInspectionForm:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -434,7 +434,7 @@
     }
 }
 
-- (void)parseDailyInspectionItem:(id)payload {
++ (void)parseDailyInspectionItem:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -485,7 +485,7 @@
     }
 }
 
-- (void)parseexpensedata:(id)payload {
++ (void)parseexpensedata:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -538,7 +538,7 @@
     }
 }
 
-- (void)parseExpenseReport:(id)payload {
++ (void)parseExpenseReport:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -601,7 +601,7 @@
     }
 }
 
-- (void)parsenonComplianceForm:(id)payload {
++ (void)parsenonComplianceForm:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -681,7 +681,7 @@
     }
 }
 
-- (void)parseProjects:(id)payload {
++ (void)parseProjects:(id)payload {
     //NSLog(@"Project payload: %@", payload);
     
     if ([payload objectForKey:@"id"]) {
@@ -755,7 +755,7 @@
     }
 }
 
-- (void)parseQuantitySummaryDetailsType:(id)payload {
++ (void)parseQuantitySummaryDetailsType:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -800,7 +800,7 @@
     }
 }
 
-- (void)parseQuantitySummaryItems:(id)payload {
++ (void)parseQuantitySummaryItems:(id)payload {
     
     if ([payload objectForKey:@"item_no"]) {
         
@@ -850,7 +850,7 @@
     }
 }
 
-- (void)parseSummarySheet1:(id)payload {
++ (void)parseSummarySheet1:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -942,7 +942,7 @@
     }
 }
 
-- (void)parseSummarySheet2:(id)payload {
++ (void)parseSummarySheet2:(id)payload {
     
     if ([payload objectForKey:@"SMSSheetNo"]) {
         
@@ -1005,7 +1005,7 @@
     }
 }
 
-- (void)parseSummarySheet3:(id)payload {
++ (void)parseSummarySheet3:(id)payload {
     
     if ([payload objectForKey:@"SMSheetNo"]) {
         
@@ -1091,7 +1091,7 @@
     }
 }
 
-- (void)parseUsers:(id)payload {
++ (void)parseUsers:(id)payload {
     
     if ([payload objectForKey:@"id"]) {
         
@@ -1144,7 +1144,7 @@
     }
 }
 
-- (NSString *) getExpenceIdByProjID:(NSString *)projId{
++ (NSString *) getExpenceIdByProjID:(NSString *)projId{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
@@ -1165,7 +1165,7 @@
 
 
 //ComplienceForm
--(void)uploadComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
++(void)uploadComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1191,7 +1191,7 @@
     }
 }
 
--(void)uploadComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
++(void)uploadComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1216,7 +1216,7 @@
     }
 }
 
--(void)uploadComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch
++(void)uploadComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1242,7 +1242,7 @@
     }
 }
 
-- (void)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
++ (void)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
                 dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
 {
     ComplianceForm *assp;
@@ -1267,7 +1267,7 @@
         
         NSString *str = [dict valueForKey:@"complianceNoticeNo"] ;
         NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
         
         if (IDToCompare >= newID) {
             newID = IDToCompare + 1;
@@ -1282,22 +1282,30 @@
     }
     
     [assp setValue:newIDD forKey:@"complianceNoticeNo"];
-    [assp setValue:contractNo forKey:@"contractNo"];
+    [assp setValue:[NSNumber numberWithInt:[contractNo integerValue]] forKey:@"contractNo"];
     [assp setValue:title forKey:@"comHeader"];
     [assp setValue:proDesc forKey:@"projectDescription"];
     [assp setValue:comTitle forKey:@"title"];
     [assp setValue:project forKey:@"project"];
-    [assp setValue:projId forKey:@"Project_id"];
+    [assp setValue:projId forKey:@"project_id"];
     [assp setValue:conRespon forKey:@"contractorResponsible"];
-    [assp setValue:to forKey:@"To"];
+    [assp setValue:to forKey:@"to"];
     [assp setValue:userId forKey:@"userID"];
     [assp setValue:correctiveAct forKey:@"correctiveActionCompliance"];
     [assp setValue:signature forKey:@"signature"];
     [assp setValue:printedName forKey:@"printedName"];
-    [assp setValue:dateIssued forKey:@"dateIssued"];
-    [assp setValue:dateConStarted forKey:@"dateContractorStarted"];
-    [assp setValue:dateConCopleted forKey:@"dateContractorCompleted"];
-    [assp setValue:dateRawReport forKey:@"dateOfDWRReported"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"dd-MM-yyyy"]; // for example
+    NSDate *dateIssued_Date = [myXMLdateReader dateFromString:dateIssued];
+    NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateIssued];
+    NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateIssued];
+    NSDate *dateOfDWRReported_Date = [myXMLdateReader dateFromString:dateIssued];
+    
+    [assp setValue:dateIssued_Date forKey:@"dateIssued"];
+    [assp setValue:dateContractorStarted_Date forKey:@"dateContractorStarted"];
+    [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
+    [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -1306,7 +1314,7 @@
 }
 
 //Non complience
--(void)uploadNonComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
++(void)uploadNonComplienceImages:(NSString *)username comNotiseNo:(NSString *)comNotiseNo imageName:(NSString *)imageName
 {
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1333,7 +1341,7 @@
 }
 
 
--(void)uploadNonComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
++(void)uploadNonComplienceSignature:(NSString *)username comNotiseNo:(NSString *)comNotiseNo signature:(NSString *)signature
 {
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1357,7 +1365,7 @@
     }
 }
 
--(void)uploadNonComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
++(void)uploadNonComplienceSketch:(NSString *)username comNotiseNo:(NSString *)comNotiseNo sketch:(NSString *)sketch{
     
     NonComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1383,7 +1391,7 @@
     }
 }
 
-- (void)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
++(void)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
                    dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
 {
     
@@ -1442,7 +1450,7 @@
 }
 
 
--(void)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
++(void)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
     Expensedata *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -1468,7 +1476,7 @@
 }
 
 
-- (void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
++(void)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     Expensedata *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1514,7 +1522,7 @@
 }
 
 
-- (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
++ (void)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
 {
     
     ExpenseReportModel *assp;
@@ -1570,7 +1578,7 @@
 
 
 //Summery3
-- (void)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
++ (void)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
 {
     
     SummarySheet3*assp;
@@ -1601,7 +1609,7 @@
         
         NSString *str = [dict valueForKey:@"sMSheetNo"] ;
         NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
         
         if (IDToCompare >= newID) {
             newID = IDToCompare + 1;
@@ -1670,7 +1678,7 @@
 /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];*/
 
 
-- (void)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
++ (void)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
 {
     
     SummarySheet2*assp;
@@ -1701,7 +1709,7 @@
         
         NSString *str = [dict valueForKey:@"sMSSheetNo"] ;
         NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:1] integerValue];
+        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
         
         if (IDToCompare >= newID) {
             newID = IDToCompare + 1;

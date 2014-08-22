@@ -932,6 +932,7 @@ typedef enum {
     
     reportDashboard *report=[[reportDashboard alloc]init];
     report.title=[NSString stringWithFormat:@"Report"];
+    NSLog(@"proType in RootVC: %d",type);
     report.proType=type;
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:report]];
 }

@@ -32,7 +32,7 @@
     TabAndSplitAppAppDelegate *appDelegate;
     NSString *imgName;
     NSInteger count;
-    MBProgressHUD *HUD;
+    MBProgressHUD *hud;
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
@@ -93,7 +93,6 @@ UILabel *cno;
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
-    _controller = [[PRIMECMController alloc] init];
     
     self.imagePicker=[[UIImagePickerController alloc]init];
     
@@ -483,66 +482,35 @@ UILabel *cno;
     }
     else
     {
+        hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.navigationController.view addSubview:hud];
+        hud.labelText=@"";
+        hud.dimBackground = YES;
+        hud.delegate = self;
+        [hud show:YES];
+        
         uploading = NO;
         uploadingsketch=NO;
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
-        [_controller saveComplianceForm:appDelegate.username title:txtTitle.text contractNo:txtContactNo.text proDesc:txtProDesc.text comTitle:COtextTitle.text project:COtextProject.text dateIssued:txtDateIssued.text conRespon:conRes.text to:txtTo.text dateConStarted:txtDateContractorStarted.text dateConComplteted:txtDateContractorCompleted.text dateRawReport:txtDateofRawReprote userId:txtUserId.text correctiveAction:correctAction.text signature:sigName printedName:txtPrintedName.text projId:appDelegate.projId];
-        
-        /*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/compliance/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,txtTitle.text,txtContactNo.text,txtProDesc.text,COtextTitle.text,COtextProject.text,txtDateIssued.text,conRes.text,txtTo.text,txtDateContractorStarted.text,txtDateContractorCompleted.text,txtDateofRawReprote.text,txtUserId.text,correctAction.text,sigName,txtPrintedName.text,appDelegate.projId];
-         
-         NSLog(@"URL---- %@",strURL);
-         
-         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-         NSURL *apiURL =
-         [NSURL URLWithString:uencodedUrl];
-         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-         [urlRequest setHTTPMethod:@"POST"];
-         //signature
-         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-         NSString *documentsDirectory = [paths objectAtIndex:0];
-         
-         NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-         
-         
-         UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-         NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-         
-         
-         NSMutableData *postbody = [NSMutableData data];
-         
-         
-         NSString *boundary = @"---------------------------14737809831466499882746641449";
-         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-         [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-         
-         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
-         [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-         [postbody appendData:[NSData dataWithData:imaData]];
-         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         NSLog(@"^^^^^^^^^^^^^%@",postbody);
-         
-         [urlRequest setHTTPBody:postbody];
-         // uploading=YES;
-         
-         NSLog(@"sent");
-         
-         //signature
-         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-         
-         _receivedData = [[NSMutableData alloc] init];
-         
-         [connection start];
-         NSLog(@"URL---%@",strURL);*/
-        
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
+        [PRIMECMController
+         saveComplianceForm: appDelegate.username
+         title:txtTitle.text
+         contractNo:txtContactNo.text
+         proDesc:txtProDesc.text
+         comTitle:COtextTitle.text
+         project:COtextProject.text
+         dateIssued:txtDateIssued.text
+         conRespon:conRes.text
+         to:txtTo.text
+         dateConStarted:txtDateContractorStarted.text
+         dateConComplteted:txtDateContractorCompleted.text
+         dateRawReport:txtDateofRawReprote.text
+         userId:txtUserId.text
+         correctiveAction:correctAction.text
+         signature:sigName
+         printedName:txtPrintedName.text
+         projId:appDelegate.projId];
         
         txtContactNo.text = @"";
         txtProDesc.text=@"";
@@ -560,29 +528,17 @@ UILabel *cno;
         txtSignature.image=NULL;
         txtPrintedName.text=@"";
         txtDate.text=@"";
+        
+        [hud setHidden:YES];
+        
+        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [exportAlert show];
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [_receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    [HUD setHidden:YES];
+    [hud setHidden:YES];
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];

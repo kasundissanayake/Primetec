@@ -584,12 +584,12 @@
 {
     NSLog(@"syncing all!");
     NSString *url = [NSString stringWithFormat:@"%@/api/syncall", [PRIMECMAPPUtils getAPIEndpoint]];
-    PRIMECMController *con = [[PRIMECMController alloc] init];
+    
     [self showInfoAlert];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        int syncStatus = [con synchronizeWithServer:url];
+        int syncStatus = [PRIMECMController synchronizeWithServer:url];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
