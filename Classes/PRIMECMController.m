@@ -1425,7 +1425,7 @@
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     if (error != nil) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+        NSLog(@"Error: %@", [error debugDescription]);
     }
     
     int randNum = 0;
@@ -1798,6 +1798,87 @@
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
+
++ (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector
+{
+    
+    Projects *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%d", randNum];
+        
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"id"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
+        }
+    }
+    NSLog(@"Project id: %@", newIDD);
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Projects"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:[NSNumber numberWithInt:[newIDD integerValue]] forKey:@"id"];
+    [assp setValue:city forKey:@"city"];
+    [assp setValue:clientName forKey:@"client_name"];
+    [assp setValue:newIDD forKey:@"contract_no"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateIssued_Date = [myXMLdateReader dateFromString:date];
+    
+    [assp setValue:dateIssued_Date forKey:@"created_date"];
+    
+    [assp setValue:inspector forKey:@"inspecter"];
+    [assp setValue:dateIssued_Date forKey:@"p_date"];
+    [assp setValue:projDesc forKey:@"p_description"];
+    [assp setValue:latitude forKey:@"p_latitude"];
+    [assp setValue:longitude forKey:@"p_longitude"];
+    [assp setValue:projName forKey:@"p_name"];
+    [assp setValue:projName forKey:@"p_title"];
+    [assp setValue:phone forKey:@"phone"];
+    [assp setValue:newIDD forKey:@"projecct_id"];
+    [assp setValue:projMgr forKey:@"project_manager"];
+    [assp setValue:state forKey:@"state"];
+    [assp setValue:street forKey:@"street"];
+    [assp setValue:0 forKey:@"status"];
+    [assp setValue:zip forKey:@"zip"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{
         return TRUE;

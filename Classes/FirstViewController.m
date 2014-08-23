@@ -220,6 +220,7 @@
 
 -(void)saveNewProject
 {
+    /*
     if([self connected]){
         NSString *strURL = [NSString stringWithFormat:@"%@/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/", [PRIMECMAPPUtils getAPIEndpoint],
                             appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
@@ -241,6 +242,52 @@
     else if (![self connected]){
         [self saveOffProject];
     }
+     */
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+   
+    
+    NSNumber *latitudeNumber = [NSNumber numberWithDouble:latitude];
+    NSNumber *longitudeNumber = [NSNumber numberWithDouble:longitude];   
+    
+    BOOL saveStatus = [PRIMECMController
+                       saveProject:appDelegate.username
+                       projId:[defaults objectForKey:@"Project Id"]
+                       phone:[defaults objectForKey:@"Phone No"]
+                       projName:[defaults objectForKey:@"Project Name"]
+                       projDesc:[defaults objectForKey:@"Project Description"]
+                       title:[defaults objectForKey:@"Project Title"]
+                       street:[defaults objectForKey:@"Street"]
+                       city:[defaults objectForKey:@"City"]
+                       state:[defaults objectForKey:@"State"]
+                       zip:[defaults objectForKey:@"Zip"]
+                       date:dateString
+                       clientName:[defaults objectForKey:@"Client Name"]
+                       projMgr:[defaults objectForKey:@"Project Manager"]
+                       latitude:[latitudeNumber stringValue]
+                       longitude:[longitudeNumber stringValue]
+                       inspector:[defaults objectForKey:@"Inspector"]];
+    
+    if (saveStatus){
+        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [exportAlert show];
+    }else{
+        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [exportAlert show];
+    }
+
+    self.navigationItem.rightBarButtonItem = Button;
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 //save project details in core data project table
