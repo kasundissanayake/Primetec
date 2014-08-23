@@ -509,7 +509,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     if (indexPath.section==0 && indexPath.row==0) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Id"];
-        NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
+        //NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
@@ -517,19 +517,19 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     else if (indexPath.section==0 && indexPath.row==1) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Title"];
-        NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
+        //NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     else  if (indexPath.section==0 && indexPath.row==2) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Name"];
-        NSLog(@"pname %@",[defaults objectForKey:@"Project Name"]);
+        //NSLog(@"pname %@",[defaults objectForKey:@"Project Name"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     else if (indexPath.section==0 && indexPath.row==3) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Description"];
-        NSLog(@"description %@",[defaults objectForKey:@"Project Description"]);
+        //NSLog(@"description %@",[defaults objectForKey:@"Project Description"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
@@ -537,42 +537,42 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     else if (indexPath.section==0 && indexPath.row==4) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Street"];
-        NSLog(@"street %@",[defaults objectForKey:@"Street"]);
+        //NSLog(@"street %@",[defaults objectForKey:@"Street"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==5) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"City"];
-        NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
+        //NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==6) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"State"];
-        NSLog(@"state %@",[defaults objectForKey:@"State"]);
+        //NSLog(@"state %@",[defaults objectForKey:@"State"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==7) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Zip"];
-        NSLog(@"zip %@",[defaults objectForKey:@"Zip"]);
+       //NSLog(@"zip %@",[defaults objectForKey:@"Zip"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==8) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Phone No"];
-        NSLog(@"phone no %@",[defaults objectForKey:@"Phone No"]);
+        //NSLog(@"phone no %@",[defaults objectForKey:@"Phone No"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==9) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Date"];
-        NSLog(@"date %@",[defaults objectForKey:@"Date"]);
+        //NSLog(@"date %@",[defaults objectForKey:@"Date"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
@@ -580,20 +580,20 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     else if (indexPath.section==0 && indexPath.row==10) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Client Name"];
-        NSLog(@"cname %@",[defaults objectForKey:@"Client Name"]);
+       // NSLog(@"cname %@",[defaults objectForKey:@"Client Name"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     
     else if (indexPath.section==0 && indexPath.row==11) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Manager"];
-        NSLog(@"manager %@",[defaults objectForKey:@"Project Manager"]);
+       // NSLog(@"manager %@",[defaults objectForKey:@"Project Manager"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     else if (indexPath.section==0 && indexPath.row==12) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Inspector"];
-        NSLog(@"inspector %@",[defaults objectForKey:@"Inspector"]);
+       // NSLog(@"inspector %@",[defaults objectForKey:@"Inspector"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;

@@ -214,6 +214,7 @@
 
 - (void) saveData
 {
+    /*
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSManagedObject *newContact;
     newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:context];
@@ -226,6 +227,7 @@
     NSError *error;
     [context save:&error];
     NSLog(@"-----------user saved--------");
+     */
 }
 
 

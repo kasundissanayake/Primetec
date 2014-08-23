@@ -1800,8 +1800,48 @@
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
         return FALSE;
     }else{
+        NSLog(@"saved summary2: %@", assp);
         return TRUE;
     }
+}
+
++(BOOL) saveAssignProject:(NSString *)username projMgr:(NSString *)projMgr projId:(NSString *)projId date:(NSDate *)date
+{
+    Assign_project *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Assign_project"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"projectid"]];
+    
+    NSError *error = nil;
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Assign_project"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:projId forKey:@"projectid"];
+    [assp setValue:projMgr forKey:@"username"];
+    [assp setValue:date forKey:@"assign_date"];
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        NSLog(@"saved assign_project: %@", assp);
+        return TRUE;
+    }
+
 }
 
 + (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector
@@ -1817,7 +1857,7 @@
     [fetchRequest setEntity:entity];
     
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"projecct_id"]];
     
     NSError *error = nil;
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
@@ -1835,7 +1875,7 @@
         newIDD = [NSString stringWithFormat:@"%d", randNum];
         
         for (NSDictionary *dict in existingIDs) {
-            NSString *str = [dict valueForKey:@"id"];
+            NSString *str = [dict valueForKey:@"projecct_id"];
             if ([str isEqualToString:newIDD]){
                 hasConflicts = TRUE;
                 break;
@@ -1850,7 +1890,7 @@
                 inManagedObjectContext:managedContext];
     }
     
-    [assp setValue:[NSNumber numberWithInt:[newIDD integerValue]] forKey:@"id"];
+    [assp setValue:newIDD forKey:@"projecct_id"];
     [assp setValue:city forKey:@"city"];
     [assp setValue:clientName forKey:@"client_name"];
     [assp setValue:newIDD forKey:@"contract_no"];
@@ -1869,18 +1909,20 @@
     [assp setValue:projName forKey:@"p_name"];
     [assp setValue:projName forKey:@"p_title"];
     [assp setValue:phone forKey:@"phone"];
-    [assp setValue:newIDD forKey:@"projecct_id"];
     [assp setValue:projMgr forKey:@"project_manager"];
     [assp setValue:state forKey:@"state"];
     [assp setValue:street forKey:@"street"];
     [assp setValue:0 forKey:@"status"];
     [assp setValue:zip forKey:@"zip"];
     
+    BOOL assignProjSave = [PRIMECMController saveAssignProject:username projMgr:projMgr projId:newIDD date:dateIssued_Date];
+    
     NSError *saveError;
-    if (![managedContext save:&saveError]) {
+    if (![managedContext save:&saveError] || !assignProjSave) {
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{
+        NSLog(@"saved project: %@", assp);
         return TRUE;
     }
 }

@@ -245,7 +245,7 @@
      */
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -277,6 +277,8 @@
                        longitude:[longitudeNumber stringValue]
                        inspector:[defaults objectForKey:@"Inspector"]];
     
+    [hud setHidden:YES];
+    
     if (saveStatus){
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
@@ -288,50 +290,6 @@
     self.navigationItem.rightBarButtonItem = Button;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-}
-
-//save project details in core data project table
-
--(void)saveOffProject{
-    
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [_receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [self hudWasHidden];
-    _connectionError = error;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [self hudWasHidden];
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSLog(@"response---%@",responseObject);
-    self.navigationItem.rightBarButtonItem = Button;
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-    {
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-    }
-    else
-    {
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-    }
 }
 
 

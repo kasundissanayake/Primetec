@@ -55,7 +55,7 @@
     // Create first object:
     userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
     [userData setValue:@"Lin" forKey:@"username"];
-    [userData setValue:@"123456" forKey:@"password"];
+    [userData setValue:@"12345" forKey:@"password"];
     [userData setValue:@"I" forKey:@"user_type"];
     [context save:&error];
     
