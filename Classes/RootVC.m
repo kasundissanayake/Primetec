@@ -153,15 +153,15 @@ typedef enum {
         {
             found = TRUE;
         }
-    }    
+    }
     
     if (!found && appDelegate.Tag == 1){
         [self reloadTableData];
-       // appDelegate.Tag=1;
+        // appDelegate.Tag=1;
         //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
-       [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
         
-      //  NSLog(@"Back pressed filtered");
+        //  NSLog(@"Back pressed filtered");
     }
 }
 
@@ -225,7 +225,7 @@ typedef enum {
     }
     
     [project_fetchRequest setEntity:projectEntity];
-    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"ANY projecct_id in %@", projectIDs];
+    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"ANY projecct_id in %@ or project_manager == %@", projectIDs, appDelegate.username];
     [project_fetchRequest setPredicate:project_predicate];
     NSArray *projectObjects = [context executeFetchRequest:project_fetchRequest error:&error];
     
