@@ -181,6 +181,7 @@
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 980D518219A1E55300EBD57D /* ComplianceForm.m */; };
 		9821A0FA199DC3B200F9E96C /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9821A0F9199DC3B200F9E96C /* libBlocksKit.a */; };
+		9824899819A8C9D0006E3AFC /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9824899719A8C9D0006E3AFC /* Image.m */; };
 		98D14A58199F19040091D5D8 /* PRIMECMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A57199F19040091D5D8 /* PRIMECMController.m */; };
 		98D14A67199F1EF80091D5D8 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A66199F1EF80091D5D8 /* Users.m */; };
 		98D14A7D199F20100091D5D8 /* PRIMECMAPPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A7C199F20100091D5D8 /* PRIMECMAPPUtils.m */; };
@@ -567,6 +568,8 @@
 		980D518119A1E55300EBD57D /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
 		980D518219A1E55300EBD57D /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		9821A0F9199DC3B200F9E96C /* libBlocksKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBlocksKit.a; path = "DrawingLib/3rd Party/BlocksKit/libBlocksKit.a"; sourceTree = "<group>"; };
+		9824899619A8C9D0006E3AFC /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		9824899719A8C9D0006E3AFC /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		98D14A56199F19040091D5D8 /* PRIMECMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRIMECMController.h; sourceTree = "<group>"; };
 		98D14A57199F19040091D5D8 /* PRIMECMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRIMECMController.m; sourceTree = "<group>"; };
 		98D14A62199F1EF80091D5D8 /* ExpenseReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpenseReportModel.h; path = ../ExpenseReportModel.h; sourceTree = "<group>"; };
@@ -1328,6 +1331,8 @@
 		98D14A7A199F1F1C0091D5D8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9824899619A8C9D0006E3AFC /* Image.h */,
+				9824899719A8C9D0006E3AFC /* Image.m */,
 				980D518119A1E55300EBD57D /* ComplianceForm.h */,
 				980D518219A1E55300EBD57D /* ComplianceForm.m */,
 				98D14AC1199F6DB10091D5D8 /* SummarySheet3.h */,
@@ -1850,6 +1855,7 @@
 				4B8CE21319418749001F8E3B /* SDEllipseFillTool.m in Sources */,
 				98D14A58199F19040091D5D8 /* PRIMECMController.m in Sources */,
 				FC69DADC18EB51FC0055A535 /* main.m in Sources */,
+				9824899819A8C9D0006E3AFC /* Image.m in Sources */,
 				98D14A67199F1EF80091D5D8 /* Users.m in Sources */,
 				4B8CE1FE19418749001F8E3B /* iCarousel.m in Sources */,
 				4B8CE20C19418749001F8E3B /* UIImage+Tint.m in Sources */,

@@ -12,6 +12,7 @@
 #import "ImageHeaderCell.h"
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface ComplianceReport ()
 {
@@ -153,34 +154,19 @@
         arrayImages  = [[[complianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[complianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",
-                                           [NSString stringWithFormat:@"%@.jpg",
-                                            [complianceReportObject valueForKey:@"signature"]]]];
-        NSLog(@"url----%@",url);
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        imgSignature.image=image;
+        NSString * signName = [complianceReportObject valueForKey:@"signature"];
+        imgSignature.image=[PRIMECMController getTheImage:signName];
         
         
         for (int i=1; i<sketchesArray.count; i++) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",
-                                               [NSString stringWithFormat:@"%@.jpg",
-                                                [sketchesArray objectAtIndex:i]]]];
-            NSLog(@"url----%@",url);
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            UIImage *image = [PRIMECMController getTheImage:[sketchesArray objectAtIndex:i]];
             [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
-            
-            
         }
         
         NSLog(@"array Images---%@",arrayImages);
         
         for (int i=1; i<arrayImages.count; i++) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/compliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
-            NSLog(@"url----%@",url);
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            UIImage *image = [PRIMECMController getTheImage:[arrayImages objectAtIndex:i]];
             [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
         }
     }else{

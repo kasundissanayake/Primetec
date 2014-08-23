@@ -3,6 +3,7 @@
 #import "ImageHeaderCell.h"
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface NonComplianceReport ()
 {
@@ -163,29 +164,21 @@
         arrayImages  = [[[nonComplianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[nonComplianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         
-        NSLog(@"array Images---%@",arrayImages);
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/noncompliance/%@",
-                                           [NSString stringWithFormat:@"%@.jpg", [nonComplianceReportObject valueForKey:@"Signature"]]]];
-        NSLog(@"url----%@",url);
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        imgSignature.image=image;
+        NSString * signName = [nonComplianceReportObject valueForKey:@"signature"];
+        imgSignature.image=[PRIMECMController getTheImage:signName];
+        
         
         for (int i=1; i<sketchesArray.count; i++) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/noncompliance/%@",[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]]];
-            NSLog(@"url----%@",url);
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            UIImage *image = [PRIMECMController getTheImage:[sketchesArray objectAtIndex:i]];
             [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
         }
         
+        NSLog(@"array Images---%@",arrayImages);
+        
         for (int i=1; i<arrayImages.count; i++) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/noncompliance/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
-            NSLog(@"url----%@",url);
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            UIImage *image = [PRIMECMController getTheImage:[arrayImages objectAtIndex:i]];
             [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
-        }        
+        }
     }
     
     [self.tblView reloadData];

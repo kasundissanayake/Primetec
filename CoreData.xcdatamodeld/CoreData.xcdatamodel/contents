@@ -139,6 +139,10 @@
         <attribute name="signature" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weekEnding" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="img" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imgName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="NonComplianceForm" representedClassName="NonComplianceForm" syncable="YES">
         <attribute name="contractNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contractorResponsible" optional="YES" attributeType="String" syncable="YES"/>
@@ -351,5 +355,6 @@
         <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="30"/>
         <element name="SummarySheet3" positionX="18" positionY="162" width="128" height="645"/>
         <element name="Users" positionX="-54" positionY="18" width="128" height="195"/>
+        <element name="Image" positionX="0" positionY="144" width="128" height="75"/>
     </elements>
 </model>

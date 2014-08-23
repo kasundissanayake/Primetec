@@ -23,6 +23,7 @@
 #import "SummarySheet3.h"
 #import "Users.h"
 #import "Reachability.h"
+#import "Image.h"
 
 @implementation PRIMECMController
 
@@ -1925,6 +1926,62 @@
         NSLog(@"saved project: %@", assp);
         return TRUE;
     }
+}
+
++ (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img{
+    
+    Image *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Image"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"imgName"]];
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Image"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:imgName forKey:@"imgName"];
+    [assp setValue:img forKey:@"img"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription ]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+    
+}
+
++ (UIImage *) getTheImage:(NSString *)imgName{
+    
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %d)", [[payload objectForKey:@"id"] intValue]];
+    //[fetchRequest setPredicate:predicate];
+    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Image" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(imgName = %@)", imgName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    NSLog(@"Object count = %d",[objects count]);
+    if([objects count] > 0){
+        
+        NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
+        return [UIImage imageWithData:[complianceReportObject valueForKey:@"img"]];
+    }
+    
+    return nil;
+    
 }
 
 @end

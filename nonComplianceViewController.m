@@ -340,8 +340,60 @@
         NtxtDate.text=@"";
         
         [hud setHidden:YES];
+        BOOL imageSaveState;
+        BOOL sketchSaveState;
+        BOOL singSaveState;
         
-        if (saveStatus){
+        //Signature to coredata
+        
+        NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        
+        NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
+        
+        
+        UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign];
+        
+        if(arrayImages.count>0)
+        {
+            for (int i = 0; i < arrayImages.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                NSString* imggName = [[arrayImages objectAtIndex:count1] valueForKey:@"name"];
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+                
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                
+                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                
+            }
+            
+        }
+        
+        if(appDelegate.sketchesArray.count>0)
+        {
+            for (int i=0;i < appDelegate.sketchesArray.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+                NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                singSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                
+            }
+            
+        }
+        
+        [hud setHidden:YES];
+        
+        if (saveStatus && singSaveState){
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }else{
