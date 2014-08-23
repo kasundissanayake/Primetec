@@ -22,24 +22,18 @@ typedef enum {
     kProjectId,
     kProjectName,
     kPManager,
-    
-    
-    
 	NUMBER_OF_SECTIONS
 } TableSections;
 
 
-
 @interface HotelDetailViewController ()
 {
-    
     TabAndSplitAppAppDelegate *appDelegate;
     RootVC *root;
     DetailedVC *dcv;
 }
 
 @property (nonatomic, readonly) NSArray *directions;
-
 @end
 
 
@@ -50,33 +44,24 @@ typedef enum {
 @synthesize detailedNavigationController;
 
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
     {
         return nil;
     }
-	
     return self;
 }
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
 	self.table.backgroundColor = [UIColor clearColor];
 	UIImage *backgroundImage = [[UIImage imageNamed:@"CalloutTableBackground.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:6];
 	UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
 	backgroundImageView.frame = self.view.bounds;
 	self.table.backgroundView = backgroundImageView;
-    
-    
-    
 }
 
 
@@ -307,10 +292,10 @@ typedef enum {
     }
     if (indexPath.section == 0 && indexPath.row == 2)
     {
-        appDelegate.tag=4;
+        //appDelegate.Tag=4;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showDashboard" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
-        NSLog(@"HotelDetail in 0,2");
+        //NSLog(@"HotelDetail in 0,2");
         [self.table setHidden:FALSE];
         
     }

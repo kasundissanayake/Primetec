@@ -201,7 +201,8 @@
 {
     self.mapView.userInteractionEnabled = YES;
     Hotel *theHotel = [[Hotel alloc] init];
-    theHotel.name = [defaults objectForKey:@"Project Name"];
+    theHotel.projID = [defaults objectForKey:@"Project Id"];
+    theHotel.projName = [defaults objectForKey:@"Project Name"];
     theHotel.street = [defaults objectForKey:@"Street"];
     theHotel.city = [defaults objectForKey:@"City"];
     theHotel.state = [defaults objectForKey:@"State"];

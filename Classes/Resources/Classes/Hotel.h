@@ -10,6 +10,8 @@
 #import <MapKit/MapKit.h>
 
 @interface Hotel : NSObject {
+    NSString *projID;
+    NSString *projName;
 	NSString *name;
     NSString *company;
 	NSString *street;
@@ -21,7 +23,8 @@
 	CLLocationDegrees latitude;
 	CLLocationDegrees longitude;
 }
-
+@property (nonatomic, copy) NSString *projID;
+@property (nonatomic, copy) NSString *projName;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *company;
 @property (nonatomic, copy) NSString *street;

@@ -153,15 +153,15 @@ typedef enum {
         {
             found = TRUE;
         }
-    }
-    NSLog(@"Tag: %ld", (long)appDelegate.Tag);
+    }    
     
     if (!found && appDelegate.Tag == 1){
         [self reloadTableData];
-        appDelegate.Tag=4;
-       // [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
-        //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
-        NSLog(@"Back pressed filtered");
+       // appDelegate.Tag=1;
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
+       [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
+        
+      //  NSLog(@"Back pressed filtered");
     }
 }
 
@@ -568,6 +568,7 @@ typedef enum {
     self.Frontimage.hidden=YES;
     self.proStatusSeg.hidden=TRUE;
     [self showToolbar];
+    
 }
 
 

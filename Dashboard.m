@@ -33,7 +33,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showToolbar" object:nil];
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.tag=1;
+    //appDelegate.tag=1;
 }
 
 
@@ -46,7 +46,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    appDelegate.Tag=1;
+    //appDelegate.Tag=1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

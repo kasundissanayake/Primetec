@@ -11,7 +11,7 @@
 
 @implementation Hotel
 
-@synthesize name, company, street, city, state, zip, phone, url;
+@synthesize name, company, street, city, state, zip, phone, url, projID, projName;
 @synthesize latitude, longitude;
 
 
