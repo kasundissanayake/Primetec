@@ -79,6 +79,12 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    //start brin
+    table.contentInset=UIEdgeInsetsMake(0, 0, 250, 0);
+    //end brin
+    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem *btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
     UIBarButtonItem *btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Delete"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
