@@ -37,6 +37,9 @@
 
 @synthesize address_client;
 @synthesize client;
+
+@synthesize coloumn1,coloumn2,coloumn3,coloumn4,iddd;
+
 //end brin
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

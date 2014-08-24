@@ -21,6 +21,8 @@
 #import "PRIMECMAPPUtils.h"
 #import "HotelDetailViewController.h"
 #import "BidSummaryForm.h"
+#import "quantitySummarySheet.h"
+#import "Quantity_S_Report.h"
 
 
 typedef enum {
@@ -130,6 +132,14 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
+    
+    
+    //start brin
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQuantitySummary) name:@"changeQuantitySummary" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQTY_S_Report:) name:@"changeQTY_S_Report" object:nil];
+//end brin
     
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
@@ -405,7 +415,7 @@ typedef enum {
         return 4;
     }
     
-    return [projectDetails count];;
+    return [projectDetails count];
 }
 
 
@@ -709,6 +719,16 @@ typedef enum {
         
         if (indexPath.section == 0 && indexPath.row == 6)
         {
+            
+            quantitySummarySheet *qtysummary=[[quantitySummarySheet alloc]init];
+            qtysummary.title=[NSString stringWithFormat:@"Quantity Summary Sheet"];
+            [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtysummary]];
+        }
+
+        
+        
+        if (indexPath.section == 0 && indexPath.row == 9)
+        {
             appDelegate.Tag=2;
             DetailedVC *dvc=[[DetailedVC alloc]init];
             dvc.title=[NSString stringWithFormat:@"Login"];
@@ -949,6 +969,35 @@ typedef enum {
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
 }
 
+
+
+//start brin
+- (void)changeQuantitySummary
+
+{
+    
+    quantitySummarySheet *summary=[[quantitySummarySheet alloc]init];
+    summary.title=[NSString stringWithFormat:@"Quantity Summary Report"];
+    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
+}
+
+
+
+- (void)changeQTY_S_Report:(NSNotification *)notification
+{
+    
+    NSDictionary *dict = [notification userInfo];
+    
+    
+    Quantity_S_Report *qtySR=[[Quantity_S_Report alloc]init];
+    NSString *CNo=[dict valueForKey:@"ConNo"];
+    qtySR.QNo=CNo;
+    qtySR.title=[NSString stringWithFormat:@"Quantity Summary Report"];
+    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtySR]];
+}
+
+
+//end brin
 
 - (void)changeDashboard:(NSNotification *)notification
 {

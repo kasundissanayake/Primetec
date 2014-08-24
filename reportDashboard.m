@@ -75,6 +75,14 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];
     }
+    
+    
+    //start brin
+    else if (proType==5 && ![NSStringFromClass([currentVC class]) isEqualToString:@"quantitySummarySheet"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil];
+    }
+    //end brin
 }
 
 
@@ -140,6 +148,20 @@
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
         }
+        
+        
+        
+        //start brin
+        else if(proType==5){
+            
+            
+            cell.lblReportName.text =@"Quantity Summary Report";
+            cell.lblReportDate.text =[[reports valueForKey:@"Date"]objectAtIndex:indexPath.row];
+            cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
+            cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
+            
+        }
+//end brin
         
         // Compliance and Non-compliance Reports
         else if (proType==0 || proType==1)
@@ -213,7 +235,78 @@
         NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummary" object:nil userInfo:dict];
     }
+    
+
+    
+    //start brin
+    
+    //quantity symmary
+
+    
+    
+    
+    if (proType == 5)
+    {
+        
+        
+
+        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"id"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:
+                              noticeNo forKey:@"ConNo"];
+        appDelegate.iddd=noticeNo;
+        
+        NSLog(@"noooticeeee nummmmmmmm-----------%@",appDelegate.iddd);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQTY_S_Report" object:nil userInfo:dict];
+    }
+    
+
 }
+
+
+
+-(void)loadQuantitySummary
+{
+    
+    // http://data.privytext.us/contructionapi.php/api/quantity_summary/itemByINID/Lin/IN10
+    
+    
+    
+    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/all/%@/%@",appDelegate.username,appDelegate.projId];
+    
+    NSURL *apiURL =
+    [NSURL URLWithString:strURL];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+    
+    
+    
+    
+    
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    
+    
+    
+    _receivedData = [[NSMutableData alloc] init];
+    
+    
+    [connection start];
+    NSLog(@"URL---%@",strURL);
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
+    
+    
+}
+
+
+//end brin
 
 -(void)loadComplianceForm
 {
@@ -367,6 +460,11 @@
     {
         [self loadSummeryForm];
     }
+    
+    else if(type==5)
+    {
+        [self loadQuantitySummary];
+    }
 }
 
 
@@ -395,6 +493,33 @@
     {
         [self loadSummeryForm];
     }
+    else if(type==5)
+    {
+        [self loadQuantitySummary];
+    }
 }
+
+
+//start brin
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+
+{
+    
+    [hud setHidden:YES];
+    
+    NSError *parseError = nil;
+    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
+    
+         if (type==5)
+    {
+        reports=[[responseObject valueForKey:@"all_quantity_summary"]mutableCopy];
+    }
+    
+    [table reloadData];
+    
+}
+
+//end brin
 
 @end

@@ -56,7 +56,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 
 
@@ -69,7 +69,7 @@
     }
     if (indexPath.section == 0) {
         
-        NSArray *titles = @[@"Compliance Report", @"Non-Compliance Report", @"Daily Inspection Report", @"Expense Report", @"Summary Sheet", @"", @""];
+          NSArray *titles = @[@"Compliance Report", @"Non-Compliance Report", @"Daily Inspection Report", @"Expense Report", @"Summary Sheet",@"Quantity Summary", @"", @""];
         cell.textLabel.text = titles[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
