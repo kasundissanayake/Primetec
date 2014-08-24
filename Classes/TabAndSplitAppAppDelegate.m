@@ -32,6 +32,13 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize  mvc;
 
+
+//start brin
+
+@synthesize address_client;
+@synthesize client;
+//end brin
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
     [toolbar setHidden:YES];

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "SuggestiveTextField.h"
 
 
-@interface DailyInspectionViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPopoverControllerDelegate,MBProgressHUDDelegate>
+@interface DailyInspectionViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPopoverControllerDelegate,MBProgressHUDDelegate,UITextFieldDelegate>
 
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
@@ -120,5 +121,71 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *txtHeader;
 @property (weak, nonatomic) IBOutlet UITextField *zip;
+
+
+
+
+
+
+
+//start brin
+
+
+@property (weak, nonatomic) IBOutlet UITextField *repNo;
+
+@property (weak, nonatomic) IBOutlet UITextField *ConName;
+
+@property (weak, nonatomic) IBOutlet UITextField *Town;
+
+@property (weak, nonatomic) IBOutlet UITextField *weather;
+
+@property (weak, nonatomic) IBOutlet UITextField *time;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *des1;
+
+@property (weak, nonatomic) IBOutlet UITextField *des2;
+
+@property (weak, nonatomic) IBOutlet UITextField *des3;
+
+@property (weak, nonatomic) IBOutlet UITextField *des4;
+
+@property (weak, nonatomic) IBOutlet UITextField *des5;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *qua1;
+
+@property (weak, nonatomic) IBOutlet UITextField *qua2;
+
+@property (weak, nonatomic) IBOutlet UITextField *qua3;
+
+@property (weak, nonatomic) IBOutlet UITextField *qua4;
+
+@property (weak, nonatomic) IBOutlet UITextField *qua5;
+
+
+
+@property(assign) IBOutlet SuggestiveTextField *textField;
+
+@property(assign) IBOutlet SuggestiveTextField *textField1;
+
+@property(assign) IBOutlet SuggestiveTextField *textField2;
+
+@property(assign) IBOutlet SuggestiveTextField *textField3;
+
+@property(assign) IBOutlet SuggestiveTextField *textFiel4;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *oriCalDays;
+
+@property (weak, nonatomic) IBOutlet UITextField *usedCalDays;
+
+
+
+//end brin
+
+
+
+
 
 @end

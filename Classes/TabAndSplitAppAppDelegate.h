@@ -90,6 +90,16 @@
 
 
 
+
+//start brin
+
+@property (nonatomic, retain) NSString *client;
+@property (nonatomic, retain) NSString *address_client;
+
+//end brin
+
+
+
 //- (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

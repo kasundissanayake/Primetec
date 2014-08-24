@@ -776,6 +776,16 @@ typedef enum {
         appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
         appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
         
+        //start brin
+        
+        appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
+        appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
+
+        
+        //end brin
+        
+        
+        
         NSLog(@"RootVC, in TAg == 4 ");
     }
 }

@@ -14,7 +14,7 @@
 
 @interface DailyInspectionReport : UIViewController<MFMailComposeViewControllerDelegate,MBProgressHUDDelegate,UIPrintInteractionControllerDelegate>
 {
-  UIPrintInteractionController *printController;
+    UIPrintInteractionController *printController;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -70,6 +70,51 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtHoursOfWork;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtZip;
+
+
+
+
+@property (weak, nonatomic) IBOutlet UITextField *repNo;
+@property (weak, nonatomic) IBOutlet UITextField *conName;
+
+@property (weak, nonatomic) IBOutlet UITextField *town;
+
+@property (weak, nonatomic) IBOutlet UITextField *weather;
+@property (weak, nonatomic) IBOutlet UITextField *time;
+//@property (weak, nonatomic) IBOutlet UITextField *des1;
+@property (weak, nonatomic) IBOutlet UITextView *des1;
+
+
+@property (weak, nonatomic) IBOutlet UITextView *des2;
+
+@property (weak, nonatomic) IBOutlet UITextView *des3;
+
+@property (weak, nonatomic) IBOutlet UITextView *des4;
+
+@property (weak, nonatomic) IBOutlet UITextView *des5;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *qua1;
+@property (weak, nonatomic) IBOutlet UITextField *qua2;
+@property (weak, nonatomic) IBOutlet UITextField *qua3;
+@property (weak, nonatomic) IBOutlet UITextField *qua4;
+@property (weak, nonatomic) IBOutlet UITextField *qua5;
+
+
+
+@property (weak, nonatomic) IBOutlet UITextField *itemno1;
+
+@property (weak, nonatomic) IBOutlet UITextField *itemno2;
+
+@property (weak, nonatomic) IBOutlet UITextField *itemno3;
+
+@property (weak, nonatomic) IBOutlet UITextField *itemno4;
+
+@property (weak, nonatomic) IBOutlet UITextField *itemno5;
+
+@property (weak, nonatomic) IBOutlet UITextField *caldays;
+
+@property (weak, nonatomic) IBOutlet UITextField *useddays;
 
 
 @end

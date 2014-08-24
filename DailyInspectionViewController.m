@@ -60,6 +60,15 @@
 @synthesize txtName1,txtName2,txtName3,txtName4,txtName5,txtname6,txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8,txtCompany1,txtCompany2,txtCompany3,txtCompany4,txtName7,txtName8,txtHours,contractor,txtAddress,txtState,txtCity,txtTel,txtCompetent,txtProject,txtTwn,txtEmail,txtWrkDone,txtHeader,zip;
 
 
+//start brin
+@synthesize oriCalDays,usedCalDays,ConName,repNo,time,Town,weather,des1,des2,des3,des4,des5,qua1,qua2,qua3,qua4,qua5;
+
+
+@synthesize textField,textField1,textField2,textField3,textFiel4;
+
+//end brin
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,8 +99,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     
     // Do any additional setup after loading the view from its nib.
-    scrollView.frame = CGRectMake(0,0, 720, 1988);
-    [scrollView setContentSize:CGSizeMake(500, 2300)];
+    scrollView.frame = CGRectMake(0,0, 720, 2900);
+    [scrollView setContentSize:CGSizeMake(700, 3250)];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
     UITapGestureRecognizer *singleTapInspec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedInspector)];
     imgSignatureDaily.userInteractionEnabled = YES;
@@ -101,6 +110,27 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
+    
+    NSDate *today1 = [NSDate date];
+    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+    
+    
+    [dateFormat1 setDateFormat:@"hh:mm"];
+    NSString *dateString1 = [dateFormat1 stringFromDate:today1];
+    
+    
+ //start brin
+    
+    
+    time.text=dateString1;
+    ConName.text=appDelegate.client;
+    Town.text=appDelegate.city;
+
+ //end brin
+    
+    
+    
+    
     contractor.text=appDelegate.projId;
     txtAddress.text=appDelegate.address;
     txtCity.text=appDelegate.city;
@@ -109,6 +139,31 @@
     txtDateIN.text=dateString;
     txtProject.text=appDelegate.projName;
     zip.text=appDelegate.zip;
+    
+    
+    
+    
+  //start brin
+    
+    NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
+    
+    
+    
+    
+    //Assigning to searchfield
+    [textField setSuggestions:array];
+    [textField1 setSuggestions:array];
+    [textField2 setSuggestions:array];
+    [textField3 setSuggestions:array];
+    [textFiel4 setSuggestions:array];
+    
+    
+   //end brin
+    
+    
+    
+    
+    
     
 }
 
@@ -576,6 +631,27 @@
         NSString *dec2=@" ";
         NSString *dec3=@" ";
         NSString *dec4=@" ";
+        
+        
+        //start brin
+        
+        
+        NSString *Des1=@" ";
+        NSString *Des2=@" ";
+        NSString *Des3=@" ";
+        NSString *Des4=@" ";
+        NSString *Des5=@" ";
+        
+        NSString *Qua1=@" ";
+        NSString *Qua2=@" ";
+        NSString *Qua3=@" ";
+        NSString *Qua4=@" ";
+        NSString *Qua5=@" ";
+        
+        //end brin
+        
+        
+        
         if(txtName1.text!=NULL && txtName1.text.length!=0)
         {
             name1=txtName1.text;
@@ -677,8 +753,89 @@
         {
             dec4=txtDescription4.text;
         }
+        
+        
+        //start brin
+        
+        
+        
+        if(des1.text!=NULL && des1.text.length!=0)
+        {
+            Des1=des1.text;
+        }
+        if(des2.text!=NULL && des2.text.length!=0)
+        {
+            Des2=des2.text;
+        }
+        if(des3.text!=NULL && des3.text.length!=0)
+        {
+            Des3=des3.text;
+        }
+        if(des4.text!=NULL && des4.text.length!=0)
+        {
+            Des4=des4.text;
+        }
+        if(des5.text!=NULL && des5.text.length!=0)
+        {
+            Des5=des5.text;
+        }
+        
+        
+        
+        if(qua1.text!=NULL && qua1.text.length!=0)
+        {
+            Qua1=qua1.text;
+        }
+        
+        if(qua2.text!=NULL && qua2.text.length!=0)
+        {
+            Qua2=qua2.text;
+        }
+        
+        
+        if(qua3.text!=NULL && qua3.text.length!=0)
+        {
+            Qua3=qua3.text;
+        }
+        
+        if(qua4.text!=NULL && qua4.text.length!=0)
+        {
+            Qua4=qua4.text;
+        }
+        
+        if(qua5.text!=NULL && qua5.text.length!=0)
+        {
+            Qua5=qua5.text;
+        }
+        
+
+        
+        
+        
+        //end brin
+        
+        
+        
+        
+        
+        
+        
+        
+     /*
         NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,@"town",txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName];
+                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,@"town",txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName,];*/
+        
+        
+        //start brin
+        
+        
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@//%@/%@/%@/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,Town.text,txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName,repNo.text,ConName.text,weather.text,time.text,oriCalDays.text,usedCalDays.text,Des1,Qua1,Des2,Qua2,Des3,Qua3,Des4,Qua4,Des5,Qua5];
+        
+        //end brin
+        
+        
+        
         
         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"URL---- %@",uencodedUrl);
@@ -755,6 +912,32 @@
         txtDescription4.text=@"";
         txtHours.text=@"";
         imgSignatureDaily.image=NULL;
+        
+        
+        //start brin
+        
+        repNo.text=@"";
+        ConName.text=@"";
+        Town.text=@"";
+        weather.text=@"";
+        time.text=@"";
+        des1.text=@"";
+        des2.text=@"";
+        des3.text=@"";
+        des4.text=@"";
+        des5.text=@"";
+        qua1.text=@"";
+        qua2.text=@"";
+        qua3.text=@"";
+        qua4.text=@"";
+        qua5.text=@"";
+        oriCalDays.text=@"";
+        usedCalDays.text=@"";
+        
+        //end brin
+        
+        
+        
     }
 }
 

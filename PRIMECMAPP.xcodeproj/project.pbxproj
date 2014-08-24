@@ -179,6 +179,7 @@
 		52771E831951A9F300B5F7C6 /* lin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52771E821951A9F300B5F7C6 /* lin1.png */; };
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
+		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
 		980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 980D518219A1E55300EBD57D /* ComplianceForm.m */; };
 		9821A0FA199DC3B200F9E96C /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9821A0F9199DC3B200F9E96C /* libBlocksKit.a */; };
 		9824899819A8C9D0006E3AFC /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9824899719A8C9D0006E3AFC /* Image.m */; };
@@ -565,6 +566,8 @@
 		52E73C811973DADF004A0418 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		52E73C821973DADF004A0418 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
+		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
 		980D518119A1E55300EBD57D /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
 		980D518219A1E55300EBD57D /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		9821A0F9199DC3B200F9E96C /* libBlocksKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBlocksKit.a; path = "DrawingLib/3rd Party/BlocksKit/libBlocksKit.a"; sourceTree = "<group>"; };
@@ -1412,6 +1415,8 @@
 				523CDC881946AFBC008C2C9B /* popupcell.h */,
 				523CDC891946AFBC008C2C9B /* popupcell.m */,
 				523CDC8A1946AFBC008C2C9B /* popupcell.xib */,
+				94188A9919A9BA0600F35759 /* SuggestiveTextField.h */,
+				94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */,
 			);
 			name = UISandClasses;
 			path = Classes;
@@ -1863,6 +1868,7 @@
 				4B8CE21719418749001F8E3B /* SDLineTool.m in Sources */,
 				4B8CE25019418749001F8E3B /* SDColorPickerViewController.m in Sources */,
 				FCD7A9F618EB30A6006008D9 /* GIKCalloutContentView.m in Sources */,
+				94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */,
 				4B8CE21419418749001F8E3B /* SDEllipseStrokeTool.m in Sources */,
 				FCD7A9F718EB30A6006008D9 /* GIKCalloutView.m in Sources */,
 				4B8CE21619418749001F8E3B /* SDFillTool.m in Sources */,
