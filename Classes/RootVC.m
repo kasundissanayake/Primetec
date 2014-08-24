@@ -20,6 +20,8 @@
 #import "Reachability.h"
 #import "PRIMECMAPPUtils.h"
 #import "HotelDetailViewController.h"
+#import "BidSummaryForm.h"
+
 
 typedef enum {
 	kkDirections,
@@ -391,7 +393,7 @@ typedef enum {
 {
     if(appDelegate.Tag==1)
     {
-        return 5;
+        return 8;
         self.proStatusSeg.hidden=true;
     }
     else if (appDelegate.Tag==4)
@@ -422,7 +424,7 @@ typedef enum {
     {
         if (indexPath.section == 0) {
             
-            NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet", @""];
+            NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet",@"Bid Summary Sheet",@"Quantity Summary Sheet" ,@"",@"",@""];
             cell.lblProjectName.text = titles[indexPath.row];
             cell.lblProjectNo.text =@"";
             cell.lblProjectAddress.text=@"";
@@ -694,6 +696,15 @@ typedef enum {
             summary.title=[NSString stringWithFormat:@"Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
         }
+        
+        if (indexPath.section == 0 && indexPath.row == 5)
+        {
+            
+            BidSummaryForm *bidsummary=[[BidSummaryForm alloc]init];
+            bidsummary.title=[NSString stringWithFormat:@"Bid Summary Sheet"];
+            [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:bidsummary]];
+        }
+
         
         
         if (indexPath.section == 0 && indexPath.row == 6)

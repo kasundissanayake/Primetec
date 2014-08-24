@@ -180,6 +180,8 @@
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
+		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
+		94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E0026F19A9E3870068D862 /* BidSummaryForm.xib */; };
 		980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 980D518219A1E55300EBD57D /* ComplianceForm.m */; };
 		9821A0FA199DC3B200F9E96C /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9821A0F9199DC3B200F9E96C /* libBlocksKit.a */; };
 		9824899819A8C9D0006E3AFC /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9824899719A8C9D0006E3AFC /* Image.m */; };
@@ -568,6 +570,9 @@
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
+		94E0026D19A9E3870068D862 /* BidSummaryForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidSummaryForm.h; sourceTree = "<group>"; };
+		94E0026E19A9E3870068D862 /* BidSummaryForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidSummaryForm.m; sourceTree = "<group>"; };
+		94E0026F19A9E3870068D862 /* BidSummaryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidSummaryForm.xib; sourceTree = "<group>"; };
 		980D518119A1E55300EBD57D /* ComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceForm.h; path = ../ComplianceForm.h; sourceTree = "<group>"; };
 		980D518219A1E55300EBD57D /* ComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceForm.m; path = ../ComplianceForm.m; sourceTree = "<group>"; };
 		9821A0F9199DC3B200F9E96C /* libBlocksKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBlocksKit.a; path = "DrawingLib/3rd Party/BlocksKit/libBlocksKit.a"; sourceTree = "<group>"; };
@@ -1417,6 +1422,9 @@
 				523CDC8A1946AFBC008C2C9B /* popupcell.xib */,
 				94188A9919A9BA0600F35759 /* SuggestiveTextField.h */,
 				94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */,
+				94E0026D19A9E3870068D862 /* BidSummaryForm.h */,
+				94E0026E19A9E3870068D862 /* BidSummaryForm.m */,
+				94E0026F19A9E3870068D862 /* BidSummaryForm.xib */,
 			);
 			name = UISandClasses;
 			path = Classes;
@@ -1687,6 +1695,7 @@
 				FCD36BFF1965750600422E34 /* Icon~ipad.png in Resources */,
 				4B8CE22019418749001F8E3B /* brush2.png in Resources */,
 				4B8CE1FD19418749001F8E3B /* FSFileSystemView.storyboard in Resources */,
+				94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */,
 				521B8D821952AFB200C206BF /* linSe.png in Resources */,
 				FCD36C011965750F00422E34 /* Icon.png in Resources */,
 				4B8CE24319418749001F8E3B /* ruler-mini.png in Resources */,
@@ -1917,6 +1926,7 @@
 				4B8CE1ED19418749001F8E3B /* OSCommonImage.m in Sources */,
 				4B8CE1EC19418749001F8E3B /* NSImage+ANImageBitmapRep.m in Sources */,
 				4B8CE1FB19418749001F8E3B /* FSDirectoryViewController.m in Sources */,
+				94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */,
 				4B8CE1EA19418749001F8E3B /* ANImageBitmapRep.m in Sources */,
 				FCBE153E19136E8A003D7A85 /* ComplianceReport.m in Sources */,
 				4B8CE21A19418749001F8E3B /* SDRectangleFillTool.m in Sources */,
