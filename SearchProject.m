@@ -177,7 +177,7 @@
 
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
 {
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(projectName contains[c] %@ OR projectNo contains[c] %@ OR address contains[c] %@)",
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(p_name contains[c] %@ OR projecct_id contains[c] %@ OR city contains[c] %@)",
                          text,text,text];
     filteredProjects = [projectDetailsSearch filteredArrayUsingPredicate:pred];
     [projectDetails removeAllObjects];
