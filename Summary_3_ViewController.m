@@ -860,7 +860,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     
     if (uploadingSignature1) {

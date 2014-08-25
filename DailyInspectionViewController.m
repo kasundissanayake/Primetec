@@ -42,6 +42,9 @@
     NSString *comNoticeNo;
     BOOL *uploadingsketch;
     int count2;
+    
+    NSUserDefaults *defaults;
+
 }
 
 @end
@@ -158,6 +161,128 @@
     [textFiel4 setSuggestions:array];
     
     
+    
+    
+    
+    
+    
+    defaults= [NSUserDefaults standardUserDefaults];
+    
+    
+    NSString* temp1 = [defaults objectForKey:@"textField1Text"];
+    NSString* temp2 = [defaults objectForKey:@"textField2Text"];
+    NSString* temp3 = [defaults objectForKey:@"textField3Text"];
+    NSString* temp4 = [defaults objectForKey:@"textField4Text"];
+    NSString* temp5 = [defaults objectForKey:@"textField5Text"];
+    NSString* temp6 = [defaults objectForKey:@"textField6Text"];
+    NSString* temp7 = [defaults objectForKey:@"textField7Text"];
+    NSString* temp8 = [defaults objectForKey:@"textField8Text"];
+    NSString* temp9 = [defaults objectForKey:@"textField9Text"];
+    NSString* temp10 = [defaults objectForKey:@"textField10Text"];
+    NSString* temp11= [defaults objectForKey:@"textField11Text"];
+    NSString* temp12= [defaults objectForKey:@"textField12Text"];
+    NSString* temp13= [defaults objectForKey:@"textField13Text"];
+    NSString* temp14= [defaults objectForKey:@"textField14Text"];
+    NSString* temp15= [defaults objectForKey:@"textField15Text"];
+    NSString* temp16= [defaults objectForKey:@"textField16Text"];
+    NSString* temp17= [defaults objectForKey:@"textField17Text"];
+    NSString* temp18= [defaults objectForKey:@"textField18Text"];
+    NSString* temp19= [defaults objectForKey:@"textField19Text"];
+    NSString* temp20= [defaults objectForKey:@"textField20Text"];
+    NSString* temp21= [defaults objectForKey:@"textField21Text"];
+    NSString* temp22= [defaults objectForKey:@"textField22Text"];
+    NSString* temp23= [defaults objectForKey:@"textField23Text"];
+    NSString* temp24= [defaults objectForKey:@"textField24Text"];
+    NSString* temp25= [defaults objectForKey:@"textField25Text"];
+    NSString* temp26= [defaults objectForKey:@"textField26Text"];
+    NSString* temp27= [defaults objectForKey:@"textField27Text"];
+    NSString* temp28= [defaults objectForKey:@"textField28Text"];
+    NSString* temp29= [defaults objectForKey:@"textField29Text"];
+    NSString* temp30= [defaults objectForKey:@"textField30Text"];
+    NSString* temp31= [defaults objectForKey:@"textField31Text"];
+    NSString* temp32= [defaults objectForKey:@"textField32Text"];
+    NSString* temp33= [defaults objectForKey:@"textField33Text"];
+    NSString* temp34= [defaults objectForKey:@"textField34Text"];
+    NSString* temp35= [defaults objectForKey:@"textField35Text"];
+    NSString* temp36= [defaults objectForKey:@"textField36Text"];
+    NSString* temp37= [defaults objectForKey:@"textField37Text"];
+    NSString* temp38= [defaults objectForKey:@"textField38Text"];
+    NSString* temp39= [defaults objectForKey:@"textField39Text"];
+    NSString* temp40= [defaults objectForKey:@"textField40Text"];
+    NSString* temp41= [defaults objectForKey:@"textField41Text"];
+    NSString* temp42= [defaults objectForKey:@"textField42Text"];
+    
+    
+
+    
+    
+    
+    
+    
+    
+    NSLog(@"gggggggggg----------%@",temp1);
+    NSLog(@"sssssssssss----------%@",temp8);
+    
+    
+    repNo.text=temp1;
+    txtCompetent.text=temp2;
+    weather.text=temp3;
+    txtEmail.text=temp4;
+    txtWrkDone.text=temp5;
+    des1.text=temp6;
+    des2.text=temp7;
+    des3.text=temp8;
+    des4.text=temp9;
+    des5.text=temp10;
+    qua1.text=temp11;
+    qua2.text=temp12;
+    qua3.text=temp13;
+    qua4.text=temp14;
+    qua5.text=temp15;
+    txtName1.text=temp16;
+    txtName2.text=temp17;
+    txtName3.text=temp18;
+    txtName4.text=temp19;
+    txtName5.text=temp20;
+    txtname6.text=temp21;
+    txtName7.text=temp22;
+    txtName8.text=temp23;
+    txtTitle1.text=temp24;
+    txtTitle2.text=temp25;
+    txtTitle3.text=temp26;
+    txtTitle4.text=temp27;
+    txtTitle5.text=temp28;
+    txtTitle6.text=temp29;
+    txtTitle7.text=temp30;
+    txtTitle8.text=temp31;
+    oriCalDays.text=temp32;
+    usedCalDays.text=temp33;
+    txtCompany1.text=temp34;
+    txtCompany2.text=temp35;
+    txtCompany3.text=temp36;
+    txtCompany4.text=temp37;
+    txtDescription1.text=temp38;
+    txtDescription2.text=temp39;
+    txtDescription3.text=temp40;
+    txtDescription4.text=temp41;
+    txtHours.text=temp42;
+    
+
+    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"Exit", @"")
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(exit)];
+    
+    self.navigationItem.rightBarButtonItem = Button;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    
+
+    
    //end brin
     
     
@@ -165,7 +290,167 @@
     
     
     
+    
 }
+
+
+
+
+
+
+-(void)exit{
+    
+    
+    
+    
+    NSString* textField1Text = repNo.text;
+    [defaults setObject:textField1Text forKey:@"textField1Text"];
+    
+    
+    NSString* textField2Text = txtCompetent.text;
+    [defaults setObject:textField2Text forKey:@"textField2Text"];
+    
+    
+    NSString* textField3Text = weather.text;
+    [defaults setObject:textField3Text forKey:@"textField3Text"];
+    
+    NSString* textField4Text = txtEmail.text;
+    [defaults setObject:textField4Text forKey:@"textField4Text"];
+    
+    
+    NSString* textField5Text = txtWrkDone.text;
+    [defaults setObject:textField5Text forKey:@"textField5Text"];
+    
+    NSString* textField6Text = des1.text;
+    [defaults setObject:textField6Text forKey:@"textField6Text"];
+    
+    NSString* textField7Text = des2.text;
+    [defaults setObject:textField7Text forKey:@"textField7Text"];
+    
+    NSString* textField8Text = des3.text;
+    [defaults setObject:textField8Text forKey:@"textField8Text"];
+    
+    NSString* textField9Text = des4.text;
+    [defaults setObject:textField9Text forKey:@"textField9Text"];
+    
+    NSString* textField10Text = des5.text;
+    [defaults setObject:textField10Text forKey:@"textField10Text"];
+    
+    NSString* textField11Text = qua1.text;
+    [defaults setObject:textField11Text forKey:@"textField11Text"];
+    
+    NSString* textField12Text = qua2.text;
+    [defaults setObject:textField12Text forKey:@"textField12Text"];
+    
+    NSString* textField13Text = qua3.text;
+    [defaults setObject:textField13Text forKey:@"textField13Text"];
+    
+    NSString* textField14Text = qua4.text;
+    [defaults setObject:textField14Text forKey:@"textField14Text"];
+    
+    NSString* textField15Text = qua5.text;
+    [defaults setObject:textField15Text forKey:@"textField15Text"];
+    
+    NSString* textField16Text = txtName1.text;
+    [defaults setObject:textField16Text forKey:@"textField16Text"];
+    
+    
+    NSString* textField17Text = txtName2.text;
+    [defaults setObject:textField17Text forKey:@"textField17Text"];
+    
+    NSString* textField18Text = txtName3.text;
+    [defaults setObject:textField18Text forKey:@"textField18Text"];
+    
+    NSString* textField19Text = txtName4.text;
+    [defaults setObject:textField19Text forKey:@"textField19Text"];
+    
+    NSString* textField20Text = txtName5.text;
+    [defaults setObject:textField20Text forKey:@"textField20Text"];
+    
+    NSString* textField21Text = txtname6.text;
+    [defaults setObject:textField21Text forKey:@"textField21Text"];
+    
+    NSString* textField22Text = txtName7.text;
+    [defaults setObject:textField22Text forKey:@"textField22Text"];
+    
+    NSString* textField23Text = txtName8.text;
+    [defaults setObject:textField23Text forKey:@"textField23Text"];
+    
+    NSString* textField24Text = txtTitle1.text;
+    [defaults setObject:textField24Text forKey:@"textField24Text"];
+    
+    NSString* textField25Text = txtTitle2.text;
+    [defaults setObject:textField25Text forKey:@"textField25Text"];
+    
+    NSString* textField26Text = txtTitle3.text;
+    [defaults setObject:textField26Text forKey:@"textField26Text"];
+    
+    NSString* textField27Text = txtTitle4.text;
+    [defaults setObject:textField27Text forKey:@"textField27Text"];
+    
+    NSString* textField28Text = txtTitle5.text;
+    [defaults setObject:textField28Text forKey:@"textField28Text"];
+    
+    NSString* textField29Text = txtTitle6.text;
+    [defaults setObject:textField29Text forKey:@"textField29Text"];
+    
+    NSString* textField30Text = txtTitle7.text;
+    [defaults setObject:textField30Text forKey:@"textField30Text"];
+    
+    NSString* textField31Text = txtTitle8.text;
+    [defaults setObject:textField31Text forKey:@"textField31Text"];
+    
+    NSString* textField32Text = oriCalDays.text;
+    [defaults setObject:textField32Text forKey:@"textField32Text"];
+    
+    NSString* textField33Text = usedCalDays.text;
+    [defaults setObject:textField33Text forKey:@"textField33Text"];
+    
+    NSString* textField34Text = txtCompany1.text;
+    [defaults setObject:textField34Text forKey:@"textField34Text"];
+    
+    NSString* textField35Text = txtCompany2.text;
+    [defaults setObject:textField35Text forKey:@"textField35Text"];
+    
+    NSString* textField36Text = txtCompany3.text;
+    [defaults setObject:textField36Text forKey:@"textField36Text"];
+    
+    NSString* textField37Text = txtCompany4.text;
+    [defaults setObject:textField37Text forKey:@"textField37Text"];
+    
+    NSString* textField38Text = txtDescription1.text;
+    [defaults setObject:textField38Text forKey:@"textField38Text"];
+    
+    NSString* textField39Text = txtDescription2.text;
+    [defaults setObject:textField39Text forKey:@"textField39Text"];
+    
+    NSString* textField40Text = txtDescription3.text;
+    [defaults setObject:textField40Text forKey:@"textField40Text"];
+    
+    NSString* textField41Text = txtDescription4.text;
+    [defaults setObject:textField41Text forKey:@"textField41Text"];
+    
+    NSString* textField42Text = txtHours.text;
+    [defaults setObject:textField42Text forKey:@"textField42Text"];
+    
+    UIImage* textField43Text = imgSignatureDaily.image;
+    [defaults setObject:UIImagePNGRepresentation(textField43Text)   forKey:@"textField43Text"];
+    
+    
+    [defaults synchronize];
+    
+    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
+    
+    [exportAlert show];
+    
+    
+    
+}
+
+
+
+
+
 
 
 -(void)showAddImageView
@@ -1136,7 +1421,7 @@
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+   // [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     if (uploading) {
         uploading=NO;

@@ -39,6 +39,8 @@
     NSString *comNoticeNo;
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
+    NSUserDefaults *defaults;
+
 }
 
 @end
@@ -100,7 +102,282 @@
     sumProjectNum.text=appDelegate.projId;
     sumDate.text=dateString;
     sumTel.text=appDelegate.tel;
+    
+    
+    
+    
+ //start brin
+    
+    defaults= [NSUserDefaults standardUserDefaults];
+    
+    
+    NSString* temp1 = [defaults objectForKey:@"sumPW"];
+    NSString* temp2 = [defaults objectForKey:@"sumFAN"];
+    NSString* temp3 = [defaults objectForKey:@"sumDescription"];
+    NSString* temp4 = [defaults objectForKey:@"sumConOrder"];
+    NSString* temp5 = [defaults objectForKey:@"sumClass1"];
+    NSString* temp6 = [defaults objectForKey:@"sumClass2"];
+    NSString* temp7 = [defaults objectForKey:@"sumClass3"];
+    NSString* temp8 = [defaults objectForKey:@"sumClass4"];
+    NSString* temp9 = [defaults objectForKey:@"sumClass5"];
+    NSString* temp10 = [defaults objectForKey:@"sumNo1"];
+    NSString* temp11 = [defaults objectForKey:@"sumNo2"];
+    NSString* temp12 = [defaults objectForKey:@"sumNo3"];
+    NSString* temp13 = [defaults objectForKey:@"sumNo4"];
+    NSString* temp14 = [defaults objectForKey:@"sumNo5"];
+    NSString* temp15 = [defaults objectForKey:@"sumHr1"];
+    NSString* temp16 = [defaults objectForKey:@"sumHr2"];
+    NSString* temp17 = [defaults objectForKey:@"sumHr3"];
+    NSString* temp18 = [defaults objectForKey:@"sumHr4"];
+    NSString* temp19 = [defaults objectForKey:@"sumHr5"];
+    NSString* temp20 = [defaults objectForKey:@"sumRate1"];
+    NSString* temp21 = [defaults objectForKey:@"sumRate2"];
+    NSString* temp22 = [defaults objectForKey:@"sumRate3"];
+    NSString* temp23 = [defaults objectForKey:@"sumRate4"];
+    NSString* temp24 = [defaults objectForKey:@"sumRate5"];
+    NSString* temp25 = [defaults objectForKey:@"sumAmt1"];
+    NSString* temp26 = [defaults objectForKey:@"sumAmt2"];
+    NSString* temp27 = [defaults objectForKey:@"sumAmt3"];
+    NSString* temp28 = [defaults objectForKey:@"sumAmt4"];
+    NSString* temp29 = [defaults objectForKey:@"sumAmt5"];
+    NSString* temp30 = [defaults objectForKey:@"sumTotLbr"];
+    
+    NSString* temp31 = [defaults objectForKey:@"sumHealth"];
+    
+    NSString* temp32 = [defaults objectForKey:@"sumIns"];
+    
+    NSString* temp33 = [defaults objectForKey:@"sum20"];
+    
+    NSString* temp34= [defaults objectForKey:@"sumTotal"];
+    
+    
+    
+    
+    
+    NSData* imageData1 = [defaults objectForKey:@"complianceSignature"];
+    UIImage* image1 = [UIImage imageWithData:imageData1];
+    
+    
+    
+    sumPW.text=temp1;
+    sumFAN.text=temp2;
+    sumDescription.text=temp3;
+    sumConOrder.text=temp4;
+    sumClass1.text=temp5;
+    sumClass2.text=temp6;
+    sumClass3.text=temp7;
+    sumClass4.text=temp8;
+    sumClass5.text=temp9;
+    sumNo1.text=temp10;
+    sumNo2.text=temp11;
+    
+    sumNo3.text=temp12;
+    sumNo4.text=temp13;
+    sumNo5.text=temp14;
+    sumHr1.text=temp15;
+    sumHr2.text=temp16;
+    sumHr3.text=temp17;
+    sumHr4.text=temp18;
+    sumHr5.text=temp19;
+    sumRate1.text=temp20;
+    sumRate2.text=temp21;
+    sumRate3.text=temp22;
+    sumRate4.text=temp23;
+    sumRate5.text=temp24;
+    sumAmt1.text=temp25;
+    sumAmt2.text=temp26;
+    sumAmt3.text=temp27;
+    sumAmt4.text=temp28;
+    sumAmt5.text=temp29;
+    sumTotLbr.text=temp30;
+    sumHealth.text=temp31;
+    sumIns.text=temp32;
+    sum20.text=temp33;
+    sumTotal.text=temp34;
+    
+    
+    
+    // txtSignature.image=image1;
+    
+    
+    
+    
+    
+    
+    
+    
+    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"Exit", @"")
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(exit)];
+    
+    self.navigationItem.rightBarButtonItem = Button;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+// end brin
+    
+    
+    
+    
+    
 }
+
+
+
+//start brin
+
+
+
+-(void)exit{
+    
+    
+    
+    
+    
+    NSString* textField1Text = sumPW.text;
+    [defaults setObject:textField1Text forKey:@"sumPW"];
+    
+    
+    NSString* textField2Text = sumFAN.text;
+    [defaults setObject:textField2Text forKey:@"sumFAN"];
+    
+    NSString* textField3Text = sumDescription.text;
+    [defaults setObject:textField3Text forKey:@"sumDescription"];
+    
+    
+    NSString* textField4Text = sumConOrder.text;
+    [defaults setObject:textField4Text forKey:@"sumConOrder"];
+    
+    NSString* textField5Text = sumClass1.text;
+    [defaults setObject:textField5Text forKey:@"sumClass1"];
+    
+    NSString* textField6Text = sumClass2.text;
+    [defaults setObject:textField6Text forKey:@"sumClass2"];
+    
+    
+    NSString* textField7Text = sumClass3.text;
+    [defaults setObject:textField7Text forKey:@"sumClass3"];
+    
+    
+    
+    NSString* textField8Text = sumClass4.text;
+    [defaults setObject:textField8Text forKey:@"sumClass4"];
+    
+    
+    
+    NSString* textField9Text = sumClass5.text;
+    [defaults setObject:textField9Text forKey:@"sumClass5"];
+    
+    NSString* textField10Text = sumNo1.text;
+    [defaults setObject:textField10Text forKey:@"sumNo1"];
+    
+    
+    NSString* textField11Text = sumNo2.text;
+    [defaults setObject:textField11Text forKey:@"sumNo2"];
+    
+    NSString* textField12Text = sumNo3.text;
+    [defaults setObject:textField12Text forKey:@"sumNo3"];
+    
+    NSString* textField13Text = sumNo4.text;
+    [defaults setObject:textField13Text forKey:@"sumNo4"];
+    
+    NSString* textField14Text = sumNo5.text;
+    [defaults setObject:textField14Text forKey:@"sumNo5"];
+    
+    NSString* textField15Text = sumHr1.text;
+    [defaults setObject:textField15Text forKey:@"sumHr1"];
+    
+    NSString* textField16Text = sumHr2.text;
+    [defaults setObject:textField16Text forKey:@"sumHr2"];
+    
+    NSString* textField17Text = sumHr3.text;
+    [defaults setObject:textField17Text forKey:@"sumHr3"];
+    
+    NSString* textField18Text = sumHr4.text;
+    [defaults setObject:textField18Text forKey:@"sumHr4"];
+    
+    NSString* textField19Text = sumHr5.text;
+    [defaults setObject:textField19Text forKey:@"sumHr5"];
+    
+    NSString* textField20Text = sumRate1.text;
+    [defaults setObject:textField20Text forKey:@"sumRate1"];
+    
+    NSString* textField21Text = sumRate2.text;
+    [defaults setObject:textField21Text forKey:@"sumRate2"];
+    
+    NSString* textField22Text = sumRate3.text;
+    [defaults setObject:textField22Text forKey:@"sumRate3"];
+    
+    NSString* textField23Text = sumRate4.text;
+    [defaults setObject:textField23Text forKey:@"sumRate4"];
+    
+    NSString* textField24Text = sumRate5.text;
+    [defaults setObject:textField24Text forKey:@"sumRate5"];
+    
+    NSString* textField25Text = sumAmt1.text;
+    [defaults setObject:textField25Text forKey:@"sumAmt1"];
+    
+    NSString* textField26Text = sumAmt2.text;
+    [defaults setObject:textField26Text forKey:@"sumAmt2"];
+    
+    NSString* textField27Text = sumAmt3.text;
+    [defaults setObject:textField27Text forKey:@"sumAmt3"];
+    
+    NSString* textField28Text = sumAmt4.text;
+    [defaults setObject:textField28Text forKey:@"sumAmt4"];
+    
+    NSString* textField29Text = sumAmt5.text;
+    [defaults setObject:textField29Text forKey:@"sumAmt5"];
+    
+    NSString* textField30Text = sumTotLbr.text;
+    [defaults setObject:textField30Text forKey:@"sumTotLbr"];
+    
+    
+    NSString* textField31Text = sumHealth.text;
+    [defaults setObject:textField31Text forKey:@"sumHealth"];
+    
+    
+    
+    NSString* textField32Text = sumIns.text;
+    [defaults setObject:textField32Text forKey:@"sumIns"];
+    
+    
+    
+    NSString* textField33Text = sum20.text;
+    [defaults setObject:textField33Text forKey:@"sum20"];
+    
+    
+    NSString* textField34Text = sumTotal.text;
+    [defaults setObject:textField34Text forKey:@"sumTotal"];
+    
+    
+    [defaults synchronize];
+    
+    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
+    
+    [exportAlert show];
+    
+    
+    
+}
+
+
+
+
+//end brin
+
+
+
+
+
+
+
 
 
 /*********************numeric**************************************/
@@ -233,7 +510,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     NSLog(@"response---%@",responseObject);
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+   // [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
     {

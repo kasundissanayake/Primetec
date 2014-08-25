@@ -50,6 +50,9 @@
     BOOL first;
     BOOL Second;
     BOOL third;
+    
+    NSUserDefaults *defaults;
+
 }
 
 @end
@@ -137,7 +140,147 @@
     HUD.dimBackground = YES;
     HUD.delegate = self;
     [HUD show:YES];
+    
+    
+    
+    
+    
+    //start brin
+    
+    
+    
+    
+    defaults= [NSUserDefaults standardUserDefaults];
+    
+    
+    NSString* temp1 = [defaults objectForKey:@"ERDescription"];
+    NSString* temp2 = [defaults objectForKey:@"ERJobNo"];
+    NSString* temp3 = [defaults objectForKey:@"ERType"];
+    NSString* temp4 = [defaults objectForKey:@"txtMil1"];
+    NSString* temp5 = [defaults objectForKey:@"txtRate1"];
+    NSString* temp6 = [defaults objectForKey:@"txtTotal1"];
+    NSString* temp7 = [defaults objectForKey:@"cashAdvance"];
+    NSString* temp8 = [defaults objectForKey:@"reimburs"];
+    NSString* temp9 = [defaults objectForKey:@"ERtxtWeek"];
+    NSString* temp10 = [defaults objectForKey:@"ERtxtCheckNum"];
+    NSString* temp11 = [defaults objectForKey:@"ERdate6"];
+    
+    
+
+    ERDescription.text=temp1;
+    ERJobNo.text=temp2;
+    ERType.text=temp3;
+    txtMil1.text=temp4;
+    txtRate1.text=temp5;
+    txtTotal1.text=temp6;
+    cashAdvance.text=temp7;
+    reimburs.text=temp8;
+    ERtxtWeek.text=temp9;
+    ERtxtCheckNum.text=temp10;
+    ERdate6.text=temp11;
+    
+    
+    // txtSignature.image=image1;
+    
+    
+    
+    
+    
+    
+    
+    
+    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"Exit", @"")
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(exit)];
+    
+    self.navigationItem.rightBarButtonItem = Button;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+    
+    
+    
+    //end brin
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
+//start brin
+
+-(void)exit{
+    
+    
+    
+    NSString* textField1Text = ERDescription.text;
+    [defaults setObject:textField1Text forKey:@"ERDescription"];
+    
+    
+    NSString* textField2Text = ERJobNo.text;
+    [defaults setObject:textField2Text forKey:@"ERJobNo"];
+    
+    NSString* textField3Text = ERType.text;
+    [defaults setObject:textField3Text forKey:@"ERType"];
+    
+    
+    NSString* textField4Text = txtMil1.text;
+    [defaults setObject:textField4Text forKey:@"txtMil1"];
+    
+    NSString* textField5Text = txtRate1.text;
+    [defaults setObject:textField5Text forKey:@"txtRate1"];
+    
+    NSString* textField6Text = txtTotal1.text;
+    [defaults setObject:textField6Text forKey:@"txtTotal1"];
+    
+    
+    NSString* textField7Text = cashAdvance.text;
+    [defaults setObject:textField7Text forKey:@"cashAdvance"];
+    
+    
+    
+    NSString* textField8Text = reimburs.text;
+    [defaults setObject:textField8Text forKey:@"reimburs"];
+    
+    
+    
+    NSString* textField9Text = ERtxtWeek.text;
+    [defaults setObject:textField9Text forKey:@"ERtxtWeek"];
+    
+    NSString* textField10Text = ERtxtCheckNum.text;
+    [defaults setObject:textField10Text forKey:@"ERtxtCheckNum"];
+    
+    
+    NSString* textField11Text = ERdate6.text;
+    [defaults setObject:textField11Text forKey:@"ERdate6"];
+    
+    
+    
+    [defaults synchronize];
+    
+    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
+    
+    [exportAlert show];
+    
+    
+    
+}
+
+//end brin
+
+
+
 
 
 -(void)getImageReviewer
@@ -1051,7 +1194,7 @@
     
     NSLog(@"response---%@",responseObject);
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     if (first) {
         if(![[responseObject valueForKey:@"status"]isEqualToString:@"not found"])
