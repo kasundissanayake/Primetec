@@ -30,11 +30,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="713" height="1872"/>
+            <rect key="frame" x="0.0" y="0.0" width="713" height="1590"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8VC-S7-KeE">
-                    <rect key="frame" x="0.0" y="0.0" width="713" height="1768"/>
+                    <rect key="frame" x="0.0" y="0.0" width="713" height="1565"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UF2-wO-c85">
@@ -262,7 +262,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="359.5" y="427"/>
+            <point key="canvasLocation" x="359.5" y="288"/>
         </view>
         <view contentMode="scaleToFill" id="a8s-us-qfP">
             <rect key="frame" x="0.0" y="0.0" width="713" height="2434"/>
