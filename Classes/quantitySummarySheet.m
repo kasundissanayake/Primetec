@@ -75,14 +75,7 @@
 {
     [super viewDidLoad];
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     defaults= [NSUserDefaults standardUserDefaults];
     
@@ -582,7 +575,7 @@ didReceiveResponse:(NSURLResponse *)response
     
     
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     
     if(isSaved){

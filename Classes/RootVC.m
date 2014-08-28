@@ -47,6 +47,10 @@ typedef enum {
     NSUserDefaults *defaults;
     int no;
     MBProgressHUD *hud;
+    
+    NSMutableArray *toolbarItems;
+    UIBarButtonItem *btnEdit;
+    UIBarButtonItem *btnDelete ;
 }
 
 @property (weak, nonatomic, readonly) NSArray *directions;
@@ -79,19 +83,28 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    //start brin
+    table.contentInset=UIEdgeInsetsMake(0, 0, 250, 0);
+    //end brin
+    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIBarButtonItem *btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
-    UIBarButtonItem *btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Delete"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
+    btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
+    btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
     UIImage* toolbarBackground = [UIImage imageNamed:@"Bar1.png"];
-    btnEdit.width = 400;
+   
+    btnEdit.width = 480;
     CGRect rect2 = CGRectMake(0,660 , self.view.frame.size.width , 0);
     
     toolbar = [[UIToolbar alloc]initWithFrame:rect2];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
     
-    NSArray *toolbarItems = [NSArray arrayWithObjects:btnDelete, btnEdit, nil];
+    toolbarItems = [NSMutableArray arrayWithObjects:btnDelete, btnEdit, nil];
     
     [toolbar setItems:toolbarItems];
+    [toolbarItems removeObject: btnDelete];
+    toolbar.items = toolbarItems;
     
     
     [[UIToolbar appearance] setBackgroundImage:toolbarBackground
@@ -177,18 +190,68 @@ typedef enum {
     }
 }
 
--(void)btnEdit{
-    // [self.table setEditing:YES animated:YES];
-    //  [self.table setAllowsSelectionDuringEditing:YES];
-    //   [self.table setAllowsMultipleSelectionDuringEditing:YES];
+
+
+//start brin
+-(void)hidebutton
+{
+    [toolbarItems removeObject: btnEdit];
+    toolbar.items = toolbarItems;
+    
 }
+
+-(void)btnEdit{
+    
+    
+    NSLog(@"delete button");
+    
+    [self.table setEditing:YES animated:YES];
+    
+    [toolbarItems insertObject:btnDelete atIndex:0];
+    [toolbarItems removeObject: btnEdit];
+    toolbar.items = toolbarItems;
+    
+}
+
 
 
 -(void)btnDelete{
-    // [self.table setEditing:YES animated:YES];
-    //  [self.table setAllowsSelectionDuringEditing:YES];
-    //   [self.table setAllowsMultipleSelectionDuringEditing:YES];
+    
+    
+    NSLog(@"done button----------");
+    
+    [self.table setEditing:NO animated:YES];
+    
+    [toolbarItems insertObject:btnEdit atIndex:0];
+    
+    [toolbarItems removeObject: btnDelete];
+    
+    toolbar.items = toolbarItems;
+    
+    
+    
 }
+
+
+//end
+
+
+
+/*
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        Projects *selectedPerson  = [fetchedResultsController objectAtIndexPath:indexPath];
+        
+        // Remove the person
+        [selectedPerson MR_deleteInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+        
+        [[NSManagedObjectContext MR_contextForCurrentThread] MR_save];
+    }
+}*/
+
+
 
 
 -(void)hideToolbar
@@ -526,6 +589,29 @@ typedef enum {
     table.hidden=FALSE;
     self.proStatusSeg.hidden=FALSE;
     self.searchBar.hidden=FALSE;
+    
+    
+    //===============================================================
+    
+    NSLog(@"=================%@",appDelegate.userTypeOffline);
+    
+    if ([appDelegate.userTypeOffline isEqualToString:@"I"]) {
+        [self hideToolbar];
+        
+    }
+    
+    else if([appDelegate.userTypeOffline isEqualToString:@"R"]){
+        
+        [self showToolbar];
+        
+    }
+    
+    //===============================================================
+
+    
+    
+    
+    
 }
 
 

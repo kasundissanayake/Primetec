@@ -44,6 +44,10 @@
     int count2;
     NSString *comNoticeNo;
     BOOL isUploadingSignature;
+    
+    
+    NSUserDefaults *defaults;
+
 }
 
 @end
@@ -87,6 +91,29 @@ UILabel *cno;
 {
     [super viewDidLoad];
     //[self deleteAllFiles];
+    
+    
+    
+    
+    //start brin
+    
+    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"Exit", @"")
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(exit)];
+    
+    self.navigationItem.rightBarButtonItem = Button;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+   //end brin
+    
+    
     
     comNoticeNo=@"";
     count=0;
@@ -139,7 +166,90 @@ UILabel *cno;
     txtPrintedName.text=appDelegate.projPrintedName;
     txtDate.text=dateString;
     txtUserId.text=appDelegate.userId;
+    
+    
+    
+    //start brin
+    
+    defaults= [NSUserDefaults standardUserDefaults];
+    
+    
+    NSString* temp1 = [defaults objectForKey:@"dateIssued"];
+    NSString* temp2 = [defaults objectForKey:@"conRes"];
+    NSString* temp3 = [defaults objectForKey:@"to"];
+    NSString* temp4 = [defaults objectForKey:@"dateContStart"];
+    NSString* temp5 = [defaults objectForKey:@"dateContCompleted"];
+    NSString* temp6 = [defaults objectForKey:@"rawReport"];
+    NSString* temp7 = [defaults objectForKey:@"correctAction"];
+    
+    
+    
+    
+    txtDateIssued.text=temp1;
+    conRes.text=temp2;
+    txtTo.text=temp3;
+    txtDateContractorStarted.text=temp4;
+    txtDateContractorCompleted.text=temp5;
+    txtDateofRawReprote.text=temp6;
+    correctAction.text=temp7;
+    
+    //end brin
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+
+
+//start brin
+
+-(void)exit{
+
+    NSString* textField1Text = txtDateIssued.text;
+    [defaults setObject:textField1Text forKey:@"dateIssued"];
+    
+    
+    NSString* textField2Text = conRes.text;
+    [defaults setObject:textField2Text forKey:@"conRes"];
+    
+    
+    NSString* textField3Text = txtTo.text;
+    [defaults setObject:textField3Text forKey:@"to"];
+    
+    NSString* textField4Text = txtDateContractorStarted.text;
+    [defaults setObject:textField4Text forKey:@"dateContStart"];
+    
+    
+    NSString* textField5Text = txtDateContractorCompleted.text;
+    [defaults setObject:textField5Text forKey:@"dateContCompleted"];
+    
+    NSString* textField6Text = txtDateofRawReprote.text;
+    [defaults setObject:textField6Text forKey:@"rawReport"];
+    
+    NSString* textField7Text = correctAction.text;
+    [defaults setObject:textField7Text forKey:@"correctAction"];
+    
+    UIImage* textField8Text = txtSignature.image;
+    [defaults setObject:UIImagePNGRepresentation(textField8Text) forKey:@"complianceSignature"];
+    
+    
+    
+    [defaults synchronize];
+    
+    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
+    
+    [exportAlert show];
+
+    
+}
+
+//end brin
+
 
 
 -(void)tapDetectedTextField

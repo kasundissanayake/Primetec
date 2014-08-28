@@ -38,6 +38,8 @@
     int count2;
     BOOL *uploadingsketch;
     BOOL isUploadingSignature;
+    NSUserDefaults *defaults;
+
 }
 
 @end
@@ -68,7 +70,6 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
-    //[self deleteAllFiles];
     
     count=0;
     pickerTag=0;
@@ -120,7 +121,118 @@
     txtPrintedName.text=appDelegate.projPrintedName;
     NtxtDate.text=dateString;
     txtUserId.text=appDelegate.userId;
+    
+    
+    //start brin
+    
+    
+    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"Exit", @"")
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(exit)];
+    
+    self.navigationItem.rightBarButtonItem = Button;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+    
+    
+    
+    defaults= [NSUserDefaults standardUserDefaults];
+    
+    NSString* temp1 = [defaults objectForKey:@"NtxtDateIssued"];
+    NSString* temp2 = [defaults objectForKey:@"contractorResp"];
+    NSString* temp3 = [defaults objectForKey:@"txtTo"];
+    NSString* temp4 = [defaults objectForKey:@"DCRC"];
+    NSString* temp5 = [defaults objectForKey:@"NtxtDateContractorStarted"];
+    NSString* temp6 = [defaults objectForKey:@"NtxtDateContractorCompleted"];
+    NSString* temp7 = [defaults objectForKey:@"NtxtDateofRawReprote"];
+    NSString* temp8 = [defaults objectForKey:@"correctiveAction"];
+    
+    
+    
+    NtxtDateIssued.text=temp1;
+    contractorResp.text=temp2;
+    txtTo.text=temp3;
+    DCRC.text=temp4;
+    NtxtDateContractorStarted.text=temp5;
+    NtxtDateContractorCompleted.text=temp6;
+    NtxtDateofRawReprote.text=temp7;
+    correctiveAction.text=temp8;
+    
+
+    
+    //end brin
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+-(void)exit{
+    
+    
+    
+    
+    NSString* textField1Text = NtxtDateIssued.text;
+    [defaults setObject:textField1Text forKey:@"NtxtDateIssued"];
+    
+    
+    NSString* textField2Text = contractorResp.text;
+    [defaults setObject:textField2Text forKey:@"contractorResp"];
+    
+    
+    NSString* textField3Text = txtTo.text;
+    [defaults setObject:textField3Text forKey:@"txtTo"];
+    
+    NSString* textField4Text = DCRC.text;
+    [defaults setObject:textField4Text forKey:@"DCRC"];
+    
+    
+    NSString* textField5Text = NtxtDateContractorStarted.text;
+    [defaults setObject:textField5Text forKey:@"NtxtDateContractorStarted"];
+    
+    NSString* textField6Text = NtxtDateContractorCompleted.text;
+    [defaults setObject:textField6Text forKey:@"NtxtDateContractorCompleted"];
+    
+    NSString* textField7Text = NtxtDateofRawReprote.text;
+    [defaults setObject:textField7Text forKey:@"NtxtDateofRawReprote"];
+    
+    
+    NSString* textField8Text = correctiveAction.text;
+    [defaults setObject:textField8Text forKey:@"correctiveAction"];
+    
+    
+    
+    
+    
+    [defaults synchronize];
+    
+    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
+    
+    [exportAlert show];
+    
+    
+    
+    
+}
+
+
+
 
 
 

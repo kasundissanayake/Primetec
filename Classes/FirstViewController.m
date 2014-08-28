@@ -289,7 +289,7 @@
 
     self.navigationItem.rightBarButtonItem = Button;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 
