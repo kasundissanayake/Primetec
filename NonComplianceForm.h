@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface NonComplianceForm : NSManagedObject
+@interface NonComplianceForm : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * contractNo;
 @property (nonatomic, retain) NSString * contractorResponsible;

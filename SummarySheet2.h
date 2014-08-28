@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface SummarySheet2 : NSManagedObject
+@interface SummarySheet2 : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * additionalDiscount;
 @property (nonatomic, retain) NSString * lessDiscount;

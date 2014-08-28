@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface DailyInspectionItem : NSManagedObject
+@interface DailyInspectionItem : ExtendedManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * inspectionID;

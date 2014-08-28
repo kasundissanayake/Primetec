@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface QuantitySummaryItems : NSManagedObject
+@interface QuantitySummaryItems : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * item_no;
 @property (nonatomic, retain) NSNumber * quantity_sum_details_no;

@@ -20,4 +20,13 @@
 @dynamic unit_price;
 @dynamic user;
 
+
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    return dict;
+}
+
 @end

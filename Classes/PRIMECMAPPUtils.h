@@ -21,6 +21,10 @@ extern NSString * const TOKEN_URL;
 extern NSString * const ACCESS_TOKEN;
 extern NSString * const REFRESH_TOKEN;
 
++ (NSString *)getAPISyncPullEndpoint;
+
++ (NSString *)getAPISyncPushEndpoint;
+
 + (NSString *)getAPIEndpoint;
 
 + (NSManagedObjectContext *)getManagedObjectContext;
@@ -28,5 +32,7 @@ extern NSString * const REFRESH_TOKEN;
 + (NSString *)filterValue:(NSString *)param;
 
 + (NSNumber *)filterNumber:(NSString *)param;
+
++ (NSArray *)getEntities;
 
 @end

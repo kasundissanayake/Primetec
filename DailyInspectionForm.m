@@ -78,4 +78,17 @@
 @dynamic i_QTY4;
 @dynamic i_QTY5;
 
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [dateFormatter stringFromDate:self.date];
+    [dict setValue:strDate forKey:@"date"];
+    
+    return dict;
+}
+
 @end

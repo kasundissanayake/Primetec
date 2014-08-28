@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface Projects : NSManagedObject
+@interface Projects : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * city;

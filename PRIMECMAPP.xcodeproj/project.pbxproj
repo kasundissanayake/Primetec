@@ -178,6 +178,7 @@
 		523CDC8C1946AFBC008C2C9B /* popupcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523CDC8A1946AFBC008C2C9B /* popupcell.xib */; };
 		52771E831951A9F300B5F7C6 /* lin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52771E821951A9F300B5F7C6 /* lin1.png */; };
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
+		55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
 		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
@@ -573,6 +574,8 @@
 		52771E821951A9F300B5F7C6 /* lin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lin1.png; sourceTree = "<group>"; };
 		52E73C811973DADF004A0418 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		52E73C821973DADF004A0418 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		55514B8019AC605B00DA6981 /* ExtendedManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedManagedObject.h; sourceTree = "<group>"; };
+		55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedManagedObject.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
@@ -1387,6 +1390,8 @@
 				98D14A66199F1EF80091D5D8 /* Users.m */,
 				98D14A62199F1EF80091D5D8 /* ExpenseReportModel.h */,
 				98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */,
+				55514B8019AC605B00DA6981 /* ExtendedManagedObject.h */,
+				55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1944,6 +1949,7 @@
 				98D14AC3199F6DB10091D5D8 /* SummarySheet3.m in Sources */,
 				98D14AAE199F596C0091D5D8 /* Projects.m in Sources */,
 				98D14AAB199F54B70091D5D8 /* NonComplianceForm.m in Sources */,
+				55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */,
 				FCD7A9FB18EB30A6006008D9 /* HotelAnnotation.m in Sources */,
 				FCD7A9F418EB30A6006008D9 /* GIKAnnotationView.m in Sources */,
 				4B8CE25119418749001F8E3B /* SDDrawingToolsViewController.m in Sources */,

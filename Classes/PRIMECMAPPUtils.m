@@ -17,6 +17,15 @@ NSString * const CACHE_CREDENTIALS = @"cache_credentials";
 NSString * const USERNAME = @"USERNAME";
 NSString * const PASSWORD = @"PASSWORD";
 
++(NSString *)getAPISyncPullEndpoint {
+    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
+    return endpoint;
+}
+
++(NSString *)getAPISyncPushEndpoint {
+    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
+    return endpoint;
+}
 
 + (NSString *)getAPIEndpoint {
     //NSString *path = [[NSBundle mainBundle] bundlePath];
@@ -30,7 +39,7 @@ NSString * const PASSWORD = @"PASSWORD";
 
 
 + (NSString *)getServerImagePath {
-    NSString *endpoint = @"http://construction.ravihansa3000.com/images";
+    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images";
     return endpoint;
 }
 
@@ -61,6 +70,30 @@ NSString * const PASSWORD = @"PASSWORD";
     }
     
     return [NSNumber numberWithInt:-1];
+}
+
++ (NSArray *)getEntities
+{
+    static NSArray *_entities;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _entities = @[
+                      @"Assign_project",
+                      @"ComplianceForm",
+                      @"DailyInspectionForm",
+                      @"DailyInspectionItem",
+                      @"Expensedata",
+                      @"ExpenseReportModel",
+                      @"NonComplianceForm",
+                      @"Projects",
+                      @"QuantitySummaryDetails",
+                      @"QuantitySummaryItems",
+                      @"SummarySheet1",
+                      @"SummarySheet2",
+                      @"SummarySheet3"
+                      ];
+    });
+    return _entities;
 }
 
 @end

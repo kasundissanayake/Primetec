@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface DailyInspectionForm : NSManagedObject
+@interface DailyInspectionForm : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSString * competentPerson;

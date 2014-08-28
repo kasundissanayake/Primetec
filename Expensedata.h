@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface Expensedata : NSManagedObject
+@interface Expensedata : ExtendedManagedObject
 
 @property (nonatomic, retain) NSDate * eRDate1;
 @property (nonatomic, retain) NSString * eRDescription1;

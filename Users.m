@@ -22,4 +22,18 @@
 @dynamic user_type;
 @dynamic username;
 
+
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [dateFormatter stringFromDate:self.created];
+    [dict setValue:strDate forKey:@"created"];
+    
+    return dict;
+}
+
 @end

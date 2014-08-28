@@ -27,10 +27,17 @@
 
 @implementation PRIMECMController
 
-+ (int)synchronizeWithServer:(NSString *)url {
++ (int)synchronizeWithServer {
+    
+    NSString *url = [NSString stringWithFormat:@"%@", [PRIMECMAPPUtils getAPISyncPullEndpoint]];
     
     if (![self connected]) {
         return 1;
+    }
+    
+    BOOL pushStatus = [self pushAllToServer];
+    if (!pushStatus){
+        return 4;
     }
     
     NSURL *endpoint = [NSURL URLWithString:url];
@@ -43,7 +50,7 @@
     NSError *error = [[NSError alloc] init];
     NSHTTPURLResponse* urlResponse = nil;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    NSLog(@"Sync Response Code: %d", [urlResponse statusCode]);
+    NSLog(@"Sync Pull HTTP Response Code: %d", [urlResponse statusCode]);
     
     if ( !([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
     {
@@ -68,8 +75,102 @@
         }
     }
     
-    NSLog(@"Sync status code: %hhd", status);
+    NSLog(@"Sync function return status code: %hhd", status);
     return status;
+}
+
++(BOOL) pushAllToServer{
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    NSArray *entities = [PRIMECMAPPUtils getEntities];
+    NSError *error = [[NSError alloc] init];
+    
+    for (NSString *entityItem in entities){
+        NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityItem inManagedObjectContext:context];
+        
+        [fetchRequest setEntity:entity];
+        NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+        NSMutableArray *entityObjArray =[[NSMutableArray alloc] init];
+        for (ExtendedManagedObject *managedObj in objects){
+            NSDictionary *itemDict =  [managedObj toDictionary]; //[assp toDictionary];
+            [entityObjArray addObject:itemDict];
+            
+        }
+        [data setObject:entityObjArray forKey:entityItem];     
+    }
+    
+    //NSLog(@"data: %@", data);
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
+    if (! jsonData) {
+        NSLog(@"JSON error: %@", error.localizedDescription);
+        return FALSE;
+    }
+    
+    NSString *jsonReqStringData = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *url = [NSString stringWithFormat:@"%@", [PRIMECMAPPUtils getAPISyncPushEndpoint]];
+    
+    if (![self connected]) {
+        return FALSE;
+    }
+    
+    NSString *post = [NSString stringWithFormat:@"data=%@",jsonReqStringData];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[post length]];
+    
+    
+    NSURL *endpoint = [NSURL URLWithString:url];
+    
+    //NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSLog(@"URL: %@", url);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
+    [request setURL: endpoint];
+    [request setHTTPMethod:@"POST"];
+    //[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] init];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    NSString *responsestr = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+    
+    NSLog(@"Sync Push HTTP Response Code: %d", [urlResponse statusCode]);
+    NSLog(@"Response String Data: %@", responsestr);
+    NSLog(@"NSHTTPURLResponse: %@", urlResponse);
+    
+    if ( !([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
+    {
+        NSLog(@"Server is not responding. Failed to download complete json. Response code: %ld", (long)[urlResponse statusCode]);
+        return FALSE;
+    }
+    else
+    {
+        
+        NSLog(@"Successfully connected to server");
+        NSError *jsonError;
+        id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
+        
+        NSLog(@"Sync PUSH jsonResponse: %@", jsonResponse);
+        
+        NSString *status = [jsonResponse valueForKey:@"status"];
+        
+        
+        
+        if (!jsonError && [status isEqualToString:@"success"]) {
+            NSLog(@"Successfully pushed records to the server");
+            return TRUE;
+        } else {
+            NSLog(@"%@", [jsonError description]);
+            return FALSE;
+        }
+        
+    }
+    
+    return FALSE;
+    
 }
 
 + (void)parseResponse:(id)responseObject {

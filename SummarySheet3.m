@@ -52,4 +52,22 @@
 @dynamic sMSheetNo;
 @dynamic total_to_date;
 
+
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *strDate1 = [dateFormatter stringFromDate:self.date1];
+    [dict setValue:strDate1 forKey:@"date1"];
+    
+    NSString *strDate2 = [dateFormatter stringFromDate:self.date2];
+    [dict setValue:strDate2 forKey:@"date2"];
+ 
+    return dict;
+}
+
 @end

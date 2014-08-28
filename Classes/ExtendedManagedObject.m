@@ -1,18 +1,14 @@
 //
-//  Image.m
+//  ExtendedManagedObject.m
 //  PRIMECMAPP
 //
-//  Created by Kasun Dissanayake on 8/23/14.
+//  Created by Akila Perera on 8/26/14.
 //
 //
 
-#import "Image.h"
+#import "ExtendedManagedObject.h"
 
-
-@implementation Image
-
-@dynamic imgName;
-@dynamic img;
+@implementation ExtendedManagedObject
 
 
 -(NSDictionary*) toDictionary

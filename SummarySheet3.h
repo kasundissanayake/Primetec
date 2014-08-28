@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface SummarySheet3 : NSManagedObject
+@interface SummarySheet3 : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * contractorRepresentative;
 @property (nonatomic, retain) NSString * dailyTotal;

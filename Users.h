@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface Users : NSManagedObject
+@interface Users : ExtendedManagedObject
 
 @property (nonatomic, retain) NSNumber * active;
 @property (nonatomic, retain) NSDate * created;

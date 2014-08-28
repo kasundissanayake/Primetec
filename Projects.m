@@ -32,4 +32,22 @@
 @dynamic street;
 @dynamic zip;
 
+
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *strCreated_date = [dateFormatter stringFromDate:self.created_date];
+    [dict setValue:strCreated_date forKey:@"created_date"];
+    
+    NSString *strPDate = [dateFormatter stringFromDate:self.p_date];
+    [dict setValue:strPDate forKey:@"p_date"];
+    
+    return dict;
+}
+
 @end

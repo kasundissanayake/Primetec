@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface SummarySheet1 : NSManagedObject
+@interface SummarySheet1 : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSString * conPeWork;

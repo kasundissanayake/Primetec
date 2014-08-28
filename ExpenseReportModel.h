@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface ExpenseReportModel : NSManagedObject
+@interface ExpenseReportModel : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * approvedBy;
 @property (nonatomic, retain) NSString * attachment;

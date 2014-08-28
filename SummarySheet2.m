@@ -39,4 +39,12 @@
 @dynamic total2;
 @dynamic total3;
 
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    return dict;
+}
+
 @end

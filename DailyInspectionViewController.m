@@ -1127,8 +1127,6 @@
     _connectionError = error;
 }
 
-
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 
 {
@@ -1136,7 +1134,7 @@
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    // [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     if (uploading) {
         uploading=NO;
@@ -1195,8 +1193,6 @@
         }
     }
 }
-
-
 
 
 -(void)createPicker:(UITextField *)txtField
@@ -1299,9 +1295,6 @@
      inView:self.view
      permittedArrowDirections:UIPopoverArrowDirectionAny
      animated:YES];
-    
-    
-    
 }
 
 

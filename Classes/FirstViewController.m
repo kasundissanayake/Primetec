@@ -589,13 +589,12 @@
 -(void) syncAll
 {
     NSLog(@"syncing all!");
-    NSString *url = [NSString stringWithFormat:@"%@/api/syncall", [PRIMECMAPPUtils getAPIEndpoint]];
     
     [self showInfoAlert];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        int syncStatus = [PRIMECMController synchronizeWithServer:url];
+        int syncStatus = [PRIMECMController synchronizeWithServer];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
@@ -618,6 +617,9 @@
                 }
                 else if (syncStatus == 3){
                     errMsg=@"Invalid response received from server.";
+                }
+                else if (syncStatus == 4){
+                    errMsg=@"Failed to push offline data to the server.";
                 }
                 
                 errMsg=[NSString stringWithFormat:@"Failed to synchronize. Please try again. Failed reason: %@", errMsg];

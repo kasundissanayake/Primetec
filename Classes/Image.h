@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface Image : NSManagedObject
+@interface Image : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * imgName;
 @property (nonatomic, retain) NSData * img;

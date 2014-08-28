@@ -27,4 +27,21 @@
 @dynamic signature;
 @dynamic weekEnding;
 
+-(NSDictionary*) toDictionary
+{
+    NSArray *attributes = [[self.entity attributesByName] allKeys];
+    NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *strDate = [dateFormatter stringFromDate:self.date];
+    [dict setValue:strDate forKey:@"date"];
+    
+    NSString *strWeekEndingDate = [dateFormatter stringFromDate:self.weekEnding];
+    [dict setValue:strWeekEndingDate forKey:@"weekEnding"];
+    
+    return dict;
+}
+
 @end

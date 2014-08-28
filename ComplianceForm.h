@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExtendedManagedObject.h"
 
-
-@interface ComplianceForm : NSManagedObject
+@interface ComplianceForm : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * comHeader;
 @property (nonatomic, retain) NSString * complianceNoticeNo;
