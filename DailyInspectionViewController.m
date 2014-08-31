@@ -14,6 +14,7 @@
 #import "SDDrawingFileNames.h"
 #import "SDDrawingsViewController.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface DailyInspectionViewController ()
 {
@@ -916,11 +917,6 @@
         NSString *dec2=@" ";
         NSString *dec3=@" ";
         NSString *dec4=@" ";
-        
-        
-        //start brin
-        
-        
         NSString *Des1=@" ";
         NSString *Des2=@" ";
         NSString *Des3=@" ";
@@ -932,9 +928,6 @@
         NSString *Qua3=@" ";
         NSString *Qua4=@" ";
         NSString *Qua5=@" ";
-        
-        //end brin
-        
         
         
         if(txtName1.text!=NULL && txtName1.text.length!=0)
@@ -1039,11 +1032,6 @@
             dec4=txtDescription4.text;
         }
         
-        
-        //start brin
-        
-        
-        
         if(des1.text!=NULL && des1.text.length!=0)
         {
             Des1=des1.text;
@@ -1093,72 +1081,21 @@
             Qua5=qua5.text;
         }
         
-
-        
-        
-        
-        //end brin
-        
-        
-        
-        
-        
-        
-        
-        
-     /*
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,@"town",txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName,];*/
-        
-        
-        //start brin
-        
-        
+        /*
         NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@//%@/%@/%@/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
                             appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,Town.text,txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName,repNo.text,ConName.text,weather.text,time.text,oriCalDays.text,usedCalDays.text,Des1,Qua1,Des2,Qua2,Des3,Qua3,Des4,Qua4,Des5,Qua5];
-        
-        //end brin
-        
-        
-        
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"URL---- %@",uencodedUrl);
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        //signature
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-        UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-        NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-        NSMutableData *postbody = [NSMutableData data];
-        NSString *boundary = @"---------------------------14737809831466499882746641449";
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-        [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[NSData dataWithData:imaData]];
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [urlRequest setHTTPBody:postbody];
-        // uploading=YES;
-        
-        NSLog(@"sent");
-        
-        //signature
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        _receivedData = [[NSMutableData alloc] init];
-        [connection start];
+        */
+
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
         HUD.labelText=@"";
         HUD.dimBackground = YES;
         HUD.delegate = self;
         [HUD show:YES];
+        
+        
+        //BOOL saveStatus = [PRIMECMController
+        
         
         contractor.text=@"";
         txtAddress.text=@"";
@@ -1197,10 +1134,6 @@
         txtDescription4.text=@"";
         txtHours.text=@"";
         imgSignatureDaily.image=NULL;
-        
-        
-        //start brin
-        
         repNo.text=@"";
         ConName.text=@"";
         Town.text=@"";
@@ -1218,9 +1151,6 @@
         qua5.text=@"";
         oriCalDays.text=@"";
         usedCalDays.text=@"";
-        
-        //end brin
-        
         
         
     }
@@ -1394,24 +1324,7 @@
 }
 
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
-    NSLog(@"ddddd");
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    NSLog(@"eeeeee");
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
+/*
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 
 {
@@ -1479,6 +1392,7 @@
     }
 }
 
+*/
 
 -(void)createPicker:(UITextField *)txtField
 {

@@ -39,7 +39,7 @@
     BOOL *uploadingsketch;
     BOOL isUploadingSignature;
     NSUserDefaults *defaults;
-
+    
 }
 
 @end
@@ -165,7 +165,7 @@
     NtxtDateofRawReprote.text=temp7;
     correctiveAction.text=temp8;
     
-
+    
     
     //end brin
     
@@ -413,7 +413,22 @@
         hud.delegate = self;
         [hud show:YES];
         
-        BOOL saveStatus = [PRIMECMController                           
+        NSMutableArray *sketchesNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < appDelegate.sketchesArray.count; i++){
+            NSString* imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+            [sketchesNameArray addObject:imggName];
+        }
+        
+        NSMutableArray *imgNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < arrayImages.count; i++){
+            NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
+            [imgNameArray addObject:imggName];
+        }
+        
+        
+        BOOL saveStatus = [PRIMECMController
                            saveNonComplianceForm:appDelegate.username
                            title:txtTitle.text
                            contractNo:txtContactNo.text
@@ -430,7 +445,9 @@
                            correctiveAction:correctiveAction.text
                            signature:sigName
                            printedName:txtPrintedName.text
-                           projId:appDelegate.projId];
+                           projId:appDelegate.projId
+                           sketchImg:[sketchesNameArray componentsJoinedByString:@","]
+                           images_uploaded:[imgNameArray componentsJoinedByString:@","]];
         
         txtContactNo.text = @"";
         projectDesc.text=@"";
@@ -474,7 +491,7 @@
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString *documentsDirectory = [paths objectAtIndex:0];
-                NSString* imggName = [[arrayImages objectAtIndex:count1] valueForKey:@"name"];
+                NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
@@ -508,11 +525,56 @@
         if (saveStatus && singSaveState){
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            [self deleteImageFiles];
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }
+        
+        
+    }
+}
 
+-(void)deleteImageFiles
+{
+    NSFileManager *fileMgr = [[NSFileManager alloc] init];
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+    
+    NSArray *directoryContents = [fileMgr contentsOfDirectoryAtPath:folderPath error:&error];
+    if (error == nil) {
+        for (NSString *path in directoryContents) {
+            NSString *fullPath = [folderPath stringByAppendingPathComponent:path];
+            BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+            if (!removeSuccess) {
+                // Error handling
+                
+            }
+        }
+    } else {
+        // Error handling
+        
+    }
+    
+    folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+    
+    directoryContents = [fileMgr contentsOfDirectoryAtPath:folderPath error:&error];
+    if (error == nil) {
+        for (NSString *path in directoryContents) {
+            NSString *fullPath = [folderPath stringByAppendingPathComponent:path];
+            BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+            if (!removeSuccess) {
+                // Error handling
+                
+            }
+        }
+    } else {
+        // Error handling
         
     }
 }

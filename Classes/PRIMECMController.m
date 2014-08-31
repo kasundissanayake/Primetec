@@ -52,12 +52,7 @@
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     NSLog(@"Sync Pull HTTP Response Code: %d", [urlResponse statusCode]);
     
-    if ( !([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
-    {
-        NSLog(@"Server is not responding. Failed to download complete json. Response code: %ld", (long)[urlResponse statusCode]);
-        status = 2;
-    }
-    else
+    if ( ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
     {
         NSString *responsestr = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
         NSLog(@"Successfully downloaded complete json");
@@ -73,6 +68,11 @@
             NSLog(@"%@", [jsonError description]);
             status = 3;
         }
+    }
+    else
+    {
+        NSLog(@"Server is not responding. Failed to download complete json. Response code: %ld", (long)[urlResponse statusCode]);
+        status = 2;
     }
     
     NSLog(@"Sync function return status code: %hhd", status);
@@ -97,7 +97,7 @@
             [entityObjArray addObject:itemDict];
             
         }
-        [data setObject:entityObjArray forKey:entityItem];     
+        [data setObject:entityObjArray forKey:entityItem];
     }
     
     //NSLog(@"data: %@", data);
@@ -116,22 +116,20 @@
         return FALSE;
     }
     
-    NSString *post = [NSString stringWithFormat:@"data=%@",jsonReqStringData];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[post length]];
-    
+    //NSString *post = [NSString stringWithFormat:@"data=%@",jsonReqStringData];
+    NSData *bodyData = [jsonReqStringData dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURL *endpoint = [NSURL URLWithString:url];
     
-    //NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSLog(@"URL: %@", url);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     
     [request setURL: endpoint];
     [request setHTTPMethod:@"POST"];
-    //[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:postData];
+    
+    //[request setValue:[NSString stringWithFormat:@"%d", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    [request setHTTPBody:bodyData];
     
     NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
@@ -141,24 +139,13 @@
     NSLog(@"Response String Data: %@", responsestr);
     NSLog(@"NSHTTPURLResponse: %@", urlResponse);
     
-    if ( !([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
+    if ( ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
     {
-        NSLog(@"Server is not responding. Failed to download complete json. Response code: %ld", (long)[urlResponse statusCode]);
-        return FALSE;
-    }
-    else
-    {
-        
         NSLog(@"Successfully connected to server");
         NSError *jsonError;
         id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
-        
         NSLog(@"Sync PUSH jsonResponse: %@", jsonResponse);
-        
         NSString *status = [jsonResponse valueForKey:@"status"];
-        
-        
-        
         if (!jsonError && [status isEqualToString:@"success"]) {
             NSLog(@"Successfully pushed records to the server");
             return TRUE;
@@ -166,6 +153,11 @@
             NSLog(@"%@", [jsonError description]);
             return FALSE;
         }
+    }
+    else
+    {
+        NSLog(@"Server is not responding. Failed to push data. Response code: %ld", (long)[urlResponse statusCode]);
+        return FALSE;
         
     }
     
@@ -1348,7 +1340,7 @@
 }
 
 + (BOOL)saveComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
-                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
+                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -1416,6 +1408,9 @@
     [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
     [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
     [assp setValue:[NSDate date] forKeyPath:@"date"];
+    
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    [assp setValue:sketchImg forKey:@"sketch_images"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -1512,7 +1507,7 @@
 }
 
 +(BOOL)saveNonComplianceForm:(NSString *)username title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
-                  dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId
+                  dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
 {
     
     NonComplianceForm *assp;
@@ -1581,6 +1576,9 @@
     [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
     [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
     [assp setValue:[NSDate date] forKeyPath:@"date"];
+    
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    [assp setValue:sketchImg forKey:@"sketch_images"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -2072,7 +2070,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Image" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(imgName = %@)", imgName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imgName= %@", imgName];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;

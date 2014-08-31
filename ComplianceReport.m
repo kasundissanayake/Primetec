@@ -157,18 +157,8 @@
         NSString * signName = [complianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
         
-        
-        for (int i=1; i<sketchesArray.count; i++) {
-            UIImage *image = [PRIMECMController getTheImage:[sketchesArray objectAtIndex:i]];
-            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
-        }
-        
         NSLog(@"array Images---%@",arrayImages);
-        
-        for (int i=1; i<arrayImages.count; i++) {
-            UIImage *image = [PRIMECMController getTheImage:[arrayImages objectAtIndex:i]];
-            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
-        }
+        NSLog(@"array Sketches---%@",sketchesArray);
     }else{
         NSLog(@"No matching ComplianceForm with ID: %@", CNo);
     }
@@ -452,11 +442,11 @@
 {
     if(section==0)
     {
-        return [arrayImages count];
+        return [arrayImages count] + 1;
     }
     else
     {
-        return [sketchesArray count];
+        return [sketchesArray count] + 1;
     }
 }
 
@@ -493,16 +483,19 @@
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
-        }
+        }          
         
         if(indexPath.section==0)
         {
             cell.lblTitle.hidden=NO;
-            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];        }
+            //cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];
+            cell.imgView.image=[PRIMECMController getTheImage:[arrayImages objectAtIndex:indexPath.row-1]];
+        }
         else
         {
             cell.lblTitle.hidden=YES;
-            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[sketchesArray objectAtIndex:indexPath.row]]];
+            //cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[sketchesArray objectAtIndex:indexPath.row]]];
+            cell.imgView.image=[PRIMECMController getTheImage:[sketchesArray objectAtIndex:indexPath.row-1]];
         }
         return cell;
     }
