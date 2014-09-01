@@ -84,7 +84,7 @@
 @synthesize lATotalHours5;
 @synthesize pOBox;
 @synthesize projectNo;
-@synthesize sSsSHeader;
+@synthesize sSHeader;
 @synthesize state;
 @synthesize telephoneNo;
 @synthesize total;

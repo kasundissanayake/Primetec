@@ -15,29 +15,22 @@
 
 {
     NSMutableArray *hotelAnnotations;
-    
     UIPopoverController *popoverController;
     UITableView *tblView;
     NSArray *tableData;
     UIViewController *popoverContent;
-    
     NSInteger count;
-    
     MBProgressHUD *HUD;
-    
     NSMutableData *_receivedData;
     NSURLResponse *_receivedResponse;
     NSError *_connectionError;
     NSArray *resPonse;
-    
     BOOL *uploading;
     BOOL *uploadingsketch;
     int count1;
     int count2;
     NSString *comNoticeNo;
-    
     BOOL isUploadingSignature;
-    
     TabAndSplitAppAppDelegate *appDelegate;
     
 }
@@ -46,11 +39,46 @@
 @implementation Summary_2_ViewController
 
 
+
+
+@synthesize additionalDiscount;
+@synthesize lessDiscount;
+@synthesize mEAmount1;
+@synthesize mEAmount2;
+@synthesize mEAmount3;
+@synthesize mEAmount4;
+@synthesize mEAmount5;
+@synthesize mEDescription1;
+@synthesize mEDescription2;
+@synthesize mEDescription3;
+@synthesize mEDescription4;
+@synthesize mEDescription5;
+@synthesize mEQuantity1;
+@synthesize mEQuantity2;
+@synthesize mEQuantity3;
+@synthesize mEQuantity4;
+@synthesize mEQuantity5;
+@synthesize mEUnitPrice1;
+@synthesize mEUnitPrice2;
+@synthesize mEUnitPrice3;
+@synthesize mEUnitPrice4;
+@synthesize mEUnitPrice5;
+@synthesize total1;
+@synthesize  total2;
+@synthesize total3;
 @synthesize scrollView;
-@synthesize txtRate1,txtRate2,txtRate3,txtRate4,txtRate5;
-@synthesize txtTotal1,txtTotal2,txtTotal3,txtTotal4,txtTotal5;
-@synthesize txtQTY1,txtQTY2,txtQTY3,txtQTY4,txtQTY5,tTotal,txtGRTotal,txt20,txtLTotal,txtInsu;
-@synthesize txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtDescription5;
+
+
+@synthesize sMSSheetNo;
+
+
+
+
+ 
+
+ 
+ 
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -125,7 +153,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField==txtQTY1 || textField==txtQTY2 || textField==txtQTY3 || textField==txtQTY4  || textField==txtQTY5 ||textField==txtRate1 || textField==txtRate2 || textField==txtRate3 || textField==txtRate4 || textField==txtRate5 || textField==tTotal || textField==txtInsu || textField==txtLTotal || textField==txt20 || txtGRTotal)
+    if(textField==mEQuantity1 || textField==mEQuantity2 || textField==mEQuantity3 || textField==mEQuantity4  || textField==mEQuantity5 ||textField==mEUnitPrice1 || textField==mEUnitPrice2 || textField==mEUnitPrice3 || textField==mEUnitPrice4 || textField==mEUnitPrice5 || textField==total1 || textField==lessDiscount || textField==total2 || textField==additionalDiscount || total3)
     {
         
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
@@ -135,21 +163,21 @@
             if (![myCharSet characterIsMember:c])
             {
                 
-                txtQTY1.enabled=YES;
-                txtQTY2.enabled=YES;
-                txtQTY3.enabled=YES;
-                txtQTY4.enabled=YES;
-                txtQTY5.enabled=YES;
-                txtRate1.enabled=YES;
-                txtRate2.enabled=YES;
-                txtRate3.enabled=YES;
-                txtRate4.enabled=YES;
-                txtRate5.enabled=YES;
-                tTotal.enabled=YES;
-                txtInsu.enabled=YES;
-                txtLTotal.enabled=YES;
-                txt20.enabled=YES;
-                txtGRTotal.enabled=YES;
+                mEQuantity1.enabled=YES;
+                mEQuantity2.enabled=YES;
+                mEQuantity3.enabled=YES;
+                mEQuantity4.enabled=YES;
+                mEQuantity5.enabled=YES;
+                mEUnitPrice1.enabled=YES;
+                mEUnitPrice2.enabled=YES;
+                mEUnitPrice3.enabled=YES;
+                mEUnitPrice4.enabled=YES;
+                mEUnitPrice5.enabled=YES;
+                total1.enabled=YES;
+                lessDiscount.enabled=YES;
+                total2.enabled=YES;
+                additionalDiscount.enabled=YES;
+                total3.enabled=YES;
 
                 
                 return NO;
@@ -169,59 +197,59 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(textField==txtTotal1)
+    if(textField==mEAmount1)
     {
         
-        double dist1 = [self.txtQTY1.text doubleValue];
-        double mileage1 = [self.txtRate1.text doubleValue];
-        txtTotal1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
+        double dist1 = [self.mEQuantity1.text doubleValue];
+        double mileage1 = [self.mEUnitPrice1.text doubleValue];
+        mEAmount1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
         
-        [txtTotal1 resignFirstResponder];
+        [mEAmount1 resignFirstResponder];
     }
-    if(textField==txtTotal2)
+    if(textField==mEAmount2)
     {
-        double dist2 = [self.txtQTY2.text doubleValue];
-        double mileage2 = [self.txtRate2.text doubleValue];
-        txtTotal2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
+        double dist2 = [self.mEQuantity2.text doubleValue];
+        double mileage2 = [self.mEUnitPrice2.text doubleValue];
+        mEAmount2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
         
-        [txtTotal2 resignFirstResponder];
+        [mEAmount2 resignFirstResponder];
     }
-    if(textField==txtTotal3)
+    if(textField==mEAmount3)
     {
-        double dist3 = [self.txtQTY3.text doubleValue];
-        double mileage3 = [self.txtRate3.text doubleValue];
-        txtTotal3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
+        double dist3 = [self.mEQuantity3.text doubleValue];
+        double mileage3 = [self.mEUnitPrice3.text doubleValue];
+        mEAmount3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
         
-        [txtTotal3 resignFirstResponder];
-    }
-    
-    if(textField==txtTotal4)
-    {
-        
-        double dist4 = [self.txtQTY4.text doubleValue];
-        double mileage4 = [self.txtRate4.text doubleValue];
-        txtTotal4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
-        [txtTotal4 resignFirstResponder];
-    }
-    if(textField==txtTotal5)
-    {
-        
-        double dist5 = [self.txtQTY5.text doubleValue];
-        double mileage5 = [self.txtRate5.text doubleValue];
-        txtTotal5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
-        [txtTotal5 resignFirstResponder];
+        [mEAmount3 resignFirstResponder];
     }
     
-    double tot1 = [self.txtTotal1.text doubleValue];
-    double tot2 = [self.txtTotal2.text doubleValue];
-    double tot3 = [self.txtTotal3.text doubleValue];
-    double tot4 = [self.txtTotal4.text doubleValue];
-    double tot5 = [self.txtTotal5.text doubleValue];
+    if(textField==mEAmount4)
+    {
+        
+        double dist4 = [self.mEQuantity4.text doubleValue];
+        double mileage4 = [self.mEUnitPrice4.text doubleValue];
+        mEAmount4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
+        [mEAmount4 resignFirstResponder];
+    }
+    if(textField==mEAmount5)
+    {
+        
+        double dist5 = [self.mEQuantity5.text doubleValue];
+        double mileage5 = [self.mEUnitPrice5.text doubleValue];
+        mEAmount5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
+        [mEAmount5 resignFirstResponder];
+    }
+    
+    double tot1 = [self.mEAmount1.text doubleValue];
+    double tot2 = [self.mEAmount2.text doubleValue];
+    double tot3 = [self.mEAmount3.text doubleValue];
+    double tot4 = [self.mEAmount4.text doubleValue];
+    double tot5 = [self.mEAmount5.text doubleValue];
     
     double allTot = tot1 + tot2 + tot3 + tot4 + tot5;
     
     
-    double insu  = [self.txtInsu.text doubleValue];
+    double insu  = [self.lessDiscount.text doubleValue];
     
     
     double calcpersentage  = allTot - insu;
@@ -229,15 +257,15 @@
     double t20  = calcpersentage * 0.15;
     
     double gtotal = t20 + calcpersentage;
-    tTotal.text =  [NSString stringWithFormat:@"%.2f",allTot];
+    total1.text =  [NSString stringWithFormat:@"%.2f",allTot];
     
     
-    txt20.text = [NSString stringWithFormat:@"%.2f",t20];
-    txtLTotal.text = [NSString stringWithFormat:@"%.2f",calcpersentage];
+    additionalDiscount.text = [NSString stringWithFormat:@"%.2f",t20];
+    total2.text = [NSString stringWithFormat:@"%.2f",calcpersentage];
         
-    txtGRTotal.text = [NSString stringWithFormat:@"%.2f",gtotal];
+    total3.text = [NSString stringWithFormat:@"%.2f",gtotal];
     
-    appDelegate.str2=txtGRTotal.text;
+    appDelegate.str2=total3.text;
     
     
     if(textField.text.length==0)
@@ -252,7 +280,7 @@
 -(IBAction)shownext
 {
     
-      if(tTotal.text==NULL || tTotal.text.length==0 || txtInsu.text==NULL || txtInsu.text.length==0 || txtLTotal.text==NULL || txtLTotal.text.length==0  || txt20.text==NULL || txt20.text.length==0 || txtGRTotal.text==NULL || txtGRTotal.text.length==0     )
+      if(total1.text==NULL || total1.text.length==0 || lessDiscount.text==NULL || lessDiscount.text.length==0 || total2.text==NULL || total2.text.length==0  || additionalDiscount.text==NULL || additionalDiscount.text.length==0 || total3.text==NULL || total3.text.length==0     )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -288,110 +316,110 @@
         NSString *field19=@" ";
         NSString *field20=@" ";
         
-        if (txtDescription1.text!=NULL && txtDescription1.text.length!=0 ) {
+        if (mEDescription1.text!=NULL && mEDescription1.text.length!=0 ) {
             
-            field1=txtDescription1.text;
-            
-        }
-        
-        if (txtQTY1.text!=NULL && txtQTY1.text.length!=0 ) {
-            
-            field2=txtQTY1.text;
+            field1=mEDescription1.text;
             
         }
         
-        if (txtRate1.text!=NULL && txtRate1.text.length!=0 ) {
+        if (mEQuantity1.text!=NULL && mEQuantity1.text.length!=0 ) {
             
-            field3=txtRate1.text;
+            field2=mEQuantity1.text;
             
         }
         
-        if (txtTotal1.text!=NULL && txtTotal1.text.length!=0 ) {
+        if (mEUnitPrice1.text!=NULL && mEUnitPrice1.text.length!=0 ) {
             
-            field4=txtTotal1.text;
+            field3=mEUnitPrice1.text;
+            
+        }
+        
+        if (mEAmount1.text!=NULL && mEAmount1.text.length!=0 ) {
+            
+            field4=mEAmount1.text;
             
         }
         
         //
         
-        if (txtDescription2.text!=NULL && txtDescription2.text.length!=0 ) {
+        if (mEDescription2.text!=NULL && mEDescription2.text.length!=0 ) {
             
-            field5=txtDescription2.text;
-            
-        }
-        
-        if (txtQTY2.text!=NULL && txtQTY2.text.length!=0 ) {
-            
-            field6=txtQTY2.text;
+            field5=mEDescription2.text;
             
         }
         
-        if (txtRate2.text!=NULL && txtRate2.text.length!=0 ) {
+        if (mEQuantity2.text!=NULL && mEQuantity2.text.length!=0 ) {
             
-            field7=txtRate2.text;
-            
-        }
-        
-        if (txtTotal2.text!=NULL && txtTotal2.text.length!=0 ) {
-            
-            field8=txtTotal2.text;
+            field6=mEQuantity2.text;
             
         }
         
-        
-        //
-        
-        if (txtDescription3.text!=NULL && txtDescription3.text.length!=0 ) {
+        if (mEUnitPrice2.text!=NULL && mEUnitPrice2.text.length!=0 ) {
             
-            field9=txtDescription3.text;
+            field7=mEUnitPrice2.text;
             
         }
         
-        
-        if (txtQTY3.text!=NULL && txtQTY3.text.length!=0 ) {
+        if (mEAmount2.text!=NULL && mEAmount2.text.length!=0 ) {
             
-            field10=txtQTY3.text;
-            
-        }
-        
-        
-        if (txtRate3.text!=NULL && txtRate3.text.length!=0 ) {
-            
-            field11=txtRate3.text;
-            
-        }
-        
-        if (txtTotal3.text!=NULL && txtTotal3.text.length!=0 ) {
-            
-            field12=txtTotal3.text;
+            field8=mEAmount2.text;
             
         }
         
         
         //
         
-        if (txtDescription4.text!=NULL && txtDescription4.text.length!=0 ) {
+        if (mEDescription3.text!=NULL && mEDescription3.text.length!=0 ) {
             
-            field13=txtDescription4.text;
-            
-        }
-        
-        if (txtQTY4.text!=NULL && txtQTY4.text.length!=0 ) {
-            
-            field14=txtQTY4.text;
-            
-        }
-        
-        if (txtRate4.text!=NULL && txtRate4.text.length!=0 ) {
-            
-            field15=txtRate4.text;
+            field9=mEDescription3.text;
             
         }
         
         
-        if (txtTotal4.text!=NULL && txtTotal4.text.length!=0 ) {
+        if (mEQuantity3.text!=NULL && mEQuantity3.text.length!=0 ) {
             
-            field16=txtTotal4.text;
+            field10=mEQuantity3.text;
+            
+        }
+        
+        
+        if (mEUnitPrice3.text!=NULL && mEUnitPrice3.text.length!=0 ) {
+            
+            field11=mEUnitPrice3.text;
+            
+        }
+        
+        if (mEAmount3.text!=NULL && mEAmount3.text.length!=0 ) {
+            
+            field12=mEAmount3.text;
+            
+        }
+        
+        
+        //
+        
+        if (mEDescription4.text!=NULL && mEDescription4.text.length!=0 ) {
+            
+            field13=mEDescription4.text;
+            
+        }
+        
+        if (mEQuantity4.text!=NULL && mEQuantity4.text.length!=0 ) {
+            
+            field14=mEQuantity4.text;
+            
+        }
+        
+        if (mEUnitPrice4.text!=NULL && mEUnitPrice4.text.length!=0 ) {
+            
+            field15=mEUnitPrice4.text;
+            
+        }
+        
+        
+        if (mEAmount4.text!=NULL && mEAmount4.text.length!=0 ) {
+            
+            field16=mEAmount4.text;
             
         }
         
@@ -401,32 +429,32 @@
         
         
         
-        if (txtDescription5.text!=NULL && txtDescription5.text.length!=0 ) {
+        if (mEDescription5.text!=NULL && mEDescription5.text.length!=0 ) {
             
-            field17=txtDescription5.text;
-            
-        }
-        
-        if (txtQTY5.text!=NULL && txtQTY5.text.length!=0 ) {
-            
-            field18=txtQTY5.text;
+            field17=mEDescription5.text;
             
         }
         
-        if (txtRate5.text!=NULL && txtRate5.text.length!=0 ) {
+        if (mEQuantity5.text!=NULL && mEQuantity5.text.length!=0 ) {
             
-            field19=txtRate5.text;
+            field18=mEQuantity5.text;
+            
+        }
+        
+        if (mEUnitPrice5.text!=NULL && mEUnitPrice5.text.length!=0 ) {
+            
+            field19=mEUnitPrice5.text;
             
         }
         
         
-        if (txtTotal5.text!=NULL && txtTotal5.text.length!=0 ) {
+        if (mEAmount5.text!=NULL && mEAmount5.text.length!=0 ) {
             
-            field20=txtTotal5.text;
+            field20=mEAmount5.text;
             
         }
         
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,total1.text,lessDiscount.text,total2.text,additionalDiscount.text,total3.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -448,32 +476,32 @@
         HUD.dimBackground = YES;
         HUD.delegate = self;
         [HUD show:YES];
-        tTotal.text=NULL ;
-        txtInsu.text=NULL ;
-        txtLTotal.text=NULL ;
-        txt20.text=NULL;
-        txtGRTotal.text=NULL;
-        txt20.text=@"";
-        txtDescription1.text=@"";
-        txtDescription2.text=@"";
-        txtDescription3.text=@"";
-        txtDescription4.text=@"";
-        txtDescription5.text=@"";
-        txtQTY1.text=@"";
-        txtQTY2.text=@"";
-        txtQTY3.text=@"";
-        txtQTY4.text=@"";
-        txtQTY5.text=@"";
-        txtRate1.text=@"";
-        txtRate2.text=@"";
-        txtRate3.text=@"";
-        txtRate4.text=@"";
-        txtRate5.text=@"";
-        txtTotal1.text=@"";
-        txtTotal2.text=@"";
-        txtTotal3.text=@"";
-        txtTotal4.text=@"";
-        txtTotal5.text=@"";
+        total1.text=NULL ;
+        lessDiscount.text=NULL ;
+        total2.text=NULL ;
+        additionalDiscount.text=NULL;
+        total3.text=NULL;
+        additionalDiscount.text=@"";
+        mEDescription1.text=@"";
+        mEDescription2.text=@"";
+        mEDescription3.text=@"";
+        mEDescription4.text=@"";
+        mEDescription5.text=@"";
+        mEQuantity1.text=@"";
+        mEQuantity2.text=@"";
+        mEQuantity3.text=@"";
+        mEQuantity4.text=@"";
+        mEQuantity5.text=@"";
+        mEUnitPrice1.text=@"";
+        mEUnitPrice2.text=@"";
+        mEUnitPrice3.text=@"";
+        mEUnitPrice4.text=@"";
+        mEUnitPrice5.text=@"";
+        mEAmount1.text=@"";
+        mEAmount2.text=@"";
+        mEAmount3.text=@"";
+        mEAmount4.text=@"";
+        mEAmount5.text=@"";
     }
 }
 

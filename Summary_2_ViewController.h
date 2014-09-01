@@ -14,44 +14,47 @@
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 
-@property (strong, nonatomic) IBOutlet UITextField *txtQTY1;
-@property (strong, nonatomic) IBOutlet UITextField *txtQTY2;
-@property (strong, nonatomic) IBOutlet UITextField *txtQTY3;
-@property (strong, nonatomic) IBOutlet UITextField *txtQTY4;
-@property (strong, nonatomic) IBOutlet UITextField *txtQTY5;
+@property (strong, nonatomic) IBOutlet UITextField *additionalDiscount;
+@property (strong, nonatomic) IBOutlet UITextField *lessDiscount;
+@property (strong, nonatomic) IBOutlet UITextField *mEAmount1;
+@property (strong, nonatomic) IBOutlet UITextField *mEAmount2;
+@property (strong, nonatomic) IBOutlet UITextField *mEAmount3;
 
 
 
-@property (strong, nonatomic) IBOutlet UITextField *txtRate1;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate2;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate3;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate4;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate5;
+@property (strong, nonatomic) IBOutlet UITextField *mEAmount4;
+@property (strong, nonatomic) IBOutlet UITextField *mEAmount5;
+@property (strong, nonatomic) IBOutlet UITextField *mEDescription1;
+@property (strong, nonatomic) IBOutlet UITextField *mEDescription2;
+@property (strong, nonatomic) IBOutlet UITextField *mEDescription3;
 
 
 
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal1;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal2;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal3;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal4;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal5;
+@property (strong, nonatomic) IBOutlet UITextField *mEDescription4;
+@property (strong, nonatomic) IBOutlet UITextField *mEDescription5;
+@property (strong, nonatomic) IBOutlet UITextField *mEQuantity1;
+@property (strong, nonatomic) IBOutlet UITextField *mEQuantity2;
+@property (strong, nonatomic) IBOutlet UITextField *mEQuantity3;
 
 
 
-@property (strong, nonatomic) IBOutlet UITextField *tTotal;
+@property (strong, nonatomic) IBOutlet UITextField *mEQuantity4;
 
-@property (strong, nonatomic) IBOutlet UITextField *txtLTotal;
-@property (strong, nonatomic) IBOutlet UITextField *txtInsu;
-@property (strong, nonatomic) IBOutlet UITextField *txt20;
-@property (strong, nonatomic) IBOutlet UITextField *txtGRTotal;
+@property (strong, nonatomic) IBOutlet UITextField *mEQuantity5;
+@property (strong, nonatomic) IBOutlet UITextField *mEUnitPrice1;
+@property (strong, nonatomic) IBOutlet UITextField *mEUnitPrice2;
+@property (strong, nonatomic) IBOutlet UITextField *mEUnitPrice3;
 
 
 
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription1;
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription2;
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription3;
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription4;
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription5;
+@property (weak, nonatomic) IBOutlet UITextField *mEUnitPrice4;
+@property (weak, nonatomic) IBOutlet UITextField *mEUnitPrice5;
+@property (weak, nonatomic) IBOutlet UITextField *sMSSheetNo;
+@property (weak, nonatomic) IBOutlet UITextField *total1;
+@property (weak, nonatomic) IBOutlet UITextField *total2;
+@property (weak, nonatomic) IBOutlet UITextField *total3;
+
+
 
 
 -(IBAction)shownext;

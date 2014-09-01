@@ -8,12 +8,10 @@
             <connections>
                 <outlet property="StxtDateCR" destination="v29-Tz-i5y" id="Xlu-we-Bc9"/>
                 <outlet property="StxtDateINS" destination="eER-gu-9A5" id="MQS-dY-GHj"/>
-                <outlet property="active1" destination="jBA-KH-e8g" id="2nv-QF-A6O"/>
                 <outlet property="active2" destination="2qa-Zd-zWq" id="XoX-Xd-2O2"/>
                 <outlet property="active3" destination="ktV-Db-gBm" id="bTE-7K-otv"/>
                 <outlet property="active4" destination="RIU-M3-s3l" id="b1G-2e-cRj"/>
                 <outlet property="active5" destination="Rfl-xo-DKM" id="BvJ-JG-3qV"/>
-                <outlet property="class1" destination="2t5-CT-ypG" id="ozk-9Q-2SP"/>
                 <outlet property="class2" destination="TmF-6d-Mn7" id="Prr-l9-YxD"/>
                 <outlet property="class3" destination="bOz-fB-dJ8" id="CiP-BF-mFG"/>
                 <outlet property="class4" destination="xzc-pR-2m0" id="Qeu-j0-CDS"/>

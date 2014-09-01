@@ -6,32 +6,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Summary_2_ViewController">
             <connections>
+                <outlet property="additionalDiscount" destination="YnT-jk-BVE" id="7hy-33-PzU"/>
+                <outlet property="lessDiscount" destination="cGg-7C-cp9" id="8Dp-n7-Mea"/>
+                <outlet property="mEAmount1" destination="2Sq-cN-Q80" id="CGo-OI-rvz"/>
+                <outlet property="mEAmount2" destination="tYi-s1-Bk3" id="db9-N5-Htl"/>
+                <outlet property="mEAmount3" destination="iUD-9u-ige" id="aco-hw-B5l"/>
+                <outlet property="mEAmount4" destination="S7e-AR-Qpc" id="LbE-gz-Rdh"/>
+                <outlet property="mEAmount5" destination="sRB-OT-bYe" id="Gvb-Bu-hhX"/>
+                <outlet property="mEDescription1" destination="Md5-Io-5MP" id="0lQ-KX-MR0"/>
+                <outlet property="mEDescription2" destination="GJq-7e-nHe" id="Tdc-7u-CwZ"/>
+                <outlet property="mEDescription3" destination="XWL-4Y-MyN" id="St3-ur-YOf"/>
+                <outlet property="mEDescription4" destination="ZdS-O7-06w" id="m3b-26-aWm"/>
+                <outlet property="mEDescription5" destination="sYc-j8-I13" id="G38-D5-9XJ"/>
+                <outlet property="mEQuantity1" destination="sIQ-g9-Mcu" id="75V-0c-OAV"/>
+                <outlet property="mEQuantity2" destination="57K-fv-j1f" id="mdW-PI-ekQ"/>
+                <outlet property="mEQuantity3" destination="vcG-vS-3kR" id="IJ3-1m-rv1"/>
+                <outlet property="mEQuantity4" destination="gq8-8a-80X" id="PDa-cR-uCA"/>
+                <outlet property="mEQuantity5" destination="7ge-hB-AYP" id="pim-Mx-B3p"/>
+                <outlet property="mEUnitPrice1" destination="XWL-4Y-MyN" id="PLk-RM-z4o"/>
+                <outlet property="mEUnitPrice2" destination="tyN-yc-9nP" id="Npr-sF-qhV"/>
+                <outlet property="mEUnitPrice3" destination="6ff-1q-c0x" id="ooy-2y-j3z"/>
+                <outlet property="mEUnitPrice4" destination="Equ-Ty-jhX" id="lXg-xF-ihy"/>
+                <outlet property="mEUnitPrice5" destination="lN5-qu-7eQ" id="9tU-VI-PCn"/>
                 <outlet property="scrollView" destination="6ua-dI-gSo" id="vDw-Ta-BwQ"/>
-                <outlet property="tTotal" destination="7Sf-Vk-Wdv" id="7pT-Yr-RTe"/>
-                <outlet property="txt20" destination="YnT-jk-BVE" id="Dgi-Ky-rER"/>
-                <outlet property="txtDescription1" destination="Md5-Io-5MP" id="GbR-Xs-9M5"/>
-                <outlet property="txtDescription2" destination="GJq-7e-nHe" id="Adn-y0-sX5"/>
-                <outlet property="txtDescription3" destination="XWL-4Y-MyN" id="ef8-7Q-Oef"/>
-                <outlet property="txtDescription4" destination="ZdS-O7-06w" id="cHx-tT-Yjv"/>
-                <outlet property="txtDescription5" destination="sYc-j8-I13" id="DSn-v2-SLF"/>
-                <outlet property="txtGRTotal" destination="Gh5-Dz-7xN" id="cR3-IL-GC0"/>
-                <outlet property="txtInsu" destination="cGg-7C-cp9" id="esf-Ls-Ie4"/>
-                <outlet property="txtLTotal" destination="fWn-7e-x0P" id="JQj-2q-Y9U"/>
-                <outlet property="txtQTY1" destination="sIQ-g9-Mcu" id="HGY-Op-50m"/>
-                <outlet property="txtQTY2" destination="57K-fv-j1f" id="FxM-KA-efO"/>
-                <outlet property="txtQTY3" destination="vcG-vS-3kR" id="3W5-Lf-myl"/>
-                <outlet property="txtQTY4" destination="gq8-8a-80X" id="hbB-9Y-Md1"/>
-                <outlet property="txtQTY5" destination="7ge-hB-AYP" id="whS-Te-nji"/>
-                <outlet property="txtRate1" destination="EY7-h1-Jhf" id="pzU-Q1-WS0"/>
-                <outlet property="txtRate2" destination="tyN-yc-9nP" id="oz9-SA-H5n"/>
-                <outlet property="txtRate3" destination="6ff-1q-c0x" id="VNP-nw-eer"/>
-                <outlet property="txtRate4" destination="Equ-Ty-jhX" id="flS-yU-SlW"/>
-                <outlet property="txtRate5" destination="lN5-qu-7eQ" id="Vbi-nE-ZbF"/>
-                <outlet property="txtTotal1" destination="2Sq-cN-Q80" id="cZT-a8-Bkd"/>
-                <outlet property="txtTotal2" destination="tYi-s1-Bk3" id="Jde-W5-3zL"/>
-                <outlet property="txtTotal3" destination="iUD-9u-ige" id="weY-S8-yEW"/>
-                <outlet property="txtTotal4" destination="S7e-AR-Qpc" id="YVk-ke-B6O"/>
-                <outlet property="txtTotal5" destination="sRB-OT-bYe" id="wTA-H3-tpQ"/>
+                <outlet property="total1" destination="7Sf-Vk-Wdv" id="zsT-Gy-xaz"/>
+                <outlet property="total2" destination="fWn-7e-x0P" id="L2o-F7-p7H"/>
+                <outlet property="total3" destination="Gh5-Dz-7xN" id="QA7-S5-UIf"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -105,9 +105,6 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="edm-WS-t6J"/>
-                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="7Sf-Vk-Wdv">
                             <rect key="frame" x="44" y="406" width="629" height="40"/>
@@ -209,9 +206,6 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="b90-Op-937"/>
-                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="tyN-yc-9nP">
                             <rect key="frame" x="503" y="214" width="88" height="40"/>
