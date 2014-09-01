@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface SummaryReportViewController ()
 {
@@ -40,7 +41,7 @@
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
     NSUserDefaults *defaults;
-
+    
 }
 
 @end
@@ -125,7 +126,7 @@
     [constructionOrder.layer setBorderWidth: 1.0];
     [constructionOrder.layer setCornerRadius:8.0f];
     [constructionOrder.layer setMasksToBounds:YES];
-
+    
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     // Do any additional setup after loading the view from its nib.
@@ -146,12 +147,6 @@
     projectNo.text=appDelegate.projId;
     date.text=dateString;
     telephoneNo.text=appDelegate.tel;
-    
-    
-    
-    
- //start brin
-    
     defaults= [NSUserDefaults standardUserDefaults];
     
     
@@ -193,15 +188,8 @@
     NSString* temp33 = [defaults objectForKey:@"itemDescount20per"];
     
     NSString* temp34= [defaults objectForKey:@"total"];
-    
-    
-    
-    
-    
     NSData* imageData1 = [defaults objectForKey:@"complianceSignature"];
     UIImage* image1 = [UIImage imageWithData:imageData1];
-    
-    
     
     conPeWork.text=temp1;
     federalAidNumber.text=temp2;
@@ -240,16 +228,6 @@
     total.text=temp34;
     
     
-    
-    // txtSignature.image=image1;
-    
-    
-    
-    
-    
-    
-    
-    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
                                style:UIBarButtonItemStyleDone
@@ -264,26 +242,10 @@
     self.navigationController.navigationBar.translucent = NO;
     
     
-// end brin
-    
-    
-    
-    
-    
 }
 
 
-
-//start brin
-
-
-
 -(void)exit{
-    
-    
-    
-    
-    
     NSString* textField1Text = conPeWork.text;
     [defaults setObject:textField1Text forKey:@"conPeWork"];
     
@@ -413,20 +375,6 @@
 
 
 
-
-//end brin
-
-
-
-
-
-
-
-
-
-/*********************numeric**************************************/
-
-
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if(textField==lATotalHours1 || textField==lATotalHours2 || textField==lATotalHours3 || textField==lATotalHours4  || textField==lATotalHours4 ||textField==lATotalHours5 || textField==lARate1 || textField==lARate2 || textField==lARate3 || textField==lARate4 || textField==lARate5 || textField==healWelAndPension || textField==insAndTaxesOnItem1)
@@ -451,19 +399,19 @@
                 lARate5.enabled=YES;
                 healWelAndPension.enabled=YES;
                 insAndTaxesOnItem1.enabled=YES;
-
+                
                 
                 return NO;
             }
             
-                else{
-            
+            else{
+                
                 //  federalAidNumber.enabled=NO;
-
+                
             }
             
         }
-    
+        
         return YES;
     }
     
@@ -522,58 +470,7 @@
     [popoverController dismissPopoverAnimated:YES];
 }
 
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
-{
-    NSLog(@"uuuuu");
-    
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
-    NSLog(@"ddddd");
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    NSLog(@"eeeeee");
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [HUD setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    NSLog(@"response---%@",responseObject);
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-   // [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-    {
-        
-        appDelegate.saveVal=[responseObject valueForKey:@"id"];
-        Summary_2_ViewController *su=[[Summary_2_ViewController alloc] init];
-        su.title=@"Summary Sheet";
-        [self.navigationController pushViewController:su animated:YES];
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-        
-    }
-    else
-    {
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-    }
-    
-}
 
 
 //brin
@@ -594,7 +491,7 @@ didReceiveResponse:(NSURLResponse *)response
     tblView.delegate=self;
     tblView.dataSource=self;
     popoverController=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
-   [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
+    [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 //end
@@ -602,7 +499,7 @@ didReceiveResponse:(NSURLResponse *)response
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-  
+    
     
     if(textField==lAAmount1)
     {
@@ -675,7 +572,7 @@ didReceiveResponse:(NSURLResponse *)response
     {
         textField.text=@" ";
     }
-   }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -684,7 +581,7 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 - (IBAction)next:(id)sender {
-   
+    
     
     if(contractor.text==NULL || contractor.text.length==0 || pOBox.text==NULL || pOBox.text.length==0 || city.text==NULL || city.text.length==0 || state.text==NULL || state.text.length==0 || telephoneNo.text==NULL || telephoneNo.text.length==0 || date.text==NULL || date.text.length==0 || conPeWork.text==NULL || conPeWork.text.length==0 || federalAidNumber.text==NULL || federalAidNumber.text.length==0 || projectNo.text==NULL || projectNo.text.length==0 || descr.text==NULL || descr.text.length==0 || constructionOrder.text==NULL || constructionOrder.text.length==0 || total.text==NULL || total.text.length==0 || healWelAndPension.text==NULL || healWelAndPension.text.length==0 || insAndTaxesOnItem1.text==NULL || insAndTaxesOnItem1.text.length==0 || totalLabor.text==NULL || totalLabor.text.length==0 ||  itemDescount20per.text==NULL || itemDescount20per.text.length==0  || zip.text==NULL ||zip.text.length==0  )
     {
@@ -882,28 +779,29 @@ didReceiveResponse:(NSURLResponse *)response
             field25=lAAmount5.text;
             
         }
-        
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,appDelegate.projId,sSHeader.text,contractor.text,pOBox.text,city.text,state.text,zip.text,telephoneNo.text,date.text,@"hi",conPeWork.text,federalAidNumber.text,projectNo.text,descr.text,constructionOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,totalLabor.text,healWelAndPension.text,insAndTaxesOnItem1.text,itemDescount20per.text,total.text,appDelegate.projPrintedName];
-        
-        
-        // NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"URL---- %@",uencodedUrl);
-        
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        // NSLog(@"URL---%@",strURL);
+        /*
+         NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+         appDelegate.username,appDelegate.projId,sSHeader.text,contractor.text,pOBox.text,city.text,state.text,zip.text,telephoneNo.text,date.text,@"hi",conPeWork.text,federalAidNumber.text,projectNo.text,descr.text,constructionOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,totalLabor.text,healWelAndPension.text,insAndTaxesOnItem1.text,itemDescount20per.text,total.text,appDelegate.projPrintedName];
+         
+         
+         // NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+         
+         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+         NSLog(@"URL---- %@",uencodedUrl);
+         
+         NSURL *apiURL =
+         [NSURL URLWithString:uencodedUrl];
+         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+         [urlRequest setHTTPMethod:@"POST"];
+         
+         
+         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+         
+         _receivedData = [[NSMutableData alloc] init];
+         
+         [connection start];
+         // NSLog(@"URL---%@",strURL);
+         */
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
@@ -912,60 +810,125 @@ didReceiveResponse:(NSURLResponse *)response
         HUD.delegate = self;
         [HUD show:YES];
         
-        contractor.text=NULL;
-        pOBox.text=NULL;
-        city.text=NULL;
-        state.text=NULL;
-        telephoneNo.text=NULL;
-        date.text=NULL;
-        conPeWork.text=NULL;
-        federalAidNumber.text=NULL;
-        projectNo.text=NULL;
-        descr.text=NULL;
-        constructionOrder.text=NULL;
-        total.text=NULL;
-        healWelAndPension.text=NULL;
-        insAndTaxesOnItem1.text=NULL;
-        totalLabor.text=NULL;
-        itemDescount20per.text=NULL;
-        itemDescount20per.text=@"";
+        BOOL saveStatus = [PRIMECMController
+                           saveSummarySheet1:appDelegate.username
+                           city:city.text
+                           conPeWork:conPeWork.text
+                           constructionOrder:constructionOrder.text
+                           contractor:contractor.text
+                           date:date.text
+                           descr:descr.text
+                           federalAidNumber:federalAidNumber.text
+                           healWelAndPension:healWelAndPension.text
+                           insAndTaxesOnItem1:insAndTaxesOnItem1.text
+                           itemDescount20per:itemDescount20per.text
+                           lAAmount1:lAAmount1.text
+                           lAAmount2:lAAmount2.text
+                           lAAmount3:lAAmount3.text
+                           lAAmount4:lAAmount4.text
+                           lAAmount5:lAAmount5.text
+                           lAClass1:lAClass1.text
+                           lAClass2:lAClass2.text
+                           lAClass3:lAClass3.text
+                           lAClass4:lAClass4.text
+                           lAClass5:lAClass5.text
+                           lANo1:lANo1.text
+                           lANo2:lANo2.text
+                           lANo3:lANo3.text
+                           lANo4:lANo4.text
+                           lANo5:lANo5.text
+                           lARate1:lARate1.text
+                           lARate2:lARate2.text
+                           lARate3:lARate3.text
+                           lARate4:lARate4.text
+                           lARate5:lARate5.text
+                           lATotalHours1:lATotalHours1.text
+                           lATotalHours2:lATotalHours2.text
+                           lATotalHours3:lATotalHours3.text
+                           lATotalHours4:lATotalHours4.text
+                           lATotalHours5:lATotalHours5.text
+                           pOBox:pOBox.text
+                           printedName:appDelegate.projPrintedName
+                           project_id:appDelegate.projId
+                           projectNo:projectNo.text
+                           reportNo:@""
+                           sMSheetNo:@""
+                           sSHeader:sSHeader.text
+                           state:state.text
+                           telephoneNo:telephoneNo.text
+                           total:total.text
+                           totalLabor:totalLabor.text
+                           zip:zip.text
+                           ];
         
+        [HUD setHidden:YES];
         
-        lAClass1.text=NULL;
-        lAClass2.text=NULL;
-        lAClass3.text=NULL;
-        lAClass4.text=NULL;
-        lAClass5.text=NULL;
-        lANo1.text=NULL;
-        lANo2.text=NULL;
-        lANo3.text=NULL;
-        lANo4.text=NULL;
-        lANo5.text=NULL;
-        
-        lATotalHours1.text=NULL;
-        lATotalHours2.text=NULL;
-        lATotalHours3.text=NULL;
-        lATotalHours4.text=NULL;
-        lATotalHours5.text=NULL;
-        
-        lARate1.text=NULL;
-        lARate2.text=NULL;
-        lARate3.text=NULL;
-        lARate4.text=NULL;
-        lARate5.text=NULL;
-        
-        lAAmount1.text=NULL;
-        lAAmount2.text=NULL;
-        lAAmount3.text=NULL;
-        lAAmount4.text=NULL;
-        lAAmount5.text=NULL;
-        
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            [self clearFormFields];
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
         
     }
     
     
 }
 
+-(void)clearFormFields
+{
+    contractor.text=NULL;
+    pOBox.text=NULL;
+    city.text=NULL;
+    state.text=NULL;
+    telephoneNo.text=NULL;
+    date.text=NULL;
+    conPeWork.text=NULL;
+    federalAidNumber.text=NULL;
+    projectNo.text=NULL;
+    descr.text=NULL;
+    constructionOrder.text=NULL;
+    total.text=NULL;
+    healWelAndPension.text=NULL;
+    insAndTaxesOnItem1.text=NULL;
+    totalLabor.text=NULL;
+    itemDescount20per.text=NULL;
+    itemDescount20per.text=@"";
+    
+    
+    lAClass1.text=NULL;
+    lAClass2.text=NULL;
+    lAClass3.text=NULL;
+    lAClass4.text=NULL;
+    lAClass5.text=NULL;
+    lANo1.text=NULL;
+    lANo2.text=NULL;
+    lANo3.text=NULL;
+    lANo4.text=NULL;
+    lANo5.text=NULL;
+    
+    lATotalHours1.text=NULL;
+    lATotalHours2.text=NULL;
+    lATotalHours3.text=NULL;
+    lATotalHours4.text=NULL;
+    lATotalHours5.text=NULL;
+    
+    lARate1.text=NULL;
+    lARate2.text=NULL;
+    lARate3.text=NULL;
+    lARate4.text=NULL;
+    lARate5.text=NULL;
+    
+    lAAmount1.text=NULL;
+    lAAmount2.text=NULL;
+    lAAmount3.text=NULL;
+    lAAmount4.text=NULL;
+    lAAmount5.text=NULL;
+}
 
 -(NSString*)getCurrentDateTimeAsNSString
 {
