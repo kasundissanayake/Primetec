@@ -45,6 +45,11 @@
     int count2;
     
     NSUserDefaults *defaults;
+    
+    //start brin
+    MBProgressHUD *hud;
+
+    //end brin
 
 }
 
@@ -91,6 +96,9 @@
     count=0;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
+    [arrayImages removeAllObjects];
+
+    
     self.imagePicker=[[UIImagePickerController alloc]init];
     arrayImages=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
@@ -103,6 +111,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     
     // Do any additional setup after loading the view from its nib.
+    
+    
+    
     scrollView.frame = CGRectMake(0,0, 720, 2900);
     [scrollView setContentSize:CGSizeMake(700, 3250)];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
@@ -888,7 +899,8 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
-    else
+    
+ /*   else
     {
         uploading = NO;
         uploadingsketch=NO;
@@ -1080,11 +1092,7 @@
         {
             Qua5=qua5.text;
         }
-        
-        /*
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/dailyinspection/create/%@/%@/%@/00/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@//%@/%@/%@/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,txtHeader.text,contractor.text,txtAddress.text,txtCity.text,txtState.text,zip.text,txtTel.text,txtDateIN.text,txtCompetent.text,txtProject.text,appDelegate.projId,Town.text,txtEmail.text,txtWrkDone.text,name1,title1,name2,title2,name3,title3,name4,title4,name5,title5,name6,title6,name7,title7,name8,title8,depart1,dec1,depart2,dec2,depart3,dec3,depart4,dec4,txtHours.text,sigName,appDelegate.projPrintedName,repNo.text,ConName.text,weather.text,time.text,oriCalDays.text,usedCalDays.text,Des1,Qua1,Des2,Qua2,Des3,Qua3,Des4,Qua4,Des5,Qua5];
-        */
+
 
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
@@ -1153,8 +1161,213 @@
         usedCalDays.text=@"";
         
         
+    } */
+    
+    
+    
+    
+    
+    //start brin
+    
+    else
+    {
+        
+        hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.navigationController.view addSubview:hud];
+        hud.labelText=@"";
+        hud.dimBackground = YES;
+        hud.delegate = self;
+        [hud show:YES];
+        
+        
+        appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        
+        NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
+        
+        
+        
+        NSLog(@" sketch_array - save: %@", appDelegate.sketchesArray);
+        NSLog(@" image_array - save: %@", arrayImages);
+        
+        
+        NSMutableArray *sketchesNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < appDelegate.sketchesArray.count; i++){
+            NSString* imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+            [sketchesNameArray addObject:imggName];
+        }
+        
+        NSMutableArray *imgNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < arrayImages.count; i++){
+            NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
+            [imgNameArray addObject:imggName];
+        }
+        
+        NSLog(@"sketches names %@", sketchesNameArray);
+        NSLog(@"images names %@", imgNameArray);
+
+        
+        
+        BOOL saveStatus = [PRIMECMController
+                           saveDailyinspectionForm: appDelegate.username
+                           dIFHeader:txtProject.text
+                           contractor:contractor.text
+                           report_No:repNo.text
+                           con_Name:ConName.text
+                           p_o_Box:txtAddress.text
+                           city:txtCity.text
+                           state:txtState.text
+                           zip_Code:zip.text
+                           telephone_No:txtTel.text
+                           date:txtDateIN.text
+                           competentPerson:txtCompetent.text
+                           town_city:Town.text
+                           weather:weather.text
+                           time:time.text
+                           project:txtProject.text
+                           e_Mail:txtEmail.text
+                           workDoneBy:txtWrkDone.text
+                           contractorsHoursOfWork:txtHours.text
+                           printedName:appDelegate.projPrintedName
+                           project_id:appDelegate.projId
+                           signature:sigName
+                           original_Calendar_Days:oriCalDays.text
+                           calendar_Days_Used:usedCalDays.text
+                           sketchImg:[sketchesNameArray componentsJoinedByString:@","]
+                           images_uploaded:[imgNameArray componentsJoinedByString:@","]
+                           oVJName1:txtName1.text
+                            oVJName2:txtName2.text
+                            oVJName3:txtName3.text
+                            oVJName4:txtName4.text
+                            oVJTitle1:txtTitle1.text
+                            oVJTitle2:txtTitle2.text
+                            oVJTitle3:txtTitle3.text
+                            oVJTitle4:txtTitle4.text
+                           ];
+        
+     //   [self saveDailyInspectionItem];
+        
+        [hud setHidden:YES];
+        BOOL imageSaveState;
+        BOOL sketchSaveState;
+        BOOL singSaveState;
+        
+        //Signature to coredata
+        
+        NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        
+        NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
+        
+        
+        UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign];
+        
+        if(arrayImages.count>0)
+        {
+            for (int i = 0; i < arrayImages.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                NSString* imggName = [[arrayImages objectAtIndex:count1] valueForKey:@"name"];
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+                
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                
+                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                
+            }
+            
+        }
+        
+        if(appDelegate.sketchesArray.count>0)
+        {
+            for (int i=0;i < appDelegate.sketchesArray.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+                NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                singSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                
+            }
+            
+        }
+        
+        [hud setHidden:YES];
+        
+        if (saveStatus && singSaveState){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved Daily Inspection report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            //[self deleteImageFiles];
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
+    }
+
+    
+    
+    //end brin
+    
+    
+
+    
+}
+
+
+-(void)deleteImageFiles
+{
+    NSFileManager *fileMgr = [[NSFileManager alloc] init];
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+    
+    NSArray *directoryContents = [fileMgr contentsOfDirectoryAtPath:folderPath error:&error];
+    if (error == nil) {
+        for (NSString *path in directoryContents) {
+            NSString *fullPath = [folderPath stringByAppendingPathComponent:path];
+            BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+            if (!removeSuccess) {
+                // Error handling
+                
+            }
+        }
+    } else {
+        // Error handling
+        
+    }
+    
+    folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+    
+    directoryContents = [fileMgr contentsOfDirectoryAtPath:folderPath error:&error];
+    if (error == nil) {
+        for (NSString *path in directoryContents) {
+            NSString *fullPath = [folderPath stringByAppendingPathComponent:path];
+            BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+            if (!removeSuccess) {
+                // Error handling
+                
+            }
+        }
+    } else {
+        // Error handling
+        
     }
 }
+
+
 
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName
 {

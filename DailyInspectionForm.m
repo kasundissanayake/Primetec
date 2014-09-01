@@ -78,6 +78,11 @@
 @dynamic i_QTY4;
 @dynamic i_QTY5;
 
+//start brin
+@dynamic signature;
+
+//end brin
+
 -(NSDictionary*) toDictionary
 {
     NSArray *attributes = [[self.entity attributesByName] allKeys];

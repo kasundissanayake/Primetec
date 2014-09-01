@@ -38,6 +38,27 @@
 
 + (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector;
 
+
+
+//start brin
++ (BOOL)saveDailyinspectionForm:(NSString *)username dIFHeader:(NSString *)dIFHeader contractor:(NSString *)contractor report_No:(NSString *)report_No con_Name:(NSString *)con_Name p_o_Box:(NSString *)p_o_Box
+                           city:(NSString *)city state:(NSString *)state zip_Code:(NSString *)zip_Code telephone_No:(NSString *)telephone_No date:(NSString *)date competentPerson:(NSString *)competentPerson town_city:(NSString *)town_city weather:(NSString *)weather time:(NSString *)time project:(NSString *)project e_Mail:(NSString *)e_Mail workDoneBy:(NSString *)workDoneBy contractorsHoursOfWork:(NSString *)contractorsHoursOfWork  printedName:(NSString *)printedName project_id:(NSString *)project_id signature:(NSString *)signature original_Calendar_Days:(NSString *)original_Calendar_Days calendar_Days_Used:(NSString *)calendar_Days_Used  sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded oVJName1:(NSString *)oVJName1 oVJName2:(NSString *)oVJName2 oVJName3:(NSString *)oVJName3 oVJName4:(NSString *)oVJName4 oVJTitle1:(NSString *)oVJTitle1 oVJTitle2:(NSString *)oVJTitle2 oVJTitle3:(NSString *)oVJTitle3 oVJTitle4:(NSString *)oVJTitle4;
+
+
+
+/*
+ 
+ 
+ iFName1:(NSString *)iFName1 iFName2:(NSString *)iFName2 iFName3:(NSString *)iFName3 iFName4:(NSString *)iFName4 iFTitle1:(NSString *)iFTitle1 iFTitle2:(NSString *)iFTitle2 iFTitle3:(NSString *)iFTitle3 iFTitle4:(NSString *)iFTitle4 wDODepartmentOrCompany1:(NSString *)wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *)wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *)wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *)wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *)wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *)wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *)wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *)wDODescriptionOfWork4;
+ 
+ 
+ */
+
+
+
+//end brin
+
+
 + (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img;
 
 + (UIImage *) getTheImage:(NSString *)imgName;

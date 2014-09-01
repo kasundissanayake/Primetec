@@ -27,6 +27,141 @@
 
 @implementation PRIMECMController
 
+
+
+
+
+
+//start brin
+
+
++ (BOOL)saveDailyinspectionForm:(NSString *)username dIFHeader:(NSString *)dIFHeader contractor:(NSString *)contractor report_No:(NSString *)report_No con_Name:(NSString *)con_Name p_o_Box:(NSString *)p_o_Box
+                           city:(NSString *)city state:(NSString *)state zip_Code:(NSString *)zip_Code telephone_No:(NSString *)telephone_No date:(NSString *)date competentPerson:(NSString *)competentPerson town_city:(NSString *)town_city weather:(NSString *)weather time:(NSString *)time project:(NSString *)project e_Mail:(NSString *)e_Mail workDoneBy:(NSString *)workDoneBy contractorsHoursOfWork:(NSString *)contractorsHoursOfWork  printedName:(NSString *)printedName project_id:(NSString *)project_id signature:(NSString *)signature original_Calendar_Days:(NSString *)original_Calendar_Days calendar_Days_Used:(NSString *)calendar_Days_Used  sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded oVJName1:(NSString *)oVJName1 oVJName2:(NSString *)oVJName2 oVJName3:(NSString *)oVJName3 oVJName4:(NSString *)oVJName4 oVJTitle1:(NSString *)oVJTitle1 oVJTitle2:(NSString *)oVJTitle2 oVJTitle3:(NSString *)oVJTitle3 oVJTitle4:(NSString *)oVJTitle4
+
+
+
+{
+    
+    
+/*iFName1:(NSString *)iFName1 iFName2:(NSString *)iFName2 iFName3:(NSString *)iFName3 iFName4:(NSString *)iFName4 iFTitle1:(NSString *)iFTitle1 iFTitle2:(NSString *)iFTitle2 iFTitle3:(NSString *)iFTitle3 iFTitle4:(NSString *)iFTitle4 wDODepartmentOrCompany1:(NSString *)wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *)wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *)wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *)wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *)wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *)wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *)wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *)wDODescriptionOfWork4*/
+    
+
+    
+    DailyInspectionForm *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%@-CM%d", project_id, randNum];
+        
+        
+        
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"inspectionID"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
+        }
+    }
+    NSLog(@"New Non-Compliance Report non-ComplianceNoticeNo: %@", newIDD);
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"DailyInspectionForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"inspectionID"];
+    [assp setValue:dIFHeader forKey:@"dIFHeader"];
+    [assp setValue:contractor forKey:@"contractor"];
+    [assp setValue:report_No forKey:@"report_No"];
+    [assp setValue:con_Name forKey:@"con_Name"];
+    [assp setValue:p_o_Box forKey:@"p_o_Box"];
+    [assp setValue:city forKey:@"city"];
+    [assp setValue:state forKey:@"state"];
+    [assp setValue:zip_Code forKey:@"zip_Code"];
+    [assp setValue:telephone_No forKey:@"telephone_No"];
+    // [assp setValue:date forKey:@"date"];
+    [assp setValue:competentPerson forKey:@"competentPerson"];
+    [assp setValue:town_city forKey:@"town_city"];
+    [assp setValue:weather forKey:@"weather"];
+    [assp setValue:time forKey:@"time"];
+    [assp setValue:project forKey:@"project"];
+    [assp setValue:e_Mail forKey:@"e_Mail"];
+    [assp setValue:workDoneBy forKey:@"workDoneBy"];
+    [assp setValue:contractorsHoursOfWork forKey:@"contractorsHoursOfWork"];
+    [assp setValue:printedName forKey:@"printedName"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:signature forKey:@"signature"];
+    [assp setValue:calendar_Days_Used forKey:@"calendar_Days_Used"];
+    [assp setValue:original_Calendar_Days forKey:@"original_Calendar_Days"];
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    [assp setValue:sketchImg forKey:@"sketch_images"];
+    [assp setValue:oVJName1 forKey:@"oVJName1"];
+    [assp setValue:oVJName2 forKey:@"oVJName2"];
+    [assp setValue:oVJName3 forKey:@"oVJName3"];
+    [assp setValue:oVJName4 forKey:@"oVJName4"];
+    [assp setValue:oVJTitle1 forKey:@"oVJTitle1"];
+    [assp setValue:oVJTitle2 forKey:@"oVJTitle2"];
+    [assp setValue:oVJTitle3 forKey:@"oVJTitle3"];
+    [assp setValue:oVJTitle4 forKey:@"oVJTitle4"];
+    [assp setValue:oVJTitle4 forKey:@"oVJTitle4"];
+
+
+
+
+
+
+
+
+    
+    
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *Date = [myXMLdateReader dateFromString:date];
+    
+    [assp setValue:Date forKey:@"date"];
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        
+        NSLog(@"............Saved daily inspection successfully..............");
+        return TRUE;
+    }
+    
+}
+
+
+//endbrin
+
+
+
+
+
+
 + (int)synchronizeWithServer {
     
     NSString *url = [NSString stringWithFormat:@"%@", [PRIMECMAPPUtils getAPISyncPullEndpoint]];
@@ -511,6 +646,14 @@
         [assp setI_QTY3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY3"]]];
         [assp setI_QTY4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY4"]]];
         [assp setI_QTY5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY5"]]];
+        
+        
+        //start brin
+        [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
+        [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
+        [assp setSketch_images:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"sketch_images"]]];
+
+        //end brin
         
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

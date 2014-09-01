@@ -79,4 +79,10 @@
 @property (nonatomic, retain) NSString * i_QTY4;
 @property (nonatomic, retain) NSString * i_QTY5;
 
+//start brin
+@property (nonatomic, retain) NSString * signature;
+
+
+//end brin
+
 @end

@@ -31,6 +31,7 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize  mvc;
+@synthesize imageArray;
 
 
 //start brin
@@ -47,6 +48,14 @@
     [toolbar setHidden:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideToolbar" object:nil];
     sketchesArray=[[NSMutableArray alloc]init];
+    
+    //start brin
+    
+    imageArray=[[NSMutableArray alloc]init];
+
+    
+    //end brin
+    
     projectsArray=[[NSMutableArray alloc]init];
     RootVC *rvc=[[RootVC alloc] init];
 	rvc.title=@"";

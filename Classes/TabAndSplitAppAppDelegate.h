@@ -52,6 +52,14 @@
 
 @property (nonatomic, assign) NSInteger Tag;
 @property(nonatomic,retain)NSMutableArray *sketchesArray;
+
+//start brin
+
+@property(nonatomic,retain)NSMutableArray *imageArray;
+
+
+
+//end brin
 @property(nonatomic,retain)NSMutableArray *projectsArray;
 
 

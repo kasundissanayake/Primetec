@@ -121,6 +121,8 @@ UILabel *cno;
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
+    [arrayImages removeAllObjects];
+
     
     self.imagePicker=[[UIImagePickerController alloc]init];
     
