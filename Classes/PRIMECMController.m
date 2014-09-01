@@ -1241,11 +1241,11 @@
 + (NSString *) getExpenceIdByProjID:(NSString *)projId{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %d)", projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id=%@)", projId];
     [fetchRequest setPredicate:predicate];
     
     NSArray *speakers = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];

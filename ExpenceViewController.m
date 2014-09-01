@@ -52,7 +52,7 @@
     BOOL third;
     
     NSUserDefaults *defaults;
-
+    
 }
 
 @end
@@ -120,38 +120,7 @@
         ExpID=@"0";
     }
     
-    
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/expense/get/id/%@",appDelegate.projId];
-     
-     NSURL *apiURL =
-     [NSURL URLWithString:strURL];
-     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-     
-     
-     [urlRequest setHTTPMethod:@"GET"];
-     first=YES;
-     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-     _receivedData = [[NSMutableData alloc] init];
-     [connection start];
-     NSLog(@"URL---%@",strURL);
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
-    
-    
-    
-    
-    
-    //start brin
-    
-    
-    
-    
     defaults= [NSUserDefaults standardUserDefaults];
-    
     
     NSString* temp1 = [defaults objectForKey:@"ERDescription"];
     NSString* temp2 = [defaults objectForKey:@"ERJobNo"];
@@ -165,8 +134,6 @@
     NSString* temp10 = [defaults objectForKey:@"ERtxtCheckNum"];
     NSString* temp11 = [defaults objectForKey:@"ERdate6"];
     
-    
-
     ERDescription.text=temp1;
     ERJobNo.text=temp2;
     ERType.text=temp3;
@@ -178,16 +145,6 @@
     ERtxtWeek.text=temp9;
     ERtxtCheckNum.text=temp10;
     ERdate6.text=temp11;
-    
-    
-    // txtSignature.image=image1;
-    
-    
-    
-    
-    
-    
-    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -202,28 +159,10 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
-    
-    
-    
-    
-    //end brin
-    
-    
-    
-    
-    
-    
 }
 
 
-
-
-//start brin
-
 -(void)exit{
-    
-    
-    
     NSString* textField1Text = ERDescription.text;
     [defaults setObject:textField1Text forKey:@"ERDescription"];
     
@@ -265,22 +204,12 @@
     NSString* textField11Text = ERdate6.text;
     [defaults setObject:textField11Text forKey:@"ERdate6"];
     
-    
-    
     [defaults synchronize];
     
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
     
     [exportAlert show];
-    
-    
-    
 }
-
-//end brin
-
-
-
 
 
 -(void)getImageReviewer
@@ -935,52 +864,52 @@
     else
     {
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
-        third=YES;
-        first=NO;
-        Second=NO;
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/update/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            ExpID,header.text,cashAdvance.text,reimburs.text,ERtxtEmpName.text,ERtxtWeek.text,sigName,ERtxtEmpNum.text,ERtxtApprovedBy.text,ERtextDate6.text,@"hi",ERtxtCheckNum.text];
         
-        NSLog(@"URL---- %@",strURL);
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        //signature
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-        UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-        NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-        NSMutableData *postbody = [NSMutableData data];
-        
-        
-        NSString *boundary = @"---------------------------14737809831466499882746641449";
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-        [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[NSData dataWithData:imaData]];
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSLog(@"^^^^^^^^^^^^^%@",postbody);
-        
-        [urlRequest setHTTPBody:postbody];
-        // uploading=YES;
-        
-        NSLog(@"sent");
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        NSLog(@"URL---%@",strURL);
+        /*
+         NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/update/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+         ExpID,header.text,cashAdvance.text,reimburs.text,ERtxtEmpName.text,ERtxtWeek.text,sigName,ERtxtEmpNum.text,ERtxtApprovedBy.text,ERtextDate6.text,@"hi",ERtxtCheckNum.text];
+         
+         NSLog(@"URL---- %@",strURL);
+         
+         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+         NSURL *apiURL =
+         [NSURL URLWithString:uencodedUrl];
+         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+         [urlRequest setHTTPMethod:@"POST"];
+         
+         //signature
+         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+         NSString *documentsDirectory = [paths objectAtIndex:0];
+         NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
+         UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
+         NSData *imaData = UIImageJPEGRepresentation(image,0.3);
+         NSMutableData *postbody = [NSMutableData data];
+         
+         
+         NSString *boundary = @"---------------------------14737809831466499882746641449";
+         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+         [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+         
+         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[NSData dataWithData:imaData]];
+         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+         
+         NSLog(@"^^^^^^^^^^^^^%@",postbody);
+         
+         [urlRequest setHTTPBody:postbody];
+         // uploading=YES;
+         
+         NSLog(@"sent");
+         
+         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+         
+         _receivedData = [[NSMutableData alloc] init];
+         
+         [connection start];
+         NSLog(@"URL---%@",strURL);
+         */
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
@@ -988,23 +917,47 @@
         HUD.dimBackground = YES;
         HUD.delegate = self;
         [HUD show:YES];
-        cashAdvance.text=NULL;
-        cashAdvance.text=NULL;
-        reimburs.text=NULL ;
-        reimburs.text=NULL;
-        ERtxtEmpName.text=NULL;
-        ERtxtEmpName.text=NULL;
-        imgSignatureEx.image=NULL;
-        ERtextDate6.text=NULL;
-        ERtextDate6.text=NULL;
-        ERtxtApprovedBy.text=NULL;
-        ERtxtApprovedBy.text=NULL;
-        ERtxtWeek.text=NULL;
-        ERtxtWeek.text=NULL;
-        ERtxtEmpNum.text=NULL;
-        ERtxtEmpNum.text=NULL;
-        ERtxtCheckNum.text=NULL;
-        ERtxtCheckNum.text=NULL;
+        
+        BOOL saveStatus = [PRIMECMController
+                           saveExpenseForm:appDelegate.username
+                           approvedBy:ERtxtApprovedBy.text
+                           attachment:@""
+                           checkNo:ERtxtCheckNum.text
+                           date:ERtextDate6.text
+                           employeeNo:ERtxtEmpNum.text
+                           eMPName:ERtxtEmpName.text
+                           eRCashAdvance:cashAdvance.text
+                           eRFHeader:header.text
+                           eRReimbursement:reimburs.text
+                           eXReportNo:ExpID images_uploaded:@""
+                           project_id:appDelegate.projId
+                           signature:sigName
+                           weekEnding:ERtxtWeek.text
+                           ];
+        
+        [HUD setHidden:YES];
+        
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            
+            cashAdvance.text=NULL;
+            reimburs.text=NULL;
+            ERtxtEmpName.text=NULL;
+            imgSignatureEx.image = nil;
+            ERtextDate6.text=NULL;
+            ERtxtApprovedBy.text=NULL;
+            ERtxtWeek.text=NULL;
+            ERtxtEmpNum.text=NULL;
+            ERtxtCheckNum.text=NULL;
+            
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
+        
     }
 }
 
@@ -1024,48 +977,47 @@
     }
     else
     {
-        Second=YES;
-        uploading = NO;
-        uploadingsketch=NO;
-        first=NO;
+        
         NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
         
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            ExpID,appDelegate.projId,header.text,ERdate6.text,ERDescription.text,ERJobNo.text,ERType.text,txtMil1.text,txtRate1.text,txtTotal1.text];
-        
-        NSLog(@"URL---- %@",strURL);
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        //signature
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-        UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-        NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-        NSMutableData *postbody = [NSMutableData data];
-        
-        NSString *boundary = @"---------------------------14737809831466499882746641449";
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-        [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [postbody appendData:[NSData dataWithData:imaData]];
-        [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [urlRequest setHTTPBody:postbody];
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        NSLog(@"URL---%@",strURL);
+        /*
+         NSString *strURL = [NSString stringWithFormat:@"%@/api/expense/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
+         ExpID,appDelegate.projId,header.text,ERdate6.text,ERDescription.text,ERJobNo.text,ERType.text,txtMil1.text,txtRate1.text,txtTotal1.text];
+         
+         NSLog(@"URL---- %@",strURL);
+         
+         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+         NSURL *apiURL =
+         [NSURL URLWithString:uencodedUrl];
+         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+         [urlRequest setHTTPMethod:@"POST"];
+         
+         //signature
+         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+         NSString *documentsDirectory = [paths objectAtIndex:0];
+         NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
+         UIImage *image=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
+         NSData *imaData = UIImageJPEGRepresentation(image,0.3);
+         NSMutableData *postbody = [NSMutableData data];
+         
+         NSString *boundary = @"---------------------------14737809831466499882746641449";
+         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+         [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+         
+         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",sigName] dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+         [postbody appendData:[NSData dataWithData:imaData]];
+         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+         [urlRequest setHTTPBody:postbody];
+         
+         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+         
+         _receivedData = [[NSMutableData alloc] init];
+         
+         [connection start];
+         NSLog(@"URL---%@",strURL);
+         */
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
@@ -1074,13 +1026,39 @@
         HUD.delegate = self;
         [HUD show:YES];
         
-        ERdate6.text=NULL;
-        ERDescription.text=NULL;
-        ERJobNo.text=NULL;
-        ERType.text=NULL;
-        txtMil1.text=NULL ;
-        txtRate1.text=NULL;
-        txtTotal1.text=NULL;
+        BOOL saveStatus = [PRIMECMController
+                           saveExpenseData:appDelegate.username
+                           eRDate1:ERdate6.text
+                           eRDescription1:ERDescription.text
+                           eRJobNo1:ERJobNo.text
+                           eRPAMilage1:txtMil1.text
+                           eRPARate1:txtRate1.text
+                           eRTotal1:txtTotal1.text
+                           eRType1:ERType.text eXReportNo:ExpID
+                           images_uploaded:@""
+                           ];
+        
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            
+            ERdate6.text=NULL;
+            ERDescription.text=NULL;
+            ERJobNo.text=NULL;
+            ERType.text=NULL;
+            txtMil1.text=NULL ;
+            txtRate1.text=NULL;
+            txtTotal1.text=NULL;
+            ERType.text=NULL;
+            
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
+        
+        
     }
 }
 
@@ -1121,129 +1099,4 @@
     return current_img;
 }
 
--(void)uploadImage
-{
-    NSString *urlLink = [NSString stringWithFormat:@"%@/api/expense/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                         appDelegate.username,RecID,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
-    
-    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"URL---%@",unicodeLink);
-    
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:unicodeLink];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60.0];
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    NSLog(@"URL DESK----- %@",unicodeLink);
-    //isSendingDecs=YES;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-    NSMutableData *postbody = [NSMutableData data];
-    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
-    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-    // NSLog(@"********************* UPloadinggggg %i  %@",count1,[arrayImages objectAtIndex:count1]);
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[arrayImages objectAtIndex:count1] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[NSData dataWithData:imaData]];
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [urlRequest setHTTPBody:postbody];
-    uploading=YES;
-    first=NO;
-    Second=NO;
-    third=NO;
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    _receivedData = [[NSMutableData alloc] init];
-    [connection start];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData  *)data
-{
-    [_receivedData appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"eeeeee");
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [HUD setHidden:YES];
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    NSLog(@"response---%@",responseObject);
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    if (first) {
-        if(![[responseObject valueForKey:@"status"]isEqualToString:@"not found"])
-        {
-            ExpID=[responseObject valueForKey:@"id"];
-            NSLog(@"exp id---------%@",ExpID);
-        }
-        else{
-            ExpID=@"0";
-            NSLog(@"exp id---------%@",ExpID);
-        }
-    }
-    else if(Second){
-        NSLog(@"rec id---------second secon sec");
-        
-        if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-        {
-            RecID=[responseObject valueForKey:@"record_id"];
-            NSLog(@"rec id---------%@",RecID);
-            // Second=NO;
-            if(arrayImages.count>0)
-            {
-                count1=0;
-                [self uploadImage];
-            }
-            else
-            {
-                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [exportAlert show];
-            }
-        }
-    }
-    else if (uploading) {
-        
-        uploading=NO;
-        count1 ++;
-        if(count1< arrayImages.count)
-        {
-            [self uploadImage];
-        }
-        else
-        {
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-    }
-    else if(third){
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-    }
-}
 @end
