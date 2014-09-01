@@ -59,20 +59,50 @@
 
 @end
 
-
 @implementation Summary_3_ViewController
+@synthesize contractorRepresentative;
+@synthesize dailyTotal;
+@synthesize date1;
+@synthesize date2;
+@synthesize eQAmount1;
+@synthesize eQAmount2;
+@synthesize eQAmount3;
+@synthesize eQAmount4;
+@synthesize eQAmount5;
+@synthesize eQIdleActive1;
+@synthesize eQIdleActive2;
+@synthesize eQIdleActive3;
+@synthesize eQIdleActive4;
+@synthesize eQIdleActive5;
+@synthesize eQNo1;
+@synthesize eQNo2;
+@synthesize eQNo3;
+@synthesize eQNo4;
+@synthesize eQNo5;
+@synthesize eQRAte1;
+@synthesize eQRAte2;
+@synthesize eQRAte3;
+@synthesize eQRAte4;
+@synthesize eQRAte5;
+@synthesize eQSizeandClass1;
+@synthesize eQSizeandClass2;
+@synthesize eQSizeandClass3;
+@synthesize arrayImages;
+@synthesize eQSizeandClass4;
+@synthesize eQSizeandClass5;
+@synthesize eQTotalHours1;
+@synthesize eQTotalHours2;
+@synthesize eQTotalHours3;
+@synthesize eQTotalHours4;
+@synthesize eQTotalHours5;
+@synthesize inspector;
+@synthesize project_id;
+@synthesize signature1;
+@synthesize signature2;
+@synthesize sMSheetNo;
+@synthesize total_to_date;
 @synthesize  scrollView;
-@synthesize StxtDateCR, StxtDateINS;
-@synthesize imgSignatureCR, imgSignatureINS;
-@synthesize txtRate1,txtRate2,txtRate3,txtRate4,txtRate5,arrayImages;
 
-@synthesize class1,class2,class3,class4,class5,no1,no2,no3,no4,no5,active1,active2,active3,active4,active5,inspecter;
-
-@synthesize txtTotal1,txtTotal2,txtTotal3,txtTotal4,txtTotal5;
-
-@synthesize txtHours1,txtHours2,txtHours3,txtHours4,txtHours5,txtDailyTotal5,txtTotaToDatel5;
-
-@synthesize pm;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,14 +131,14 @@
     UITapGestureRecognizer *singleTapInspec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedInspector)];
     
     // singleTap.numberOfTapsRequired = 1;
-    imgSignatureINS.userInteractionEnabled = YES;
-    [imgSignatureINS addGestureRecognizer:singleTapInspec];
+    signature1.userInteractionEnabled = YES;
+    [signature1 addGestureRecognizer:singleTapInspec];
     
     
     UITapGestureRecognizer *singleTapReviewer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedReviewer)];
     // singleTap.numberOfTapsRequired = 1;
-    imgSignatureCR.userInteractionEnabled = YES;
-    [imgSignatureCR addGestureRecognizer:singleTapReviewer];
+    signature2.userInteractionEnabled = YES;
+    [signature2 addGestureRecognizer:singleTapReviewer];
     
     
     
@@ -118,10 +148,10 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
-    inspecter.text=appDelegate.projPrintedName;
-    StxtDateINS.text=dateString;
-    StxtDateCR.text= dateString;
-    pm.text = appDelegate.pm;
+    inspector.text=appDelegate.projPrintedName;
+    date1.text=dateString;
+    date2.text= dateString;
+    contractorRepresentative.text = appDelegate.pm;
     
 }
 
@@ -133,7 +163,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-    imgSignatureINS.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature"] folderPath:folderPath];
+    signature1.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature"] folderPath:folderPath];
     
 }
 
@@ -145,7 +175,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
-    imgSignatureCR.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
+    signature2.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
     
     
     }
@@ -203,7 +233,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField==txtHours1 || textField==txtHours2 || textField==txtHours3 || textField==txtHours4  || textField==txtHours5 ||textField==txtRate1 || textField==txtRate2 || textField==txtRate3 || textField==txtRate4 || textField==txtRate5 || textField==txtDailyTotal5 )
+    if(textField==eQTotalHours1 || textField==eQTotalHours2 || textField==eQTotalHours3 || textField==eQTotalHours4  || textField==eQTotalHours5 ||textField==eQRAte1 || textField==eQRAte2 || textField==eQRAte3 || textField==eQRAte4 || textField==eQRAte5 || textField==dailyTotal )
     {
         
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
@@ -213,17 +243,17 @@
             if (![myCharSet characterIsMember:c])
             {
                 
-                txtHours1.enabled=YES;
-                txtHours2.enabled=YES;
-                txtHours3.enabled=YES;
-                txtHours4.enabled=YES;
-                txtHours5.enabled=YES;
-                txtRate1.enabled=YES;
-                txtRate2.enabled=YES;
-                txtRate3.enabled=YES;
-                txtRate4.enabled=YES;
-                txtRate5.enabled=YES;
-                txtDailyTotal5.enabled=YES;
+                eQTotalHours1.enabled=YES;
+                eQTotalHours2.enabled=YES;
+                eQTotalHours3.enabled=YES;
+                eQTotalHours4.enabled=YES;
+                eQTotalHours5.enabled=YES;
+                eQRAte1.enabled=YES;
+                eQRAte2.enabled=YES;
+                eQRAte3.enabled=YES;
+                eQRAte4.enabled=YES;
+                eQRAte5.enabled=YES;
+                dailyTotal.enabled=YES;
                 
                 return NO;
             }
@@ -245,57 +275,57 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(textField==txtTotal1)
+    if(textField==eQAmount1)
     {
         
-        double dist1 = [self.txtHours1.text doubleValue];
-        double mileage1 = [self.txtRate1.text doubleValue];
-        txtTotal1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
-        [txtTotal1 resignFirstResponder];
+        double dist1 = [self.eQTotalHours1.text doubleValue];
+        double mileage1 = [self.eQRAte1.text doubleValue];
+        eQAmount1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
+        [eQAmount1 resignFirstResponder];
         
     }
-    if(textField==txtTotal2)
+    if(textField==eQAmount2)
     {
-        double dist2 = [self.txtHours2.text doubleValue];
-        double mileage2 = [self.txtRate2.text doubleValue];
-        txtTotal2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
+        double dist2 = [self.eQTotalHours2.text doubleValue];
+        double mileage2 = [self.eQRAte2.text doubleValue];
+        eQAmount2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
         
-        [txtTotal2 resignFirstResponder];
+        [eQAmount2 resignFirstResponder];
     }
-    if(textField==txtTotal3)
+    if(textField==eQAmount3)
     {
-        double dist3 = [self.txtHours3.text doubleValue];
-        double mileage3 = [self.txtRate3.text doubleValue];
-        txtTotal3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
+        double dist3 = [self.eQTotalHours3.text doubleValue];
+        double mileage3 = [self.eQRAte3.text doubleValue];
+        eQAmount3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
         
-        [txtTotal3 resignFirstResponder];
+        [eQAmount3 resignFirstResponder];
     }
     
-    if(textField==txtTotal4)
+    if(textField==eQAmount4)
     {
         
-        double dist4 = [self.txtHours4.text doubleValue];
-        double mileage4 = [self.txtRate4.text doubleValue];
-        txtTotal4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
-        [txtTotal4 resignFirstResponder];
+        double dist4 = [self.eQTotalHours4.text doubleValue];
+        double mileage4 = [self.eQRAte4.text doubleValue];
+        eQAmount4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
+        [eQAmount4 resignFirstResponder];
     }
-    if(textField==txtTotal5)
+    if(textField==eQAmount5)
     {
         
-        double dist5 = [self.txtHours5.text doubleValue];
-        double mileage5 = [self.txtRate5.text doubleValue];
-        txtTotal5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
-        [txtTotal5 resignFirstResponder];
+        double dist5 = [self.eQTotalHours5.text doubleValue];
+        double mileage5 = [self.eQRAte5.text doubleValue];
+        eQAmount5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
+        [eQAmount5 resignFirstResponder];
     }
-    double tot1 = [self.txtTotal1.text doubleValue];
-    double tot2 = [self.txtTotal2.text doubleValue];
-    double tot3 = [self.txtTotal3.text doubleValue];
-    double tot4 = [self.txtTotal4.text doubleValue];
-    double tot5 = [self.txtTotal5.text doubleValue];
+    double tot1 = [self.eQAmount1.text doubleValue];
+    double tot2 = [self.eQAmount2.text doubleValue];
+    double tot3 = [self.eQAmount3.text doubleValue];
+    double tot4 = [self.eQAmount4.text doubleValue];
+    double tot5 = [self.eQAmount5.text doubleValue];
     
     double allTot = tot1 + tot2 + tot3 + tot4 + tot5;
     
-    txtDailyTotal5.text = [NSString stringWithFormat:@"%.2f",allTot];
+    dailyTotal.text = [NSString stringWithFormat:@"%.2f",allTot];
     
     
     double sum = [appDelegate.str1 doubleValue];
@@ -303,7 +333,7 @@
     double totdate = sum+sum1;
     
     
-    txtTotaToDatel5.text = [NSString stringWithFormat:@"%.2f",totdate];
+    total_to_date.text = [NSString stringWithFormat:@"%.2f",totdate];
     
     
     
@@ -344,7 +374,7 @@
     
     
     
-    if(inspecter.text==NULL || inspecter.text.length==0 || imgSignatureINS.image==NULL ||  StxtDateINS.text==NULL || StxtDateINS.text.length==0  || StxtDateCR.text==NULL || StxtDateCR.text.length==0 || imgSignatureCR.image==NULL || StxtDateCR.text==NULL || StxtDateCR.text.length==0 || txtDailyTotal5.text==NULL || txtDailyTotal5.text.length==0 || txtTotaToDatel5.text==NULL || txtTotaToDatel5.text.length==0 || pm.text==NULL || pm.text.length==0)
+    if(inspector.text==NULL || inspector.text.length==0 || signature1.image==NULL ||  date1.text==NULL || date1.text.length==0  || date2.text==NULL || date2.text.length==0 || signature2.image==NULL || date2.text==NULL || date2.text.length==0 || dailyTotal.text==NULL || dailyTotal.text.length==0 || total_to_date.text==NULL || total_to_date.text.length==0 || contractorRepresentative.text==NULL || contractorRepresentative.text.length==0)
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -395,155 +425,155 @@
         NSString *field30=@" ";
         
         
-        if (class1.text!=NULL && class1.text.length!=0 ) {
+        if (eQSizeandClass1.text!=NULL && eQSizeandClass1.text.length!=0 ) {
             
-            field1=class1.text;
-            
-        }
-        
-        if (active1.text!=NULL && active1.text.length!=0 ) {
-            
-            field2=active1.text;
+            field1=eQSizeandClass1.text;
             
         }
         
-        if (no1.text!=NULL && no1.text.length!=0 ) {
+        if (eQIdleActive1.text!=NULL && eQIdleActive1.text.length!=0 ) {
             
-            field3=no1.text;
-            
-        }
-        
-        if (txtHours1.text!=NULL && txtHours1.text.length!=0 ) {
-            
-            field4=txtHours1.text;
+            field2=eQIdleActive1.text;
             
         }
         
-        if (txtRate1.text!=NULL && txtRate1.text.length!=0 ) {
+        if (eQNo1.text!=NULL && eQNo1.text.length!=0 ) {
             
-            field5=txtRate1.text;
-            
-        }
-        
-        if (txtTotal1.text!=NULL && txtTotal1.text.length!=0 ) {
-            
-            field6=txtTotal1.text;
+            field3=eQNo1.text;
             
         }
         
-        
-        //
-        
-        if (class2.text!=NULL && class2.text.length!=0 ) {
+        if (eQTotalHours1.text!=NULL && eQTotalHours1.text.length!=0 ) {
             
-            field7=class2.text;
+            field4=eQTotalHours1.text;
             
         }
         
-        if (active2.text!=NULL && active2.text.length!=0 ) {
+        if (eQRAte1.text!=NULL && eQRAte1.text.length!=0 ) {
             
-            field8=active2.text;
-            
-        }
-        
-        if (no2.text!=NULL && no2.text.length!=0 ) {
-            
-            field9=no2.text;
+            field5=eQRAte1.text;
             
         }
         
-        if (txtHours2.text!=NULL && txtHours2.text.length!=0 ) {
+        if (eQAmount1.text!=NULL && eQAmount1.text.length!=0 ) {
             
-            field10=txtHours2.text;
-            
-        }
-        
-        if (txtRate2.text!=NULL && txtRate2.text.length!=0 ) {
-            
-            field11=txtRate2.text;
-            
-        }
-        
-        if (txtTotal2.text!=NULL && txtTotal2.text.length!=0 ) {
-            
-            field12=txtTotal2.text;
+            field6=eQAmount1.text;
             
         }
         
         
         //
         
-        if (class3.text!=NULL && class3.text.length!=0 ) {
+        if (eQSizeandClass2.text!=NULL && eQSizeandClass2.text.length!=0 ) {
             
-            field13=class3.text;
-            
-        }
-        
-        if (active3.text!=NULL && active3.text.length!=0 ) {
-            
-            field14=active3.text;
+            field7=eQSizeandClass2.text;
             
         }
         
-        if (no3.text!=NULL && no3.text.length!=0 ) {
+        if (eQIdleActive2.text!=NULL && eQIdleActive2.text.length!=0 ) {
             
-            field15=no3.text;
-            
-        }
-        
-        if (txtHours3.text!=NULL && txtHours3.text.length!=0 ) {
-            
-            field16=txtHours3.text;
+            field8=eQIdleActive2.text;
             
         }
         
-        if (txtRate2.text!=NULL && txtRate2.text.length!=0 ) {
+        if (eQNo2.text!=NULL && eQNo2.text.length!=0 ) {
             
-            field17=txtRate2.text;
+            field9=eQNo2.text;
             
         }
         
-        if (txtTotal3.text!=NULL && txtTotal3.text.length!=0 ) {
+        if (eQTotalHours2.text!=NULL && eQTotalHours2.text.length!=0 ) {
             
-            field18=txtTotal3.text;
+            field10=eQTotalHours2.text;
+            
+        }
+        
+        if (eQRAte2.text!=NULL && eQRAte2.text.length!=0 ) {
+            
+            field11=eQRAte2.text;
+            
+        }
+        
+        if (eQAmount2.text!=NULL && eQAmount2.text.length!=0 ) {
+            
+            field12=eQAmount2.text;
+            
+        }
+        
+        
+        //
+        
+        if (eQSizeandClass3.text!=NULL && eQSizeandClass3.text.length!=0 ) {
+            
+            field13=eQSizeandClass3.text;
+            
+        }
+        
+        if (eQIdleActive3.text!=NULL && eQIdleActive3.text.length!=0 ) {
+            
+            field14=eQIdleActive3.text;
+            
+        }
+        
+        if (eQNo3.text!=NULL && eQNo3.text.length!=0 ) {
+            
+            field15=eQNo3.text;
+            
+        }
+        
+        if (eQTotalHours3.text!=NULL && eQTotalHours3.text.length!=0 ) {
+            
+            field16=eQTotalHours3.text;
+            
+        }
+        
+        if (eQRAte2.text!=NULL && eQRAte2.text.length!=0 ) {
+            
+            field17=eQRAte2.text;
+            
+        }
+        
+        if (eQAmount3.text!=NULL && eQAmount3.text.length!=0 ) {
+            
+            field18=eQAmount3.text;
             
         }
         
         //
         
-        if (class4.text!=NULL && class4.text.length!=0 ) {
+        if (eQSizeandClass4.text!=NULL && eQSizeandClass4.text.length!=0 ) {
             
-            field19=class4.text;
-            
-        }
-        
-        if (active4.text!=NULL && active4.text.length!=0 ) {
-            
-            field20=active4.text;
+            field19=eQSizeandClass4.text;
             
         }
         
-        if (no4.text!=NULL && no4.text.length!=0 ) {
+        if (eQIdleActive4.text!=NULL && eQIdleActive4.text.length!=0 ) {
             
-            field21=no4.text;
-            
-        }
-        
-        if (txtHours4.text!=NULL && txtHours4.text.length!=0 ) {
-            
-            field22=txtHours4.text;
+            field20=eQIdleActive4.text;
             
         }
         
-        if (txtRate4.text!=NULL && txtRate4.text.length!=0 ) {
+        if (eQNo4.text!=NULL && eQNo4.text.length!=0 ) {
             
-            field23=txtRate4.text;
+            field21=eQNo4.text;
             
         }
         
-        if (txtTotal4.text!=NULL && txtTotal4.text.length!=0 ) {
+        if (eQTotalHours4.text!=NULL && eQTotalHours4.text.length!=0 ) {
             
-            field24=txtTotal4.text;
+            field22=eQTotalHours4.text;
+            
+        }
+        
+        if (eQRAte4.text!=NULL && eQRAte4.text.length!=0 ) {
+            
+            field23=eQRAte4.text;
+            
+        }
+        
+        if (eQAmount4.text!=NULL && eQAmount4.text.length!=0 ) {
+            
+            field24=eQAmount4.text;
             
         }
         
@@ -551,39 +581,39 @@
         
         
         
-        if (class5.text!=NULL && class5.text.length!=0 ) {
+        if (eQSizeandClass5.text!=NULL && eQSizeandClass5.text.length!=0 ) {
             
-            field25=class5.text;
-            
-        }
-        
-        if (active5.text!=NULL && active5.text.length!=0 ) {
-            
-            field26=active5.text;
+            field25=eQSizeandClass5.text;
             
         }
         
-        if (no5.text!=NULL && no5.text.length!=0 ) {
+        if (eQIdleActive5.text!=NULL && eQIdleActive5.text.length!=0 ) {
             
-            field27=no5.text;
-            
-        }
-        
-        if (txtHours5.text!=NULL && txtHours5.text.length!=0 ) {
-            
-            field28=txtHours5.text;
+            field26=eQIdleActive5.text;
             
         }
         
-        if (txtRate5.text!=NULL && txtRate5.text.length!=0 ) {
+        if (eQNo5.text!=NULL && eQNo5.text.length!=0 ) {
             
-            field29=txtRate5.text;
+            field27=eQNo5.text;
             
         }
         
-        if (txtTotal5.text!=NULL && txtTotal5.text.length!=0 ) {
+        if (eQTotalHours5.text!=NULL && eQTotalHours5.text.length!=0 ) {
             
-            field30=txtTotal5.text;
+            field28=eQTotalHours5.text;
+            
+        }
+        
+        if (eQRAte5.text!=NULL && eQRAte5.text.length!=0 ) {
+            
+            field29=eQRAte5.text;
+            
+        }
+        
+        if (eQAmount5.text!=NULL && eQAmount5.text.length!=0 ) {
+            
+            field30=eQAmount5.text;
             
         }
        
@@ -596,7 +626,7 @@
         NSLog(@"saved val%@",savedValue);
         
         
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary3/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,inspecter.text,sigName1,StxtDateINS.text,pm.text,sigName2,StxtDateCR.text,txtDailyTotal5.text,txtTotaToDatel5.text];
+        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary3/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,inspector.text,sigName1,date1.text,contractorRepresentative.text,sigName2,date2.text,dailyTotal.text,total_to_date.text];
         
         NSLog(@"URL---- %@",strURL);
         
@@ -622,51 +652,51 @@
         HUD.delegate = self;
         [HUD show:YES];
         
-        txtHours1.text=@"";
-        txtHours2.text=@"";
-        txtHours3.text=@"";
-        txtHours4.text=@"";
-        txtHours5.text=@"";
+        eQTotalHours1.text=@"";
+        eQTotalHours2.text=@"";
+        eQTotalHours3.text=@"";
+        eQTotalHours4.text=@"";
+        eQTotalHours5.text=@"";
         
-        no1.text=@"";
-        no2.text=@"";
-        no3.text=@"";
-        no4.text=@"";
-        no5.text=@"";
+        eQNo1.text=@"";
+        eQNo2.text=@"";
+        eQNo3.text=@"";
+        eQNo4.text=@"";
+        eQNo5.text=@"";
         
-        active1.text=@"";
-        active2.text=@"";
-        active3.text=@"";
-        active4.text=@"";
-        active5.text=@"";
+        eQIdleActive1.text=@"";
+        eQIdleActive2.text=@"";
+        eQIdleActive3.text=@"";
+        eQIdleActive4.text=@"";
+        eQIdleActive5.text=@"";
         
-        class5.text=@"";
-        class4.text=@"";
-        class3.text=@"";
-        class2.text=@"";
-        class1.text=@"";
+        eQSizeandClass5.text=@"";
+        eQSizeandClass4.text=@"";
+        eQSizeandClass3.text=@"";
+        eQSizeandClass2.text=@"";
+        eQSizeandClass1.text=@"";
         
-        txtRate1.text=@"";
-        txtRate2.text=@"";
-        txtRate3.text=@"";
-        txtRate4.text=@"";
-        txtRate5.text=@"";
-        txtTotal1.text=@"";
-        txtTotal2.text=@"";
-        txtTotal3.text=@"";
-        txtTotal4.text=@"";
-        txtTotal5.text=@"";
+        eQRAte1.text=@"";
+        eQRAte2.text=@"";
+        eQRAte3.text=@"";
+        eQRAte4.text=@"";
+        eQRAte5.text=@"";
+        eQAmount1.text=@"";
+        eQAmount2.text=@"";
+        eQAmount3.text=@"";
+        eQAmount4.text=@"";
+        eQAmount5.text=@"";
         
-        inspecter.text=@"";
+        inspector.text=@"";
       
-        StxtDateCR.text=NULL;
-        StxtDateINS.text=NULL;
-        txtDailyTotal5.text=@"";
-        txtTotaToDatel5.text=@"";
-        pm.text=@"";
+        date2.text=NULL;
+        date1.text=NULL;
+        dailyTotal.text=@"";
+        total_to_date.text=@"";
+        contractorRepresentative.text=@"";
         
-        imgSignatureCR.image=NULL;
-        imgSignatureINS.image=NULL;
+        signature2.image=NULL;
+        signature1.image=NULL;
         
        }
     
