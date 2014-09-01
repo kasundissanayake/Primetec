@@ -47,7 +47,51 @@
 
 @implementation SummaryReportViewController
 
-@synthesize scrollView,arrayImages,sumContracter,sumAddress,sumCity,sumState,sumTel,sumDate,sumPW,sumFAN,sumProjectNum,sumDescription,sumConOrder,sumClass1,sumClass2,sumClass3,sumClass5,sumClass4,sumNo1,sumNo2,sumNo3,sumNo4,sumNo5,sumHr1,sumHr2,sumHr3,sumHr4,sumHr5,sumRate1,sumRate2,sumRate3,sumRate4,sumRate5,sumAmt1,sumAmt2,sumAmt3,sumAmt4,sumAmt5,sumTotLbr,sumHealth,sumIns,sum20,sumTotal,header,summeryZip;
+@synthesize city;
+@synthesize conPeWork;
+@synthesize constructionOrder;
+@synthesize contractor;
+@synthesize date;
+@synthesize descr;
+@synthesize federalAidNumber;
+@synthesize healWelAndPension;
+@synthesize insAndTaxesOnItem1;
+@synthesize itemDescount20per;
+@synthesize lAAmount1;
+@synthesize lAAmount2;
+@synthesize lAAmount3;
+@synthesize lAAmount4;
+@synthesize lAAmount5;
+@synthesize lAClass1;
+@synthesize lAClass2;
+@synthesize lAClass3;
+@synthesize lAClass4;
+@synthesize lAClass5;
+@synthesize lANo1;
+@synthesize lANo2;
+@synthesize lANo3;
+@synthesize lANo4;
+@synthesize lANo5;
+@synthesize lARate1;
+@synthesize lARate2;
+@synthesize lARate3;
+@synthesize lARate4;
+@synthesize lARate5;
+@synthesize lATotalHours1;
+@synthesize lATotalHours2;
+@synthesize lATotalHours3;
+@synthesize lATotalHours4;
+@synthesize lATotalHours5;
+@synthesize pOBox;
+@synthesize projectNo;
+@synthesize sSsSHeader;
+@synthesize state;
+@synthesize telephoneNo;
+@synthesize total;
+@synthesize totalLabor;
+@synthesize zip;
+@synthesize scrollView;
+@synthesize arrayImages;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,17 +114,17 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
     
-    [sumDescription.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
-    [sumDescription.layer setBorderColor: [[UIColor grayColor] CGColor]];
-    [sumDescription.layer setBorderWidth: 1.0];
-    [sumDescription.layer setCornerRadius:8.0f];
-    [sumDescription.layer setMasksToBounds:YES];
+    [descr.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
+    [descr.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [descr.layer setBorderWidth: 1.0];
+    [descr.layer setCornerRadius:8.0f];
+    [descr.layer setMasksToBounds:YES];
     
-    [sumConOrder.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
-    [sumConOrder.layer setBorderColor: [[UIColor grayColor] CGColor]];
-    [sumConOrder.layer setBorderWidth: 1.0];
-    [sumConOrder.layer setCornerRadius:8.0f];
-    [sumConOrder.layer setMasksToBounds:YES];
+    [constructionOrder.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
+    [constructionOrder.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [constructionOrder.layer setBorderWidth: 1.0];
+    [constructionOrder.layer setCornerRadius:8.0f];
+    [constructionOrder.layer setMasksToBounds:YES];
 
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
@@ -94,14 +138,14 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
-    sumContracter.text=appDelegate.projId;
-    sumAddress.text=appDelegate.address;
-    sumCity.text=appDelegate.city;
-    sumState.text=appDelegate.state;
-    summeryZip.text=appDelegate.zip;
-    sumProjectNum.text=appDelegate.projId;
-    sumDate.text=dateString;
-    sumTel.text=appDelegate.tel;
+    contractor.text=appDelegate.projId;
+    pOBox.text=appDelegate.address;
+    city.text=appDelegate.city;
+    state.text=appDelegate.state;
+    zip.text=appDelegate.zip;
+    projectNo.text=appDelegate.projId;
+    date.text=dateString;
+    telephoneNo.text=appDelegate.tel;
     
     
     
@@ -111,44 +155,44 @@
     defaults= [NSUserDefaults standardUserDefaults];
     
     
-    NSString* temp1 = [defaults objectForKey:@"sumPW"];
-    NSString* temp2 = [defaults objectForKey:@"sumFAN"];
-    NSString* temp3 = [defaults objectForKey:@"sumDescription"];
-    NSString* temp4 = [defaults objectForKey:@"sumConOrder"];
-    NSString* temp5 = [defaults objectForKey:@"sumClass1"];
-    NSString* temp6 = [defaults objectForKey:@"sumClass2"];
-    NSString* temp7 = [defaults objectForKey:@"sumClass3"];
-    NSString* temp8 = [defaults objectForKey:@"sumClass4"];
-    NSString* temp9 = [defaults objectForKey:@"sumClass5"];
-    NSString* temp10 = [defaults objectForKey:@"sumNo1"];
-    NSString* temp11 = [defaults objectForKey:@"sumNo2"];
-    NSString* temp12 = [defaults objectForKey:@"sumNo3"];
-    NSString* temp13 = [defaults objectForKey:@"sumNo4"];
-    NSString* temp14 = [defaults objectForKey:@"sumNo5"];
-    NSString* temp15 = [defaults objectForKey:@"sumHr1"];
-    NSString* temp16 = [defaults objectForKey:@"sumHr2"];
-    NSString* temp17 = [defaults objectForKey:@"sumHr3"];
-    NSString* temp18 = [defaults objectForKey:@"sumHr4"];
-    NSString* temp19 = [defaults objectForKey:@"sumHr5"];
-    NSString* temp20 = [defaults objectForKey:@"sumRate1"];
-    NSString* temp21 = [defaults objectForKey:@"sumRate2"];
-    NSString* temp22 = [defaults objectForKey:@"sumRate3"];
-    NSString* temp23 = [defaults objectForKey:@"sumRate4"];
-    NSString* temp24 = [defaults objectForKey:@"sumRate5"];
-    NSString* temp25 = [defaults objectForKey:@"sumAmt1"];
-    NSString* temp26 = [defaults objectForKey:@"sumAmt2"];
-    NSString* temp27 = [defaults objectForKey:@"sumAmt3"];
-    NSString* temp28 = [defaults objectForKey:@"sumAmt4"];
-    NSString* temp29 = [defaults objectForKey:@"sumAmt5"];
-    NSString* temp30 = [defaults objectForKey:@"sumTotLbr"];
+    NSString* temp1 = [defaults objectForKey:@"conPeWork"];
+    NSString* temp2 = [defaults objectForKey:@"federalAidNumber"];
+    NSString* temp3 = [defaults objectForKey:@"descr"];
+    NSString* temp4 = [defaults objectForKey:@"constructionOrder"];
+    NSString* temp5 = [defaults objectForKey:@"lAClass1"];
+    NSString* temp6 = [defaults objectForKey:@"lAClass2"];
+    NSString* temp7 = [defaults objectForKey:@"lAClass3"];
+    NSString* temp8 = [defaults objectForKey:@"lAClass4"];
+    NSString* temp9 = [defaults objectForKey:@"lAClass5"];
+    NSString* temp10 = [defaults objectForKey:@"lANo1"];
+    NSString* temp11 = [defaults objectForKey:@"lANo2"];
+    NSString* temp12 = [defaults objectForKey:@"lANo3"];
+    NSString* temp13 = [defaults objectForKey:@"lANo4"];
+    NSString* temp14 = [defaults objectForKey:@"lANo5"];
+    NSString* temp15 = [defaults objectForKey:@"lATotalHours1"];
+    NSString* temp16 = [defaults objectForKey:@"lATotalHours2"];
+    NSString* temp17 = [defaults objectForKey:@"lATotalHours3"];
+    NSString* temp18 = [defaults objectForKey:@"lATotalHours4"];
+    NSString* temp19 = [defaults objectForKey:@"lATotalHours5"];
+    NSString* temp20 = [defaults objectForKey:@"lARate1"];
+    NSString* temp21 = [defaults objectForKey:@"lARate2"];
+    NSString* temp22 = [defaults objectForKey:@"lARate3"];
+    NSString* temp23 = [defaults objectForKey:@"lARate4"];
+    NSString* temp24 = [defaults objectForKey:@"lARate5"];
+    NSString* temp25 = [defaults objectForKey:@"lAAmount1"];
+    NSString* temp26 = [defaults objectForKey:@"lAAmount2"];
+    NSString* temp27 = [defaults objectForKey:@"lAAmount3"];
+    NSString* temp28 = [defaults objectForKey:@"lAAmount4"];
+    NSString* temp29 = [defaults objectForKey:@"lAAmount5"];
+    NSString* temp30 = [defaults objectForKey:@"totalLabor"];
     
-    NSString* temp31 = [defaults objectForKey:@"sumHealth"];
+    NSString* temp31 = [defaults objectForKey:@"healWelAndPension"];
     
-    NSString* temp32 = [defaults objectForKey:@"sumIns"];
+    NSString* temp32 = [defaults objectForKey:@"insAndTaxesOnItem1"];
     
-    NSString* temp33 = [defaults objectForKey:@"sum20"];
+    NSString* temp33 = [defaults objectForKey:@"itemDescount20per"];
     
-    NSString* temp34= [defaults objectForKey:@"sumTotal"];
+    NSString* temp34= [defaults objectForKey:@"total"];
     
     
     
@@ -159,41 +203,41 @@
     
     
     
-    sumPW.text=temp1;
-    sumFAN.text=temp2;
-    sumDescription.text=temp3;
-    sumConOrder.text=temp4;
-    sumClass1.text=temp5;
-    sumClass2.text=temp6;
-    sumClass3.text=temp7;
-    sumClass4.text=temp8;
-    sumClass5.text=temp9;
-    sumNo1.text=temp10;
-    sumNo2.text=temp11;
+    conPeWork.text=temp1;
+    federalAidNumber.text=temp2;
+    descr.text=temp3;
+    constructionOrder.text=temp4;
+    lAClass1.text=temp5;
+    lAClass2.text=temp6;
+    lAClass3.text=temp7;
+    lAClass4.text=temp8;
+    lAClass5.text=temp9;
+    lANo1.text=temp10;
+    lANo2.text=temp11;
     
-    sumNo3.text=temp12;
-    sumNo4.text=temp13;
-    sumNo5.text=temp14;
-    sumHr1.text=temp15;
-    sumHr2.text=temp16;
-    sumHr3.text=temp17;
-    sumHr4.text=temp18;
-    sumHr5.text=temp19;
-    sumRate1.text=temp20;
-    sumRate2.text=temp21;
-    sumRate3.text=temp22;
-    sumRate4.text=temp23;
-    sumRate5.text=temp24;
-    sumAmt1.text=temp25;
-    sumAmt2.text=temp26;
-    sumAmt3.text=temp27;
-    sumAmt4.text=temp28;
-    sumAmt5.text=temp29;
-    sumTotLbr.text=temp30;
-    sumHealth.text=temp31;
-    sumIns.text=temp32;
-    sum20.text=temp33;
-    sumTotal.text=temp34;
+    lANo3.text=temp12;
+    lANo4.text=temp13;
+    lANo5.text=temp14;
+    lATotalHours1.text=temp15;
+    lATotalHours2.text=temp16;
+    lATotalHours3.text=temp17;
+    lATotalHours4.text=temp18;
+    lATotalHours5.text=temp19;
+    lARate1.text=temp20;
+    lARate2.text=temp21;
+    lARate3.text=temp22;
+    lARate4.text=temp23;
+    lARate5.text=temp24;
+    lAAmount1.text=temp25;
+    lAAmount2.text=temp26;
+    lAAmount3.text=temp27;
+    lAAmount4.text=temp28;
+    lAAmount5.text=temp29;
+    totalLabor.text=temp30;
+    healWelAndPension.text=temp31;
+    insAndTaxesOnItem1.text=temp32;
+    itemDescount20per.text=temp33;
+    total.text=temp34;
     
     
     
@@ -240,121 +284,121 @@
     
     
     
-    NSString* textField1Text = sumPW.text;
-    [defaults setObject:textField1Text forKey:@"sumPW"];
+    NSString* textField1Text = conPeWork.text;
+    [defaults setObject:textField1Text forKey:@"conPeWork"];
     
     
-    NSString* textField2Text = sumFAN.text;
-    [defaults setObject:textField2Text forKey:@"sumFAN"];
+    NSString* textField2Text = federalAidNumber.text;
+    [defaults setObject:textField2Text forKey:@"federalAidNumber"];
     
-    NSString* textField3Text = sumDescription.text;
-    [defaults setObject:textField3Text forKey:@"sumDescription"];
-    
-    
-    NSString* textField4Text = sumConOrder.text;
-    [defaults setObject:textField4Text forKey:@"sumConOrder"];
-    
-    NSString* textField5Text = sumClass1.text;
-    [defaults setObject:textField5Text forKey:@"sumClass1"];
-    
-    NSString* textField6Text = sumClass2.text;
-    [defaults setObject:textField6Text forKey:@"sumClass2"];
+    NSString* textField3Text = descr.text;
+    [defaults setObject:textField3Text forKey:@"descr"];
     
     
-    NSString* textField7Text = sumClass3.text;
-    [defaults setObject:textField7Text forKey:@"sumClass3"];
+    NSString* textField4Text = constructionOrder.text;
+    [defaults setObject:textField4Text forKey:@"constructionOrder"];
+    
+    NSString* textField5Text = lAClass1.text;
+    [defaults setObject:textField5Text forKey:@"lAClass1"];
+    
+    NSString* textField6Text = lAClass2.text;
+    [defaults setObject:textField6Text forKey:@"lAClass2"];
     
     
-    
-    NSString* textField8Text = sumClass4.text;
-    [defaults setObject:textField8Text forKey:@"sumClass4"];
+    NSString* textField7Text = lAClass3.text;
+    [defaults setObject:textField7Text forKey:@"lAClass3"];
     
     
     
-    NSString* textField9Text = sumClass5.text;
-    [defaults setObject:textField9Text forKey:@"sumClass5"];
-    
-    NSString* textField10Text = sumNo1.text;
-    [defaults setObject:textField10Text forKey:@"sumNo1"];
-    
-    
-    NSString* textField11Text = sumNo2.text;
-    [defaults setObject:textField11Text forKey:@"sumNo2"];
-    
-    NSString* textField12Text = sumNo3.text;
-    [defaults setObject:textField12Text forKey:@"sumNo3"];
-    
-    NSString* textField13Text = sumNo4.text;
-    [defaults setObject:textField13Text forKey:@"sumNo4"];
-    
-    NSString* textField14Text = sumNo5.text;
-    [defaults setObject:textField14Text forKey:@"sumNo5"];
-    
-    NSString* textField15Text = sumHr1.text;
-    [defaults setObject:textField15Text forKey:@"sumHr1"];
-    
-    NSString* textField16Text = sumHr2.text;
-    [defaults setObject:textField16Text forKey:@"sumHr2"];
-    
-    NSString* textField17Text = sumHr3.text;
-    [defaults setObject:textField17Text forKey:@"sumHr3"];
-    
-    NSString* textField18Text = sumHr4.text;
-    [defaults setObject:textField18Text forKey:@"sumHr4"];
-    
-    NSString* textField19Text = sumHr5.text;
-    [defaults setObject:textField19Text forKey:@"sumHr5"];
-    
-    NSString* textField20Text = sumRate1.text;
-    [defaults setObject:textField20Text forKey:@"sumRate1"];
-    
-    NSString* textField21Text = sumRate2.text;
-    [defaults setObject:textField21Text forKey:@"sumRate2"];
-    
-    NSString* textField22Text = sumRate3.text;
-    [defaults setObject:textField22Text forKey:@"sumRate3"];
-    
-    NSString* textField23Text = sumRate4.text;
-    [defaults setObject:textField23Text forKey:@"sumRate4"];
-    
-    NSString* textField24Text = sumRate5.text;
-    [defaults setObject:textField24Text forKey:@"sumRate5"];
-    
-    NSString* textField25Text = sumAmt1.text;
-    [defaults setObject:textField25Text forKey:@"sumAmt1"];
-    
-    NSString* textField26Text = sumAmt2.text;
-    [defaults setObject:textField26Text forKey:@"sumAmt2"];
-    
-    NSString* textField27Text = sumAmt3.text;
-    [defaults setObject:textField27Text forKey:@"sumAmt3"];
-    
-    NSString* textField28Text = sumAmt4.text;
-    [defaults setObject:textField28Text forKey:@"sumAmt4"];
-    
-    NSString* textField29Text = sumAmt5.text;
-    [defaults setObject:textField29Text forKey:@"sumAmt5"];
-    
-    NSString* textField30Text = sumTotLbr.text;
-    [defaults setObject:textField30Text forKey:@"sumTotLbr"];
-    
-    
-    NSString* textField31Text = sumHealth.text;
-    [defaults setObject:textField31Text forKey:@"sumHealth"];
+    NSString* textField8Text = lAClass4.text;
+    [defaults setObject:textField8Text forKey:@"lAClass4"];
     
     
     
-    NSString* textField32Text = sumIns.text;
-    [defaults setObject:textField32Text forKey:@"sumIns"];
+    NSString* textField9Text = lAClass5.text;
+    [defaults setObject:textField9Text forKey:@"lAClass5"];
+    
+    NSString* textField10Text = lANo1.text;
+    [defaults setObject:textField10Text forKey:@"lANo1"];
+    
+    
+    NSString* textField11Text = lANo2.text;
+    [defaults setObject:textField11Text forKey:@"lANo2"];
+    
+    NSString* textField12Text = lANo3.text;
+    [defaults setObject:textField12Text forKey:@"lANo3"];
+    
+    NSString* textField13Text = lANo4.text;
+    [defaults setObject:textField13Text forKey:@"lANo4"];
+    
+    NSString* textField14Text = lANo5.text;
+    [defaults setObject:textField14Text forKey:@"lANo5"];
+    
+    NSString* textField15Text = lATotalHours1.text;
+    [defaults setObject:textField15Text forKey:@"lATotalHours1"];
+    
+    NSString* textField16Text = lATotalHours2.text;
+    [defaults setObject:textField16Text forKey:@"lATotalHours2"];
+    
+    NSString* textField17Text = lATotalHours3.text;
+    [defaults setObject:textField17Text forKey:@"lATotalHours3"];
+    
+    NSString* textField18Text = lATotalHours4.text;
+    [defaults setObject:textField18Text forKey:@"lATotalHours4"];
+    
+    NSString* textField19Text = lATotalHours5.text;
+    [defaults setObject:textField19Text forKey:@"lATotalHours5"];
+    
+    NSString* textField20Text = lARate1.text;
+    [defaults setObject:textField20Text forKey:@"lARate1"];
+    
+    NSString* textField21Text = lARate2.text;
+    [defaults setObject:textField21Text forKey:@"lARate2"];
+    
+    NSString* textField22Text = lARate3.text;
+    [defaults setObject:textField22Text forKey:@"lARate3"];
+    
+    NSString* textField23Text = lARate4.text;
+    [defaults setObject:textField23Text forKey:@"lARate4"];
+    
+    NSString* textField24Text = lARate5.text;
+    [defaults setObject:textField24Text forKey:@"lARate5"];
+    
+    NSString* textField25Text = lAAmount1.text;
+    [defaults setObject:textField25Text forKey:@"lAAmount1"];
+    
+    NSString* textField26Text = lAAmount2.text;
+    [defaults setObject:textField26Text forKey:@"lAAmount2"];
+    
+    NSString* textField27Text = lAAmount3.text;
+    [defaults setObject:textField27Text forKey:@"lAAmount3"];
+    
+    NSString* textField28Text = lAAmount4.text;
+    [defaults setObject:textField28Text forKey:@"lAAmount4"];
+    
+    NSString* textField29Text = lAAmount5.text;
+    [defaults setObject:textField29Text forKey:@"lAAmount5"];
+    
+    NSString* textField30Text = totalLabor.text;
+    [defaults setObject:textField30Text forKey:@"totalLabor"];
+    
+    
+    NSString* textField31Text = healWelAndPension.text;
+    [defaults setObject:textField31Text forKey:@"healWelAndPension"];
     
     
     
-    NSString* textField33Text = sum20.text;
-    [defaults setObject:textField33Text forKey:@"sum20"];
+    NSString* textField32Text = insAndTaxesOnItem1.text;
+    [defaults setObject:textField32Text forKey:@"insAndTaxesOnItem1"];
     
     
-    NSString* textField34Text = sumTotal.text;
-    [defaults setObject:textField34Text forKey:@"sumTotal"];
+    
+    NSString* textField33Text = itemDescount20per.text;
+    [defaults setObject:textField33Text forKey:@"itemDescount20per"];
+    
+    
+    NSString* textField34Text = total.text;
+    [defaults setObject:textField34Text forKey:@"total"];
     
     
     [defaults synchronize];
@@ -385,7 +429,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField==sumHr1 || textField==sumHr2 || textField==sumHr3 || textField==sumHr4  || textField==sumHr4 ||textField==sumHr5 || textField==sumRate1 || textField==sumRate2 || textField==sumRate3 || textField==sumRate4 || textField==sumRate5 || textField==sumHealth || textField==sumIns)
+    if(textField==lATotalHours1 || textField==lATotalHours2 || textField==lATotalHours3 || textField==lATotalHours4  || textField==lATotalHours4 ||textField==lATotalHours5 || textField==lARate1 || textField==lARate2 || textField==lARate3 || textField==lARate4 || textField==lARate5 || textField==healWelAndPension || textField==insAndTaxesOnItem1)
     {
         
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
@@ -395,18 +439,18 @@
             if (![myCharSet characterIsMember:c])
             {
                 
-                sumHr1.enabled=YES;
-                sumHr2.enabled=YES;
-                sumHr3.enabled=YES;
-                sumHr4.enabled=YES;
-                sumHr5.enabled=YES;
-                sumRate1.enabled=YES;
-                sumRate2.enabled=YES;
-                sumRate3.enabled=YES;
-                sumRate4.enabled=YES;
-                sumRate5.enabled=YES;
-                sumHealth.enabled=YES;
-                sumIns.enabled=YES;
+                lATotalHours1.enabled=YES;
+                lATotalHours2.enabled=YES;
+                lATotalHours3.enabled=YES;
+                lATotalHours4.enabled=YES;
+                lATotalHours5.enabled=YES;
+                lARate1.enabled=YES;
+                lARate2.enabled=YES;
+                lARate3.enabled=YES;
+                lARate4.enabled=YES;
+                lARate5.enabled=YES;
+                healWelAndPension.enabled=YES;
+                insAndTaxesOnItem1.enabled=YES;
 
                 
                 return NO;
@@ -414,7 +458,7 @@
             
                 else{
             
-                //  sumFAN.enabled=NO;
+                //  federalAidNumber.enabled=NO;
 
             }
             
@@ -560,58 +604,58 @@ didReceiveResponse:(NSURLResponse *)response
 {
   
     
-    if(textField==sumAmt1)
+    if(textField==lAAmount1)
     {
-        double dist1 = [self.sumHr1.text doubleValue];
-        double mileage1 = [self.sumRate1.text doubleValue];
-        sumAmt1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
-        [sumAmt1 resignFirstResponder];
+        double dist1 = [self.lATotalHours1.text doubleValue];
+        double mileage1 = [self.lARate1.text doubleValue];
+        lAAmount1.text =  [NSString stringWithFormat:@"%.2f",dist1 * mileage1];
+        [lAAmount1 resignFirstResponder];
     }
-    if(textField==sumAmt2)
+    if(textField==lAAmount2)
     {
-        double dist2 = [self.sumHr2.text doubleValue];
-        double mileage2 = [self.sumRate2.text doubleValue];
-        sumAmt2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
+        double dist2 = [self.lATotalHours2.text doubleValue];
+        double mileage2 = [self.lARate2.text doubleValue];
+        lAAmount2.text =  [NSString stringWithFormat:@"%.2f",dist2 * mileage2];
         
-        [sumAmt2 resignFirstResponder];
+        [lAAmount2 resignFirstResponder];
     }
-    if(textField==sumAmt3)
+    if(textField==lAAmount3)
     {
-        double dist3 = [self.sumHr3.text doubleValue];
-        double mileage3 = [self.sumRate3.text doubleValue];
-        sumAmt3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
+        double dist3 = [self.lATotalHours3.text doubleValue];
+        double mileage3 = [self.lARate3.text doubleValue];
+        lAAmount3.text =  [NSString stringWithFormat:@"%.2f",dist3 * mileage3];
         
-        [sumAmt3 resignFirstResponder];
+        [lAAmount3 resignFirstResponder];
     }
     
-    if(textField==sumAmt4)
+    if(textField==lAAmount4)
     {
         
-        double dist4 = [self.sumHr4.text doubleValue];
-        double mileage4 = [self.sumRate4.text doubleValue];
-        sumAmt4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
-        [sumAmt4 resignFirstResponder];
+        double dist4 = [self.lATotalHours4.text doubleValue];
+        double mileage4 = [self.lARate4.text doubleValue];
+        lAAmount4.text =  [NSString stringWithFormat:@"%.2f",dist4 * mileage4];
+        [lAAmount4 resignFirstResponder];
     }
-    if(textField==sumAmt5)
+    if(textField==lAAmount5)
     {
         
-        double dist5 = [self.sumHr5.text doubleValue];
-        double mileage5 = [self.sumRate5.text doubleValue];
-        sumAmt5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
-        [sumAmt5 resignFirstResponder];
+        double dist5 = [self.lATotalHours5.text doubleValue];
+        double mileage5 = [self.lARate5.text doubleValue];
+        lAAmount5.text =  [NSString stringWithFormat:@"%.2f",dist5 * mileage5];
+        [lAAmount5 resignFirstResponder];
     }
     
-    double tot1 = [self.sumAmt1.text doubleValue];
-    double tot2 = [self.sumAmt2.text doubleValue];
-    double tot3 = [self.sumAmt3.text doubleValue];
-    double tot4 = [self.sumAmt4.text doubleValue];
-    double tot5 = [self.sumAmt5.text doubleValue];
+    double tot1 = [self.lAAmount1.text doubleValue];
+    double tot2 = [self.lAAmount2.text doubleValue];
+    double tot3 = [self.lAAmount3.text doubleValue];
+    double tot4 = [self.lAAmount4.text doubleValue];
+    double tot5 = [self.lAAmount5.text doubleValue];
     double allTot = tot1 + tot2 + tot3 + tot4 + tot5;
     
-    sumTotLbr.text =  [NSString stringWithFormat:@"%.2f",allTot];
-    double insu  = [self.sumIns.text doubleValue];
+    totalLabor.text =  [NSString stringWithFormat:@"%.2f",allTot];
+    double insu  = [self.insAndTaxesOnItem1.text doubleValue];
     
-    double health  = [self.sumHealth.text doubleValue];
+    double health  = [self.healWelAndPension.text doubleValue];
     
     double calcpersentage  = allTot + insu + health;
     
@@ -619,11 +663,11 @@ didReceiveResponse:(NSURLResponse *)response
     
     double gtotal = t20 + calcpersentage;
     
-    sum20.text = [NSString stringWithFormat:@"%.2f",t20];
+    itemDescount20per.text = [NSString stringWithFormat:@"%.2f",t20];
     
-    sumTotal.text = [NSString stringWithFormat:@"%.2f",gtotal];
+    total.text = [NSString stringWithFormat:@"%.2f",gtotal];
     
-    appDelegate.str1=sumTotal.text;
+    appDelegate.str1=total.text;
     
     
     
@@ -642,7 +686,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (IBAction)next:(id)sender {
    
     
-    if(sumContracter.text==NULL || sumContracter.text.length==0 || sumAddress.text==NULL || sumAddress.text.length==0 || sumCity.text==NULL || sumCity.text.length==0 || sumState.text==NULL || sumState.text.length==0 || sumTel.text==NULL || sumTel.text.length==0 || sumDate.text==NULL || sumDate.text.length==0 || sumPW.text==NULL || sumPW.text.length==0 || sumFAN.text==NULL || sumFAN.text.length==0 || sumProjectNum.text==NULL || sumProjectNum.text.length==0 || sumDescription.text==NULL || sumDescription.text.length==0 || sumConOrder.text==NULL || sumConOrder.text.length==0 || sumTotal.text==NULL || sumTotal.text.length==0 || sumHealth.text==NULL || sumHealth.text.length==0 || sumIns.text==NULL || sumIns.text.length==0 || sumTotLbr.text==NULL || sumTotLbr.text.length==0 ||  sum20.text==NULL || sum20.text.length==0  || summeryZip.text==NULL ||summeryZip.text.length==0  )
+    if(contractor.text==NULL || contractor.text.length==0 || pOBox.text==NULL || pOBox.text.length==0 || city.text==NULL || city.text.length==0 || state.text==NULL || state.text.length==0 || telephoneNo.text==NULL || telephoneNo.text.length==0 || date.text==NULL || date.text.length==0 || conPeWork.text==NULL || conPeWork.text.length==0 || federalAidNumber.text==NULL || federalAidNumber.text.length==0 || projectNo.text==NULL || projectNo.text.length==0 || descr.text==NULL || descr.text.length==0 || constructionOrder.text==NULL || constructionOrder.text.length==0 || total.text==NULL || total.text.length==0 || healWelAndPension.text==NULL || healWelAndPension.text.length==0 || insAndTaxesOnItem1.text==NULL || insAndTaxesOnItem1.text.length==0 || totalLabor.text==NULL || totalLabor.text.length==0 ||  itemDescount20per.text==NULL || itemDescount20per.text.length==0  || zip.text==NULL ||zip.text.length==0  )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -687,160 +731,160 @@ didReceiveResponse:(NSURLResponse *)response
         
         
         
-        if (sumClass1.text!=NULL && sumClass1.text.length!=0 ) {
+        if (lAClass1.text!=NULL && lAClass1.text.length!=0 ) {
             
-            field1=sumClass1.text;
-            
-        }
-        
-        if (sumNo1.text!=NULL && sumNo1.text.length!=0 ) {
-            
-            field2=sumNo1.text;
+            field1=lAClass1.text;
             
         }
         
-        if (sumHr1.text!=NULL && sumHr1.text.length!=0 ) {
+        if (lANo1.text!=NULL && lANo1.text.length!=0 ) {
             
-            field3=sumHr1.text;
-            
-        }
-        
-        if (sumRate1.text!=NULL && sumRate1.text.length!=0 ) {
-            
-            field4=sumRate1.text;
+            field2=lANo1.text;
             
         }
         
-        if (sumAmt1.text!=NULL && sumAmt1.text.length!=0 ) {
+        if (lATotalHours1.text!=NULL && lATotalHours1.text.length!=0 ) {
             
-            field5=sumAmt1.text;
-            
-        }
-        
-        if (sumClass2.text!=NULL && sumClass2.text.length!=0 ) {
-            
-            field6=sumClass2.text;
+            field3=lATotalHours1.text;
             
         }
         
-        if (sumNo2.text!=NULL && sumNo2.text.length!=0 ) {
+        if (lARate1.text!=NULL && lARate1.text.length!=0 ) {
             
-            field7=sumNo2.text;
-            
-        }
-        
-        if (sumHr2.text!=NULL && sumHr2.text.length!=0 ) {
-            
-            field8=sumHr2.text;
+            field4=lARate1.text;
             
         }
         
-        if (sumRate2.text!=NULL && sumRate2.text.length!=0 ) {
+        if (lAAmount1.text!=NULL && lAAmount1.text.length!=0 ) {
             
-            field9=sumRate2.text;
+            field5=lAAmount1.text;
             
         }
         
-        
-        if (sumAmt2.text!=NULL && sumAmt2.text.length!=0 ) {
+        if (lAClass2.text!=NULL && lAClass2.text.length!=0 ) {
             
-            field10=sumAmt2.text;
+            field6=lAClass2.text;
+            
+        }
+        
+        if (lANo2.text!=NULL && lANo2.text.length!=0 ) {
+            
+            field7=lANo2.text;
+            
+        }
+        
+        if (lATotalHours2.text!=NULL && lATotalHours2.text.length!=0 ) {
+            
+            field8=lATotalHours2.text;
+            
+        }
+        
+        if (lARate2.text!=NULL && lARate2.text.length!=0 ) {
+            
+            field9=lARate2.text;
             
         }
         
         
-        if (sumClass3.text!=NULL && sumClass3.text.length!=0 ) {
+        if (lAAmount2.text!=NULL && lAAmount2.text.length!=0 ) {
             
-            field11=sumClass3.text;
-            
-        }
-        
-        if (sumNo3.text!=NULL && sumNo3.text.length!=0 ) {
-            
-            field12=sumNo3.text;
+            field10=lAAmount2.text;
             
         }
         
-        if (sumHr3.text!=NULL && sumHr3.text.length!=0 ) {
+        
+        if (lAClass3.text!=NULL && lAClass3.text.length!=0 ) {
             
-            field13=sumHr3.text;
+            field11=lAClass3.text;
             
         }
         
-        if (sumRate3.text!=NULL && sumRate3.text.length!=0 ) {
+        if (lANo3.text!=NULL && lANo3.text.length!=0 ) {
             
-            field14=sumRate3.text;
-            
-        }
-        
-        if (sumAmt3.text!=NULL && sumAmt3.text.length!=0 ) {
-            
-            field15=sumAmt3.text;
+            field12=lANo3.text;
             
         }
         
-        if (sumClass4.text!=NULL && sumClass4.text.length!=0 ) {
+        if (lATotalHours3.text!=NULL && lATotalHours3.text.length!=0 ) {
             
-            field16=sumClass4.text;
-            
-        }
-        
-        if (sumNo4.text!=NULL && sumNo4.text.length!=0 ) {
-            
-            field17=sumNo4.text;
+            field13=lATotalHours3.text;
             
         }
         
-        if (sumHr4.text!=NULL && sumHr4.text.length!=0 ) {
+        if (lARate3.text!=NULL && lARate3.text.length!=0 ) {
             
-            field18=sumHr4.text;
-            
-        }
-        
-        if (sumRate4.text!=NULL && sumRate4.text.length!=0 ) {
-            
-            field19=sumRate4.text;
+            field14=lARate3.text;
             
         }
         
-        if (sumAmt4.text!=NULL && sumAmt4.text.length!=0 ) {
+        if (lAAmount3.text!=NULL && lAAmount3.text.length!=0 ) {
             
-            field20=sumAmt4.text;
-            
-        }
-        
-        if (sumClass5.text!=NULL && sumClass5.text.length!=0 ) {
-            
-            field21=sumClass5.text;
+            field15=lAAmount3.text;
             
         }
         
-        if (sumNo5.text!=NULL && sumNo5.text.length!=0 ) {
+        if (lAClass4.text!=NULL && lAClass4.text.length!=0 ) {
             
-            field22=sumNo5.text;
-            
-        }
-        
-        if (sumHr5.text!=NULL && sumHr5.text.length!=0 ) {
-            
-            field23=sumHr5.text;
+            field16=lAClass4.text;
             
         }
         
-        if (sumRate5.text!=NULL && sumRate5.text.length!=0 ) {
+        if (lANo4.text!=NULL && lANo4.text.length!=0 ) {
             
-            field24=sumRate5.text;
+            field17=lANo4.text;
             
         }
         
-        if (sumAmt5.text!=NULL && sumAmt5.text.length!=0 ) {
+        if (lATotalHours4.text!=NULL && lATotalHours4.text.length!=0 ) {
             
-            field25=sumAmt5.text;
+            field18=lATotalHours4.text;
+            
+        }
+        
+        if (lARate4.text!=NULL && lARate4.text.length!=0 ) {
+            
+            field19=lARate4.text;
+            
+        }
+        
+        if (lAAmount4.text!=NULL && lAAmount4.text.length!=0 ) {
+            
+            field20=lAAmount4.text;
+            
+        }
+        
+        if (lAClass5.text!=NULL && lAClass5.text.length!=0 ) {
+            
+            field21=lAClass5.text;
+            
+        }
+        
+        if (lANo5.text!=NULL && lANo5.text.length!=0 ) {
+            
+            field22=lANo5.text;
+            
+        }
+        
+        if (lATotalHours5.text!=NULL && lATotalHours5.text.length!=0 ) {
+            
+            field23=lATotalHours5.text;
+            
+        }
+        
+        if (lARate5.text!=NULL && lARate5.text.length!=0 ) {
+            
+            field24=lARate5.text;
+            
+        }
+        
+        if (lAAmount5.text!=NULL && lAAmount5.text.length!=0 ) {
+            
+            field25=lAAmount5.text;
             
         }
         
         NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,appDelegate.projId,header.text,sumContracter.text,sumAddress.text,sumCity.text,sumState.text,summeryZip.text,sumTel.text,sumDate.text,@"hi",sumPW.text,sumFAN.text,sumProjectNum.text,sumDescription.text,sumConOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,sumTotLbr.text,sumHealth.text,sumIns.text,sum20.text,sumTotal.text,appDelegate.projPrintedName];
+                            appDelegate.username,appDelegate.projId,sSHeader.text,contractor.text,pOBox.text,city.text,state.text,zip.text,telephoneNo.text,date.text,@"hi",conPeWork.text,federalAidNumber.text,projectNo.text,descr.text,constructionOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,totalLabor.text,healWelAndPension.text,insAndTaxesOnItem1.text,itemDescount20per.text,total.text,appDelegate.projPrintedName];
         
         
         // NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -868,53 +912,53 @@ didReceiveResponse:(NSURLResponse *)response
         HUD.delegate = self;
         [HUD show:YES];
         
-        sumContracter.text=NULL;
-        sumAddress.text=NULL;
-        sumCity.text=NULL;
-        sumState.text=NULL;
-        sumTel.text=NULL;
-        sumDate.text=NULL;
-        sumPW.text=NULL;
-        sumFAN.text=NULL;
-        sumProjectNum.text=NULL;
-        sumDescription.text=NULL;
-        sumConOrder.text=NULL;
-        sumTotal.text=NULL;
-        sumHealth.text=NULL;
-        sumIns.text=NULL;
-        sumTotLbr.text=NULL;
-        sum20.text=NULL;
-        sum20.text=@"";
+        contractor.text=NULL;
+        pOBox.text=NULL;
+        city.text=NULL;
+        state.text=NULL;
+        telephoneNo.text=NULL;
+        date.text=NULL;
+        conPeWork.text=NULL;
+        federalAidNumber.text=NULL;
+        projectNo.text=NULL;
+        descr.text=NULL;
+        constructionOrder.text=NULL;
+        total.text=NULL;
+        healWelAndPension.text=NULL;
+        insAndTaxesOnItem1.text=NULL;
+        totalLabor.text=NULL;
+        itemDescount20per.text=NULL;
+        itemDescount20per.text=@"";
         
         
-        sumClass1.text=NULL;
-        sumClass2.text=NULL;
-        sumClass3.text=NULL;
-        sumClass4.text=NULL;
-        sumClass5.text=NULL;
-        sumNo1.text=NULL;
-        sumNo2.text=NULL;
-        sumNo3.text=NULL;
-        sumNo4.text=NULL;
-        sumNo5.text=NULL;
+        lAClass1.text=NULL;
+        lAClass2.text=NULL;
+        lAClass3.text=NULL;
+        lAClass4.text=NULL;
+        lAClass5.text=NULL;
+        lANo1.text=NULL;
+        lANo2.text=NULL;
+        lANo3.text=NULL;
+        lANo4.text=NULL;
+        lANo5.text=NULL;
         
-        sumHr1.text=NULL;
-        sumHr2.text=NULL;
-        sumHr3.text=NULL;
-        sumHr4.text=NULL;
-        sumHr5.text=NULL;
+        lATotalHours1.text=NULL;
+        lATotalHours2.text=NULL;
+        lATotalHours3.text=NULL;
+        lATotalHours4.text=NULL;
+        lATotalHours5.text=NULL;
         
-        sumRate1.text=NULL;
-        sumRate2.text=NULL;
-        sumRate3.text=NULL;
-        sumRate4.text=NULL;
-        sumRate5.text=NULL;
+        lARate1.text=NULL;
+        lARate2.text=NULL;
+        lARate3.text=NULL;
+        lARate4.text=NULL;
+        lARate5.text=NULL;
         
-        sumAmt1.text=NULL;
-        sumAmt2.text=NULL;
-        sumAmt3.text=NULL;
-        sumAmt4.text=NULL;
-        sumAmt5.text=NULL;
+        lAAmount1.text=NULL;
+        lAAmount2.text=NULL;
+        lAAmount3.text=NULL;
+        lAAmount4.text=NULL;
+        lAAmount5.text=NULL;
         
         
     }

@@ -6,51 +6,51 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SummaryReportViewController">
             <connections>
-                <outlet property="header" destination="h4J-fc-4cw" id="pIA-gn-59F"/>
+                <outlet property="city" destination="3SY-yP-HrA" id="TqV-aK-vUB"/>
+                <outlet property="conPeWork" destination="Kdl-et-LW9" id="Fmt-yX-5WG"/>
+                <outlet property="constructionOrder" destination="0UF-mh-1qf" id="BIF-gE-8E4"/>
+                <outlet property="contractor" destination="F6O-JA-22n" id="tZz-rd-34D"/>
+                <outlet property="date" destination="glA-5i-LSS" id="1Bj-AX-DoE"/>
+                <outlet property="descr" destination="5kE-UU-4NR" id="9ps-Jd-B9p"/>
+                <outlet property="federalAidNumber" destination="Z0i-0h-WCV" id="7av-gt-0DE"/>
+                <outlet property="healWelAndPension" destination="X5u-Qf-dmd" id="gOw-a5-HDB"/>
+                <outlet property="id" destination="B90-M3-d91" id="Kgx-9S-fBj"/>
+                <outlet property="insAndTaxesOnItem1" destination="fQA-5e-LOi" id="dE1-8D-QdM"/>
+                <outlet property="itemDescount20per" destination="Ugo-a6-1I0" id="dwH-xr-Zno"/>
+                <outlet property="lAAmount1" destination="gUJ-eC-Nz3" id="7iN-cM-dgd"/>
+                <outlet property="lAAmount2" destination="E5b-ej-ihX" id="7gf-Ya-hkk"/>
+                <outlet property="lAAmount3" destination="5yk-He-oMx" id="ezb-QD-XmD"/>
+                <outlet property="lAAmount4" destination="hCq-CX-2ay" id="lQg-og-k28"/>
+                <outlet property="lAAmount5" destination="ZAk-Cw-J00" id="bBG-qG-gYt"/>
+                <outlet property="lAClass1" destination="t2D-Nj-pFU" id="hQ5-Rh-cwd"/>
+                <outlet property="lAClass2" destination="RKi-6E-pdC" id="Qp9-Ks-QlM"/>
+                <outlet property="lAClass3" destination="QMv-E8-QMp" id="CcJ-ec-D0r"/>
+                <outlet property="lAClass4" destination="5i3-Ca-ceg" id="E0D-dB-rek"/>
+                <outlet property="lAClass5" destination="S2x-4a-NpD" id="evq-ZU-DdA"/>
+                <outlet property="lANo1" destination="tsq-mT-atC" id="dNM-Xl-7fO"/>
+                <outlet property="lANo2" destination="954-gI-3PE" id="ZBi-hg-O2R"/>
+                <outlet property="lANo3" destination="Fye-vl-oQw" id="gEa-AK-Tvw"/>
+                <outlet property="lANo4" destination="Ca5-7T-deW" id="ig9-In-NEd"/>
+                <outlet property="lANo5" destination="qsb-a9-Jtj" id="LRU-Ep-jje"/>
+                <outlet property="lARate1" destination="eWx-qn-X3u" id="bhZ-wV-jUT"/>
+                <outlet property="lARate2" destination="uc1-1f-c2G" id="MZX-48-PYE"/>
+                <outlet property="lARate3" destination="DKR-4V-m4w" id="5NH-Oa-dcc"/>
+                <outlet property="lARate4" destination="pGd-ZZ-M7M" id="DqP-nV-krV"/>
+                <outlet property="lARate5" destination="xP1-Fe-zAv" id="8P5-K9-s1o"/>
+                <outlet property="lATotalHours1" destination="XkP-RM-MPs" id="dGm-za-YSW"/>
+                <outlet property="lATotalHours2" destination="HgL-m5-1ig" id="023-c9-Vwo"/>
+                <outlet property="lATotalHours3" destination="eNK-ov-EUu" id="2S4-RW-JNf"/>
+                <outlet property="lATotalHours4" destination="9V8-BN-Bvg" id="51n-kv-Sa5"/>
+                <outlet property="lATotalHours5" destination="ZyV-Rv-Zb3" id="ld1-vH-oDl"/>
+                <outlet property="pOBox" destination="3Is-K9-I5l" id="ao5-am-HcC"/>
+                <outlet property="projectNo" destination="2PI-44-NpE" id="6Wk-ku-QLc"/>
+                <outlet property="sSHeader" destination="h4J-fc-4cw" id="Bho-cD-AuP"/>
                 <outlet property="scrollView" destination="JPR-i7-DuG" id="vb6-AW-hIY"/>
-                <outlet property="sum20" destination="Ugo-a6-1I0" id="zmF-5k-kZT"/>
-                <outlet property="sumAddress" destination="3Is-K9-I5l" id="eOl-8P-opw"/>
-                <outlet property="sumAmt1" destination="gUJ-eC-Nz3" id="Ftj-sv-KpZ"/>
-                <outlet property="sumAmt2" destination="E5b-ej-ihX" id="FCr-R4-yIM"/>
-                <outlet property="sumAmt3" destination="5yk-He-oMx" id="XaT-bw-U0b"/>
-                <outlet property="sumAmt4" destination="hCq-CX-2ay" id="IrC-xj-MTk"/>
-                <outlet property="sumAmt5" destination="ZAk-Cw-J00" id="X0D-LP-kU7"/>
-                <outlet property="sumCity" destination="3SY-yP-HrA" id="olS-Og-gRW"/>
-                <outlet property="sumClass1" destination="t2D-Nj-pFU" id="Iat-WK-7Xv"/>
-                <outlet property="sumClass2" destination="RKi-6E-pdC" id="iO1-Br-il0"/>
-                <outlet property="sumClass3" destination="QMv-E8-QMp" id="Chg-t0-sRl"/>
-                <outlet property="sumClass4" destination="5i3-Ca-ceg" id="luj-jM-x23"/>
-                <outlet property="sumClass5" destination="S2x-4a-NpD" id="Wbl-5j-ppy"/>
-                <outlet property="sumConOrder" destination="0UF-mh-1qf" id="Z4q-HG-nIr"/>
-                <outlet property="sumContracter" destination="F6O-JA-22n" id="abJ-Y3-9Ch"/>
-                <outlet property="sumDate" destination="glA-5i-LSS" id="fUP-hU-Mbi"/>
-                <outlet property="sumDescription" destination="5kE-UU-4NR" id="5a5-2E-E3o"/>
-                <outlet property="sumFAN" destination="Z0i-0h-WCV" id="keG-WI-alb"/>
-                <outlet property="sumHealth" destination="X5u-Qf-dmd" id="KpP-Hl-4Nb"/>
-                <outlet property="sumHr1" destination="XkP-RM-MPs" id="4u1-cr-BdN"/>
-                <outlet property="sumHr2" destination="HgL-m5-1ig" id="tPm-qB-IIq"/>
-                <outlet property="sumHr3" destination="eNK-ov-EUu" id="n5a-hb-fq0"/>
-                <outlet property="sumHr4" destination="9V8-BN-Bvg" id="3fk-hj-i9I"/>
-                <outlet property="sumHr5" destination="ZyV-Rv-Zb3" id="vss-vs-Z1q"/>
-                <outlet property="sumIns" destination="fQA-5e-LOi" id="UcP-co-OFB"/>
-                <outlet property="sumNo1" destination="tsq-mT-atC" id="JwK-XL-YJS"/>
-                <outlet property="sumNo2" destination="954-gI-3PE" id="3Wh-IR-XR5"/>
-                <outlet property="sumNo3" destination="Fye-vl-oQw" id="vNz-2i-knw"/>
-                <outlet property="sumNo4" destination="Ca5-7T-deW" id="cPs-Ip-Yi4"/>
-                <outlet property="sumNo5" destination="qsb-a9-Jtj" id="Uee-d7-doY"/>
-                <outlet property="sumPW" destination="Kdl-et-LW9" id="YNs-bQ-xWW"/>
-                <outlet property="sumProjectNum" destination="2PI-44-NpE" id="HXH-WN-lMc"/>
-                <outlet property="sumRate1" destination="eWx-qn-X3u" id="88Z-Wl-pq7"/>
-                <outlet property="sumRate2" destination="uc1-1f-c2G" id="818-QN-F9W"/>
-                <outlet property="sumRate3" destination="DKR-4V-m4w" id="iIf-mx-sbn"/>
-                <outlet property="sumRate4" destination="pGd-ZZ-M7M" id="lGP-7O-uoX"/>
-                <outlet property="sumRate5" destination="xP1-Fe-zAv" id="jLz-U6-AxW"/>
-                <outlet property="sumState" destination="FUM-uL-TsV" id="jOe-mn-NUk"/>
-                <outlet property="sumTel" destination="2b4-wU-1IM" id="Xep-6Y-kYh"/>
-                <outlet property="sumTotLbr" destination="hN7-a9-U5F" id="Hme-lL-ema"/>
-                <outlet property="sumTotal" destination="Cpy-gP-TH5" id="EuM-em-SKl"/>
-                <outlet property="summeryZip" destination="DhR-4x-tOx" id="Fa5-lN-iyx"/>
-                <outlet property="view" destination="2" id="3"/>
+                <outlet property="state" destination="FUM-uL-TsV" id="9Rz-r0-WJ5"/>
+                <outlet property="telephoneNo" destination="2b4-wU-1IM" id="dht-IK-IGM"/>
+                <outlet property="total" destination="Cpy-gP-TH5" id="y58-hq-fOM"/>
+                <outlet property="totalLabor" destination="hN7-a9-U5F" id="hlS-pd-WB2"/>
+                <outlet property="zip" destination="DhR-4x-tOx" id="2Dw-0Y-Z7T"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -298,7 +298,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="F6O-JA-22n">
-                            <rect key="frame" x="29" y="148" width="631" height="40"/>
+                            <rect key="frame" x="29" y="148" width="311" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -583,6 +583,19 @@
                         </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="quN-39-MNt">
                             <rect key="frame" x="534" y="184" width="87" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="B90-M3-d91">
+                            <rect key="frame" x="340" y="148" width="320" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sx8-Fg-H5M">
+                            <rect key="frame" x="340" y="114" width="88" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                             <nil key="highlightedColor"/>
