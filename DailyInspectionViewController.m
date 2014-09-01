@@ -1,4 +1,3 @@
-//
 //  DailyInspectionViewController.m
 //  TabAndSplitApp
 //
@@ -48,9 +47,9 @@
     
     //start brin
     MBProgressHUD *hud;
-
+    
     //end brin
-
+    
 }
 
 @end
@@ -97,7 +96,7 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
     [arrayImages removeAllObjects];
-
+    
     
     self.imagePicker=[[UIImagePickerController alloc]init];
     arrayImages=[[NSMutableArray alloc]init];
@@ -111,8 +110,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
     
     // Do any additional setup after loading the view from its nib.
-    
-    
     
     scrollView.frame = CGRectMake(0,0, 720, 2900);
     [scrollView setContentSize:CGSizeMake(700, 3250)];
@@ -133,18 +130,9 @@
     [dateFormat1 setDateFormat:@"hh:mm"];
     NSString *dateString1 = [dateFormat1 stringFromDate:today1];
     
-    
- //start brin
-    
-    
     time.text=dateString1;
     ConName.text=appDelegate.client;
     Town.text=appDelegate.city;
-
- //end brin
-    
-    
-    
     
     contractor.text=appDelegate.projId;
     txtAddress.text=appDelegate.address;
@@ -155,13 +143,7 @@
     txtProject.text=appDelegate.projName;
     zip.text=appDelegate.zip;
     
-    
-    
-    
-  //start brin
-    
     NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
-    
     
     
     
@@ -171,15 +153,7 @@
     [textField2 setSuggestions:array];
     [textField3 setSuggestions:array];
     [textFiel4 setSuggestions:array];
-    
-    
-    
-    
-    
-    
-    
     defaults= [NSUserDefaults standardUserDefaults];
-    
     
     NSString* temp1 = [defaults objectForKey:@"textField1Text"];
     NSString* temp2 = [defaults objectForKey:@"textField2Text"];
@@ -224,18 +198,6 @@
     NSString* temp41= [defaults objectForKey:@"textField41Text"];
     NSString* temp42= [defaults objectForKey:@"textField42Text"];
     
-    
-
-    
-    
-    
-    
-    
-    
-    NSLog(@"gggggggggg----------%@",temp1);
-    NSLog(@"sssssssssss----------%@",temp8);
-    
-    
     repNo.text=temp1;
     txtCompetent.text=temp2;
     weather.text=temp3;
@@ -279,7 +241,7 @@
     txtDescription4.text=temp41;
     txtHours.text=temp42;
     
-
+    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
                                style:UIBarButtonItemStyleDone
@@ -292,32 +254,11 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
-    
-
-    
-   //end brin
-    
-    
-    
-    
-    
-    
-    
 }
 
-
-
-
-
-
 -(void)exit{
-    
-    
-    
-    
     NSString* textField1Text = repNo.text;
     [defaults setObject:textField1Text forKey:@"textField1Text"];
-    
     
     NSString* textField2Text = txtCompetent.text;
     [defaults setObject:textField2Text forKey:@"textField2Text"];
@@ -447,23 +388,10 @@
     
     UIImage* textField43Text = imgSignatureDaily.image;
     [defaults setObject:UIImagePNGRepresentation(textField43Text)   forKey:@"textField43Text"];
-    
-    
     [defaults synchronize];
-    
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    
     [exportAlert show];
-    
-    
-    
 }
-
-
-
-
-
-
 
 -(void)showAddImageView
 {
@@ -899,276 +827,6 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
-    
- /*   else
-    {
-        uploading = NO;
-        uploadingsketch=NO;
-        NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
-        NSString *name1=@" ";
-        NSString *name2=@" ";
-        NSString *name3=@" ";
-        NSString *name4=@" ";
-        NSString *name5=@" ";
-        NSString *name6=@" ";
-        NSString *name7=@" ";
-        NSString *name8=@" ";
-        NSString *title1=@" ";
-        NSString *title2=@" ";
-        NSString *title3=@" ";
-        NSString *title4=@" ";
-        NSString *title5=@" ";
-        NSString *title6=@" ";
-        NSString *title7=@" ";
-        NSString *title8=@" ";
-        NSString *depart1=@" ";
-        NSString *depart2=@" ";
-        NSString *depart3=@" ";
-        NSString *depart4=@" ";
-        NSString *dec1=@" ";
-        NSString *dec2=@" ";
-        NSString *dec3=@" ";
-        NSString *dec4=@" ";
-        NSString *Des1=@" ";
-        NSString *Des2=@" ";
-        NSString *Des3=@" ";
-        NSString *Des4=@" ";
-        NSString *Des5=@" ";
-        
-        NSString *Qua1=@" ";
-        NSString *Qua2=@" ";
-        NSString *Qua3=@" ";
-        NSString *Qua4=@" ";
-        NSString *Qua5=@" ";
-        
-        
-        if(txtName1.text!=NULL && txtName1.text.length!=0)
-        {
-            name1=txtName1.text;
-        }
-        if(txtName2.text!=NULL && txtName2.text.length!=0)
-        {
-            name2=txtName2.text;
-        }
-        if(txtName3.text!=NULL && txtName3.text.length!=0)
-        {
-            name3=txtName3.text;
-        }
-        if(txtName4.text!=NULL && txtName4.text.length!=0)
-        {
-            name4=txtName4.text;
-        }
-        if(txtName5.text!=NULL && txtName5.text.length!=0)
-        {
-            name5=txtName5.text;
-        }
-        if(txtname6.text!=NULL && txtname6.text.length!=0)
-        {
-            name6=txtname6.text;
-        }
-        if(txtName7.text!=NULL && txtName7.text.length!=0)
-        {
-            name7=txtName7.text;
-        }
-        if(txtName8.text!=NULL && txtName8.text.length!=0)
-        {
-            name8=txtName8.text;
-        }
-        
-        if(txtTitle1.text!=NULL && txtTitle1.text.length!=0)
-        {
-            title1=txtTitle1.text;
-        }
-        if(txtTitle2.text!=NULL && txtTitle2.text.length!=0)
-        {
-            title2=txtTitle2.text;
-        }
-        if(txtTitle3.text!=NULL && txtTitle3.text.length!=0)
-        {
-            title3=txtTitle3.text;
-        }
-        if(txtTitle4.text!=NULL && txtTitle4.text.length!=0)
-        {
-            title4=txtTitle4.text;
-        }
-        if(txtTitle5.text!=NULL && txtTitle5.text.length!=0)
-        {
-            title5=txtTitle5.text;
-        }
-        if(txtTitle6.text!=NULL && txtTitle6.text.length!=0)
-        {
-            title6=txtTitle6.text;
-        }
-        if(txtTitle7.text!=NULL && txtTitle7.text.length!=0)
-        {
-            title7=txtTitle7.text;
-        }
-        if(txtTitle8.text!=NULL && txtTitle8.text.length!=0)
-        {
-            title8=txtTitle8.text;
-        }
-        if(txtName1.text!=NULL && txtName1.text.length!=0)
-        {
-            name1=txtName1.text;
-        }
-        if(txtCompany1.text!=NULL && txtCompany1.text.length!=0)
-        {
-            depart1=txtCompany1.text;
-        }
-        if(txtCompany2.text!=NULL && txtCompany2.text.length!=0)
-        {
-            depart2=txtCompany2.text;
-        }
-        if(txtCompany3.text!=NULL && txtCompany3.text.length!=0)
-        {
-            depart3=txtCompany3.text;
-        }
-        if(txtCompany4.text!=NULL && txtCompany4.text.length!=0)
-        {
-            depart4=txtCompany4.text;
-        }
-        if(txtDescription1.text!=NULL && txtDescription1.text.length!=0)
-        {
-            dec1=txtDescription1.text;
-        }
-        if(txtDescription2.text!=NULL && txtDescription2.text.length!=0)
-        {
-            dec2=txtDescription2.text;
-        }
-        if(txtDescription3.text!=NULL && txtDescription3.text.length!=0)
-        {
-            dec3=txtDescription3.text;
-        }
-        if(txtDescription4.text!=NULL && txtDescription4.text.length!=0)
-        {
-            dec4=txtDescription4.text;
-        }
-        
-        if(des1.text!=NULL && des1.text.length!=0)
-        {
-            Des1=des1.text;
-        }
-        if(des2.text!=NULL && des2.text.length!=0)
-        {
-            Des2=des2.text;
-        }
-        if(des3.text!=NULL && des3.text.length!=0)
-        {
-            Des3=des3.text;
-        }
-        if(des4.text!=NULL && des4.text.length!=0)
-        {
-            Des4=des4.text;
-        }
-        if(des5.text!=NULL && des5.text.length!=0)
-        {
-            Des5=des5.text;
-        }
-        
-        
-        
-        if(qua1.text!=NULL && qua1.text.length!=0)
-        {
-            Qua1=qua1.text;
-        }
-        
-        if(qua2.text!=NULL && qua2.text.length!=0)
-        {
-            Qua2=qua2.text;
-        }
-        
-        
-        if(qua3.text!=NULL && qua3.text.length!=0)
-        {
-            Qua3=qua3.text;
-        }
-        
-        if(qua4.text!=NULL && qua4.text.length!=0)
-        {
-            Qua4=qua4.text;
-        }
-        
-        if(qua5.text!=NULL && qua5.text.length!=0)
-        {
-            Qua5=qua5.text;
-        }
-
-
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
-        
-        
-        //BOOL saveStatus = [PRIMECMController
-        
-        
-        contractor.text=@"";
-        txtAddress.text=@"";
-        txtCity.text=@"";
-        txtState.text=@"";
-        zip.text=@"";
-        txtTel.text=@"";
-        txtDateIN.text=@"";
-        txtCompetent.text=@"";
-        txtProject.text=@"";
-        txtEmail.text=@"";
-        txtWrkDone.text=@"";
-        txtName1.text=@"";
-        txtName2.text=@"";
-        txtName3.text=@"";
-        txtName4.text=@"";
-        txtName5.text=@"";
-        txtname6.text=@"";
-        txtName7.text=@"";
-        txtName8.text=@"";
-        txtTitle1.text=@"";
-        txtTitle2.text=@"";
-        txtTitle3.text=@"";
-        txtTitle4.text=@"";
-        txtTitle5.text=@"";
-        txtTitle6.text=@"";
-        txtTitle7.text=@"";
-        txtTitle8.text=@"";
-        txtCompany1.text=@"";
-        txtCompany2.text=@"";
-        txtCompany3.text=@"";
-        txtCompany4.text=@"";
-        txtDescription1.text=@"";
-        txtDescription2.text=@"";
-        txtDescription3.text=@"";
-        txtDescription4.text=@"";
-        txtHours.text=@"";
-        imgSignatureDaily.image=NULL;
-        repNo.text=@"";
-        ConName.text=@"";
-        Town.text=@"";
-        weather.text=@"";
-        time.text=@"";
-        des1.text=@"";
-        des2.text=@"";
-        des3.text=@"";
-        des4.text=@"";
-        des5.text=@"";
-        qua1.text=@"";
-        qua2.text=@"";
-        qua3.text=@"";
-        qua4.text=@"";
-        qua5.text=@"";
-        oriCalDays.text=@"";
-        usedCalDays.text=@"";
-        
-        
-    } */
-    
-    
-    
-    
-    
-    //start brin
-    
     else
     {
         
@@ -1179,17 +837,10 @@
         hud.delegate = self;
         [hud show:YES];
         
-        
         appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-        
-        
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
-        
-        
-        
         NSLog(@" sketch_array - save: %@", appDelegate.sketchesArray);
         NSLog(@" image_array - save: %@", arrayImages);
-        
         
         NSMutableArray *sketchesNameArray = [[NSMutableArray alloc] init];
         
@@ -1207,52 +858,129 @@
         
         NSLog(@"sketches names %@", sketchesNameArray);
         NSLog(@"images names %@", imgNameArray);
-
         
+        
+        NSArray *item1Arr = [des1.text componentsSeparatedByString:@"--,"];
+        NSArray *item2Arr = [des2.text componentsSeparatedByString:@"--,"];
+        NSArray *item3Arr = [des3.text componentsSeparatedByString:@"--,"];
+        NSArray *item4Arr = [des4.text componentsSeparatedByString:@"--,"];
+        NSArray *item5Arr = [des5.text componentsSeparatedByString:@"--,"];
+        
+        NSString *i_no1= @"", *i_no2= @"", *i_no3= @"", *i_no4= @"", *i_no5= @"", *i_desc1= @"", *i_desc2= @"", *i_desc3= @"", *i_desc4= @"", *i_desc5 = @"";
+        
+        if ([item1Arr count] > 1){
+            i_no1 = [item1Arr objectAtIndex:1];
+            i_desc1 = [item1Arr objectAtIndex:0];
+        }
+        
+        if ([item2Arr count] > 1){
+            i_no2 = [item2Arr objectAtIndex:1];
+            i_desc2 = [item2Arr objectAtIndex:0];
+        }
+        
+        if ([item3Arr count] > 1){
+            i_no3 = [item3Arr objectAtIndex:1];
+            i_desc3 = [item3Arr objectAtIndex:0];
+        }
+        
+        if ([item4Arr count] > 1){
+            i_no4 = [item4Arr objectAtIndex:1];
+            i_desc4 = [item4Arr objectAtIndex:0];
+        }
+        
+        if ([item5Arr count] > 1){
+            i_no5 = [item5Arr objectAtIndex:1];
+            i_desc5 = [item5Arr objectAtIndex:0];
+        }
+        
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
         
         BOOL saveStatus = [PRIMECMController
-                           saveDailyinspectionForm: appDelegate.username
-                           dIFHeader:txtProject.text
-                           contractor:contractor.text
-                           report_No:repNo.text
-                           con_Name:ConName.text
-                           p_o_Box:txtAddress.text
+                           saveDailyInspectionForm:appDelegate.username
+                           calendar_Days_Used:usedCalDays.text
                            city:txtCity.text
-                           state:txtState.text
-                           zip_Code:zip.text
-                           telephone_No:txtTel.text
-                           date:txtDateIN.text
                            competentPerson:txtCompetent.text
-                           town_city:Town.text
-                           weather:weather.text
-                           time:time.text
-                           project:txtProject.text
-                           e_Mail:txtEmail.text
-                           workDoneBy:txtWrkDone.text
+                           con_Name:ConName.text
+                           contractor:contractor.text
                            contractorsHoursOfWork:txtHours.text
-                           printedName:appDelegate.projPrintedName
-                           project_id:appDelegate.projId
+                           date:txtDateIN.text
+                           dIFHeader:txtHeader.text
+                           e_Mail:txtEmail.text
+                           
+                           i_Desc1:i_desc1
+                           i_Desc2:i_desc2
+                           i_Desc3:i_desc3
+                           i_Desc4:i_desc4
+                           i_Desc5:i_desc5
+                           
+                           i_No1:i_no1
+                           i_No2:i_no2
+                           i_No3:i_no3
+                           i_No4:i_no4
+                           i_No5:i_no5
+                           
+                           i_QTY1:qua1.text
+                           i_QTY2:qua2.text
+                           i_QTY3:qua3.text
+                           i_QTY4:qua4.text
+                           i_QTY5:qua5.text
+                           
+                           iFName1:txtName5.text
+                           iFName2:txtname6.text
+                           iFName3:txtName7.text
+                           iFName4:txtName8.text
+                           
+                           iFTitle1:txtTitle5.text
+                           iFTitle2:txtTitle6.text
+                           iFTitle3:txtTitle7.text
+                           iFTitle4:txtTitle8.text
+                           
+                           images_uploaded:[sketchesNameArray componentsJoinedByString:@","]
+                           inspectionID:repNo.text
+                           inspectorSign:sigName
                            signature:sigName
                            original_Calendar_Days:oriCalDays.text
-                           calendar_Days_Used:usedCalDays.text
-                           sketchImg:[sketchesNameArray componentsJoinedByString:@","]
-                           images_uploaded:[imgNameArray componentsJoinedByString:@","]
+                           
                            oVJName1:txtName1.text
-                            oVJName2:txtName2.text
-                            oVJName3:txtName3.text
-                            oVJName4:txtName4.text
-                            oVJTitle1:txtTitle1.text
-                            oVJTitle2:txtTitle2.text
-                            oVJTitle3:txtTitle3.text
-                            oVJTitle4:txtTitle4.text
+                           oVJName2:txtName2.text
+                           oVJName3:txtName3.text
+                           oVJName4:txtName4.text
+                           
+                           oVJTitle1:txtTitle1.text
+                           oVJTitle2:txtTitle2.text
+                           oVJTitle3:txtTitle3.text
+                           oVJTitle4:txtTitle4.text
+                           
+                           p_o_Box:txtAddress.text
+                           printedName:appDelegate.projPrintedName
+                           project:txtProject.text
+                           project_id:appDelegate.projId
+                           report_No:repNo.text
+                           sketch_images:[imgNameArray componentsJoinedByString:@","]
+                           state:txtState.text
+                           telephone_No:txtTel.text
+                           time:time.text
+                           town_city:Town.text
+                           
+                           wDODepartmentOrCompany1:txtCompany1.text
+                           wDODepartmentOrCompany2:txtCompany2.text
+                           wDODepartmentOrCompany3:txtCompany3.text
+                           wDODepartmentOrCompany4:txtCompany4.text
+                           wDODescriptionOfWork1:txtDescription1.text
+                           wDODescriptionOfWork2:txtDescription2.text
+                           wDODescriptionOfWork3:txtDescription3.text
+                           wDODescriptionOfWork4:txtDescription4.text
+                           weather:weather.text
+                           workDoneBy:txtWrkDone.text
+                           zip_Code:zip.text
                            ];
         
-     //   [self saveDailyInspectionItem];
         
-        [hud setHidden:YES];
-        BOOL imageSaveState;
-        BOOL sketchSaveState;
-        BOOL singSaveState;
+        NSLog(@"Save status DailyInspectionForm: %hhd", saveStatus);
+        
+        BOOL imageSaveState = TRUE;
+        BOOL singSaveState = TRUE;
         
         //Signature to coredata
         
@@ -1278,8 +1006,9 @@
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
                 
-                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
-                
+                if (! [PRIMECMController saveAllImages:imggName img:imgData]){
+                    imageSaveState = FALSE;
+                }
             }
             
         }
@@ -1295,8 +1024,10 @@
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
-                singSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
                 
+                if (! [PRIMECMController saveAllImages:imggName img:imgData]){
+                    singSaveState = FALSE;
+                }
             }
             
         }
@@ -1308,20 +1039,71 @@
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
             [arrayImages removeAllObjects];
+            [self clearFieldsInForm];
             //[self deleteImageFiles];
         }else{
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save Daily Inspection report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }
     }
+}
 
-    
-    
-    //end brin
-    
-    
-
-    
+-(void)clearFieldsInForm
+{
+    contractor.text=@"";
+    txtAddress.text=@"";
+    txtCity.text=@"";
+    txtState.text=@"";
+    zip.text=@"";
+    txtTel.text=@"";
+    txtDateIN.text=@"";
+    txtCompetent.text=@"";
+    txtProject.text=@"";
+    txtEmail.text=@"";
+    txtWrkDone.text=@"";
+    txtName1.text=@"";
+    txtName2.text=@"";
+    txtName3.text=@"";
+    txtName4.text=@"";
+    txtName5.text=@"";
+    txtname6.text=@"";
+    txtName7.text=@"";
+    txtName8.text=@"";
+    txtTitle1.text=@"";
+    txtTitle2.text=@"";
+    txtTitle3.text=@"";
+    txtTitle4.text=@"";
+    txtTitle5.text=@"";
+    txtTitle6.text=@"";
+    txtTitle7.text=@"";
+    txtTitle8.text=@"";
+    txtCompany1.text=@"";
+    txtCompany2.text=@"";
+    txtCompany3.text=@"";
+    txtCompany4.text=@"";
+    txtDescription1.text=@"";
+    txtDescription2.text=@"";
+    txtDescription3.text=@"";
+    txtDescription4.text=@"";
+    txtHours.text=@"";
+    imgSignatureDaily.image=NULL;
+    repNo.text=@"";
+    ConName.text=@"";
+    Town.text=@"";
+    weather.text=@"";
+    time.text=@"";
+    des1.text=@"";
+    des2.text=@"";
+    des3.text=@"";
+    des4.text=@"";
+    des5.text=@"";
+    qua1.text=@"";
+    qua2.text=@"";
+    qua3.text=@"";
+    qua4.text=@"";
+    qua5.text=@"";
+    oriCalDays.text=@"";
+    usedCalDays.text=@"";
 }
 
 
@@ -1366,7 +1148,6 @@
         
     }
 }
-
 
 
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName
@@ -1537,75 +1318,6 @@
 }
 
 
-/*
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    [HUD setHidden:YES];
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-
-    
-    if (uploading) {
-        uploading=NO;
-        count1 ++;
-        if(count1< arrayImages.count)
-        {
-            [self uploadImage];
-        }
-        else
-        {
-            if(appDelegate.sketchesArray.count>0)
-            {
-                [self uploadSketch];
-            }
-            else
-            {
-                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];            [exportAlert show];
-            }
-        }
-    }
-    else if(uploadingsketch){
-        uploadingsketch=NO;
-        count2++;
-        if(count2< appDelegate.sketchesArray.count)
-        {
-            [self uploadSketch];
-        }
-        else
-        {
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-    }
-    else{
-        NSLog(@"Upload Images------ %i",arrayImages.count);
-        if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-        {
-            comNoticeNo=[responseObject valueForKey:@"id"];
-            NSLog(@"Upload Images------ %i",arrayImages.count);
-            
-            if(arrayImages.count >0)
-            {
-                [self uploadImage];
-            }
-            else{
-                if(appDelegate.sketchesArray.count >0)
-                {
-                    [self uploadSketch];
-                }
-            }
-        }
-        else
-        {
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-    }
-}
-
-*/
 
 -(void)createPicker:(UITextField *)txtField
 {

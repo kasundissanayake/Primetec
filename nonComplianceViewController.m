@@ -447,7 +447,8 @@
                            printedName:txtPrintedName.text
                            projId:appDelegate.projId
                            sketchImg:[sketchesNameArray componentsJoinedByString:@","]
-                           images_uploaded:[imgNameArray componentsJoinedByString:@","]];
+                           images_uploaded:[imgNameArray componentsJoinedByString:@","]
+                           ];
         
         txtContactNo.text = @"";
         projectDesc.text=@"";
@@ -523,13 +524,13 @@
         [hud setHidden:YES];
         
         if (saveStatus && singSaveState){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved Non-Compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
             [arrayImages removeAllObjects];
             [self deleteImageFiles];
         }else{
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save Non-Compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }
         

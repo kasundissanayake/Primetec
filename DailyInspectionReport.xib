@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DailyInspectionReport">
@@ -55,7 +55,15 @@
                 <outlet property="txtOfficeTitle4" destination="Lui-fP-llN" id="UAo-td-ERM"/>
                 <outlet property="txtState" destination="eJF-Tw-04j" id="4Lw-0P-GG7"/>
                 <outlet property="txtTelephone" destination="FNe-PL-s3Z" id="MVm-Mf-wn9"/>
+                <outlet property="txtWorkDec1" destination="YSC-tm-VMr" id="81L-TA-4XF"/>
+                <outlet property="txtWorkDec2" destination="UoE-LS-c4T" id="4XH-c5-hFq"/>
+                <outlet property="txtWorkDec3" destination="CXm-Th-cM3" id="Nsn-Ds-3um"/>
+                <outlet property="txtWorkDec4" destination="Lu5-Tf-DlM" id="Yzk-SD-kp2"/>
                 <outlet property="txtWorkDone" destination="cJa-fa-Zip" id="Mvw-QK-Aa5"/>
+                <outlet property="txtWorkDoneDepart1" destination="C0q-BO-0AI" id="6GH-kX-rbr"/>
+                <outlet property="txtWorkDoneDepart2" destination="uRa-Ls-Zgy" id="Tcf-bz-Ikm"/>
+                <outlet property="txtWorkDoneDepart3" destination="lND-lT-N8r" id="Uqj-1Z-Yrq"/>
+                <outlet property="txtWorkDoneDepart4" destination="xN4-qK-As9" id="7sJ-Bi-PXh"/>
                 <outlet property="txtZip" destination="F41-Kz-FTz" id="fZ8-x4-JBl"/>
                 <outlet property="useddays" destination="AZR-YT-vgO" id="ggA-XR-biV"/>
                 <outlet property="view" destination="Zs1-Db-XIM" id="cLT-hJ-0nh"/>
@@ -236,7 +244,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textBack.png" id="YSC-tm-VMr">
-                            <rect key="frame" x="276" y="1809" width="410" height="40"/>
+                            <rect key="frame" x="277" y="1809" width="410" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -330,7 +338,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textBack.png" id="e9W-05-DL1">
-                            <rect key="frame" x="428" y="1555" width="258" height="40"/>
+                            <rect key="frame" x="427" y="1555" width="258" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -578,7 +586,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textBack.png" id="I5X-1V-Scv">
-                            <rect key="frame" x="55" y="1129" width="99" height="40"/>
+                            <rect key="frame" x="54" y="1129" width="99" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -663,36 +671,36 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="sdsdsdsdsdsd" id="DnH-pN-yUY">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="DnH-pN-yUY">
                             <rect key="frame" x="152" y="942" width="447" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="sdsdsdsdsdsd" id="plg-Zf-FGi">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="plg-Zf-FGi">
                             <rect key="frame" x="152" y="1002" width="447" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="sdsdsdsdsdsd" id="PVc-e8-Nxf">
-                            <rect key="frame" x="152" y="1058" width="447" height="52"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="PVc-e8-Nxf">
+                            <rect key="frame" x="152" y="1054" width="447" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="sdsdsdsdsdsd" id="2E1-4o-ZgG">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="2E1-4o-ZgG">
                             <rect key="frame" x="152" y="1114" width="447" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="sdsdsdsdsdsd" id="d8U-x8-MSl">
-                            <rect key="frame" x="152" y="1170" width="447" height="52"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="d8U-x8-MSl">
+                            <rect key="frame" x="152" y="1171" width="447" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -708,7 +716,6 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139.5" y="461"/>
         </view>
         <view contentMode="scaleToFill" id="Zs1-Db-XIM">
             <rect key="frame" x="0.0" y="0.0" width="713" height="1543"/>
@@ -725,7 +732,6 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
@@ -734,12 +740,4 @@
         <image name="Prime-Tech-Logo[1].png" width="182" height="92"/>
         <image name="textBack.png" width="17" height="20"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination">
-            <size key="portraitSize" width="768" height="1024"/>
-            <size key="landscapeSize" width="1024" height="768"/>
-        </simulatedScreenMetrics>
-    </simulatedMetricsContainer>
 </document>

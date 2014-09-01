@@ -103,16 +103,16 @@
 -(void)populateNonComplianceForm
 {
     /*
-    NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/single/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,CNo];
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    [urlRequest setHTTPMethod:@"GET"];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    _receivedData = [[NSMutableData alloc] init];
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    */
+     NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/single/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,CNo];
+     NSURL *apiURL =
+     [NSURL URLWithString:strURL];
+     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+     [urlRequest setHTTPMethod:@"GET"];
+     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+     _receivedData = [[NSMutableData alloc] init];
+     [connection start];
+     NSLog(@"URL---%@",strURL);
+     */
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
@@ -156,7 +156,7 @@
         
         txtDateOfRawReport.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateOfDWRReported"]
                                                                dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-       
+        
         lblCorrectiveActionComp.text=[nonComplianceReportObject valueForKey:@"descriptionOfNonCompliance"];
         txtPrintedName.text=[nonComplianceReportObject valueForKey:@"printedName"];
         txtDate.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"date"]
@@ -167,18 +167,6 @@
         NSString * signName = [nonComplianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
         
-        
-        for (int i=1; i<sketchesArray.count; i++) {
-            UIImage *image = [PRIMECMController getTheImage:[sketchesArray objectAtIndex:i]];
-            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [sketchesArray objectAtIndex:i]]];
-        }
-        
-        NSLog(@"array Images---%@",arrayImages);
-        
-        for (int i=1; i<arrayImages.count; i++) {
-            UIImage *image = [PRIMECMController getTheImage:[arrayImages objectAtIndex:i]];
-            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
-        }
     }
     
     [self.tblView reloadData];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6208.6" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assign_project" representedClassName="Assign_project" syncable="YES">
         <attribute name="assign_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -102,7 +102,6 @@
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workDoneBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip_Code" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="itemID" toMany="YES" deletionRule="Nullify" destinationEntity="DailyInspectionItem" inverseName="rno" inverseEntity="DailyInspectionItem" syncable="YES"/>
     </entity>
     <entity name="DailyInspectionItem" representedClassName="DailyInspectionItem" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -111,7 +110,6 @@
         <attribute name="inspectionID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="no" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="qty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="rno" maxCount="1" deletionRule="Nullify" destinationEntity="DailyInspectionForm" inverseName="itemID" inverseEntity="DailyInspectionForm" syncable="YES"/>
     </entity>
     <entity name="Expensedata" representedClassName="Expensedata" syncable="YES">
         <attribute name="eRDate1" optional="YES" attributeType="Date" syncable="YES"/>
@@ -346,8 +344,8 @@
     <elements>
         <element name="Assign_project" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="ComplianceForm" positionX="-36" positionY="90" width="128" height="435"/>
-        <element name="DailyInspectionForm" positionX="-396" positionY="135" width="128" height="1063"/>
-        <element name="DailyInspectionItem" positionX="-162" positionY="995" width="144" height="148"/>
+        <element name="DailyInspectionForm" positionX="-396" positionY="135" width="128" height="1048"/>
+        <element name="DailyInspectionItem" positionX="-162" positionY="995" width="144" height="133"/>
         <element name="Expensedata" positionX="-18" positionY="162" width="128" height="195"/>
         <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="268"/>
         <element name="Image" positionX="0" positionY="144" width="128" height="75"/>

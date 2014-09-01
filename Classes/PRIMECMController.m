@@ -27,141 +27,6 @@
 
 @implementation PRIMECMController
 
-
-
-
-
-
-//start brin
-
-
-+ (BOOL)saveDailyinspectionForm:(NSString *)username dIFHeader:(NSString *)dIFHeader contractor:(NSString *)contractor report_No:(NSString *)report_No con_Name:(NSString *)con_Name p_o_Box:(NSString *)p_o_Box
-                           city:(NSString *)city state:(NSString *)state zip_Code:(NSString *)zip_Code telephone_No:(NSString *)telephone_No date:(NSString *)date competentPerson:(NSString *)competentPerson town_city:(NSString *)town_city weather:(NSString *)weather time:(NSString *)time project:(NSString *)project e_Mail:(NSString *)e_Mail workDoneBy:(NSString *)workDoneBy contractorsHoursOfWork:(NSString *)contractorsHoursOfWork  printedName:(NSString *)printedName project_id:(NSString *)project_id signature:(NSString *)signature original_Calendar_Days:(NSString *)original_Calendar_Days calendar_Days_Used:(NSString *)calendar_Days_Used  sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded oVJName1:(NSString *)oVJName1 oVJName2:(NSString *)oVJName2 oVJName3:(NSString *)oVJName3 oVJName4:(NSString *)oVJName4 oVJTitle1:(NSString *)oVJTitle1 oVJTitle2:(NSString *)oVJTitle2 oVJTitle3:(NSString *)oVJTitle3 oVJTitle4:(NSString *)oVJTitle4
-
-
-
-{
-    
-    
-/*iFName1:(NSString *)iFName1 iFName2:(NSString *)iFName2 iFName3:(NSString *)iFName3 iFName4:(NSString *)iFName4 iFTitle1:(NSString *)iFTitle1 iFTitle2:(NSString *)iFTitle2 iFTitle3:(NSString *)iFTitle3 iFTitle4:(NSString *)iFTitle4 wDODepartmentOrCompany1:(NSString *)wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *)wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *)wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *)wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *)wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *)wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *)wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *)wDODescriptionOfWork4*/
-    
-
-    
-    DailyInspectionForm *assp;
-    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
-    NSError *error = nil;
-    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
-    if (error != nil) {
-        NSLog(@"Error: %@", [error debugDescription]);
-    }
-    
-    int randNum = 0;
-    NSString *newIDD;
-    BOOL hasConflicts = TRUE;
-    while (hasConflicts){
-        hasConflicts = FALSE;
-        randNum = rand() % (100000000) + 100000; //create the random number.
-        newIDD = [NSString stringWithFormat:@"%@-CM%d", project_id, randNum];
-        
-        
-        
-        for (NSDictionary *dict in existingIDs) {
-            NSString *str = [dict valueForKey:@"inspectionID"];
-            if ([str isEqualToString:newIDD]){
-                hasConflicts = TRUE;
-                break;
-            }
-        }
-    }
-    NSLog(@"New Non-Compliance Report non-ComplianceNoticeNo: %@", newIDD);
-    
-    
-    if (!assp) {
-        assp = [NSEntityDescription
-                insertNewObjectForEntityForName:@"DailyInspectionForm"
-                inManagedObjectContext:managedContext];
-    }
-    
-    [assp setValue:newIDD forKey:@"inspectionID"];
-    [assp setValue:dIFHeader forKey:@"dIFHeader"];
-    [assp setValue:contractor forKey:@"contractor"];
-    [assp setValue:report_No forKey:@"report_No"];
-    [assp setValue:con_Name forKey:@"con_Name"];
-    [assp setValue:p_o_Box forKey:@"p_o_Box"];
-    [assp setValue:city forKey:@"city"];
-    [assp setValue:state forKey:@"state"];
-    [assp setValue:zip_Code forKey:@"zip_Code"];
-    [assp setValue:telephone_No forKey:@"telephone_No"];
-    // [assp setValue:date forKey:@"date"];
-    [assp setValue:competentPerson forKey:@"competentPerson"];
-    [assp setValue:town_city forKey:@"town_city"];
-    [assp setValue:weather forKey:@"weather"];
-    [assp setValue:time forKey:@"time"];
-    [assp setValue:project forKey:@"project"];
-    [assp setValue:e_Mail forKey:@"e_Mail"];
-    [assp setValue:workDoneBy forKey:@"workDoneBy"];
-    [assp setValue:contractorsHoursOfWork forKey:@"contractorsHoursOfWork"];
-    [assp setValue:printedName forKey:@"printedName"];
-    [assp setValue:project_id forKey:@"project_id"];
-    [assp setValue:signature forKey:@"signature"];
-    [assp setValue:calendar_Days_Used forKey:@"calendar_Days_Used"];
-    [assp setValue:original_Calendar_Days forKey:@"original_Calendar_Days"];
-    [assp setValue:images_uploaded forKey:@"images_uploaded"];
-    [assp setValue:sketchImg forKey:@"sketch_images"];
-    [assp setValue:oVJName1 forKey:@"oVJName1"];
-    [assp setValue:oVJName2 forKey:@"oVJName2"];
-    [assp setValue:oVJName3 forKey:@"oVJName3"];
-    [assp setValue:oVJName4 forKey:@"oVJName4"];
-    [assp setValue:oVJTitle1 forKey:@"oVJTitle1"];
-    [assp setValue:oVJTitle2 forKey:@"oVJTitle2"];
-    [assp setValue:oVJTitle3 forKey:@"oVJTitle3"];
-    [assp setValue:oVJTitle4 forKey:@"oVJTitle4"];
-    [assp setValue:oVJTitle4 forKey:@"oVJTitle4"];
-
-
-
-
-
-
-
-
-    
-    
-    
-    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
-    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
-    NSDate *Date = [myXMLdateReader dateFromString:date];
-    
-    [assp setValue:Date forKey:@"date"];
-    
-    
-    NSError *saveError;
-    if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
-        return FALSE;
-    }else{
-        
-        NSLog(@"............Saved daily inspection successfully..............");
-        return TRUE;
-    }
-    
-}
-
-
-//endbrin
-
-
-
-
-
-
 + (int)synchronizeWithServer {
     
     NSString *url = [NSString stringWithFormat:@"%@", [PRIMECMAPPUtils getAPISyncPullEndpoint]];
@@ -646,14 +511,6 @@
         [assp setI_QTY3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY3"]]];
         [assp setI_QTY4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY4"]]];
         [assp setI_QTY5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY5"]]];
-        
-        
-        //start brin
-        [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
-        [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
-        [assp setSketch_images:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"sketch_images"]]];
-
-        //end brin
         
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -1733,7 +1590,469 @@
 }
 
 
+
++(BOOL) saveDailyInspectionForm:(NSString *)username calendar_Days_Used:(NSString *)calendar_Days_Used city:(NSString *)city competentPerson:(NSString *) competentPerson con_Name:(NSString *) con_Name contractor:(NSString *) contractor contractorsHoursOfWork:(NSNumber *) contractorsHoursOfWork date:(NSString *) date dIFHeader:(NSString *) dIFHeader e_Mail:(NSString *) e_Mail i_Desc1:(NSString *) i_Desc1 i_Desc2:(NSString *) i_Desc2 i_Desc3:(NSString *) i_Desc3 i_Desc4:(NSString *) i_Desc4 i_Desc5:(NSString *) i_Desc5 i_No1:(NSString *) i_No1 i_No2:(NSString *) i_No2 i_No3:(NSString *) i_No3 i_No4:(NSString *) i_No4 i_No5:(NSString *) i_No5 i_QTY1:(NSString *) i_QTY1 i_QTY2:(NSString *) i_QTY2 i_QTY3:(NSString *) i_QTY3 i_QTY4:(NSString *) i_QTY4 i_QTY5:(NSString *) i_QTY5 iFName1:(NSString *) iFName1 iFName2:(NSString *) iFName2 iFName3:(NSString *) iFName3 iFName4:(NSString *) iFName4 iFTitle1:(NSString *) iFTitle1 iFTitle2:(NSString *) iFTitle2 iFTitle3:(NSString *) iFTitle3 iFTitle4:(NSString *) iFTitle4 images_uploaded:(NSString *) images_uploaded inspectionID:(NSString *) inspectionID inspectorSign:(NSString *) inspectorSign signature:(NSString*)signature original_Calendar_Days:(NSString *) original_Calendar_Days oVJName1:(NSString *) oVJName1 oVJName2:(NSString *) oVJName2 oVJName3:(NSString *) oVJName3 oVJName4:(NSString *) oVJName4 oVJTitle1:(NSString *) oVJTitle1 oVJTitle2:(NSString *) oVJTitle2 oVJTitle3:(NSString *) oVJTitle3 oVJTitle4:(NSString *) oVJTitle4 p_o_Box:(NSString *) p_o_Box printedName:(NSString *) printedName project:(NSString *) project project_id:(NSString *) project_id report_No:(NSString *) report_No sketch_images:(NSString *) sketch_images state:(NSString *) state telephone_No:(NSString *) telephone_No time:(NSString *) time town_city:(NSString *) town_city wDODepartmentOrCompany1:(NSString *) wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *) wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *) wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *) wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *) wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *) wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *) wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *) wDODescriptionOfWork4 weather:(NSString *)weather workDoneBy:(NSString *) workDoneBy zip_Code:(NSString *) zip_Code{
+    
+    DailyInspectionForm *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID=%@)", inspectionID];
+    [fetchRequest setPredicate:predicate];
+    
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    // inspection record already exists...do not overwrite
+    if ([existingIDs count] > 0){
+        NSLog(@"DailyInspection Report with ID %@ already exists...aborting", inspectionID);
+        return FALSE;
+    }
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"DailyInspectionForm"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:inspectionID forKey:@"inspectionID"];
+    [assp setValue:calendar_Days_Used forKey:@"calendar_Days_Used"];
+    [assp setValue:city forKey:@"city"];
+    [assp setValue:competentPerson forKey:@"competentPerson"];
+    [assp setValue:con_Name forKey:@"con_Name"];
+    [assp setValue:contractor forKey:@"contractor"];
+    
+   // NSNumber *conHrsWork = [NSNumber numberWithInt:[contractorsHoursOfWork integerValue]];
+    [assp setValue:contractorsHoursOfWork forKey:@"contractorsHoursOfWork"];
+    
+    [assp setValue:dIFHeader forKey:@"dIFHeader"];
+    [assp setValue:project forKey:@"project"];
+    [assp setValue:project_id forKey:@"Project_id"];
+    
+    
+    [assp setValue:e_Mail forKey:@"e_Mail"];
+    
+    [assp setValue:i_Desc1 forKey:@"i_Desc1"];
+    [assp setValue:i_Desc2 forKey:@"i_Desc2"];
+    [assp setValue:i_Desc3 forKey:@"i_Desc3"];
+    [assp setValue:i_Desc4 forKey:@"i_Desc4"];
+    [assp setValue:i_Desc5 forKey:@"i_Desc5"];
+    
+    [assp setValue:i_No1 forKey:@"i_No1"];
+    [assp setValue:i_No2 forKey:@"i_No2"];
+    [assp setValue:i_No3 forKey:@"i_No3"];
+    [assp setValue:i_No4 forKey:@"i_No4"];
+    [assp setValue:i_No5 forKey:@"i_No5"];
+    
+    [assp setValue:i_QTY1 forKey:@"i_QTY1"];
+    [assp setValue:i_QTY2 forKey:@"i_QTY2"];
+    [assp setValue:i_QTY3 forKey:@"i_QTY3"];
+    [assp setValue:i_QTY4 forKey:@"i_QTY4"];
+    [assp setValue:i_QTY5 forKey:@"i_QTY5"];
+    
+    [assp setValue:iFName1 forKey:@"iFName1"];
+    [assp setValue:iFName2 forKey:@"iFName2"];
+    [assp setValue:iFName3 forKey:@"iFName3"];
+    [assp setValue:iFName4 forKey:@"iFName4"];
+    
+    [assp setValue:iFTitle1 forKey:@"iFTitle1"];
+    [assp setValue:iFTitle2 forKey:@"iFTitle2"];
+    [assp setValue:iFTitle3 forKey:@"iFTitle3"];
+    [assp setValue:iFTitle4 forKey:@"iFTitle4"];
+    
+    [assp setValue:inspectorSign forKey:@"inspectorSign"];
+    [assp setValue:signature forKey:@"signature"];
+    
+    [assp setValue:original_Calendar_Days forKey:@"original_Calendar_Days"];
+    
+    [assp setValue:oVJName1 forKey:@"oVJName1"];
+    [assp setValue:oVJName2 forKey:@"oVJName2"];
+    [assp setValue:oVJName3 forKey:@"oVJName3"];
+    [assp setValue:oVJName4 forKey:@"oVJName4"];
+    
+    [assp setValue:oVJTitle1 forKey:@"oVJTitle1"];
+    [assp setValue:oVJTitle2 forKey:@"oVJTitle2"];
+    [assp setValue:oVJTitle3 forKey:@"oVJTitle3"];
+    [assp setValue:oVJTitle4 forKey:@"oVJTitle4"];
+    
+    [assp setValue:p_o_Box forKey:@"p_o_Box"];
+    
+    [assp setValue:printedName forKey:@"printedName"];
+    [assp setValue:report_No forKey:@"report_No"];
+    [assp setValue:state forKey:@"state"];
+    
+    [assp setValue:telephone_No forKey:@"telephone_No"];
+    [assp setValue:time forKey:@"time"];
+    [assp setValue:town_city forKey:@"town_city"];
+    
+    [assp setValue:wDODepartmentOrCompany1 forKey:@"wDODepartmentOrCompany1"];
+    [assp setValue:wDODepartmentOrCompany2 forKey:@"wDODepartmentOrCompany2"];
+    [assp setValue:wDODepartmentOrCompany3 forKey:@"wDODepartmentOrCompany3"];
+    [assp setValue:wDODepartmentOrCompany4 forKey:@"wDODepartmentOrCompany4"];
+    
+    [assp setValue:wDODescriptionOfWork1 forKey:@"wDODescriptionOfWork1"];
+    [assp setValue:wDODescriptionOfWork2 forKey:@"wDODescriptionOfWork2"];
+    [assp setValue:wDODescriptionOfWork3 forKey:@"wDODescriptionOfWork3"];
+    [assp setValue:wDODescriptionOfWork4 forKey:@"wDODescriptionOfWork4"];
+    
+    
+    [assp setValue:weather forKey:@"weather"];
+    [assp setValue:workDoneBy forKey:@"workDoneBy"];
+    [assp setValue:zip_Code forKey:@"zip_Code"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:date];
+    [assp setValue:dateType forKey:@"date"];
+    
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    [assp setValue:sketch_images forKey:@"sketch_images"];
+    
+    
+    // save daily inspection items
+    BOOL *saveItems = TRUE;
+    
+    if ( ![@"" isEqualToString:i_No1] &&  ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc1 inspectionID:inspectionID no:i_No1 qty:i_QTY1]){
+        saveItems = FALSE;
+    }
+    
+    if (![@"" isEqualToString:i_No2] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc2 inspectionID:inspectionID no:i_No2 qty:i_QTY2]){
+        saveItems = FALSE;
+    }
+    
+    if (![@"" isEqualToString:i_No3] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc3 inspectionID:inspectionID no:i_No3 qty:i_QTY3]){
+        saveItems = FALSE;
+    }
+    
+    if (![@"" isEqualToString:i_No4] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc4 inspectionID:inspectionID no:i_No4 qty:i_QTY4]){
+        saveItems = FALSE;
+    }
+    
+    if (![@"" isEqualToString:i_No5] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc5 inspectionID:inspectionID no:i_No5 qty:i_QTY5]){
+        saveItems = FALSE;
+    }
+    
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError] || !saveItems) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+    
+    
+}
+
+
+
++ (BOOL)saveDailyInspectionItem:(NSString *)username date:(NSString *)date desc:(NSString *) desc inspectionID:(NSString *) inspectionID no:(NSString *) no qty:(NSString *) qty{
+    
+    
+    DailyInspectionItem *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionItem"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"DailyInspectionItem"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:inspectionID forKey:@"inspectionID"];
+    
+    [assp setValue:no forKey:@"no"];    
+    [assp setValue:[NSNumber numberWithInt:[qty intValue]] forKey:@"qty"];
+    [assp setValue:desc forKey:@"desc"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:date];
+    [assp setValue:dateType forKey:@"date"];
+
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
+
+
++(NSArray *)getDailyInspectionItemsFromInspectionID:(NSString *)inspectionID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionItem"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID=%@)", inspectionID];
+    [fetchRequest setPredicate:predicate];
+
+    
+    NSError *error = nil;
+    NSArray *itemsForInspection = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    return itemsForInspection;
+}
+
++(BOOL)saveQuantitySummaryDetails:(NSString *)username est_qty:(NSString *)est_qty item_no:(NSString *) item_no project:(NSString *) project project_id:(NSString *) project_id unit:(NSString *) unit unit_price:(NSString *) unit_price user:(NSString *) user
+{
+    
+    QuantitySummaryDetails *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    NSError *error = nil;
+    //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"QuantitySummaryDetails"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:item_no forKey:@"item_no"];
+    
+    [assp setValue:project forKey:@"project"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:unit forKey:@"unit"];
+    [assp setValue:unit_price forKey:@"unit_price"];
+    [assp setValue:username forKey:@"user"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
+
+
++ (BOOL)saveQuantitySummaryItems:(NSString *)username accum:(NSString *) accum daily:(NSString *) daily date:(NSString *) date item_no:(NSString *) item_no location_station:(NSString *) location_station quantity_sum_details_no:(NSString *) quantity_sum_details_no{
+    
+    QuantitySummaryItems *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryItems"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
+    NSError *error = nil;
+    //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"QuantitySummaryItems"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:item_no forKey:@"item_no"];
+    
+    [assp setValue:accum forKey:@"accum"];
+    [assp setValue:daily forKey:@"daily"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:date];
+    [assp setValue:dateType forKey:@"date"];
+    
+    [assp setValue:location_station forKey:@"location_station"];
+    [assp setValue:quantity_sum_details_no forKey:@"quantity_sum_details_no"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+    
+}
+
++ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy attachment:(NSString *)attachment checkNo:(NSString *)checkNo date:(NSString *)date employeeNo:(NSString *)employeeNo eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding{
+    
+    
+    ExpenseReportModel *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"eXReportNo"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", project_id, username, randNum];
+        
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"non_ComplianceNoticeNo"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
+        }
+    }
+    NSLog(@"New Expense Report eXReportNo: %@", newIDD);
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"ExpenseReportModel"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:newIDD forKey:@"eXReportNo"];
+    
+    [assp setValue:approvedBy forKey:@"approvedBy"];
+    [assp setValue:attachment forKey:@"attachment"];
+    [assp setValue:checkNo forKey:@"checkNo"];
+    
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:date];
+    [assp setValue:dateType forKey:@"date"];
+    
+    NSDate *weekEndingdateType = [myXMLdateReader dateFromString:weekEnding];
+    [assp setValue:weekEndingdateType forKey:@"weekEnding"];
+    [assp setValue:employeeNo forKey:@"employeeNo"];
+    
+    [assp setValue:eMPName forKey:@"eMPName"];
+    
+    NSNumber *eRCashAdvanceNum = [NSNumber numberWithInt:[eRCashAdvance integerValue]];
+    [assp setValue:eRCashAdvanceNum forKey:@"eRCashAdvance"];
+    
+    [assp setValue:eRFHeader forKey:@"eRFHeader"];
+    
+    NSNumber *eRReimbursementNum = [NSNumber numberWithInt:[eRReimbursement integerValue]];
+    [assp setValue:eRReimbursementNum forKey:@"eRReimbursement"];
+    
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:signature forKey:@"signature"];
+    
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+    
+}
+
+
++ (BOOL)saveExpenseData:(NSString *)username eRDate1:(NSString *)eRDate1 eRDescription1:(NSString *)eRDescription1 eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1 eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded{
+    
+    
+    Expensedata *assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"eXReportNo"]];
+    NSError *error = nil;
+    //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Expensedata"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:eXReportNo forKey:@"eXReportNo"];
+    
+    [assp setValue:eRDescription1 forKey:@"eRDescription1"];
+    [assp setValue:eRJobNo1 forKey:@"eRJobNo1"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:eRDate1];
+    [assp setValue:dateType forKey:@"eRDate1"];
+    
+    
+    NSNumber *eRPAMilage1Num = [NSNumber numberWithInt:[eRPAMilage1 integerValue]];
+    [assp setValue:eRPAMilage1Num forKey:@"eRPAMilage1"];
+    
+    NSNumber *eRPARate1Num = [NSNumber numberWithInt:[eRPARate1 integerValue]];
+    [assp setValue:eRPARate1Num forKey:@"eRPARate1"];
+    
+    NSNumber *eRTotal1Num = [NSNumber numberWithInt:[eRTotal1 integerValue]];
+    [assp setValue:eRTotal1Num forKey:@"eRTotal1"];
+    
+    [assp setValue:eRType1 forKey:@"eRType1"];
+    [assp setValue:images_uploaded forKey:@"images_uploaded"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+    
+}
+
 +(BOOL)uploadExpencesImages:(NSString *)username comNotiseNo:(NSString *)RecId imageName:(NSString *)imageName{
+    
     Expensedata *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -1759,257 +2078,149 @@
     return TRUE;
 }
 
+// summary sheet 1
 
-+(BOOL)saveExpensec:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
-{
-    Expensedata *assp;
-    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
-    NSError *error = nil;
-    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
-    if (error != nil) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    NSInteger newID = 0;
-    for (NSDictionary *dict in existingIDs) {
-        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
-        }
-    }
-    
-    if (!assp) {
-        assp = [NSEntityDescription
-                insertNewObjectForEntityForName:@"Expensedata"
-                inManagedObjectContext:managedContext];
-    }
-    
-    [assp setValue:expId forKey:@"id"];
-    [assp setValue:date forKey:@"eRDate1"];
-    [assp setValue:desc forKey:@"eRDescription1"];
-    [assp setValue:jobNo forKey:@"eRJobNo1"];
-    [assp setValue:mil forKey:@"eRPAMilage1"];
-    [assp setValue:rate forKey:@"eRPARate1"];
-    [assp setValue:totl forKey:@"eRTotal1"];
-    
-    NSError *saveError;
-    if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-        return FALSE;
-    }else{
-        return TRUE;
-    }
-}
-
-
-+ (BOOL)saveExpensecRep:(NSString *)expId projId:(NSString *)projId header:(NSString *)header date:(NSString *)date desc:(NSString *)desc jobNo:(NSString *)jobNo type:(NSString *)type mil:(NSString *)mil rate:(NSString *)rate totl:(NSString *)totl
++ (BOOL)saveSummarySheet1:(NSString *)username city:(NSString *)city conPeWork:(NSString *) conPeWork constructionOrder:(NSString *) constructionOrder contractor:(NSString *) contractor date:(NSString *) date descr:(NSString *) descr federalAidNumber:(NSString *) federalAidNumber healWelAndPension:(NSString *) healWelAndPension insAndTaxesOnItem1:(NSString *) insAndTaxesOnItem1 itemDescount20per:(NSString *) itemDescount20per lAAmount1:(NSString *) lAAmount1 lAAmount2:(NSString *) lAAmount2 lAAmount3:(NSString *) lAAmount3 lAAmount4:(NSString *) lAAmount4 lAAmount5:(NSString *) lAAmount5 lAClass1:(NSString *) lAClass1 lAClass2:(NSString *) lAClass2 lAClass3:(NSString *) lAClass3 lAClass4:(NSString *) lAClass4 lAClass5:(NSString *) lAClass5 lANo1:(NSString *) lANo1 lANo2:(NSString *) lANo2 lANo3:(NSString *) lANo3 lANo4:(NSString *) lANo4 lANo5:(NSString *) lANo5 lARate1:(NSString *) lARate1 lARate2:(NSString *) lARate2 lARate3:(NSString *) lARate3 lARate4:(NSString *) lARate4 lARate5:(NSString *) lARate5 lATotalHours1:(NSString *) lATotalHours1 lATotalHours2:(NSString *) lATotalHours2 lATotalHours3:(NSString *) lATotalHours3 lATotalHours4:(NSString *) lATotalHours4 lATotalHours5:(NSString *) lATotalHours5 pOBox:(NSString *) pOBox printedName:(NSString *) printedName project_id:(NSString *) project_id projectNo:(NSString *) projectNo reportNo:(NSString *) reportNo sMSheetNo:(NSString *) sMSheetNo sSHeader:(NSString *) sSHeader state:(NSString *) state telephoneNo:(NSString *) telephoneNo total:(NSString *) total totalLabor:(NSString *) totalLabor zip:(NSString *) zip
 {
     
-    ExpenseReportModel *assp;
-    
+    SummarySheet1 *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
-    
-    [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"id"]];
-    
-    NSError *error = nil;
-    
-    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
-    
-    if (error != nil) {
-        
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    NSInteger newID = 0;
-    
-    for (NSDictionary *dict in existingIDs) {
-        
-        NSInteger IDToCompare = [[dict objectForKey:@"id"] integerValue];
-        
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
-        }
-    }
-    
-    
-    if (!assp) {
-        assp = [NSEntityDescription
-                insertNewObjectForEntityForName:@"ExpenseReportModel"
-                inManagedObjectContext:managedContext];
-    }
-    
-    [assp setValue:expId forKey:@"id"];
-    [assp setValue:header forKey:@"eRFHeader"];
-    [assp setValue:projId forKey:@"project_id"];
-    
-    
-    NSError *saveError;
-    if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-        return FALSE;
-    }else{
-        return TRUE;
-    }
-}
-
-
-//Summery3
-+ (BOOL)saveSummery3:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId class1:(NSString *)class1 active1:(NSString *)active1 no1:(NSString *)no1 hours1:(NSString *)hours1 rate1:(NSString *)rate1 total1:(NSString *)total1 class2:(NSString *)class2 active2:(NSString *)active2 no2:(NSString *)no2 hours2:(NSString *)hours2 rate2:(NSString *)rate2 total2:(NSString *)total2 class3:(NSString *)class3 active3:(NSString *)active3 no3:(NSString *)no3 hours3:(NSString *)hours3 rate3:(NSString *)rate3 total3:(NSString *)total3 class4:(NSString *)class4 active4:(NSString *)active4 no4:(NSString *)no4 hours4:(NSString *)hours4 rate4:(NSString *)rate4 total4:(NSString *)total4 class5:(NSString *)class5 active5:(NSString *)active5 no5:(NSString *)no5 hours5:(NSString *)hours5 rate5:(NSString *)rate5 total5:(NSString *)total5 inspecter:(NSString *)inspecter signame1:(NSString *)signame1 signame2:(NSString *)signame2 dateIns:(NSString *)dateIns projMan:(NSString *)projMan dateCr:(NSString *)dateCr totalToDate:(NSString *)totalToDate l5:(NSString *)l5
-{
-    
-    SummarySheet3*assp;
-    
-    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet3"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-    [fetchRequest setEntity:entity];
-    
     [fetchRequest setResultType:NSDictionaryResultType];
     [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
-    
     NSError *error = nil;
-    
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
-    
     if (error != nil) {
-        
-        NSLog(@"Error: %@", [error localizedDescription]);
+        NSLog(@"Error: %@", [error debugDescription]);
     }
     
-    NSInteger newID = 0;
-    
-    for (NSDictionary *dict in existingIDs) {
+    int randNum = 0;
+    NSString *newIDD;
+    BOOL hasConflicts = TRUE;
+    while (hasConflicts){
+        hasConflicts = FALSE;
+        randNum = rand() % (100000000) + 100000; //create the random number.
+        newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", project_id, username, randNum];
         
-        NSString *str = [dict valueForKey:@"sMSheetNo"] ;
-        NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
-        
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
+        for (NSDictionary *dict in existingIDs) {
+            NSString *str = [dict valueForKey:@"sMSheetNo"];
+            if ([str isEqualToString:newIDD]){
+                hasConflicts = TRUE;
+                break;
+            }
         }
     }
-    
-    NSString *newIDD = [NSString stringWithFormat:@"SM%d",newID];
+    NSLog(@"New Summary Sheet 1 Report sMSheetNo: %@", newIDD);
     
     if (!assp) {
         assp = [NSEntityDescription
-                insertNewObjectForEntityForName:@"SummarySheet3"
+                insertNewObjectForEntityForName:@"SummarySheet1"
                 inManagedObjectContext:managedContext];
     }
     
-    [assp setValue:newIDD forKey:@"sMSheetNo"];
-    [assp setValue:projId forKey:@"project_id"];
-    [assp setValue:class1 forKey:@"eQSizeandClass1"];
-    [assp setValue:class2 forKey:@"eQSizeandClass2"];
-    [assp setValue:class3 forKey:@"eQSizeandClass3"];
-    [assp setValue:class4 forKey:@"eQSizeandClass4"];
-    [assp setValue:class5 forKey:@"eQSizeandClass5"];
-    [assp setValue:active1 forKey:@"eQIdleActive1"];
-    [assp setValue:active2 forKey:@"eQIdleActive2"];
-    [assp setValue:active3 forKey:@"eQIdleActive3"];
-    [assp setValue:active4 forKey:@"eQIdleActive4"];
-    [assp setValue:active5 forKey:@"eQIdleActive5"];
-    [assp setValue:no1 forKey:@"eQNo1"];
-    [assp setValue:no2 forKey:@"eQNo2"];
-    [assp setValue:no3 forKey:@"eQNo3"];
-    [assp setValue:no4 forKey:@"eQNo4"];
-    [assp setValue:no5 forKey:@"eQNo5"];
-    [assp setValue:hours1 forKey:@"eQTotalHours1"];
-    [assp setValue:hours2 forKey:@"eQTotalHours2"];
-    [assp setValue:hours3 forKey:@"eQTotalHours3"];
-    [assp setValue:hours4 forKey:@"eQTotalHours4"];
-    [assp setValue:hours5 forKey:@"eQTotalHours5"];
-    [assp setValue:rate1 forKey:@"eQRAte1"];
-    [assp setValue:rate2 forKey:@"eQRAte2"];
-    [assp setValue:rate3 forKey:@"eQRAte3"];
-    [assp setValue:rate4 forKey:@"eQRAte4"];
-    [assp setValue:rate5 forKey:@"eQRAte5"];
-    [assp setValue:total1 forKey:@"eQTotalHours1"];
-    [assp setValue:total2 forKey:@"eQTotalHours2"];
-    [assp setValue:total3 forKey:@"eQTotalHours3"];
-    [assp setValue:total4 forKey:@"eQTotalHours4"];
-    [assp setValue:total5 forKey:@"eQTotalHours5"];
-    [assp setValue:inspecter forKey:@"inspector"];
-    [assp setValue:signame1 forKey:@"signature1"];
-    [assp setValue:signame2 forKey:@"signature2"];
-    [assp setValue:dateIns forKey:@""];
-    [assp setValue:projMan forKey:@"contractorRepresentative"];
-    [assp setValue:projId forKey:@"project_id"];
-    [assp setValue:dateCr forKey:@"date1"];
-    [assp setValue:totalToDate forKey:@"dailyTotal"];
+    [assp setValue:sMSheetNo forKey:@"sMSheetNo"];
+    
+    [assp setValue:city forKey:@"city"];
+    [assp setValue:conPeWork forKey:@"conPeWork"];
+    
+    [assp setValue:constructionOrder forKey:@"constructionOrder"];
+    [assp setValue:contractor forKey:@"contractor"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateType = [myXMLdateReader dateFromString:date];
+    [assp setValue:dateType forKey:@"date"];
+    
+    
+    [assp setValue:descr forKey:@"descr"];
+    
+    
+    [assp setValue:federalAidNumber forKey:@"federalAidNumber"];
+    [assp setValue:healWelAndPension forKey:@"healWelAndPension"];
+    [assp setValue:insAndTaxesOnItem1 forKey:@"insAndTaxesOnItem1"];
+    [assp setValue:itemDescount20per forKey:@"itemDescount20per"];
+    [assp setValue:lAAmount1 forKey:@"lAAmount1"];
+    [assp setValue:lAAmount2 forKey:@"lAAmount2"];
+    [assp setValue:lAAmount3 forKey:@"lAAmount3"];
+    [assp setValue:lAAmount4 forKey:@"lAAmount4"];
+    [assp setValue:lAAmount5 forKey:@"lAAmount5"];
+    
+    [assp setValue:lAClass1 forKey:@"lAClass1"];
+    [assp setValue:lAClass2 forKey:@"lAClass2"];
+    [assp setValue:lAClass3 forKey:@"lAClass3"];
+    [assp setValue:lAClass4 forKey:@"lAClass4"];
+    [assp setValue:lAClass5 forKey:@"lAClass5"];
+    
+    [assp setValue:lANo1 forKey:@"lANo1"];
+    [assp setValue:lANo2 forKey:@"lANo2"];
+    [assp setValue:lANo3 forKey:@"lANo3"];
+    [assp setValue:lANo4 forKey:@"lANo4"];
+    [assp setValue:lANo5 forKey:@"lANo5"];
+    
+    [assp setValue:lARate1 forKey:@"lARate1"];
+    [assp setValue:lARate2 forKey:@"lARate2"];
+    [assp setValue:lARate3 forKey:@"lARate3"];
+    [assp setValue:lARate4 forKey:@"lARate4"];
+    [assp setValue:lARate5 forKey:@"lARate5"];
+    
+    [assp setValue:lATotalHours1 forKey:@"lATotalHours1"];
+    [assp setValue:lATotalHours2 forKey:@"lATotalHours2"];
+    [assp setValue:lATotalHours3 forKey:@"lATotalHours3"];
+    [assp setValue:lATotalHours4 forKey:@"lATotalHours4"];
+    [assp setValue:lATotalHours5 forKey:@"lATotalHours5"];
+    
+    
+    
+    [assp setValue:pOBox forKey:@"pOBox"];
+    [assp setValue:printedName forKey:@"printedName"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:projectNo forKey:@"projectNo"];
+    [assp setValue:reportNo forKey:@"reportNo"];
+    [assp setValue:sSHeader forKey:@"sSHeader"];
+    [assp setValue:telephoneNo forKey:@"telephoneNo"];
+    [assp setValue:total forKey:@"total"];
+    [assp setValue:totalLabor forKey:@"totalLabor"];
+    [assp setValue:zip forKey:@"zip"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
-        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{
         return TRUE;
     }
+    
 }
 
 
 //Summary2
 
-
-/*NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,tTotal.text,txtInsu.text,txtLTotal.text,txt20.text,txtGRTotal.text];*/
-
-
-+ (BOOL)saveSummery2:(NSString *)username saveVal:(NSString *)saveVal projId:(NSString *)projId desc1:(NSString *)desc1 qty1:(NSString *)qty1 rate1:(NSString *)rate1 total1:(NSString *)total1 desc2:(NSString *)desc2 qty2:(NSString *)qty2 rate2:(NSString *)rate2 total2:(NSString *)total2 desc3:(NSString *)desc3 qty3:(NSString *)qty3 rate3:(NSString *)rate3 total3:(NSString *)total3 desc4:(NSString *)desc4 qty4:(NSString *)qty4 rate4:(NSString *)rate4 total4:(NSString *)total4 desc5:(NSString *)desc5 qty5:(NSString *)qty5 rate5:(NSString *)rate5 total5:(NSString *)total5 totalTxt:(NSString *)totalTxt insu:(NSString *)insu lTotal:(NSString *)lTotal txt20:(NSString *)txt20 GRTotal:(NSString *)GRTotal
++(BOOL)saveSummery2:(NSString *)username additionalDiscount:(NSString *) additionalDiscount lessDiscount:(NSString *) lessDiscount mEAmount1:(NSString *) mEAmount1 mEAmount2:(NSString *) mEAmount2 mEAmount3:(NSString *) mEAmount3 mEAmount4:(NSString *) mEAmount4 mEAmount5:(NSString *) mEAmount5 mEDescription1:(NSString *) mEDescription1 mEDescription2:(NSString *) mEDescription2 mEDescription3:(NSString *) mEDescription3 mEDescription4:(NSString *) mEDescription4 mEDescription5:(NSString *) mEDescription5 mEQuantity1:(NSString *) mEQuantity1 mEQuantity2:(NSString *) mEQuantity2 mEQuantity3:(NSString *) mEQuantity3 mEQuantity4:(NSString *) mEQuantity4 mEQuantity5:(NSString *) mEQuantity5 mEUnitPrice1:(NSString *) mEUnitPrice1 mEUnitPrice2:(NSString *) mEUnitPrice2 mEUnitPrice3:(NSString *) mEUnitPrice3 mEUnitPrice4:(NSString *) mEUnitPrice4 mEUnitPrice5:(NSString *) mEUnitPrice5 project_id:(NSString *) project_id sMSSheetNo:(NSString *) sMSSheetNo total1:(NSString *) total1 total2:(NSString *) total2 total3:(NSString *) total3
 {
     
     SummarySheet2*assp;
-    
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet2"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
-    
     [fetchRequest setResultType:NSDictionaryResultType];
     [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
-    
     NSError *error = nil;
-    
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
+    if ([existingIDs count] > 0){
+        return FALSE;
+    }
     
     if (error != nil) {
-        
-        NSLog(@"Error: %@", [error localizedDescription]);
+        NSLog(@"Error: %@", [error debugDescription]);
     }
-    
-    NSInteger newID = 0;
-    
-    for (NSDictionary *dict in existingIDs) {
-        
-        NSString *str = [dict valueForKey:@"sMSSheetNo"] ;
-        NSArray *arr = [str componentsSeparatedByString:@"M"];
-        NSInteger IDToCompare = [[arr objectAtIndex:0] integerValue];
-        
-        if (IDToCompare >= newID) {
-            newID = IDToCompare + 1;
-        }
-    }
-    
-    NSString *newIDD = [NSString stringWithFormat:@"SM%d",newID];
+    NSLog(@"New Summary Sheet 2 Report sMSheetNo: %@", sMSSheetNo);
     
     if (!assp) {
         assp = [NSEntityDescription
@@ -2017,26 +2228,29 @@
                 inManagedObjectContext:managedContext];
     }
     
-    [assp setValue:newIDD forKey:@"sMSSheetNo"];
-    [assp setValue:projId forKey:@"project_id"];
-    [assp setValue:desc1 forKey:@"mEDescription1"];
-    [assp setValue:desc2 forKey:@"mEDescription2"];
-    [assp setValue:desc3 forKey:@"mEDescription3"];
-    [assp setValue:desc4 forKey:@"mEDescription4"];
-    [assp setValue:desc5 forKey:@"mEDescription5"];
-    [assp setValue:qty1 forKey:@"mEQuantity1"];
-    [assp setValue:qty2 forKey:@"mEQuantity2"];
-    [assp setValue:qty3 forKey:@"mEQuantity3"];
-    [assp setValue:qty4 forKey:@"mEQuantity4"];
-    [assp setValue:qty5 forKey:@"mEQuantity5"];
-    [assp setValue:rate1 forKey:@"mEUnitPrice1"];
-    [assp setValue:rate2 forKey:@"mEUnitPrice2"];
-    [assp setValue:rate3 forKey:@"mEUnitPrice3"];
-    [assp setValue:rate4 forKey:@"mEUnitPrice4"];
-    [assp setValue:rate5 forKey:@"mEUnitPrice5"];
+    [assp setValue:sMSSheetNo forKey:@"sMSSheetNo"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:mEDescription1 forKey:@"mEDescription1"];
+    [assp setValue:mEDescription2 forKey:@"mEDescription2"];
+    [assp setValue:mEDescription3 forKey:@"mEDescription3"];
+    [assp setValue:mEDescription4 forKey:@"mEDescription4"];
+    [assp setValue:mEDescription5 forKey:@"mEDescription5"];
+    [assp setValue:mEQuantity1 forKey:@"mEQuantity1"];
+    [assp setValue:mEQuantity2 forKey:@"mEQuantity2"];
+    [assp setValue:mEQuantity3 forKey:@"mEQuantity3"];
+    [assp setValue:mEQuantity4 forKey:@"mEQuantity4"];
+    [assp setValue:mEQuantity5 forKey:@"mEQuantity5"];
+    [assp setValue:mEUnitPrice1 forKey:@"mEUnitPrice1"];
+    [assp setValue:mEUnitPrice2 forKey:@"mEUnitPrice2"];
+    [assp setValue:mEUnitPrice3 forKey:@"mEUnitPrice3"];
+    [assp setValue:mEUnitPrice4 forKey:@"mEUnitPrice4"];
+    [assp setValue:mEUnitPrice5 forKey:@"mEUnitPrice5"];
     [assp setValue:total1 forKey:@"total1"];
     [assp setValue:total2 forKey:@"total2"];
     [assp setValue:total3 forKey:@"total3"];
+    
+    [assp setValue:additionalDiscount forKey:@"additionalDiscount"];
+    [assp setValue:lessDiscount forKey:@"lessDiscount"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -2047,6 +2261,103 @@
         return TRUE;
     }
 }
+
+
+
+//Summery3
++ (BOOL)saveSummery3:(NSString *)username contractorRepresentative:(NSString *) contractorRepresentative dailyTotal:(NSString *) dailyTotal date1:(NSString *) date1 date2:(NSString *) date2 eQAmount1:(NSString *) eQAmount1 eQAmount2:(NSString *) eQAmount2 eQAmount3:(NSString *) eQAmount3 eQAmount4:(NSString *) eQAmount4 eQAmount5:(NSString *) eQAmount5 eQIdleActive1:(NSString *) eQIdleActive1 eQIdleActive2:(NSString *) eQIdleActive2 eQIdleActive3:(NSString *) eQIdleActive3 eQIdleActive4:(NSString *) eQIdleActive4 eQIdleActive5:(NSString *) eQIdleActive5 eQNo1:(NSString *) eQNo1 eQNo2:(NSString *) eQNo2 eQNo3:(NSString *) eQNo3 eQNo4:(NSString *) eQNo4 eQNo5:(NSString *) eQNo5 eQRAte1:(NSString *) eQRAte1 eQRAte2:(NSString *) eQRAte2 eQRAte3:(NSString *) eQRAte3 eQRAte4:(NSString *) eQRAte4 eQRAte5:(NSString *) eQRAte5 eQSizeandClass1:(NSString *) eQSizeandClass1 eQSizeandClass2:(NSString *) eQSizeandClass2 eQSizeandClass3:(NSString *) eQSizeandClass3 eQSizeandClass4:(NSString *) eQSizeandClass4 eQSizeandClass5:(NSString *) eQSizeandClass5 eQTotalHours1:(NSString *) eQTotalHours1 eQTotalHours2:(NSString *) eQTotalHours2 eQTotalHours3:(NSString *) eQTotalHours3 eQTotalHours4:(NSString *) eQTotalHours4 eQTotalHours5:(NSString *) eQTotalHours5 inspector:(NSString *) inspector project_id:(NSString *) project_id signature1:(NSString *) signature1 signature2:(NSString *) signature2 sMSheetNo:(NSString *) sMSheetNo total_to_date:(NSString *) total_to_date
+{
+    
+    SummarySheet3*assp;
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet3"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([existingIDs count] > 0){
+        return FALSE;
+    }
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    NSLog(@"New Summary Sheet 2 Report sMSheetNo: %@", sMSheetNo);
+    
+    
+    if (!assp) {
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"SummarySheet3"
+                inManagedObjectContext:managedContext];
+    }
+    
+    [assp setValue:sMSheetNo forKey:@"sMSheetNo"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:eQSizeandClass1 forKey:@"eQSizeandClass1"];
+    [assp setValue:eQSizeandClass2 forKey:@"eQSizeandClass2"];
+    [assp setValue:eQSizeandClass3 forKey:@"eQSizeandClass3"];
+    [assp setValue:eQSizeandClass4 forKey:@"eQSizeandClass4"];
+    [assp setValue:eQSizeandClass5 forKey:@"eQSizeandClass5"];
+    [assp setValue:eQIdleActive1 forKey:@"eQIdleActive1"];
+    [assp setValue:eQIdleActive2 forKey:@"eQIdleActive2"];
+    [assp setValue:eQIdleActive3 forKey:@"eQIdleActive3"];
+    [assp setValue:eQIdleActive4 forKey:@"eQIdleActive4"];
+    [assp setValue:eQIdleActive5 forKey:@"eQIdleActive5"];
+    [assp setValue:eQNo1 forKey:@"eQNo1"];
+    [assp setValue:eQNo2 forKey:@"eQNo2"];
+    [assp setValue:eQNo3 forKey:@"eQNo3"];
+    [assp setValue:eQNo4 forKey:@"eQNo4"];
+    [assp setValue:eQNo5 forKey:@"eQNo5"];
+    [assp setValue:eQTotalHours1 forKey:@"eQTotalHours1"];
+    [assp setValue:eQTotalHours2 forKey:@"eQTotalHours2"];
+    [assp setValue:eQTotalHours3 forKey:@"eQTotalHours3"];
+    [assp setValue:eQTotalHours4 forKey:@"eQTotalHours4"];
+    [assp setValue:eQTotalHours5 forKey:@"eQTotalHours5"];
+    [assp setValue:eQRAte1 forKey:@"eQRAte1"];
+    [assp setValue:eQRAte2 forKey:@"eQRAte2"];
+    [assp setValue:eQRAte3 forKey:@"eQRAte3"];
+    [assp setValue:eQRAte4 forKey:@"eQRAte4"];
+    [assp setValue:eQRAte4 forKey:@"eQRAte4"];
+    [assp setValue:eQTotalHours1 forKey:@"eQTotalHours1"];
+    [assp setValue:eQTotalHours2 forKey:@"eQTotalHours2"];
+    [assp setValue:eQTotalHours3 forKey:@"eQTotalHours3"];
+    [assp setValue:eQTotalHours4 forKey:@"eQTotalHours4"];
+    [assp setValue:eQTotalHours5 forKey:@"eQTotalHours5"];
+    [assp setValue:inspector forKey:@"inspector"];
+    [assp setValue:signature1 forKey:@"signature1"];
+    [assp setValue:signature2 forKey:@"signature2"];
+    
+    [assp setValue:contractorRepresentative forKey:@"contractorRepresentative"];
+    [assp setValue:project_id forKey:@"project_id"];
+    
+    NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
+    [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *date1Type = [myXMLdateReader dateFromString:date1];
+    [assp setValue:date1Type forKey:@"date1"];
+    
+    NSDate *date2Type = [myXMLdateReader dateFromString:date2];
+    [assp setValue:date2Type forKey:@"date2"];
+    
+    
+    
+    [assp setValue:dailyTotal forKey:@"dailyTotal"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
+
+
 
 +(BOOL) saveAssignProject:(NSString *)username inspectors:(NSString *)inspectors projId:(NSString *)projId date:(NSDate *)date
 {
@@ -2206,9 +2517,6 @@
 
 + (UIImage *) getTheImage:(NSString *)imgName{
     
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %d)", [[payload objectForKey:@"id"] intValue]];
-    //[fetchRequest setPredicate:predicate];
-    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Image" inManagedObjectContext:context];
@@ -2218,7 +2526,7 @@
     
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"Object count = %d",[objects count]);
+    NSLog(@"Object count = %d for image name=%@",[objects count], imgName);
     if([objects count] > 0){
         
         NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
