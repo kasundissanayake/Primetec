@@ -670,7 +670,7 @@
         [HUD setHidden:YES];
         
         if (saveStatus){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
             // [arrayImages removeAllObjects];
@@ -678,17 +678,11 @@
             
             
         }else{
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }
-        
     }
-    
-    
-    
 }
-
-
 
 
 -(void)uploadSignature2

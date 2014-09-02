@@ -94,11 +94,11 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-   // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
-   //[fetchRequest setPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
+   [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"obbbbbjjjjjjjjjjctttsssss%@",objects);
+    
 
     if([objects count] > 0){
         

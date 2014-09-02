@@ -491,7 +491,9 @@
         [assp setWDODescriptionOfWork2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork2"]]];
         [assp setWDODescriptionOfWork3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork3"]]];
         [assp setWDODescriptionOfWork4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork4"]]];
-        [assp setContractorsHoursOfWork:[NSNumber numberWithInt:[[payload objectForKey:@"ContractorsHoursOfWork"] intValue]]];
+        //[assp setContractorsHoursOfWork:[NSNumber numberWithInt:[[payload objectForKey:@"ContractorsHoursOfWork"] intValue]]];
+        [assp setContractorsHoursOfWork:[payload objectForKey:@"ContractorsHoursOfWork"]];
+        
         [assp setInspectorSign:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"InspectorSign"]]];
         [assp setPrintedName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"printedName"]]];
         [assp setOriginal_Calendar_Days:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"original_Calendar_Days"]]];
@@ -2186,6 +2188,7 @@
     [assp setValue:total forKey:@"total"];
     [assp setValue:totalLabor forKey:@"totalLabor"];
     [assp setValue:zip forKey:@"zip"];
+    [assp setValue:state forKey:@"state"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {

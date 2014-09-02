@@ -936,7 +936,7 @@
                            iFTitle3:txtTitle7.text
                            iFTitle4:txtTitle8.text
                            
-                           images_uploaded:[sketchesNameArray componentsJoinedByString:@","]
+                           images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            inspectionID:repNo.text
                            inspectorSign:sigName
                            signature:sigName
@@ -957,7 +957,7 @@
                            project:txtProject.text
                            project_id:appDelegate.projId
                            report_No:repNo.text
-                           sketch_images:[imgNameArray componentsJoinedByString:@","]
+                           sketch_images:[sketchesNameArray componentsJoinedByString:@","]
                            state:txtState.text
                            telephone_No:txtTel.text
                            time:time.text
