@@ -94,12 +94,12 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
-   [fetchRequest setPredicate:predicate];
+    // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
+    //[fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    NSLog(@"obbbbbjjjjjjjjjjctttsssss%@",objects);
     
-
     if([objects count] > 0){
         
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
@@ -115,7 +115,7 @@
             for(int i=1; i<tempImageArray.count; i++)
             {
                 [arrayImages addObject:[tempImageArray objectAtIndex:i]];
-            }            
+            }
         }
         
         NSLog(@"Array Images--- %@",arrayImages);
@@ -172,14 +172,14 @@
         NSLog(@"url----%@",url);
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
-       // imgSignature.image=image;
+        // imgSignature.image=image;
         
         
         
         
         NSString * signName = [expenseReportModelObject valueForKey:@"Signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
-
+        
         
     }
     [self.tblView reloadData];
