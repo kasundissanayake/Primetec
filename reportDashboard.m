@@ -76,7 +76,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];
     }
     
-    
     //start brin
     else if (proType==5 && ![NSStringFromClass([currentVC class]) isEqualToString:@"quantitySummarySheet"])
     {

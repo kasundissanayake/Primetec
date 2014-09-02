@@ -7,6 +7,7 @@
 #import "ExpenseReportCell.h"
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface ExpenseReport (){
     NSMutableArray *arrayImages;
@@ -93,11 +94,12 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
-    [fetchRequest setPredicate:predicate];
+   // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
+   //[fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    
+    NSLog(@"obbbbbjjjjjjjjjjctttsssss%@",objects);
+
     if([objects count] > 0){
         
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
@@ -170,9 +172,18 @@
         NSLog(@"url----%@",url);
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
-        imgSignature.image=image;
+       // imgSignature.image=image;
+        
+        
+        
+        
+        NSString * signName = [expenseReportModelObject valueForKey:@"Signature"];
+        imgSignature.image=[PRIMECMController getTheImage:signName];
+
+        
     }
     [self.tblView reloadData];
+    
 }
 
 
