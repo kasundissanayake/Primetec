@@ -869,6 +869,11 @@
             [appDelegate.sketchesArray removeAllObjects];
             [arrayImages removeAllObjects];
             [self clearFormFields];
+            
+            Summary_2_ViewController *su=[[Summary_2_ViewController alloc] init];
+            su.title=@"Summary Sheet";
+            [self.navigationController pushViewController:su animated:YES];
+            
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];

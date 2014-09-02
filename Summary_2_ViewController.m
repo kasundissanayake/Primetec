@@ -10,6 +10,7 @@
 #import "Summary_3_ViewController.h"
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface Summary_2_ViewController ()
 
@@ -454,97 +455,69 @@
             
         }
         
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary2/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,total1.text,lessDiscount.text,total2.text,additionalDiscount.text,total3.text];
-        
-        NSLog(@"URL---- %@",strURL);
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        NSLog(@"URL---%@",strURL);
-        
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
-        total1.text=NULL ;
-        lessDiscount.text=NULL ;
-        total2.text=NULL ;
-        additionalDiscount.text=NULL;
-        total3.text=NULL;
-        additionalDiscount.text=@"";
-        mEDescription1.text=@"";
-        mEDescription2.text=@"";
-        mEDescription3.text=@"";
-        mEDescription4.text=@"";
-        mEDescription5.text=@"";
-        mEQuantity1.text=@"";
-        mEQuantity2.text=@"";
-        mEQuantity3.text=@"";
-        mEQuantity4.text=@"";
-        mEQuantity5.text=@"";
-        mEUnitPrice1.text=@"";
-        mEUnitPrice2.text=@"";
-        mEUnitPrice3.text=@"";
-        mEUnitPrice4.text=@"";
-        mEUnitPrice5.text=@"";
-        mEAmount1.text=@"";
-        mEAmount2.text=@"";
-        mEAmount3.text=@"";
-        mEAmount4.text=@"";
-        mEAmount5.text=@"";
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    _receivedResponse = response;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [_receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [HUD setHidden:YES];
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-   // [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+       
     
-    if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-    {
-        Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
-        su.title=@"Summary Sheet";
-        [self.navigationController pushViewController:su animated:YES];
+        BOOL saveStatus = [PRIMECMController
+                           saveSummery2:appDelegate.username
+                           additionalDiscount:additionalDiscount.text
+                           lessDiscount:lessDiscount.text
+                           mEAmount1:mEAmount1.text
+                           mEAmount2:mEAmount2.text
+                           mEAmount3:mEAmount3.text
+                           mEAmount4:mEAmount4.text
+                           mEAmount5:mEAmount5.text
+                           mEDescription1:mEDescription1.text
+                           mEDescription2:mEDescription2.text
+                           mEDescription3:mEDescription3.text
+                           mEDescription4:mEDescription4.text
+                           mEDescription5:mEDescription5.text
+                           mEQuantity1:mEQuantity1.text
+                           mEQuantity2:mEQuantity2.text
+                           mEQuantity3:mEQuantity3.text
+                           mEQuantity4:mEQuantity4.text
+                           mEQuantity5:mEQuantity5.text
+                           mEUnitPrice1:mEUnitPrice1.text
+                           mEUnitPrice2:mEUnitPrice2.text
+                           mEUnitPrice3:mEUnitPrice3.text
+                           mEUnitPrice4:mEUnitPrice4.text
+                           mEUnitPrice5:mEUnitPrice5.text
+                           project_id:appDelegate.projId
+                           sMSSheetNo:@""
+                           total1:total1.text
+                           total2:total2.text
+                           total3:total3.text];
         
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
+        [HUD setHidden:YES];
+        
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+           // [arrayImages removeAllObjects];
+           // [self clearFormFields];
+            
+            Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
+            su.title=@"Summary Sheet";
+            [self.navigationController pushViewController:su animated:YES];
+            
+
+            
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
+        
     }
-    else
-    {
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-    }
+
     
-}
+    
+    
+    
+    
+    
+    
+    }
+
 
 -(NSString*)getCurrentDateTimeAsNSString
 {

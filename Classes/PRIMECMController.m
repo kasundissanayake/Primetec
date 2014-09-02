@@ -1064,8 +1064,9 @@
                     insertNewObjectForEntityForName:@"SummarySheet2"
                     inManagedObjectContext:managedContext];
         }
-        
-        [assp setSMSSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSSheetNo"]]];
+           [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
+        [assp setLessDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LessDiscount"]]];
+
         [assp setMEDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription1"]]];
         [assp setMEDescription2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription2"]]];
         [assp setMEDescription3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription3"]]];
@@ -1086,12 +1087,12 @@
         [assp setMEAmount3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount3"]]];
         [assp setMEAmount4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount4"]]];
         [assp setMEAmount5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount5"]]];
+        [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
+        [assp setSMSSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSSheetNo"]]];
         [assp setTotal1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total1"]]];
         [assp setTotal2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total2"]]];
         [assp setTotal3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total3"]]];
-        [assp setLessDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LessDiscount"]]];
-        [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
-        
+     
         NSError *saveError;
         if (![managedContext save:&saveError]) {
             NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
@@ -2209,7 +2210,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSSheetNo"]];
     NSError *error = nil;
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
@@ -2227,9 +2228,15 @@
                 insertNewObjectForEntityForName:@"SummarySheet2"
                 inManagedObjectContext:managedContext];
     }
+
     
-    [assp setValue:sMSSheetNo forKey:@"sMSSheetNo"];
-    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:additionalDiscount forKey:@"additionalDiscount"];
+    [assp setValue:lessDiscount forKey:@"lessDiscount"];
+    [assp setValue:mEAmount1 forKey:@"mEAmount1"];
+    [assp setValue:mEAmount2 forKey:@"mEAmount2"];
+    [assp setValue:mEAmount3 forKey:@"mEAmount3"];
+    [assp setValue:mEAmount4 forKey:@"mEAmount4"];
+    [assp setValue:mEAmount5 forKey:@"mEAmount5"];
     [assp setValue:mEDescription1 forKey:@"mEDescription1"];
     [assp setValue:mEDescription2 forKey:@"mEDescription2"];
     [assp setValue:mEDescription3 forKey:@"mEDescription3"];
@@ -2245,12 +2252,12 @@
     [assp setValue:mEUnitPrice3 forKey:@"mEUnitPrice3"];
     [assp setValue:mEUnitPrice4 forKey:@"mEUnitPrice4"];
     [assp setValue:mEUnitPrice5 forKey:@"mEUnitPrice5"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:sMSSheetNo forKey:@"sMSSheetNo"];
     [assp setValue:total1 forKey:@"total1"];
     [assp setValue:total2 forKey:@"total2"];
     [assp setValue:total3 forKey:@"total3"];
-    
-    [assp setValue:additionalDiscount forKey:@"additionalDiscount"];
-    [assp setValue:lessDiscount forKey:@"lessDiscount"];
+
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {

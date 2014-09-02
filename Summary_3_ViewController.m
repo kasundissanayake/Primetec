@@ -5,6 +5,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 
 @interface Summary_3_ViewController ()
 {
@@ -374,8 +375,9 @@
     
     
     
-    if(inspector.text==NULL || inspector.text.length==0 || signature1.image==NULL ||  date1.text==NULL || date1.text.length==0  || date2.text==NULL || date2.text.length==0 || signature2.image==NULL || date2.text==NULL || date2.text.length==0 || dailyTotal.text==NULL || dailyTotal.text.length==0 || total_to_date.text==NULL || total_to_date.text.length==0 || contractorRepresentative.text==NULL || contractorRepresentative.text.length==0)
+    if(inspector.text==NULL || inspector.text.length==0 || signature1.image==NULL ||  date1.text==NULL || date1.text.length==0  || date2.text==NULL || date2.text.length==0 || signature2.image==NULL || signature2.image==NULL || dailyTotal.text==NULL || dailyTotal.text.length==0 || total_to_date.text==NULL || total_to_date.text.length==0  )
     {
+      //  contractorRepresentative.text==NULL || contractorRepresentative.text.length==0
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
                                                         message:@"Please fill all the fields"
@@ -621,84 +623,68 @@
         sigName1=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
         sigName2=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
-        NSString *savedValue = [[NSUserDefaults standardUserDefaults]
-                                stringForKey:@"summery id"];
-        NSLog(@"saved val%@",savedValue);
+        BOOL saveStatus = [PRIMECMController
+                           saveSummery3:appDelegate.username
+                           contractorRepresentative:contractorRepresentative.text
+                           dailyTotal:dailyTotal.text
+                           date1:date1.text
+                           date2:date2.text
+                           eQAmount1:eQAmount1.text
+                           eQAmount2:eQAmount2.text
+                           eQAmount3:eQAmount3.text
+                           eQAmount4:eQAmount4.text
+                           eQAmount5:eQAmount5.text
+                           eQIdleActive1:eQIdleActive1.text
+                           eQIdleActive2:eQIdleActive2.text
+                           eQIdleActive3:eQIdleActive3.text
+                           eQIdleActive4:eQIdleActive4.text
+                           eQIdleActive5:eQIdleActive5.text
+                           eQNo1:eQNo1.text
+                           eQNo2:eQNo2.text
+                           eQNo3:eQNo3.text
+                           eQNo4:eQNo4.text
+                           eQNo5:eQNo5.text
+                           eQRAte1:eQRAte1.text
+                           eQRAte2:eQRAte2.text
+                           eQRAte3:eQRAte3.text
+                           eQRAte4:eQRAte4.text
+                           eQRAte5:eQRAte5.text
+                           eQSizeandClass1:eQSizeandClass1.text
+                           eQSizeandClass2:eQSizeandClass2.text
+                           eQSizeandClass3:eQSizeandClass3.text
+                           eQSizeandClass4:eQSizeandClass4.text
+                           eQSizeandClass5:eQSizeandClass5.text
+                           eQTotalHours1:eQTotalHours1.text
+                           eQTotalHours2:eQTotalHours2.text
+                           eQTotalHours3:eQTotalHours3.text
+                           eQTotalHours4:eQTotalHours4.text
+                           eQTotalHours5:eQTotalHours5.text
+                           inspector:inspector.text
+                           project_id:appDelegate.projId
+                           signature1:eQTotalHours3.text
+                           signature2:eQTotalHours3.text
+                           sMSheetNo:@""
+                           total_to_date:total_to_date.text
+                           ];
         
+        [HUD setHidden:YES];
         
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/summary3/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,appDelegate.saveVal,appDelegate.projId,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,inspector.text,sigName1,date1.text,contractorRepresentative.text,sigName2,date2.text,dailyTotal.text,total_to_date.text];
+        if (saveStatus){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            // [arrayImages removeAllObjects];
+            // [self clearFormFields];
+            
+            
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
         
-        NSLog(@"URL---- %@",strURL);
-        
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        NSLog(@"URL---%@",strURL);
-        
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
-        
-        eQTotalHours1.text=@"";
-        eQTotalHours2.text=@"";
-        eQTotalHours3.text=@"";
-        eQTotalHours4.text=@"";
-        eQTotalHours5.text=@"";
-        
-        eQNo1.text=@"";
-        eQNo2.text=@"";
-        eQNo3.text=@"";
-        eQNo4.text=@"";
-        eQNo5.text=@"";
-        
-        eQIdleActive1.text=@"";
-        eQIdleActive2.text=@"";
-        eQIdleActive3.text=@"";
-        eQIdleActive4.text=@"";
-        eQIdleActive5.text=@"";
-        
-        eQSizeandClass5.text=@"";
-        eQSizeandClass4.text=@"";
-        eQSizeandClass3.text=@"";
-        eQSizeandClass2.text=@"";
-        eQSizeandClass1.text=@"";
-        
-        eQRAte1.text=@"";
-        eQRAte2.text=@"";
-        eQRAte3.text=@"";
-        eQRAte4.text=@"";
-        eQRAte5.text=@"";
-        eQAmount1.text=@"";
-        eQAmount2.text=@"";
-        eQAmount3.text=@"";
-        eQAmount4.text=@"";
-        eQAmount5.text=@"";
-        
-        inspector.text=@"";
-      
-        date2.text=NULL;
-        date1.text=NULL;
-        dailyTotal.text=@"";
-        total_to_date.text=@"";
-        contractorRepresentative.text=@"";
-        
-        signature2.image=NULL;
-        signature1.image=NULL;
-        
-       }
+    }
+    
+    
     
 }
 
@@ -848,94 +834,6 @@
     NSDate *now = [NSDate date];
     NSString *retStr = [format stringFromDate:now];
     return retStr;
-}
-
-
-
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
-{
-    NSLog(@"uuuuu");
-    
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
-    NSLog(@"ddddd");
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    NSLog(@"eeeeee");
-    [HUD setHidden:YES];
-    _connectionError = error;
-}
-
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [HUD setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    NSLog(@"response---%@",responseObject);
-    
-    
-    
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    
-    if (uploadingSignature1) {
-        
-        uploadingSignature1=NO;
-        
-        
-        
-        
-        [self uploadSignature2];
-        
-        
-        
-    }
-    else if (uploadingSignature2) {
-        
-        uploadingSignature2=NO;
-        
-        
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [exportAlert show];
-        
-        
-    }
-   
-    else
-    {
-        
-        if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-        {
-            
-            
-            [self uploadSignature1];
-            
-        }
-        else
-        {
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-        
-        
-    }
-
-    
 }
 
 
