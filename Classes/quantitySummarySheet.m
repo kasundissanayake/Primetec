@@ -9,7 +9,8 @@
 #import "quantitySummarySheet.h"
 #import "quantityCellTableViewCell.h"
 #import "TabAndSplitAppAppDelegate.h"
-
+#import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
 @interface quantitySummarySheet (){
     
     
@@ -409,11 +410,6 @@
 
 - (IBAction)saveQuantitySumSheet:(id)sender {
     
-    
-    
-    
-    
-    
     if(project.text==NULL || project.text.length==0|| i_number.text==NULL || i_number.text.length==0 || item.text==NULL || item.text.length==0 || est_quantity.text==NULL || est_quantity.text.length==0||unit.text==NULL || unit.text.length==0||unit_price.text==NULL || unit_price.text.length==0)
     {
         
@@ -424,47 +420,23 @@
                                               otherButtonTitles:nil];
         [alert show];
         
-        
     }
     else
     {
-        
-        
         // http://data.privytext.us/contructionapi.php/api/quantity_summary/save/`project/ item_no/ est_qty/unit/unit_price
-        
         isSaved=YES;
-        
         NSString *strURL;
-        
-        
         strURL= [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/save/%@/%@/%@/%@/%@/%@/%@",appDelegate.projId ,project.text,value,est_quantity.text,unit.text,unit_price.text,appDelegate.username];
-        
-        
-        
-        
-        
-        
         NSLog(@"URL---- %@",strURL);
-        
         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *apiURL =
         [NSURL URLWithString:uencodedUrl];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
         [urlRequest setHTTPMethod:@"POST"];
-        
-        
-        
-        
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        
-        
         _receivedData = [[NSMutableData alloc] init];
-        
-        
         [connection start];
         NSLog(@"URL---%@",strURL);
-        
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
         HUD.labelText=@"";
@@ -473,12 +445,74 @@
         [HUD show:YES];
         
         
+        BOOL saveStatus = [PRIMECMController saveQuantitySummaryDetails: appDelegate.username
+                                                                est_qty: est_quantity.text
+                                                                item_no: i_number.text
+                                                                project: project.text
+                                                             project_id: appDelegate.projId
+                                                                   unit: unit.text
+                                                             unit_price: unit_price.text
+                                                                   user: appDelegate.userId
+                           ];
         
+        
+        
+        project.text = @"";
+        i_number.text=@"";
+        est_quantity.text=@"";
+        unit.text=@"";
+        unit_price.text=@"";
+        
+        
+        [HUD setHidden:YES];
+        
+        if (saveStatus ){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved QuantitySummaryDetails report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save QuantitySummaryDetails report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+        }
+    }
+}
+
+
+
+
+
+-(void) populateItem
+{
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.labelText=@"";
+    HUD.dimBackground = YES;
+    HUD.delegate = self;
+    [HUD show:YES];
+    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionItem" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY no == %@", value];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if([objects count] > 0){
+        NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
+        NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"no"]);
+        
+        
+        item.text=[complianceReportObject valueForKey:@"desc"];
+        
+        
+    }else{
+        NSLog(@"No matching ComplianceForm with ID: %@", value);
     }
     
     
-    
-    
+    [HUD setHidden:YES];
 }
 
 

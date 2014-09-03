@@ -1836,7 +1836,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
     NSError *error = nil;
     //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
