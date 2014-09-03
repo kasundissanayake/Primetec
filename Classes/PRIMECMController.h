@@ -48,6 +48,12 @@
 
 + (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector;
 
++ (BOOL)saveQuantitySummaryItems:(NSString *)username item_no:(NSString *)item_no quantity_sum_details_no:(NSString *)quantity_sum_details_no date:(NSString *)date location_station:(NSString *)location_station daily:(NSString *)daily accum:(NSString *)accum;
+
++ (BOOL)saveQuantitySummaryDetails:(NSString *)username project_id:(NSString *)project_id project:(NSString *)project item_no:(NSString *)item_no est_qty:(NSString *)est_qty unit:(NSString *)unit unit_price:(NSString *)unit_price user:(NSString *)user;
+
+
+
 + (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img;
 
 + (UIImage *) getTheImage:(NSString *)imgName;

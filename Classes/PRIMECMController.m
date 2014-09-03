@@ -1836,7 +1836,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
     NSError *error = nil;
     //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
@@ -1851,7 +1851,6 @@
     }
     
     [assp setValue:item_no forKey:@"item_no"];
-    
     [assp setValue:project forKey:@"project"];
     [assp setValue:project_id forKey:@"project_id"];
     [assp setValue:unit forKey:@"unit"];
@@ -1892,7 +1891,6 @@
     }
     
     [assp setValue:item_no forKey:@"item_no"];
-    
     [assp setValue:accum forKey:@"accum"];
     [assp setValue:daily forKey:@"daily"];
     
@@ -2410,6 +2408,9 @@
     NSLog(@"saved assign_project: %@", assp);
     return TRUE;
 }
+
+
+
 
 + (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector
 {
