@@ -1836,7 +1836,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
     NSError *error = nil;
     //NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
@@ -1851,6 +1851,7 @@
     }
     
     [assp setValue:item_no forKey:@"item_no"];
+    
     [assp setValue:project forKey:@"project"];
     [assp setValue:project_id forKey:@"project_id"];
     [assp setValue:unit forKey:@"unit"];
@@ -1891,6 +1892,7 @@
     }
     
     [assp setValue:item_no forKey:@"item_no"];
+    
     [assp setValue:accum forKey:@"accum"];
     [assp setValue:daily forKey:@"daily"];
     
@@ -2193,6 +2195,11 @@
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{
+        
+        
+        
+            NSLog(@"saved summary1: %@", assp);
+        
         return TRUE;
     }
     
@@ -2311,11 +2318,21 @@
     [assp setValue:eQSizeandClass3 forKey:@"eQSizeandClass3"];
     [assp setValue:eQSizeandClass4 forKey:@"eQSizeandClass4"];
     [assp setValue:eQSizeandClass5 forKey:@"eQSizeandClass5"];
+    
     [assp setValue:eQIdleActive1 forKey:@"eQIdleActive1"];
     [assp setValue:eQIdleActive2 forKey:@"eQIdleActive2"];
     [assp setValue:eQIdleActive3 forKey:@"eQIdleActive3"];
     [assp setValue:eQIdleActive4 forKey:@"eQIdleActive4"];
     [assp setValue:eQIdleActive5 forKey:@"eQIdleActive5"];
+    
+    
+    [assp setValue:eQAmount1 forKey:@"eQAmount1"];
+    [assp setValue:eQAmount2 forKey:@"eQAmount2"];
+    [assp setValue:eQAmount3 forKey:@"eQAmount3"];
+    [assp setValue:eQAmount4 forKey:@"eQAmount4"];
+    [assp setValue:eQAmount5 forKey:@"eQAmount5"];
+    
+    
     [assp setValue:eQNo1 forKey:@"eQNo1"];
     [assp setValue:eQNo2 forKey:@"eQNo2"];
     [assp setValue:eQNo3 forKey:@"eQNo3"];
@@ -2330,7 +2347,8 @@
     [assp setValue:eQRAte2 forKey:@"eQRAte2"];
     [assp setValue:eQRAte3 forKey:@"eQRAte3"];
     [assp setValue:eQRAte4 forKey:@"eQRAte4"];
-    [assp setValue:eQRAte4 forKey:@"eQRAte4"];
+    [assp setValue:eQRAte4 forKey:@"eQRAte5"];
+    
     [assp setValue:eQTotalHours1 forKey:@"eQTotalHours1"];
     [assp setValue:eQTotalHours2 forKey:@"eQTotalHours2"];
     [assp setValue:eQTotalHours3 forKey:@"eQTotalHours3"];
@@ -2355,12 +2373,17 @@
     
     
     [assp setValue:dailyTotal forKey:@"dailyTotal"];
+     [assp setValue:total_to_date forKey:@"total_to_date"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
         return FALSE;
     }else{
+        
+        
+            NSLog(@"saved summary3: %@", assp);
+        
         return TRUE;
     }
 }
@@ -2408,9 +2431,6 @@
     NSLog(@"saved assign_project: %@", assp);
     return TRUE;
 }
-
-
-
 
 + (BOOL)saveProject:(NSString *)username projId:(NSString *)projId phone:(NSString *)phone projName:(NSString *)projName projDesc:(NSString *)projDesc title:(NSString *)title street:(NSString *)street city:(NSString *)city state:(NSString *)state zip:(NSString *)zip date:(NSString *)date clientName:(NSString *)clientName projMgr:(NSString *)projMgr latitude:(NSString *)latitude longitude:(NSString *)longitude inspector:(NSString *)inspector
 {

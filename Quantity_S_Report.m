@@ -1,14 +1,14 @@
 #import "Quantity_S_Report.h"
 #import "quantityCellTableViewCell.h"
 #import "TabAndSplitAppAppDelegate.h"
-#import "PRIMECMAPPUtils.h"
-#import "PRIMECMController.h"
 
 
 
 @interface Quantity_S_Report ()
 @end
 @implementation Quantity_S_Report
+
+
 
 NSMutableData *_receivedData;
 NSURLResponse *_receivedResponse;
@@ -30,40 +30,65 @@ TabAndSplitAppAppDelegate *appDelegate;
     scrollView.frame = CGRectMake(0,0, 720, 1800);
     [scrollView setContentSize:CGSizeMake(700, 1800)];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
+    
+    
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
+    
+    
+    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"New", @"")
                                style:UIBarButtonItemStyleDone
                                target:self
                                action:@selector(showSCompliance:)];
+    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
+    
+    
+    
+    
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button,btnEmail,btnPrint, nil];
+    
+    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSLog(@"vvvvvvv,%@",appDelegate.city);
-    itemDetails=[[NSMutableArray alloc]init];
-    // [self loadSummerySheet];
-   // [self loadExpenseDetails];
     
-    [self loadQtySummaryDetails];
+    
+    
+    itemDetails=[[NSMutableArray alloc]init];
+    
+    // [self loadSummerySheet];
+    [self loadExpenseDetails];
     
 }
 
 
+
+
+
+
+
+
 -(void)printReport
 {
+    
     //[self.tblView setContentOffset:CGPointZero animated:YES];
     [self.quantityTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *directroyPath = nil;
     directroyPath = [documentsDirectory stringByAppendingPathComponent:@"PDF"];
     NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
     NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
+    
     // check for the "PDF" directory
     NSError *error;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        
     } else {
         [[NSFileManager defaultManager] createDirectoryAtPath:directroyPath
                                   withIntermediateDirectories:NO
@@ -112,8 +137,26 @@ TabAndSplitAppAppDelegate *appDelegate;
         };
         [printController presentFromBarButtonItem:btnPrint animated:YES completionHandler:completionHandler];
     }
+    
+    
+    
     [self.quantityTable setContentOffset:CGPointMake(self.quantityTable.contentOffset.x, -self.quantityTable.contentInset.top) animated:YES];
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 -(void)createPDF
 {
@@ -286,6 +329,14 @@ TabAndSplitAppAppDelegate *appDelegate;
     
 }
 
+
+
+
+
+
+
+
+
 -(IBAction)showSCompliance:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil];
@@ -327,46 +378,6 @@ TabAndSplitAppAppDelegate *appDelegate;
 }
 
 
--(void)loadQtySummaryDetails
-{
-
-HUD = [[MBProgressHUD alloc] initWithView:self.view];
-[self.navigationController.view addSubview:HUD];
-HUD.labelText=@"";
-HUD.dimBackground = YES;
-HUD.delegate = self;
-[HUD show:YES];
-
-NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails" inManagedObjectContext:context];
-[fetchRequest setEntity:entity];
-NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY id == %@", QNo];
-[fetchRequest setPredicate:predicate];
-
-NSError *error = nil;
-NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-
-if([objects count] > 0){
-    NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
-    NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"id"]);
-    
-    project.text=[complianceReportObject valueForKey:@"project"];
-    item.text=[complianceReportObject valueForKey:@"user"];
-    itemNo.text=[complianceReportObject valueForKey:@"item_no"];
-    estQty.text=[complianceReportObject valueForKey:@"est_qty"];
-    unit.text=[complianceReportObject valueForKey:@"unit"];
-    price.text=[complianceReportObject valueForKey:@"unit_price"];
-    
-    
-    
-}else{
-    NSLog(@"No matching ComplianceForm with ID: %@", QNo);
-}
-
-[self.tblView reloadData];
-[HUD setHidden:YES];
-}
 
 
 
@@ -381,12 +392,23 @@ if([objects count] > 0){
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-
+    
+    
+    
+    
+    
     [urlRequest setHTTPMethod:@"GET"];
+    
+    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    
+    
+    
     _receivedData = [[NSMutableData alloc] init];
+    
     [connection start];
     NSLog(@"URL---%@",strURL);
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     HUD.labelText=@"";
@@ -395,44 +417,8 @@ if([objects count] > 0){
     [HUD show:YES];
     
     
-    
-      HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
-        
-        NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails" inManagedObjectContext:context];
-        [fetchRequest setEntity:entity];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY id == %@", QNo];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-        
-        if([objects count] > 0){
-            NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
-            NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"id"]);
-            
-            project.text=[complianceReportObject valueForKey:@"project"];
-            item.text=[complianceReportObject valueForKey:@"user"];
-            itemNo.text=[complianceReportObject valueForKey:@"item_no"];
-            estQty.text=[complianceReportObject valueForKey:@"est_qty"];
-            unit.text=[complianceReportObject valueForKey:@"unit"];
-            price.text=[complianceReportObject valueForKey:@"unit_price"];
-            
-            
-            
-        }else{
-            NSLog(@"No matching ComplianceForm with ID: %@", QNo);
-        }
-        
-        [self.tblView reloadData];
-        [HUD setHidden:YES];
-    }
+}
+
 
 
 - (void)connection:(NSURLConnection *)connection

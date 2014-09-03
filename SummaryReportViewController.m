@@ -812,10 +812,10 @@
         
         BOOL saveStatus = [PRIMECMController
                            saveSummarySheet1:appDelegate.username
-                           city:city.text
+                           city:appDelegate.city
                            conPeWork:conPeWork.text
                            constructionOrder:constructionOrder.text
-                           contractor:contractor.text
+                           contractor:appDelegate.projId
                            date:date.text
                            descr:descr.text
                            federalAidNumber:federalAidNumber.text
@@ -847,18 +847,18 @@
                            lATotalHours3:lATotalHours3.text
                            lATotalHours4:lATotalHours4.text
                            lATotalHours5:lATotalHours5.text
-                           pOBox:pOBox.text
-                           printedName:appDelegate.projPrintedName
+                           pOBox:appDelegate.address
+                           printedName:@"Lin"
                            project_id:appDelegate.projId
-                           projectNo:projectNo.text
+                           projectNo:appDelegate.projId
                            reportNo:@""
                            sMSheetNo:@""
                            sSHeader:sSHeader.text
-                           state:state.text
-                           telephoneNo:telephoneNo.text
+                           state:appDelegate.state
+                           telephoneNo:appDelegate.tel
                            total:total.text
                            totalLabor:totalLabor.text
-                           zip:zip.text
+                           zip:appDelegate.zip
                            ];
         
         [HUD setHidden:YES];

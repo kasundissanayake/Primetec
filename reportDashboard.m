@@ -286,22 +286,41 @@
 {
     
     // http://data.privytext.us/contructionapi.php/api/quantity_summary/itemByINID/Lin/IN10
+    
+    
+    
     NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/all/%@/%@",appDelegate.username,appDelegate.projId];
     
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
+    
+    
+    
+    
+    
     [urlRequest setHTTPMethod:@"GET"];
+    
+    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    
+    
+    
     _receivedData = [[NSMutableData alloc] init];
+    
+    
     [connection start];
     NSLog(@"URL---%@",strURL);
+    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
     hud.labelText=@"";
     hud.dimBackground = YES;
     hud.delegate = self;
     [hud show:YES];
+    
+    
+    
 }
 
 

@@ -654,6 +654,7 @@ UILabel *cno;
         
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+        
         NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
         singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign];
         

@@ -166,6 +166,7 @@
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
     signature1.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature"] folderPath:folderPath];
     
+    
 }
 
 -(void)getImageReviewer1
@@ -625,7 +626,7 @@
         
         BOOL saveStatus = [PRIMECMController
                            saveSummery3:appDelegate.username
-                           contractorRepresentative:contractorRepresentative.text
+                           contractorRepresentative:appDelegate.pm
                            dailyTotal:dailyTotal.text
                            date1:date1.text
                            date2:date2.text
@@ -659,15 +660,37 @@
                            eQTotalHours3:eQTotalHours3.text
                            eQTotalHours4:eQTotalHours4.text
                            eQTotalHours5:eQTotalHours5.text
-                           inspector:inspector.text
+                           inspector:appDelegate.projPrintedName
                            project_id:appDelegate.projId
-                           signature1:eQTotalHours3.text
-                           signature2:eQTotalHours3.text
+                           signature1:sigName1
+                           signature2:sigName2
                            sMSheetNo:@""
                            total_to_date:total_to_date.text
                            ];
         
         [HUD setHidden:YES];
+        
+        BOOL singSaveState;
+        BOOL singSaveState2;
+
+        
+        NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        
+        NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
+        
+        
+        UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+        NSData *imaDataSign1 = UIImageJPEGRepresentation(imageSign,0.3);
+        NSData *imaDataSign2 = UIImageJPEGRepresentation(imageSign,0.3);
+
+        singSaveState = [PRIMECMController saveAllImages:sigName1 img:imaDataSign1];
+        
+        
+        singSaveState2 = [PRIMECMController saveAllImages:sigName2 img:imaDataSign2];
+
+        
+        
         
         if (saveStatus){
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

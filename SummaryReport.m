@@ -1,5 +1,7 @@
 #import "SummaryReport.h"
 #import "PRIMECMAPPUtils.h"
+#import "PRIMECMController.h"
+
 
 @interface SummaryReport ()
 {
@@ -243,6 +245,7 @@
         txtInsTax.text=[summaryReportObject valueForKey:@"insAndTaxesOnItem1"];
         txt20Items.text=[summaryReportObject valueForKey:@"itemDescount20per"];
         txtTotalItems.text=[summaryReportObject valueForKey:@"total"];
+        
         txtDes1.text=[summaryReportObject valueForKey:@"mEDescription1"];
         txtDes2.text=[summaryReportObject valueForKey:@"mEDescription2"];
         txtDes3.text=[summaryReportObject valueForKey:@"mEDescription3"];
@@ -268,58 +271,75 @@
         txtLessDisTotal.text=[summaryReportObject valueForKey:@"total2"];
         txtAdditional.text=[summaryReportObject valueForKey:@"additionalDiscount"];
         txtAddTotal.text=[summaryReportObject valueForKey:@"total3"];
+        
         txtSize1.text=[summaryReportObject valueForKey:@"eQSizeandClass1"];
         txtSize2.text=[summaryReportObject valueForKey:@"eQSizeandClass2"];
         txtSize3.text=[summaryReportObject valueForKey:@"eQSizeandClass3"];
         txtSize4.text=[summaryReportObject valueForKey:@"eQSizeandClass4"];
         txtSize5.text=[summaryReportObject valueForKey:@"eQSizeandClass5"];
-        txtActive1.text=[summaryReportObject valueForKey:@"eQAmount1"];
-        txtActive2.text=[summaryReportObject valueForKey:@"eQAmount2"];
-        txtActive3.text=[summaryReportObject valueForKey:@"eQAmount3"];
-        txtActive4.text=[summaryReportObject valueForKey:@"eQAmount4"];
-        txtActive5.text=[summaryReportObject valueForKey:@"eQAmount5"];
+        
+        txtActive1.text=[summaryReportObject valueForKey:@"eQIdleActive1"];
+        txtActive2.text=[summaryReportObject valueForKey:@"eQIdleActive2"];
+        txtActive3.text=[summaryReportObject valueForKey:@"eQIdleActive3"];
+        txtActive4.text=[summaryReportObject valueForKey:@"eQIdleActive4"];
+        txtActive5.text=[summaryReportObject valueForKey:@"eQIdleActive5"];
+        
         txtENo1.text=[summaryReportObject valueForKey:@"eQNo1"];
         txtENo2.text=[summaryReportObject valueForKey:@"eQNo2"];
         txtENo3.text=[summaryReportObject valueForKey:@"eQNo3"];
         txtENo4.text=[summaryReportObject valueForKey:@"eQNo4"];
         txtENo5.text=[summaryReportObject valueForKey:@"eQNo5"];
+
         txtETotal1.text=[summaryReportObject valueForKey:@"eQTotalHours1"];
         txtETotal2.text=[summaryReportObject valueForKey:@"eQTotalHours2"];
         txtEtotal3.text=[summaryReportObject valueForKey:@"eQTotalHours3"];
         txtETotal4.text=[summaryReportObject valueForKey:@"eQTotalHours4"];
         txtETotal5.text=[summaryReportObject valueForKey:@"eQTotalHours5"];
+//
         txtERate1.text=[summaryReportObject valueForKey:@"eQRAte1"];
         txtERate2.text=[summaryReportObject valueForKey:@"eQRAte2"];
         txtERate3.text=[summaryReportObject valueForKey:@"eQRAte3"];
         txtERate4.text=[summaryReportObject valueForKey:@"eQRAte4"];
         txtERate5.text=[summaryReportObject valueForKey:@"eQRAte5"];
+//
         txtEAmt1.text=[summaryReportObject valueForKey:@"eQAmount1"];
         txtEAmt2.text=[summaryReportObject valueForKey:@"eQAmount2"];
         txtEAmt3.text=[summaryReportObject valueForKey:@"eQAmount3"];
         txtEAmt4.text=[summaryReportObject valueForKey:@"eQAmount4"];
-        txtEAmt5.text=[summaryReportObject valueForKey:@"eQTotalHours5"];
+        txtEAmt5.text=[summaryReportObject valueForKey:@"eQAmount5"];
+
         txtInspector.text=[summaryReportObject valueForKey:@"inspector"];
-        //txtEDate.text=[responseObject valueForKey:@"Date1"];
+        
+//        txtEDate.text=[responseObject valueForKey:@"Date1"];
         txtContractorRepresentative.text=[summaryReportObject valueForKey:@"contractorRepresentative"];
         txtConReDate.text=[NSDateFormatter localizedStringFromDate:[summaryReportObject valueForKey:@"date2"]
                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-        
+//        
         txtDailyTotal.text=[summaryReportObject valueForKey:@"dailyTotal"];
         txtTotalDate.text=[summaryReportObject valueForKey:@"total_to_date"];
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
-                                           [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature1"]]]];
-        NSLog(@"url----%@",url);
-        NSData *imageData1 = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [[UIImage alloc] initWithData:imageData1];
-        imgSignature.image=image;
+        NSString * signName1 = [summaryReportObject valueForKey:@"signature1"];
+        NSString * signName2 = [summaryReportObject valueForKey:@"signature2"];
+
+
+        imgSignature.image=[PRIMECMController getTheImage:signName1];
+        imgSignature2.image=[PRIMECMController getTheImage:signName2];
+
         
-        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
-                                            [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature2"]]]];
-        NSLog(@"url----%@",url2);
-        NSData *imageData2 = [NSData dataWithContentsOfURL:url2];
-        UIImage *image1 = [[UIImage alloc] initWithData:imageData2];
-        imgSignature2.image=image1;
+//        
+//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
+//                                           [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature1"]]]];
+//        NSLog(@"url----%@",url);
+//        NSData *imageData1 = [NSData dataWithContentsOfURL:url];
+//        UIImage *image = [[UIImage alloc] initWithData:imageData1];
+//        imgSignature.image=image;
+//        
+//        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
+//                                            [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature2"]]]];
+//        NSLog(@"url----%@",url2);
+//        NSData *imageData2 = [NSData dataWithContentsOfURL:url2];
+//        UIImage *image1 = [[UIImage alloc] initWithData:imageData2];
+//        imgSignature2.image=image1;
     }
     
     [hud setHidden:YES];
