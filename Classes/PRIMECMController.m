@@ -45,7 +45,6 @@
     [request setURL: endpoint];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    BOOL status;
     
     NSError *error = [[NSError alloc] init];
     NSHTTPURLResponse* urlResponse = nil;
@@ -59,24 +58,29 @@
         NSError *jsonError;
         id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
         
-        if (!jsonError) {
-            [self parseResponse:jsonResponse];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];
-            NSLog(@"Successfully parsed complete json");
-            status = 0;
-        } else {
-            NSLog(@"%@", [jsonError description]);
-            status = 3;
+        NSDictionary *responseDictionary = (NSDictionary *)jsonResponse;
+        if (!jsonError && responseDictionary){
+            id msgStatus = [[responseDictionary objectForKey:@"message"] objectForKey:@"status"];
+            if ([msgStatus isEqualToString:@"success"]){
+                
+                //[self parseResponse:jsonResponse];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];
+                NSLog(@"Successfully parsed complete json");
+                
+                return 0;
+            }else{
+                NSLog(@"%@", [jsonError description]);
+                return 3;
+            }
+        }else{
+            return 3;
         }
     }
     else
     {
         NSLog(@"Server is not responding. Failed to download complete json. Response code: %ld", (long)[urlResponse statusCode]);
-        status = 2;
+        return 2;
     }
-    
-    NSLog(@"Sync function return status code: %hhd", status);
-    return status;
 }
 
 +(BOOL) pushAllToServer{
@@ -128,7 +132,7 @@
     [request setHTTPMethod:@"POST"];
     
     //[request setValue:[NSString stringWithFormat:@"%d", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:bodyData];
     
     NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] init];
@@ -136,7 +140,7 @@
     NSString *responsestr = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
     
     NSLog(@"Sync Push HTTP Response Code: %d", [urlResponse statusCode]);
-    NSLog(@"Response String Data: %@", responsestr);
+    NSLog(@"Sync Push HTTP Response  Data: %@", responsestr);
     NSLog(@"NSHTTPURLResponse: %@", urlResponse);
     
     if ( ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300))
@@ -144,8 +148,20 @@
         NSLog(@"Successfully connected to server");
         NSError *jsonError;
         id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&jsonError];
-        NSLog(@"Sync PUSH jsonResponse: %@", jsonResponse);
-        NSString *status = [jsonResponse valueForKey:@"status"];
+        NSLog(@"Sync Push JSON Data: %@", jsonResponse);
+        NSDictionary *responseDictionary = (NSDictionary *)jsonResponse;
+        if (responseDictionary){
+            id msgStatus = [[responseDictionary objectForKey:@"message"] objectForKey:@"status"];
+            if ([msgStatus isEqualToString:@"success"]){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }else{
+            return FALSE;
+        }
+        
+        NSString *status = [jsonResponse valueForKey:@"message"] ;
         if (!jsonError && [status isEqualToString:@"success"]) {
             NSLog(@"Successfully pushed records to the server");
             return TRUE;
@@ -156,7 +172,7 @@
     }
     else
     {
-        NSLog(@"Server is not responding. Failed to push data. Response code: %ld", (long)[urlResponse statusCode]);
+        NSLog(@"Something went wrong at the server. Failed to push data. Response code: %ld", (long)[urlResponse statusCode]);
         return FALSE;
         
     }
