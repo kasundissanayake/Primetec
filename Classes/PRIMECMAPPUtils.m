@@ -18,12 +18,23 @@ NSString * const USERNAME = @"USERNAME";
 NSString * const PASSWORD = @"PASSWORD";
 
 +(NSString *)getAPISyncPullEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
+    
+    
+    //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/pull/";
+    
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/pull/";
+    
     return endpoint;
 }
 
 +(NSString *)getAPISyncPushEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
+    
+    //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/push/";
+    
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/push/";
+    
     return endpoint;
 }
 
