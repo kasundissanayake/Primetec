@@ -152,6 +152,7 @@
         <attribute name="dateContractorStarted" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateCRTCB" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateIssued" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateOfDWRReported" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionOfNonCompliance" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
@@ -195,7 +196,7 @@
         <attribute name="item_no" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="unit_price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -348,9 +349,9 @@
         <element name="Expensedata" positionX="-18" positionY="162" width="128" height="195"/>
         <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="268"/>
         <element name="Image" positionX="0" positionY="144" width="128" height="75"/>
-        <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="358"/>
+        <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="373"/>
         <element name="Projects" positionX="-9" positionY="135" width="128" height="345"/>
-        <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="163"/>
+        <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="30"/>
         <element name="QuantitySummaryItems" positionX="9" positionY="153" width="128" height="135"/>
         <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="763"/>
         <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="448"/>

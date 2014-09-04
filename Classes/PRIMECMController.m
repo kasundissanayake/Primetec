@@ -63,7 +63,7 @@
             id msgStatus = [[responseDictionary objectForKey:@"message"] objectForKey:@"status"];
             if ([msgStatus isEqualToString:@"success"]){
                 
-                //[self parseResponse:jsonResponse];
+                	[self parseResponse:jsonResponse];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];
                 NSLog(@"Successfully parsed complete json");
                 
