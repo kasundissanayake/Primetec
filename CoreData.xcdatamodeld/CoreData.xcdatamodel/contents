@@ -178,8 +178,8 @@
         <attribute name="inspecter" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="p_description" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="p_latitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="p_longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="p_latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="p_longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="p_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p_title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
@@ -350,7 +350,7 @@
         <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="268"/>
         <element name="Image" positionX="0" positionY="144" width="128" height="75"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="373"/>
-        <element name="Projects" positionX="-9" positionY="135" width="128" height="345"/>
+        <element name="Projects" positionX="-9" positionY="135" width="128" height="343"/>
         <element name="QuantitySummaryDetails" positionX="0" positionY="144" width="128" height="30"/>
         <element name="QuantitySummaryItems" positionX="9" positionY="153" width="128" height="135"/>
         <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="763"/>

@@ -63,7 +63,7 @@
             id msgStatus = [[responseDictionary objectForKey:@"message"] objectForKey:@"status"];
             if ([msgStatus isEqualToString:@"success"]){
                 
-                	[self parseResponse:jsonResponse];
+                [self parseResponse:jsonResponse];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_table_data" object:self];
                 NSLog(@"Successfully parsed complete json");
                 
@@ -838,11 +838,9 @@
         [assp setClient_name:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"client_name"]]];
         [assp setProject_manager:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"project_manager"]]];
         [assp setInspecter:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"inspecter"]]];
-        [assp setP_latitude:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"p_latitude"]]];
-        [assp setP_longitude:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"p_longitude"]]];
+        [assp setP_latitude:[NSNumber numberWithDouble:[[payload objectForKey:@"p_latitude"] doubleValue]]];
+        [assp setP_longitude:[NSNumber numberWithDouble:[[payload objectForKey:@"p_longitude"] doubleValue]]];
         [assp setStatus:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"status"]]];
-        
-        
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -1082,9 +1080,9 @@
                     insertNewObjectForEntityForName:@"SummarySheet2"
                     inManagedObjectContext:managedContext];
         }
-           [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
+        [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
         [assp setLessDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LessDiscount"]]];
-
+        
         [assp setMEDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription1"]]];
         [assp setMEDescription2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription2"]]];
         [assp setMEDescription3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription3"]]];
@@ -1110,7 +1108,7 @@
         [assp setTotal1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total1"]]];
         [assp setTotal2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total2"]]];
         [assp setTotal3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total3"]]];
-     
+        
         NSError *saveError;
         if (![managedContext save:&saveError]) {
             NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
@@ -1650,7 +1648,7 @@
     [assp setValue:con_Name forKey:@"con_Name"];
     [assp setValue:contractor forKey:@"contractor"];
     
-   // NSNumber *conHrsWork = [NSNumber numberWithInt:[contractorsHoursOfWork integerValue]];
+    // NSNumber *conHrsWork = [NSNumber numberWithInt:[contractorsHoursOfWork integerValue]];
     [assp setValue:contractorsHoursOfWork forKey:@"contractorsHoursOfWork"];
     
     [assp setValue:dIFHeader forKey:@"dIFHeader"];
@@ -1801,7 +1799,7 @@
     
     [assp setValue:inspectionID forKey:@"inspectionID"];
     
-    [assp setValue:no forKey:@"no"];    
+    [assp setValue:no forKey:@"no"];
     [assp setValue:[NSNumber numberWithInt:[qty intValue]] forKey:@"qty"];
     [assp setValue:desc forKey:@"desc"];
     
@@ -1809,7 +1807,7 @@
     [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
     NSDate *dateType = [myXMLdateReader dateFromString:date];
     [assp setValue:dateType forKey:@"date"];
-
+    
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -1830,7 +1828,7 @@
     [fetchRequest setResultType:NSDictionaryResultType];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID=%@)", inspectionID];
     [fetchRequest setPredicate:predicate];
-
+    
     
     NSError *error = nil;
     NSArray *itemsForInspection = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
@@ -2214,7 +2212,7 @@
         
         
         
-            NSLog(@"saved summary1: %@", assp);
+        NSLog(@"saved summary1: %@", assp);
         
         return TRUE;
     }
@@ -2252,7 +2250,7 @@
                 insertNewObjectForEntityForName:@"SummarySheet2"
                 inManagedObjectContext:managedContext];
     }
-
+    
     
     [assp setValue:additionalDiscount forKey:@"additionalDiscount"];
     [assp setValue:lessDiscount forKey:@"lessDiscount"];
@@ -2281,7 +2279,7 @@
     [assp setValue:total1 forKey:@"total1"];
     [assp setValue:total2 forKey:@"total2"];
     [assp setValue:total3 forKey:@"total3"];
-
+    
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -2389,7 +2387,7 @@
     
     
     [assp setValue:dailyTotal forKey:@"dailyTotal"];
-     [assp setValue:total_to_date forKey:@"total_to_date"];
+    [assp setValue:total_to_date forKey:@"total_to_date"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -2398,7 +2396,7 @@
     }else{
         
         
-            NSLog(@"saved summary3: %@", assp);
+        NSLog(@"saved summary3: %@", assp);
         
         return TRUE;
     }
@@ -2457,72 +2455,66 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+                                              inManagedObjectContext:managedContext];
     [fetchRequest setEntity:entity];
-    
-    [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"projecct_id"]];
+    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"projecct_id= %@", projId];
+    [fetchRequest setPredicate:project_predicate];
+    [fetchRequest  setResultType:NSDictionaryResultType];
     
     NSError *error = nil;
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([existingIDs count] > 0){
+        assp = [existingIDs objectAtIndex:0];
+        NSLog(@"Updating project with projID: %@", projId);
+    }
     
     if (error != nil) {
         NSLog(@"Error: %@", [error debugDescription]);
     }
     
-    int randNum = 0;
-    NSString *newIDD;
-    BOOL hasConflicts = TRUE;
-    while (hasConflicts){
-        hasConflicts = FALSE;
-        randNum = rand() % (100000000) + 100000; //create the random number.
-        newIDD = [NSString stringWithFormat:@"%d", randNum];
-        
-        for (NSDictionary *dict in existingIDs) {
-            NSString *str = [dict valueForKey:@"projecct_id"];
-            if ([str isEqualToString:newIDD]){
-                hasConflicts = TRUE;
-                break;
-            }
-        }
-    }
-    NSLog(@"Project id: %@", newIDD);
-    
-    if (!assp) {
-        assp = [NSEntityDescription
-                insertNewObjectForEntityForName:@"Projects"
-                inManagedObjectContext:managedContext];
-    }
-    
-    [assp setValue:newIDD forKey:@"projecct_id"];
-    [assp setValue:city forKey:@"city"];
-    [assp setValue:clientName forKey:@"client_name"];
-    [assp setValue:newIDD forKey:@"contract_no"];
-    
+    NSNumber *latitudeNum = [NSNumber numberWithDouble:[latitude doubleValue]];
+    NSNumber *longitudeNum = [NSNumber numberWithDouble:[longitude doubleValue]];
     NSDateFormatter *myXMLdateReader = [[NSDateFormatter alloc] init];
     [myXMLdateReader setDateFormat:@"yyyy-MM-dd"];
     NSDate *dateIssued_Date = [myXMLdateReader dateFromString:date];
     
-    [assp setValue:dateIssued_Date forKey:@"created_date"];
+    if (assp == NULL) {
+        NSLog(@"Creating a new project with projID: %@", projId);
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"Projects"
+                inManagedObjectContext:managedContext];
+        [assp setValue:projId forKey:@"projecct_id"];
+        [assp setValue:projId forKey:@"contract_no"];
+        [assp setValue:city forKey:@"city"];
+        [assp setValue:clientName forKey:@"client_name"];
+        [assp setValue:dateIssued_Date forKey:@"created_date"];
+        [assp setValue:inspector forKey:@"inspecter"];
+        [assp setValue:dateIssued_Date forKey:@"p_date"];
+        [assp setValue:projDesc forKey:@"p_description"];
+        [assp setValue:latitudeNum forKey:@"p_latitude"];
+        [assp setValue:longitudeNum forKey:@"p_longitude"];
+        [assp setValue:projName forKey:@"p_name"];
+        [assp setValue:projName forKey:@"p_title"];
+        [assp setValue:phone forKey:@"phone"];
+        [assp setValue:projMgr forKey:@"project_manager"];
+        [assp setValue:state forKey:@"state"];
+        [assp setValue:street forKey:@"street"];
+        [assp setValue:0 forKey:@"status"];
+        [assp setValue:zip forKey:@"zip"];
+    }else{
+        assp.p_name = projName;
+        assp.p_title = projName;
+    }
     
-    [assp setValue:inspector forKey:@"inspecter"];
-    [assp setValue:dateIssued_Date forKey:@"p_date"];
-    [assp setValue:projDesc forKey:@"p_description"];
-    [assp setValue:latitude forKey:@"p_latitude"];
-    [assp setValue:longitude forKey:@"p_longitude"];
-    [assp setValue:projName forKey:@"p_name"];
-    [assp setValue:projName forKey:@"p_title"];
-    [assp setValue:phone forKey:@"phone"];
-    [assp setValue:projMgr forKey:@"project_manager"];
-    [assp setValue:state forKey:@"state"];
-    [assp setValue:street forKey:@"street"];
-    [assp setValue:0 forKey:@"status"];
-    [assp setValue:zip forKey:@"zip"];
     
-    BOOL assignProjSave = [PRIMECMController saveAssignProject:username inspectors:inspector projId:newIDD date:dateIssued_Date];
     
     NSError *saveError;
-    if (![managedContext save:&saveError] || !assignProjSave) {
+    
+    BOOL projSave = [managedContext save:&saveError];
+    BOOL assignProjSave = [PRIMECMController saveAssignProject:username inspectors:inspector projId:projId date:dateIssued_Date];
+    
+    if (!projSave || !assignProjSave) {
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{

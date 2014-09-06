@@ -2,7 +2,7 @@
 //  Projects.m
 //  PRIMECMAPP
 //
-//  Created by Kasun Dissanayake on 8/16/14.
+//  Created by Akila Perera on 9/6/14.
 //
 //
 
@@ -31,7 +31,6 @@
 @dynamic status;
 @dynamic street;
 @dynamic zip;
-
 
 -(NSDictionary*) toDictionary
 {

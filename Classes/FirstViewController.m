@@ -220,29 +220,6 @@
 
 -(void)saveNewProject
 {
-    /*
-    if([self connected]){
-        NSString *strURL = [NSString stringWithFormat:@"%@/api/project/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%f/%f/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                            appDelegate.username,[defaults objectForKey:@"Project Id"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Project Name"],[defaults objectForKey:@"Project Description"],[defaults objectForKey:@"Project Title"],[defaults objectForKey:@"Street"],[defaults objectForKey:@"City"],[defaults objectForKey:@"State"],[defaults objectForKey:@"Zip"],[defaults objectForKey:@"Phone No"],[defaults objectForKey:@"Date"],[defaults objectForKey:@"Client Name"],[defaults objectForKey:@"Project Manager"],latitude,longitude,[defaults objectForKey:@"Inspector"]];
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"URL---- %@",strURL);
-        
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        
-        _receivedData = [[NSMutableData alloc] init];
-        
-        [connection start];
-        [self showInfoAlert];
-    }
-    else if (![self connected]){
-        [self saveOffProject];
-    }
-     */
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
@@ -254,7 +231,6 @@
     hud.dimBackground = YES;
     hud.delegate = self;
     [hud show:YES];
-   
     
     NSNumber *latitudeNumber = [NSNumber numberWithDouble:latitude];
     NSNumber *longitudeNumber = [NSNumber numberWithDouble:longitude];   
@@ -718,9 +694,13 @@
     mapId=[dict valueForKey:@"mapId"];
     HotelAnnotation *annotation=[hotelAnnotations objectAtIndex:[mapId intValue]];
     
+   
+    
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude =annotation.coordinate.latitude;
     zoomLocation.longitude= annotation.coordinate.longitude;
+    
+     NSLog(@"HotelAnnotation = %f , %f", zoomLocation.latitude, zoomLocation.longitude );
     
     // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.0*METERS_PER_MILE, 0.0*METERS_PER_MILE);

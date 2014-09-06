@@ -180,6 +180,7 @@
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
 		55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
+		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
 		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
 		94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E0026F19A9E3870068D862 /* BidSummaryForm.xib */; };
@@ -200,7 +201,6 @@
 		98D14A9F199F40670091D5D8 /* DailyInspectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A9E199F40670091D5D8 /* DailyInspectionItem.m */; };
 		98D14AA2199F44260091D5D8 /* Expensedata.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AA1199F44260091D5D8 /* Expensedata.m */; };
 		98D14AAB199F54B70091D5D8 /* NonComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */; };
-		98D14AAE199F596C0091D5D8 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AAD199F596C0091D5D8 /* Projects.m */; };
 		98D14AB1199F5C3E0091D5D8 /* QuantitySummaryDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */; };
 		98D14AB4199F5EE30091D5D8 /* QuantitySummaryItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AB3199F5EE30091D5D8 /* QuantitySummaryItems.m */; };
 		98D14ABD199F67F50091D5D8 /* SummarySheet1.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14ABC199F67F50091D5D8 /* SummarySheet1.m */; };
@@ -576,6 +576,8 @@
 		52E73C821973DADF004A0418 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		55514B8019AC605B00DA6981 /* ExtendedManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedManagedObject.h; sourceTree = "<group>"; };
 		55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedManagedObject.m; sourceTree = "<group>"; };
+		55FD290C19BAC8FD0002FEA5 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
+		55FD290D19BAC8FD0002FEA5 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
@@ -614,8 +616,6 @@
 		98D14AA1199F44260091D5D8 /* Expensedata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Expensedata.m; path = ../Expensedata.m; sourceTree = "<group>"; };
 		98D14AA9199F54B70091D5D8 /* NonComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonComplianceForm.h; path = ../NonComplianceForm.h; sourceTree = "<group>"; };
 		98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NonComplianceForm.m; path = ../NonComplianceForm.m; sourceTree = "<group>"; };
-		98D14AAC199F596C0091D5D8 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Projects.h; path = ../Projects.h; sourceTree = "<group>"; };
-		98D14AAD199F596C0091D5D8 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Projects.m; path = ../Projects.m; sourceTree = "<group>"; };
 		98D14AAF199F5C3E0091D5D8 /* QuantitySummaryDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantitySummaryDetails.h; path = ../QuantitySummaryDetails.h; sourceTree = "<group>"; };
 		98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuantitySummaryDetails.m; path = ../QuantitySummaryDetails.m; sourceTree = "<group>"; };
 		98D14AB2199F5EE30091D5D8 /* QuantitySummaryItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantitySummaryItems.h; path = ../QuantitySummaryItems.h; sourceTree = "<group>"; };
@@ -1360,6 +1360,8 @@
 		98D14A7A199F1F1C0091D5D8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				55FD290C19BAC8FD0002FEA5 /* Projects.h */,
+				55FD290D19BAC8FD0002FEA5 /* Projects.m */,
 				9824899619A8C9D0006E3AFC /* Image.h */,
 				9824899719A8C9D0006E3AFC /* Image.m */,
 				980D518119A1E55300EBD57D /* ComplianceForm.h */,
@@ -1374,8 +1376,6 @@
 				98D14AB3199F5EE30091D5D8 /* QuantitySummaryItems.m */,
 				98D14AAF199F5C3E0091D5D8 /* QuantitySummaryDetails.h */,
 				98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */,
-				98D14AAC199F596C0091D5D8 /* Projects.h */,
-				98D14AAD199F596C0091D5D8 /* Projects.m */,
 				98D14AA9199F54B70091D5D8 /* NonComplianceForm.h */,
 				98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */,
 				98D14AA0199F44260091D5D8 /* Expensedata.h */,
@@ -1861,6 +1861,7 @@
 				98D14A7D199F20100091D5D8 /* PRIMECMAPPUtils.m in Sources */,
 				4B8CE20819418749001F8E3B /* UIImage+Alpha.m in Sources */,
 				4B8CE21D19418749001F8E3B /* SDToolSettings.m in Sources */,
+				55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */,
 				98D14A9C199F3CFD0091D5D8 /* DailyInspectionForm.m in Sources */,
 				FC181BF718EC58320084F7C5 /* nonComplianceViewController.m in Sources */,
 				4B8CE25219418749001F8E3B /* SDFontSizeViewController.m in Sources */,
@@ -1947,7 +1948,6 @@
 				FCD71F85191B63AF00413A3D /* SignatureViewController.m in Sources */,
 				4B8CE1F119418749001F8E3B /* BitmapContextManipulator.m in Sources */,
 				98D14AC3199F6DB10091D5D8 /* SummarySheet3.m in Sources */,
-				98D14AAE199F596C0091D5D8 /* Projects.m in Sources */,
 				98D14AAB199F54B70091D5D8 /* NonComplianceForm.m in Sources */,
 				55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */,
 				FCD7A9FB18EB30A6006008D9 /* HotelAnnotation.m in Sources */,

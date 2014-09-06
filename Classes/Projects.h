@@ -2,7 +2,7 @@
 //  Projects.h
 //  PRIMECMAPP
 //
-//  Created by Kasun Dissanayake on 8/16/14.
+//  Created by Akila Perera on 9/6/14.
 //
 //
 
@@ -21,8 +21,8 @@
 @property (nonatomic, retain) NSString * inspecter;
 @property (nonatomic, retain) NSDate * p_date;
 @property (nonatomic, retain) NSString * p_description;
-@property (nonatomic, retain) NSString * p_latitude;
-@property (nonatomic, retain) NSString * p_longitude;
+@property (nonatomic, retain) NSNumber * p_latitude;
+@property (nonatomic, retain) NSNumber * p_longitude;
 @property (nonatomic, retain) NSString * p_name;
 @property (nonatomic, retain) NSString * p_title;
 @property (nonatomic, retain) NSString * phone;

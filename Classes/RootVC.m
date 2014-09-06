@@ -201,40 +201,20 @@ typedef enum {
 }
 
 -(void)btnEdit{
-    
-    
-    NSLog(@"delete button");
-    
     [self.table setEditing:YES animated:YES];
-    
     [toolbarItems insertObject:btnDelete atIndex:0];
     [toolbarItems removeObject: btnEdit];
     toolbar.items = toolbarItems;
-    
 }
 
 
 
 -(void)btnDelete{
-    
-    
-    NSLog(@"done button----------");
-    
     [self.table setEditing:NO animated:YES];
-    
     [toolbarItems insertObject:btnEdit atIndex:0];
-    
     [toolbarItems removeObject: btnDelete];
-    
     toolbar.items = toolbarItems;
-    
-    
-    
 }
-
-
-//end
-
 
 
 /*
@@ -250,9 +230,6 @@ typedef enum {
         [[NSManagedObjectContext MR_contextForCurrentThread] MR_save];
     }
 }*/
-
-
-
 
 -(void)hideToolbar
 {
@@ -524,9 +501,12 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (indexPath.row == [projectDetails count] -1){
+        return 160;
+    }
     return 100;
 }
-
 
 -(void)changeView
 {
