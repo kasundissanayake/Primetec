@@ -1281,7 +1281,7 @@
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"complianceNoticeNo"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"complianceNoticeNo = %@", complianceNoticeNo];

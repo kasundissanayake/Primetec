@@ -604,6 +604,7 @@ UILabel *cno;
         
         BOOL saveStatus = [PRIMECMController
                            saveComplianceForm: appDelegate.username
+                           complianceNoticeNo: @""
                            title:txtTitle.text
                            contractNo:txtContactNo.text
                            proDesc:txtProDesc.text

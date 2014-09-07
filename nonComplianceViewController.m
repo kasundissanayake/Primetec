@@ -430,6 +430,7 @@
         
         BOOL saveStatus = [PRIMECMController
                            saveNonComplianceForm:appDelegate.username
+                           non_ComplianceNoticeNo:@"--"
                            title:txtTitle.text
                            contractNo:txtContactNo.text
                            proDesc:projectDesc.text
