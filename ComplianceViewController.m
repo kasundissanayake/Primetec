@@ -75,6 +75,8 @@ UILabel *cno;
 @synthesize arrayImages;
 @synthesize txtTitle;
 @synthesize datePicker;
+@synthesize EditComNumber;
+@synthesize test;
 @synthesize txtComNoticeNo,title,txtContactNo,txtPrintedName,txtProDesc,txtTo,txtUserId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -161,39 +163,61 @@ UILabel *cno;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormat stringFromDate:today];
-    txtContactNo.text=appDelegate.projId;
-    txtProDesc.text=appDelegate.projDescription;
-    COtextTitle.text=appDelegate.projTitle;
-    COtextProject.text=appDelegate.projName;
-    txtPrintedName.text=appDelegate.projPrintedName;
+    txtContactNo.text=appDelegate.Eproject_id;
+    txtProDesc.text=appDelegate.EprojectDescription;
+    COtextTitle.text=appDelegate.Etitle;
+    COtextProject.text=appDelegate.EProject;
+    txtPrintedName.text=appDelegate.EprintedName;
     txtDate.text=dateString;
     txtUserId.text=appDelegate.userId;
+    test.text=appDelegate.EdateIssued;
+    
+    
+    //Edit Compliance//
+    
+    
+//    txtDescription= appDelegate.EprojectDescription;
+//     appDelegate.Eproject_id=txtContractNo.text;
+//    appDelegate.Etitle=txtTitle.text;
+//    appDelegate.EProject=txtProject.text;
+    
+    EditComNumber.text=appDelegate.EcomplianceNoticeNo;
+    txtDateIssued.text=appDelegate.EdateIssued;
+    txtDateContractorStarted.text=appDelegate.EdateContractorStarted;
+    txtDateContractorCompleted.text=appDelegate.EdateContractorCompleted;
+    txtDate.text=appDelegate.Edate;
+    txtDateofRawReprote.text=appDelegate.EdateOfDWRReported;
+    conRes.text=appDelegate.EContractorResponsible;
+    correctAction.text=appDelegate.EcorrectiveActionCompliance;
+    txtTo.text=appDelegate.Eto;
+    txtSignature.image=appDelegate.signature;
     
     
     
-    //start brin
+    
+//start brin
     
     defaults= [NSUserDefaults standardUserDefaults];
     
     
-    NSString* temp1 = [defaults objectForKey:@"dateIssued"];
-    NSString* temp2 = [defaults objectForKey:@"conRes"];
-    NSString* temp3 = [defaults objectForKey:@"to"];
-    NSString* temp4 = [defaults objectForKey:@"dateContStart"];
-    NSString* temp5 = [defaults objectForKey:@"dateContCompleted"];
-    NSString* temp6 = [defaults objectForKey:@"rawReport"];
-    NSString* temp7 = [defaults objectForKey:@"correctAction"];
+//    NSString* temp1 = [defaults objectForKey:@"dateIssued"];
+//    NSString* temp2 = [defaults objectForKey:@"conRes"];
+//    NSString* temp3 = [defaults objectForKey:@"to"];
+//    NSString* temp4 = [defaults objectForKey:@"dateContStart"];
+//    NSString* temp5 = [defaults objectForKey:@"dateContCompleted"];
+//    NSString* temp6 = [defaults objectForKey:@"rawReport"];
+//    NSString* temp7 = [defaults objectForKey:@"correctAction"];
+//    
+//    
     
     
-    
-    
-    txtDateIssued.text=temp1;
-    conRes.text=temp2;
-    txtTo.text=temp3;
-    txtDateContractorStarted.text=temp4;
-    txtDateContractorCompleted.text=temp5;
-    txtDateofRawReprote.text=temp6;
-    correctAction.text=temp7;
+//    txtDateIssued.text=temp1;
+//    conRes.text=temp2;
+//    txtTo.text=temp3;
+//    txtDateContractorStarted.text=temp4;
+//    txtDateContractorCompleted.text=temp5;
+//    txtDateofRawReprote.text=temp6;
+//    correctAction.text=temp7;
     
     //end brin
     
@@ -604,7 +628,7 @@ UILabel *cno;
         
         BOOL saveStatus = [PRIMECMController
                            saveComplianceForm: appDelegate.username
-                           complianceNoticeNo: @""
+                           complianceNoticeNo: EditComNumber.text
                            title:txtTitle.text
                            contractNo:txtContactNo.text
                            proDesc:txtProDesc.text

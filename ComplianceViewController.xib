@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="COtextProject" destination="1U0-QS-KWY" id="ubp-ue-ZQf"/>
                 <outlet property="COtextTitle" destination="O2Y-KO-sAg" id="yHZ-Yr-NTX"/>
+                <outlet property="EditComNumber" destination="cBQ-gY-d4Q" id="TZc-vY-V6h"/>
                 <outlet property="btnAttachImage" destination="KDK-fX-xPh" id="OmC-sr-3vo"/>
                 <outlet property="conRes" destination="wVw-Gz-X8S" id="DU1-1e-jIX"/>
                 <outlet property="correctAction" destination="XOE-Pk-WHb" id="DmO-nl-TZz"/>
@@ -67,7 +68,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" id="uh3-70-0fz">
-                            <rect key="frame" x="37" y="266" width="559" height="40"/>
+                            <rect key="frame" x="37" y="266" width="286" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -340,6 +341,19 @@
                             <rect key="frame" x="39" y="75" width="109" height="62"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" id="cBQ-gY-d4Q">
+                            <rect key="frame" x="353" y="266" width="286" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EhM-4N-Pas">
+                            <rect key="frame" x="353" y="232" width="140" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>

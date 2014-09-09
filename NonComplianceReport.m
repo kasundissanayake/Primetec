@@ -89,6 +89,11 @@
     [self populateNonComplianceForm];
 }
 
+
+-(IBAction)fnEdit:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -98,6 +103,21 @@
 -(IBAction)showSCompliance:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil];
+    
+    appDelegate.EcomplianceNoticeNo=@" ";
+    appDelegate.EdateIssued=@" ";
+    appDelegate.EContractorResponsible=@" ";
+    appDelegate.EdateContractorStarted=@" ";
+    appDelegate.EdateContractorCompleted=@" ";
+    appDelegate.EdateOfDWRReported=@" ";
+    appDelegate.EcorrectiveActionCompliance=@" ";
+    appDelegate.EprintedName=@" ";
+    appDelegate.Edate=@" ";
+    appDelegate.Eto=@" ";
+    appDelegate.signature = Nil;
+    
+
+    
 }
 
 -(void)populateNonComplianceForm
@@ -166,6 +186,30 @@
         
         NSString * signName = [nonComplianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
+      
+        
+        //Edit Non-Compliance===================//
+        
+        appDelegate.EprojectDescription=lblProjDec.text;
+        appDelegate.Eproject_id=txtContactNo.text;
+        appDelegate.Etitle=txtTitle.text;
+        appDelegate.EProject=txtProject.text;
+        appDelegate.EcomplianceNoticeNo=nonComNotNo.text;
+        appDelegate.EdateIssued=txtDateIssued.text;
+        appDelegate.EContractorResponsible=lblContractorRes.text;
+        appDelegate.EdateContractorStarted=txtDateContractorStarted.text;
+        appDelegate.EdateContractorCompleted=txtDateContractCompleted.text;
+        appDelegate.EdateOfDWRReported=txtDateOfRawReport.text;
+        appDelegate.EcorrectiveActionCompliance=lblContractorRes.text;
+        appDelegate.EprintedName=txtPrintedName.text;
+        appDelegate.Edate=txtDate.text;
+        appDelegate.Eto=txtTo.text;
+        appDelegate.signature=imgSignature.image;
+        appDelegate.EdateCompletedBy=dateCRC.text;
+       
+        
+        
+        
         
     }
     

@@ -13,6 +13,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
+#import "ComplianceViewController.h"
 
 @interface ComplianceReport ()
 {
@@ -24,6 +25,7 @@
     NSArray *resPonse;
     MBProgressHUD *hud;
     TabAndSplitAppAppDelegate *appDelegate;
+    ComplianceViewController *CompliForm;
     UIBarButtonItem  *btnPrint;
 }
 
@@ -132,12 +134,17 @@
         
         txtTitle.text=[complianceReportObject valueForKey:@"comHeader"];
         comNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
+        
         lblProjDec.text=[complianceReportObject valueForKey:@"projectDescription"];
         txtContractNo.text=[complianceReportObject valueForKey:@"project_id"];
         txtTitle.text=[complianceReportObject valueForKey:@"title"];
         txtProject.text=[complianceReportObject valueForKey:@"Project"];
         txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateIssued"]
                                                           dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        
+        
+        NSLog(@"alllllllllllnnnnnnnnnnnn---%@",appDelegate.EdateIssued);
+        
         lblConRes.text=[complianceReportObject valueForKey:@"ContractorResponsible"];
         txtTo.text=[complianceReportObject valueForKey:@"to"];
         txtDateContracStarted.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateContractorStarted"]
@@ -157,6 +164,29 @@
         NSString * signName = [complianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
         
+        //For Editing //
+       
+        appDelegate.EprojectDescription=lblProjDec.text;
+        appDelegate.Eproject_id=txtContractNo.text;
+        appDelegate.Etitle=txtTitle.text;
+        appDelegate.EProject=txtProject.text;
+        appDelegate.EcomplianceNoticeNo=comNoticeNo.text;
+        appDelegate.EdateIssued=txtDateIssued.text;
+        appDelegate.EContractorResponsible=lblConRes.text;
+        appDelegate.EdateContractorStarted=txtDateContracStarted.text;
+        appDelegate.EdateContractorCompleted=txtDateContactCompleted.text;
+        appDelegate.EdateOfDWRReported=txtDateRawReport.text;
+        appDelegate.EcorrectiveActionCompliance=lblCorrective.text;
+        appDelegate.EprintedName=[complianceReportObject valueForKey:@"printedName"];
+        appDelegate.Edate=txtdate.text;
+        appDelegate.Eto=txtTo.text;
+        appDelegate.signature=imgSignature.image;
+        
+//        appDelegate.Eimages_uploaded=
+//        appDelegate.Esketch_images=
+//        appDelegate.signature=[complianceReportObject valueForKey:@"signature"];
+//        imgSignature.image=[PRIMECMController getTheImage:signName];
+        
         NSLog(@"array Images---%@",arrayImages);
         NSLog(@"array Sketches---%@",sketchesArray);
     }else{
@@ -165,6 +195,57 @@
     
     [self.tblView reloadData];
     [hud setHidden:YES];
+    
+    
+    
+   
+    
+    
+    
+    
+}
+
+-(IBAction)fnEdit:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
+    
+    
+    
+    
+    
+    
+//    lblConRes.text;
+//    txtDateContracStarted.text;
+//    txtDateContactCompleted.text;
+//    txtDateRawReport.text;
+//    lblCorrective.text;
+//    txtPrintedName.text;
+//    txtdate.text;
+//    txtTo.text;
+//    imgSignature.image;
+//    
+//    CompliForm.txtContactNo.text=txtContractNo.text;
+//    CompliForm.txtProDesc.text=lblProjDec.text;
+//    CompliForm.COtextTitle.text=txtTitle.text;
+//    CompliForm.COtextProject.text=txtProject.text;
+//    txtPrintedName.text=appDelegate.EprintedName;
+//    CompliForm.EditComNumber.text=comNoticeNo.text;
+//    txtDateIssued.text=txtDateIssued.text;
+//    
+//    NSLog(@"xxaxaasasasasasas%@", txtContractNo.text);
+//     NSLog(@"xxaxaasasasasasas%@", CompliForm.txtContactNo.text);
+//    
+//    txtDateContractorStarted.text=appDelegate.EdateContractorStarted;
+//    txtDateContractorCompleted.text=appDelegate.EdateContractorCompleted;
+//    txtDate.text=appDelegate.Edate;
+//    txtDateofRawReprote.text=appDelegate.EdateOfDWRReported;
+//    conRes.text=appDelegate.EContractorResponsible;
+//    correctAction.text=appDelegate.EcorrectiveActionCompliance;
+//    txtTo.text=appDelegate.Eto;
+//    txtSignature.image=appDelegate.signature;
+
+    
+    
 }
 
 
@@ -431,6 +512,20 @@
 -(IBAction)showSCompliance:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
+    appDelegate.EcomplianceNoticeNo=@" ";
+    appDelegate.EdateIssued=@" ";
+    appDelegate.EContractorResponsible=@" ";
+    appDelegate.EdateContractorStarted=@" ";
+    appDelegate.EdateContractorCompleted=@" ";
+    appDelegate.EdateOfDWRReported=@" ";
+    appDelegate.EcorrectiveActionCompliance=@" ";
+    appDelegate.EprintedName=@" ";
+    appDelegate.Edate=@" ";
+    appDelegate.Eto=@" ";
+    appDelegate.signature = Nil;
+    
+    
+    
 }
 
 

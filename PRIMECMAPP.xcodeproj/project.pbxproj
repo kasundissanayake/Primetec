@@ -1985,8 +1985,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kasun Dissanayake (82XHU7RV3K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lingeswaran Kandasamy (4Q24XNNTMF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lingeswaran Kandasamy (4Q24XNNTMF)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2000,8 +2000,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PRIMECMAPP;
-				PROVISIONING_PROFILE = "F0F6D30A-2A2F-4833-B15B-28C2F5BF8F67";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0F6D30A-2A2F-4833-B15B-28C2F5BF8F67";
+				PROVISIONING_PROFILE = "66eaf8c1-ba3d-46ad-b002-c31290634ce0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "66eaf8c1-ba3d-46ad-b002-c31290634ce0";
 			};
 			name = Debug;
 		};
@@ -2010,8 +2010,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kasun Dissanayake (82XHU7RV3K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lingeswaran Kandasamy (4Q24XNNTMF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lingeswaran Kandasamy (4Q24XNNTMF)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = PRIMECMAPP_Prefix.pch;
@@ -2023,8 +2023,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PRIMECMAPP;
-				PROVISIONING_PROFILE = "F0F6D30A-2A2F-4833-B15B-28C2F5BF8F67";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0F6D30A-2A2F-4833-B15B-28C2F5BF8F67";
+				PROVISIONING_PROFILE = "66eaf8c1-ba3d-46ad-b002-c31290634ce0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "66eaf8c1-ba3d-46ad-b002-c31290634ce0";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

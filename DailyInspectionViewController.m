@@ -42,7 +42,6 @@
     NSString *comNoticeNo;
     BOOL *uploadingsketch;
     int count2;
-    
     NSUserDefaults *defaults;
     
     //start brin
@@ -64,7 +63,6 @@
 @synthesize arrayImages;
 @synthesize imageAddSubView;
 @synthesize imgViewAdd,txvDescription,datePicker;
-
 @synthesize txtName1,txtName2,txtName3,txtName4,txtName5,txtname6,txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8,txtCompany1,txtCompany2,txtCompany3,txtCompany4,txtName7,txtName8,txtHours,contractor,txtAddress,txtState,txtCity,txtTel,txtCompetent,txtProject,txtTwn,txtEmail,txtWrkDone,txtHeader,zip;
 
 
@@ -130,18 +128,104 @@
     [dateFormat1 setDateFormat:@"hh:mm"];
     NSString *dateString1 = [dateFormat1 stringFromDate:today1];
     
-    time.text=dateString1;
-    ConName.text=appDelegate.client;
-    Town.text=appDelegate.city;
+   time.text=dateString1;
+//    ConName.text=appDelegate.client;
+  //Town.text=appDelegate.city;
+//    contractor.text=appDelegate.projId;
+//    txtAddress.text=appDelegate.address;
+//    txtCity.text=appDelegate.city;
+//    txtState.text=appDelegate.state;
+//    txtTel.text=appDelegate.tel;
+  //  txtDateIN.text=dateString;
+//    txtProject.text=appDelegate.projName;
+//    zip.text=appDelegate.zip;
     
-    contractor.text=appDelegate.projId;
-    txtAddress.text=appDelegate.address;
-    txtCity.text=appDelegate.city;
-    txtState.text=appDelegate.state;
-    txtTel.text=appDelegate.tel;
+    
+    
+  
     txtDateIN.text=dateString;
-    txtProject.text=appDelegate.projName;
-    zip.text=appDelegate.zip;
+    imgSignatureDaily.image=appDelegate.DIimgInspectorSignature;
+   // txvDescription.text=,
+  
+    txtName1.text=appDelegate.DItxtOfficeName1;
+    txtName2.text=appDelegate.DItxtOfficeName2;
+    txtName3.text=appDelegate.DItxtOfficeName3;
+    txtName4.text=appDelegate.DItxtOfficeName4;
+    
+    txtName7.text=appDelegate.DItxtInspecName1;
+    txtName5.text=appDelegate.DItxtInspecName2;
+    txtname6.text=appDelegate.DItxtInspecName3;
+    txtName8.text=appDelegate.DItxtInspecName4;
+    
+    txtDescription1.text=appDelegate.DItxtWorkDec1;
+    txtDescription2.text=appDelegate.DItxtWorkDec2;
+    txtDescription3.text=appDelegate.DItxtWorkDec3;
+    txtDescription4.text=appDelegate.DItxtWorkDec4;
+    txtTitle1.text=appDelegate.DItxtOfficeTitle1;
+    txtTitle2.text=appDelegate.DItxtOfficeTitle2;
+    txtTitle3.text=appDelegate.DItxtOfficeTitle3;
+    txtTitle4.text=appDelegate.DItxtOfficeTitle4;
+    
+    txtTitle5.text=appDelegate.DItxtInspecTitle;
+    txtTitle6.text=appDelegate.DItxtInspecTitle1;
+    txtTitle7.text=appDelegate.DItxtInspecTitle2;
+    txtTitle8.text=appDelegate.DItxtInspecTitle3;
+    txtCompany1.text=appDelegate.DItxtWorkDec1;
+    txtCompany2.text=appDelegate.DItxtWorkDec2;
+    txtCompany3.text=appDelegate.DItxtWorkDec3;
+    txtCompany4.text=appDelegate.DItxtWorkDec4;
+   
+    
+    txtHours.text=appDelegate.DItxtHoursOfWork;
+    contractor.text=appDelegate.DItxtContractor;
+    txtAddress.text=appDelegate.DItxtAdressPOBox;
+    txtState.text=appDelegate.DItxtState;
+    txtCity.text=appDelegate.DItxtCity;
+    txtTel.text=appDelegate.DItxtTelephone;
+    txtCompetent.text=appDelegate.DItxtCometentPerson;
+    txtProject.text=appDelegate.DIlblProject;
+    txtTwn.text=appDelegate.DItxtTown;
+    txtEmail.text=appDelegate.DItxtEmail;
+    txtWrkDone.text=appDelegate.DItxtWorkDone;
+    zip.text=appDelegate.DItxtZip;
+    oriCalDays.text=appDelegate.DIcaldays;
+    usedCalDays.text=appDelegate.DIuseddays;
+    ConName.text=appDelegate.DIconName;
+    repNo.text=appDelegate.DIrepNo;
+    time.text=appDelegate.DItime;
+    Town.text=appDelegate. DItxtTown;
+    
+    weather.text=appDelegate.DIweather;
+    des1.text=appDelegate.DIdes1;
+    des2.text=appDelegate.DIdes2;
+    des3.text=appDelegate.DIdes3;
+    des4.text=appDelegate.DIdes4;
+    des5.text=appDelegate.DIdes5;
+    qua1.text=appDelegate.DIqua1;
+    qua2.text=appDelegate.DIqua2;
+    qua3.text=appDelegate.DIqua3;
+    qua4.text=appDelegate.DIqua4;
+    qua5.text=appDelegate.DIqua5;
+    textField.text=appDelegate.DIitemno1;
+    textField1.text=appDelegate.DIitemno2;
+    textField2.text=appDelegate.DIitemno3;
+    textField3.text=appDelegate.DIitemno4;
+    textFiel4.text=appDelegate.DIitemno5;
+
+    
+    
+    textField.text=appDelegate.DIdes1;
+    textField1.text=appDelegate.DIdes2;
+    textField2.text=appDelegate.DIdes3;
+    textField3.text=appDelegate.DIdes4;
+    textFiel4.text=appDelegate.DIdes5;
+
+    
+    
+    
+    //des1,des2,des3,des4,des5
+    NSLog(@"ApppppppDeeeeesssssccccc----------------%@",appDelegate.DIdes1);
+        
     
     NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
     
@@ -153,94 +237,96 @@
     [textField2 setSuggestions:array];
     [textField3 setSuggestions:array];
     [textFiel4 setSuggestions:array];
+
+    
     defaults= [NSUserDefaults standardUserDefaults];
     
-    NSString* temp1 = [defaults objectForKey:@"textField1Text"];
-    NSString* temp2 = [defaults objectForKey:@"textField2Text"];
-    NSString* temp3 = [defaults objectForKey:@"textField3Text"];
-    NSString* temp4 = [defaults objectForKey:@"textField4Text"];
-    NSString* temp5 = [defaults objectForKey:@"textField5Text"];
-    NSString* temp6 = [defaults objectForKey:@"textField6Text"];
-    NSString* temp7 = [defaults objectForKey:@"textField7Text"];
-    NSString* temp8 = [defaults objectForKey:@"textField8Text"];
-    NSString* temp9 = [defaults objectForKey:@"textField9Text"];
-    NSString* temp10 = [defaults objectForKey:@"textField10Text"];
-    NSString* temp11= [defaults objectForKey:@"textField11Text"];
-    NSString* temp12= [defaults objectForKey:@"textField12Text"];
-    NSString* temp13= [defaults objectForKey:@"textField13Text"];
-    NSString* temp14= [defaults objectForKey:@"textField14Text"];
-    NSString* temp15= [defaults objectForKey:@"textField15Text"];
-    NSString* temp16= [defaults objectForKey:@"textField16Text"];
-    NSString* temp17= [defaults objectForKey:@"textField17Text"];
-    NSString* temp18= [defaults objectForKey:@"textField18Text"];
-    NSString* temp19= [defaults objectForKey:@"textField19Text"];
-    NSString* temp20= [defaults objectForKey:@"textField20Text"];
-    NSString* temp21= [defaults objectForKey:@"textField21Text"];
-    NSString* temp22= [defaults objectForKey:@"textField22Text"];
-    NSString* temp23= [defaults objectForKey:@"textField23Text"];
-    NSString* temp24= [defaults objectForKey:@"textField24Text"];
-    NSString* temp25= [defaults objectForKey:@"textField25Text"];
-    NSString* temp26= [defaults objectForKey:@"textField26Text"];
-    NSString* temp27= [defaults objectForKey:@"textField27Text"];
-    NSString* temp28= [defaults objectForKey:@"textField28Text"];
-    NSString* temp29= [defaults objectForKey:@"textField29Text"];
-    NSString* temp30= [defaults objectForKey:@"textField30Text"];
-    NSString* temp31= [defaults objectForKey:@"textField31Text"];
-    NSString* temp32= [defaults objectForKey:@"textField32Text"];
-    NSString* temp33= [defaults objectForKey:@"textField33Text"];
-    NSString* temp34= [defaults objectForKey:@"textField34Text"];
-    NSString* temp35= [defaults objectForKey:@"textField35Text"];
-    NSString* temp36= [defaults objectForKey:@"textField36Text"];
-    NSString* temp37= [defaults objectForKey:@"textField37Text"];
-    NSString* temp38= [defaults objectForKey:@"textField38Text"];
-    NSString* temp39= [defaults objectForKey:@"textField39Text"];
-    NSString* temp40= [defaults objectForKey:@"textField40Text"];
-    NSString* temp41= [defaults objectForKey:@"textField41Text"];
-    NSString* temp42= [defaults objectForKey:@"textField42Text"];
-    
-    repNo.text=temp1;
-    txtCompetent.text=temp2;
-    weather.text=temp3;
-    txtEmail.text=temp4;
-    txtWrkDone.text=temp5;
-    des1.text=temp6;
-    des2.text=temp7;
-    des3.text=temp8;
-    des4.text=temp9;
-    des5.text=temp10;
-    qua1.text=temp11;
-    qua2.text=temp12;
-    qua3.text=temp13;
-    qua4.text=temp14;
-    qua5.text=temp15;
-    txtName1.text=temp16;
-    txtName2.text=temp17;
-    txtName3.text=temp18;
-    txtName4.text=temp19;
-    txtName5.text=temp20;
-    txtname6.text=temp21;
-    txtName7.text=temp22;
-    txtName8.text=temp23;
-    txtTitle1.text=temp24;
-    txtTitle2.text=temp25;
-    txtTitle3.text=temp26;
-    txtTitle4.text=temp27;
-    txtTitle5.text=temp28;
-    txtTitle6.text=temp29;
-    txtTitle7.text=temp30;
-    txtTitle8.text=temp31;
-    oriCalDays.text=temp32;
-    usedCalDays.text=temp33;
-    txtCompany1.text=temp34;
-    txtCompany2.text=temp35;
-    txtCompany3.text=temp36;
-    txtCompany4.text=temp37;
-    txtDescription1.text=temp38;
-    txtDescription2.text=temp39;
-    txtDescription3.text=temp40;
-    txtDescription4.text=temp41;
-    txtHours.text=temp42;
-    
+//    NSString* temp1 = [defaults objectForKey:@"textField1Text"];
+//    NSString* temp2 = [defaults objectForKey:@"textField2Text"];
+//    NSString* temp3 = [defaults objectForKey:@"textField3Text"];
+//    NSString* temp4 = [defaults objectForKey:@"textField4Text"];
+//    NSString* temp5 = [defaults objectForKey:@"textField5Text"];
+//    NSString* temp6 = [defaults objectForKey:@"textField6Text"];
+//    NSString* temp7 = [defaults objectForKey:@"textField7Text"];
+//    NSString* temp8 = [defaults objectForKey:@"textField8Text"];
+//    NSString* temp9 = [defaults objectForKey:@"textField9Text"];
+//    NSString* temp10 = [defaults objectForKey:@"textField10Text"];
+//    NSString* temp11= [defaults objectForKey:@"textField11Text"];
+//    NSString* temp12= [defaults objectForKey:@"textField12Text"];
+//    NSString* temp13= [defaults objectForKey:@"textField13Text"];
+//    NSString* temp14= [defaults objectForKey:@"textField14Text"];
+//    NSString* temp15= [defaults objectForKey:@"textField15Text"];
+//    NSString* temp16= [defaults objectForKey:@"textField16Text"];
+//    NSString* temp17= [defaults objectForKey:@"textField17Text"];
+//    NSString* temp18= [defaults objectForKey:@"textField18Text"];
+//    NSString* temp19= [defaults objectForKey:@"textField19Text"];
+//    NSString* temp20= [defaults objectForKey:@"textField20Text"];
+//    NSString* temp21= [defaults objectForKey:@"textField21Text"];
+//    NSString* temp22= [defaults objectForKey:@"textField22Text"];
+//    NSString* temp23= [defaults objectForKey:@"textField23Text"];
+//    NSString* temp24= [defaults objectForKey:@"textField24Text"];
+//    NSString* temp25= [defaults objectForKey:@"textField25Text"];
+//    NSString* temp26= [defaults objectForKey:@"textField26Text"];
+//    NSString* temp27= [defaults objectForKey:@"textField27Text"];
+//    NSString* temp28= [defaults objectForKey:@"textField28Text"];
+//    NSString* temp29= [defaults objectForKey:@"textField29Text"];
+//    NSString* temp30= [defaults objectForKey:@"textField30Text"];
+//    NSString* temp31= [defaults objectForKey:@"textField31Text"];
+//    NSString* temp32= [defaults objectForKey:@"textField32Text"];
+//    NSString* temp33= [defaults objectForKey:@"textField33Text"];
+//    NSString* temp34= [defaults objectForKey:@"textField34Text"];
+//    NSString* temp35= [defaults objectForKey:@"textField35Text"];
+//    NSString* temp36= [defaults objectForKey:@"textField36Text"];
+//    NSString* temp37= [defaults objectForKey:@"textField37Text"];
+//    NSString* temp38= [defaults objectForKey:@"textField38Text"];
+//    NSString* temp39= [defaults objectForKey:@"textField39Text"];
+//    NSString* temp40= [defaults objectForKey:@"textField40Text"];
+//    NSString* temp41= [defaults objectForKey:@"textField41Text"];
+//    NSString* temp42= [defaults objectForKey:@"textField42Text"];
+//    
+//    repNo.text=temp1;
+//    txtCompetent.text=temp2;
+//    weather.text=temp3;
+//    txtEmail.text=temp4;
+//    txtWrkDone.text=temp5;
+//    des1.text=temp6;
+//    des2.text=temp7;
+//    des3.text=temp8;
+//    des4.text=temp9;
+//    des5.text=temp10;
+//    qua1.text=temp11;
+//    qua2.text=temp12;
+//    qua3.text=temp13;
+//    qua4.text=temp14;
+//    qua5.text=temp15;
+//    txtName1.text=temp16;
+//    txtName2.text=temp17;
+//    txtName3.text=temp18;
+//    txtName4.text=temp19;
+//    txtName5.text=temp20;
+//    txtname6.text=temp21;
+//    txtName7.text=temp22;
+//    txtName8.text=temp23;
+//    txtTitle1.text=temp24;
+//    txtTitle2.text=temp25;
+//    txtTitle3.text=temp26;
+//    txtTitle4.text=temp27;
+//    txtTitle5.text=temp28;
+//    txtTitle6.text=temp29;
+//    txtTitle7.text=temp30;
+//    txtTitle8.text=temp31;
+//    oriCalDays.text=temp32;
+//    usedCalDays.text=temp33;
+//    txtCompany1.text=temp34;
+//    txtCompany2.text=temp35;
+//    txtCompany3.text=temp36;
+//    txtCompany4.text=temp37;
+//    txtDescription1.text=temp38;
+//    txtDescription2.text=temp39;
+//    txtDescription3.text=temp40;
+//    txtDescription4.text=temp41;
+//    txtHours.text=temp42;
+//    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -249,7 +335,6 @@
                                action:@selector(exit)];
     
     self.navigationItem.rightBarButtonItem = Button;
-    
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];

@@ -103,15 +103,11 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY inspectionID == %@", CNo];
     [fetchRequest setPredicate:predicate];
-    
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    
     if([objects count] > 0){
-        
         NSManagedObject *inspectionReportObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Inspection Form object inspectionID: %@", [inspectionReportObject valueForKey:@"inspectionID"]);
-        
         town.text=[inspectionReportObject valueForKey:@"town_city"];
         weather.text=[inspectionReportObject valueForKey:@"weather"];
         time.text=[inspectionReportObject valueForKey:@"time"];
@@ -120,7 +116,6 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtZip.text=[inspectionReportObject valueForKey:@"zip_Code"];
         useddays.text=[inspectionReportObject valueForKey:@"original_Calendar_Days"];
         caldays.text=[inspectionReportObject valueForKey:@"calendar_Days_Used"];
-        
         txtContractor.text=[inspectionReportObject valueForKey:@"contractor"];
         txtAdressPOBox.text=[inspectionReportObject valueForKey:@"p_o_Box"];
         txtCity.text=[inspectionReportObject valueForKey:@"city"];
@@ -130,14 +125,12 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         lblProject.text=[inspectionReportObject valueForKey:@"project"];
         txtTown.text=[inspectionReportObject valueForKey:@"town_city"];
         txtZip.text=[inspectionReportObject valueForKey:@"zip_Code"];
-        
         txtEmail.text=[inspectionReportObject valueForKey:@"e_Mail"];
         txtWorkDone.text=[inspectionReportObject valueForKey:@"workDoneBy"];
         txtOfficeName1.text=[inspectionReportObject valueForKey:@"oVJName1"];
         txtOfficeName2.text=[inspectionReportObject valueForKey:@"oVJName2"];
         txtOfficeName3.text=[inspectionReportObject valueForKey:@"oVJName3"];
         txtOfficeName4.text=[inspectionReportObject valueForKey:@"oVJName4"];
-        
         txtOfficeTitle1.text=[inspectionReportObject valueForKey:@"oVJTitle1"];
         txtOfficeTitle2.text=[inspectionReportObject valueForKey:@"oVJTitle2"];
         txtOfficeTitle3.text=[inspectionReportObject valueForKey:@"oVJTitle3"];
@@ -146,12 +139,10 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtInspecName2.text=[inspectionReportObject valueForKey:@"iFName2"];
         txtInspecName3.text=[inspectionReportObject valueForKey:@"iFName3"];
         txtInspecName4.text=[inspectionReportObject valueForKey:@"iFName4"];
-        
         txtInspecTitle1.text=[inspectionReportObject valueForKey:@"iFTitle1"];
         txtInspecTitle2.text=[inspectionReportObject valueForKey:@"iFTitle2"];
         txtInspecTitle3.text=[inspectionReportObject valueForKey:@"iFTitle3"];
         txtInspecTitle.text=[inspectionReportObject valueForKey:@"iFTitle4"];
-        
         txtWorkDoneDepart1.text=[inspectionReportObject valueForKey:@"wDODepartmentOrCompany1"];
         txtWorkDoneDepart2.text=[inspectionReportObject valueForKey:@"wDODepartmentOrCompany2"];
         txtWorkDoneDepart3.text=[inspectionReportObject valueForKey:@"wDODepartmentOrCompany3"];
@@ -161,18 +152,14 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtWorkDec3.text=[inspectionReportObject valueForKey:@"wDODescriptionOfWork3"];
         txtWorkDec4.text=[inspectionReportObject valueForKey:@"wDODescriptionOfWork4"];
         txtHoursOfWork.text=[NSString stringWithFormat:@"%@", [inspectionReportObject valueForKey:@"contractorsHoursOfWork"]];
-        
         NSString * signName = [inspectionReportObject valueForKey:@"signature"];
         imgInspectorSignature.image=[PRIMECMController getTheImage:signName];
-        
         arrayImages  = [[[inspectionReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[inspectionReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         
         NSLog(@"array Images---%@",arrayImages);
         NSLog(@"array Sketches---%@",sketchesArray);
-        
         NSArray *responseObject = [PRIMECMController getDailyInspectionItemsFromInspectionID:CNo];
-        
         if ([responseObject count] > 0){
             _des1.text=[[responseObject objectAtIndex:0] valueForKey:@"desc"];
             _qua1.text=[[[responseObject objectAtIndex:0] valueForKey:@"qty"] stringValue];
@@ -203,12 +190,86 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
             _itemno5.text=[[responseObject objectAtIndex:4] valueForKey:@"no"];
         }
         
+        
+        
+        
+        
+         appDelegate.DIlblProject=lblProject.text;
+         appDelegate.DItxtWorkDone=txtWorkDone.text;
+         appDelegate.DItxtContractor=txtContractor.text;
+        appDelegate. DItxtAdressPOBox=txtAdressPOBox.text;
+        appDelegate. DItxtCity=txtCity.text;
+        appDelegate. DItxtState=txtState.text;
+        appDelegate. DItxtTelephone=txtTelephone.text;
+        appDelegate. DItxtCometentPerson=txtCometentPerson.text;
+        appDelegate. DItxtTown=town.text;
+        appDelegate. DItxtEmail=txtEmail.text;
+        appDelegate. DItxtOfficeName1=txtOfficeName1.text;
+        appDelegate. DItxtOfficeTitle1=txtOfficeTitle1.text;
+        appDelegate. DItxtOfficeName2=txtOfficeName2.text;
+        appDelegate. DItxtOfficeName3=txtOfficeName3.text;
+        appDelegate. DItxtOfficeName4=txtOfficeName4.text;
+        appDelegate. DItxtOfficeTitle2=txtOfficeTitle2.text;
+        appDelegate. DItxtOfficeTitle3=txtOfficeTitle3.text;
+        appDelegate. DItxtOfficeTitle4=txtOfficeTitle4.text;
+        appDelegate. DItxtInspecName1=txtInspecName1.text;
+        appDelegate. DItxtInspecName2=txtInspecName2.text;
+        appDelegate. DItxtInspecName3=txtInspecName3.text;
+        appDelegate. DItxtInspecTitle1=txtInspecTitle1.text;
+        appDelegate. DItxtInspecTitle2=txtInspecTitle2.text;
+        appDelegate. DItxtInspecTitle3=txtInspecTitle3.text;
+        appDelegate. DItxtWorkDoneDepart1=txtWorkDoneDepart1.text;
+        appDelegate. DItxtWorkDoneDepart2=txtWorkDoneDepart2.text;
+        appDelegate. DItxtWorkDoneDepart3=txtWorkDoneDepart3.text;
+        appDelegate. DItxtWorkDec1=txtWorkDec1.text;
+        appDelegate. DItxtWorkDec3=txtWorkDec3.text;
+        appDelegate. DItxtWorkDec2=txtWorkDec2.text;
+        appDelegate. DItxtHowToWork=txtHowToWork.text;
+        appDelegate. DIimgInspectorSignature = imgInspectorSignature.image;
+        appDelegate. DItxtInspecName4=txtInspecName4.text;
+        appDelegate. DItxtInspecTitle=txtInspecTitle.text;
+        appDelegate. DItxtWorkDoneDepart4=txtWorkDoneDepart4.text;
+        appDelegate. DItxtWorkDec4=txtWorkDec4.text;
+        appDelegate. DItxtHoursOfWork=txtHoursOfWork.text;
+        appDelegate. DItxtZip=txtZip.text;
+        appDelegate. DIrepNo=repNo.text;
+        appDelegate. DIconName=conName.text;
+        appDelegate. DIweather=weather.text;
+        appDelegate. DItime=time.text;
+        appDelegate. DIdes1=_des1.text;
+        appDelegate. DIdes2=_des2.text;
+        appDelegate. DIdes3=_des3.text;
+        appDelegate. DIdes4=_des4.text;
+        appDelegate. DIdes5=_des5.text;
+        appDelegate. DIqua1=_qua1.text;
+        appDelegate. DIqua2=_qua2.text;
+        appDelegate. DIqua3=_qua3.text;
+        appDelegate. DIqua4=_qua4.text;
+        appDelegate. DIqua5=_qua5.text;
+        appDelegate. DIitemno1=_itemno1.text;
+        appDelegate. DIitemno2=_itemno2.text;
+        appDelegate. DIitemno3=_itemno3.text;
+        appDelegate. DIitemno4=_itemno4.text;
+        appDelegate. DIitemno5=_itemno5.text;
+        appDelegate. DIcaldays=caldays.text;
+        appDelegate. DIuseddays=useddays.text;
+        
+        
+        
+        
+        
     }else{
         NSLog(@"No matching ComplianceForm with ID: %@", CNo);
     }
   
     [self.tblView reloadData];
     [hud setHidden:YES];
+}
+
+
+-(IBAction)fnEdit:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil];
 }
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName

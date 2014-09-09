@@ -9,6 +9,7 @@
 #import "PopUpViewController.h"
 #import "popupcell.h"
 #import "CMShowImagesViewController.h"
+#import "TabAndSplitAppAppDelegate.h"
 
 @interface PopUpViewController ()
 {
@@ -22,6 +23,7 @@
     int pickerTag;
     NSArray *pickerDataArray;
     NSIndexPath *index;
+    TabAndSplitAppAppDelegate *appDelegate;
 }
 
 @end
@@ -131,10 +133,19 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     
     tableData = [NSArray arrayWithObjects:@"Project Id",@"Project Title",@"Project Name",@"Project Description",@"Street",@"City",@"State",@"Zip",@"Phone No",@"Date",@"Client Name",@"Project Manager",@"Inspector",nil];
     
+    
+    
+    
     button.enabled=NO;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     defaults=[NSUserDefaults standardUserDefaults];
+    
+    
+    
+    
+    
+    
     }
 
 

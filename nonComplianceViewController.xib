@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="nonComplianceViewController">
             <connections>
                 <outlet property="DCRC" destination="Z1D-OH-xpa" id="JMv-bg-h9n"/>
+                <outlet property="EditNonNoticeNo" destination="4TX-YJ-qB5" id="DcC-DH-bZi"/>
                 <outlet property="NtxtDate" destination="J2U-nu-o1Z" id="8Pn-9K-YUZ"/>
                 <outlet property="NtxtDateContractorCompleted" destination="i8z-Hs-060" id="koG-gj-ji7"/>
                 <outlet property="NtxtDateContractorStarted" destination="tBG-0A-wIA" id="h3x-nK-zeu"/>
@@ -60,7 +61,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" id="NcO-CK-WXA">
-                            <rect key="frame" x="33" y="207" width="633" height="40"/>
+                            <rect key="frame" x="33" y="207" width="312" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -355,6 +356,23 @@
                             <rect key="frame" x="33" y="42" width="109" height="62"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" id="4TX-YJ-qB5">
+                            <rect key="frame" x="344" y="207" width="319" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="DgF-Yy-9Bb"/>
+                            </connections>
+                        </textField>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z16-yJ-hWo">
+                            <rect key="frame" x="344" y="182" width="240" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <string key="text">Compliance Notice Number	</string>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </scrollView>
             </subviews>

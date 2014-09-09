@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SERVER_API_ENDPOINT</key>
-	<string>http://vesuvius.ravihansa3000.com/construction/constructionapi.php</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>SERVER_IMAGE_PATH_URL</key>
-	<string>http://vesuvius.ravihansa3000.com/construction/images</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +13,7 @@
 	<key>CFBundleIconFile~ipad</key>
 	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.prime.PRIMECMAPP</string>
+	<string>com.prime.PRIMECMAPPSA</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -36,6 +32,10 @@
 	<string>MainWindow</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow</string>
+	<key>SERVER_API_ENDPOINT</key>
+	<string>http://vesuvius.ravihansa3000.com/construction/constructionapi.php</string>
+	<key>SERVER_IMAGE_PATH_URL</key>
+	<string>http://vesuvius.ravihansa3000.com/construction/images</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

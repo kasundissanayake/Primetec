@@ -23,6 +23,7 @@
 #import "BidSummaryForm.h"
 #import "quantitySummarySheet.h"
 #import "Quantity_S_Report.h"
+#import "PopUpViewController.h"
 
 
 typedef enum {
@@ -145,7 +146,9 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPopupView) name:@"displayPopupView" object:nil];
+
+   
     
     //start brin
     
@@ -201,10 +204,41 @@ typedef enum {
 }
 
 -(void)btnEdit{
-    [self.table setEditing:YES animated:YES];
-    [toolbarItems insertObject:btnDelete atIndex:0];
-    [toolbarItems removeObject: btnEdit];
-    toolbar.items = toolbarItems;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"displayPopupView" object:nil];
+    
+//
+//    appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
+//    appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
+//    appDelegate.projTitle=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_title"];
+//    appDelegate.projName=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_name"];
+//    appDelegate.address=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"street"];
+//    appDelegate.city=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"city"];
+//    appDelegate.state=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"state"];
+//    appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
+//    appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
+//    appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
+//    
+//    //start brin
+//    
+//    appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
+//    appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
+//    
+
+    
+//    [self.table setEditing:YES animated:YES];
+//    [toolbarItems insertObject:btnDelete atIndex:0];
+//    [toolbarItems removeObject: btnEdit];
+//    toolbar.items = toolbarItems;
+//    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -877,6 +911,9 @@ typedef enum {
         
         appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
         appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
+        
+        
+        
 
         
         //end brin
@@ -1138,5 +1175,13 @@ typedef enum {
     com.title=[NSString stringWithFormat:@"Compliance View"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
 }
+
+-(void)displayPopupView
+{
+    PopUpViewController *controller = [[PopUpViewController alloc] initWithNibName:@"PopUpViewController" bundle:nil];
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 
 @end

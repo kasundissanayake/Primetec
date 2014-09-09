@@ -17,7 +17,6 @@ NSMutableDictionary *selectionStates;
 @property(nonatomic,strong)IBOutlet UIView *viewAttachImage;
 @property(nonatomic,strong)IBOutlet UIBarButtonItem *button;
 @property(nonatomic,strong)IBOutlet UILabel *lblTitle;
-
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach1;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach2;
@@ -34,21 +33,13 @@ NSMutableDictionary *selectionStates;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach13;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach14;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAttach15;
-
 @property(nonatomic,strong)UIImagePickerController *imagePicker;
-
-
 @property(nonatomic,strong)IBOutlet UIView *imageAddSubView;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAdd;
-
 @property(nonatomic,strong)NSMutableArray *arrayImages;
-
-
 @property(nonatomic,assign)BOOL isFromSketches;
 @property(nonatomic,assign)BOOL isFromReport;
 @property(nonatomic,strong)IBOutlet UITextView *txvDescription;
-
-
 @property(nonatomic,retain) UIDatePicker *datePicker;
 
 @end

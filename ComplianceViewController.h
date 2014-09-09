@@ -40,7 +40,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *conRes;
 @property (strong, nonatomic) IBOutlet UITextView *correctAction;
 
-
+@property(nonatomic,strong)IBOutlet UITextField *EditComNumber;
 
 @property(nonatomic,strong)IBOutlet UITextField *COtextTitle;
 @property(nonatomic,strong)IBOutlet UITextField *COtextProject;
@@ -71,5 +71,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTo;
 @property (weak, nonatomic) IBOutlet UITextField *txtUserId;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
+@property (weak, nonatomic) IBOutlet UITextField *test;
 
 @end
