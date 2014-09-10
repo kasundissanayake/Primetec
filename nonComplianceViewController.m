@@ -9,7 +9,6 @@
 #import "PRIMECMController.h"
 
 @interface nonComplianceViewController ()
-
 {
     UIDatePicker *datePicker;
     NSMutableArray *hotelAnnotations;
@@ -39,7 +38,6 @@
     BOOL *uploadingsketch;
     BOOL isUploadingSignature;
     NSUserDefaults *defaults;
-    
 }
 
 @end
@@ -109,52 +107,6 @@
     imgSignature.userInteractionEnabled = YES;
     [imgSignature addGestureRecognizer:singleTapInspec];
     
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormat stringFromDate:today];
-    
-//    txtContactNo.text=appDelegate.projId;
-//    projectDesc.text=appDelegate.projDescription;
-//    nonCOtextTitle.text=appDelegate.projTitle;
-//    nonCOtextProject.text=appDelegate.projName;
-//    txtPrintedName.text=appDelegate.projPrintedName;
-      NtxtDate.text=dateString;
-      txtUserId.text=appDelegate.userId;
-    
-    
-    
-    //edit Non-Compliance====//
-    
-   
-    projectDesc.text=appDelegate.EprojectDescription;
-    contractorResp.text=appDelegate.EContractorResponsible;
-    correctiveAction.text=appDelegate.EcorrectiveActionCompliance;
-    NtxtDateIssued.text=appDelegate.EdateIssued;
-    NtxtDateContractorStarted.text=appDelegate.EdateContractorStarted;
-    NtxtDateContractorCompleted.text=appDelegate.EdateContractorCompleted;
-    NtxtDate.text=appDelegate.Edate;
-    NtxtDateofRawReprote.text=appDelegate.EdateOfDWRReported;
-    DCRC.text=appDelegate.EdateCompletedBy;
-    imgSignature.image=appDelegate.signature;
-    nonCOtextProject.text=appDelegate.EProject;
-    nonCOtextTitle.text=appDelegate.Etitle;
-    txtContactNo.text=appDelegate.Eproject_id;
-    txtPrintedName.text=appDelegate.EprintedName;
-    txtTo.text=appDelegate.Eto;
-    txtNonCompNoticeNo.text=appDelegate.EcomplianceNoticeNo;
-    EditNonNoticeNo.text=appDelegate.EcomplianceNoticeNo;
-    
-    
-    NSLog(@"appppppppppppddddddddlllllliiiii",appDelegate.EprojectDescription);
-    
-    
-    
-    
-    
-        //start brin
-    
-    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
                                style:UIBarButtonItemStyleDone
@@ -167,55 +119,25 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
-    
-    
-    
-    
-    
     defaults= [NSUserDefaults standardUserDefaults];
     
-//    NSString* temp1 = [defaults objectForKey:@"NtxtDateIssued"];
-//    NSString* temp2 = [defaults objectForKey:@"contractorResp"];
-//    NSString* temp3 = [defaults objectForKey:@"txtTo"];
-//    NSString* temp4 = [defaults objectForKey:@"DCRC"];
-//    NSString* temp5 = [defaults objectForKey:@"NtxtDateContractorStarted"];
-//    NSString* temp6 = [defaults objectForKey:@"NtxtDateContractorCompleted"];
-//    NSString* temp7 = [defaults objectForKey:@"NtxtDateofRawReprote"];
-//    NSString* temp8 = [defaults objectForKey:@"correctiveAction"];
-//    
-//    
-//    
-//    NtxtDateIssued.text=temp1;
-//    contractorResp.text=temp2;
-//    txtTo.text=temp3;
-//    DCRC.text=temp4;
-//    NtxtDateContractorStarted.text=temp5;
-//    NtxtDateContractorCompleted.text=temp6;
-//    NtxtDateofRawReprote.text=temp7;
-//    correctiveAction.text=temp8;
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormat stringFromDate:today];
     
-    
-    
-    //end brin
-    
-    
-    
-    
-    
+    txtContactNo.text=appDelegate.projId;
+    projectDesc.text=appDelegate.projDescription;
+    nonCOtextTitle.text=appDelegate.projTitle;
+    nonCOtextProject.text=appDelegate.projName;
+    txtPrintedName.text=appDelegate.projPrintedName;
+    NtxtDate.text=dateString;
+    txtUserId.text=appDelegate.userId;    
 }
 
 
 
-
-
-
-
-
-
 -(void)exit{
-    
-    
-    
     
     NSString* textField1Text = NtxtDateIssued.text;
     [defaults setObject:textField1Text forKey:@"NtxtDateIssued"];
@@ -545,7 +467,7 @@
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
-                singSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
                 
             }
             
@@ -562,9 +484,7 @@
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save Non-Compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
-        }
-        
-        
+        }       
     }
 }
 

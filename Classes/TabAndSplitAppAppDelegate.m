@@ -32,121 +32,16 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize  mvc;
 @synthesize imageArray;
-
-
-//editing Compliance AND Non Compliance
-@synthesize EprojectDescription;
-@synthesize Eproject_id;
-@synthesize Etitle;
-@synthesize EProject;
-@synthesize EcomplianceNoticeNo;
-@synthesize EdateIssued;
-@synthesize EContractorResponsible;
-@synthesize Eto;
-@synthesize EdateContractorStarted;
-@synthesize EdateContractorCompleted;
-@synthesize EprojPrintedName;
-@synthesize EdateOfDWRReported;
-@synthesize EcorrectiveActionCompliance;
-@synthesize EprintedName;
-@synthesize Edate;
-@synthesize Eimages_uploaded;
-@synthesize Esketch_images;
-@synthesize signature;
-@synthesize EdateCompletedBy;
-
-
-
-
-//Edit Daily Inspection============//
-
-@synthesize DIlblProject;
-@synthesize DItxtWorkDone;
-@synthesize DItxtContractor;
-@synthesize DItxtAdressPOBox;
-@synthesize DItxtCity;
-@synthesize DItxtState;
-@synthesize DItxtTelephone;
-@synthesize DItxtCometentPerson;
-@synthesize DItxtTown;
-@synthesize DItxtEmail;
-@synthesize DItxtOfficeName1;
-@synthesize DItxtOfficeTitle1;
-@synthesize DItxtOfficeName2;
-@synthesize DItxtOfficeName3;
-@synthesize DItxtOfficeName4;
-@synthesize DItxtOfficeTitle2;
-@synthesize DItxtOfficeTitle3;
-@synthesize DItxtOfficeTitle4;
-@synthesize DItxtInspecName1;
-@synthesize DItxtInspecName2;
-@synthesize DItxtInspecName3;
-@synthesize DItxtInspecTitle1;
-@synthesize DItxtInspecTitle2;
-@synthesize DItxtInspecTitle3;
-@synthesize DItxtWorkDoneDepart1;
-@synthesize DItxtWorkDoneDepart2;
-@synthesize DItxtWorkDoneDepart3;
-@synthesize DItxtWorkDec1;
-@synthesize DItxtWorkDec3;
-@synthesize DItxtWorkDec2;
-@synthesize DItxtHowToWork;
-@synthesize DIimgInspectorSignature;
-@synthesize DItxtInspecName4;
-@synthesize DItxtInspecTitle;
-@synthesize DItxtWorkDoneDepart4;
-@synthesize DItxtWorkDec4;
-@synthesize DItxtHoursOfWork;
-@synthesize DItxtZip;
-@synthesize DIrepNo;
-@synthesize DIconName;
-@synthesize DItown;
-@synthesize DIweather;
-@synthesize DItime;
-@synthesize DIdes1;
-@synthesize DIdes2;
-@synthesize DIdes3;
-@synthesize DIdes4;
-@synthesize DIdes5;
-@synthesize DIqua1;
-@synthesize DIqua2;
-@synthesize DIqua3;
-@synthesize DIqua4;
-@synthesize DIqua5;
-@synthesize DIitemno1;
-@synthesize DIitemno2;
-@synthesize DIitemno3;
-@synthesize DIitemno4;
-@synthesize DIitemno5;
-@synthesize DIcaldays;
-@synthesize DIuseddays;
-
-
-
-//========================//
-
-//start brin
-
 @synthesize address_client;
 @synthesize client;
-
 @synthesize coloumn1,coloumn2,coloumn3,coloumn4,iddd;
-
-//end brin
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
     [toolbar setHidden:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideToolbar" object:nil];
     sketchesArray=[[NSMutableArray alloc]init];
-    
-    //start brin
-    
     imageArray=[[NSMutableArray alloc]init];
-
-    
-    //end brin
-    
     projectsArray=[[NSMutableArray alloc]init];
     RootVC *rvc=[[RootVC alloc] init];
 	rvc.title=@"";

@@ -94,7 +94,7 @@ typedef enum {
     btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
     btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
     UIImage* toolbarBackground = [UIImage imageNamed:@"Bar1.png"];
-   
+    
     btnEdit.width = 480;
     CGRect rect2 = CGRectMake(0,660 , self.view.frame.size.width , 0);
     
@@ -139,23 +139,23 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspection:) name:@"changeInspection" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpese:) name:@"changeDExpese" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummary:) name:@"changeSummary" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeComplianceForm) name:@"changeComplianceForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonComplianceForm) name:@"changeNonComplianceForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspectionForm) name:@"changeInspectionForm" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeComplianceForm:) name:@"changeComplianceForm" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonComplianceForm:) name:@"changeNonComplianceForm" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspectionForm:) name:@"changeInspectionForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpeseForm) name:@"changeDExpeseForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPopupView) name:@"displayPopupView" object:nil];
-
-   
+    
+    
     
     //start brin
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQuantitySummary) name:@"changeQuantitySummary" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQTY_S_Report:) name:@"changeQTY_S_Report" object:nil];
-//end brin
+    //end brin
     
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
@@ -207,31 +207,31 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"displayPopupView" object:nil];
     
-//
-//    appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
-//    appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
-//    appDelegate.projTitle=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_title"];
-//    appDelegate.projName=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_name"];
-//    appDelegate.address=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"street"];
-//    appDelegate.city=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"city"];
-//    appDelegate.state=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"state"];
-//    appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
-//    appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
-//    appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
-//    
-//    //start brin
-//    
-//    appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
-//    appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
-//    
-
+    //
+    //    appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
+    //    appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
+    //    appDelegate.projTitle=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_title"];
+    //    appDelegate.projName=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_name"];
+    //    appDelegate.address=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"street"];
+    //    appDelegate.city=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"city"];
+    //    appDelegate.state=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"state"];
+    //    appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
+    //    appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
+    //    appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
+    //
+    //    //start brin
+    //
+    //    appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
+    //    appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
+    //
     
-//    [self.table setEditing:YES animated:YES];
-//    [toolbarItems insertObject:btnDelete atIndex:0];
-//    [toolbarItems removeObject: btnEdit];
-//    toolbar.items = toolbarItems;
-//    
+    
+    //    [self.table setEditing:YES animated:YES];
+    //    [toolbarItems insertObject:btnDelete atIndex:0];
+    //    [toolbarItems removeObject: btnEdit];
+    //    toolbar.items = toolbarItems;
+    //
     
     
     
@@ -252,18 +252,18 @@ typedef enum {
 
 
 /*
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        Projects *selectedPerson  = [fetchedResultsController objectAtIndexPath:indexPath];
-        
-        // Remove the person
-        [selectedPerson MR_deleteInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-        
-        [[NSManagedObjectContext MR_contextForCurrentThread] MR_save];
-    }
-}*/
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete)
+ {
+ Projects *selectedPerson  = [fetchedResultsController objectAtIndexPath:indexPath];
+ 
+ // Remove the person
+ [selectedPerson MR_deleteInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+ 
+ [[NSManagedObjectContext MR_contextForCurrentThread] MR_save];
+ }
+ }*/
 
 -(void)hideToolbar
 {
@@ -621,7 +621,7 @@ typedef enum {
     }
     
     //===============================================================
-
+    
     
     
     
@@ -814,7 +814,7 @@ typedef enum {
             bidsummary.title=[NSString stringWithFormat:@"Bid Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:bidsummary]];
         }
-
+        
         
         
         if (indexPath.section == 0 && indexPath.row == 6)
@@ -824,7 +824,7 @@ typedef enum {
             qtysummary.title=[NSString stringWithFormat:@"Quantity Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtysummary]];
         }
-
+        
         
         
         if (indexPath.section == 0 && indexPath.row == 9)
@@ -914,7 +914,7 @@ typedef enum {
         
         
         
-
+        
         
         //end brin
         
@@ -1033,15 +1033,16 @@ typedef enum {
     });
 }
 
-- (void)changeComplianceForm
+- (void)changeComplianceForm:(NSDictionary *)sourceDictionary
 {
-    ComplianceViewController *com=[[ComplianceViewController alloc]init];
+    ComplianceViewController *com=[[ComplianceViewController alloc]initWithData:sourceDictionary];
     com.title=[NSString stringWithFormat:@"Compliance View"];
+    
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
 }
 
 
-- (void)changeNonComplianceForm
+- (void)changeNonComplianceForm:(NSDictionary *)sourceDictionary
 {
     nonComplianceViewController *noncom=[[nonComplianceViewController alloc]init];
     noncom.title=[NSString stringWithFormat:@"Non-Compliance View"];
@@ -1049,7 +1050,7 @@ typedef enum {
 }
 
 
-- (void)changeInspectionForm
+- (void)changeInspectionForm:(NSDictionary *)sourceDictionary
 {
     DailyInspectionViewController *daily=[[DailyInspectionViewController alloc]init];
     daily.title=[NSString stringWithFormat:@"Daily Inspection Report"];
@@ -1174,6 +1175,7 @@ typedef enum {
     ComplianceViewController *com=[[ComplianceViewController alloc]init];
     com.title=[NSString stringWithFormat:@"Compliance View"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
+    
 }
 
 -(void)displayPopupView

@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtNoticeNo;
 @property (weak, nonatomic) IBOutlet UITextField *txtdate;
 @property(nonatomic,retain)NSString *CNo;
+@property(nonatomic,retain)NSString *sigImgName;
 @property(nonatomic,retain)IBOutlet UIImageView *imgSignature;
 @property (strong, nonatomic) IBOutlet UITextField *comNoticeNo;
 

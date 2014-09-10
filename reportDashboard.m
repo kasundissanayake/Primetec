@@ -57,23 +57,23 @@
     
     if(proType==0 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ComplianceViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:NULL];
     }
     else if (proType==1 && ![NSStringFromClass([currentVC class]) isEqualToString:@"nonComplianceViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo:NULL];
     }
-    else if (proType==2 && ![NSStringFromClass([currentVC class]) isEqualToString:@"DailyInspectionViewController"])
+    else if (proType==2 && ![NSStringFromClass([currentVC class]) isEqualToString:@"DailyInspectionViewController"] )
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:NULL];
     }
     else if (proType==3 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ExpenceViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpeseForm" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpeseForm" object:nil userInfo:NULL];
     }
     else if (proType==4 && ![NSStringFromClass([currentVC class]) isEqualToString:@"SummaryReportViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil userInfo:NULL];
     }
     
     //start brin

@@ -73,4 +73,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
 @property (weak, nonatomic) IBOutlet UITextField *test;
 
+- (id)initWithData:(NSDictionary *)sourceDictionary;
+
 @end

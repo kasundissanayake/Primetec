@@ -103,37 +103,10 @@
 -(IBAction)showSCompliance:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil];
-    
-    appDelegate.EcomplianceNoticeNo=@" ";
-    appDelegate.EdateIssued=@" ";
-    appDelegate.EContractorResponsible=@" ";
-    appDelegate.EdateContractorStarted=@" ";
-    appDelegate.EdateContractorCompleted=@" ";
-    appDelegate.EdateOfDWRReported=@" ";
-    appDelegate.EcorrectiveActionCompliance=@" ";
-    appDelegate.EprintedName=@" ";
-    appDelegate.Edate=@" ";
-    appDelegate.Eto=@" ";
-    appDelegate.signature = Nil;
-    
-
-    
 }
 
 -(void)populateNonComplianceForm
 {
-    /*
-     NSString *strURL = [NSString stringWithFormat:@"%@/api/noncompliance/single/%@/%@", [PRIMECMAPPUtils getAPIEndpoint], appDelegate.username,CNo];
-     NSURL *apiURL =
-     [NSURL URLWithString:strURL];
-     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-     [urlRequest setHTTPMethod:@"GET"];
-     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-     _receivedData = [[NSMutableData alloc] init];
-     [connection start];
-     NSLog(@"URL---%@",strURL);
-     */
-    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
     hud.labelText=@"";
@@ -147,7 +120,6 @@
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY non_ComplianceNoticeNo == %@", CNo];
     [fetchRequest setPredicate:predicate];
-    
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
@@ -186,33 +158,7 @@
         
         NSString * signName = [nonComplianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
-      
-        
-        //Edit Non-Compliance===================//
-        
-        appDelegate.EprojectDescription=lblProjDec.text;
-        appDelegate.Eproject_id=txtContactNo.text;
-        appDelegate.Etitle=txtTitle.text;
-        appDelegate.EProject=txtProject.text;
-        appDelegate.EcomplianceNoticeNo=nonComNotNo.text;
-        appDelegate.EdateIssued=txtDateIssued.text;
-        appDelegate.EContractorResponsible=lblContractorRes.text;
-        appDelegate.EdateContractorStarted=txtDateContractorStarted.text;
-        appDelegate.EdateContractorCompleted=txtDateContractCompleted.text;
-        appDelegate.EdateOfDWRReported=txtDateOfRawReport.text;
-        appDelegate.EcorrectiveActionCompliance=lblContractorRes.text;
-        appDelegate.EprintedName=txtPrintedName.text;
-        appDelegate.Edate=txtDate.text;
-        appDelegate.Eto=txtTo.text;
-        appDelegate.signature=imgSignature.image;
-        appDelegate.EdateCompletedBy=dateCRC.text;
-       
-        
-        
-        
-        
     }
-    
     [self.tblView reloadData];
     [hud setHidden:YES];
 }
