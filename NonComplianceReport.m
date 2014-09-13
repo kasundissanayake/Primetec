@@ -4,6 +4,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
+#import "nonComplianceViewController.h"
 
 @interface NonComplianceReport ()
 {
@@ -16,12 +17,12 @@
     MBProgressHUD *hud;
     TabAndSplitAppAppDelegate *appDelegate;
     UIBarButtonItem  *btnPrint;
+    NSString * signName;
+    nonComplianceViewController *CompliForm;
 }
 
 @end
-
 @implementation NonComplianceReport
-
 @synthesize  scrollView,headerView;
 @synthesize lblImageAttachmentTitle,viewImageAttachmentTitle;
 @synthesize txtContactNo,txtDate,txtPrintedName,txtTo,txtDateIssued,txtProject,txtTitle,txtDateContractCompleted,txtDateContractorStarted,txtDateOfRawReport;
@@ -63,25 +64,18 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
-    
-    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"New", @"")
                                style:UIBarButtonItemStyleDone
                                target:self
                                action:@selector(showSCompliance:)];
-    
     UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
                                 initWithTitle:NSLocalizedString(@"Edit", @"")
                                 style:UIBarButtonItemStyleDone
                                 target:self
                                 action:@selector(fnEdit:)];
-    
-    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
-    
-    
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
     self.navigationItem.leftBarButtonItem=Button2;
     arrayImages=[[NSMutableArray alloc]init];
@@ -89,11 +83,6 @@
     [self populateNonComplianceForm];
 }
 
-
--(IBAction)fnEdit:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil];
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -122,7 +111,6 @@
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    
     if([objects count] > 0){
         
         NSManagedObject *nonComplianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
@@ -137,6 +125,7 @@
         txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateIssued"]
                                                           dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         lblContractorRes.text=[nonComplianceReportObject valueForKey:@"contractorResponsible"];
+        
         txtTo.text=[nonComplianceReportObject valueForKey:@"to"];
         txtDateContractorStarted.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateContractorStarted"]
                                                                      dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
@@ -156,13 +145,41 @@
         arrayImages  = [[[nonComplianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[nonComplianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         
-        NSString * signName = [nonComplianceReportObject valueForKey:@"signature"];
+        signName = [nonComplianceReportObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
     }
     [self.tblView reloadData];
     [hud setHidden:YES];
 }
 
+
+
+-(IBAction)fnEdit:(id)sender
+{
+    NSLog(@"foldelingesrPath--- %@",lblContractorRes);
+    
+    NSMutableDictionary *complianceReportDTO = [[NSMutableDictionary alloc] init];
+    [complianceReportDTO setValue:txtTitle.text forKey:@"comHeader"];
+    [complianceReportDTO setValue:CNo forKey:@"non_ComplianceNoticeNo"];
+    [complianceReportDTO setValue:txtContactNo.text forKey:@"contractNo"];
+    [complianceReportDTO setValue:lblProjDec.text forKey:@"projectDescription"];
+    [complianceReportDTO setValue:txtProject.text forKey:@"project"];
+    [complianceReportDTO setValue:txtTitle.text forKey:@"title"];
+    [complianceReportDTO setValue:txtDateIssued.text forKey:@"dateIssued"];
+    [complianceReportDTO setValue:lblContractorRes.text forKey:@"contractorResponsible"];
+    [complianceReportDTO setValue:txtTo.text forKey:@"to"];
+    [complianceReportDTO setValue:txtDateContractorStarted.text forKey:@"dateContractorStarted"];
+    [complianceReportDTO setValue:dateCRC.text forKey:@"dateCRTCB"];
+    [complianceReportDTO setValue:txtDateContractCompleted.text forKey:@"dateContractorCompleted"];
+    [complianceReportDTO setValue:txtDateOfRawReport.text forKey:@"dateOfDWRReported"];
+    [complianceReportDTO setValue:lblCorrectiveActionComp.text forKey:@"descriptionOfNonCompliance"];
+    [complianceReportDTO setValue:txtPrintedName.text forKey:@"printedName"];
+    [complianceReportDTO setValue:txtDate.text forKey:@"date"];
+    [complianceReportDTO setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
+    [complianceReportDTO setValue:signName forKey:@"signature"];
+    [complianceReportDTO setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo: complianceReportDTO];
+}
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
 {
@@ -216,13 +233,11 @@
     {
         // page 1
         CGContextBeginPage (pdfContext,nil);
-        
         //turn PDF upsidedown
         CGAffineTransform transform = CGAffineTransformIdentity;
         transform = CGAffineTransformMakeTranslation(0, (i+1) *830);
         transform = CGAffineTransformScale(transform, 1.0, -1.0);
         CGContextConcatCTM(pdfContext, transform);
-        
         //Draw view into PDF
         [self.tblView.layer renderInContext:pdfContext];
         CGContextEndPage (pdfContext);

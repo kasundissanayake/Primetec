@@ -104,7 +104,6 @@ UILabel *cno;
                                action:@selector(exit)];
     
     self.navigationItem.rightBarButtonItem = Button;
-    
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -113,14 +112,12 @@ UILabel *cno;
     comNoticeNo=@"";
     count=0;
     count1=0;
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
     [arrayImages removeAllObjects];
     
     
     self.imagePicker=[[UIImagePickerController alloc]init];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
     
     //Text View border and styles
@@ -175,6 +172,7 @@ UILabel *cno;
      txtDateofRawReprote.text = [defaults objectForKey:@"rawReport"];
      correctAction.text = [defaults objectForKey:@"correctAction"];
      */
+     NSLog(@"Compliance Form Data bbbbbbbcccccc: %@", sourceDictionary);
     
     if (sourceDictionary != NULL){
         NSLog(@"Compliance Form Data: %@", sourceDictionary);

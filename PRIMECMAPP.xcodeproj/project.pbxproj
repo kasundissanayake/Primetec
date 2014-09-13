@@ -662,7 +662,7 @@
 		FC69DADE18EB5BAE0055A535 /* ComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceViewController.m; path = ../ComplianceViewController.m; sourceTree = "<group>"; };
 		FC69DADF18EB5BAE0055A535 /* ComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComplianceViewController.xib; path = ../ComplianceViewController.xib; sourceTree = "<group>"; };
 		FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardinalLogoWeb2.png; sourceTree = "<group>"; };
-		FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prime-Tech-Logo[1].png"; sourceTree = "<group>"; };
+		FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Prime-Tech-Logo[1].png"; path = "Classes/Prime-Tech-Logo[1].png"; sourceTree = "<group>"; };
 		FCAFB077191744B00027A362 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCAFB079191745F50027A362 /* SearchProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProject.h; sourceTree = "<group>"; };
 		FCAFB07A191745F50027A362 /* SearchProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProject.m; sourceTree = "<group>"; };
@@ -1431,7 +1431,6 @@
 				FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */,
 				FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */,
 				FC69DADD18EB5BAE0055A535 /* ComplianceViewController.h */,
-				FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */,
 				FC69DADE18EB5BAE0055A535 /* ComplianceViewController.m */,
 				FC69DADF18EB5BAE0055A535 /* ComplianceViewController.xib */,
 				4B4EB9E0193831C1009917E8 /* TapHereSubViewController.h */,
@@ -1459,6 +1458,7 @@
 		FC612DC81920898200573DA0 /* signature */ = {
 			isa = PBXGroup;
 			children = (
+				FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */,
 				FCD71F82191B63AF00413A3D /* SignatureViewController.h */,
 				FCD71F83191B63AF00413A3D /* SignatureViewController.m */,
 				FCD71F84191B63AF00413A3D /* SignatureViewController.xib */,

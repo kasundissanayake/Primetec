@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtProject;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateIssued;
 @property (strong, nonatomic) IBOutlet UITextView *lblCorrectiveActionComp;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtTo;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateContractorStarted;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateOfRawReport;
@@ -46,4 +45,5 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *dateCRC;
 
+-(void)populateNonComplianceForm;
 @end

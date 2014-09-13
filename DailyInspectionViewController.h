@@ -122,15 +122,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtHeader;
 @property (weak, nonatomic) IBOutlet UITextField *zip;
 
-
-
-
-
-
-
-//start brin
-
-
 @property (weak, nonatomic) IBOutlet UITextField *repNo;
 
 @property (weak, nonatomic) IBOutlet UITextField *ConName;
@@ -182,7 +173,7 @@
 
 
 
-//end brin
+- (id)initWithData:(NSDictionary *)sourceDictionary;
 
 
 

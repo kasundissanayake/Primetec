@@ -43,11 +43,10 @@
     BOOL *uploadingsketch;
     int count2;
     NSUserDefaults *defaults;
-    
-    //start brin
+     NSDictionary *sourceDictionary;
     MBProgressHUD *hud;
     
-    //end brin
+
     
 }
 @end
@@ -72,6 +71,14 @@
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+
+
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
     return self;
 }
 
@@ -130,6 +137,81 @@
     txtDateIN.text=dateString;
     txtProject.text=appDelegate.projName;
     zip.text=appDelegate.zip;
+    
+    
+    
+    if (sourceDictionary != NULL){
+        NSLog(@"Compliance Form Data: %@", sourceDictionary);
+        
+        NSLog(@"Compliance Form complianceNoticeNo: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"]);
+        imgSignatureDaily.image=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"signature"];
+        txtName1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
+        txtName2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
+        txtName3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
+        txtName4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
+        txtName7.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
+        txtName5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
+        txtname6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
+        txtName8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
+        
+        txtDescription1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
+        txtDescription2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
+        txtDescription3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
+        txtDescription4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
+        
+        txtTitle1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
+        txtTitle2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
+        txtTitle3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
+        txtTitle4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
+        txtTitle5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
+        txtTitle6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
+        txtTitle7.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
+        txtTitle8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
+        
+        
+        txtCompany1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
+        txtCompany2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
+        txtCompany3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
+        txtCompany4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
+        
+        txtHours.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"contractorsHoursOfWork"];
+        contractor.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"con_Name"];
+        txtAddress.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"p_o_Box"];
+        txtState.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"state"];
+        txtCity.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"city"];
+        txtTel.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"telephone_No"];
+        txtCompetent.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"competentPerson"];
+        txtProject.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"project"];
+        txtEmail.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"e_Mail"];
+        txtWrkDone.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"workDoneBy"];
+        zip.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"zip_Code"];
+        oriCalDays.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"original_Calendar_Days"];
+        usedCalDays.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"calendar_Days_Used"];
+        ConName.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"con_Name"];
+        repNo.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"report_No"];
+        time.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"time"];
+        Town.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"town_city"];
+        weather.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"weather"];
+        
+        
+        des1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
+        des2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
+        des3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
+        des4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
+        des5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
+        qua1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
+        qua2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
+        qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
+        qua4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
+        qua5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
+        textField.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
+        textField1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
+        textField2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
+        textField3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
+        textFiel4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
+        
+        
+    }
     
     NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
     

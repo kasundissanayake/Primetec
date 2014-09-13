@@ -40,4 +40,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
 @property (weak, nonatomic) IBOutlet UITextField *EditNonNoticeNo;
 
+- (id)initWithData:(NSDictionary *)sourceDictionary1;
+
+
 @end

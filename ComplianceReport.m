@@ -25,14 +25,13 @@
     NSArray *resPonse;
     MBProgressHUD *hud;
     TabAndSplitAppAppDelegate *appDelegate;
-    ComplianceViewController *CompliForm;
+   // ComplianceViewController *CompliForm;
     UIBarButtonItem  *btnPrint;
 }
 
 @end
 
 @implementation ComplianceReport
-
 @synthesize  scrollView,headerView;
 @synthesize txtTo,txtPrintedName,txtTitle,txtDateIssued,txtContractNo,txtdate,txtDateContactCompleted,txtDateContracStarted,txtDateRawReport,txtProject, comNoticeNo;
 @synthesize lblConRes,lblCorrective,lblProjDec;
@@ -71,7 +70,6 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
-    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithTitle:NSLocalizedString(@"", @"")
                                   style:UIBarButtonItemStyleDone
@@ -81,26 +79,22 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName : [UIColor clearColor]
                                                                       }];
-    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"New", @"")
                                style:UIBarButtonItemStyleDone
                                target:self
                                action:@selector(showSCompliance:)];
-    
     UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
                                 initWithTitle:NSLocalizedString(@"Edit", @"")
                                 style:UIBarButtonItemStyleDone
                                 target:self
                                 action:@selector(fnEdit:)];
-    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
     self.navigationItem.leftBarButtonItem=Button2;
     
-    //self.navigationItem.rightBarButtonItem = Button;
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -132,10 +126,8 @@
     if([objects count] > 0){
         NSManagedObject *complianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"complianceNoticeNo"]);
-        
         txtTitle.text=[complianceReportObject valueForKey:@"comHeader"];
         comNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
-        
         lblProjDec.text=[complianceReportObject valueForKey:@"projectDescription"];
         txtContractNo.text=[complianceReportObject valueForKey:@"project_id"];
         txtTitle.text=[complianceReportObject valueForKey:@"title"];
@@ -172,24 +164,22 @@
 
 -(IBAction)fnEdit:(id)sender
 {
-    NSMutableDictionary *complianceReportDTO = [[NSMutableDictionary alloc] init];
-    
-    [complianceReportDTO setValue:txtTitle.text forKey:@"comHeader"];
-    [complianceReportDTO setValue:CNo forKey:@"complianceNoticeNo"];
-    [complianceReportDTO setValue:txtContractNo.text forKey:@"contractNo"];
-    [complianceReportDTO setValue:lblConRes.text forKey:@"contractorResponsible"];
-    [complianceReportDTO setValue:lblCorrective.text forKey:@"correctiveActionCompliance"];
-    [complianceReportDTO setValue:txtdate.text forKey:@"date"];
-    [complianceReportDTO setValue:txtDateContactCompleted.text forKey:@"dateContractorCompleted"];
-    [complianceReportDTO setValue:txtDateContracStarted.text forKey:@"dateContractorStarted"];
-    [complianceReportDTO setValue:txtDateIssued.text forKey:@"dateIssued"];
-    [complianceReportDTO setValue:txtDateRawReport.text forKey:@"dateOfDWRReported"];
-    [complianceReportDTO setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
-    [complianceReportDTO setValue:sigImgName forKey:@"signature"];
-    [complianceReportDTO setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
-    [complianceReportDTO setValue:txtTo.text forKey:@"to"];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:complianceReportDTO];
+    NSMutableDictionary *complianceReportDTO1 = [[NSMutableDictionary alloc] init];
+    [complianceReportDTO1 setValue:txtTitle.text forKey:@"comHeader"];
+    [complianceReportDTO1 setValue:CNo forKey:@"complianceNoticeNo"];
+    [complianceReportDTO1 setValue:txtContractNo.text forKey:@"contractNo"];
+    [complianceReportDTO1 setValue:lblConRes.text forKey:@"contractorResponsible"];
+    [complianceReportDTO1 setValue:lblCorrective.text forKey:@"correctiveActionCompliance"];
+    [complianceReportDTO1 setValue:txtdate.text forKey:@"date"];
+    [complianceReportDTO1 setValue:txtDateContactCompleted.text forKey:@"dateContractorCompleted"];
+    [complianceReportDTO1 setValue:txtDateContracStarted.text forKey:@"dateContractorStarted"];
+    [complianceReportDTO1 setValue:txtDateIssued.text forKey:@"dateIssued"];
+    [complianceReportDTO1 setValue:txtDateRawReport.text forKey:@"dateOfDWRReported"];
+    [complianceReportDTO1 setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
+    [complianceReportDTO1 setValue:sigImgName forKey:@"signature"];
+    [complianceReportDTO1 setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
+    [complianceReportDTO1 setValue:txtTo.text forKey:@"to"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:complianceReportDTO1];
 }
 
 

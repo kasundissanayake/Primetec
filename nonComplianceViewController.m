@@ -38,10 +38,10 @@
     BOOL *uploadingsketch;
     BOOL isUploadingSignature;
     NSUserDefaults *defaults;
+    NSDictionary *sourceDictionary1;
 }
 
 @end
-
 @implementation nonComplianceViewController
 @synthesize scrollView;
 @synthesize projectDesc, contractorResp, correctiveAction;
@@ -61,6 +61,12 @@
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary1 = sourceDictionaryParam;
     return self;
 }
 
@@ -132,53 +138,56 @@
     nonCOtextProject.text=appDelegate.projName;
     txtPrintedName.text=appDelegate.projPrintedName;
     NtxtDate.text=dateString;
-    txtUserId.text=appDelegate.userId;    
+    txtUserId.text=appDelegate.userId;
+    
+    NSLog(@"Non-Compliance Form Data: %@", sourceDictionary1);
+    
+    if (sourceDictionary1 != NULL){
+        NSLog(@"Non-Compliance Form Data: %@", sourceDictionary1);
+        NSLog(@"Compliance Form complianceNoticeNo: %@", [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"]);
+        projectDesc.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"projectDescription"];
+        contractorResp.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"contractorResponsible"];
+        correctiveAction.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"descriptionOfNonCompliance"];
+        NtxtDateIssued.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateIssued"];
+        NtxtDateContractorStarted.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateContractorStarted"];
+        NtxtDateContractorCompleted.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateContractorCompleted"];
+        NtxtDate.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"date"];
+        NtxtDateofRawReprote.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateOfDWRReported"];
+        DCRC.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateCRTCB"];
+        imgSignature.image = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"signature"];
+        txtTo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"to"];
+        txtNonCompNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
+        EditNonNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
+
+        
+        
+    }
 }
 
 
 
 -(void)exit{
     
-    NSString* textField1Text = NtxtDateIssued.text;
+  /*  NSString* textField1Text = NtxtDateIssued.text;
     [defaults setObject:textField1Text forKey:@"NtxtDateIssued"];
-    
-    
     NSString* textField2Text = contractorResp.text;
     [defaults setObject:textField2Text forKey:@"contractorResp"];
-    
-    
     NSString* textField3Text = txtTo.text;
     [defaults setObject:textField3Text forKey:@"txtTo"];
-    
     NSString* textField4Text = DCRC.text;
     [defaults setObject:textField4Text forKey:@"DCRC"];
-    
-    
     NSString* textField5Text = NtxtDateContractorStarted.text;
     [defaults setObject:textField5Text forKey:@"NtxtDateContractorStarted"];
-    
     NSString* textField6Text = NtxtDateContractorCompleted.text;
     [defaults setObject:textField6Text forKey:@"NtxtDateContractorCompleted"];
-    
     NSString* textField7Text = NtxtDateofRawReprote.text;
     [defaults setObject:textField7Text forKey:@"NtxtDateofRawReprote"];
-    
-    
     NSString* textField8Text = correctiveAction.text;
     [defaults setObject:textField8Text forKey:@"correctiveAction"];
-    
-    
-    
-    
-    
     [defaults synchronize];
-    
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    
     [exportAlert show];
-    
-    
-    
+    */
     
 }
 
