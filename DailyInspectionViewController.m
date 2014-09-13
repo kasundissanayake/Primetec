@@ -43,11 +43,8 @@
     BOOL *uploadingsketch;
     int count2;
     NSUserDefaults *defaults;
-     NSDictionary *sourceDictionary;
+    NSDictionary *sourceDictionary;
     MBProgressHUD *hud;
-    
-
-    
 }
 @end
 
@@ -138,41 +135,36 @@
     txtProject.text=appDelegate.projName;
     zip.text=appDelegate.zip;
     
-    
-    
     if (sourceDictionary != NULL){
-        NSLog(@"Compliance Form Data: %@", sourceDictionary);
+        NSLog(@"Daily Inspection Form - populating update for inspectionID: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"inspectionID"]);
         
-        NSLog(@"Compliance Form complianceNoticeNo: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"]);
-        imgSignatureDaily.image=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"signature"];
         txtName1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
-        txtName2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
-        txtName3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
-        txtName4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
+        txtName2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName2"];
+        txtName3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName3"];
+        txtName4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName4"];
         txtName7.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
-        txtName5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
-        txtname6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
-        txtName8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName1"];
+        txtName5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName2"];
+        txtname6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName3"];
+        txtName8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFName4"];
         
         txtDescription1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
-        txtDescription2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
-        txtDescription3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
-        txtDescription4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork1"];
+        txtDescription2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork2"];
+        txtDescription3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork3"];
+        txtDescription4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODescriptionOfWork4"];
         
         txtTitle1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
-        txtTitle2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
-        txtTitle3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
-        txtTitle4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle1"];
+        txtTitle2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle2"];
+        txtTitle3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle3"];
+        txtTitle4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJTitle4"];
         txtTitle5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
-        txtTitle6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
-        txtTitle7.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
-        txtTitle8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle1"];
-        
+        txtTitle6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle2"];
+        txtTitle7.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle3"];
+        txtTitle8.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"iFTitle4"];
         
         txtCompany1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
-        txtCompany2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
-        txtCompany3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
-        txtCompany4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany1"];
+        txtCompany2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany2"];
+        txtCompany3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany3"];
+        txtCompany4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"wDODepartmentOrCompany4"];
         
         txtHours.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"contractorsHoursOfWork"];
         contractor.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"con_Name"];
@@ -193,29 +185,24 @@
         Town.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"town_city"];
         weather.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"weather"];
         
-        
-        des1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
-        des2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
-        des3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
-        des4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
-        des5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"desc"];
-        qua1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
-        qua2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
-        qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
-        qua4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
-        qua5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"qty"];
-        textField.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
-        textField1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
-        textField2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
-        textField3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
-        textFiel4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"no"];
-        
-        
+        des1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc1"];
+        des2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc2"];
+        des3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc3"];
+        des4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc4"];
+        des5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc5"];
+        qua1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY1"];
+        qua2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY2"];
+        qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY3"];
+        qua4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY4"];
+        qua5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY5"];
+        textField.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No1"];
+        textField1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No2"];
+        textField2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No3"];
+        textField3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No4"];
+        textFiel4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No5"];
     }
     
     NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
-    
-    
     
     //Assigning to searchfield
     [textField setSuggestions:array];
@@ -224,10 +211,9 @@
     [textField3 setSuggestions:array];
     [textFiel4 setSuggestions:array];
     
-    
     defaults= [NSUserDefaults standardUserDefaults];
     
-
+    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -240,94 +226,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
-    
-    defaults= [NSUserDefaults standardUserDefaults];
-    
-    NSString* temp1 = [defaults objectForKey:@"textField1Text"];
-    NSString* temp2 = [defaults objectForKey:@"textField2Text"];
-    NSString* temp3 = [defaults objectForKey:@"textField3Text"];
-    NSString* temp4 = [defaults objectForKey:@"textField4Text"];
-    NSString* temp5 = [defaults objectForKey:@"textField5Text"];
-    NSString* temp6 = [defaults objectForKey:@"textField6Text"];
-    NSString* temp7 = [defaults objectForKey:@"textField7Text"];
-    NSString* temp8 = [defaults objectForKey:@"textField8Text"];
-    NSString* temp9 = [defaults objectForKey:@"textField9Text"];
-    NSString* temp10 = [defaults objectForKey:@"textField10Text"];
-    NSString* temp11= [defaults objectForKey:@"textField11Text"];
-    NSString* temp12= [defaults objectForKey:@"textField12Text"];
-    NSString* temp13= [defaults objectForKey:@"textField13Text"];
-    NSString* temp14= [defaults objectForKey:@"textField14Text"];
-    NSString* temp15= [defaults objectForKey:@"textField15Text"];
-    NSString* temp16= [defaults objectForKey:@"textField16Text"];
-    NSString* temp17= [defaults objectForKey:@"textField17Text"];
-    NSString* temp18= [defaults objectForKey:@"textField18Text"];
-    NSString* temp19= [defaults objectForKey:@"textField19Text"];
-    NSString* temp20= [defaults objectForKey:@"textField20Text"];
-    NSString* temp21= [defaults objectForKey:@"textField21Text"];
-    NSString* temp22= [defaults objectForKey:@"textField22Text"];
-    NSString* temp23= [defaults objectForKey:@"textField23Text"];
-    NSString* temp24= [defaults objectForKey:@"textField24Text"];
-    NSString* temp25= [defaults objectForKey:@"textField25Text"];
-    NSString* temp26= [defaults objectForKey:@"textField26Text"];
-    NSString* temp27= [defaults objectForKey:@"textField27Text"];
-    NSString* temp28= [defaults objectForKey:@"textField28Text"];
-    NSString* temp29= [defaults objectForKey:@"textField29Text"];
-    NSString* temp30= [defaults objectForKey:@"textField30Text"];
-    NSString* temp31= [defaults objectForKey:@"textField31Text"];
-    NSString* temp32= [defaults objectForKey:@"textField32Text"];
-    NSString* temp33= [defaults objectForKey:@"textField33Text"];
-    NSString* temp34= [defaults objectForKey:@"textField34Text"];
-    NSString* temp35= [defaults objectForKey:@"textField35Text"];
-    NSString* temp36= [defaults objectForKey:@"textField36Text"];
-    NSString* temp37= [defaults objectForKey:@"textField37Text"];
-    NSString* temp38= [defaults objectForKey:@"textField38Text"];
-    NSString* temp39= [defaults objectForKey:@"textField39Text"];
-    NSString* temp40= [defaults objectForKey:@"textField40Text"];
-    NSString* temp41= [defaults objectForKey:@"textField41Text"];
-    NSString* temp42= [defaults objectForKey:@"textField42Text"];
-    
-    repNo.text=temp1;
-    txtCompetent.text=temp2;
-    weather.text=temp3;
-    txtEmail.text=temp4;
-    txtWrkDone.text=temp5;
-    des1.text=temp6;
-    des2.text=temp7;
-    des3.text=temp8;
-    des4.text=temp9;
-    des5.text=temp10;
-    qua1.text=temp11;
-    qua2.text=temp12;
-    qua3.text=temp13;
-    qua4.text=temp14;
-    qua5.text=temp15;
-    txtName1.text=temp16;
-    txtName2.text=temp17;
-    txtName3.text=temp18;
-    txtName4.text=temp19;
-    txtName5.text=temp20;
-    txtname6.text=temp21;
-    txtName7.text=temp22;
-    txtName8.text=temp23;
-    txtTitle1.text=temp24;
-    txtTitle2.text=temp25;
-    txtTitle3.text=temp26;
-    txtTitle4.text=temp27;
-    txtTitle5.text=temp28;
-    txtTitle6.text=temp29;
-    txtTitle7.text=temp30;
-    txtTitle8.text=temp31;
-    oriCalDays.text=temp32;
-    usedCalDays.text=temp33;
-    txtCompany1.text=temp34;
-    txtCompany2.text=temp35;
-    txtCompany3.text=temp36;
-    txtCompany4.text=temp37;
-    txtDescription1.text=temp38;
-    txtDescription2.text=temp39;
-    txtDescription3.text=temp40;
-    txtDescription4.text=temp41;
-    txtHours.text=temp42;
 }
 
 -(void)exit{
@@ -1197,12 +1095,10 @@
             BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
             if (!removeSuccess) {
                 // Error handling
-                
             }
         }
     } else {
         // Error handling
-        
     }
     
     folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
@@ -1214,12 +1110,10 @@
             BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
             if (!removeSuccess) {
                 // Error handling
-                
             }
         }
     } else {
         // Error handling
-        
     }
 }
 
@@ -1249,7 +1143,6 @@
 }
 
 
-
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
 {
     //get images from document directory
@@ -1261,142 +1154,9 @@
     return current_img;
 }
 
--(void)uploadImage
-{
-    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
-    
-    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"URL---%@",unicodeLink);
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:unicodeLink];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60.0];
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    NSLog(@"URL DESK----- %@",unicodeLink);
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-    NSMutableData *postbody = [NSMutableData data];
-    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
-    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-    // NSLog(@"********************* UPloadinggggg %i  %@",count1,[arrayImages objectAtIndex:count1]);
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[arrayImages objectAtIndex:count1] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[NSData dataWithData:imaData]];
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [urlRequest setHTTPBody:postbody];
-    uploading=YES;
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    _receivedData = [[NSMutableData alloc] init];
-    [connection start];
-    NSLog(@"sent");
-}
-
-
--(void)uploadSignature
-{
-    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
-    
-    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"URL---%@",unicodeLink);
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:unicodeLink];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60.0];
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    NSLog(@"URL DESK----- %@",unicodeLink);
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-    NSMutableData *postbody = [NSMutableData data];
-    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
-    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-    // NSLog(@"********************* UPloadinggggg %i  %@",count1,[arrayImages objectAtIndex:count1]);
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[arrayImages objectAtIndex:count1] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[NSData dataWithData:imaData]];
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"^^^^^^^^^^^^^%@",postbody);
-    
-    [urlRequest setHTTPBody:postbody];
-    uploading=YES;
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    _receivedData = [[NSMutableData alloc] init];
-    [connection start];
-    NSLog(@"sent");
-}
-
-
-
--(void)uploadSketch
-{
-    uploadingsketch=YES;
-    NSString *urlLink = [NSString stringWithFormat:@"%@/api/dailyinspection/uploadsketches/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
-                         appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
-    
-    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"URL---%@",unicodeLink);
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:unicodeLink];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60.0];
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    NSLog(@"URL DESK----- %@",unicodeLink);
-    //isSendingDecs=YES;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
-    NSMutableData *postbody = [NSMutableData data];
-    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]] folderPath:folderPath];
-    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[NSData dataWithData:imaData]];
-    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"^^^^^^^^^^^^^%@",postbody);
-    [urlRequest setHTTPBody:postbody];
-    uploadingsketch=YES;
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    _receivedData = [[NSMutableData alloc] init];
-    [connection start];
-    NSLog(@"sent");
-}
-
-
 
 -(void)createPicker:(UITextField *)txtField
 {
-    
-    
     UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     pickerToolbar.barStyle = UIBarStyleBlackOpaque;
     [pickerToolbar sizeToFit];
@@ -1439,7 +1199,6 @@
      inView:self.view
      permittedArrowDirections:UIPopoverArrowDirectionUp
      animated:YES];
-    
 }
 
 

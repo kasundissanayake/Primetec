@@ -156,29 +156,27 @@
 
 -(IBAction)fnEdit:(id)sender
 {
-    NSLog(@"foldelingesrPath--- %@",lblContractorRes);
-    
-    NSMutableDictionary *complianceReportDTO = [[NSMutableDictionary alloc] init];
-    [complianceReportDTO setValue:txtTitle.text forKey:@"comHeader"];
-    [complianceReportDTO setValue:CNo forKey:@"non_ComplianceNoticeNo"];
-    [complianceReportDTO setValue:txtContactNo.text forKey:@"contractNo"];
-    [complianceReportDTO setValue:lblProjDec.text forKey:@"projectDescription"];
-    [complianceReportDTO setValue:txtProject.text forKey:@"project"];
-    [complianceReportDTO setValue:txtTitle.text forKey:@"title"];
-    [complianceReportDTO setValue:txtDateIssued.text forKey:@"dateIssued"];
-    [complianceReportDTO setValue:lblContractorRes.text forKey:@"contractorResponsible"];
-    [complianceReportDTO setValue:txtTo.text forKey:@"to"];
-    [complianceReportDTO setValue:txtDateContractorStarted.text forKey:@"dateContractorStarted"];
-    [complianceReportDTO setValue:dateCRC.text forKey:@"dateCRTCB"];
-    [complianceReportDTO setValue:txtDateContractCompleted.text forKey:@"dateContractorCompleted"];
-    [complianceReportDTO setValue:txtDateOfRawReport.text forKey:@"dateOfDWRReported"];
-    [complianceReportDTO setValue:lblCorrectiveActionComp.text forKey:@"descriptionOfNonCompliance"];
-    [complianceReportDTO setValue:txtPrintedName.text forKey:@"printedName"];
-    [complianceReportDTO setValue:txtDate.text forKey:@"date"];
-    [complianceReportDTO setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
-    [complianceReportDTO setValue:signName forKey:@"signature"];
-    [complianceReportDTO setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo: complianceReportDTO];
+    NSMutableDictionary *nonComplianceReportDTO = [[NSMutableDictionary alloc] init];
+    [nonComplianceReportDTO setValue:txtTitle.text forKey:@"comHeader"];
+    [nonComplianceReportDTO setValue:CNo forKey:@"non_ComplianceNoticeNo"];
+    [nonComplianceReportDTO setValue:txtContactNo.text forKey:@"contractNo"];
+    [nonComplianceReportDTO setValue:lblProjDec.text forKey:@"projectDescription"];
+    [nonComplianceReportDTO setValue:txtProject.text forKey:@"project"];
+    [nonComplianceReportDTO setValue:txtTitle.text forKey:@"title"];
+    [nonComplianceReportDTO setValue:txtDateIssued.text forKey:@"dateIssued"];
+    [nonComplianceReportDTO setValue:lblContractorRes.text forKey:@"contractorResponsible"];
+    [nonComplianceReportDTO setValue:txtTo.text forKey:@"to"];
+    [nonComplianceReportDTO setValue:txtDateContractorStarted.text forKey:@"dateContractorStarted"];
+    [nonComplianceReportDTO setValue:dateCRC.text forKey:@"dateCRTCB"];
+    [nonComplianceReportDTO setValue:txtDateContractCompleted.text forKey:@"dateContractorCompleted"];
+    [nonComplianceReportDTO setValue:txtDateOfRawReport.text forKey:@"dateOfDWRReported"];
+    [nonComplianceReportDTO setValue:lblCorrectiveActionComp.text forKey:@"descriptionOfNonCompliance"];
+    [nonComplianceReportDTO setValue:txtPrintedName.text forKey:@"printedName"];
+    [nonComplianceReportDTO setValue:txtDate.text forKey:@"date"];
+    [nonComplianceReportDTO setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
+    [nonComplianceReportDTO setValue:signName forKey:@"signature"];
+    [nonComplianceReportDTO setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo: nonComplianceReportDTO];
 }
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName

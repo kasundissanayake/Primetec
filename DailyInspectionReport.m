@@ -199,75 +199,70 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 
 -(IBAction)fnEdit:(id)sender
 {
-    NSMutableDictionary *complianceReportDTO = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dailyInspectionReportDTO = [[NSMutableDictionary alloc] init];
     
-    [complianceReportDTO setValue:town.text forKey:@"town_city"];
-    [complianceReportDTO setValue:CNo forKey:@"inspectionID"];
-    [complianceReportDTO setValue:weather.text forKey:@"weather"];
-    [complianceReportDTO setValue:time.text forKey:@"time"];
-    [complianceReportDTO setValue:conName.text forKey:@"con_Name"];
-    [complianceReportDTO setValue:repNo.text forKey:@"report_No"];
-    [complianceReportDTO setValue:txtZip.text forKey:@"zip_Code"];
-    [complianceReportDTO setValue:useddays.text forKey:@"original_Calendar_Days"];
-    [complianceReportDTO setValue:caldays.text forKey:@"calendar_Days_Used"];
-    [complianceReportDTO setValue:txtContractor.text forKey:@"contractor"];
-    [complianceReportDTO setValue:txtAdressPOBox.text forKey:@"p_o_Box"];
-    [complianceReportDTO setValue:txtCity.text forKey:@"city"];
-    [complianceReportDTO setValue:txtState.text forKey:@"state"];
-    [complianceReportDTO setValue:txtTelephone.text forKey:@"telephone_No"];
-    [complianceReportDTO setValue:txtCometentPerson.text forKey:@"competentPerson"];
-    [complianceReportDTO setValue:lblProject.text forKey:@"project"];
-    [complianceReportDTO setValue:txtTown.text forKey:@"town_city"];
-    [complianceReportDTO setValue:txtEmail.text forKey:@"e_Mail"];
-    [complianceReportDTO setValue:txtWorkDone.text forKey:@"workDoneBy"];
-    [complianceReportDTO setValue:txtOfficeName1.text forKey:@"oVJName1"];
-    [complianceReportDTO setValue:txtOfficeName2.text forKey:@"oVJName2"];
-    [complianceReportDTO setValue:txtOfficeName3.text forKey:@"oVJName3"];
-    [complianceReportDTO setValue:txtOfficeName4.text forKey:@"oVJName4"];
-    [complianceReportDTO setValue:txtOfficeTitle1.text forKey:@"oVJTitle1"];
-    [complianceReportDTO setValue:txtOfficeTitle2.text forKey:@"oVJTitle2"];
-    [complianceReportDTO setValue:txtOfficeTitle3.text forKey:@"oVJTitle3"];
-    [complianceReportDTO setValue:txtOfficeTitle4.text forKey:@"oVJTitle4"];
-    [complianceReportDTO setValue:txtInspecName1.text forKey:@"iFName1"];
-    [complianceReportDTO setValue:txtInspecName2 forKey:@"iFName2"];
-    [complianceReportDTO setValue:txtInspecName3.text forKey:@"iFName3"];
-    [complianceReportDTO setValue:txtInspecName4.text forKey:@"iFName4"];
-    [complianceReportDTO setValue:txtInspecTitle.text forKey:@"iFTitle1"];
-    [complianceReportDTO setValue:txtInspecTitle1.text forKey:@"iFTitle2"];
-    [complianceReportDTO setValue:txtInspecTitle2.text forKey:@"iFTitle3"];
-    [complianceReportDTO setValue:txtInspecTitle3.text forKey:@"iFTitle4"];
-    [complianceReportDTO setValue:txtWorkDoneDepart1.text forKey:@"wDODepartmentOrCompany1"];
-    [complianceReportDTO setValue:txtWorkDoneDepart2.text forKey:@"wDODepartmentOrCompany2"];
-    [complianceReportDTO setValue:txtWorkDoneDepart3.text forKey:@"wDODepartmentOrCompany3"];
-    [complianceReportDTO setValue:txtWorkDoneDepart4.text forKey:@"wDODepartmentOrCompany4"];
-    [complianceReportDTO setValue:txtWorkDec1.text forKey:@"wDODescriptionOfWork1"];
-    [complianceReportDTO setValue:txtWorkDec2.text forKey:@"wDODescriptionOfWork1"];
-    [complianceReportDTO setValue:txtWorkDec3.text forKey:@"wDODescriptionOfWork1"];
-    [complianceReportDTO setValue:txtWorkDec4.text forKey:@"wDODescriptionOfWork1"];
-    [complianceReportDTO setValue:txtHoursOfWork.text forKey:@"contractorsHoursOfWork"];
-    [complianceReportDTO setValue:imgInspectorSignature.image forKey:@"signature"];
-    [complianceReportDTO setValue:_des1.text forKey:@"desc"];
-    [complianceReportDTO setValue:_qua1.text forKey:@"qty"];
-    [complianceReportDTO setValue:_itemno1.text forKey:@"no"];
-    [complianceReportDTO setValue:_des2.text forKey:@"desc"];
-    [complianceReportDTO setValue:_qua2.text forKey:@"qty"];
-    [complianceReportDTO setValue:_itemno2.text forKey:@"no"];
-    [complianceReportDTO setValue:_des3.text forKey:@"desc"];
-    [complianceReportDTO setValue:_qua3.text forKey:@"qty"];
-    [complianceReportDTO setValue:_itemno3.text forKey:@"no"];
-    [complianceReportDTO setValue:_des4.text forKey:@"desc"];
-    [complianceReportDTO setValue:_qua4.text forKey:@"qty"];
-    [complianceReportDTO setValue:_itemno4.text forKey:@"no"];
-    [complianceReportDTO setValue:_des5.text forKey:@"desc"];
-    [complianceReportDTO setValue:_qua5.text forKey:@"qty"];
-    [complianceReportDTO setValue:_itemno5.text forKey:@"no"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:complianceReportDTO];
-                         
-                         
+    [dailyInspectionReportDTO setValue:town.text forKey:@"town_city"];
+    [dailyInspectionReportDTO setValue:CNo forKey:@"inspectionID"];
+    [dailyInspectionReportDTO setValue:weather.text forKey:@"weather"];
+    [dailyInspectionReportDTO setValue:time.text forKey:@"time"];
+    [dailyInspectionReportDTO setValue:conName.text forKey:@"con_Name"];
+    [dailyInspectionReportDTO setValue:repNo.text forKey:@"report_No"];
+    [dailyInspectionReportDTO setValue:txtZip.text forKey:@"zip_Code"];
+    [dailyInspectionReportDTO setValue:useddays.text forKey:@"original_Calendar_Days"];
+    [dailyInspectionReportDTO setValue:caldays.text forKey:@"calendar_Days_Used"];
+    [dailyInspectionReportDTO setValue:txtContractor.text forKey:@"contractor"];
+    [dailyInspectionReportDTO setValue:txtAdressPOBox.text forKey:@"p_o_Box"];
+    [dailyInspectionReportDTO setValue:txtCity.text forKey:@"city"];
+    [dailyInspectionReportDTO setValue:txtState.text forKey:@"state"];
+    [dailyInspectionReportDTO setValue:txtTelephone.text forKey:@"telephone_No"];
+    [dailyInspectionReportDTO setValue:txtCometentPerson.text forKey:@"competentPerson"];
+    [dailyInspectionReportDTO setValue:lblProject.text forKey:@"project"];
+    [dailyInspectionReportDTO setValue:txtTown.text forKey:@"town_city"];
+    [dailyInspectionReportDTO setValue:txtEmail.text forKey:@"e_Mail"];
+    [dailyInspectionReportDTO setValue:txtWorkDone.text forKey:@"workDoneBy"];
+    [dailyInspectionReportDTO setValue:txtOfficeName1.text forKey:@"oVJName1"];
+    [dailyInspectionReportDTO setValue:txtOfficeName2.text forKey:@"oVJName2"];
+    [dailyInspectionReportDTO setValue:txtOfficeName3.text forKey:@"oVJName3"];
+    [dailyInspectionReportDTO setValue:txtOfficeName4.text forKey:@"oVJName4"];
+    [dailyInspectionReportDTO setValue:txtOfficeTitle1.text forKey:@"oVJTitle1"];
+    [dailyInspectionReportDTO setValue:txtOfficeTitle2.text forKey:@"oVJTitle2"];
+    [dailyInspectionReportDTO setValue:txtOfficeTitle3.text forKey:@"oVJTitle3"];
+    [dailyInspectionReportDTO setValue:txtOfficeTitle4.text forKey:@"oVJTitle4"];
+    [dailyInspectionReportDTO setValue:txtInspecName1.text forKey:@"iFName1"];
+    [dailyInspectionReportDTO setValue:txtInspecName2.text forKey:@"iFName2"];
+    [dailyInspectionReportDTO setValue:txtInspecName3.text forKey:@"iFName3"];
+    [dailyInspectionReportDTO setValue:txtInspecName4.text forKey:@"iFName4"];
+    [dailyInspectionReportDTO setValue:txtInspecTitle.text forKey:@"iFTitle1"];
+    [dailyInspectionReportDTO setValue:txtInspecTitle1.text forKey:@"iFTitle2"];
+    [dailyInspectionReportDTO setValue:txtInspecTitle2.text forKey:@"iFTitle3"];
+    [dailyInspectionReportDTO setValue:txtInspecTitle3.text forKey:@"iFTitle4"];
+    [dailyInspectionReportDTO setValue:txtWorkDoneDepart1.text forKey:@"wDODepartmentOrCompany1"];
+    [dailyInspectionReportDTO setValue:txtWorkDoneDepart2.text forKey:@"wDODepartmentOrCompany2"];
+    [dailyInspectionReportDTO setValue:txtWorkDoneDepart3.text forKey:@"wDODepartmentOrCompany3"];
+    [dailyInspectionReportDTO setValue:txtWorkDoneDepart4.text forKey:@"wDODepartmentOrCompany4"];
+    [dailyInspectionReportDTO setValue:txtWorkDec1.text forKey:@"wDODescriptionOfWork1"];
+    [dailyInspectionReportDTO setValue:txtWorkDec2.text forKey:@"wDODescriptionOfWork2"];
+    [dailyInspectionReportDTO setValue:txtWorkDec3.text forKey:@"wDODescriptionOfWork3"];
+    [dailyInspectionReportDTO setValue:txtWorkDec4.text forKey:@"wDODescriptionOfWork4"];
+    [dailyInspectionReportDTO setValue:txtHoursOfWork.text forKey:@"contractorsHoursOfWork"];
+    [dailyInspectionReportDTO setValue:_des1.text forKey:@"i_Desc1"];
+    [dailyInspectionReportDTO setValue:_qua1.text forKey:@"i_QTY1"];
+    [dailyInspectionReportDTO setValue:_itemno1.text forKey:@"i_No1"];
+    [dailyInspectionReportDTO setValue:_des2.text forKey:@"i_Desc2"];
+    [dailyInspectionReportDTO setValue:_qua2.text forKey:@"i_QTY2"];
+    [dailyInspectionReportDTO setValue:_itemno2.text forKey:@"i_No2"];
+    [dailyInspectionReportDTO setValue:_des3.text forKey:@"i_Desc3"];
+    [dailyInspectionReportDTO setValue:_qua3.text forKey:@"i_QTY3"];
+    [dailyInspectionReportDTO setValue:_itemno3.text forKey:@"i_No3"];
+    [dailyInspectionReportDTO setValue:_des4.text forKey:@"i_Desc4"];
+    [dailyInspectionReportDTO setValue:_qua4.text forKey:@"i_QTY4"];
+    [dailyInspectionReportDTO setValue:_itemno4.text forKey:@"i_No4"];
+    [dailyInspectionReportDTO setValue:_des5.text forKey:@"i_Desc5"];
+    [dailyInspectionReportDTO setValue:_qua5.text forKey:@"i_QTY5"];
+    [dailyInspectionReportDTO setValue:_itemno5.text forKey:@"i_No5"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:dailyInspectionReportDTO];
 }
-
-
-
 
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName

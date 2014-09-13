@@ -1044,7 +1044,7 @@ typedef enum {
 
 - (void)changeNonComplianceForm:(NSDictionary *)sourceDictionary
 {
-    nonComplianceViewController *noncom=[[nonComplianceViewController alloc]init];
+    nonComplianceViewController *noncom=[[nonComplianceViewController alloc]initWithData:sourceDictionary];
     noncom.title=[NSString stringWithFormat:@"Non-Compliance View"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
 }
@@ -1052,7 +1052,7 @@ typedef enum {
 
 - (void)changeInspectionForm:(NSDictionary *)sourceDictionary
 {
-    DailyInspectionViewController *daily=[[DailyInspectionViewController alloc]init];
+    DailyInspectionViewController *daily=[[DailyInspectionViewController alloc]initWithData:sourceDictionary];
     daily.title=[NSString stringWithFormat:@"Daily Inspection Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:daily]];
 }

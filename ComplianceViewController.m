@@ -160,24 +160,10 @@ UILabel *cno;
     COtextProject.text=appDelegate.projName;
     txtPrintedName.text=appDelegate.projPrintedName;
     txtDate.text=dateString;
-    txtUserId.text=appDelegate.userId;
-    
-    /*
-     defaults= [NSUserDefaults standardUserDefaults];
-     txtDateIssued.text = [defaults objectForKey:@"dateIssued"];
-     conRes.text = [defaults objectForKey:@"conRes"];
-     txtTo.text = [defaults objectForKey:@"to"];
-     txtDateContractorStarted.text = [defaults objectForKey:@"dateContStart"];
-     txtDateContractorCompleted.text = [defaults objectForKey:@"dateContCompleted"];
-     txtDateofRawReprote.text = [defaults objectForKey:@"rawReport"];
-     correctAction.text = [defaults objectForKey:@"correctAction"];
-     */
-     NSLog(@"Compliance Form Data bbbbbbbcccccc: %@", sourceDictionary);
+    txtUserId.text=appDelegate.userId;   
     
     if (sourceDictionary != NULL){
-        NSLog(@"Compliance Form Data: %@", sourceDictionary);
-        
-        NSLog(@"Compliance Form complianceNoticeNo: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"]);
+        NSLog(@"Compliance Form - populating update for complianceNoticeNo: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"]);
         
         txtTitle.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"comHeader"];
         EditComNumber.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"];

@@ -138,13 +138,10 @@
     nonCOtextProject.text=appDelegate.projName;
     txtPrintedName.text=appDelegate.projPrintedName;
     NtxtDate.text=dateString;
-    txtUserId.text=appDelegate.userId;
-    
-    NSLog(@"Non-Compliance Form Data: %@", sourceDictionary1);
+    txtUserId.text=appDelegate.userId;   
     
     if (sourceDictionary1 != NULL){
-        NSLog(@"Non-Compliance Form Data: %@", sourceDictionary1);
-        NSLog(@"Compliance Form complianceNoticeNo: %@", [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"]);
+        NSLog(@"NonCompliance Form - populating update for non_complianceNoticeNo: %@", [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"]);
         projectDesc.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"projectDescription"];
         contractorResp.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"contractorResponsible"];
         correctiveAction.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"descriptionOfNonCompliance"];
@@ -154,13 +151,9 @@
         NtxtDate.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"date"];
         NtxtDateofRawReprote.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateOfDWRReported"];
         DCRC.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"dateCRTCB"];
-        imgSignature.image = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"signature"];
         txtTo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"to"];
         txtNonCompNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
         EditNonNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
-
-        
-        
     }
 }
 
