@@ -295,13 +295,13 @@
         txtEtotal3.text=[summaryReportObject valueForKey:@"eQTotalHours3"];
         txtETotal4.text=[summaryReportObject valueForKey:@"eQTotalHours4"];
         txtETotal5.text=[summaryReportObject valueForKey:@"eQTotalHours5"];
-//
+
         txtERate1.text=[summaryReportObject valueForKey:@"eQRAte1"];
         txtERate2.text=[summaryReportObject valueForKey:@"eQRAte2"];
         txtERate3.text=[summaryReportObject valueForKey:@"eQRAte3"];
         txtERate4.text=[summaryReportObject valueForKey:@"eQRAte4"];
         txtERate5.text=[summaryReportObject valueForKey:@"eQRAte5"];
-//
+
         txtEAmt1.text=[summaryReportObject valueForKey:@"eQAmount1"];
         txtEAmt2.text=[summaryReportObject valueForKey:@"eQAmount2"];
         txtEAmt3.text=[summaryReportObject valueForKey:@"eQAmount3"];
@@ -310,11 +310,10 @@
 
         txtInspector.text=[summaryReportObject valueForKey:@"inspector"];
         
-//        txtEDate.text=[responseObject valueForKey:@"Date1"];
         txtContractorRepresentative.text=[summaryReportObject valueForKey:@"contractorRepresentative"];
         txtConReDate.text=[NSDateFormatter localizedStringFromDate:[summaryReportObject valueForKey:@"date2"]
                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-//        
+        
         txtDailyTotal.text=[summaryReportObject valueForKey:@"dailyTotal"];
         txtTotalDate.text=[summaryReportObject valueForKey:@"total_to_date"];
         
@@ -326,20 +325,6 @@
         imgSignature2.image=[PRIMECMController getTheImage:signName2];
 
         
-//        
-//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
-//                                           [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature1"]]]];
-//        NSLog(@"url----%@",url);
-//        NSData *imageData1 = [NSData dataWithContentsOfURL:url];
-//        UIImage *image = [[UIImage alloc] initWithData:imageData1];
-//        imgSignature.image=image;
-//        
-//        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/summery/%@",
-//                                            [NSString stringWithFormat:@"%@.jpg", [summaryReportObject valueForKey:@"signature2"]]]];
-//        NSLog(@"url----%@",url2);
-//        NSData *imageData2 = [NSData dataWithContentsOfURL:url2];
-//        UIImage *image1 = [[UIImage alloc] initWithData:imageData2];
-//        imgSignature2.image=image1;
     }
     
     [hud setHidden:YES];
@@ -358,7 +343,6 @@
     NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
     NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
     
-    // check for the "PDF" directory
     NSError *error;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         

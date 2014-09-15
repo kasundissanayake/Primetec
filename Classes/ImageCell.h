@@ -12,7 +12,6 @@
 
 
 @property(nonatomic,strong)IBOutlet UIImageView *imgView;
-@property(nonatomic,strong)IBOutlet UILabel *lblTitle;
 @property(nonatomic,strong)IBOutlet UITextView *txvDescription;
 
 @end

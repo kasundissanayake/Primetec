@@ -29,7 +29,6 @@
 
 @implementation SearchProject
 
-//@synthesize searchProject;
 @synthesize searchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -94,7 +93,6 @@
     ProjectDetailsCell *cell =(ProjectDetailsCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
-        //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         NSArray *nib=[[NSBundle mainBundle]loadNibNamed:@"ProjectDetailsCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
@@ -102,7 +100,6 @@
     if (indexPath.section == 0) {
         //start brin
         cell.lblProjectName.text =[[projectDetails valueForKey:@"p_name"]objectAtIndex:indexPath.row];
-        //projectDetails[indexPath.row];
         cell.lblProjectNo.text = [[projectDetails valueForKey:@"projecct_id"]objectAtIndex:indexPath.row];
         cell.lblProjectAddress.text = [[projectDetails valueForKey:@"street"]objectAtIndex:indexPath.row];
         

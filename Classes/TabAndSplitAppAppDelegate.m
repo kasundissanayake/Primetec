@@ -35,6 +35,7 @@
 @synthesize address_client;
 @synthesize client;
 @synthesize coloumn1,coloumn2,coloumn3,coloumn4,iddd;
+@synthesize edit1,edit2;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
@@ -99,8 +100,6 @@
     return __managedObjectContext;
 }
 
-// Returns the managed object model for the application.
-// If the model doesn't already exist, it is created from the application's model.
 - (NSManagedObjectModel *)managedObjectModel
 {
     if (__managedObjectModel != nil) {
@@ -132,7 +131,6 @@
 
 #pragma mark - Application's Documents directory
 
-// Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];

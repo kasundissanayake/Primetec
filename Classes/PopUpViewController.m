@@ -59,6 +59,13 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    
+    
+
+    
     defaults=[NSUserDefaults standardUserDefaults];
     imgTag=0;
     self.imagePicker=[[UIImagePickerController alloc]init];
@@ -519,16 +526,26 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     
     if (indexPath.section==0 && indexPath.row==0) {
         
-        cell.lblpopupvalue.text=[defaults objectForKey:@"Project Id"];
-        //NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
+       cell.lblpopupvalue.text=[defaults objectForKey:@"Project Id"];
+        
+        NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
+        
+        appDelegate.edit1=cell.lblpopupvalue.text;
+        NSLog(@".............Edit part.................%@",appDelegate.projId);
+        
+        
+       // cell.lblpopupvalue.text=appDelegate.projId;
+        
+        
+        
     }
     
     
     else if (indexPath.section==0 && indexPath.row==1) {
         
         cell.lblpopupvalue.text=[defaults objectForKey:@"Project Title"];
-        //NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
+        NSLog(@"title %@",[defaults objectForKey:@"Project Title"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
     }
     else  if (indexPath.section==0 && indexPath.row==2) {

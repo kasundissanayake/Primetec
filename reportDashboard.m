@@ -116,19 +116,7 @@
     }
     
     if (indexPath.section == 0) {
-        
-        // Daily Inspection Report
-  /*      if(proType==2)
-        {
-            cell.lblReportName.text =[[reports valueForKey:@"dIFHeader"]objectAtIndex:indexPath.row];
-            cell.lblReportDate.text = [NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
-                                       dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-            
-            cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
-            cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
-        } */
-        
-        
+ 
         //start brin
         
        

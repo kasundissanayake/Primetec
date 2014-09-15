@@ -13,14 +13,10 @@
 
 @interface FirstViewController : GIKMapViewController<GIKCalloutDetailDataSource,UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
 {
-	//NSArray *hotels;
     UINavigationController *__weak detailedNavigationController;
 }
 @property(nonatomic,strong)IBOutlet UIView *imageSubView;
 @property(nonatomic,weak) UINavigationController *detailedNavigationController;
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property(nonatomic,strong)IBOutlet UIView *viewTapHere;
-@property (strong, nonatomic) IBOutlet UILabel *address;
 @property (nonatomic,weak) NSString *mapId;
 @property (strong, nonatomic) MBProgressHUD *hud;
 @end

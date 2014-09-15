@@ -17,20 +17,17 @@
     UIPrintInteractionController *printController;
 }
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (strong, nonatomic) IBOutlet UITextView *lblProject;
 @property (strong, nonatomic) IBOutlet UITextView *txtWorkDone;
-@property(nonatomic,strong)IBOutlet UILabel *lblImageAttachmentTitle;
-@property(nonatomic,strong)IBOutlet UIView *viewImageAttachmentTitle;
+
 @property (weak, nonatomic) IBOutlet UITextField *txtContractor;
 @property (weak, nonatomic) IBOutlet UITextField *txtAdressPOBox;
 @property (weak, nonatomic) IBOutlet UITextField *txtCity;
 @property (weak, nonatomic) IBOutlet UITextField *txtState;
 @property (weak, nonatomic) IBOutlet UITextField *txtTelephone;
 @property (weak, nonatomic) IBOutlet UITextField *txtCometentPerson;
-@property (weak, nonatomic) IBOutlet UITextField *txtTown;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtOfficeName1;
 @property (weak, nonatomic) IBOutlet UITextField *txtOfficeTitle1;
@@ -52,7 +49,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtWorkDec1;
 @property (weak, nonatomic) IBOutlet UITextField *txtWorkDec3;
 @property (weak, nonatomic) IBOutlet UITextField *txtWorkDec2;
-@property (weak, nonatomic) IBOutlet UITextField *txtHowToWork;
 @property (weak, nonatomic) IBOutlet UIImageView *imgInspectorSignature;
 @property(nonatomic,retain)NSString *CNo;
 @property (weak, nonatomic) IBOutlet UITextField *txtInspecName4;

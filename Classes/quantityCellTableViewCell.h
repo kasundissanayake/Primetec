@@ -14,8 +14,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *i_Date;
 
-@property (strong, nonatomic) IBOutlet UILabel *i_location_Satation;
-
 @property (strong, nonatomic) IBOutlet UILabel *i_Daily;
 @property (weak, nonatomic) IBOutlet UILabel *location_station;
 

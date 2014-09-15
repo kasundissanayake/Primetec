@@ -32,9 +32,7 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showToolbar" object:nil];
-    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    //appDelegate.tag=1;
-}
+    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];}
 
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +44,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    //appDelegate.Tag=1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -85,7 +82,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary* dict = [NSDictionary dictionaryWithObject:
                           [NSNumber numberWithInt:indexPath.row]
                                                      forKey:@"index"];

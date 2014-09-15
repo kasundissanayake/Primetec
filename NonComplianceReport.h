@@ -17,12 +17,10 @@
 }
 @property (strong, nonatomic) IBOutlet UITextView *lblProjDec;
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)IBOutlet UITableView *tblView;
 @property(nonatomic,strong)IBOutlet UIView *headerView;
 
-@property(nonatomic,strong)IBOutlet UILabel *lblImageAttachmentTitle;
-@property(nonatomic,strong)IBOutlet UIView *viewImageAttachmentTitle;
+
 @property(nonatomic,retain)NSString *CNo;
 @property (weak, nonatomic) IBOutlet UITextField *txtContactNo;
 

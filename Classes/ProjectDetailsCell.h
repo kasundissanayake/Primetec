@@ -16,6 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCity;
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageTag;
 
 @end

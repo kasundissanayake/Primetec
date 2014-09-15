@@ -11,13 +11,11 @@
     UIPrintInteractionController *printController;
 }
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
 
-@property(nonatomic,strong)IBOutlet UILabel *lblImageAttachmentTitle;
-@property(nonatomic,strong)IBOutlet UIView *viewImageAttachmentTitle;
+
 @property(nonatomic,retain)IBOutlet UITableView *tblSubView;
 @property (weak, nonatomic) IBOutlet UITextField *txtCashAdvance;
 @property (weak, nonatomic) IBOutlet UITextField *txtReimbursement;

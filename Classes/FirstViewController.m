@@ -59,7 +59,6 @@
 @synthesize mapId;
 @synthesize detailedNavigationController;
 @synthesize imageSubView;
-@synthesize viewTapHere;
 @synthesize hud;
 
 - (id)init {
@@ -74,7 +73,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -122,7 +120,6 @@
     self.navigationItem.rightBarButtonItem = Button;
     self.navigationItem.leftBarButtonItem = btnMapType;
     
-    // Coordinates for part of downtown San Francisco - around Moscone West, no less.
     MKCoordinateRegion startupRegion;
 	startupRegion.center = CLLocationCoordinate2DMake(41.650639, -72.665895);
 	startupRegion.span = MKCoordinateSpanMake(0.003515, 0.007129);
@@ -177,7 +174,7 @@
     popoverView.backgroundColor=[UIColor whiteColor];
     popoverContent.view=popoverView;
     popoverContent.preferredContentSize=CGSizeMake(250, 250);
-    popoverContent.view=tblView; //Adding tableView to popover
+    popoverContent.view=tblView;
     tblView.delegate=self;
     tblView.dataSource=self;
     popMenu=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
@@ -265,7 +262,6 @@
 
     self.navigationItem.rightBarButtonItem = Button;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 
@@ -351,7 +347,6 @@
     else
     {
         [bottomView removeFromSuperview];
-        // bottomView.hidden=YES;
         isDisplayBottomBar=NO;
         bottomView.frame = CGRectMake(20.0, 582.0,600.0, 50.0);//place where to start animating
         [UIView animateWithDuration:0.1
@@ -371,12 +366,8 @@
 }
 
 
-
-// once the mapview appears, below method used for close the map
-
 -(void)selectionDone
 {
-    // [popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
     [popMap dismissPopoverAnimated:YES];
 }
@@ -397,7 +388,6 @@
         
         latitude=locCoord.latitude;
         longitude=locCoord.longitude;
-        // MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
         
         //brin
         GIKAnnotation *newAnnotation = [[GIKAnnotation alloc] init];
@@ -557,7 +547,6 @@
             [self syncAll];
         }
     }
-    //[popoverController dismissPopoverAnimated:YES];
     [popMenu dismissPopoverAnimated:YES];
     [popMap dismissPopoverAnimated:YES];
 }
@@ -625,10 +614,6 @@
 }
 
 
--(void)doneAction
-{
-    
-}
 
 
 -(void)createAddImageCloseBtn
@@ -667,7 +652,6 @@
 		theHotel.state = [hotel valueForKey:@"state"];
 		theHotel.zip = [hotel valueForKey:@"zip"];
 		theHotel.phone = [hotel valueForKey:@"phone"];
-		//theHotel.url = [hotel objectForKey:@"url"];
 		theHotel.latitude = [[hotel valueForKey:@"p_latitude"] doubleValue];
 		theHotel.longitude = [[hotel valueForKey:@"p_longitude"] doubleValue];
 		HotelAnnotation *annotation = [[HotelAnnotation alloc] initWithLatitude:theHotel.latitude longitude:theHotel.longitude];
@@ -702,11 +686,8 @@
     
      NSLog(@"HotelAnnotation = %f , %f", zoomLocation.latitude, zoomLocation.longitude );
     
-    // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.0*METERS_PER_MILE, 0.0*METERS_PER_MILE);
-    // 3
     [mapView setRegion:viewRegion animated:YES];
-    
     [mapView selectAnnotation:annotation animated:YES];
 }
 
@@ -725,7 +706,6 @@
 
 - (NSArray *)hotels {
     hotels = [appDelegate.projectsArray mutableCopy];
-    //NSLog(@"Hotels----%@",hotels);
 	return hotels;
 }
 

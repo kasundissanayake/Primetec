@@ -29,8 +29,7 @@
 @end
 
 @implementation ExpenseReport
-@synthesize  headerView,scrollView;
-@synthesize lblImageAttachmentTitle,viewImageAttachmentTitle;
+@synthesize  headerView;
 @synthesize tblView;
 @synthesize tblSubView;
 @synthesize ExNo;
@@ -50,7 +49,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    scrollView.scrollsToTop=NO;
     self.tblView.scrollsToTop=YES;
     self.tblView.tableHeaderView = headerView;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -167,16 +165,6 @@
         txtWeakEnding.text=[NSDateFormatter localizedStringFromDate:[expenseReportModelObject valueForKey:@"weekEnding"]
                                                           dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/expense/%@",
-                                           [NSString stringWithFormat:@"%@.jpg", [expenseReportModelObject valueForKey:@"signature"]]]];
-        NSLog(@"url----%@",url);
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        // imgSignature.image=image;
-        
-        
-        
-        
         NSString * signName = [expenseReportModelObject valueForKey:@"Signature"];
         imgSignature.image=[PRIMECMController getTheImage:signName];
         
@@ -212,10 +200,8 @@
 -(void)printReport
 {
     
-    //[self.tblView setContentOffset:CGPointZero animated:YES];
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
+
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -224,7 +210,6 @@
     NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
     NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
     
-    // check for the "PDF" directory
     NSError *error;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         
@@ -282,8 +267,7 @@
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
+
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -396,8 +380,7 @@
     
     // Remove the mail view
     [self dismissViewControllerAnimated:YES completion:nil];
-    viewImageAttachmentTitle.hidden=NO;
-    lblImageAttachmentTitle.hidden=NO;
+
 }
 
 

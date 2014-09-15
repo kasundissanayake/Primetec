@@ -22,9 +22,7 @@
 }
 
 @property(nonatomic,weak) UINavigationController *detailedNavigationController;
-//@property (strong, nonatomic) IBOutlet UIImageView *Frontimage;
 @property (nonatomic, strong) IBOutlet UITableView *table;
-//@property (strong, nonatomic) IBOutlet UIImageView *dashboardImage;
 @property(nonatomic,assign) NSInteger proType;
 
 @end

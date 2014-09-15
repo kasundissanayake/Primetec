@@ -10,7 +10,6 @@
 
 @implementation ImageCell
 @synthesize txvDescription;
-@synthesize lblTitle;
 @synthesize imageView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

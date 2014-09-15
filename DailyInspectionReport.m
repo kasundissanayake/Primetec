@@ -20,11 +20,10 @@
 @end
 
 @implementation DailyInspectionReport
-@synthesize  scrollView,headerView;
-@synthesize lblImageAttachmentTitle,viewImageAttachmentTitle;
+@synthesize  headerView;
 @synthesize CNo;
-@synthesize txtAdressPOBox,txtCity,txtCometentPerson,txtContractor,txtEmail,txtHowToWork,txtInspecName1,txtInspecName2,txtInspecName3,txtInspecTitle1,txtInspecTitle2,txtInspecTitle3,txtOfficeName1,txtOfficeName2,txtOfficeName3,txtOfficeName4,txtOfficeTitle1,
-txtOfficeTitle2,txtOfficeTitle3,txtOfficeTitle4,txtState,txtTelephone,txtTown,txtWorkDec1,txtWorkDec2,txtWorkDec3,txtWorkDone,
+@synthesize txtAdressPOBox,txtCity,txtCometentPerson,txtContractor,txtEmail,txtInspecName1,txtInspecName2,txtInspecName3,txtInspecTitle1,txtInspecTitle2,txtInspecTitle3,txtOfficeName1,txtOfficeName2,txtOfficeName3,txtOfficeName4,txtOfficeTitle1,
+txtOfficeTitle2,txtOfficeTitle3,txtOfficeTitle4,txtState,txtTelephone,txtWorkDec1,txtWorkDec2,txtWorkDec3,txtWorkDone,
 txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 @synthesize lblProject;
 @synthesize txtInspecName4,txtInspecTitle,txtWorkDec4,txtWorkDoneDepart4;
@@ -123,7 +122,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtTelephone.text=[inspectionReportObject valueForKey:@"telephone_No"];
         txtCometentPerson.text=[inspectionReportObject valueForKey:@"competentPerson"];
         lblProject.text=[inspectionReportObject valueForKey:@"project"];
-        txtTown.text=[inspectionReportObject valueForKey:@"town_city"];
+        town.text=[inspectionReportObject valueForKey:@"town_city"];
         txtZip.text=[inspectionReportObject valueForKey:@"zip_Code"];
         txtEmail.text=[inspectionReportObject valueForKey:@"e_Mail"];
         txtWorkDone.text=[inspectionReportObject valueForKey:@"workDoneBy"];
@@ -217,7 +216,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     [dailyInspectionReportDTO setValue:txtTelephone.text forKey:@"telephone_No"];
     [dailyInspectionReportDTO setValue:txtCometentPerson.text forKey:@"competentPerson"];
     [dailyInspectionReportDTO setValue:lblProject.text forKey:@"project"];
-    [dailyInspectionReportDTO setValue:txtTown.text forKey:@"town_city"];
+    [dailyInspectionReportDTO setValue:town.text forKey:@"town_city"];
     [dailyInspectionReportDTO setValue:txtEmail.text forKey:@"e_Mail"];
     [dailyInspectionReportDTO setValue:txtWorkDone.text forKey:@"workDoneBy"];
     [dailyInspectionReportDTO setValue:txtOfficeName1.text forKey:@"oVJName1"];
@@ -289,9 +288,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 -(void)printReport
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
-    
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *directroyPath = nil;
@@ -355,9 +352,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
-    
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *directroyPath = nil;
@@ -470,8 +465,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    viewImageAttachmentTitle.hidden=NO;
-    lblImageAttachmentTitle.hidden=NO;
+
 }
 
 
@@ -575,13 +569,12 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         if(indexPath.section==0)
         {
             cell.lblTitle.hidden=NO;
-            // cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];
+
             cell.imgView.image=[PRIMECMController getTheImage:[arrayImages objectAtIndex:indexPath.row-1]];
         }
         else
         {
             cell.lblTitle.hidden=YES;
-            // cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[sketchesArray objectAtIndex:indexPath.row]]];
             cell.imgView.image=[PRIMECMController getTheImage:[sketchesArray objectAtIndex:indexPath.row-1]];
         }
         return cell;

@@ -23,8 +23,6 @@
 
 @end
 @implementation NonComplianceReport
-@synthesize  scrollView,headerView;
-@synthesize lblImageAttachmentTitle,viewImageAttachmentTitle;
 @synthesize txtContactNo,txtDate,txtPrintedName,txtTo,txtDateIssued,txtProject,txtTitle,txtDateContractCompleted,txtDateContractorStarted,txtDateOfRawReport;
 @synthesize lblProjDec,lblContractorRes,lblCorrectiveActionComp, nonComNotNo, dateCRC;
 @synthesize CNo;
@@ -58,9 +56,7 @@
     [lblContractorRes.layer setBorderWidth: 1.0];
     [lblContractorRes.layer setCornerRadius:8.0f];
     
-    scrollView.scrollsToTop=NO;
     self.tblView.scrollsToTop=YES;
-    self.tblView.tableHeaderView = headerView;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
@@ -203,8 +199,7 @@
 -(void)printReport
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
+
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -267,8 +262,7 @@
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    viewImageAttachmentTitle.hidden=YES;
-    lblImageAttachmentTitle.hidden=YES;
+
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -380,8 +374,7 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    viewImageAttachmentTitle.hidden=NO;
-    lblImageAttachmentTitle.hidden=NO;
+
 }
 
 -(void)createPDFfromUIView:(UIScrollView*)aView saveToDocumentsWithFileName:(NSString*)aFilename

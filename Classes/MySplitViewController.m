@@ -80,14 +80,9 @@ static int SB_HEIGHT =  0.0;	// Status bar height
 	
 	self.leftController.view.autoresizingMask=UIViewAutoresizingFlexibleHeight;
 	
-	//dvc.view.autoresizingMask=UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 	
-	// get split view frame size, ..for things like a tab bar
 	CGRect svf = self.view.frame;
-	//
-	// currently, starting the app in portrait mode and a status bar will fail to offset the view
-	// this takes care of the problem, but it's not the way i like to code
-	//
+
 	if (offset > 0.0) 
 	{
 		svf.origin.y = offset;
@@ -143,7 +138,7 @@ static int SB_HEIGHT =  0.0;	// Status bar height
 	} else {
 		return (toInterfaceOrientation==UIInterfaceOrientationPortrait); //
 	}
-	//return ([self.leftController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation] && [self.rightController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]);
+
 }
 
 //---------------------------------------------------------------------------------------- didRotateFromInterfaceOrientation
@@ -176,8 +171,7 @@ static int SB_HEIGHT =  0.0;	// Status bar height
 - (void)viewDidUnload 
 {
 	[super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 
 	//---------------------------------------------------------------------------------------- dealloc

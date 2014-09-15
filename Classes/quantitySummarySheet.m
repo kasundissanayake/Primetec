@@ -372,7 +372,7 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.coloumn1=cell.i_number.text;
     appDelegate.coloumn2=cell.i_Date.text;
-    appDelegate.coloumn3=cell.i_location_Satation.text;
+    appDelegate.coloumn3=cell.location_station.text;
     appDelegate.coloumn4=cell.i_Daily.text;
     appDelegate.coloumn5=cell.i_Accum.text;
     

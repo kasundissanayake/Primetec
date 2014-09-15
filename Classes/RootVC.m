@@ -118,7 +118,6 @@ typedef enum {
     defaults=[NSUserDefaults standardUserDefaults];
     // start brin
     table.hidden = TRUE;
-    // [self.proStatusSeg setHidden:FALSE];
     //end brin
     appDelegate.Tag=4;
     self.table.backgroundColor = [UIColor clearColor];
@@ -166,8 +165,7 @@ typedef enum {
     [self populateProjectList];
     [self.table reloadData];
     
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"hideToolbar" object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideToolbar) name:@"hideToolbar" object:nil];
+
 }
 
 
@@ -185,11 +183,8 @@ typedef enum {
     
     if (!found && appDelegate.Tag == 1){
         [self reloadTableData];
-        // appDelegate.Tag=1;
-        //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
         
-        //  NSLog(@"Back pressed filtered");
     }
 }
 
@@ -207,36 +202,19 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"displayPopupView" object:nil];
     
-    //
-    //    appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
-    //    appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
-    //    appDelegate.projTitle=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_title"];
-    //    appDelegate.projName=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_name"];
-    //    appDelegate.address=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"street"];
-    //    appDelegate.city=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"city"];
-    //    appDelegate.state=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"state"];
-    //    appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
-    //    appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
-    //    appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
-    //
-    //    //start brin
-    //
-    //    appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
-    //    appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
-    //
     
-    
-    //    [self.table setEditing:YES animated:YES];
-    //    [toolbarItems insertObject:btnDelete atIndex:0];
-    //    [toolbarItems removeObject: btnEdit];
-    //    toolbar.items = toolbarItems;
-    //
-    
-    
-    
-    
-    
+    NSLog(@"Editing click part..........%@", appDelegate.projId);
+    NSLog(@"Editing click part..........%@", appDelegate.projTitle);
+    NSLog(@"Editing click part..........%@", appDelegate.projName);
+    NSLog(@"Editing click part..........%@", appDelegate.projDescription);
+    NSLog(@"Editing click part..........%@", appDelegate.address);
+    NSLog(@"Editing click part..........%@", appDelegate.city);
+    NSLog(@"Editing click part..........%@", appDelegate.state);
+    NSLog(@"Editing click part..........%@", appDelegate.zip);
+    NSLog(@"Editing click part..........%@", appDelegate.tel);
+    NSLog(@"Editing click part..........%@", appDelegate.pm);
+
+
     
     
 }
@@ -251,19 +229,7 @@ typedef enum {
 }
 
 
-/*
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete)
- {
- Projects *selectedPerson  = [fetchedResultsController objectAtIndexPath:indexPath];
- 
- // Remove the person
- [selectedPerson MR_deleteInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
- 
- [[NSManagedObjectContext MR_contextForCurrentThread] MR_save];
- }
- }*/
+
 
 -(void)hideToolbar
 {
@@ -329,7 +295,6 @@ typedef enum {
     }
     
     if ([projectObjects count]>0) {
-        //appDelegate.projId=[[projectDetails objectAtIndex:0]valueForKey:@"projecct_id"];
         NSLog(@"Total projects count: %lu", (unsigned long)[projectDetails count]);
     }
     else {
@@ -514,7 +479,6 @@ typedef enum {
             cell.lblProjectAddress.text=@"";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.lblCity.text=@"";
-            cell.imageTag.hidden=YES;
             self.searchBar.hidden=true;
         }
     }

@@ -212,25 +212,6 @@
 }
 
 
-- (void) saveData
-{
-    /*
-    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-    NSManagedObject *newContact;
-    newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:context];
-    [newContact setValue:@"Lin" forKey:@"username"];
-    [newContact setValue:@"12345" forKey:@"password"];
-    [newContact setValue:@"Lingeshwaran" forKey:@"firstname"];
-    [newContact setValue:@"Kandasami" forKey:@"lastname"];
-    [newContact setValue:@"id_no" forKey:@"000"];
-    
-    NSError *error;
-    [context save:&error];
-    NSLog(@"-----------user saved--------");
-     */
-}
-
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -259,7 +240,6 @@
                                                                 error:&parseError];
     
     
-    //NSLog(@"response obj------%@",responseObject);
     NSString *loginStatus = [[responseObject  valueForKey:@"message"]valueForKey:@"status"];
     NSString *fname=[responseObject valueForKey:@"firstname"];
     NSString *lname=[responseObject valueForKey:@"lastname"];
@@ -294,15 +274,12 @@
 
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc. that aren't in use.
 }
 
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 @end

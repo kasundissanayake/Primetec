@@ -10,7 +10,7 @@
 
 @implementation quantityCellTableViewCell
 
-@synthesize i_Accum,i_Daily,i_Date,i_location_Satation,i_number,imageView,indentationLevel,location_station;
+@synthesize i_Accum,i_Daily,i_Date,i_number,imageView,indentationLevel,location_station;
 
 
 
