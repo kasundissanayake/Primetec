@@ -140,7 +140,7 @@
     NtxtDate.text=dateString;
     txtUserId.text=appDelegate.userId;   
     
-    if (sourceDictionary1 != NULL){
+    if (sourceDictionary1 != nil && [sourceDictionary1 valueForKey:@"userInfo"] != nil){
         NSLog(@"NonCompliance Form - populating update for non_complianceNoticeNo: %@", [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"]);
         projectDesc.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"projectDescription"];
         contractorResp.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"contractorResponsible"];
@@ -438,7 +438,7 @@
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
         NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
-        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign];
+        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
         
         if(arrayImages.count>0)
         {
@@ -452,7 +452,7 @@
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
                 
-                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
             
@@ -469,7 +469,7 @@
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
-                sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData];
+                sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
             

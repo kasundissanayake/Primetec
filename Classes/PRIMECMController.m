@@ -282,7 +282,7 @@
         NSURL *endpoint = [NSURL URLWithString:[[PRIMECMAPPUtils getSyncImgBaseURL] stringByAppendingString:imgName]];
         NSData* imgData = [NSData dataWithContentsOfURL:endpoint];
         
-        if (![self saveAllImages:imgName img:imgData]){
+        if (![self saveAllImages:imgName img:imgData syncStatus:SYNC_STATUS_OK]){
             downloadSatus = FALSE;
         }
     }
@@ -314,7 +314,9 @@
             
             NSNumber *imgSyncStatus = [NSNumber numberWithInt:SYNC_STATUS_OK];
             [imageObj setValue:imgSyncStatus forKey:@"syncStatus"];
-            [context save:&error];
+            if (![context save:&error]){
+                NSLog(@"Failed to update SYNC STATUS of image: %@", [imageObj valueForKey:@"imgName"]);
+            }
             
         } else {
             NSLog(@"Failed to push image with name: %@", [objects valueForKey:@"imgName"]);
@@ -2557,7 +2559,7 @@
     }
 }
 
-+ (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img {
++ (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img syncStatus:(int*)syncStatus {
     
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     
@@ -2583,7 +2585,7 @@
     
     
     [assp setValue:img forKey:@"img"];
-    NSNumber *imgSyncStatus = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    NSNumber *imgSyncStatus = [NSNumber numberWithInt:syncStatus];
     [assp setValue:imgSyncStatus forKey:@"syncStatus"];
     
     NSError *saveError;

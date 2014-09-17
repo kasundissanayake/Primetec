@@ -135,7 +135,8 @@
     txtProject.text=appDelegate.projName;
     zip.text=appDelegate.zip;
     
-    if (sourceDictionary != NULL){
+    
+    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
         NSLog(@"Daily Inspection Form - populating update for inspectionID: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"inspectionID"]);
         
         txtName1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"oVJName1"];
@@ -964,7 +965,7 @@
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
         NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
-        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign];
+        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
         
         if(arrayImages.count>0)
         {
@@ -978,7 +979,7 @@
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
                 
-                if (! [PRIMECMController saveAllImages:imggName img:imgData]){
+                if (! [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING]){
                     imageSaveState = FALSE;
                 }
             }
@@ -997,7 +998,7 @@
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
                 
-                if (! [PRIMECMController saveAllImages:imggName img:imgData]){
+                if (! [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING]){
                     singSaveState = FALSE;
                 }
             }

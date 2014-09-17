@@ -684,10 +684,10 @@
         NSData *imaDataSign1 = UIImageJPEGRepresentation(imageSign,0.3);
         NSData *imaDataSign2 = UIImageJPEGRepresentation(imageSign,0.3);
 
-        singSaveState = [PRIMECMController saveAllImages:sigName1 img:imaDataSign1];
+        singSaveState = [PRIMECMController saveAllImages:sigName1 img:imaDataSign1 syncStatus:SYNC_STATUS_PENDING];
         
         
-        singSaveState2 = [PRIMECMController saveAllImages:sigName2 img:imaDataSign2];
+        singSaveState2 = [PRIMECMController saveAllImages:sigName2 img:imaDataSign2 syncStatus:SYNC_STATUS_PENDING];
 
         
         

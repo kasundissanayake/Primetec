@@ -502,13 +502,13 @@
         
         if(indexPath.section==0)
         {
-            cell.lblTitle.hidden=NO;
+            //cell.lblTitle.hidden=NO;
             //cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row]]];
             cell.imgView.image=[PRIMECMController getTheImage:[arrayImages objectAtIndex:indexPath.row-1]];
         }
         else
         {
-            cell.lblTitle.hidden=YES;
+            //cell.lblTitle.hidden=YES;
             //cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[sketchesArray objectAtIndex:indexPath.row]]];
             cell.imgView.image=[PRIMECMController getTheImage:[sketchesArray objectAtIndex:indexPath.row-1]];
         }

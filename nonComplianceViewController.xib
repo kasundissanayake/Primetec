@@ -339,7 +339,7 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Connecticut Department of Transportation" textAlignment="center" minimumFontSize="17" id="FbX-VZ-bNf">
-                            <rect key="frame" x="70" y="132" width="555" height="30"/>
+                            <rect key="frame" x="71" y="132" width="555" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -367,9 +367,9 @@
                             </connections>
                         </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z16-yJ-hWo">
-                            <rect key="frame" x="344" y="182" width="240" height="31"/>
+                            <rect key="frame" x="344" y="182" width="252" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Compliance Notice Number	</string>
+                            <string key="text">Non Compliance Notice Number	</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>

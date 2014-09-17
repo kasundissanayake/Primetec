@@ -151,7 +151,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtWorkDec3.text=[inspectionReportObject valueForKey:@"wDODescriptionOfWork3"];
         txtWorkDec4.text=[inspectionReportObject valueForKey:@"wDODescriptionOfWork4"];
         txtHoursOfWork.text=[NSString stringWithFormat:@"%@", [inspectionReportObject valueForKey:@"contractorsHoursOfWork"]];
-        NSString * signName = [inspectionReportObject valueForKey:@"signature"];
+        NSString * signName = [inspectionReportObject valueForKey:@"inspectorSign"];
         imgInspectorSignature.image=[PRIMECMController getTheImage:signName];
         arrayImages  = [[[inspectionReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[inspectionReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
@@ -568,13 +568,13 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         
         if(indexPath.section==0)
         {
-            cell.lblTitle.hidden=NO;
+            //cell.lblTitle.hidden=NO;
 
             cell.imgView.image=[PRIMECMController getTheImage:[arrayImages objectAtIndex:indexPath.row-1]];
         }
         else
         {
-            cell.lblTitle.hidden=YES;
+            //cell.lblTitle.hidden=YES;
             cell.imgView.image=[PRIMECMController getTheImage:[sketchesArray objectAtIndex:indexPath.row-1]];
         }
         return cell;

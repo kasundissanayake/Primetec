@@ -23,55 +23,55 @@ int * const SYNC_STATUS_PENDING = 2;
 int * const SYNC_STATUS_DELETED = 3;
 
 +(NSString *)getAPISyncPullEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/pull/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/pull/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/pull/";
     
     return endpoint;
 }
 
 +(NSString *)getAPISyncPushEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/push/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/push/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/push/";
     
     return endpoint;
 }
 
 +(NSString *)getAPISyncImgPushEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/push/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/push/";
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/images/push/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/push/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/push/";
     
     return endpoint;
 }
 
 
 +(NSString *)getAPISyncImgPullEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/pull/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/pull/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/images/pull/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/pull/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/pull/";
     
     return endpoint;
 }
 
 +(NSString *)getSyncImgBaseURL {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/images/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/images/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/images/";
     
     return endpoint;
 }
@@ -83,12 +83,6 @@ int * const SYNC_STATUS_DELETED = 3;
     //NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
     
     NSString *endpoint = @"http://construction.ravihansa3000.com/contructionapi.php";
-    return endpoint;
-}
-
-
-+ (NSString *)getServerImagePath {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images";
     return endpoint;
 }
 
