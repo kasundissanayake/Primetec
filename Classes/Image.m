@@ -13,12 +13,14 @@
 
 @dynamic imgName;
 @dynamic img;
-
+@dynamic syncStatus;
 
 -(NSDictionary*) toDictionary
 {
     NSArray *attributes = [[self.entity attributesByName] allKeys];
     NSMutableDictionary *dict = [[self dictionaryWithValuesForKeys:attributes] mutableCopy];
+    
+    [dict setValue:nil forKey:@"img"];
     
     return dict;
 }

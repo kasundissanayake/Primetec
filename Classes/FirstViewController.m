@@ -230,7 +230,7 @@
     [hud show:YES];
     
     NSNumber *latitudeNumber = [NSNumber numberWithDouble:latitude];
-    NSNumber *longitudeNumber = [NSNumber numberWithDouble:longitude];   
+    NSNumber *longitudeNumber = [NSNumber numberWithDouble:longitude];
     
     BOOL saveStatus = [PRIMECMController
                        saveProject:appDelegate.username
@@ -259,7 +259,7 @@
         UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [exportAlert show];
     }
-
+    
     self.navigationItem.rightBarButtonItem = Button;
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
 }
@@ -551,10 +551,91 @@
     [popMap dismissPopoverAnimated:YES];
 }
 
+-(void) syncImages {
+    
+    NSLog(@"syncing all images!");
+    [self showInfoAlert];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        int syncStatus = [PRIMECMController synchronizeImagesWithServer];
+        NSLog(@"syncStatus = %d", syncStatus);
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            
+            [self reloadInputViews];
+            [self hudWasHidden];
+            
+            if(syncStatus == 0)
+            {
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully synchronized images with the server." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                exportAlert.tag = 2;
+                [exportAlert show];
+            }
+            else
+            {
+                NSString *errMsg;
+                if (syncStatus == 1){
+                    errMsg=@"No Internet connection";
+                }
+                else if (syncStatus == 2){
+                    errMsg=@"Server is not responding.";
+                }
+                else if (syncStatus == 3){
+                    errMsg=@"Invalid response received from server.";
+                }
+                else if (syncStatus == 4){
+                    errMsg=@"Failed to push offline data to the server.";
+                }
+                
+                errMsg=[NSString stringWithFormat:@"Failed to synchronize images. Please try again. Failed reason: %@", errMsg];
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                exportAlert.tag = -1;
+                [exportAlert show];
+                
+            }
+        });
+        
+    });
+
+    
+}
+
+// yes button callback
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (alertView.tag == 1){
+        if (buttonIndex == 0) {
+            // do code for yes click
+            [self syncImages];
+        } else {
+            // otherwise
+            
+        }
+    } else if (alertView.tag == 0){
+        if (buttonIndex == 0){
+            // OK
+            
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"Sync"
+                                  message:@"Do you want to sync images? This may take some time depending on your network connection."
+                                  delegate:self  // set nil if you don't want the yes button callback
+                                  cancelButtonTitle:@"Yes"
+                                  otherButtonTitles:@"No", nil];
+            alert.tag = 1;
+            [alert show];
+            
+        } else {
+            
+        }
+    }
+    
+}
+
+
 -(void) syncAll
 {
-    NSLog(@"syncing all!");
-    
+    NSLog(@"syncing all data!");
     [self showInfoAlert];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -568,7 +649,8 @@
             
             if(syncStatus == 0)
             {
-                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully synchronized with the server." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully synchronized data with the server." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                exportAlert.tag = 0;
                 [exportAlert show];
             }
             else
@@ -589,7 +671,9 @@
                 
                 errMsg=[NSString stringWithFormat:@"Failed to synchronize. Please try again. Failed reason: %@", errMsg];
                 UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                exportAlert.tag = -1;
                 [exportAlert show];
+                
             }
         });
         
@@ -678,13 +762,13 @@
     mapId=[dict valueForKey:@"mapId"];
     HotelAnnotation *annotation=[hotelAnnotations objectAtIndex:[mapId intValue]];
     
-   
+    
     
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude =annotation.coordinate.latitude;
     zoomLocation.longitude= annotation.coordinate.longitude;
     
-     NSLog(@"HotelAnnotation = %f , %f", zoomLocation.latitude, zoomLocation.longitude );
+    NSLog(@"HotelAnnotation = %f , %f", zoomLocation.latitude, zoomLocation.longitude );
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.0*METERS_PER_MILE, 0.0*METERS_PER_MILE);
     [mapView setRegion:viewRegion animated:YES];

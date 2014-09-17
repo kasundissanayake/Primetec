@@ -54,4 +54,7 @@
 
 +(NSArray *)getDailyInspectionItemsFromInspectionID:(NSString *)inspectionID;
 
+
++ (int)synchronizeImagesWithServer;
+
 @end

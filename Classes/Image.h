@@ -14,5 +14,5 @@
 
 @property (nonatomic, retain) NSString * imgName;
 @property (nonatomic, retain) NSData * img;
-
+@property (nonatomic, retain) NSNumber * syncStatus;
 @end

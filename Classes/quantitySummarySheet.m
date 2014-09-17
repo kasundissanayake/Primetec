@@ -207,39 +207,14 @@
 
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    
-    
-    
-    
     if(textField==i_number)
     {
-        
-        
-        
         [i_number resignFirstResponder];
         pickerDataArray=[[NSMutableArray alloc]initWithObjects:@"INO-01",@"INO-02",@"INO-03",@"INO-04",@"INO-05",@"INO-06",@"INO-07",@"INO-08",@"INO-09",@"INO-10",@"INO-11",@"INO-12",@"INO-13",@"INO-14",@"INO-15",@"INO-16",@"INO-17",@"INO-18",@"INO-19",@"INO-20",@"INO-21",@"INO-22",@"INO-23",@"INO-24",@"INO-25",@"INO-26",@"INO-27",@"INO-28",@"INO-29",@"INO-30",@"INO-31",@"INO-32",@"INO-33",@"INO-34",@"INO-35",@"INO-36",@"INO-37",@"INO-38",@"INO-39",@"INO-40",@"INO-41",@"INO-42",@"INO-43",@"INO-44",@"INO-45",@"INO-46",@"INO-47",@"INO-48",@"INO-49",@"INO-50",@"INO-51",@"INO-52",@"INO-53",@"INO-54",nil];
-        
-        
-        
-        
         [self createPicker:i_number];
-        
-        
-        
         pickerTag=1;
-        
     }
-    
-    
 }
-
-
-
-
-
-
-
-
 
 -(void)createPicker:(UITextField *)txtField
 {

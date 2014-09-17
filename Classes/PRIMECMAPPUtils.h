@@ -21,6 +21,11 @@ extern NSString * const TOKEN_URL;
 extern NSString * const ACCESS_TOKEN;
 extern NSString * const REFRESH_TOKEN;
 
+
+extern int * const SYNC_STATUS_OK;
+extern int * const SYNC_STATUS_PENDING;
+extern int * const SYNC_STATUS_DELETED;
+
 + (NSString *)getAPISyncPullEndpoint;
 
 + (NSString *)getAPISyncPushEndpoint;
@@ -34,5 +39,11 @@ extern NSString * const REFRESH_TOKEN;
 + (NSNumber *)filterNumber:(NSString *)param;
 
 + (NSArray *)getEntities;
+
++(NSString *)getAPISyncImgPushEndpoint;
+
++(NSString *)getAPISyncImgPullEndpoint;
+
++(NSString *)getSyncImgBaseURL;
 
 @end

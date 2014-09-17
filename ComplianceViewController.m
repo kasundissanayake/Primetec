@@ -166,8 +166,7 @@ UILabel *cno;
         NSLog(@"Compliance Form - populating update for complianceNoticeNo: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"]);
         
         txtTitle.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"comHeader"];
-        EditComNumber.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"];
-        txtContactNo.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"contractNo"];
+        EditComNumber.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"complianceNoticeNo"];        
         conRes.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"contractorResponsible"];
         correctAction.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"correctiveActionCompliance"];
         txtDateContractorCompleted.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dateContractorCompleted"];
@@ -335,7 +334,8 @@ UILabel *cno;
 
 -(IBAction)saveCompliance:(id)sender
 {
-    if(txtTitle.text==NULL || txtTitle.text.length==0|| txtContactNo.text==NULL || txtContactNo.text.length==0 ||  txtProDesc.text==NULL || txtProDesc.text.length==0 || COtextTitle.text==NULL || COtextTitle.text.length==0||COtextProject.text==NULL || COtextProject.text.length==0||txtDateIssued.text==NULL || txtDateIssued.text.length==0||conRes.text==NULL || conRes.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| txtDateContractorStarted.text==NULL || txtDateContractorStarted.text.length==0|| txtDateContractorCompleted.text==NULL || txtDateContractorCompleted.text.length==0||txtDateofRawReprote.text==NULL || txtDateofRawReprote.text.length==0 || correctAction.text==NULL || correctAction.text.length==0 || txtSignature.image== NULL || txtPrintedName.text==NULL || txtPrintedName.text.length==0 )
+   
+    if( txtContactNo.text==NULL || txtContactNo.text.length==0 ||  txtProDesc.text==NULL || txtProDesc.text.length==0 || COtextTitle.text==NULL || COtextTitle.text.length==0||COtextProject.text==NULL || COtextProject.text.length==0||txtDateIssued.text==NULL || txtDateIssued.text.length==0||conRes.text==NULL || conRes.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| txtDateContractorStarted.text==NULL || txtDateContractorStarted.text.length==0|| txtDateContractorCompleted.text==NULL || txtDateContractorCompleted.text.length==0||txtDateofRawReprote.text==NULL || txtDateofRawReprote.text.length==0 || correctAction.text==NULL || correctAction.text.length==0 || txtSignature.image== NULL || txtPrintedName.text==NULL || txtPrintedName.text.length==0 )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
