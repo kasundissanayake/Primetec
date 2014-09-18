@@ -10,6 +10,16 @@
 #import "MBProgressHUD.h"
 
 @interface ExpenceViewController : UIViewController<UIPickerViewDelegate,UIPopoverControllerDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, MBProgressHUDDelegate >
+{
+
+    //Radha
+    NSMutableString *imgPath;
+
+
+}
+
+//Radha  is used for Edit or New also
+@property(nonatomic,strong) NSString *exNUmber;
 
 
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;

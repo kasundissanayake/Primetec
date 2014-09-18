@@ -14,6 +14,13 @@
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 
+//Radha
+@property BOOL isEdit;
+@property(nonatomic,strong) NSString *smSheetNumber;
+
+
+
+
 @property (strong, nonatomic) IBOutlet UITextField *additionalDiscount;
 @property (strong, nonatomic) IBOutlet UITextField *lessDiscount;
 @property (strong, nonatomic) IBOutlet UITextField *mEAmount1;

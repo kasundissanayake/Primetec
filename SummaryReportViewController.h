@@ -12,6 +12,14 @@
 
 @interface SummaryReportViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, MBProgressHUDDelegate>
 
+
+
+//Radha
+@property BOOL isEdit;
+
+
+
+
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *arrayImages;
 

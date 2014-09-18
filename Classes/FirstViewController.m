@@ -551,6 +551,8 @@
     [popMap dismissPopoverAnimated:YES];
 }
 
+
+
 -(void) syncImages {
     
     NSLog(@"syncing all images!");
@@ -607,7 +609,7 @@
     if (alertView.tag == 1){
         if (buttonIndex == 0) {
             // do code for yes click
-            [self syncImages];
+          //  [self syncImages];
         } else {
             // otherwise
             

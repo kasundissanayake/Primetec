@@ -27,7 +27,7 @@
 @synthesize txtContactNo,txtDate,txtPrintedName,txtTo,txtDateIssued,txtProject,txtTitle,txtDateContractCompleted,txtDateContractorStarted,txtDateOfRawReport;
 @synthesize lblProjDec,lblContractorRes,lblCorrectiveActionComp, nonComNotNo, dateCRC;
 @synthesize CNo;
-@synthesize imgSignature;
+@synthesize imgSignature,headerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +57,9 @@
     [lblContractorRes.layer setBorderWidth: 1.0];
     [lblContractorRes.layer setCornerRadius:8.0f];
     
+    
+    self.tblView.tableHeaderView = headerView;
+
     self.tblView.scrollsToTop=YES;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]

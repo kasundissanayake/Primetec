@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6208.6" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assign_project" representedClassName="Assign_project" syncable="YES">
         <attribute name="assign_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -123,6 +123,7 @@
         <attribute name="eRType1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eXReportNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="syncStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -354,7 +355,7 @@
         <element name="ComplianceForm" positionX="-36" positionY="90" width="128" height="448"/>
         <element name="DailyInspectionForm" positionX="-396" positionY="135" width="128" height="1063"/>
         <element name="DailyInspectionItem" positionX="-162" positionY="995" width="144" height="133"/>
-        <element name="Expensedata" positionX="-18" positionY="162" width="128" height="208"/>
+        <element name="Expensedata" positionX="-18" positionY="162" width="128" height="225"/>
         <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="285"/>
         <element name="Image" positionX="0" positionY="144" width="128" height="88"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="388"/>

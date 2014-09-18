@@ -10,6 +10,8 @@
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
 #import "MBProgressHUD.h"
+#import "SummaryReportViewController.h"
+
 
 @interface SummaryReport : UIViewController<MFMailComposeViewControllerDelegate,UIPrintInteractionControllerDelegate,MBProgressHUDDelegate>
 {
