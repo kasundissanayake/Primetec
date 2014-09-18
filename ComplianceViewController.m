@@ -94,8 +94,7 @@ UILabel *cno;
 }
 
 - (void)viewDidLoad
-{
-    txtTo.text = @"ttttt";
+{    
     [super viewDidLoad];
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")

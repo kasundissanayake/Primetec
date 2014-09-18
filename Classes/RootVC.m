@@ -198,25 +198,8 @@ typedef enum {
     
 }
 
--(void)btnEdit{
-    
+-(void)btnEdit{    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"displayPopupView" object:nil];
-    
-    
-    NSLog(@"Editing click part..........%@", appDelegate.projId);
-    NSLog(@"Editing click part..........%@", appDelegate.projTitle);
-    NSLog(@"Editing click part..........%@", appDelegate.projName);
-    NSLog(@"Editing click part..........%@", appDelegate.projDescription);
-    NSLog(@"Editing click part..........%@", appDelegate.address);
-    NSLog(@"Editing click part..........%@", appDelegate.city);
-    NSLog(@"Editing click part..........%@", appDelegate.state);
-    NSLog(@"Editing click part..........%@", appDelegate.zip);
-    NSLog(@"Editing click part..........%@", appDelegate.tel);
-    NSLog(@"Editing click part..........%@", appDelegate.pm);
-
-
-    
-    
 }
 
 

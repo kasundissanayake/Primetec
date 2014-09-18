@@ -4,7 +4,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
-
+#import "DailyInspectionForm.h"
 
 @interface DailyInspectionReport (){
     NSMutableArray *arrayImages;
@@ -70,7 +70,11 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
                                 style:UIBarButtonItemStyleDone
                                 target:self
                                 action:@selector(fnEdit:)];
-    
+    UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Delete", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnDelete:)];
     arrayImages=[[NSMutableArray alloc]init];
     sketchesArray=[[NSMutableArray alloc]init];
     
@@ -82,7 +86,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    self.navigationItem.leftBarButtonItem=Button2;
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];
     
     [self populateInspectionForm];
 }
@@ -263,6 +267,38 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:dailyInspectionReportDTO];
 }
 
+-(IBAction)fnDelete:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+    
+    DailyInspectionForm *assp;
+    NSError *retrieveError;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
+                                              inManagedObjectContext:managedContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID = %@)", CNo];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
+    
+    if (fetchedObjects && [fetchedObjects count] > 0) {
+        assp = [fetchedObjects objectAtIndex:0];
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_DELETED];
+        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        if (![managedContext save:&retrieveError]) {
+            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
+        } else {
+            NSLog(@"Deleted: %@", CNo);
+        }
+    }
+    
+}
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
 {

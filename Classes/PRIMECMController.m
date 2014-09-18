@@ -590,6 +590,9 @@
         [assp setImages_3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_3"]]];
         [assp setImages_3_desc:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_3_desc"]]];
         
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         
@@ -717,6 +720,8 @@
         [assp setI_QTY4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY4"]]];
         [assp setI_QTY5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY5"]]];
         
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setValue:syncStatusNum forKey:@"syncStatus"];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -947,6 +952,9 @@
         [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
         [assp setPrintedName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"PrintedName"]]];
         [assp setSketch_images:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"sketch_images"]]];
+        
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setValue:syncStatusNum forKey:@"syncStatus"];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -1544,6 +1552,9 @@
     [assp setValue:images_uploaded forKey:@"images_uploaded"];
     [assp setValue:sketchImg forKey:@"sketch_images"];
     
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
+    
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription ]);
@@ -1631,6 +1642,9 @@
     
     [assp setValue:images_uploaded forKey:@"images_uploaded"];
     [assp setValue:sketchImg forKey:@"sketch_images"];
+    
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -1761,6 +1775,9 @@
     
     [assp setValue:images_uploaded forKey:@"images_uploaded"];
     [assp setValue:sketch_images forKey:@"sketch_images"];
+    
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
     
     
     // delete existing inspection items for this inspection ID

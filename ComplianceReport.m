@@ -14,6 +14,7 @@
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
 #import "ComplianceViewController.h"
+#import "ComplianceForm.h"
 
 @interface ComplianceReport ()
 {
@@ -89,12 +90,19 @@
                                 style:UIBarButtonItemStyleDone
                                 target:self
                                 action:@selector(fnEdit:)];
+    
+    UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Delete", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnDelete:)];
+    
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    self.navigationItem.leftBarButtonItem=Button2;
-    
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];;
+       
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -182,6 +190,38 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:complianceReportDTO1];
 }
 
+-(IBAction)fnDelete:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+    
+    ComplianceForm *assp;
+    NSError *retrieveError;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                              inManagedObjectContext:managedContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(complianceNoticeNo = %@)", CNo];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
+    
+    if (fetchedObjects && [fetchedObjects count] > 0) {
+        assp = [fetchedObjects objectAtIndex:0];
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_DELETED];
+        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        if (![managedContext save:&retrieveError]) {
+            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
+        }else{
+            NSLog(@"Deleted: %@", CNo);
+        }
+    }
+    
+}
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
 {

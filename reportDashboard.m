@@ -320,7 +320,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY project_id == %@", appDelegate.projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
+                              appDelegate.projId, SYNC_STATUS_OK  , SYNC_STATUS_PENDING ];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -345,7 +346,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY project_id == %@", appDelegate.projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
+                              appDelegate.projId, SYNC_STATUS_OK, SYNC_STATUS_PENDING];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -370,11 +372,12 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY project_id == %@", appDelegate.projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
+                              appDelegate.projId, SYNC_STATUS_OK, SYNC_STATUS_PENDING];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];    
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
