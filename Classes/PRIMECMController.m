@@ -637,7 +637,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID = %@)", [[payload objectForKey:@"inspectionID"] intValue]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID = %@)", [payload objectForKey:@"inspectionID"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -753,7 +753,7 @@
         [fetchRequest setEntity:entity];
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(inspectionID = %@ AND no = %@)",
-                                  [[payload objectForKey:@"inspectionID"] intValue], [[payload objectForKey:@"No"] intValue]];
+                                  [payload objectForKey:@"inspectionID"], [payload objectForKey:@"No"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
