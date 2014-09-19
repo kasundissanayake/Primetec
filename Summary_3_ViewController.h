@@ -6,19 +6,12 @@
 //
 //
 
-
-
 #import <UIKit/UIKit.h>
 #import "SummaryReportViewController.h"
 #import "Summary_2_ViewController.h"
 #import "MBProgressHUD.h"
 
 @interface Summary_3_ViewController : UIViewController <MBProgressHUDDelegate>
-
-
-@property BOOL isEdit;
-@property(nonatomic,strong) NSString *smSheetNumber;
-
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 

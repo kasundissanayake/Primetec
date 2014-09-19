@@ -11,8 +11,6 @@
 #import "MBProgressHUD.h"
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
-#import "PRIMECMController.h"
-
 
 
 @interface Quantity_S_Report : UIViewController<UIPrintInteractionControllerDelegate,MFMailComposeViewControllerDelegate,MBProgressHUDDelegate>{
@@ -23,9 +21,6 @@
     
     
 }
-@property (strong, nonatomic) NSDictionary *selectedDict;
-
-
 @property(nonatomic,retain)NSString *QNo;
 @property (weak, nonatomic) IBOutlet UITextField *project;
 @property (weak, nonatomic) IBOutlet UITextField *itemNo;

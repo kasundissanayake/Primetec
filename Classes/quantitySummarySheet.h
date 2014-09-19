@@ -15,10 +15,6 @@
 
 @interface quantitySummarySheet : UIViewController<MFMailComposeViewControllerDelegate,MBProgressHUDDelegate,UIPrintInteractionControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
-@property BOOL isEdit;
-@property (strong, nonatomic) NSDictionary *selectedDict;
-
-
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *qtyTable;
