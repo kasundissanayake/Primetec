@@ -430,7 +430,8 @@
 }
 -(IBAction)showSCompliance:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpeseForm" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpeseForm" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeExpenceForm" object:nil userInfo:NULL];
 }
 
 

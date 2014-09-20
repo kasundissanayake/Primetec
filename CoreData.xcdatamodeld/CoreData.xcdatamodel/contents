@@ -128,16 +128,20 @@
     </entity>
     <entity name="ExpenseReportModel" representedClassName="ExpenseReportModel" syncable="YES">
         <attribute name="approvedBy" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="attachment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="checkNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="employeeNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eMPName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRCashAdvance" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="eRFHeader" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRCashAdvance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRDate1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRDescription1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRFHeader" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eRJobNo1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRPAMilage1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRPARate1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="eRReimbursement" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eRTotal1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRType1" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eXReportNo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="signature" optional="YES" attributeType="String" syncable="YES"/>
@@ -355,7 +359,7 @@
         <element name="DailyInspectionForm" positionX="-396" positionY="135" width="128" height="1063"/>
         <element name="DailyInspectionItem" positionX="-162" positionY="995" width="144" height="133"/>
         <element name="Expensedata" positionX="-18" positionY="162" width="128" height="208"/>
-        <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="285"/>
+        <element name="ExpenseReportModel" positionX="18" positionY="180" width="128" height="343"/>
         <element name="Image" positionX="0" positionY="144" width="128" height="88"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="388"/>
         <element name="Projects" positionX="-9" positionY="135" width="128" height="360"/>
