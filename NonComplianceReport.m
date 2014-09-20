@@ -27,7 +27,7 @@
 @synthesize txtContactNo,txtDate,txtPrintedName,txtTo,txtDateIssued,txtProject,txtTitle,txtDateContractCompleted,txtDateContractorStarted,txtDateOfRawReport;
 @synthesize lblProjDec,lblContractorRes,lblCorrectiveActionComp, nonComNotNo, dateCRC;
 @synthesize CNo;
-@synthesize imgSignature;
+@synthesize imgSignature,headerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +58,7 @@
     [lblContractorRes.layer setCornerRadius:8.0f];
     
     self.tblView.scrollsToTop=YES;
+     self.tblView.tableHeaderView = headerView;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
@@ -76,8 +77,7 @@
                                 style:UIBarButtonItemStyleDone
                                 target:self
                                 action:@selector(fnDelete:)];
-    btnPrint = [[UIBarButtonItem alloc]
-                initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
+    btnPrint = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
     self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];
     
@@ -458,8 +458,11 @@
     }
 }
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
