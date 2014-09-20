@@ -640,7 +640,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        int syncStatus = [PRIMECMController synchronizeWithServer];
+        int syncStatus = [PRIMECMController synchronizeDataWithServer];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
@@ -660,16 +660,13 @@
                     errMsg=@"No Internet connection";
                 }
                 else if (syncStatus == 2){
-                    errMsg=@"Server is not responding.";
-                }
-                else if (syncStatus == 3){
-                    errMsg=@"Invalid response received from server.";
-                }
-                else if (syncStatus == 4){
                     errMsg=@"Failed to push offline data to the server.";
                 }
+                else if (syncStatus == 3){
+                    errMsg=@"Failed to pull data from the server.";
+                }
                 
-                errMsg=[NSString stringWithFormat:@"Failed to synchronize. Please try again. Failed reason: %@", errMsg];
+                errMsg=[NSString stringWithFormat:@"Synchronization failed. Please try again. Failed reason: %@", errMsg];
                 UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 exportAlert.tag = -1;
                 [exportAlert show];

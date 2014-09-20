@@ -179,6 +179,8 @@
 		52771E831951A9F300B5F7C6 /* lin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52771E821951A9F300B5F7C6 /* lin1.png */; };
 		52E73C831973DADF004A0418 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E73C821973DADF004A0418 /* Reachability.m */; };
 		55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */; };
+		5563F51F19CE1BE000A66013 /* ImageSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563F51E19CE1BE000A66013 /* ImageSyncController.m */; };
+		5563F52219CE1EBF00A66013 /* DataSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563F52119CE1EBF00A66013 /* DataSyncController.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
@@ -576,6 +578,10 @@
 		52E73C821973DADF004A0418 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		55514B8019AC605B00DA6981 /* ExtendedManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedManagedObject.h; sourceTree = "<group>"; };
 		55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedManagedObject.m; sourceTree = "<group>"; };
+		5563F51D19CE1BE000A66013 /* ImageSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSyncController.h; sourceTree = "<group>"; };
+		5563F51E19CE1BE000A66013 /* ImageSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSyncController.m; sourceTree = "<group>"; };
+		5563F52019CE1EBF00A66013 /* DataSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSyncController.h; sourceTree = "<group>"; };
+		5563F52119CE1EBF00A66013 /* DataSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSyncController.m; sourceTree = "<group>"; };
 		55FD290C19BAC8FD0002FEA5 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
 		55FD290D19BAC8FD0002FEA5 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -1353,6 +1359,10 @@
 			children = (
 				98D14A56199F19040091D5D8 /* PRIMECMController.h */,
 				98D14A57199F19040091D5D8 /* PRIMECMController.m */,
+				5563F51D19CE1BE000A66013 /* ImageSyncController.h */,
+				5563F51E19CE1BE000A66013 /* ImageSyncController.m */,
+				5563F52019CE1EBF00A66013 /* DataSyncController.h */,
+				5563F52119CE1EBF00A66013 /* DataSyncController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1954,6 +1964,7 @@
 				FCD7A9F418EB30A6006008D9 /* GIKAnnotationView.m in Sources */,
 				4B8CE25119418749001F8E3B /* SDDrawingToolsViewController.m in Sources */,
 				E98753F61462982200E603C6 /* MySplitViewController.m in Sources */,
+				5563F52219CE1EBF00A66013 /* DataSyncController.m in Sources */,
 				4B8CE1F219418749001F8E3B /* BitmapCropManipulator.m in Sources */,
 				4B8CE1F919418749001F8E3B /* NSFileManager+DirectoryInfo.m in Sources */,
 				4B8CE1FA19418749001F8E3B /* NSString+FileSize.m in Sources */,
@@ -1973,6 +1984,7 @@
 				4B8CE1F619418749001F8E3B /* BGRSLoupeLayer.m in Sources */,
 				FC245AB118EC60C200950C49 /* DailyInspectionViewController.m in Sources */,
 				4B8CE1F719418749001F8E3B /* RSBrightnessSlider.m in Sources */,
+				5563F51F19CE1BE000A66013 /* ImageSyncController.m in Sources */,
 				4BF5325F193B6DBC0096E687 /* ImageHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

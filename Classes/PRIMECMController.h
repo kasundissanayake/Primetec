@@ -10,9 +10,9 @@
 
 @interface PRIMECMController : NSObject
 
-+ (int)synchronizeWithServer;
++ (int)synchronizeDataWithServer;
 
-+ (void)parseResponse:(id)responseObject;
+
 
 + (NSString *) getExpenceIdByProjID:(NSString *)projId;
 
@@ -51,12 +51,12 @@
 
 + (UIImage *) getTheImage:(NSString *)imgName;
 
-+(NSArray *)getDailyInspectionItemsFromInspectionID:(NSString *)inspectionID;
++(NSArray *) getDailyInspectionItemsFromInspectionID:(NSString *)inspectionID;
 
-+ (int)synchronizeImagesWithServer;
++ (int) synchronizeImagesWithServer;
 
-+(NSArray *)getQuantitySummaryDetailsForInspectionID:(NSString *)inspectionId AndItemNum:(NSString *)item_no;
++(NSArray *) getQuantitySummaryDetailsForInspectionID:(NSString *)inspectionId AndItemNum:(NSString *)item_no;
 
-+(int)totalObjectsOfSummarySheet;
++(int) totalObjectsOfSummarySheet;
 
 @end
