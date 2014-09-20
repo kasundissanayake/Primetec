@@ -812,7 +812,7 @@
     else
     {
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:hud];
+        [self.navigationController.view addSubview:HUD];
         HUD.labelText=@"";
         HUD.dimBackground = YES;
         HUD.delegate = self;
@@ -843,26 +843,24 @@
         BOOL saveStatus = [PRIMECMController
                            saveExpenseForm:appDelegate.username
                            approvedBy:ERtxtApprovedBy.text
-                           eRDate1:ERtextDate6.text
-                           checkNo:ERtxtCheckNum.text
                            date:ERdate6.text
-                           eRDescription1:txvDescription.text
+                           eRDate1:ERtextDate6.text
                            eMPName:ERtxtEmpName.text
                            eRCashAdvance:cashAdvance.text
                            eRFHeader:header.text
                            eRReimbursement:reimburs.text
-                           eXReportNo:@""
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            project_id:appDelegate.projId
                            signature:sigName
                            weekEnding:ERtxtWeek.text
+                           eRDescription1:ERDescription.text
                            eRJobNo1:ERJobNo.text
                            eRPAMilage1:txtMil1.text
                            eRPARate1:txtRate1.text
                            eRTotal1:txtTotal1.text
-                           eRType1:ERType.text
-                           
-                           ];
+                           eRType1:ERType.text ];
+        
+        
         
         
    ERtxtApprovedBy.text=@" ";
@@ -878,14 +876,9 @@
     ERtxtWeek.text=@" ";
     ERJobNo.text=@" ";
     txtMil1.text=@" ";
-    txtRate1.text
-    txtTotal1.text
-    ERType.text
-        
-       
-        
-        
-        
+    txtRate1.text=@" ";
+    txtTotal1.text=@" ";
+    ERType.text=@" ";
         
             BOOL imageSaveState;
             BOOL sketchSaveState;
@@ -938,14 +931,14 @@
                 
             }
             
-            [hud setHidden:YES];
+            [HUD setHidden:YES];
             
             if (saveStatus && singSaveState){
                 UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [exportAlert show];
                 [appDelegate.sketchesArray removeAllObjects];
                 [arrayImages removeAllObjects];
-                [self deleteImageFiles];
+                //[self deleteImageFiles];
             }else{
                 UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [exportAlert show];

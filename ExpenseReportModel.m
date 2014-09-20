@@ -30,7 +30,7 @@
 @dynamic eRPARate1;
 @dynamic eRTotal1;
 @dynamic eRType1;
-@dynamic syncStatus;
+
 
 
 -(NSDictionary*) toDictionary

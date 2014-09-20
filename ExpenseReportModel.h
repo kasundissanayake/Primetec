@@ -23,8 +23,6 @@
 @property (nonatomic, retain) NSString * eRPARate1;
 @property (nonatomic, retain) NSString * eRTotal1;
 @property (nonatomic, retain) NSString * eRType1;
-@property (nonatomic, retain) NSString * syncStatus;
-
 
 @end
 

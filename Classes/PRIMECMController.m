@@ -2047,7 +2047,7 @@
     
 }
 
-+ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy attachment:(NSString *)attachment checkNo:(NSString *)checkNo date:(NSString *)date eRDate1:(NSString *)eRDate1 eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding eXReportNo:(NSString *)eXReportNo eRDescription1:(NSString *)eRDescription1 signature:(NSString *)signature eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1 isEdit:(BOOL)isEdit
++ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy checkNo:(NSString *)checkNo date:(NSString *)date eRDate1:(NSString *)eRDate1 eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding eXReportNo:(NSString *)eXReportNo eRDescription1:(NSString *)eRDescription1 eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1
 
 {
     ExpenseReportModel *assp;
@@ -2067,14 +2067,14 @@
     if (error != nil) {
         NSLog(@"Error: %@", [error debugDescription]);
     }
-    if(isEdit)
-    {
-        NSLog(@"Edited ");
-        if([existingIDs count]>0)
-        {
-            assp =[existingIDs firstObject];
-        }
-    }
+//    if(isEdit)
+//    {
+//        NSLog(@"Edited ");
+//        if([existingIDs count]>0)
+//        {
+//            assp =[existingIDs firstObject];
+//        }
+//    }
     if (!assp) {
         assp = [NSEntityDescription
                 insertNewObjectForEntityForName:@"ExpenseReportModel"
@@ -2082,7 +2082,7 @@
         [assp setValue:eXReportNo forKey:@"eXReportNo"];
     }
     [assp setValue:approvedBy forKey:@"approvedBy"];
-    [assp setValue:attachment forKey:@"attachment"];
+    //[assp setValue:attachment forKey:@"attachment"];
     [assp setValue:checkNo forKey:@"checkNo"];
     
     
@@ -2122,8 +2122,8 @@
     [assp setValue:eRTotal1 forKey:@"eRTotal1"];
     [assp setValue:eRType1 forKey:@"eRType1"];
     
-    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
-   [assp setValue:syncStatusNum forKey:@"syncStatus"];
+//    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+//   [assp setValue:syncStatusNum forKey:@"syncStatus"];
     
 
    
