@@ -1137,8 +1137,7 @@
         }
         
         [assp setItem_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"item_no"]]];
-        [assp setLocation_station:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"location_station"]]];
-        [assp setItem_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"item_no"]]];
+        [assp setLocation_station:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"location_station"]]];        
         [assp setQuantity_sum_details_no:[NSNumber numberWithInt:[[payload objectForKey:@"quantity_sum_details_no"] intValue]]];
         [assp setDaily:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"daily"]]];
         [assp setAccum:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"accum"]]];

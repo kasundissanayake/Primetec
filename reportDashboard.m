@@ -96,6 +96,10 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (reports == nil || reports == NULL) {
+        return 0;
+    }
+    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
     [reports sortUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     return reports.count;
@@ -114,9 +118,6 @@
     
     if (indexPath.section == 0) {
         
-        //start brin
-        
-        
         if(proType==2)
         {
             cell.lblReportName.text =[[reports valueForKey:@"dIFHeader"]objectAtIndex:indexPath.row];
@@ -126,11 +127,6 @@
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
         }
-        
-        
-        //end brin
-        
-        
         
         // Expense Report
         else if(proType==3)
@@ -152,19 +148,14 @@
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
         }
         
-        
-        
-        //start brin
+        // Quantity Summary
         else if(proType==5){
-            
-            
             cell.lblReportName.text =@"Quantity Summary Report";
-            cell.lblReportDate.text =[[reports valueForKey:@"Date"]objectAtIndex:indexPath.row];
-            cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
-            cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
+           // cell.lblReportDate.text =[[reports valueForKey:@"date"] objectAtIndex:indexPath.row];
+           // cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"] objectAtIndex:indexPath.row];
+            cell.lblReportProjectManager.text =[[reports valueForKey:@"item_no"] objectAtIndex:indexPath.row];
             
         }
-        //end brin
         
         // Compliance and Non-compliance Reports
         else if (proType==0 || proType==1)
@@ -174,8 +165,6 @@
                                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
-            
-            //NSLog(@"TEST in cell");
             
         }
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
@@ -209,7 +198,6 @@
     // Non-compliance Report
     if (proType == 1)
     {
-        
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"non_ComplianceNoticeNo"];
         NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonCompliance" object:nil userInfo:dict];
@@ -239,26 +227,13 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummary" object:nil userInfo:dict];
     }
     
-    
-    
-    //start brin
-    
-    //quantity symmary
-    
-    
-    
-    
+    // Quantity Summary
     if (proType == 5)
     {
-        
-        
-        
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"id"];
         NSDictionary* dict = [NSDictionary dictionaryWithObject:
                               noticeNo forKey:@"ConNo"];
         appDelegate.iddd=noticeNo;
-        
-        NSLog(@"noooticeeee nummmmmmmm-----------%@",appDelegate.iddd);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQTY_S_Report" object:nil userInfo:dict];
     }
     
@@ -266,26 +241,22 @@
 }
 
 
-
 -(void)loadQuantitySummary
 {
-    //Radha Core data
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryItems"
+                                              inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"project_id == %@",appDelegate.projId];
-    [fetchRequest setPredicate:predicate];
-    //  [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)",appDelegate.projId];
+    //[fetchRequest setPredicate:predicate];
     NSError *error = nil;
-    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"Before saving ids are %@",existingIDs);
-    reports = [NSMutableArray arrayWithArray:existingIDs];
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    [reports addObjectsFromArray: objects];
     [table reloadData];
 }
 
-//end brin
+
 
 -(void)loadComplianceForm
 {
@@ -480,28 +451,5 @@
         [self loadQuantitySummary];
     }
 }
-
-
-//start brin
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [hud setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    if (type==5)
-    {
-        reports=[[responseObject valueForKey:@"all_quantity_summary"]mutableCopy];
-    }
-    
-    [table reloadData];
-    
-}
-
-//end brin
 
 @end
