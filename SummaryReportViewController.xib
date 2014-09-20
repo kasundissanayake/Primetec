@@ -15,7 +15,7 @@
                 <outlet property="descr" destination="5kE-UU-4NR" id="9ps-Jd-B9p"/>
                 <outlet property="federalAidNumber" destination="Z0i-0h-WCV" id="7av-gt-0DE"/>
                 <outlet property="healWelAndPension" destination="X5u-Qf-dmd" id="gOw-a5-HDB"/>
-                <outlet property="id" destination="B90-M3-d91" id="Kgx-9S-fBj"/>
+                <outlet property="id1" destination="B90-M3-d91" id="Xqn-Jc-RSa"/>
                 <outlet property="insAndTaxesOnItem1" destination="fQA-5e-LOi" id="dE1-8D-QdM"/>
                 <outlet property="itemDescount20per" destination="Ugo-a6-1I0" id="dwH-xr-Zno"/>
                 <outlet property="lAAmount1" destination="gUJ-eC-Nz3" id="7iN-cM-dgd"/>

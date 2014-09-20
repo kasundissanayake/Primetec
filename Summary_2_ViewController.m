@@ -67,8 +67,19 @@
 @synthesize total1;
 @synthesize  total2;
 @synthesize total3;
-@synthesize scrollView,smSheetNumber,isEdit;
+@synthesize scrollView;
+
+
 @synthesize sMSSheetNo;
+
+
+
+
+ 
+
+ 
+ 
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -97,17 +108,8 @@
     // Do any additional setup after loading the view from its nib.
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if(isEdit)
-    {
-        [self populateValues];
-    }
     
 }
--(void)populateValues
-{
-        
-}
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -177,14 +179,14 @@
                 total2.enabled=YES;
                 additionalDiscount.enabled=YES;
                 total3.enabled=YES;
-                
+
                 
                 return NO;
             }
             else{
                 
-                
-                
+             
+             
             }
         }
         
@@ -261,7 +263,7 @@
     
     additionalDiscount.text = [NSString stringWithFormat:@"%.2f",t20];
     total2.text = [NSString stringWithFormat:@"%.2f",calcpersentage];
-    
+        
     total3.text = [NSString stringWithFormat:@"%.2f",gtotal];
     
     appDelegate.str2=total3.text;
@@ -279,7 +281,7 @@
 -(IBAction)shownext
 {
     
-    if(total1.text==NULL || total1.text.length==0 || lessDiscount.text==NULL || lessDiscount.text.length==0 || total2.text==NULL || total2.text.length==0  || additionalDiscount.text==NULL || additionalDiscount.text.length==0 || total3.text==NULL || total3.text.length==0     )
+      if(total1.text==NULL || total1.text.length==0 || lessDiscount.text==NULL || lessDiscount.text.length==0 || total2.text==NULL || total2.text.length==0  || additionalDiscount.text==NULL || additionalDiscount.text.length==0 || total3.text==NULL || total3.text.length==0     )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -453,8 +455,8 @@
             
         }
         
-        
-        
+       
+    
         BOOL saveStatus = [PRIMECMController
                            saveSummery2:appDelegate.username
                            additionalDiscount:additionalDiscount.text
@@ -480,29 +482,25 @@
                            mEUnitPrice4:mEUnitPrice4.text
                            mEUnitPrice5:mEUnitPrice5.text
                            project_id:appDelegate.projId
-                           sMSSheetNo:smSheetNumber
+                           sMSSheetNo:@""
                            total1:total1.text
                            total2:total2.text
-                           total3:total3.text
-                           isEdit:isEdit];
+                           total3:total3.text];
         
         [HUD setHidden:YES];
         
         if (saveStatus){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Summary Sheet 2 is saved.Fill the Sheet 3" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
-            // [arrayImages removeAllObjects];
-            // [self clearFormFields];
+           // [arrayImages removeAllObjects];
+           // [self clearFormFields];
             
-            Summary_3_ViewController *su = [[Summary_3_ViewController alloc] init];
+            Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
             su.title=@"Summary Sheet";
-            su.isEdit = isEdit;
-            su.smSheetNumber = smSheetNumber;
-            
             [self.navigationController pushViewController:su animated:YES];
             
-            
+
             
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -510,6 +508,7 @@
         }
         
     }
+
     
     
     
@@ -517,8 +516,7 @@
     
     
     
-    
-}
+    }
 
 
 -(NSString*)getCurrentDateTimeAsNSString

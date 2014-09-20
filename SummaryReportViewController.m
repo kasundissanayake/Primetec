@@ -113,7 +113,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad]; 
+    [super viewDidLoad];  
     
     comNoticeNo=@"";
     count=0;
@@ -654,8 +654,7 @@
                            telephoneNo:appDelegate.tel
                            total:total.text
                            totalLabor:totalLabor.text
-                           zip:appDelegate.zip
-                           isEdit:isEdit
+                           zip:appDelegate.zip                           
                            ];
         
         [HUD setHidden:YES];

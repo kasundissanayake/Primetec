@@ -674,8 +674,7 @@
                            signature1:sigName1
                            signature2:sigName2
                            sMSheetNo:smSheetNumber
-                           total_to_date:total_to_date.text
-                           isEdit:isEdit
+                           total_to_date:total_to_date.text                           
                            ];
         
         [HUD setHidden:YES];
