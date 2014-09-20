@@ -19,61 +19,62 @@ UIBarButtonItem  *btnPrint;
 BOOL isquantityTable;
 NSMutableArray *itemDetails;
 TabAndSplitAppAppDelegate *appDelegate;
-
+NSDictionary *sourceDictionary;
 
 @synthesize QNo,project,item,itemNo,estQty,unit,price,quantityTable,tblView;
-@synthesize scrollView;
+@synthesize scrollView,selectedDict;
+
+
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    scrollView.frame = CGRectMake(0,0, 720, 1800);
-    [scrollView setContentSize:CGSizeMake(700, 1800)];
+    // scrollView.frame = CGRectMake(0,0, 720, 1800);
+    [scrollView setContentSize:CGSizeMake(700, 1500)];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
-    
     
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
-    
-    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"New", @"")
                                style:UIBarButtonItemStyleDone
                                target:self
-                               action:@selector(showSCompliance:)];
+                               action:@selector(showQuantitySummaryForm:)];
+    
+    //    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
+    //                                initWithTitle:NSLocalizedString(@"Edit", @"")
+    //                                style:UIBarButtonItemStyleDone
+    //                                target:self
+    //                                action:@selector(fnEdit:)];
+    
     
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
-    
-    
-    
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button,btnEmail,btnPrint, nil];
-    
+    // self.navigationItem.leftBarButtonItem = Button2;
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSLog(@"vvvvvvv,%@",appDelegate.city);
-    
-    
     
     itemDetails=[[NSMutableArray alloc]init];
     
     // [self loadSummerySheet];
     [self loadExpenseDetails];
-    
+    [self  loadExpenseEntries];
 }
-
-
-
-
-
-
 
 
 -(void)printReport
 {
-    
     //[self.tblView setContentOffset:CGPointZero animated:YES];
     [self.quantityTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     
@@ -137,26 +138,9 @@ TabAndSplitAppAppDelegate *appDelegate;
         };
         [printController presentFromBarButtonItem:btnPrint animated:YES completionHandler:completionHandler];
     }
-    
-    
-    
     [self.quantityTable setContentOffset:CGPointMake(self.quantityTable.contentOffset.x, -self.quantityTable.contentInset.top) animated:YES];
     
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
 
 -(void)createPDF
 {
@@ -332,78 +316,72 @@ TabAndSplitAppAppDelegate *appDelegate;
 
 
 
-
-
-
-
-
--(IBAction)showSCompliance:(id)sender
+-(IBAction)showQuantitySummaryForm:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil];
+    NSLog(@"changeQuantitySummary in Quantity_S_Report");
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil userInfo:NULL];
     
 }
 
 -(void)loadExpenseEntries
 {
-    
-    isquantityTable=NO;
-    
-    
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/list/Lin/%@",itemNo.text];
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
+    //QuantitySummaryItems
+    //Radha
+    //    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    //    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryItems"
+    //                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    //    [fetchRequest setEntity:entity];
+    //    [fetchRequest setResultType:NSDictionaryResultType];
+    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"item_no == %@",[selectedDict objectForKey:@"item_no"]];
+    //    [fetchRequest setPredicate:predicate];
+    //    //  [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
+    //    NSError *error = nil;
+    //    NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
+    //    NSLog(@"Down Table values are %@",existingIDs);
+    itemDetails = [[NSMutableArray alloc] init];
+    itemDetails = [NSMutableArray arrayWithArray:[PRIMECMController getQuantitySummaryDetailsForInspectionID:appDelegate.inspectionID AndItemNum:[selectedDict objectForKey:@"item_no"]]];
+    [quantityTable reloadData];
     
     
+    
+    
+    return;
+    }
+
+-(IBAction)fnEdit:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil userInfo:selectedDict];
 }
-
-
-
 
 
 -(void)loadExpenseDetails
 {
+    //Radha
+    project.text=[selectedDict valueForKey:@"project"];
+    itemNo.text=[selectedDict valueForKey:@"item_no"];
+    item.text= [selectedDict valueForKey:@"Description"];
+    estQty.text= [NSString stringWithFormat:@"%d",[[selectedDict valueForKey:@"est_qty"] intValue]];
+    unit.text= [NSString stringWithFormat:@"%d",[[selectedDict valueForKey:@"unit"] intValue]];
+    price.text= [selectedDict valueForKey:@"unit_price"];
+    
+    project.userInteractionEnabled = NO;
+    itemNo.userInteractionEnabled = NO;
+    item.userInteractionEnabled = NO;
+    estQty.userInteractionEnabled = NO;
+    unit.userInteractionEnabled = NO;
+    price.userInteractionEnabled = NO;
+    
+    return;
+    
     isquantityTable=YES;
-    
     NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/report/Lin/%@",appDelegate.iddd];
-    
-    
-    
     NSURL *apiURL =
     [NSURL URLWithString:strURL];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    
-    
-    
     [urlRequest setHTTPMethod:@"GET"];
     
-    
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
     _receivedData = [[NSMutableData alloc] init];
     
     [connection start];
@@ -415,11 +393,7 @@ TabAndSplitAppAppDelegate *appDelegate;
     HUD.dimBackground = YES;
     HUD.delegate = self;
     [HUD show:YES];
-    
-    
 }
-
-
 
 - (void)connection:(NSURLConnection *)connection
 didReceiveResponse:(NSURLResponse *)response
@@ -449,14 +423,8 @@ didReceiveResponse:(NSURLResponse *)response
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return [itemDetails count];
-    
 }
-
-
-
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"quantityCell";
@@ -470,34 +438,42 @@ didReceiveResponse:(NSURLResponse *)response
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    cell.i_Date.text =  [formatter stringFromDate:[[itemDetails valueForKey:@"date"]objectAtIndex:indexPath.row]];
+    cell.i_number.text = [[itemDetails valueForKey:@"no"]objectAtIndex:indexPath.row];
+    cell.i_Accum.text = [NSString stringWithFormat:@"%d",[self calculateAccumForRowNumber:indexPath.row]]  ;
+    cell.i_Daily.text = [NSString stringWithFormat:@"%d",[[[itemDetails valueForKey:@"qty"]objectAtIndex:indexPath.row] intValue]];
+    cell.location_station.text = appDelegate.city;
     
-    cell.i_Date.text = [[itemDetails valueForKey:@"date"]objectAtIndex:indexPath.row];
-    cell.i_number.text = [[itemDetails valueForKey:@"No"]objectAtIndex:indexPath.row];
-    cell.i_Accum.text = [[itemDetails valueForKey:@"accum"]objectAtIndex:indexPath.row];
-    cell.i_Daily.text = [[itemDetails valueForKey:@"Qty"]objectAtIndex:indexPath.row];
-    cell.location_station.text=[[itemDetails valueForKey:@"address"]objectAtIndex:indexPath.row] ;
-    
-    
-    NSLog(@"ssssssss,%@",appDelegate.address);
+    //    NSString *locationStr =  [[itemDetails valueForKey:@"location_station"]objectAtIndex:indexPath.row];
+    //    if(locationStr)
+    //    {
+    //       if([locationStr isKindOfClass:[NSNull class]] || [locationStr length] == 0 || [locationStr isEqualToString:@"(null)"])
+    //           locationStr = @"";
+    //    }
     
     
     return cell;
 }
+-(int)calculateAccumForRowNumber:(int)count
+{
+    int accum = 0;
+    for (int i = 0; i<= count; i++) {
+        accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
+    }
+    return accum;
+}
+
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
-    
-    
     [HUD setHidden:YES];
     
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     
     NSLog(@"count---%@",responseObject);
-    
-    
-    
     if(isquantityTable){
         
         isquantityTable=YES;
@@ -510,19 +486,9 @@ didReceiveResponse:(NSURLResponse *)response
         unit.text= [[responseObject valueForKey:@"quantity_summary"]valueForKey:@"unit"];
         price.text= [[responseObject valueForKey:@"quantity_summary"]valueForKey:@"unit_price"];
         
-        
-        
         [self loadExpenseEntries];
-        
-        
     }
-    
-    
     else    {
-        
-        
-        
-        
         /* itemDetails=[[responseObject valueForKey:@"quantity_summary"]mutableCopy];
          
          NSLog(@"Count-------%@",itemDetails);
@@ -531,31 +497,14 @@ didReceiveResponse:(NSURLResponse *)response
          [self.quantityTable reloadData];
          [self loadExpenseEntries];*/
         
-        
-        
-        
         NSInteger count =[[responseObject valueForKey:@"quantity_summary"] count];
         NSLog(@"count--- %i",count);
         itemDetails=[[NSMutableArray alloc]init];
         
         itemDetails=[[responseObject valueForKey:@"quantity_summary"]mutableCopy];
-        
-        
-        
         NSLog(@"details---------%@",itemDetails);
-        
-        
-        
-        
         [quantityTable reloadData];
-        
-        
-        
-        
     }
-    
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

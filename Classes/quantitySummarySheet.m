@@ -15,9 +15,6 @@
     
     
     UIPopoverController *popoverController;
-    
-    
-    
     BOOL isSubTableView;
     NSMutableArray *arrayItems;
     NSMutableArray *itemDetails;
@@ -42,24 +39,15 @@
     UIPickerView *pickerView1;
     UIPickerView *pickerViewCities;
     
-    
     BOOL isSaved;
     
-    
-    NSUserDefaults *defaults;
-    
-    
-    
-    
-    
-    
-    
+    NSDictionary *sourceDictionary;
 }
 
 @end
 
 @implementation quantitySummarySheet
-@synthesize qtyTable;
+@synthesize qtyTable,isEdit,selectedDict;
 @synthesize scrollView;
 @synthesize i_number,item,est_quantity,project,unit,unit_price;
 
@@ -72,37 +60,16 @@
     return self;
 }
 
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionaryParam = sourceDictionaryParam;
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-    
-    defaults= [NSUserDefaults standardUserDefaults];
-    
-    
-    NSString* temp1 = [defaults objectForKey:@"project"];
-    NSString* temp2 = [defaults objectForKey:@"i_number"];
-    NSString* temp3 = [defaults objectForKey:@"item"];
-    NSString* temp4 = [defaults objectForKey:@"est_quantity"];
-    NSString* temp5 = [defaults objectForKey:@"unit"];
-    NSString* temp6 = [defaults objectForKey:@"unit_price"];
-    
-    
-    NSString* temp7 = [defaults objectForKey:@"i_number"];
-    
-    
-    
-    project.text=temp1;
-    i_number.text=temp2;
-    item.text=temp3;
-    est_quantity.text=temp4;
-    unit.text=temp5;
-    unit_price.text=temp6;
-    
-    // appDelegate.coloumn1=temp7;
-    
-    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -127,94 +94,54 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    
     project.text=appDelegate.projName;
     
-    
-    NSLog(@"------- %@",itemDetails);
-    
-    // [self getAllItems];
-    
+    if(selectedDict)
+    {
+        NSLog(@"selected Dict is %@",selectedDict);
+        //Edit
+        project.text= [selectedDict valueForKey:@"project"];
+        i_number.text=[selectedDict valueForKey:@"item_no"];
+        //   item.text=[selectedDict valueForKey:@""];
+        est_quantity.text= [NSString stringWithFormat:@"%d",[[selectedDict valueForKey:@"est_qty"] intValue]];;
+        unit_price.text=[selectedDict valueForKey:@"unit_price"];
+        unit.text=[NSString stringWithFormat:@"%d",[[selectedDict valueForKey:@"unit"] intValue]];
+        
+        [self getAllItems];
+    }
 }
-
-
-
-
-
-
-
 -(void)exit{
-    
-    
-    
-    
-    
-    NSString* textField1Text = project.text;
-    [defaults setObject:textField1Text forKey:@"project"];
-    
-    
-    NSString* textField2Text = i_number.text;
-    [defaults setObject:textField2Text forKey:@"i_number"];
-    
-    NSString* textField3Text = item.text;
-    [defaults setObject:textField3Text forKey:@"item"];
-    
-    
-    NSString* textField4Text = est_quantity.text;
-    [defaults setObject:textField4Text forKey:@"est_quantity"];
-    
-    NSString* textField5Text = unit.text;
-    [defaults setObject:textField5Text forKey:@"unit"];
-    
-    NSString* textField6Text = unit_price.text;
-    [defaults setObject:textField6Text forKey:@"unit_price"];
-    
-    
-    [defaults synchronize];
-    
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    
     [exportAlert show];
-    
-    
-    
-    
 }
-
-
-
-
-
-
-
-
 
 
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     
-    //value=i_number.text;
     
-    NSLog(@"------11111------------");
-    
-    //  [self getAllItems];
-    
-    //  }
 }
 
 
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
+    
     if(textField==i_number)
     {
+        
         [i_number resignFirstResponder];
         pickerDataArray=[[NSMutableArray alloc]initWithObjects:@"INO-01",@"INO-02",@"INO-03",@"INO-04",@"INO-05",@"INO-06",@"INO-07",@"INO-08",@"INO-09",@"INO-10",@"INO-11",@"INO-12",@"INO-13",@"INO-14",@"INO-15",@"INO-16",@"INO-17",@"INO-18",@"INO-19",@"INO-20",@"INO-21",@"INO-22",@"INO-23",@"INO-24",@"INO-25",@"INO-26",@"INO-27",@"INO-28",@"INO-29",@"INO-30",@"INO-31",@"INO-32",@"INO-33",@"INO-34",@"INO-35",@"INO-36",@"INO-37",@"INO-38",@"INO-39",@"INO-40",@"INO-41",@"INO-42",@"INO-43",@"INO-44",@"INO-45",@"INO-46",@"INO-47",@"INO-48",@"INO-49",@"INO-50",@"INO-51",@"INO-52",@"INO-53",@"INO-54",nil];
+        
+        
         [self createPicker:i_number];
         pickerTag=1;
+        
     }
+    
+    
 }
+
 
 -(void)createPicker:(UITextField *)txtField
 {
@@ -337,32 +264,36 @@
         cell = [nib objectAtIndex:0];
     }
     
+    //    NSDate *dateObj = [[itemDetails valueForKey:@"date"]objectAtIndex:indexPath.row];
+    //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //    [formatter setDateFormat:@"YYYY-MM-dd"];
+    //    NSString *dateStr = [formatter stringFromDate:dateObj];
+    //    if(!dateStr)
+    //        dateStr = @"";
+    //
+    //    cell.i_Date.text = dateStr;
+    //    cell.i_number.text = [[itemDetails valueForKey:@"item_no"]objectAtIndex:indexPath.row];
+    //    cell.i_Accum.text = [[itemDetails valueForKey:@"accum"]objectAtIndex:indexPath.row];
+    //    cell.i_Daily.text = [NSString stringWithFormat:@"%d",[[[itemDetails valueForKey:@"quantity_sum_details_no"] objectAtIndex:indexPath.row]  integerValue]];
+    //    cell.location_station.text=appDelegate.address ;
     
-    cell.i_Date.text = [[itemDetails valueForKey:@"date"]objectAtIndex:indexPath.row];
-    cell.i_number.text = [[itemDetails valueForKey:@"No"]objectAtIndex:indexPath.row];
-    cell.i_Accum.text = [[itemDetails valueForKey:@"accum"]objectAtIndex:indexPath.row];
-    cell.i_Daily.text = [[itemDetails valueForKey:@"Qty"]objectAtIndex:indexPath.row];
-    cell.location_station.text=appDelegate.address ;
-    
-    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.coloumn1=cell.i_number.text;
-    appDelegate.coloumn2=cell.i_Date.text;
-    appDelegate.coloumn3=cell.location_station.text;
-    appDelegate.coloumn4=cell.i_Daily.text;
-    appDelegate.coloumn5=cell.i_Accum.text;
-    
-    
-    
-    
-    NSString* textField1Text = appDelegate.coloumn1;
-    [defaults setObject:textField1Text forKey:@"i_number"];
-    
-    
-    
-    
+    //Radha
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    cell.i_Date.text =  [formatter stringFromDate:[[itemDetails valueForKey:@"date"]objectAtIndex:indexPath.row]];
+    cell.i_number.text = [[itemDetails valueForKey:@"no"]objectAtIndex:indexPath.row];
+    cell.i_Accum.text = [NSString stringWithFormat:@"%d",[self calculateAccumForRowNumber:indexPath.row]]  ;
+    cell.i_Daily.text = [NSString stringWithFormat:@"%d",[[[itemDetails valueForKey:@"qty"]objectAtIndex:indexPath.row] intValue]];
+    cell.location_station.text = appDelegate.city;
     
     
     
+    appDelegate = (TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.coloumn1 = cell.i_number.text;
+    appDelegate.coloumn2 = cell.i_Date.text;
+    appDelegate.coloumn3 = cell.location_station.text;
+    appDelegate.coloumn4 = cell.i_Daily.text;
+    appDelegate.coloumn5 = cell.i_Accum.text;    
     
     return cell;
 }
@@ -374,14 +305,17 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return itemDetails.count;
-    
 }
 
-
-
-
+-(int)calculateAccumForRowNumber:(int)count
+{
+    int accum = 0;
+    for (int i = 0; i<= count; i++) {
+        accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
+    }
+    return accum;
+}
 
 - (IBAction)saveQuantitySumSheet:(id)sender {
     
@@ -398,27 +332,12 @@
     }
     else
     {
-        // http://data.privytext.us/contructionapi.php/api/quantity_summary/save/`project/ item_no/ est_qty/unit/unit_price
-        isSaved=YES;
-        NSString *strURL;
-        strURL= [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/save/%@/%@/%@/%@/%@/%@/%@",appDelegate.projId ,project.text,value,est_quantity.text,unit.text,unit_price.text,appDelegate.username];
-        NSLog(@"URL---- %@",strURL);
-        NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *apiURL =
-        [NSURL URLWithString:uencodedUrl];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-        [urlRequest setHTTPMethod:@"POST"];
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        _receivedData = [[NSMutableData alloc] init];
-        [connection start];
-        NSLog(@"URL---%@",strURL);
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
         
+        isSaved=YES;
+        
+        NSString *idStr;
+        if(selectedDict)
+            idStr = [selectedDict valueForKey:@"id"];
         
         BOOL saveStatus = [PRIMECMController saveQuantitySummaryDetails: appDelegate.username
                                                                 est_qty: est_quantity.text
@@ -428,6 +347,8 @@
                                                                    unit: unit.text
                                                              unit_price: unit_price.text
                                                                    user: appDelegate.userId
+                                                                  idStr:idStr
+                                                                isEdit :isEdit
                            ];
         
         
@@ -495,158 +416,17 @@
 
 -(void)getAllItems
 {
-    NSString *strURL;
-    
-    isSaved=NO;
-    
-    
-    strURL= [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/list/Lin/%@",value];
-    
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.labelText=@"";
-    HUD.dimBackground = YES;
-    HUD.delegate = self;
-    [HUD show:YES];
-    
-    
-    
-}
-
-
-
-
-
-
-
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response
-{
-    
-    _receivedResponse = response;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData
-                                                                 *)data
-{
-    
-    [_receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError
-                                                                   *)error
-{
-    [HUD setHidden:YES];
-    _connectionError = error;
-    isSubTableView=NO;
-}
-
-
-
-
-
-
-
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-    [HUD setHidden:YES];
-    
-    NSError *parseError = nil;
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
-    
-    
-    
-    NSLog(@"response---%@",responseObject);
-    
-    
-    
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    
-    if(isSaved){
-        
-        isSaved=YES;
-        if([[responseObject valueForKey:@"status"]isEqualToString:@"sucess"])
-            
-        {
-            
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully added." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-            
-        }
-        
-        else
-        {
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-        
-    }
-    
-    
-    else{
-        
-        
-        
-        NSInteger count =[[responseObject valueForKey:@"quantity_summary"] count];
-        NSLog(@"count--- %i",count);
-        itemDetails=[[NSMutableArray alloc]init];
-        
-        itemDetails=[[responseObject valueForKey:@"quantity_summary"]mutableCopy];
+    //Radha
+    itemDetails  =  [NSMutableArray arrayWithArray:[PRIMECMController getQuantitySummaryDetailsForInspectionID:appDelegate.inspectionID AndItemNum:i_number.text]];
+    NSLog(@"quantityList is %@",itemDetails);
+    if([itemDetails count]>0)
+    {
         itemNo=[[itemDetails objectAtIndex:0]valueForKey:@"No"];
         itemDes=[[itemDetails objectAtIndex:0]valueForKey:@"Description"];
-        
-        
-        NSLog(@"details---------%@",itemDetails);
-        
-        
-        NSLog(@"iteeem%@",itemNo);
-        NSLog(@"fsddsdf%@",[[itemDetails objectAtIndex:0]valueForKey:@"No"]);
-        
-        
         item.text=itemDes;
-        
-        
-        // appDelegate.projectsArray=[[responseObject valueForKey:@"quantity_summary"] mutableCopy];
-        // appDelegate.projId=[[itemDetails objectAtIndex:0]valueForKey:@"No"];
-        
-        NSLog(@"response obj------%@",itemDetails);
-        // NSLog(@"response obj1------%@",appDelegate.projectsArray);
-        
-        
-        [qtyTable reloadData];
-        
-
-        
-        
     }
-    
-    
-    
+    [qtyTable reloadData];
+    return;
 }
 
 

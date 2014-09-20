@@ -455,7 +455,8 @@
 
 -(IBAction)saveImage:(id)sender
 {
-    imgName=[NSString stringWithFormat:@"CM_%i",count];
+    NSString *imgName=[NSString stringWithFormat:@"daily_inspection_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
+    
     if(txvDescription.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"

@@ -50,15 +50,13 @@
     BOOL first;
     BOOL Second;
     BOOL third;
-    
-    NSUserDefaults *defaults;
-    
+    NSDictionary *sourceDictionary;
 }
 
 @end
 
 @implementation ExpenceViewController
-@synthesize  scrollView,ERtextDate6,txtMil1,txtRate1,txtTotal1,cashAdvance,reimburs,imgSignatureEx,imagePicker,isFromSketches,isFromReport,arrayImages,imageAddSubView,imgViewAdd,txvDescription,header,ERtxtEmpName,ERtxtApprovedBy,ERtxtWeek,ERtxtCheckNum,ERdate6,ERtxtEmpNum,ERDescription,ERJobNo,ERType;
+@synthesize  scrollView,ERtextDate6,txtMil1,txtRate1,txtTotal1,cashAdvance,reimburs,imgSignatureEx,imagePicker,isFromSketches,isFromReport,arrayImages,imageAddSubView,imgViewAdd,txvDescription,header,ERtxtEmpName,ERtxtApprovedBy,ERtxtWeek,ERtxtCheckNum,ERdate6,ERtxtEmpNum,ERDescription,ERJobNo,ERType,exNUmber;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,6 +65,13 @@
     if (self) {
         
     }
+    return self;
+}
+
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
     return self;
 }
 
@@ -109,42 +114,10 @@
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
     
-    NSString *expID = [PRIMECMController getExpenceIdByProjID:appDelegate.projId];
-    
-    if(expID != nil)
-    {
-        ExpID=expID;
-        NSLog(@"Inthe");
-    }
-    else{
-        ExpID=@"0";
-    }
-    
-    defaults= [NSUserDefaults standardUserDefaults];
-    
-    NSString* temp1 = [defaults objectForKey:@"ERDescription"];
-    NSString* temp2 = [defaults objectForKey:@"ERJobNo"];
-    NSString* temp3 = [defaults objectForKey:@"ERType"];
-    NSString* temp4 = [defaults objectForKey:@"txtMil1"];
-    NSString* temp5 = [defaults objectForKey:@"txtRate1"];
-    NSString* temp6 = [defaults objectForKey:@"txtTotal1"];
-    NSString* temp7 = [defaults objectForKey:@"cashAdvance"];
-    NSString* temp8 = [defaults objectForKey:@"reimburs"];
-    NSString* temp9 = [defaults objectForKey:@"ERtxtWeek"];
-    NSString* temp10 = [defaults objectForKey:@"ERtxtCheckNum"];
-    NSString* temp11 = [defaults objectForKey:@"ERdate6"];
-    
-    ERDescription.text=temp1;
-    ERJobNo.text=temp2;
-    ERType.text=temp3;
-    txtMil1.text=temp4;
-    txtRate1.text=temp5;
-    txtTotal1.text=temp6;
-    cashAdvance.text=temp7;
-    reimburs.text=temp8;
-    ERtxtWeek.text=temp9;
-    ERtxtCheckNum.text=temp10;
-    ERdate6.text=temp11;
+    if(!exNUmber)
+        ExpID =  [NSString stringWithFormat:@"EX_%@",[self getCurrentDateTimeAsNSString]];  // [PRIMECMController getExpenceIdByProjID:appDelegate.projId];
+    else
+        ExpID = exNUmber;
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -159,55 +132,17 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
+    //Radha
+    if(exNUmber)
+    {
+        //Edit Tapped
+        
+    }
 }
 
 
 -(void)exit{
-    NSString* textField1Text = ERDescription.text;
-    [defaults setObject:textField1Text forKey:@"ERDescription"];
-    
-    
-    NSString* textField2Text = ERJobNo.text;
-    [defaults setObject:textField2Text forKey:@"ERJobNo"];
-    
-    NSString* textField3Text = ERType.text;
-    [defaults setObject:textField3Text forKey:@"ERType"];
-    
-    
-    NSString* textField4Text = txtMil1.text;
-    [defaults setObject:textField4Text forKey:@"txtMil1"];
-    
-    NSString* textField5Text = txtRate1.text;
-    [defaults setObject:textField5Text forKey:@"txtRate1"];
-    
-    NSString* textField6Text = txtTotal1.text;
-    [defaults setObject:textField6Text forKey:@"txtTotal1"];
-    
-    
-    NSString* textField7Text = cashAdvance.text;
-    [defaults setObject:textField7Text forKey:@"cashAdvance"];
-    
-    
-    
-    NSString* textField8Text = reimburs.text;
-    [defaults setObject:textField8Text forKey:@"reimburs"];
-    
-    
-    
-    NSString* textField9Text = ERtxtWeek.text;
-    [defaults setObject:textField9Text forKey:@"ERtxtWeek"];
-    
-    NSString* textField10Text = ERtxtCheckNum.text;
-    [defaults setObject:textField10Text forKey:@"ERtxtCheckNum"];
-    
-    
-    NSString* textField11Text = ERdate6.text;
-    [defaults setObject:textField11Text forKey:@"ERdate6"];
-    
-    [defaults synchronize];
-    
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    
     [exportAlert show];
 }
 
@@ -517,17 +452,19 @@
         [txtTotal1 resignFirstResponder];
     }
     
-    double cash  = [self.cashAdvance.text doubleValue];
-    double sum = [appDelegate.reImp doubleValue];
-    if (sum > 0)
+    //Radha
+    if(appDelegate.reImp)
     {
-        
-        double totdate = sum;
-        double result = totdate - cash;
-        reimburs.text =  [NSString stringWithFormat:@"%.2f", result];
-        if (totdate < cash)
+        double cash  = [self.cashAdvance.text doubleValue];
+        double sum = [appDelegate.reImp doubleValue];
+        if (sum > 0)
         {
-            reimburs.text = @"00.00";
+            double result = sum - cash;
+            reimburs.text =  [NSString stringWithFormat:@"%.2f", result];
+            if (sum < cash)
+            {
+                reimburs.text = @"00.00";
+            }
         }
     }
     
@@ -667,13 +604,28 @@
     NSData *imagData = UIImageJPEGRepresentation(image,0.75f);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
-    [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
+    BOOL status =  [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
+    if(status)
+    {
+        if(!imgPath)
+        {
+            imgPath = [[NSMutableString alloc] init];
+            [imgPath appendString:fullPath];
+        }
+        else
+        {
+            [imgPath appendString:@","];
+            [imgPath appendString:fullPath];
+        }
+    }
 }
 
 
 -(IBAction)saveImage:(id)sender
 {
-    NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
+    //Radha
+    NSString *imgName=[NSString stringWithFormat:@"CM_%d_%i",arc4random()%10000, count];
+    
     if(txvDescription.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -849,8 +801,6 @@
 }
 
 - (IBAction)butSave:(id)sender {
-    
-    
     if(cashAdvance.text==NULL || cashAdvance.text.length==0 || reimburs.text==NULL || reimburs.text.length==0 || ERtxtEmpName.text==NULL || ERtxtEmpName.text.length==0 || imgSignatureEx.image==NULL || ERtextDate6.text==NULL ||  ERtextDate6.text.length==0 || ERtxtApprovedBy.text.length==0 || ERtxtApprovedBy.text==NULL || ERtxtWeek.text==NULL || ERtxtWeek.text.length==0 || ERtxtEmpNum.text==NULL || ERtxtEmpNum.text.length==0|| ERtxtCheckNum.text==NULL || ERtxtCheckNum.text.length==0)
     {
         
@@ -865,13 +815,12 @@
     {
         NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
         
+        BOOL status = [PRIMECMController saveAllImages:sigName img:UIImageJPEGRepresentation( imgSignatureEx.image,1) syncStatus:SYNC_STATUS_PENDING];
+        NSLog(@"signature saved %d",status);
         
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText=@"";
-        HUD.dimBackground = YES;
-        HUD.delegate = self;
-        [HUD show:YES];
+        BOOL isEdit = NO;
+        if(exNUmber)
+            isEdit = YES;
         
         BOOL saveStatus = [PRIMECMController
                            saveExpenseForm:appDelegate.username
@@ -889,12 +838,20 @@
                            project_id:appDelegate.projId
                            signature:sigName
                            weekEnding:ERtxtWeek.text
+                           isEdit:isEdit
                            ];
         
         [HUD setHidden:YES];
         
         if (saveStatus){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            NSString *msg;
+            if(isEdit)
+                msg  = @"Updated expense data";
+            else
+                msg = @"Successfully saved expense data.";
+            
+            
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
             [arrayImages removeAllObjects];
@@ -908,6 +865,7 @@
             ERtxtWeek.text=NULL;
             ERtxtEmpNum.text=NULL;
             ERtxtCheckNum.text=NULL;
+            exNUmber = NULL;
             
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -919,6 +877,27 @@
 
 
 - (IBAction)butExp:(id)sender {
+    //Radha
+    NSLog(@"ExpID is %@",ExpID);
+    
+    //    BOOL saveStatus = [PRIMECMController
+    //                       saveExpenseData:appDelegate.username
+    //                       eRDate1:@"2014-12-23"
+    //                       eRDescription1:@"Test boss2"
+    //                       eRJobNo1:@"Manager"
+    //                       eRPAMilage1:@"123"
+    //                       eRPARate1:@"234"
+    //                       eRTotal1:@"324"
+    //                       eRType1:@"222"
+    //                       eXReportNo:ExpID
+    //                       images_uploaded:@""
+    //                       project_id:appDelegate.projId
+    //                       imgPath:imgPath
+    //                       ];
+    //
+    //    return;
+    
+    
     uploading = NO;
     uploadingsketch=NO;
     if(ERdate6.text==NULL || ERdate6.text.length==0 || ERDescription.text==NULL || ERDescription.text.length==0 || ERJobNo.text==NULL || ERJobNo.text.length==0 || ERType.text==NULL ||  ERType.text.length==0 || txtMil1.text.length==0 || txtMil1.text==NULL || txtRate1.text==NULL || txtRate1.text.length==0 || txtTotal1.text==NULL || txtTotal1.text.length==0)
@@ -936,7 +915,7 @@
         
         //NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
         
-      
+        
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
         HUD.labelText=@"";
@@ -954,12 +933,14 @@
                            eRTotal1:txtTotal1.text
                            eRType1:ERType.text
                            eXReportNo:ExpID
-                           images_uploaded:@""
+                           images_uploaded:imgPath
+                           project_id:appDelegate.projId
+                           imgPath:imgPath
                            ];
         
         
         [HUD setHidden:YES];
-
+        
         
         if (saveStatus){
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -975,6 +956,7 @@
             txtRate1.text=NULL;
             txtTotal1.text=NULL;
             ERType.text=NULL;
+            imgPath = NULL;
             
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

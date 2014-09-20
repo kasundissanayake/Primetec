@@ -40,14 +40,14 @@
     NSString *comNoticeNo;
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
-    NSUserDefaults *defaults;
-    
+    NSDictionary *sourceDictionary;
 }
 
 @end
 
 @implementation SummaryReportViewController
 
+@synthesize isEdit;
 @synthesize city;
 @synthesize conPeWork;
 @synthesize constructionOrder;
@@ -104,9 +104,16 @@
     return self;
 }
 
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
+    return self;
+}
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad]; 
     
     comNoticeNo=@"";
     count=0;
@@ -136,7 +143,7 @@
     
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
     contractor.text=appDelegate.projId;
@@ -147,86 +154,6 @@
     projectNo.text=appDelegate.projId;
     date.text=dateString;
     telephoneNo.text=appDelegate.tel;
-    defaults= [NSUserDefaults standardUserDefaults];
-    
-    
-    NSString* temp1 = [defaults objectForKey:@"conPeWork"];
-    NSString* temp2 = [defaults objectForKey:@"federalAidNumber"];
-    NSString* temp3 = [defaults objectForKey:@"descr"];
-    NSString* temp4 = [defaults objectForKey:@"constructionOrder"];
-    NSString* temp5 = [defaults objectForKey:@"lAClass1"];
-    NSString* temp6 = [defaults objectForKey:@"lAClass2"];
-    NSString* temp7 = [defaults objectForKey:@"lAClass3"];
-    NSString* temp8 = [defaults objectForKey:@"lAClass4"];
-    NSString* temp9 = [defaults objectForKey:@"lAClass5"];
-    NSString* temp10 = [defaults objectForKey:@"lANo1"];
-    NSString* temp11 = [defaults objectForKey:@"lANo2"];
-    NSString* temp12 = [defaults objectForKey:@"lANo3"];
-    NSString* temp13 = [defaults objectForKey:@"lANo4"];
-    NSString* temp14 = [defaults objectForKey:@"lANo5"];
-    NSString* temp15 = [defaults objectForKey:@"lATotalHours1"];
-    NSString* temp16 = [defaults objectForKey:@"lATotalHours2"];
-    NSString* temp17 = [defaults objectForKey:@"lATotalHours3"];
-    NSString* temp18 = [defaults objectForKey:@"lATotalHours4"];
-    NSString* temp19 = [defaults objectForKey:@"lATotalHours5"];
-    NSString* temp20 = [defaults objectForKey:@"lARate1"];
-    NSString* temp21 = [defaults objectForKey:@"lARate2"];
-    NSString* temp22 = [defaults objectForKey:@"lARate3"];
-    NSString* temp23 = [defaults objectForKey:@"lARate4"];
-    NSString* temp24 = [defaults objectForKey:@"lARate5"];
-    NSString* temp25 = [defaults objectForKey:@"lAAmount1"];
-    NSString* temp26 = [defaults objectForKey:@"lAAmount2"];
-    NSString* temp27 = [defaults objectForKey:@"lAAmount3"];
-    NSString* temp28 = [defaults objectForKey:@"lAAmount4"];
-    NSString* temp29 = [defaults objectForKey:@"lAAmount5"];
-    NSString* temp30 = [defaults objectForKey:@"totalLabor"];
-    
-    NSString* temp31 = [defaults objectForKey:@"healWelAndPension"];
-    
-    NSString* temp32 = [defaults objectForKey:@"insAndTaxesOnItem1"];
-    
-    NSString* temp33 = [defaults objectForKey:@"itemDescount20per"];
-    
-    NSString* temp34= [defaults objectForKey:@"total"];
-    NSData* imageData1 = [defaults objectForKey:@"complianceSignature"];
-    UIImage* image1 = [UIImage imageWithData:imageData1];
-    
-    conPeWork.text=temp1;
-    federalAidNumber.text=temp2;
-    descr.text=temp3;
-    constructionOrder.text=temp4;
-    lAClass1.text=temp5;
-    lAClass2.text=temp6;
-    lAClass3.text=temp7;
-    lAClass4.text=temp8;
-    lAClass5.text=temp9;
-    lANo1.text=temp10;
-    lANo2.text=temp11;
-    
-    lANo3.text=temp12;
-    lANo4.text=temp13;
-    lANo5.text=temp14;
-    lATotalHours1.text=temp15;
-    lATotalHours2.text=temp16;
-    lATotalHours3.text=temp17;
-    lATotalHours4.text=temp18;
-    lATotalHours5.text=temp19;
-    lARate1.text=temp20;
-    lARate2.text=temp21;
-    lARate3.text=temp22;
-    lARate4.text=temp23;
-    lARate5.text=temp24;
-    lAAmount1.text=temp25;
-    lAAmount2.text=temp26;
-    lAAmount3.text=temp27;
-    lAAmount4.text=temp28;
-    lAAmount5.text=temp29;
-    totalLabor.text=temp30;
-    healWelAndPension.text=temp31;
-    insAndTaxesOnItem1.text=temp32;
-    itemDescount20per.text=temp33;
-    total.text=temp34;
-    
     
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"Exit", @"")
@@ -241,136 +168,18 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
+}
+
+
+-(void)populateValues
+{
     
 }
 
 
 -(void)exit{
-    NSString* textField1Text = conPeWork.text;
-    [defaults setObject:textField1Text forKey:@"conPeWork"];
-    
-    
-    NSString* textField2Text = federalAidNumber.text;
-    [defaults setObject:textField2Text forKey:@"federalAidNumber"];
-    
-    NSString* textField3Text = descr.text;
-    [defaults setObject:textField3Text forKey:@"descr"];
-    
-    
-    NSString* textField4Text = constructionOrder.text;
-    [defaults setObject:textField4Text forKey:@"constructionOrder"];
-    
-    NSString* textField5Text = lAClass1.text;
-    [defaults setObject:textField5Text forKey:@"lAClass1"];
-    
-    NSString* textField6Text = lAClass2.text;
-    [defaults setObject:textField6Text forKey:@"lAClass2"];
-    
-    
-    NSString* textField7Text = lAClass3.text;
-    [defaults setObject:textField7Text forKey:@"lAClass3"];
-    
-    
-    
-    NSString* textField8Text = lAClass4.text;
-    [defaults setObject:textField8Text forKey:@"lAClass4"];
-    
-    
-    
-    NSString* textField9Text = lAClass5.text;
-    [defaults setObject:textField9Text forKey:@"lAClass5"];
-    
-    NSString* textField10Text = lANo1.text;
-    [defaults setObject:textField10Text forKey:@"lANo1"];
-    
-    
-    NSString* textField11Text = lANo2.text;
-    [defaults setObject:textField11Text forKey:@"lANo2"];
-    
-    NSString* textField12Text = lANo3.text;
-    [defaults setObject:textField12Text forKey:@"lANo3"];
-    
-    NSString* textField13Text = lANo4.text;
-    [defaults setObject:textField13Text forKey:@"lANo4"];
-    
-    NSString* textField14Text = lANo5.text;
-    [defaults setObject:textField14Text forKey:@"lANo5"];
-    
-    NSString* textField15Text = lATotalHours1.text;
-    [defaults setObject:textField15Text forKey:@"lATotalHours1"];
-    
-    NSString* textField16Text = lATotalHours2.text;
-    [defaults setObject:textField16Text forKey:@"lATotalHours2"];
-    
-    NSString* textField17Text = lATotalHours3.text;
-    [defaults setObject:textField17Text forKey:@"lATotalHours3"];
-    
-    NSString* textField18Text = lATotalHours4.text;
-    [defaults setObject:textField18Text forKey:@"lATotalHours4"];
-    
-    NSString* textField19Text = lATotalHours5.text;
-    [defaults setObject:textField19Text forKey:@"lATotalHours5"];
-    
-    NSString* textField20Text = lARate1.text;
-    [defaults setObject:textField20Text forKey:@"lARate1"];
-    
-    NSString* textField21Text = lARate2.text;
-    [defaults setObject:textField21Text forKey:@"lARate2"];
-    
-    NSString* textField22Text = lARate3.text;
-    [defaults setObject:textField22Text forKey:@"lARate3"];
-    
-    NSString* textField23Text = lARate4.text;
-    [defaults setObject:textField23Text forKey:@"lARate4"];
-    
-    NSString* textField24Text = lARate5.text;
-    [defaults setObject:textField24Text forKey:@"lARate5"];
-    
-    NSString* textField25Text = lAAmount1.text;
-    [defaults setObject:textField25Text forKey:@"lAAmount1"];
-    
-    NSString* textField26Text = lAAmount2.text;
-    [defaults setObject:textField26Text forKey:@"lAAmount2"];
-    
-    NSString* textField27Text = lAAmount3.text;
-    [defaults setObject:textField27Text forKey:@"lAAmount3"];
-    
-    NSString* textField28Text = lAAmount4.text;
-    [defaults setObject:textField28Text forKey:@"lAAmount4"];
-    
-    NSString* textField29Text = lAAmount5.text;
-    [defaults setObject:textField29Text forKey:@"lAAmount5"];
-    
-    NSString* textField30Text = totalLabor.text;
-    [defaults setObject:textField30Text forKey:@"totalLabor"];
-    
-    
-    NSString* textField31Text = healWelAndPension.text;
-    [defaults setObject:textField31Text forKey:@"healWelAndPension"];
-    
-    
-    
-    NSString* textField32Text = insAndTaxesOnItem1.text;
-    [defaults setObject:textField32Text forKey:@"insAndTaxesOnItem1"];
-    
-    
-    
-    NSString* textField33Text = itemDescount20per.text;
-    [defaults setObject:textField33Text forKey:@"itemDescount20per"];
-    
-    
-    NSString* textField34Text = total.text;
-    [defaults setObject:textField34Text forKey:@"total"];
-    
-    
-    [defaults synchronize];
-    
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    
-    [exportAlert show];
-    
-    
-    
+    [exportAlert show];    
 }
 
 
@@ -581,7 +390,17 @@
 }
 
 - (IBAction)next:(id)sender {
-    
+    int totalRecords = [PRIMECMController totalObjectsOfSummarySheet];
+    NSString *smNum;
+    if(!isEdit)
+    {
+        //New Record
+        smNum = [NSString stringWithFormat:@"SM_%d_%d",arc4random()%10000,totalRecords+1];
+    }
+    else
+    {
+        smNum =  appDelegate.sMSheetNo;
+    }
     
     if(contractor.text==NULL || contractor.text.length==0 || pOBox.text==NULL || pOBox.text.length==0 || city.text==NULL || city.text.length==0 || state.text==NULL || state.text.length==0 || telephoneNo.text==NULL || telephoneNo.text.length==0 || date.text==NULL || date.text.length==0 || conPeWork.text==NULL || conPeWork.text.length==0 || federalAidNumber.text==NULL || federalAidNumber.text.length==0 || projectNo.text==NULL || projectNo.text.length==0 || descr.text==NULL || descr.text.length==0 || constructionOrder.text==NULL || constructionOrder.text.length==0 || total.text==NULL || total.text.length==0 || healWelAndPension.text==NULL || healWelAndPension.text.length==0 || insAndTaxesOnItem1.text==NULL || insAndTaxesOnItem1.text.length==0 || totalLabor.text==NULL || totalLabor.text.length==0 ||  itemDescount20per.text==NULL || itemDescount20per.text.length==0  || zip.text==NULL ||zip.text.length==0  )
     {
@@ -779,29 +598,6 @@
             field25=lAAmount5.text;
             
         }
-        /*
-         NSString *strURL = [NSString stringWithFormat:@"%@/api/summary1/create/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@", [PRIMECMAPPUtils getAPIEndpoint],
-         appDelegate.username,appDelegate.projId,sSHeader.text,contractor.text,pOBox.text,city.text,state.text,zip.text,telephoneNo.text,date.text,@"hi",conPeWork.text,federalAidNumber.text,projectNo.text,descr.text,constructionOrder.text,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25,totalLabor.text,healWelAndPension.text,insAndTaxesOnItem1.text,itemDescount20per.text,total.text,appDelegate.projPrintedName];
-         
-         
-         // NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-         
-         NSString *uencodedUrl = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-         NSLog(@"URL---- %@",uencodedUrl);
-         
-         NSURL *apiURL =
-         [NSURL URLWithString:uencodedUrl];
-         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-         [urlRequest setHTTPMethod:@"POST"];
-         
-         
-         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-         
-         _receivedData = [[NSMutableData alloc] init];
-         
-         [connection start];
-         // NSLog(@"URL---%@",strURL);
-         */
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
@@ -848,23 +644,30 @@
                            lATotalHours4:lATotalHours4.text
                            lATotalHours5:lATotalHours5.text
                            pOBox:appDelegate.address
-                           printedName:@"Lin"
+                           printedName:appDelegate.username   //Radha
                            project_id:appDelegate.projId
                            projectNo:appDelegate.projId
                            reportNo:@""
-                           sMSheetNo:@""
+                           sMSheetNo:smNum    //Radha
                            sSHeader:sSHeader.text
                            state:appDelegate.state
                            telephoneNo:appDelegate.tel
                            total:total.text
                            totalLabor:totalLabor.text
                            zip:appDelegate.zip
+                           isEdit:isEdit
                            ];
         
         [HUD setHidden:YES];
         
         if (saveStatus){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            NSString *msg;
+            if(isEdit)
+                msg  = @"Updated Summary Sheet Report";
+            else
+                msg = @"Sheet1 is Saved.Fill the Sheet 2";
+            
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
             [arrayImages removeAllObjects];
@@ -872,16 +675,15 @@
             
             Summary_2_ViewController *su=[[Summary_2_ViewController alloc] init];
             su.title=@"Summary Sheet";
+            su.isEdit = isEdit;
+            su.smSheetNumber = smNum;
             [self.navigationController pushViewController:su animated:YES];
             
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
         }
-        
     }
-    
-    
 }
 
 -(void)clearFormFields

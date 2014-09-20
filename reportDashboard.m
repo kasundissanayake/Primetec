@@ -2,7 +2,7 @@
 #import "ReportDetailsCell.h"
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
-#import "ComplianceReport.h"
+//#import "ComplianceReport.h"
 
 @interface reportDashboard ()
 {
@@ -44,8 +44,8 @@
     
     UIBarButtonItem  *newButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(addNewForm)];
     self.navigationItem.rightBarButtonItem = newButton;
-    UIBarButtonItem  *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
-    self.navigationItem.leftBarButtonItem = deleteButton;
+    //UIBarButtonItem  *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];
+    // self.navigationItem.leftBarButtonItem = deleteButton;
     self.table.scrollEnabled=YES;
     
 }
@@ -69,19 +69,16 @@
     }
     else if (proType==3 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ExpenceViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpeseForm" object:nil userInfo:NULL];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeExpenceForm" object:nil userInfo:NULL];
     }
     else if (proType==4 && ![NSStringFromClass([currentVC class]) isEqualToString:@"SummaryReportViewController"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil userInfo:NULL];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil];
     }
-    
-    //start brin
     else if (proType==5 && ![NSStringFromClass([currentVC class]) isEqualToString:@"quantitySummarySheet"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummary" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQuantitySummaryForm" object:nil userInfo:nil];
     }
-    //end brin
 }
 
 
@@ -116,21 +113,21 @@
     }
     
     if (indexPath.section == 0) {
- 
+        
         //start brin
         
-       
-            if(proType==2)
-            {
-                cell.lblReportName.text =[[reports valueForKey:@"dIFHeader"]objectAtIndex:indexPath.row];
-                cell.lblReportDate.text = [NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
-                                                                         dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-                
-                cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
-                cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
-            }
+        
+        if(proType==2)
+        {
+            cell.lblReportName.text =[[reports valueForKey:@"dIFHeader"]objectAtIndex:indexPath.row];
+            cell.lblReportDate.text = [NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
+                                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             
-
+            cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
+            cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
+        }
+        
+        
         //end brin
         
         
@@ -150,7 +147,7 @@
         {
             cell.lblReportName.text =@"Summary Report";
             cell.lblReportDate.text =[NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
-                                      dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+                                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
         }
@@ -167,14 +164,14 @@
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
             
         }
-//end brin
+        //end brin
         
         // Compliance and Non-compliance Reports
         else if (proType==0 || proType==1)
         {
             cell.lblReportName.text =[[reports valueForKey:@"title"]objectAtIndex:indexPath.row];
             cell.lblReportDate.text =[NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
-                                      dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+                                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"]objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"printedName"]objectAtIndex:indexPath.row];
             
@@ -242,12 +239,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummary" object:nil userInfo:dict];
     }
     
-
+    
     
     //start brin
     
     //quantity symmary
-
+    
     
     
     
@@ -255,7 +252,7 @@
     {
         
         
-
+        
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"id"];
         NSDictionary* dict = [NSDictionary dictionaryWithObject:
                               noticeNo forKey:@"ConNo"];
@@ -265,52 +262,28 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQTY_S_Report" object:nil userInfo:dict];
     }
     
-
+    
 }
 
 
 
 -(void)loadQuantitySummary
 {
-    
-    // http://data.privytext.us/contructionapi.php/api/quantity_summary/itemByINID/Lin/IN10
-    
-    
-    
-    NSString *strURL = [NSString stringWithFormat:@"http://data.privytext.us/contructionapi.php/api/quantity_summary/all/%@/%@",appDelegate.username,appDelegate.projId];
-    
-    NSURL *apiURL =
-    [NSURL URLWithString:strURL];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL];
-    
-    
-    
-    
-    
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    
-    
-    _receivedData = [[NSMutableData alloc] init];
-    
-    
-    [connection start];
-    NSLog(@"URL---%@",strURL);
-    
-    hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:hud];
-    hud.labelText=@"";
-    hud.dimBackground = YES;
-    hud.delegate = self;
-    [hud show:YES];
-    
-    
-    
+    //Radha Core data
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"project_id == %@",appDelegate.projId];
+    [fetchRequest setPredicate:predicate];
+    //  [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"item_no"]];
+    NSError *error = nil;
+    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSLog(@"Before saving ids are %@",existingIDs);
+    reports = [NSMutableArray arrayWithArray:existingIDs];
+    [table reloadData];
 }
-
 
 //end brin
 
@@ -377,7 +350,7 @@
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];    
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
@@ -520,7 +493,7 @@
     NSError *parseError = nil;
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:_receivedData options:kNilOptions error:&parseError];
     
-         if (type==5)
+    if (type==5)
     {
         reports=[[responseObject valueForKey:@"all_quantity_summary"]mutableCopy];
     }

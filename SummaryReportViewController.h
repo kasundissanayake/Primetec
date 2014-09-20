@@ -12,6 +12,10 @@
 
 @interface SummaryReportViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, MBProgressHUDDelegate>
 
+//Radha
+@property BOOL isEdit;
+
+
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *arrayImages;
 
@@ -64,6 +68,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *project_id;
 @property (weak, nonatomic) IBOutlet UITextField *reportNo;
 @property (weak, nonatomic) IBOutlet UITextField *sMSheetNo;
-@property (weak, nonatomic) IBOutlet UITextField *id;
+@property (weak, nonatomic) IBOutlet UITextField *id1;
+
+- (id)initWithData:(NSDictionary *)sourceDictionary;
 
 @end

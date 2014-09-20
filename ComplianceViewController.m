@@ -885,7 +885,7 @@ UILabel *cno;
 
 -(IBAction)saveImage:(id)sender
 {
-    imgName=[NSString stringWithFormat:@"CM_%i",count];
+    NSString *imgName=[NSString stringWithFormat:@"compliance_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
     // imageName=@"new";
     // NSLog(@"Add Image----------------%@",imgName);
     if(txvDescription.text.length==0)

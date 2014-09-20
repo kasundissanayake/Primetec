@@ -13,6 +13,8 @@
 
 @interface Summary_3_ViewController : UIViewController <MBProgressHUDDelegate>
 
+@property BOOL isEdit;
+@property(nonatomic,strong) NSString *smSheetNumber;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,strong)IBOutlet UITextField *contractorRepresentative;
@@ -63,54 +65,54 @@
 
 
 /*
-
-
-@property(nonatomic,strong)IBOutlet UITextField *StxtDateINS;
-@property(nonatomic,strong)IBOutlet UITextField *StxtDateCR;
+ 
+ 
+ @property(nonatomic,strong)IBOutlet UITextField *StxtDateINS;
+ @property(nonatomic,strong)IBOutlet UITextField *StxtDateCR;
  
  
  
-
  
  
  
-@property (strong, nonatomic) IBOutlet UITextField *txtHours1;
-@property (strong, nonatomic) IBOutlet UITextField *txtHours2;
-@property (strong, nonatomic) IBOutlet UITextField *txtHours3;
-@property (strong, nonatomic) IBOutlet UITextField *txtHours4;
-@property (strong, nonatomic) IBOutlet UITextField *txtHours5;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate1;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate2;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate3;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate4;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate5;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal1;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal2;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal3;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal4;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal5;
-@property (strong, nonatomic) IBOutlet UITextField *txtDailyTotal5;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotaToDatel5;
-@property (weak, nonatomic) IBOutlet UITextField *class1;
-@property (weak, nonatomic) IBOutlet UITextField *class2;
-@property (weak, nonatomic) IBOutlet UITextField *class3;
-@property (weak, nonatomic) IBOutlet UITextField *class4;
-@property (weak, nonatomic) IBOutlet UITextField *class5;
-
-@property (weak, nonatomic) IBOutlet UITextField *active1;
-@property (weak, nonatomic) IBOutlet UITextField *active2;
-@property (weak, nonatomic) IBOutlet UITextField *active3;
-@property (weak, nonatomic) IBOutlet UITextField *active4;
-@property (weak, nonatomic) IBOutlet UITextField *active5;
-@property (weak, nonatomic) IBOutlet UITextField *no1;
-@property (weak, nonatomic) IBOutlet UITextField *no2;
-@property (weak, nonatomic) IBOutlet UITextField *no3;
-@property (weak, nonatomic) IBOutlet UITextField *no4;
-@property (weak, nonatomic) IBOutlet UITextField *no5;
-@property (weak, nonatomic) IBOutlet UITextField *inspecter;
-@property (weak, nonatomic) IBOutlet UITextField *pm;
-
-
-*/
+ 
+ @property (strong, nonatomic) IBOutlet UITextField *txtHours1;
+ @property (strong, nonatomic) IBOutlet UITextField *txtHours2;
+ @property (strong, nonatomic) IBOutlet UITextField *txtHours3;
+ @property (strong, nonatomic) IBOutlet UITextField *txtHours4;
+ @property (strong, nonatomic) IBOutlet UITextField *txtHours5;
+ @property (strong, nonatomic) IBOutlet UITextField *txtRate1;
+ @property (strong, nonatomic) IBOutlet UITextField *txtRate2;
+ @property (strong, nonatomic) IBOutlet UITextField *txtRate3;
+ @property (strong, nonatomic) IBOutlet UITextField *txtRate4;
+ @property (strong, nonatomic) IBOutlet UITextField *txtRate5;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotal1;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotal2;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotal3;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotal4;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotal5;
+ @property (strong, nonatomic) IBOutlet UITextField *txtDailyTotal5;
+ @property (strong, nonatomic) IBOutlet UITextField *txtTotaToDatel5;
+ @property (weak, nonatomic) IBOutlet UITextField *class1;
+ @property (weak, nonatomic) IBOutlet UITextField *class2;
+ @property (weak, nonatomic) IBOutlet UITextField *class3;
+ @property (weak, nonatomic) IBOutlet UITextField *class4;
+ @property (weak, nonatomic) IBOutlet UITextField *class5;
+ 
+ @property (weak, nonatomic) IBOutlet UITextField *active1;
+ @property (weak, nonatomic) IBOutlet UITextField *active2;
+ @property (weak, nonatomic) IBOutlet UITextField *active3;
+ @property (weak, nonatomic) IBOutlet UITextField *active4;
+ @property (weak, nonatomic) IBOutlet UITextField *active5;
+ @property (weak, nonatomic) IBOutlet UITextField *no1;
+ @property (weak, nonatomic) IBOutlet UITextField *no2;
+ @property (weak, nonatomic) IBOutlet UITextField *no3;
+ @property (weak, nonatomic) IBOutlet UITextField *no4;
+ @property (weak, nonatomic) IBOutlet UITextField *no5;
+ @property (weak, nonatomic) IBOutlet UITextField *inspecter;
+ @property (weak, nonatomic) IBOutlet UITextField *pm;
+ 
+ 
+ */
 
 @end

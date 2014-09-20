@@ -970,7 +970,7 @@
 
 -(IBAction)saveImage:(id)sender
 {
-    NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
+    NSString *imgName=[NSString stringWithFormat:@"non_compliance_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
     if(txvDescription.text.length==0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"

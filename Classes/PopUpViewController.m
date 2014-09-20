@@ -342,7 +342,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
 
 -(IBAction)saveImage:(id)sender
 {
-    NSString *imgName=[NSString stringWithFormat:@"CM_%i",count];
+    NSString *imgName=[NSString stringWithFormat:@"project_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
     
     if(txvDescription.text.length==0)
     {

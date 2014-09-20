@@ -80,16 +80,52 @@ typedef enum {
 	return self;
 }
 
+-(id) init
+{
+    self = [super init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showToolbar) name:@"showToolbar" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDashboard:) name:@"changeDashboard" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSProject) name:@"showSProject" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDashboard) name:@"showDashboard" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView) name:@"changeView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTableView) name:@"changeTableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popchangeView) name:@"popchangeView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popchangeTableView) name:@"popchangeTableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutView) name:@"logoutView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logouttableView) name:@"logouttableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCompliance:) name:@"changeCompliance" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonCompliance:) name:@"changeNonCompliance" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspection:) name:@"changeInspection" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpese:) name:@"changeDExpese" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummary:) name:@"changeSummary" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeComplianceForm:) name:@"changeComplianceForm" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonComplianceForm:) name:@"changeNonComplianceForm" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspectionForm:) name:@"changeInspectionForm" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeExpenceForm:) name:@"changeExpenceForm" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm:) name:@"changeSummaryForm" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPopupView) name:@"displayPopupView" object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQuantitySummaryForm:) name:@"changeQuantitySummaryForm" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQTY_S_Report:) name:@"changeQTY_S_Report" object:nil];
+    
+    return self;
+}
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
-    
-    //start brin
     table.contentInset=UIEdgeInsetsMake(0, 0, 250, 0);
-    //end brin
-    
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     btnEdit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"style:UIBarButtonItemStyleDone target:self action:@selector(btnEdit)];
     btnDelete = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"style:UIBarButtonItemStyleDone target:self action:@selector(btnDelete)];
@@ -123,38 +159,7 @@ typedef enum {
     self.table.backgroundColor = [UIColor clearColor];
     self.table.opaque = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showToolbar) name:@"showToolbar" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDashboard:) name:@"changeDashboard" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSProject) name:@"showSProject" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDashboard) name:@"showDashboard" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView) name:@"changeView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTableView) name:@"changeTableView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popchangeView) name:@"popchangeView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popchangeTableView) name:@"popchangeTableView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutView) name:@"logoutView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logouttableView) name:@"logouttableView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCompliance:) name:@"changeCompliance" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonCompliance:) name:@"changeNonCompliance" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspection:) name:@"changeInspection" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpese:) name:@"changeDExpese" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummary:) name:@"changeSummary" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeComplianceForm:) name:@"changeComplianceForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNonComplianceForm:) name:@"changeNonComplianceForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInspectionForm:) name:@"changeInspectionForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDExpeseForm) name:@"changeDExpeseForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm) name:@"changeSummaryForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPopupView) name:@"displayPopupView" object:nil];
-    
-    
-    
-    //start brin
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQuantitySummary) name:@"changeQuantitySummary" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeQTY_S_Report:) name:@"changeQTY_S_Report" object:nil];
-    //end brin
+
     
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
@@ -164,8 +169,6 @@ typedef enum {
     
     [self populateProjectList];
     [self.table reloadData];
-    
-
 }
 
 
@@ -1005,44 +1008,35 @@ typedef enum {
 }
 
 
-- (void)changeDExpeseForm
+- (void)changeExpenceForm:(NSDictionary *)sourceDictionary
 {
-    ExpenceViewController *expence=[[ExpenceViewController alloc]init];
+    ExpenceViewController *expence=[[ExpenceViewController alloc] initWithData:sourceDictionary];
     expence.title=[NSString stringWithFormat:@"Expense Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:expence]];
 }
 
 
-- (void)changeSummaryForm
+- (void)changeSummaryForm:(NSDictionary *)sourceDictionary
 {
-    SummaryReportViewController *summary=[[SummaryReportViewController alloc]init];
+    SummaryReportViewController *summary=[[SummaryReportViewController alloc] initWithData:sourceDictionary];
     summary.title=[NSString stringWithFormat:@"Summary Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
 }
 
 
 
-//start brin
-- (void)changeQuantitySummary
-
+- (void)changeQuantitySummaryForm:(NSDictionary *)sourceDictionary
 {
-    
-    quantitySummarySheet *summary=[[quantitySummarySheet alloc]init];
+    quantitySummarySheet *summary=[[quantitySummarySheet alloc]initWithData:sourceDictionary];
     summary.title=[NSString stringWithFormat:@"Quantity Summary Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
 }
 
 
 
-- (void)changeQTY_S_Report:(NSNotification *)notification
-{
-    
-    NSDictionary *dict = [notification userInfo];
-    
-    
-    Quantity_S_Report *qtySR=[[Quantity_S_Report alloc]init];
-    NSString *CNo=[dict valueForKey:@"ConNo"];
-    qtySR.QNo=CNo;
+- (void)changeQTY_S_Report:(NSDictionary *)sourceDictionary
+{   
+    Quantity_S_Report *qtySR=[[Quantity_S_Report alloc]initWithData:sourceDictionary];
     qtySR.title=[NSString stringWithFormat:@"Quantity Summary Report"];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtySR]];
 }

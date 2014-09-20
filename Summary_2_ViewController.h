@@ -11,6 +11,8 @@
 
 @interface Summary_2_ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
 
+@property BOOL isEdit;
+@property(nonatomic,strong) NSString *smSheetNumber;
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 

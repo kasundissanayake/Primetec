@@ -55,12 +55,13 @@
     
     NSString *sigName1;
     NSString *sigName2;
-       
+    
 }
 
 @end
 
 @implementation Summary_3_ViewController
+@synthesize smSheetNumber,isEdit;
 @synthesize contractorRepresentative;
 @synthesize dailyTotal;
 @synthesize date1;
@@ -144,7 +145,7 @@
     
     
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
- 
+    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
@@ -153,6 +154,14 @@
     date1.text=dateString;
     date2.text= dateString;
     contractorRepresentative.text = appDelegate.pm;
+    if(isEdit)
+    {
+        [self populateValues];
+    }
+}
+-(void)populateValues
+{
+    
     
 }
 
@@ -180,7 +189,7 @@
     signature2.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
     
     
-    }
+}
 
 -(UIImage *)getImageFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
 {
@@ -378,7 +387,7 @@
     
     if(inspector.text==NULL || inspector.text.length==0 || signature1.image==NULL ||  date1.text==NULL || date1.text.length==0  || date2.text==NULL || date2.text.length==0 || signature2.image==NULL || signature2.image==NULL || dailyTotal.text==NULL || dailyTotal.text.length==0 || total_to_date.text==NULL || total_to_date.text.length==0  )
     {
-      //  contractorRepresentative.text==NULL || contractorRepresentative.text.length==0
+        //  contractorRepresentative.text==NULL || contractorRepresentative.text.length==0
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
                                                         message:@"Please fill all the fields"
@@ -619,7 +628,7 @@
             field30=eQAmount5.text;
             
         }
-       
+        
         
         sigName1=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
         sigName2=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
@@ -664,15 +673,16 @@
                            project_id:appDelegate.projId
                            signature1:sigName1
                            signature2:sigName2
-                           sMSheetNo:@""
+                           sMSheetNo:smSheetNumber
                            total_to_date:total_to_date.text
+                           isEdit:isEdit
                            ];
         
         [HUD setHidden:YES];
         
         BOOL singSaveState;
         BOOL singSaveState2;
-
+        
         
         NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
@@ -683,12 +693,12 @@
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
         NSData *imaDataSign1 = UIImageJPEGRepresentation(imageSign,0.3);
         NSData *imaDataSign2 = UIImageJPEGRepresentation(imageSign,0.3);
-
+        
         singSaveState = [PRIMECMController saveAllImages:sigName1 img:imaDataSign1 syncStatus:SYNC_STATUS_PENDING];
         
         
         singSaveState2 = [PRIMECMController saveAllImages:sigName2 img:imaDataSign2 syncStatus:SYNC_STATUS_PENDING];
-
+        
         
         
         

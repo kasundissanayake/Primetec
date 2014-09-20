@@ -36,6 +36,7 @@
 @synthesize client;
 @synthesize coloumn1,coloumn2,coloumn3,coloumn4,iddd;
 @synthesize edit1,edit2;
+@synthesize sMSheetNo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
