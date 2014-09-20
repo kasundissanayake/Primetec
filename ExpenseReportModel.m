@@ -12,20 +12,26 @@
 @implementation ExpenseReportModel
 
 @dynamic approvedBy;
-@dynamic attachment;
+@dynamic eRDate1;
 @dynamic checkNo;
 @dynamic date;
-@dynamic employeeNo;
+@dynamic eRDescription1;
 @dynamic eMPName;
 @dynamic eRCashAdvance;
 @dynamic eRFHeader;
 @dynamic eRReimbursement;
 @dynamic eXReportNo;
-@dynamic id;
 @dynamic images_uploaded;
 @dynamic project_id;
 @dynamic signature;
 @dynamic weekEnding;
+@dynamic eRJobNo1;
+@dynamic eRPAMilage1;
+@dynamic eRPARate1;
+@dynamic eRTotal1;
+@dynamic eRType1;
+
+
 
 -(NSDictionary*) toDictionary
 {
@@ -37,6 +43,9 @@
     
     NSString *strDate = [dateFormatter stringFromDate:self.date];
     [dict setValue:strDate forKey:@"date"];
+    
+    NSString *eRDate1 = [dateFormatter stringFromDate:self.date];
+    [dict setValue:eRDate1 forKey:@"eRDate1"];
     
     NSString *strWeekEndingDate = [dateFormatter stringFromDate:self.weekEnding];
     [dict setValue:strWeekEndingDate forKey:@"weekEnding"];

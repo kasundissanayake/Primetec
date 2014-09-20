@@ -11,12 +11,11 @@
 
 @interface ExpenceViewController : UIViewController<UIPickerViewDelegate,UIPopoverControllerDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, MBProgressHUDDelegate >
 {
-    //Radha
-    NSMutableString *imgPath;
+  //  Radha
+  NSMutableString *imgPath;
 }
 //Radha  is used for Edit or New also
 @property(nonatomic,strong) NSString *exNUmber;
-
 
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)IBOutlet UITextField *ERtextDate6;
@@ -35,8 +34,6 @@
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAdd;
 @property(nonatomic,strong)IBOutlet UITextView *txvDescription;
 
-- (IBAction)butExp:(id)sender;
-
 @property (weak, nonatomic) IBOutlet UILabel *header;
 @property (weak, nonatomic) IBOutlet UITextField *ERtxtEmpName;
 @property (weak, nonatomic) IBOutlet UITextField *ERtxtApprovedBy;
@@ -44,7 +41,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *ERtxtCheckNum;
 @property (weak, nonatomic) IBOutlet UITextField *ERdate6;
 
-@property (weak, nonatomic) IBOutlet UITextField *ERtxtEmpNum;
+//@property (weak, nonatomic) IBOutlet UITextField *ERtxtEmpNum;
 @property (weak, nonatomic) IBOutlet UITextField *ERDescription;
 @property (weak, nonatomic) IBOutlet UITextField *ERJobNo;
 @property (weak, nonatomic) IBOutlet UITextField *ERType;

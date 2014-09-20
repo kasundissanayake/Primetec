@@ -34,7 +34,9 @@
 
 
 
-+ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy attachment:(NSString *)attachment checkNo:(NSString *)checkNo date:(NSString *)date employeeNo:(NSString *)employeeNo eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding isEdit:(BOOL)isEdit;
++ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy checkNo:(NSString *)checkNo date:(NSString *)date eRDate1:(NSString *)eRDate1 eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding eXReportNo:(NSString *)eXReportNo eRDescription1:(NSString *)eRDescription1 eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1;
+
+
 
 + (BOOL)saveExpenseData:(NSString *)username eRDate1:(NSString *)eRDate1 eRDescription1:(NSString *)eRDescription1 eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1 eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id imgPath:(NSString *)imgPath ;
 

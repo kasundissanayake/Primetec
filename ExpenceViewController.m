@@ -56,7 +56,31 @@
 @end
 
 @implementation ExpenceViewController
-@synthesize  scrollView,ERtextDate6,txtMil1,txtRate1,txtTotal1,cashAdvance,reimburs,imgSignatureEx,imagePicker,isFromSketches,isFromReport,arrayImages,imageAddSubView,imgViewAdd,txvDescription,header,ERtxtEmpName,ERtxtApprovedBy,ERtxtWeek,ERtxtCheckNum,ERdate6,ERtxtEmpNum,ERDescription,ERJobNo,ERType,exNUmber;
+@synthesize scrollView;
+@synthesize ERtextDate6;
+@synthesize txtMil1;
+@synthesize txtRate1;
+@synthesize txtTotal1;
+@synthesize cashAdvance;
+@synthesize reimburs;
+@synthesize imgSignatureEx;
+@synthesize imagePicker;
+@synthesize isFromSketches;
+@synthesize isFromReport;
+@synthesize arrayImages;
+@synthesize imageAddSubView;
+@synthesize imgViewAdd;
+@synthesize txvDescription;
+@synthesize header;
+@synthesize ERtxtEmpName;
+@synthesize ERtxtApprovedBy;
+@synthesize ERtxtWeek;
+@synthesize ERtxtCheckNum;
+@synthesize ERdate6;
+@synthesize ERDescription;
+@synthesize ERJobNo;
+@synthesize ERType;
+@synthesize exNUmber;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -79,37 +103,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self deleteAllFiles];
+    
     count=0;
     comNoticeNo=@"";
     count1=0;
-    
     [[self ERdate6] setTintColor:[UIColor clearColor]];
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.sketchesArray removeAllObjects];
-    
     self.imagePicker=[[UIImagePickerController alloc]init];
     arrayImages=[[NSMutableArray alloc]init];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
     tblView=[[UITableView alloc] initWithFrame:CGRectMake(265, 680, 0, 0) style:UITableViewStylePlain];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMapData:) name:@"ViewControllerAReloadData" object:nil];
-    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back.jpg"]];
+    
+    
     // Do any additional setup after loading the view from its nib.
     scrollView.frame = CGRectMake(0,0, 720, 1988);
     [scrollView setContentSize:CGSizeMake(500, 2300)];
-    
     UITapGestureRecognizer *singleTapInspec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedInspector)];
     imgSignatureEx.userInteractionEnabled = YES;
     [imgSignatureEx addGestureRecognizer:singleTapInspec];
-    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
-    ERtxtEmpNum.text=appDelegate.userId;
+   // ERtxtEmpNum.text=appDelegate.userId;
     ERtxtEmpName.text=appDelegate.projPrintedName;
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
@@ -126,7 +146,6 @@
                                action:@selector(exit)];
     
     self.navigationItem.rightBarButtonItem = Button;
-    
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -139,7 +158,6 @@
         
     }
 }
-
 
 -(void)exit{
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
@@ -155,7 +173,6 @@
     
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
     imgSignatureEx.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-    
 }
 
 
@@ -167,7 +184,6 @@
     
     NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Signature"];
     imgSignatureEx.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPath];
-    
 }
 
 -(UIImage *)getImageFromFileName:(NSString *)fileName folderPath:(NSString *)folderPath
@@ -175,8 +191,6 @@
     //get images from document directory
     NSLog(@"image name......%@",fileName);
     UIImage *current_img;
-    
-    
     NSString *fullPath = [folderPath stringByAppendingPathComponent:fileName];
     current_img=[UIImage imageWithContentsOfFile:fullPath];
     NSLog(@"current_img %@",current_img);
@@ -187,7 +201,6 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    
     NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
@@ -213,7 +226,6 @@
     UIImage* imageHighLighted = [UIImage imageNamed:@"closeBtn.png"];
     CGRect frame;
     frame = CGRectMake(617,115,40,40);
-    
     btnCloseSignView = [[UIButton alloc]initWithFrame:frame];
     [btnCloseSignView setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [btnCloseSignView setBackgroundImage:imageHighLighted forState:UIControlStateHighlighted];
@@ -240,13 +252,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
     cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
     return cell;
 }
@@ -254,7 +263,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if (indexPath.section == 0 && indexPath.row == 0)
     {
         
@@ -277,19 +285,15 @@
 -(IBAction)selectType:(id)sender
 {
     tableData = [NSArray arrayWithObjects:@"",@"Dashboard", @"Help",nil];
-    
     UIViewController *popoverContent=[[UIViewController alloc] init];
     [tblView reloadData];
     UIView *popoverView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
-    
     popoverView.backgroundColor=[UIColor whiteColor];
-    
     popoverContent.view=popoverView;
     popoverContent.preferredContentSize=CGSizeMake(250, 150);
     popoverContent.view=tblView; //Adding tableView to popover
     tblView.delegate=self;
     tblView.dataSource=self;
-    
     popoverController=[[UIPopoverController alloc]initWithContentViewController:popoverContent];
     [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
@@ -303,28 +307,22 @@
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(selectionDone)];
     [barItems addObject:doneBtn];
-    
     [pickerToolbar setItems:barItems animated:YES];
     pickerViewCities = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, 320, 300)];
     pickerViewCities.delegate = self;
     pickerViewCities.showsSelectionIndicator = YES;
-    
     UIViewController* popoverContent = [[UIViewController alloc] init];
     UIView* popoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 344)];
     popoverView.backgroundColor = [UIColor whiteColor];
-    
-    
     [popoverView addSubview:pickerToolbar];
     [popoverView addSubview:pickerViewCities];
     popoverContent.view = popoverView;
-    
     popoverContent.contentSizeForViewInPopover = CGSizeMake(320, 244);
     
     //create a popover controller
     popoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
     CGRect popoverRect = [self.view convertRect:[txtField frame]
                                        fromView:[txtField superview]];
-    
     popoverRect.size.width = MIN(popoverRect.size.width, 100) ;
     popoverRect.origin.x  = popoverRect.origin.x;
     [popoverController presentPopoverFromRect:popoverRect inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
@@ -503,6 +501,7 @@
 }
 
 // tell the picker how many components it will have
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
@@ -530,7 +529,6 @@
 	
 	return componentWidth;
 }
-
 
 -(void)showAddImageView
 {
@@ -801,7 +799,7 @@
 }
 
 - (IBAction)butSave:(id)sender {
-    if(cashAdvance.text==NULL || cashAdvance.text.length==0 || reimburs.text==NULL || reimburs.text.length==0 || ERtxtEmpName.text==NULL || ERtxtEmpName.text.length==0 || imgSignatureEx.image==NULL || ERtextDate6.text==NULL ||  ERtextDate6.text.length==0 || ERtxtApprovedBy.text.length==0 || ERtxtApprovedBy.text==NULL || ERtxtWeek.text==NULL || ERtxtWeek.text.length==0 || ERtxtEmpNum.text==NULL || ERtxtEmpNum.text.length==0|| ERtxtCheckNum.text==NULL || ERtxtCheckNum.text.length==0)
+    if(cashAdvance.text==NULL || cashAdvance.text.length==0 || reimburs.text==NULL || reimburs.text.length==0 || ERtxtEmpName.text==NULL || ERtxtEmpName.text.length==0 || imgSignatureEx.image==NULL || ERtextDate6.text==NULL ||  ERtextDate6.text.length==0 || ERtxtApprovedBy.text.length==0 || ERtxtApprovedBy.text==NULL || ERtxtWeek.text==NULL || ERtxtWeek.text.length==0 || ERtxtCheckNum.text==NULL || ERtxtCheckNum.text.length==0)
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -813,109 +811,6 @@
     }
     else
     {
-        NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
-        
-        BOOL status = [PRIMECMController saveAllImages:sigName img:UIImageJPEGRepresentation( imgSignatureEx.image,1) syncStatus:SYNC_STATUS_PENDING];
-        NSLog(@"signature saved %d",status);
-        
-        BOOL isEdit = NO;
-        if(exNUmber)
-            isEdit = YES;
-        
-        BOOL saveStatus = [PRIMECMController
-                           saveExpenseForm:appDelegate.username
-                           approvedBy:ERtxtApprovedBy.text
-                           attachment:@""
-                           checkNo:ERtxtCheckNum.text
-                           date:ERtextDate6.text
-                           employeeNo:ERtxtEmpNum.text
-                           eMPName:ERtxtEmpName.text
-                           eRCashAdvance:cashAdvance.text
-                           eRFHeader:header.text
-                           eRReimbursement:reimburs.text
-                           eXReportNo:ExpID
-                           images_uploaded:@""
-                           project_id:appDelegate.projId
-                           signature:sigName
-                           weekEnding:ERtxtWeek.text
-                           isEdit:isEdit
-                           ];
-        
-        [HUD setHidden:YES];
-        
-        if (saveStatus){
-            NSString *msg;
-            if(isEdit)
-                msg  = @"Updated expense data";
-            else
-                msg = @"Successfully saved expense data.";
-            
-            
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-            [appDelegate.sketchesArray removeAllObjects];
-            [arrayImages removeAllObjects];
-            
-            cashAdvance.text=NULL;
-            reimburs.text=NULL;
-            ERtxtEmpName.text=NULL;
-            imgSignatureEx.image = nil;
-            ERtextDate6.text=NULL;
-            ERtxtApprovedBy.text=NULL;
-            ERtxtWeek.text=NULL;
-            ERtxtEmpNum.text=NULL;
-            ERtxtCheckNum.text=NULL;
-            exNUmber = NULL;
-            
-        }else{
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-        
-    }
-}
-
-
-- (IBAction)butExp:(id)sender {
-    //Radha
-    NSLog(@"ExpID is %@",ExpID);
-    
-    //    BOOL saveStatus = [PRIMECMController
-    //                       saveExpenseData:appDelegate.username
-    //                       eRDate1:@"2014-12-23"
-    //                       eRDescription1:@"Test boss2"
-    //                       eRJobNo1:@"Manager"
-    //                       eRPAMilage1:@"123"
-    //                       eRPARate1:@"234"
-    //                       eRTotal1:@"324"
-    //                       eRType1:@"222"
-    //                       eXReportNo:ExpID
-    //                       images_uploaded:@""
-    //                       project_id:appDelegate.projId
-    //                       imgPath:imgPath
-    //                       ];
-    //
-    //    return;
-    
-    
-    uploading = NO;
-    uploadingsketch=NO;
-    if(ERdate6.text==NULL || ERdate6.text.length==0 || ERDescription.text==NULL || ERDescription.text.length==0 || ERJobNo.text==NULL || ERJobNo.text.length==0 || ERType.text==NULL ||  ERType.text.length==0 || txtMil1.text.length==0 || txtMil1.text==NULL || txtRate1.text==NULL || txtRate1.text.length==0 || txtTotal1.text==NULL || txtTotal1.text.length==0)
-    {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
-                                                        message:@"Please fill all the fields"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-    else
-    {
-        
-        //NSString *sigName=[NSString stringWithFormat:@"Signature_%@",[self getCurrentDateTimeAsNSString]];
-        
-        
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.navigationController.view addSubview:HUD];
         HUD.labelText=@"";
@@ -923,50 +818,212 @@
         HUD.delegate = self;
         [HUD show:YES];
         
+        NSString *sigName=[NSString stringWithFormat:@"Signature_R%@",[self getCurrentDateTimeAsNSString]];
+        
+        NSLog(@" sketch_array - save: %@", appDelegate.sketchesArray);
+        NSLog(@" image_array - save: %@", arrayImages);
+        
+        NSMutableArray *sketchesNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < appDelegate.sketchesArray.count; i++){
+            NSString* imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+            [sketchesNameArray addObject:imggName];
+        }
+        
+        NSMutableArray *imgNameArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < arrayImages.count; i++){
+            NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
+            [imgNameArray addObject:imggName];
+        }
+        
+        NSLog(@"sketches names %@", sketchesNameArray);
+        NSLog(@"images names %@", imgNameArray);
+        
         BOOL saveStatus = [PRIMECMController
-                           saveExpenseData:appDelegate.username
-                           eRDate1:ERdate6.text
+                           saveExpenseForm:appDelegate.username
+                           approvedBy:ERtxtApprovedBy.text
+                           date:ERdate6.text
+                           eRDate1:ERtextDate6.text
+                           eMPName:ERtxtEmpName.text
+                           eRCashAdvance:cashAdvance.text
+                           eRFHeader:header.text
+                           eRReimbursement:reimburs.text
+                           images_uploaded:[imgNameArray componentsJoinedByString:@","]
+                           project_id:appDelegate.projId
+                           signature:sigName
+                           weekEnding:ERtxtWeek.text
                            eRDescription1:ERDescription.text
                            eRJobNo1:ERJobNo.text
                            eRPAMilage1:txtMil1.text
                            eRPARate1:txtRate1.text
                            eRTotal1:txtTotal1.text
-                           eRType1:ERType.text
-                           eXReportNo:ExpID
-                           images_uploaded:imgPath
-                           project_id:appDelegate.projId
-                           imgPath:imgPath
-                           ];
+                           eRType1:ERType.text ];
         
         
-        [HUD setHidden:YES];
         
         
-        if (saveStatus){
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-            [appDelegate.sketchesArray removeAllObjects];
-            [arrayImages removeAllObjects];
-            
-            ERdate6.text=NULL;
-            ERDescription.text=NULL;
-            ERJobNo.text=NULL;
-            ERType.text=NULL;
-            txtMil1.text=NULL ;
-            txtRate1.text=NULL;
-            txtTotal1.text=NULL;
-            ERType.text=NULL;
-            imgPath = NULL;
-            
-        }else{
-            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [exportAlert show];
-        }
-        
-        
-    }
-}
+   ERtxtApprovedBy.text=@" ";
+    ERtextDate6.text=@" ";
+    ERtxtCheckNum.text=@" ";
+    ERdate6.text=@" ";
+    txvDescription.text=@" ";
+    ERtxtEmpName.text=@" ";
+    cashAdvance.text=@" ";
+    eRFHeader:header.text=@" ";
+    eRReimbursement:reimburs.text=@" ";
 
+    ERtxtWeek.text=@" ";
+    ERJobNo.text=@" ";
+    txtMil1.text=@" ";
+    txtRate1.text=@" ";
+    txtTotal1.text=@" ";
+    ERType.text=@" ";
+        
+            BOOL imageSaveState;
+            BOOL sketchSaveState;
+            BOOL singSaveState;
+            //Signature to coredata
+        
+            NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        
+            NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
+            
+            
+            UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+            
+            NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+            singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
+            
+            if(arrayImages.count>0)
+            {
+                for (int i = 0; i < arrayImages.count;i++) {
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                    NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
+                    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+                    
+                    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                    NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                    
+                    imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
+                    
+                }
+                
+            }
+            
+            if(appDelegate.sketchesArray.count>0)
+            {
+                for (int i=0;i < appDelegate.sketchesArray.count;i++) {
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                    
+                    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+                    NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+                    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                    NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                    sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
+                    
+                }
+                
+            }
+            
+            [HUD setHidden:YES];
+            
+            if (saveStatus && singSaveState){
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [exportAlert show];
+                [appDelegate.sketchesArray removeAllObjects];
+                [arrayImages removeAllObjects];
+                //[self deleteImageFiles];
+            }else{
+                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save compliance report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [exportAlert show];
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+//
+//- (IBAction)butExp:(id)sender {
+//    //Radha
+//    NSLog(@"ExpID is %@",ExpID);
+//    uploading = NO;
+//    uploadingsketch=NO;
+//    if(ERdate6.text==NULL || ERdate6.text.length==0 || ERDescription.text==NULL || ERDescription.text.length==0 || ERJobNo.text==NULL || ERJobNo.text.length==0 || ERType.text==NULL ||  ERType.text.length==0 || txtMil1.text.length==0 || txtMil1.text==NULL || txtRate1.text==NULL || txtRate1.text.length==0 || txtTotal1.text==NULL || txtTotal1.text.length==0)
+//    {
+//
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
+//                                                        message:@"Please fill all the fields"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//    }
+//    else
+//    {
+//
+//        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        [self.navigationController.view addSubview:HUD];
+//        HUD.labelText=@"";
+//        HUD.dimBackground = YES;
+//        HUD.delegate = self;
+//        [HUD show:YES];
+//        
+//        BOOL saveStatus = [PRIMECMController
+//                           saveExpenseData:appDelegate.username
+//                           eRDate1:ERdate6.text
+//                           eRDescription1:ERDescription.text
+//                           eRJobNo1:ERJobNo.text
+//                           eRPAMilage1:txtMil1.text
+//                           eRPARate1:txtRate1.text
+//                           eRTotal1:txtTotal1.text
+//                           eRType1:ERType.text
+//                           eXReportNo:ExpID
+//                           images_uploaded:imgPath
+//                           project_id:appDelegate.projId
+//                           imgPath:imgPath
+//                           ];
+//        
+//        
+//        [HUD setHidden:YES];
+//        
+//        if (saveStatus){
+//            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            [exportAlert show];
+//            [appDelegate.sketchesArray removeAllObjects];
+//            [arrayImages removeAllObjects];
+//            
+//            ERdate6.text=NULL;
+//            ERDescription.text=NULL;
+//            ERJobNo.text=NULL;
+//            ERType.text=NULL;
+//            txtMil1.text=NULL ;
+//            txtRate1.text=NULL;
+//            txtTotal1.text=NULL;
+//            ERType.text=NULL;
+//            imgPath = NULL;
+//            
+//        }else{
+//            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            [exportAlert show];
+//        }
+//        
+//        
+//    }
+//}
+//
 
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName
 {
