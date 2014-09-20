@@ -840,15 +840,23 @@
         NSLog(@"sketches names %@", sketchesNameArray);
         NSLog(@"images names %@", imgNameArray);
         
+        
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"yyyy-MM-dd"];
+        NSDate *now = [NSDate date];
+                
         BOOL saveStatus = [PRIMECMController
                            saveExpenseForm:appDelegate.username
                            approvedBy:ERtxtApprovedBy.text
-                           date:ERdate6.text
+                           attachment:@""
+                           checkNo:@"checkno"
+                           date:[format stringFromDate:now]
                            eRDate1:ERtextDate6.text
                            eMPName:ERtxtEmpName.text
                            eRCashAdvance:cashAdvance.text
                            eRFHeader:header.text
                            eRReimbursement:reimburs.text
+                           eXReportNo:nil
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            project_id:appDelegate.projId
                            signature:sigName
@@ -858,7 +866,7 @@
                            eRPAMilage1:txtMil1.text
                            eRPARate1:txtRate1.text
                            eRTotal1:txtTotal1.text
-                           eRType1:ERType.text ];
+                           eRType1:ERType.text];
         
         
         

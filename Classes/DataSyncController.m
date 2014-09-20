@@ -644,7 +644,7 @@
 
 + (void)parseExpenseReport:(id)payload {
     
-    if ([payload objectForKey:@"id"]) {
+    if ([payload objectForKey:@"eXReportNo"]) {
         
         ExpenseReportModel *assp;
         
@@ -671,7 +671,6 @@
                     inManagedObjectContext:managedContext];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
         [assp setEXReportNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EXReportNo"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setERFHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERFHeader"]]];
@@ -681,9 +680,8 @@
         [assp setERReimbursement:[NSNumber numberWithInt:[[payload objectForKey:@"ERReimbursement"] intValue]]];
         [assp setERReimbursement:[NSNumber numberWithInt:[[payload objectForKey:@"ERReimbursement"] intValue]]];
         [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
-        [assp setEmployeeNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EmployeeNo"]]];
-        [assp setApprovedBy:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ApprovedBy"]]];
-        [assp setAttachment:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Attachment"]]];
+        [assp setEMPName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EmployeeNo"]]];
+        [assp setApprovedBy:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ApprovedBy"]]];        
         [assp setCheckNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"CheckNo"]]];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
