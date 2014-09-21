@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *unit;
 
 @property (weak, nonatomic) IBOutlet UITextField *unit_price;
+@property (weak, nonatomic) IBOutlet UITextField *date1;
+
 
 - (id)initWithData:(NSDictionary *)sourceDictionary;
 

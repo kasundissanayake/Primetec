@@ -591,7 +591,7 @@
 
 + (void)parseExpenseReportModel:(id)payload {
     
-    if ([payload objectForKey:@"EXReportNo"]) {
+    if ([payload objectForKey:@"eXReportNo"]) {
         
         ExpenseReportModel *assp;
         
@@ -603,7 +603,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %@)", [payload objectForKey:@"EXReportNo"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %@)", [[payload objectForKey:@"EXReportNo"] intValue]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -695,11 +695,11 @@
         }
         
         
-        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_Quantity"] intValue]]];
-        [assp setItem_no:[payload objectForKey:@"itemNo"] ];
-        [assp setProject_id:[payload objectForKey:@"Project_id"] ];
+        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_qty"] intValue]]];
+        [assp setItem_no:[payload objectForKey:@"item_no"] ];
+        [assp setProject_id:[payload objectForKey:@"project_id"] ];
         [assp setUnit:[payload objectForKey:@"unit"] ];
-        [assp setUnit_price:[NSNumber numberWithInt:[[payload objectForKey:@"unitPrice"] intValue]]];
+        [assp setUnit_price:[payload objectForKey:@"unit_price"] ];
         [assp setUser:[payload objectForKey:@"user"] ];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -721,7 +721,7 @@
 
 + (void)parsenonComplianceForm:(id)payload {
     
-    if ([payload objectForKey:@"Non_ComplianceNoticeNo"]) {
+    if ([payload objectForKey:@"non_ComplianceNoticeNo"]) {
         
         NonComplianceForm *assp;
         

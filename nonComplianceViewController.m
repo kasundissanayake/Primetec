@@ -159,36 +159,6 @@
 
 
 
--(void)exit{
-    
-  /*  NSString* textField1Text = NtxtDateIssued.text;
-    [defaults setObject:textField1Text forKey:@"NtxtDateIssued"];
-    NSString* textField2Text = contractorResp.text;
-    [defaults setObject:textField2Text forKey:@"contractorResp"];
-    NSString* textField3Text = txtTo.text;
-    [defaults setObject:textField3Text forKey:@"txtTo"];
-    NSString* textField4Text = DCRC.text;
-    [defaults setObject:textField4Text forKey:@"DCRC"];
-    NSString* textField5Text = NtxtDateContractorStarted.text;
-    [defaults setObject:textField5Text forKey:@"NtxtDateContractorStarted"];
-    NSString* textField6Text = NtxtDateContractorCompleted.text;
-    [defaults setObject:textField6Text forKey:@"NtxtDateContractorCompleted"];
-    NSString* textField7Text = NtxtDateofRawReprote.text;
-    [defaults setObject:textField7Text forKey:@"NtxtDateofRawReprote"];
-    NSString* textField8Text = correctiveAction.text;
-    [defaults setObject:textField8Text forKey:@"correctiveAction"];
-    [defaults synchronize];
-    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    [exportAlert show];
-    */
-    
-}
-
-
-
-
-
-
 -(void)getImageReviewer
 {
     [self removeSignatureView];
@@ -213,9 +183,138 @@
 
 
 
+-(void)uploadImage
+{
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/noncompliance/uploadimages/%@/%@/%@/",  [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    
+    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"URL---%@",unicodeLink);
+    
+    NSURL *apiURL =
+    [NSURL URLWithString:unicodeLink];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60.0];
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    NSLog(@"URL DESK----- %@",unicodeLink);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    
+    
+    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+    NSMutableData *postbody = [NSMutableData data];
+    
+    
+    
+    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
+    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
+    
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[arrayImages objectAtIndex:count1] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[NSData dataWithData:imaData]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [urlRequest setHTTPBody:postbody];
+    uploading=YES;
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    _receivedData = [[NSMutableData alloc] init];
+    [connection start];
+}
+
+
+-(void)uploadSketch
+{
+    uploadingsketch=YES;
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/noncompliance/uploadsketches/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]];
+    
+    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"URL---%@",unicodeLink);
+    NSURL *apiURL =
+    [NSURL URLWithString:unicodeLink];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60.0];
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    NSLog(@"URL DESK----- %@",unicodeLink);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+    NSMutableData *postbody = [NSMutableData data];
+    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]] folderPath:folderPath];
+    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[appDelegate.sketchesArray objectAtIndex:count2] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[NSData dataWithData:imaData]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [urlRequest setHTTPBody:postbody];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    _receivedData = [[NSMutableData alloc] init];
+    [connection start];
+    NSLog(@"sent");
+}
+
+
+-(void)uploadSignature
+{
+    NSString *urlLink = [NSString stringWithFormat:@"%@/api/compliance/uploadimages/%@/%@/%@/", [PRIMECMAPPUtils getAPIEndpoint],
+                         appDelegate.username,comNoticeNo,[[arrayImages objectAtIndex:count1] valueForKey:@"name"]];
+    
+    NSString *unicodeLink = [urlLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"URL---%@",unicodeLink);
+    
+    NSURL *apiURL =
+    [NSURL URLWithString:unicodeLink];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:apiURL cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60.0];
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    NSLog(@"URL DESK----- %@",unicodeLink);
+    //isSendingDecs=YES;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+    NSMutableData *postbody = [NSMutableData data];
+    
+    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:count1] valueForKey:@"name"]] folderPath:folderPath];
+    NSData *imaData = UIImageJPEGRepresentation(image,0.3);
+    // NSLog(@"********************* UPloadinggggg %i  %@",count1,[arrayImages objectAtIndex:count1]);
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [urlRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n",[[arrayImages objectAtIndex:count1] valueForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[NSData dataWithData:imaData]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [urlRequest setHTTPBody:postbody];
+    uploading=YES;
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    _receivedData = [[NSMutableData alloc] init];
+    [connection start];
+}
+
+
 -(IBAction)saveNonCompliance:(id)sender
 {
-    if(txtTitle.text==NULL || txtTitle.text.length==0|| txtContactNo.text==NULL || txtContactNo.text.length==0 || projectDesc.text==NULL || projectDesc.text.length==0 || nonCOtextTitle.text==NULL || nonCOtextTitle.text.length==0||nonCOtextProject.text==NULL || nonCOtextProject.text.length==0||NtxtDateIssued.text==NULL || NtxtDateIssued.text.length==0||contractorResp.text==NULL || contractorResp.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| NtxtDateContractorStarted.text==NULL || NtxtDateContractorStarted.text.length==0|| NtxtDateContractorCompleted.text==NULL || NtxtDateContractorCompleted.text.length==0||NtxtDateofRawReprote.text==NULL || NtxtDateofRawReprote.text.length==0 || correctiveAction.text==NULL || correctiveAction.text.length==0 ||imgSignature.image==NULL||txtPrintedName.text==NULL || txtPrintedName.text.length==0 || txtUserId.text==NULL || txtUserId.text.length==0 || DCRC.text == NULL || DCRC.text.length == 0)
+    if(txtTitle.text==NULL || txtTitle.text.length==0|| txtContactNo.text==NULL || txtContactNo.text.length==0 || projectDesc.text==NULL || projectDesc.text.length==0 || nonCOtextTitle.text==NULL || nonCOtextTitle.text.length==0||nonCOtextProject.text==NULL || nonCOtextProject.text.length==0||NtxtDateIssued.text==NULL || NtxtDateIssued.text.length==0||contractorResp.text==NULL || contractorResp.text.length==0|| txtTo.text==NULL || txtTo.text.length==0|| NtxtDateContractorStarted.text==NULL || NtxtDateContractorStarted.text.length==0|| NtxtDateContractorCompleted.text==NULL || NtxtDateContractorCompleted.text.length==0||NtxtDateofRawReprote.text==NULL || NtxtDateofRawReprote.text.length==0 || correctiveAction.text==NULL || correctiveAction.text.length==0 ||imgSignature.image==NULL||txtPrintedName.text==NULL || txtPrintedName.text.length==0 || txtUserId.text==NULL || txtUserId.text.length==0 )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -261,7 +360,6 @@
                            dateIssued:NtxtDateIssued.text
                            conRespon:contractorResp.text
                            to:txtTo.text
-                           dateDCRC:DCRC.text
                            dateConStarted:NtxtDateContractorStarted.text
                            dateConComplteted:NtxtDateContractorCompleted.text
                            dateRawReport:NtxtDateofRawReprote.text

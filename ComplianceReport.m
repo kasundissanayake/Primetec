@@ -588,7 +588,7 @@
     }
     else
     {
-        return 650                                                                                                                                                                   ;
+        return 550                                                                                                                                                                   ;
     }
 }
 - (BOOL)presentFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated completionHandler:(UIPrintInteractionCompletionHandler)completion {

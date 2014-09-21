@@ -22,7 +22,7 @@ TabAndSplitAppAppDelegate *appDelegate;
 NSDictionary *sourceDictionary;
 
 @synthesize QNo,project,item,itemNo,estQty,unit,price,quantityTable,tblView;
-@synthesize scrollView,selectedDict;
+@synthesize scrollView,selectedDict,date;
 
 
 - (id)initWithData:(NSDictionary *)sourceDictionaryParam
@@ -87,16 +87,23 @@ NSDictionary *sourceDictionary;
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
+    NSLog(@"Test Lin%@",objects);
+    
     if([objects count] > 0){
         
         
         NSManagedObject *qtySummaryReportObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"QuantityEstimateForm object QNo: %@", [qtySummaryReportObject valueForKey:@"qtyEstID"]);
         
+        NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+        [dateFormater setDateFormat:@"yyyy-MM-dd"];
+        
         itemNo.text=[qtySummaryReportObject valueForKey:@"item_no"];
         estQty.text= [NSString stringWithFormat:@"%d",[[qtySummaryReportObject valueForKey:@"est_qty"] intValue]];
         unit.text= [qtySummaryReportObject valueForKey:@"unit"];
         price.text= [NSString stringWithFormat:@"%d",[[qtySummaryReportObject valueForKey:@"unit_price"] intValue]];
+        
+        date.text=[dateFormater stringFromDate:[qtySummaryReportObject valueForKey:@"date"]];
         
         NSArray *arr = [PRIMECMAPPUtils getItemFromNo:itemNo.text];
         if (arr && [arr count] > 0){

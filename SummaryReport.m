@@ -1,9 +1,7 @@
 #import "SummaryReport.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
-#import "SummarySheet1.h"
-#import "SummarySheet2.h"
-#import "SummarySheet3.h"
+
 
 @interface SummaryReport ()
 {
@@ -83,85 +81,6 @@
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
     self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];
     [self populateSummerySheet];
-}
-
-
--(IBAction)fnEdit:(id)sender
-{
-    NSMutableDictionary *summaryReportDTO = [[NSMutableDictionary alloc] init];
-    
-    [summaryReportDTO setValue:txtContractor.text forKey:@"contractor"];
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil userInfo:summaryReportDTO];
-}
-
-
--(IBAction)fnDelete:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
-    
-    SummarySheet1 *summarySheet1;
-    NSError *retrieveError;
-    
-    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:managedContext];
-    [fetchRequest setEntity:entity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)", SMNo];
-    [fetchRequest setPredicate:predicate];
-    
-    NSArray *fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
-    
-    if (fetchedObjects && [fetchedObjects count] > 0) {
-        summarySheet1 = [fetchedObjects objectAtIndex:0];
-        [managedContext deleteObject:summarySheet1];
-        if (![managedContext save:&retrieveError]) {
-            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
-        } else {
-            NSLog(@"Deleted: %@", SMNo);
-        }
-    }
-    
-    SummarySheet2 *summarySheet2;
-    entity = [NSEntityDescription entityForName:@"SummarySheet2" inManagedObjectContext:managedContext];
-    [fetchRequest setEntity:entity];
-    predicate = [NSPredicate predicateWithFormat:@"(sMSSheetNo = %@)", SMNo];
-    [fetchRequest setPredicate:predicate];
-    
-    fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
-    
-    if (fetchedObjects && [fetchedObjects count] > 0) {
-        summarySheet2 = [fetchedObjects objectAtIndex:0];
-        [managedContext deleteObject:summarySheet2];
-        if (![managedContext save:&retrieveError]) {
-            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
-        } else {
-            NSLog(@"Deleted: %@", SMNo);
-        }
-    }
-    
-    
-    SummarySheet3 *summarySheet3;
-    entity = [NSEntityDescription entityForName:@"SummarySheet3" inManagedObjectContext:managedContext];
-    [fetchRequest setEntity:entity];
-    predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)", SMNo];
-    [fetchRequest setPredicate:predicate];
-    
-    fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
-    
-    if (fetchedObjects && [fetchedObjects count] > 0) {
-        summarySheet3 = [fetchedObjects objectAtIndex:0];
-        [managedContext deleteObject:summarySheet3];
-        if (![managedContext save:&retrieveError]) {
-            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
-        } else {
-            NSLog(@"Deleted: %@", SMNo);
-        }
-    }
-
-    
 }
 
 

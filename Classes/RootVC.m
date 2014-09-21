@@ -487,7 +487,7 @@ typedef enum {
 {
     
     if (indexPath.row == [projectDetails count] -1){
-        return 160;
+        return 100;
     }
     return 100;
 }
@@ -554,6 +554,11 @@ typedef enum {
     self.proStatusSeg.hidden=FALSE;
     self.searchBar.hidden=FALSE;
     
+    
+    //===============================================================
+    
+    NSLog(@"=================%@",appDelegate.userTypeOffline);
+    
     if ([appDelegate.userTypeOffline isEqualToString:@"I"]) {
         [self hideToolbar];
         
@@ -564,6 +569,12 @@ typedef enum {
         [self showToolbar];
         
     }
+    
+    //===============================================================
+    
+    
+    
+    
     
 }
 

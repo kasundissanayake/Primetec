@@ -40,7 +40,7 @@
 @implementation quantitySummarySheet
 @synthesize qtyTable,isEdit;
 @synthesize scrollView;
-@synthesize i_number,item,est_quantity,project,unit,unit_price;
+@synthesize i_number,item,est_quantity,project,unit,unit_price,date1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +69,12 @@
                                action:@selector(exit)];
     
     self.navigationItem.rightBarButtonItem = Button;
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    date1.text=dateString;
     
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -103,6 +109,11 @@
                                                         getInspectionSummaryForItemID:i_number.text]];
         
         [qtyTable reloadData];
+        
+       
+        
+        
+        
     }
 }
 
@@ -112,6 +123,12 @@
     [exportAlert show];
 }
 
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+    
+}
 
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -254,10 +271,8 @@
 -(int)calculateAccumForRowNumber:(int)count
 {
     int accum = 0;
-    for (int i = 0; i <= count; i++) {
-        if ([itemDetails valueForKey:@"qty"] && [[itemDetails valueForKey:@"qty"] count] > i){
-            accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
-        }
+    for (int i = 0; i<= count; i++) {
+        accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
     }
     return accum;
 }
