@@ -217,6 +217,8 @@
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"eXReportNo"];
         NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDExpese" object:nil userInfo:dict];
+        NSLog(@"Expense lllllllno %@", noticeNo);
+        
     }
     
     // Summary Sheet 1

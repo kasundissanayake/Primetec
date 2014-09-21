@@ -856,7 +856,7 @@
                            eRCashAdvance:cashAdvance.text
                            eRFHeader:header.text
                            eRReimbursement:reimburs.text
-                           eXReportNo:@" "
+                           eXReportNo:ERJobNo.text
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            project_id:appDelegate.projId
                            signature:sigName
