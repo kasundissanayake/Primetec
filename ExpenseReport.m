@@ -130,7 +130,7 @@
         txtWeakEnding.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"weekEnding"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];;
         txtMil1.text=[expensedataObject valueForKey:@"eRPAMilage1"];
         txtRate1.text=[[expensedataObject valueForKey:@"eRPARate1"]stringValue];
-        txtTotal1.text=[expensedataObject valueForKey:@"eRTotal1"];
+        txtTotal1.text=[[expensedataObject valueForKey:@"eRTotal1"] stringValue];
         header.text=[expensedataObject valueForKey:@"eRFHeader"];
         ERdate6.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"eRDate1"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         

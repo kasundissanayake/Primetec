@@ -587,7 +587,7 @@
     NSNumber *erateNum = [NSNumber numberWithInt:[eRPARate1 intValue]];
     [assp setValue:erateNum forKey:@"eRPARate1"];
     
-    [assp setValue:eRTotal1 forKey:@"eRTotal1"];
+    [assp setValue:[NSNumber numberWithInt:[eRTotal1 intValue]] forKey:@"eRTotal1"];
     [assp setValue:eRType1 forKey:@"eRType1"];
     
     NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
