@@ -232,10 +232,8 @@
     // Quantity Summary
     if (proType == 5)
     {
-        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"id"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                              noticeNo forKey:@"ConNo"];
-        appDelegate.iddd=noticeNo;
+        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"qtyEstID"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:noticeNo forKey:@"ConNo"];        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQTY_S_Report" object:nil userInfo:dict];
     }
     
@@ -247,11 +245,11 @@
 {
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryItems"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
                                               inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)",appDelegate.projId];
-    //[fetchRequest setPredicate:predicate];
+    [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     [reports addObjectsFromArray: objects];

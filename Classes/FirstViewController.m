@@ -253,10 +253,14 @@
     [hud setHidden:YES];
     
     if (saveStatus){
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved project."
+                                                             delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        exportAlert.tag = 10;
         [exportAlert show];
     }else{
-        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save project." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save project."
+                                                             delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        exportAlert.tag = 10;
         [exportAlert show];
     }
     
