@@ -132,20 +132,21 @@
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Compliance Form object CNo: %@", [expensedataObject valueForKey:@"eXReportNo"]);
         
+        NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+        [dateFormater setDateFormat:@"yyyy-MM-dd"];
+        
         txtApprovedBy.text=[expensedataObject valueForKey:@"approvedBy"];
         txtCashAdvance.text=[[expensedataObject valueForKey:@"eRCashAdvance"]stringValue];
         txtCheckNumber.text=[expensedataObject valueForKey:@"checkNo"];
-        txtDate.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"date"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDate.text=[dateFormater stringFromDate:[expensedataObject valueForKey:@"date"]];
         txtEmpName.text=[expensedataObject valueForKey:@"eMPName"];
         txtReimbursement.text=[[expensedataObject valueForKey:@"eRReimbursement"]stringValue];
-        txtWeakEnding.text=[NSDateFormatter
-                            localizedStringFromDate:[expensedataObject valueForKey:@"weekEnding"]
-                            dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];;
+        txtWeakEnding.text=[dateFormater stringFromDate:[expensedataObject valueForKey:@"weekEnding"]];
         txtMil1.text=[expensedataObject valueForKey:@"eRPAMilage1"];
         txtRate1.text=[[expensedataObject valueForKey:@"eRPARate1"]stringValue];
         txtTotal1.text=[[expensedataObject valueForKey:@"eRTotal1"] stringValue];
         header.text=[expensedataObject valueForKey:@"eRFHeader"];
-        ERdate6.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"eRDate1"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        ERdate6.text=[dateFormater stringFromDate:[expensedataObject valueForKey:@"eRDate1"]];
         
         ERDescription.text=[expensedataObject valueForKey:@"eRDescription1"];
         ERJobNo.text=[expensedataObject valueForKey:@"eRJobNo1"];

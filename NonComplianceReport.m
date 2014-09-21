@@ -119,6 +119,9 @@
         NSManagedObject *nonComplianceReportObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Non-Compliance Form object CNo: %@", [nonComplianceReportObject valueForKey:@"non_ComplianceNoticeNo"]);
         
+        NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+        [dateFormater setDateFormat:@"yyyy-MM-dd"];
+        
         txtTitle.text=[nonComplianceReportObject valueForKey:@"non_ComHeader"];
         nonComNotNo.text=[nonComplianceReportObject valueForKey:@"non_ComplianceNoticeNo"];
         
@@ -130,26 +133,20 @@
         txtContactNo.text=[nonComplianceReportObject valueForKey:@"contractNo"];
         txtTitle.text=[nonComplianceReportObject valueForKey:@"title"];
         
-        txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateIssued"]
-                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateIssued.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"dateIssued"]];
         lblContractorRes.text=[nonComplianceReportObject valueForKey:@"contractorResponsible"];
         
         txtTo.text=[nonComplianceReportObject valueForKey:@"to"];
-        txtDateContractorStarted.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateContractorStarted"]
-                                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-        dateCRC.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateCRTCB"]
-                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateContractorStarted.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"dateContractorStarted"]];
+        dateCRC.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"dateCRTCB"]];
         
-        txtDateContractCompleted.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateContractorCompleted"]
-                                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateContractCompleted.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"dateContractorCompleted"]];
         
-        txtDateOfRawReport.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateOfDWRReported"]
-                                                               dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateOfRawReport.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"dateOfDWRReported"]];
         
         lblCorrectiveActionComp.text=[nonComplianceReportObject valueForKey:@"descriptionOfNonCompliance"];
         txtPrintedName.text=[nonComplianceReportObject valueForKey:@"printedName"];
-        txtDate.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"date"]
-                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDate.text=[dateFormater stringFromDate:[nonComplianceReportObject valueForKey:@"date"]];
         arrayImages  = [[[nonComplianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[nonComplianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         

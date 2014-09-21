@@ -144,24 +144,21 @@
             txtProject.text=[project valueForKey:@"p_name"];
         }
         
+        NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+        [dateFormater setDateFormat:@"yyyy-MM-dd"];
         
         txtContractNo.text=[complianceReportObject valueForKey:@"project_id"];
         txtTitle.text=[complianceReportObject valueForKey:@"title"];
         
-        txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateIssued"]
-                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateIssued.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"dateIssued"]];
         lblConRes.text=[complianceReportObject valueForKey:@"ContractorResponsible"];
         txtTo.text=[complianceReportObject valueForKey:@"to"];
-        txtDateContracStarted.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateContractorStarted"]
-                                                                  dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-        txtDateContactCompleted.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateContractorCompleted"]
-                                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-        txtDateRawReport.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateOfDWRReported"]
-                                                             dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtDateContracStarted.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"dateContractorStarted"]];
+        txtDateContactCompleted.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"dateContractorCompleted"]];
+        txtDateRawReport.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"dateOfDWRReported"]];
         lblCorrective.text=[complianceReportObject valueForKey:@"correctiveActionCompliance"];
         txtPrintedName.text=[complianceReportObject valueForKey:@"printedName"];
-        txtdate.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"date"]
-                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        txtdate.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"date"]];
         txtNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
         arrayImages  = [[[complianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[complianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];

@@ -151,7 +151,7 @@ UILabel *cno;
     
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     txtContactNo.text=appDelegate.projId;
     txtProDesc.text=appDelegate.projDescription;
