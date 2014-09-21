@@ -133,6 +133,20 @@
 @property (weak, nonatomic) IBOutlet UITextField *time;
 
 
+
+@property (weak, nonatomic) IBOutlet UITextField *q_itemNo1;
+
+@property (weak, nonatomic) IBOutlet UITextField *q_itemNo2;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *q_itemNo3;
+
+@property (weak, nonatomic) IBOutlet UITextField *q_itemNo4;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *q_itemNo5;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *des1;
 
 @property (weak, nonatomic) IBOutlet UITextField *des2;
