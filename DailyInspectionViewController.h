@@ -170,7 +170,7 @@
 
 
 
-@property(assign) IBOutlet SuggestiveTextField *textField;
+@property(assign) IBOutlet SuggestiveTextField *textField0;
 
 @property(assign) IBOutlet SuggestiveTextField *textField1;
 

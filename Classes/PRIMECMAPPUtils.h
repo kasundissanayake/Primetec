@@ -46,4 +46,10 @@ extern int * const SYNC_STATUS_DELETED;
 
 +(NSString *)getSyncImgBaseURL;
 
++(NSArray*) getItemFromDesc: (NSString*) desc;
+
++(NSArray*) getItemFromNo: (NSString*) no;
+
++(NSArray*) getSuggestionArray;
+
 @end

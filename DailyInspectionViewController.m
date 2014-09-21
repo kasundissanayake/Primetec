@@ -59,7 +59,7 @@
 @synthesize imgViewAdd,txvDescription,datePicker;
 @synthesize txtName1,txtName2,txtName3,txtName4,txtName5,txtname6,txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8,txtCompany1,txtCompany2,txtCompany3,txtCompany4,txtName7,txtName8,txtHours,contractor,txtAddress,txtState,txtCity,txtTel,txtCompetent,txtProject,txtTwn,txtEmail,txtWrkDone,txtHeader,zip;
 @synthesize oriCalDays,usedCalDays,ConName,repNo,time,Town,weather,des1,des2,des3,des4,des5,qua1,qua2,qua3,qua4,qua5;
-@synthesize textField,textField1,textField2,textField3,textFiel4;
+@synthesize textField0,textField1,textField2,textField3,textFiel4;
 @synthesize q_itemNo1;
 @synthesize q_itemNo2;
 @synthesize q_itemNo3;
@@ -201,83 +201,27 @@
         qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY3"];
         qua4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY4"];
         qua5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY5"];
-        textField.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No1"];
+        textField0.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No1"];
         textField1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No2"];
         textField2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No3"];
         textField3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No4"];
         textFiel4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No5"];
     }
     
-    NSMutableArray *itemArray = [[NSMutableArray alloc] init];
-    
-    [itemArray addObject:@[@"INO-01", @"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-02", @"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD"]];
-    [itemArray addObject:@[@"INO-03", @"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-04", @"CLEARING AND GRUBBING PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-05", @"BANK RUN GRAVEL PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-06", @"TEST PITS PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-07", @"WATER FOR DUST CONTROL 1,000 GAL."]];
-    [itemArray addObject:@[@"INO-08", @"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-09", @"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-10", @"RAILROAD INSPECTOR ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-11", @"TRAFFICMEN(CITY POLICE)ALLOWAWCE"]];
-    [itemArray addObject:@[@"INO-12", @"TRAFFICMEN	(STATE POLICE)ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-13", @"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-14", @"TEMPORARY WASTE STOCKPILE AREA RENTAL ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-15", @"UTILITY POLE RELOCATION ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-16", @"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD."]];
-    [itemArray addObject:@[@"INO-17", @"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO ."]];
-    [itemArray addObject:@[@"INO-18", @"MISCELLANEOUS CONCRETE PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-19", @"TURF ESTABLISHMENT PER SQ. YD."]];
-    [itemArray addObject:@[@"INO-20", @"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-21", @"TESTING LABORATORY SERVICES ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-22", @"FIELD OFFICE FOR ENGINEER PER MONTH"]];
-    [itemArray addObject:@[@"INO-23", @"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-24", @"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN"]];
-    [itemArray addObject:@[@"INO-25", @"DISPOSAL OF CONTROLLED MATERIALS PER TON"]];
-    [itemArray addObject:@[@"INO-26", @"CONTROLLED MATERIALS EXCAVATION PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-27", @"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-28", @"STONE CROSSING PER CUBIC YARD"]];
-    [itemArray addObject:@[@"INO-29", @"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM"]];
-    [itemArray addObject:@[@"INO-30", @"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT"]];
-    [itemArray addObject:@[@"INO-31", @"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT."]];
-    [itemArray addObject:@[@"INO-32", @"30'REINFORCED CONCRETE PIPE LINER FOOT"]];
-    [itemArray addObject:@[@"INO-33", @"30 REINFORCED  CONCRETE CULVERT END EACH"]];
-    [itemArray addObject:@[@"INO-34", @"CONCRETE CURBING PER  LINEAR  FOOT"]];
-    [itemArray addObject:@[@"INO-35", @"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT"]];
-    [itemArray addObject:@[@"INO-36", @"30 PVC  FORCE  MAIN  PIPING AND APPURTENANCES PER LINEAR  FOOT"]];
-    [itemArray addObject:@[@"INO-37", @"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM"]];
-    [itemArray addObject:@[@"INO-38", @"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC"]];
-    [itemArray addObject:@[@"INO-39", @"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC"]];
-    [itemArray addObject:@[@"INO-40", @"DISPOSAL OF HDD BORE CUTTINGS PER TON"]];
-    [itemArray addObject:@[@"INO-41", @"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL"]];
-    [itemArray addObject:@[@"INO-42", @"HDD  ADDITIONAL  REDIRECT  ROCK EACH"]];
-    [itemArray addObject:@[@"INO-43", @"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH"]];
-    [itemArray addObject:@[@"INO-44", @"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT"]];
-    [itemArray addObject:@[@"INO-45", @"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT"]];
-    [itemArray addObject:@[@"INO-46", @"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD."]];
-    [itemArray addObject:@[@"INO-47", @"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE"]];
-    [itemArray addObject:@[@"INO-48", @"AIR  VALVE  MANHOLE EACH"]];
-    [itemArray addObject:@[@"INO-49", @"JUNCTION  VAULT EACH"]];
-    [itemArray addObject:@[@"INO-50", @"FORCE  MAIN  DRAIN  MANHOLE	EACH"]];
-    [itemArray addObject:@[@"INO-51", @"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-52", @"RAILROAD  STONE  BALLAST PER  CUBIC  YARD"]];
-    [itemArray addObject:@[@"INO-53", @"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE"]];
-    [itemArray addObject:@[@"INO-54", @"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM"]];
-    [itemArray addObject:@[@"INO-55", @"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE"]];
-    
-    // add other items like above
-    
-    
-    
-     NSArray *array = @[@"EARTH EXCAVATION AND GRADINGACCESS ROADPER CUBIC YARD--,INO-01",@"EARTH EXCAVATION AND SCREENED GRAVEL BELOW NORMAL GRADE PER CUBIC RD--,INO-02",@"TRENCH ROCK EXCAVATION DISPOSAL AND BACKFILL PER CUBIC YARD--,INO-03",@"CLEARING AND GRUBBING PER LUMP SUM--,INO-04",@"BANK RUN GRAVEL PER CUBIC YARD--,INO-05",@"TEST PITS PER CUBIC YARD--,INO-06",@"WATER FOR DUST CONTROL 1,000 GAL.--,INO-07",@"SEDIMENTATION CONTROL SYSTEM PER LUMP SUM--,INO-08",@"MAINTENANCE AND PROTECTION OF TRAFFIC PER LUMP SUM--,INO-09",@"RAILROAD INSPECTOR ALLOWANCE--,INO-10",@"TRAFFICMEN(CITY POLICE)ALLOWAWCE,INO-11",@"TRAFFICMEN	(STATE POLICE)ALLOWANCE--,INO-12",@"TRAFFICMEN(UNIFORMED FLAGMEN) ALLOWANCE--,INO-13",@"TEMPORARY WA6TE STOCKPILE AREA RENTAL ALLOWANCE--,INO-14",@"UTILITY POLE RELOCATION ALLOWANCE--,INO-15",@"TEMPORARY PAVEMENT REPLACEMENT(CITY ROADS)PER SQ. YD.--,INO-16",@"PERMANENT PAVEMENT REPLACEMENT( CITY ROADS )PER  SO . YD .--,INO-17",@"MI8CELLANEOUS CONCRETE PER CUBIC YARD--,INO-18",@"TURF ESTABLISHMENT PER SQ. YD.--,INO-19",@"ENVIRONMENTAL HEALTH AND SAFETY PER LUMP SUM--,INO-20,TESTING LABORATORY SERVICES ALLOWANCE--,INO-21",@"FIELD OFFICE FOR ENGIWEER PER MONTH--,INO-22",@"TEMPORARY WASTE STOCKPILE AREA PER LUMP SUM--,INO-23",@"DEWATERING, CONTROL AND DIVERSION OF WATER PER LUMP SUN--,INO-24",@"DISPOSAL OF CONTROLLED MATERIALS PER TON--,INO-25",@"MANAGEMENT OF REUSABLE CONTROLLED MATERIAL PER CUBIC YARD--,INO-26",@"STONE CROSSING PER CUBIC YARD--,INO-27",@"STONE CROSSING PER CUBIC YARD--,INO-28",@"HANDLING CONTAMINATED GROUNDWATER PER LUMP SUM--,INO-29",@"PIPE CROSSING UNDER RAILROAD PER LINEAR FOOT--,INO-30",@"CEMENT CONCRETE SIDEWALK AND DRIVEWAY PER 3Q. FT.--,INO-31",@"30'REINFORCED CONCRETE PIPE LINER FOOT--,INO-32",@"30 REINFORCED  CONCRETE CULVERT END EACH--,INO-33",@"CONCRETE CURBING PER  LINEAR  FOOT--,INO-34",@"24 PVC  FORCE  MAIN  PIPING  AND APPURTENANCES PER  LINEAR  FOOT--,INO-35",@"HYDROSTATIC TESTING  OF  FORCE MAIN PER  LUMP  SUM--,INO-36",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #1 PER LINEAR FOOT PVC--,INO-37",@"DIRECTIONAL DRILLED FORCE MAIN PIPE #2 PER LINEAR FOOT PVC--,INO-38",@"DISPOSAL OF HDD BORE CUTTINGS PER TON--,INO-39",@"DISPOSAL OF HDD DRILLING MUD PER 1000 GAL--,INO-40",@"HDD  ADDITIONAL  REDIRECT  ROCK EACH--,INO-41",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH--,INO-42",@"HDD  ADDITIONAL  REDIRECT  IN SOIL EACH --,INO-43",@"HDD  ADDITIONAL  CONDUCTOR CASING PER  LINEAR  FOOT--,INO-44",@"PERMANENT  ACCESS  ROAD PER  LINEAR  FOOT --,INO-45",@"WETLAND  MITIGATION  AND ENHANCEMENT PER  SQ.   YD.--,INO-46",@"CONTROL  AND  REMOVAL  OF INVASIVE  VEGETATION PER ACRE --,INO-47",@"AIR  VALVE  MANHOLE EACH --,INO-48",@"JUNCTION  VAULT EACH --,INI-49",@"FORCE  MAIN  DRAIN  MANHOLE	EACH --,INO-50",@"RAILROAD  TRACK  REMOVAL AND RE PLACEMENT ALLOWANCE --,INO-51",@"RAILROAD  STONE  BALLAST PER  CUBIC  YARD --,INO-52",@"WATER  FOR  FORCE  MAIN  TESTING	ALLOWANCE --,INO-53",@"ADDITIONAL ALTERNATE NO. 1-EXTENDED WARRANTY(MAINTENANCE BOND) PER LUM SUM--,INO-54",@"ADD ALTERNATE NO. 2- CITY OF MIDDLETOWN PERMITS ALLOWANCE--,INO55"];
-    
+    NSArray *array = [PRIMECMAPPUtils getSuggestionArray];
     //Assigning to searchfield
-    [textField setSuggestions:array];
+    [textField0 setSuggestions:array];
     [textField1 setSuggestions:array];
     [textField2 setSuggestions:array];
     [textField3 setSuggestions:array];
     [textFiel4 setSuggestions:array];
+    
+    textField0.tag = 1;
+    textField1.tag = 2;
+    textField2.tag = 3;
+    textField3.tag = 4;
+    textFiel4.tag = 5;
+    
     
     defaults= [NSUserDefaults standardUserDefaults];
     
@@ -535,7 +479,6 @@
     }
     else
     {
-        NSLog(@"Add Image----------------%@",imgName);
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
         imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i",count], @"tag",
@@ -543,7 +486,6 @@
                          imgName, @"name",
                          nil];
         
-        NSLog(@"Add Image objjjjjjj-------");
         [arrayImages addObject:imageDictionary];
         [self saveImageTaken:imgViewAdd.image imgName:imgName];
         [self removeAddImageView];
@@ -563,8 +505,7 @@
     if(arrayImages.count!=0)
     {
         CMShowImagesViewController *nextView= [[CMShowImagesViewController alloc]initWithNibName:@"CMShowImagesViewController" bundle:nil];
-        //nextView.tag=[NSString stringWithFormat:@"%i",btn.tag];
-        NSLog(@"Arrayyy--------- %i",arrayImages.count);
+        
         nextView.arrayImages=arrayImages;
         nextView.isFromSketches=NO;
         nextView.isFromReport=NO;
@@ -1379,19 +1320,55 @@
 }
 
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+-(IBAction)itemDescChange:(id)sender
 {
-    if(textField.text.length==0)
-    {
-        textField.text=@" ";
+    
+    
+    if (sender == textField0){
+        NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField0.text];
+        NSLog(@"suggest item %@", arr);
+        if (arr && [arr count] >0){
+            q_itemNo1.text = [arr objectAtIndex:0];
+        }
     }
-    //clearField = NO;
+    else if (sender == textField1){
+        NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField1.text];
+        if (arr && [arr count] >0){
+            q_itemNo2.text = [arr objectAtIndex:0];
+        }
+    }
+    else if (sender == textField2){
+        NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField2.text];
+        if (arr && [arr count] >0){
+            q_itemNo2.text = [arr objectAtIndex:0];
+        }
+    }
+    else if (sender == textField3){
+        NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField3.text];
+        if (arr && [arr count] >0){
+            q_itemNo2.text = [arr objectAtIndex:0];
+        }
+    }
+    else if (sender == textFiel4){
+        NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textFiel4.text];
+        if (arr && [arr count] >0){
+            q_itemNo2.text = [arr objectAtIndex:0];
+        }
+    }
 }
 
--(void)textFieldShouldReturn:(UITextField *)textField
+-(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    //  clearField = NO;
+    
+    
 }
+
+/*
+ -(BOOL)textFieldShouldReturn:(UITextField *)textField
+ {
+ //  clearField = NO;
+ }
+ */
 
 - (void)TextChange:(id)sender{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];

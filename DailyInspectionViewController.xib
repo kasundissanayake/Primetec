@@ -31,7 +31,7 @@
                 <outlet property="repNo" destination="Lfh-3Q-904" id="rMS-HS-7Q4"/>
                 <outlet property="scrollView" destination="eRw-Kq-NUM" id="pkD-mP-m4S"/>
                 <outlet property="textFiel4" destination="dXk-0R-Y8F" id="Egi-6v-WxM"/>
-                <outlet property="textField" destination="Lr7-29-awE" id="SMe-g2-M5o"/>
+                <outlet property="textField0" destination="Lr7-29-awE" id="SMe-g2-M5o"/>
                 <outlet property="textField1" destination="K4b-JQ-Rcx" id="JpV-fc-QVN"/>
                 <outlet property="textField2" destination="GLd-ko-e7W" id="Jqc-2R-4WT"/>
                 <outlet property="textField3" destination="1cH-HW-95s" id="bxP-Fh-aaI"/>
@@ -589,7 +589,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item Number &amp; Description of Item" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="L0D-4s-vVd">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="L0D-4s-vVd">
                             <rect key="frame" x="120" y="1203" width="457" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -603,6 +603,9 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidEnd" id="LQF-Zy-1c5"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item No" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="hMB-wV-LwS">
                             <rect key="frame" x="33" y="1203" width="88" height="30"/>
@@ -618,6 +621,9 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidBegin" id="vOh-56-ql7"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="goS-WO-7cU">
                             <rect key="frame" x="575" y="1232" width="88" height="40"/>
@@ -660,6 +666,9 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidEnd" id="HVo-rl-86V"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="1cH-HW-95s" customClass="SuggestiveTextField">
                             <rect key="frame" x="119" y="1349" width="457" height="40"/>
@@ -667,8 +676,11 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidEnd" id="kHL-YS-Cbo"/>
+                            </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item QTY" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="VlF-Yd-JBD">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="QTY" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="VlF-Yd-JBD">
                             <rect key="frame" x="575" y="1203" width="88" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -747,6 +759,9 @@
                             <color key="backgroundColor" white="1" alpha="0.88" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidEnd" id="7eL-V3-veZ"/>
+                            </connections>
                         </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Calendar Days " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bpQ-eW-1Av">
                             <rect key="frame" x="33" y="1945" width="169" height="21"/>
