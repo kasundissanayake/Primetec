@@ -113,12 +113,6 @@
 }
 
 
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    
-    
-}
-
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
@@ -260,8 +254,10 @@
 -(int)calculateAccumForRowNumber:(int)count
 {
     int accum = 0;
-    for (int i = 0; i<= count; i++) {
-        accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
+    for (int i = 0; i <= count; i++) {
+        if ([itemDetails valueForKey:@"qty"] && [[itemDetails valueForKey:@"qty"] count] > i){
+            accum += [[[itemDetails valueForKey:@"qty"] objectAtIndex:i] intValue];
+        }
     }
     return accum;
 }

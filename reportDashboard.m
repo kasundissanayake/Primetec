@@ -155,7 +155,6 @@
                                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
             cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"] objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"item_no"] objectAtIndex:indexPath.row];
-            
         }
         
         // Compliance and Non-compliance Reports
@@ -233,8 +232,8 @@
     // Quantity Summary
     if (proType == 5)
     {
-        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"qtyEstID"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject:noticeNo forKey:@"ConNo"];        
+        noticeNo=[[reports objectAtIndex: indexPath.row] valueForKey:@"qtyEstID"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeQTY_S_Report" object:nil userInfo:dict];
     }
     
@@ -256,7 +255,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
                                               inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)",appDelegate.projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id=%@)", appDelegate.projId];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
@@ -283,8 +282,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
-                              appDelegate.projId, SYNC_STATUS_OK  , SYNC_STATUS_PENDING ];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", appDelegate.projId];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -312,8 +310,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
-                              appDelegate.projId, SYNC_STATUS_OK, SYNC_STATUS_PENDING];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", appDelegate.projId];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -341,8 +338,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@) AND (syncStatus = %d OR syncStatus = %d )",
-                              appDelegate.projId, SYNC_STATUS_OK, SYNC_STATUS_PENDING];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", appDelegate.projId];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;

@@ -30,55 +30,55 @@ NSMutableArray *itemArray;
 }
 
 +(NSString *)getAPISyncPullEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/pull/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/pull/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/pull/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/pull/";
     
     return endpoint;
 }
 
 +(NSString *)getAPISyncPushEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/push/";
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/push/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/push/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/push/";
     
     return endpoint;
 }
 
 +(NSString *)getAPISyncImgPushEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/push/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/push/";
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/images/push/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/push/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/push/";
     
     return endpoint;
 }
 
 
 +(NSString *)getAPISyncImgPullEndpoint {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/pull/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/api/v1.0/sync/images/pull/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/api/v1.0/sync/images/pull/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/pull/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/api/v1.0/sync/images/pull/";
     
     return endpoint;
 }
 
 +(NSString *)getSyncImgBaseURL {
-    NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images/";
+    //NSString *endpoint = @"http://192.168.167.1/ConstructionAPI/images/";
     
     
     //NSString *endpoint = @"http://54.255.121.169/ConstructionAPI/images/";
     
-    //NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/images/";
+    NSString *endpoint = @"http://www.privytext.us/ConstructionAPI/images/";
     
     return endpoint;
 }
@@ -124,26 +124,18 @@ NSMutableArray *itemArray;
 
 + (NSArray *)getEntities
 {
-    static NSArray *_entities;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _entities = @[
+    NSArray *_entities = @[
                       @"Projects",
-                      // @"Assign_project",
-                      
                       @"ComplianceForm",
                       @"ExpenseReportModel",
                       @"NonComplianceForm",
-                      @"quantityEstimateForm",
-                      
+                      @"QuantityEstimateForm",
                       @"DailyInspectionForm",
-                      // @"DailyInspectionItem",
-                      
                       @"SummarySheet1",
                       @"SummarySheet2",
                       @"SummarySheet3"
                       ];
-    });
+    
     return _entities;
 }
 
