@@ -554,11 +554,6 @@ typedef enum {
     self.proStatusSeg.hidden=FALSE;
     self.searchBar.hidden=FALSE;
     
-    
-    //===============================================================
-    
-    NSLog(@"=================%@",appDelegate.userTypeOffline);
-    
     if ([appDelegate.userTypeOffline isEqualToString:@"I"]) {
         [self hideToolbar];
         
@@ -569,12 +564,6 @@ typedef enum {
         [self showToolbar];
         
     }
-    
-    //===============================================================
-    
-    
-    
-    
     
 }
 
