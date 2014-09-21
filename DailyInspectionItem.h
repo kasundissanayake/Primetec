@@ -12,7 +12,6 @@
 
 @interface DailyInspectionItem : ExtendedManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * inspectionID;
 @property (nonatomic, retain) NSString * no;
 @property (nonatomic, retain) NSString * desc;

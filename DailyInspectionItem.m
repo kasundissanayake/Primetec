@@ -11,7 +11,6 @@
 
 @implementation DailyInspectionItem
 
-@dynamic id;
 @dynamic inspectionID;
 @dynamic no;
 @dynamic desc;

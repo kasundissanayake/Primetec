@@ -38,6 +38,7 @@
 @dynamic total1;
 @dynamic total2;
 @dynamic total3;
+@dynamic syncStatus;
 
 -(NSDictionary*) toDictionary
 {

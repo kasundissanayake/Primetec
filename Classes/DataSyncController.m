@@ -16,16 +16,14 @@
 #import "ComplianceForm.h"
 #import "DailyInspectionForm.h"
 #import "DailyInspectionItem.h"
-#import "Expensedata.h"
 #import "ExpenseReportModel.h"
 #import "NonComplianceForm.h"
 #import "Projects.h"
-#import "QuantitySummaryDetails.h"
-#import "QuantitySummaryItems.h"
 #import "SummarySheet1.h"
 #import "SummarySheet2.h"
 #import "SummarySheet3.h"
 #import "Users.h"
+#import "QuantityEstimateForm.h"
 
 
 @implementation DataSyncController
@@ -43,10 +41,15 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:entityItem inManagedObjectContext:context];
         
         [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(syncStatus = %d)", SYNC_STATUS_PENDING ];
+        [fetchRequest setPredicate:predicate];
+        
         NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
         NSMutableArray *entityObjArray =[[NSMutableArray alloc] init];
+        
         for (ExtendedManagedObject *managedObj in objects){
-            NSDictionary *itemDict =  [managedObj toDictionary]; //[assp toDictionary];
+            NSDictionary *itemDict =  [managedObj toDictionary];
             [entityObjArray addObject:itemDict];
             
         }
@@ -172,14 +175,23 @@
     
     NSDictionary *responseDictionary = (NSDictionary *)responseObject;
     if (responseDictionary) {
-        /*
+        
+        NSArray *projectsArray = [responseDictionary objectForKey:@"projects"];
+        
+        if (projectsArray) {
+            for (NSDictionary *projects in projectsArray) {
+                [self parseProjects:projects];
+            }
+        }
+        
+        
         NSArray *assignProjectArray = [responseDictionary objectForKey:@"assign_project"];
         if (assignProjectArray) {
             for (NSDictionary *assignProject in assignProjectArray) {
                 [self parseAssignProject:assignProject];
             }
         }
-         */
+        
         
         NSArray *complianceFormArray = [responseDictionary objectForKey:@"complianceForm"];
         if (complianceFormArray) {
@@ -194,7 +206,7 @@
             }
         }
         
-        /*
+        
         NSArray *dailyInspection_itemArray = [responseDictionary objectForKey:@"dailyInspection_item"];
         
         if (dailyInspection_itemArray) {
@@ -202,24 +214,15 @@
                 [self parseDailyInspectionItem:dailyInspection_item];
             }
         }
-         */
         
-        NSArray *expensedataArray = [responseDictionary objectForKey:@"expensedata"];
         
-        if (expensedataArray) {
-            
-            for (NSDictionary *expensedata in expensedataArray) {
-                [self parseexpensedata:expensedata];
-            }
-        }
-        
-        NSArray *expenseReportArray = [responseDictionary objectForKey:@"expenseReport"];
-        
+        NSArray *expenseReportArray = [responseDictionary objectForKey:@"expenseReportModel"];
         if (expenseReportArray) {
             for (NSDictionary *expenseReport in expenseReportArray) {
-                [self parseExpenseReport:expenseReport];
+                [self parseExpenseReportModel:expenseReport];
             }
         }
+        
         
         NSArray *nonComplianceFormArray = [responseDictionary objectForKey:@"nonComplianceForm"];
         
@@ -229,29 +232,16 @@
             }
         }
         
-        NSArray *projectsArray = [responseDictionary objectForKey:@"projects"];
         
-        if (projectsArray) {
-            for (NSDictionary *projects in projectsArray) {
-                [self parseProjects:projects];
+        NSArray *quantityEstimateFormArray = [responseDictionary objectForKey:@"quantityEstimateForm"];
+        
+        if (quantityEstimateFormArray) {
+            for (NSDictionary *quantityEstimateForm in quantityEstimateFormArray) {
+                [self parseQuantityEstimateForm:quantityEstimateForm];
             }
         }
         
-        NSArray *quantitySummaryDetailsTypeArray = [responseDictionary objectForKey:@"quantity_summary_details"];
         
-        if (quantitySummaryDetailsTypeArray) {
-            for (NSDictionary *quantitySummaryDetailsType in quantitySummaryDetailsTypeArray) {
-                [self parseQuantitySummaryDetailsType:quantitySummaryDetailsType];
-            }
-        }
-        
-        NSArray *quantitySummaryItemsArray = [responseDictionary objectForKey:@"quantity_summary_items"];
-        
-        if (quantitySummaryItemsArray) {
-            for (NSDictionary *quantitySummaryItems in quantitySummaryItemsArray) {
-                [self parseQuantitySummaryItems:quantitySummaryItems];
-            }
-        }
         
         NSArray *summarySheet1Array = [responseDictionary objectForKey:@"summarySheet1"];
         
@@ -291,7 +281,7 @@
 
 + (void)parseAssignProject:(id)payload {
     
-    if ([payload objectForKey:@"id"]) {
+    if ([payload objectForKey:@"projectid"] && [payload objectForKey:@"username"]) {
         
         Assign_project *assp;
         
@@ -319,7 +309,6 @@
                     inManagedObjectContext:managedContext];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
         [assp setUsername:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"username"]]];
         [assp setProjectid:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"projectid"]]];
         
@@ -364,11 +353,11 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"ComplianceForm"
                     inManagedObjectContext:managedContext];
+            [assp setComplianceNoticeNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ComplianceNoticeNo"]]];
         }
         
         [assp setContractNo:[NSNumber numberWithInt:[[payload objectForKey:@"ContractNo"] intValue]]];
-        [assp setComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"comHeader"]]];
-        [assp setComplianceNoticeNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ComplianceNoticeNo"]]];
+        [assp setComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"comHeader"]]];        
         [assp setProjectDescription:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ProjectDescription"]]];
         [assp setTitle:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Title"]]];
         [assp setProject:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project"]]];
@@ -389,7 +378,7 @@
         [assp setImages_3_desc:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_3_desc"]]];
         
         NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        [assp setSyncStatus:syncStatusNum];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -426,7 +415,7 @@
     if ([payload objectForKey:@"inspectionID"]) {
         
         DailyInspectionForm *assp;
-        
+        NSError *error = nil;
         NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
         
         NSError *retrieveError;
@@ -448,9 +437,10 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"DailyInspectionForm"
                     inManagedObjectContext:managedContext];
+            [assp setInspectionID:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"inspectionID"]]];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
+        
         [assp setReport_No:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"report_No"]]];
         [assp setDIFHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"DIFHeader"]]];
         [assp setContractor:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Contractor"]]];
@@ -459,7 +449,6 @@
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setWeather:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"weather"]]];
         [assp setTime:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"time"]]];
-        [assp setInspectionID:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"inspectionID"]]];
         [assp setP_o_Box:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"P_O_Box"]]];
         [assp setCity:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"City"]]];
         [assp setState:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"State"]]];
@@ -495,9 +484,7 @@
         [assp setWDODescriptionOfWork2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork2"]]];
         [assp setWDODescriptionOfWork3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork3"]]];
         [assp setWDODescriptionOfWork4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"WDODescriptionOfWork4"]]];
-        //[assp setContractorsHoursOfWork:[NSNumber numberWithInt:[[payload objectForKey:@"ContractorsHoursOfWork"] intValue]]];
         [assp setContractorsHoursOfWork:[payload objectForKey:@"ContractorsHoursOfWork"]];
-        
         [assp setInspectorSign:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"InspectorSign"]]];
         [assp setPrintedName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"printedName"]]];
         [assp setOriginal_Calendar_Days:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"original_Calendar_Days"]]];
@@ -519,7 +506,7 @@
         [assp setI_QTY5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"I_QTY5"]]];
         
         NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        [assp setSyncStatus:syncStatusNum];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -527,6 +514,24 @@
         
         if ([payload objectForKey:@"Date"]) {
             [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"Date"]]];
+        }
+        
+        
+        
+        // delete existing inspection items for this inspection ID
+        NSEntityDescription *dailyInspectionItemEntity = [NSEntityDescription entityForName:@"DailyInspectionItem"
+                                                                     inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:dailyInspectionItemEntity];
+        NSPredicate *dailyInspectionItemsPredicate = [NSPredicate predicateWithFormat:@"(inspectionID=%@)", [payload objectForKey:@"inspectionID"]];
+        [fetchRequest setPredicate:dailyInspectionItemsPredicate];
+        NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (NSManagedObject *obj in existingIDs){
+            [managedContext deleteObject:obj];
+        }
+        
+        if (error != nil) {
+            NSLog(@"Error: %@", [error debugDescription]);
         }
         
         NSError *saveError;
@@ -564,15 +569,13 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"DailyInspectionItem"
                     inManagedObjectContext:managedContext];
+            [assp setInspectionID:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"inspectionID"]]];
+            [assp setNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"No"]]];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setInspectionID:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"inspectionID"]]];
-        [assp setNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"No"]]];
+        
         [assp setDesc:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Description"]]];
         [assp setQty:[NSNumber numberWithInt:[[payload objectForKey:@"Qty"] intValue]]];
-        
-        
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -588,61 +591,8 @@
     }
 }
 
-+ (void)parseexpensedata:(id)payload {
-    
-    if ([payload objectForKey:@"id"]) {
-        
-        Expensedata *assp;
-        
-        NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-        
-        NSError *retrieveError;
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata"
-                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %s AND eRJobNo1 = %s)",
-                                  [[payload objectForKey:@"EXReportNo"] intValue], [[payload objectForKey:@"ERJobNo1"] intValue]];
-        [fetchRequest setPredicate:predicate];
-        
-        NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
-        
-        if (fetchedObjects && [fetchedObjects count] > 0) {
-            assp = [fetchedObjects objectAtIndex:0];
-        }
-        
-        if (!assp) {
-            assp = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"Expensedata"
-                    inManagedObjectContext:managedContext];
-        }
-        
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setEXReportNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EXReportNo"]]];
-        [assp setERDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERDescription1"]]];
-        [assp setERJobNo1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERJobNo1"]]];
-        [assp setERType1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERType1"]]];
-        [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
-        [assp setERPAMilage1:[NSNumber numberWithInt:[[payload objectForKey:@"ERPAMilage1"] intValue]]];
-        [assp setERPARate1:[NSNumber numberWithInt:[[payload objectForKey:@"ERPARate1"] intValue]]];
-        [assp setERTotal1:[NSNumber numberWithInt:[[payload objectForKey:@"ERTotal1"] intValue]]];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        
-        if ([payload objectForKey:@"ERDate1"]) {
-            [assp setERDate1:[dateFormatter dateFromString:[payload objectForKey:@"ERDate1"]]];
-        }
-        
-        NSError *saveError;
-        if (![managedContext save:&saveError]) {
-            NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-        }
-    }
-}
 
-+ (void)parseExpenseReport:(id)payload {
++ (void)parseExpenseReportModel:(id)payload {
     
     if ([payload objectForKey:@"eXReportNo"]) {
         
@@ -669,32 +619,94 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"ExpenseReportModel"
                     inManagedObjectContext:managedContext];
+            [assp setEXReportNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EXReportNo"]]];
         }
         
-        [assp setEXReportNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EXReportNo"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setERFHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERFHeader"]]];
         [assp setEMPName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EMPName"]]];
         [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
         [assp setERCashAdvance:[NSNumber numberWithInt:[[payload objectForKey:@"ERCashAdvance"] intValue]]];
         [assp setERReimbursement:[NSNumber numberWithInt:[[payload objectForKey:@"ERReimbursement"] intValue]]];
-        [assp setERReimbursement:[NSNumber numberWithInt:[[payload objectForKey:@"ERReimbursement"] intValue]]];
         [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
         [assp setEMPName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EmployeeNo"]]];
-        [assp setApprovedBy:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ApprovedBy"]]];        
+        [assp setApprovedBy:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ApprovedBy"]]];
         [assp setCheckNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"CheckNo"]]];
+        [assp setERDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERDescription1"]]];
+        [assp setERJobNo1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERJobNo1"]]];
+        [assp setERType1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERType1"]]];
+        [assp setERPAMilage1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERPAMilage1"]]];
+        [assp setERPARate1:[NSNumber numberWithInt:[[payload objectForKey:@"ERPARate1"] intValue]]];
+        [assp setERTotal1:[NSNumber numberWithInt:[[payload objectForKey:@"ERTotal1"] intValue]]];
+        
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        if ([payload objectForKey:@"ERDate1"]) {
+            [assp setERDate1:[dateFormatter dateFromString:[payload objectForKey:@"ERDate1"]]];
+        }
         
         if ([payload objectForKey:@"WeekEnding"]) {
             [assp setWeekEnding:[dateFormatter dateFromString:[payload objectForKey:@"WeekEnding"]]];
         }
         
+        
         if ([payload objectForKey:@"Date"]) {
             [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"Date"]]];
         }
         
+        
+        NSError *saveError;
+        if (![managedContext save:&saveError]) {
+            NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
+        }
+    }
+}
+
+
+
++ (void)parseQuantityEstimateForm:(id)payload {
+    if ([payload objectForKey:@"qtyEstID"]) {
+        
+        QuantityEstimateForm *assp;
+        
+        NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+        
+        NSError *retrieveError;
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
+                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(qtyEstID = %@)", [payload objectForKey:@"qtyEstID"]];
+        [fetchRequest setPredicate:predicate];
+        
+        NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
+        
+        if (fetchedObjects && [fetchedObjects count] > 0) {
+            assp = [fetchedObjects objectAtIndex:0];
+        }
+        
+        if (!assp) {
+            assp = [NSEntityDescription
+                    insertNewObjectForEntityForName:@"QuantityEstimateForm"
+                    inManagedObjectContext:managedContext];
+            [assp setQtyEstID:[payload objectForKey:@"qtyEstID"] ];
+        }
+        
+        
+        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_qty"] intValue]]];
+        [assp setItem_no:[payload objectForKey:@"item_no"] ];
+        [assp setProject_id:[payload objectForKey:@"project_id"] ];
+        [assp setUnit:[payload objectForKey:@"unit"] ];
+        [assp setUnit_price:[payload objectForKey:@"unit_price"] ];
+        [assp setUser:[payload objectForKey:@"user"] ];
+        
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
         
         NSError *saveError;
         if (![managedContext save:&saveError]) {
@@ -730,11 +742,11 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"NonComplianceForm"
                     inManagedObjectContext:managedContext];
+            [assp setNon_ComplianceNoticeNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Non_ComplianceNoticeNo"]]];
         }
         
         [assp setNon_ComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Non_ComHeader"]]];
         [assp setContractNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ContractNo"]]];
-        [assp setNon_ComplianceNoticeNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Non_ComplianceNoticeNo"]]];
         [assp setProjectDescription:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ProjectDescription"]]];
         [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
         [assp setTitle:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Title"]]];
@@ -749,7 +761,7 @@
         [assp setSketch_images:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"sketch_images"]]];
         
         NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        [assp setSyncStatus:syncStatusNum];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -786,9 +798,8 @@
 }
 
 + (void)parseProjects:(id)payload {
-    //NSLog(@"Project payload: %@", payload);
     
-    if ([payload objectForKey:@"id"]) {
+    if ([payload objectForKey:@"projecct_id"]) {
         
         Projects *assp;
         
@@ -813,10 +824,10 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"Projects"
                     inManagedObjectContext:managedContext];
+            [assp setProjecct_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"projecct_id"]]];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setProjecct_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"projecct_id"]]];
+        
         [assp setContract_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"contract_no"]]];
         [assp setP_name:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"p_name"]]];
         [assp setP_description:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"p_description"]]];
@@ -834,6 +845,9 @@
         [assp setP_longitude:[NSNumber numberWithDouble:[[payload objectForKey:@"p_longitude"] doubleValue]]];
         [assp setStatus:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"status"]]];
         
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         
@@ -848,112 +862,38 @@
             [assp setCreated_date:[dateFormatterTime dateFromString:[payload objectForKey:@"DateCRTCB"]]];
         }
         
+        
+        // delete existing assign_project records for this project ID
+        NSError *error;
+        NSEntityDescription *assignProject = [NSEntityDescription entityForName:@"Assign_project"
+                                                                     inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:assignProject];
+        NSPredicate *assignProjectPredicate = [NSPredicate predicateWithFormat:@"(projectid=%@)", [payload objectForKey:@"projecct_id"]];
+        [fetchRequest setPredicate:assignProjectPredicate];
+        NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (NSManagedObject *obj in existingIDs){
+            [managedContext deleteObject:obj];
+        }
+        
+        if (error != nil) {
+            NSLog(@"Error: %@", [error debugDescription]);
+        }
+        
+        
         NSError *saveError;
         if (![managedContext save:&saveError]) {
             NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
         }else{
-            NSLog(@"Successfully saved Project with id: %@", [assp id]);
+            NSLog(@"Successfully saved Project with id: %@", [assp projecct_id]);
         }
     }
 }
 
-+ (void)parseQuantitySummaryDetailsType:(id)payload {
-    
-    if ([payload objectForKey:@"id"]) {
-        
-        QuantitySummaryDetails *assp;
-        
-        NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-        
-        NSError *retrieveError;
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryDetails"
-                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %@)", [payload objectForKey:@"id"]];
-        [fetchRequest setPredicate:predicate];
-        
-        NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
-        
-        if (fetchedObjects && [fetchedObjects count] > 0) {
-            assp = [fetchedObjects objectAtIndex:0];
-        }
-        
-        if (!assp) {
-            assp = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"QuantitySummaryDetails"
-                    inManagedObjectContext:managedContext];
-        }
-        
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"project_id"]]];
-        [assp setProject:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"project"]]];
-        [assp setItem_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"item_no"]]];
-        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_qty"] intValue]]];
-        [assp setUnit:[NSNumber numberWithInt:[[payload objectForKey:@"unit"] intValue]]];
-        [assp setUnit_price:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"unit_price"]]];
-        [assp setUser:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"user"]]];
-        
-        NSError *saveError;
-        if (![managedContext save:&saveError]) {
-            NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-        }
-    }
-}
-
-+ (void)parseQuantitySummaryItems:(id)payload {
-    
-    if ([payload objectForKey:@"item_no"]) {
-        
-        QuantitySummaryItems *assp;
-        
-        NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
-        
-        NSError *retrieveError;
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantitySummaryItems"
-                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(item_no = %@)", [payload objectForKey:@"item_no"]];
-        [fetchRequest setPredicate:predicate];
-        
-        NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
-        
-        if (fetchedObjects && [fetchedObjects count] > 0) {
-            assp = [fetchedObjects objectAtIndex:0];
-        }
-        
-        if (!assp) {
-            assp = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"QuantitySummaryItems"
-                    inManagedObjectContext:managedContext];
-        }
-        
-        [assp setItem_no:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"item_no"]]];
-        [assp setLocation_station:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"location_station"]]];
-        [assp setQuantity_sum_details_no:[NSNumber numberWithInt:[[payload objectForKey:@"quantity_sum_details_no"] intValue]]];
-        [assp setDaily:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"daily"]]];
-        [assp setAccum:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"accum"]]];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        
-        if ([payload objectForKey:@"date"]) {
-            [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"date"]]];
-        }
-        
-        NSError *saveError;
-        if (![managedContext save:&saveError]) {
-            NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-        }
-    }
-}
 
 + (void)parseSummarySheet1:(id)payload {
     
-    if ([payload objectForKey:@"id"]) {
+    if ([payload objectForKey:@"SMSheetNo"]) {
         
         SummarySheet1 *assp;
         
@@ -978,10 +918,9 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"SummarySheet1"
                     inManagedObjectContext:managedContext];
+            [assp setSMSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSheetNo"]]];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setSMSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSheetNo"]]];
         [assp setSSHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SSHeader"]]];
         [assp setContractor:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Contractor"]]];
         [assp setPOBox:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"POBox"]]];
@@ -1028,6 +967,9 @@
         [assp setTotal:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"total"]]];
         [assp setPrintedName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"printedName"]]];
         
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         
@@ -1070,10 +1012,11 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"SummarySheet2"
                     inManagedObjectContext:managedContext];
+            [assp setSMSSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSSheetNo"]]];
         }
+        
         [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
         [assp setLessDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LessDiscount"]]];
-        
         [assp setMEDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription1"]]];
         [assp setMEDescription2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription2"]]];
         [assp setMEDescription3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription3"]]];
@@ -1095,10 +1038,12 @@
         [assp setMEAmount4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount4"]]];
         [assp setMEAmount5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount5"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
-        [assp setSMSSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSSheetNo"]]];
         [assp setTotal1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total1"]]];
         [assp setTotal2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total2"]]];
         [assp setTotal3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total3"]]];
+        
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
         
         NSError *saveError;
         if (![managedContext save:&saveError]) {
@@ -1134,9 +1079,9 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"SummarySheet3"
                     inManagedObjectContext:managedContext];
+            [assp setSMSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSheetNo"]]];
         }
         
-        [assp setSMSheetNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"SMSheetNo"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setEQSizeandClass1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQSizeandClass1"]]];
         [assp setEQSizeandClass2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQSizeandClass2"]]];
@@ -1175,6 +1120,9 @@
         [assp setDailyTotal:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"DailyTotal"]]];
         [assp setTotal_to_date:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"total_to_date"]]];
         
+        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
+        [assp setSyncStatus:syncStatusNum];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         
@@ -1195,7 +1143,7 @@
 
 + (void)parseUsers:(id)payload {
     
-    if ([payload objectForKey:@"id"]) {
+    if ([payload objectForKey:@"username"]) {
         
         Users *assp;
         
@@ -1220,10 +1168,9 @@
             assp = [NSEntityDescription
                     insertNewObjectForEntityForName:@"Users"
                     inManagedObjectContext:managedContext];
+            [assp setUsername:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"username"]]];
         }
         
-        [assp setId:[NSNumber numberWithInt:[[payload objectForKey:@"id"] intValue]]];
-        [assp setUsername:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"username"]]];
         [assp setPassword:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"password"]]];
         [assp setFirstname:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"firstname"]]];
         [assp setLastname:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"lastname"]]];

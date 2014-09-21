@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * dIFHeader;
 @property (nonatomic, retain) NSString * e_Mail;
-@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * iFName1;
 @property (nonatomic, retain) NSString * iFName2;
 @property (nonatomic, retain) NSString * iFName3;
@@ -78,11 +77,7 @@
 @property (nonatomic, retain) NSString * i_QTY3;
 @property (nonatomic, retain) NSString * i_QTY4;
 @property (nonatomic, retain) NSString * i_QTY5;
-
-//start brin
+@property (nonatomic, retain) NSNumber * syncStatus;
 @property (nonatomic, retain) NSString * signature;
-
-
-//end brin
 
 @end

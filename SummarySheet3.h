@@ -52,5 +52,6 @@
 @property (nonatomic, retain) NSString * signature2;
 @property (nonatomic, retain) NSString * sMSheetNo;
 @property (nonatomic, retain) NSString * total_to_date;
+@property (nonatomic, retain) NSNumber * syncStatus;
 
 @end

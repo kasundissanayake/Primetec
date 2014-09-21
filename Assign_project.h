@@ -13,7 +13,6 @@
 @interface Assign_project : ExtendedManagedObject
 
 @property (nonatomic, retain) NSDate * assign_date;
-@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * projectid;
 @property (nonatomic, retain) NSString * username;
 

@@ -38,5 +38,6 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * to;
 @property (nonatomic, retain) NSString * userID;
+@property (nonatomic, retain) NSNumber * syncStatus;
 
 @end

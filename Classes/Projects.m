@@ -16,7 +16,6 @@
 @dynamic client_name;
 @dynamic contract_no;
 @dynamic created_date;
-@dynamic id;
 @dynamic inspecter;
 @dynamic p_date;
 @dynamic p_description;
@@ -31,6 +30,7 @@
 @dynamic status;
 @dynamic street;
 @dynamic zip;
+@dynamic syncStatus;
 
 -(NSDictionary*) toDictionary
 {

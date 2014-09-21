@@ -121,16 +121,17 @@ int * const SYNC_STATUS_DELETED = 3;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _entities = @[
-                      @"Assign_project",
+                      @"Projects",
+                      // @"Assign_project",
+                      
                       @"ComplianceForm",
-                      @"DailyInspectionForm",
-                      @"DailyInspectionItem",
-                      @"Expensedata",
                       @"ExpenseReportModel",
                       @"NonComplianceForm",
-                      @"Projects",
-                      @"QuantitySummaryDetails",
-                      @"QuantitySummaryItems",
+                      @"quantityEstimateForm",
+                      
+                      @"DailyInspectionForm",
+                      // @"DailyInspectionItem",
+                      
                       @"SummarySheet1",
                       @"SummarySheet2",
                       @"SummarySheet3"

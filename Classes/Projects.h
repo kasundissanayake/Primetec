@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSString * client_name;
 @property (nonatomic, retain) NSString * contract_no;
 @property (nonatomic, retain) NSDate * created_date;
-@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * inspecter;
 @property (nonatomic, retain) NSDate * p_date;
 @property (nonatomic, retain) NSString * p_description;
@@ -32,5 +31,6 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * street;
 @property (nonatomic, retain) NSString * zip;
+@property (nonatomic, retain) NSNumber * syncStatus;
 
 @end

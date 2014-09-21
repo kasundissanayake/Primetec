@@ -39,5 +39,6 @@
 @property (nonatomic, retain) NSString * total1;
 @property (nonatomic, retain) NSString * total2;
 @property (nonatomic, retain) NSString * total3;
+@property (nonatomic, retain) NSNumber * syncStatus;
 
 @end

@@ -18,7 +18,6 @@
 @dynamic date;
 @dynamic dIFHeader;
 @dynamic e_Mail;
-@dynamic id;
 @dynamic iFName1;
 @dynamic iFName2;
 @dynamic iFName3;
@@ -77,6 +76,7 @@
 @dynamic i_QTY3;
 @dynamic i_QTY4;
 @dynamic i_QTY5;
+@dynamic syncStatus;
 
 //start brin
 @dynamic signature;

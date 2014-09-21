@@ -51,6 +51,7 @@
 @dynamic signature2;
 @dynamic sMSheetNo;
 @dynamic total_to_date;
+@dynamic syncStatus;
 
 
 -(NSDictionary*) toDictionary

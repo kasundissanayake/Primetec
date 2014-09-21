@@ -19,7 +19,6 @@
 @dynamic descr;
 @dynamic federalAidNumber;
 @dynamic healWelAndPension;
-@dynamic id;
 @dynamic insAndTaxesOnItem1;
 @dynamic itemDescount20per;
 @dynamic lAAmount1;
@@ -59,6 +58,7 @@
 @dynamic totalLabor;
 @dynamic zip;
 @dynamic printedName;
+@dynamic syncStatus;
 
 
 -(NSDictionary*) toDictionary

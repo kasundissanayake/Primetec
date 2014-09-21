@@ -21,8 +21,9 @@
 @property (nonatomic, retain) NSString * eRJobNo1;
 @property (nonatomic, retain) NSString * eRPAMilage1;
 @property (nonatomic, retain) NSNumber * eRPARate1;
-@property (nonatomic, retain) NSString * eRTotal1;
+@property (nonatomic, retain) NSNumber * eRTotal1;
 @property (nonatomic, retain) NSString * eRType1;
+@property (nonatomic, retain) NSNumber * syncStatus;
 
 @end
 

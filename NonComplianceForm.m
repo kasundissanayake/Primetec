@@ -20,7 +20,6 @@
 @dynamic dateIssued;
 @dynamic dateOfDWRReported;
 @dynamic descriptionOfNonCompliance;
-@dynamic id;
 @dynamic images_uploaded;
 @dynamic non_ComHeader;
 @dynamic non_ComplianceNoticeNo;
@@ -33,7 +32,7 @@
 @dynamic title;
 @dynamic to;
 @dynamic userID;
-
+@dynamic syncStatus;
 
 -(NSDictionary*) toDictionary
 {

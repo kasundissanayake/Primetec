@@ -15,7 +15,6 @@
 @dynamic created;
 @dynamic email;
 @dynamic firstname;
-@dynamic id;
 @dynamic id_no;
 @dynamic lastname;
 @dynamic password;

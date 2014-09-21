@@ -181,6 +181,7 @@
 		55514B8219AC605B00DA6981 /* ExtendedManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */; };
 		5563F51F19CE1BE000A66013 /* ImageSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563F51E19CE1BE000A66013 /* ImageSyncController.m */; };
 		5563F52219CE1EBF00A66013 /* DataSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563F52119CE1EBF00A66013 /* DataSyncController.m */; };
+		5563F52B19CEA69F00A66013 /* QuantityEstimateForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563F52A19CEA69F00A66013 /* QuantityEstimateForm.m */; };
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
@@ -201,10 +202,7 @@
 		98D14A84199F22890091D5D8 /* Assign_project.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A83199F22890091D5D8 /* Assign_project.m */; };
 		98D14A9C199F3CFD0091D5D8 /* DailyInspectionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A9B199F3CFD0091D5D8 /* DailyInspectionForm.m */; };
 		98D14A9F199F40670091D5D8 /* DailyInspectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A9E199F40670091D5D8 /* DailyInspectionItem.m */; };
-		98D14AA2199F44260091D5D8 /* Expensedata.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AA1199F44260091D5D8 /* Expensedata.m */; };
 		98D14AAB199F54B70091D5D8 /* NonComplianceForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */; };
-		98D14AB1199F5C3E0091D5D8 /* QuantitySummaryDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */; };
-		98D14AB4199F5EE30091D5D8 /* QuantitySummaryItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AB3199F5EE30091D5D8 /* QuantitySummaryItems.m */; };
 		98D14ABD199F67F50091D5D8 /* SummarySheet1.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14ABC199F67F50091D5D8 /* SummarySheet1.m */; };
 		98D14AC0199F6A0C0091D5D8 /* SummarySheet2.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14ABF199F6A0C0091D5D8 /* SummarySheet2.m */; };
 		98D14AC3199F6DB10091D5D8 /* SummarySheet3.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14AC2199F6DB10091D5D8 /* SummarySheet3.m */; };
@@ -582,6 +580,8 @@
 		5563F51E19CE1BE000A66013 /* ImageSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSyncController.m; sourceTree = "<group>"; };
 		5563F52019CE1EBF00A66013 /* DataSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSyncController.h; sourceTree = "<group>"; };
 		5563F52119CE1EBF00A66013 /* DataSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSyncController.m; sourceTree = "<group>"; };
+		5563F52919CEA69F00A66013 /* QuantityEstimateForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuantityEstimateForm.h; sourceTree = "<group>"; };
+		5563F52A19CEA69F00A66013 /* QuantityEstimateForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuantityEstimateForm.m; sourceTree = "<group>"; };
 		55FD290C19BAC8FD0002FEA5 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
 		55FD290D19BAC8FD0002FEA5 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -618,14 +618,8 @@
 		98D14A9B199F3CFD0091D5D8 /* DailyInspectionForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyInspectionForm.m; path = ../DailyInspectionForm.m; sourceTree = "<group>"; };
 		98D14A9D199F40670091D5D8 /* DailyInspectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DailyInspectionItem.h; path = ../DailyInspectionItem.h; sourceTree = "<group>"; };
 		98D14A9E199F40670091D5D8 /* DailyInspectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyInspectionItem.m; path = ../DailyInspectionItem.m; sourceTree = "<group>"; };
-		98D14AA0199F44260091D5D8 /* Expensedata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Expensedata.h; path = ../Expensedata.h; sourceTree = "<group>"; };
-		98D14AA1199F44260091D5D8 /* Expensedata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Expensedata.m; path = ../Expensedata.m; sourceTree = "<group>"; };
 		98D14AA9199F54B70091D5D8 /* NonComplianceForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonComplianceForm.h; path = ../NonComplianceForm.h; sourceTree = "<group>"; };
 		98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NonComplianceForm.m; path = ../NonComplianceForm.m; sourceTree = "<group>"; };
-		98D14AAF199F5C3E0091D5D8 /* QuantitySummaryDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantitySummaryDetails.h; path = ../QuantitySummaryDetails.h; sourceTree = "<group>"; };
-		98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuantitySummaryDetails.m; path = ../QuantitySummaryDetails.m; sourceTree = "<group>"; };
-		98D14AB2199F5EE30091D5D8 /* QuantitySummaryItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantitySummaryItems.h; path = ../QuantitySummaryItems.h; sourceTree = "<group>"; };
-		98D14AB3199F5EE30091D5D8 /* QuantitySummaryItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuantitySummaryItems.m; path = ../QuantitySummaryItems.m; sourceTree = "<group>"; };
 		98D14ABB199F67F50091D5D8 /* SummarySheet1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummarySheet1.h; path = ../SummarySheet1.h; sourceTree = "<group>"; };
 		98D14ABC199F67F50091D5D8 /* SummarySheet1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummarySheet1.m; path = ../SummarySheet1.m; sourceTree = "<group>"; };
 		98D14ABE199F6A0C0091D5D8 /* SummarySheet2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummarySheet2.h; path = ../SummarySheet2.h; sourceTree = "<group>"; };
@@ -1382,14 +1376,8 @@
 				98D14ABF199F6A0C0091D5D8 /* SummarySheet2.m */,
 				98D14ABB199F67F50091D5D8 /* SummarySheet1.h */,
 				98D14ABC199F67F50091D5D8 /* SummarySheet1.m */,
-				98D14AB2199F5EE30091D5D8 /* QuantitySummaryItems.h */,
-				98D14AB3199F5EE30091D5D8 /* QuantitySummaryItems.m */,
-				98D14AAF199F5C3E0091D5D8 /* QuantitySummaryDetails.h */,
-				98D14AB0199F5C3E0091D5D8 /* QuantitySummaryDetails.m */,
 				98D14AA9199F54B70091D5D8 /* NonComplianceForm.h */,
 				98D14AAA199F54B70091D5D8 /* NonComplianceForm.m */,
-				98D14AA0199F44260091D5D8 /* Expensedata.h */,
-				98D14AA1199F44260091D5D8 /* Expensedata.m */,
 				98D14A9D199F40670091D5D8 /* DailyInspectionItem.h */,
 				98D14A9E199F40670091D5D8 /* DailyInspectionItem.m */,
 				98D14A9A199F3CFD0091D5D8 /* DailyInspectionForm.h */,
@@ -1402,6 +1390,8 @@
 				98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */,
 				55514B8019AC605B00DA6981 /* ExtendedManagedObject.h */,
 				55514B8119AC605B00DA6981 /* ExtendedManagedObject.m */,
+				5563F52919CEA69F00A66013 /* QuantityEstimateForm.h */,
+				5563F52A19CEA69F00A66013 /* QuantityEstimateForm.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1926,10 +1916,10 @@
 				4B8CE21419418749001F8E3B /* SDEllipseStrokeTool.m in Sources */,
 				FCD7A9F718EB30A6006008D9 /* GIKCalloutView.m in Sources */,
 				4B8CE21619418749001F8E3B /* SDFillTool.m in Sources */,
+				5563F52B19CEA69F00A66013 /* QuantityEstimateForm.m in Sources */,
 				FCD71F89191B688B00413A3D /* MyView.m in Sources */,
 				98D14ABD199F67F50091D5D8 /* SummarySheet1.m in Sources */,
 				4B8CE20F19418749001F8E3B /* SDMapAnnotation.m in Sources */,
-				98D14AB4199F5EE30091D5D8 /* QuantitySummaryItems.m in Sources */,
 				FC69DAE018EB5BAE0055A535 /* ComplianceViewController.m in Sources */,
 				E98753701462965000E603C6 /* RootVC.m in Sources */,
 				4B8CE21019418749001F8E3B /* SDArcTool.m in Sources */,
@@ -1940,7 +1930,6 @@
 				4B8CE25619418749001F8E3B /* SDTransparencyViewController.m in Sources */,
 				4B8F6BF21963E8E1002E50D4 /* ExpenseReportCell.m in Sources */,
 				5234B57F196B9AFC00FAB5B2 /* CoreData.xcdatamodeld in Sources */,
-				98D14AB1199F5C3E0091D5D8 /* QuantitySummaryDetails.m in Sources */,
 				4B8CE25419418749001F8E3B /* SDMapViewController.m in Sources */,
 				4B8CE20B19418749001F8E3B /* NSString+UUID.m in Sources */,
 				98D14AC0199F6A0C0091D5D8 /* SummarySheet2.m in Sources */,
@@ -1950,7 +1939,6 @@
 				FCBE155319136F4C003D7A85 /* SummaryReport.m in Sources */,
 				FCCE5B59190A3539009ECF16 /* MenuOption.m in Sources */,
 				4B914CA9193454EE00F6E1F4 /* ProjectDetailsCell.m in Sources */,
-				98D14AA2199F44260091D5D8 /* Expensedata.m in Sources */,
 				4B8CE1EF19418749001F8E3B /* CGContextCreator.m in Sources */,
 				4B8CE24E19418749001F8E3B /* SDLayersViewController.m in Sources */,
 				4B8CE21B19418749001F8E3B /* SDRectangleStrokeTool.m in Sources */,

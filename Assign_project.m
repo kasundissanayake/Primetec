@@ -12,7 +12,6 @@
 @implementation Assign_project
 
 @dynamic assign_date;
-@dynamic id;
 @dynamic projectid;
 @dynamic username;
 

@@ -37,6 +37,7 @@
 @dynamic title;
 @dynamic to;
 @dynamic userID;
+@dynamic syncStatus;
 
 -(NSDictionary*) toDictionary
 {

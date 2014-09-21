@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSDate * created;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * firstname;
-@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * id_no;
 @property (nonatomic, retain) NSString * lastname;
 @property (nonatomic, retain) NSString * password;
