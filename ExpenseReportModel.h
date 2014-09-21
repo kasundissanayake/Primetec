@@ -5,7 +5,7 @@
 @interface ExpenseReportModel : ExtendedManagedObject
 
 @property (nonatomic, retain) NSString * approvedBy;
-@property (nonatomic, retain) NSString * eRDate1;
+@property (nonatomic, retain) NSDate * eRDate1;
 @property (nonatomic, retain) NSString * checkNo;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * eRDescription1;
@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSDate * weekEnding;
 @property (nonatomic, retain) NSString * eRJobNo1;
 @property (nonatomic, retain) NSString * eRPAMilage1;
-@property (nonatomic, retain) NSString * eRPARate1;
+@property (nonatomic, retain) NSNumber * eRPARate1;
 @property (nonatomic, retain) NSString * eRTotal1;
 @property (nonatomic, retain) NSString * eRType1;
 

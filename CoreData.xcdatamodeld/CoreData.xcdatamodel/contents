@@ -131,16 +131,16 @@
         <attribute name="checkNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eMPName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRCashAdvance" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRDate1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eRCashAdvance" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eRDate1" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eRDescription1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRFHeader" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eRFHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eRJobNo1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eRPAMilage1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRPARate1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eRPARate1" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="eRReimbursement" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="eRTotal1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eRType1" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eRType1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eXReportNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="images_uploaded" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="project_id" optional="YES" attributeType="String" syncable="YES"/>

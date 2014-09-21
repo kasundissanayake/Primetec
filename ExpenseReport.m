@@ -33,7 +33,23 @@
 @synthesize tblView;
 @synthesize tblSubView;
 @synthesize ExNo;
-@synthesize txtApprovedBy,txtCashAdvance,txtCheckNumber,txtDate,txtEmpName,txtEmpNo,txtReimbursement,txtWeakEnding,imgSignature;
+@synthesize txtApprovedBy;
+@synthesize txtCashAdvance;
+@synthesize txtCheckNumber;
+@synthesize txtDate;
+@synthesize txtEmpName;
+@synthesize txtReimbursement;
+@synthesize txtWeakEnding;
+@synthesize imgSignature;
+@synthesize txtMil1;
+@synthesize txtRate1;
+@synthesize txtTotal1;
+@synthesize header;
+@synthesize ERdate6;
+@synthesize ERDescription;
+@synthesize ERJobNo;
+@synthesize ERType;
+@synthesize sigImgName;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -80,7 +96,7 @@
     [hud show:YES];
     
     [self populateExpenseEntries];
-    [self populateExpenseDetails];
+   // [self populateExpenseDetails];
     
     [hud setHidden:YES];
 }
@@ -90,7 +106,7 @@
 {
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expensedata" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
     //[fetchRequest setPredicate:predicate];
@@ -103,77 +119,80 @@
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Expensedata object eXReportNo: %@", [expensedataObject valueForKey:@"eXReportNo"]);
         
-        arrayExpenses=[NSMutableArray arrayWithArray:objects];
-        NSInteger sum;
+         txtApprovedBy.text=[expensedataObject valueForKey:@"approvedBy"];
+         txtCashAdvance.text=[expensedataObject valueForKey:@"eRCashAdvance"];
+         txtCheckNumber.text=[expensedataObject valueForKey:@"checkNo"];
+         txtDate.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"date"]
+                                       dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         
-        for(int i=0; i<arrayExpenses.count; i++)
-        {
-            sum += (NSInteger) [[arrayExpenses objectAtIndex:i] valueForKey:@"eRTotal1"];
-            tempImageArray  = [[[[arrayExpenses objectAtIndex:i] valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
-            for(int i=1; i<tempImageArray.count; i++)
-            {
-                [arrayImages addObject:[tempImageArray objectAtIndex:i]];
-            }
-        }
-        
-        NSLog(@"Array Images--- %@",arrayImages);
-        isSubTableView=NO;
-        appDelegate.reImp=[NSString stringWithFormat: @"%d", (int)sum];
-        txtReimbursement.text =  [NSString stringWithFormat:@"%@", appDelegate.reImp];
-        appDelegate.reImp=txtReimbursement.text;
-        NSLog(@"appdelegate value: %@", appDelegate.reImp);
-        
-        for (int i=0; i<arrayImages.count; i++) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://data.privytext.us/expense/%@",[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]]];
-            NSLog(@"url----%@",url);
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
-            [self saveImageTaken:image imgName:[NSString stringWithFormat:@"%@.jpg", [arrayImages objectAtIndex:i]]];
-        }
-    }
-    [self.tblSubView reloadData];
-}
-
-
--(void)populateExpenseDetails
-{
-    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if([objects count] > 0){
-        
-        NSManagedObject *expenseReportModelObject = (NSManagedObject *) [objects objectAtIndex:0];
-        NSLog(@"ExpenseReportModel object eXReportNo: %@", [expenseReportModelObject valueForKey:@"eXReportNo"]);
-        
-        txtApprovedBy.text=[expenseReportModelObject valueForKey:@"approvedBy"];
-        txtCashAdvance.text=[NSString stringWithFormat:@"%@", [expenseReportModelObject valueForKey:@"eRCashAdvance"]];
-        txtCheckNumber.text=[expenseReportModelObject valueForKey:@"checkNo"];
-        
-        txtDate.text=[NSDateFormatter localizedStringFromDate:[expenseReportModelObject valueForKey:@"date"]
+         txtEmpName.text=[expensedataObject valueForKey:@"eMPName"];
+         txtReimbursement.text=[expensedataObject valueForKey:@"eRReimbursement"];
+         txtWeakEnding.text=[expensedataObject valueForKey:@"weekEnding"];
+         txtMil1.text=[expensedataObject valueForKey:@"eRPAMilage1"];
+         txtRate1.text=[expensedataObject valueForKey:@"eRPARate1"];
+         txtTotal1.text=[expensedataObject valueForKey:@"eRTotal1"];
+         header.text=[expensedataObject valueForKey:@"eRFHeader"];
+         ERdate6.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"eRDate1"]
                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+
+         ERDescription.text=[expensedataObject valueForKey:@"eRDescription1"];
+         ERJobNo.text=[expensedataObject valueForKey:@"eRJobNo1"];
+         ERType.text=[expensedataObject valueForKey:@"eRType1"];
+        
+        sigImgName = [expensedataObject valueForKey:@"signature"];
+        imgSignature.image=[PRIMECMController getTheImage:sigImgName];
+        NSLog(@"array Images---%@",arrayImages);
+        NSLog(@"array Sketches---%@",sketchesArray);
         
         
-        txtEmpName.text=[expenseReportModelObject valueForKey:@"eMPName"];
-        txtEmpNo.text=[expenseReportModelObject valueForKey:@"employeeNo"];
-        txtWeakEnding.text=[NSDateFormatter localizedStringFromDate:[expenseReportModelObject valueForKey:@"weekEnding"]
-                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-        
-        NSString * signName = [expenseReportModelObject valueForKey:@"Signature"];
-        imgSignature.image=[PRIMECMController getTheImage:signName];
-        
-        
+    }else{
+        NSLog(@"No matching ComplianceForm with ID: %@", ExNo);
     }
-    [self.tblView reloadData];
     
+    [self.tblView reloadData];
+    [hud setHidden:YES];
 }
 
+
+
+//-(void)populateExpenseDetails
+//{
+//    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel" inManagedObjectContext:context];
+//    [fetchRequest setEntity:entity];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY eXReportNo == %@", ExNo];
+//    [fetchRequest setPredicate:predicate];
+//    
+//    NSError *error = nil;
+//    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+//    
+//    if([objects count] > 0){
+//        
+//        NSManagedObject *expenseReportModelObject = (NSManagedObject *) [objects objectAtIndex:0];
+//        NSLog(@"ExpenseReportModel object eXReportNo: %@", [expenseReportModelObject valueForKey:@"eXReportNo"]);
+//        
+//        txtApprovedBy.text=[expenseReportModelObject valueForKey:@"approvedBy"];
+//        txtCashAdvance.text=[NSString stringWithFormat:@"%@", [expenseReportModelObject valueForKey:@"eRCashAdvance"]];
+//        txtCheckNumber.text=[expenseReportModelObject valueForKey:@"checkNo"];
+//        
+//        txtDate.text=[NSDateFormatter localizedStringFromDate:[expenseReportModelObject valueForKey:@"date"]
+//                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+//        
+//        
+//        txtEmpName.text=[expenseReportModelObject valueForKey:@"eMPName"];
+//        txtWeakEnding.text=[NSDateFormatter localizedStringFromDate:[expenseReportModelObject valueForKey:@"weekEnding"]
+//                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+//        
+//        NSString * signName = [expenseReportModelObject valueForKey:@"Signature"];
+//        imgSignature.image=[PRIMECMController getTheImage:signName];
+//        
+//        
+//    }
+//    [self.tblView reloadData];
+//    
+//}
+//
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
 {

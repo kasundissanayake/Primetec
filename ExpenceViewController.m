@@ -848,25 +848,27 @@
         BOOL saveStatus = [PRIMECMController
                            saveExpenseForm:appDelegate.username
                            approvedBy:ERtxtApprovedBy.text
-                           attachment:@""
-                           checkNo:@"checkno"
-                           date:[format stringFromDate:now]
                            eRDate1:ERtextDate6.text
+                           checkNo:ERtxtCheckNum.text
+                           date:ERdate6.text
+                           eRDescription1:ERDescription.text
                            eMPName:ERtxtEmpName.text
                            eRCashAdvance:cashAdvance.text
                            eRFHeader:header.text
                            eRReimbursement:reimburs.text
-                           eXReportNo:nil
+                           eXReportNo:@" "
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            project_id:appDelegate.projId
                            signature:sigName
                            weekEnding:ERtxtWeek.text
-                           eRDescription1:ERDescription.text
                            eRJobNo1:ERJobNo.text
                            eRPAMilage1:txtMil1.text
                            eRPARate1:txtRate1.text
                            eRTotal1:txtTotal1.text
                            eRType1:ERType.text];
+        
+        
+        
         
         
         

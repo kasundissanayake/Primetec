@@ -652,7 +652,7 @@
     
 }
 
-+ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy attachment:(NSString *)attachment checkNo:(NSString *)checkNo date:(NSString *)date eRDate1:(NSString *)eRDate1 eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding eRDescription1:(NSString *)eRDescription1 eRJobNo1:(NSString *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1
++ (BOOL)saveExpenseForm:(NSString *)username approvedBy:(NSString *)approvedBy eRDate1:(NSString *)eRDate1 checkNo:(NSString *)checkNo date:(NSString *)date eRDescription1:(NSString *)eRDescription1 eMPName:(NSString *)eMPName eRCashAdvance:(NSString *)eRCashAdvance eRFHeader:(NSString *)eRFHeader eRReimbursement:(NSString *)eRReimbursement eXReportNo:(NSString *)eXReportNo images_uploaded:(NSString *)images_uploaded project_id:(NSString *)project_id signature:(NSString *)signature weekEnding:(NSString *)weekEnding eRJobNo1:(NSNumber *)eRJobNo1 eRPAMilage1:(NSString *)eRPAMilage1 eRPARate1:(NSString *)eRPARate1 eRTotal1:(NSString *)eRTotal1 eRType1:(NSString *)eRType1;
 
 {
     ExpenseReportModel *assp;
@@ -685,7 +685,6 @@
         [assp setValue:eXReportNo forKey:@"eXReportNo"];
     }
     [assp setValue:approvedBy forKey:@"approvedBy"];
-    [assp setValue:attachment forKey:@"attachment"];
     [assp setValue:checkNo forKey:@"checkNo"];
     
     
@@ -720,14 +719,15 @@
     
     [assp setValue:eRJobNo1 forKey:@"eRJobNo1"];
     [assp setValue:eRPAMilage1 forKey:@"eRPAMilage1"];
-    [assp setValue:eRPARate1 forKey:@"eRPARate1"];
+    
+    NSNumber *erateNum = [NSNumber numberWithInt:[eRPARate1 intValue]];
+    [assp setValue:erateNum forKey:@"eRPARate1"];
     
     [assp setValue:eRTotal1 forKey:@"eRTotal1"];
     [assp setValue:eRType1 forKey:@"eRType1"];
     
     NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
     [assp setValue:syncStatusNum forKey:@"syncStatus"];
-    
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {

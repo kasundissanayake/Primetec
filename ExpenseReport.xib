@@ -6,8 +6,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExpenseReport">
             <connections>
+                <outlet property="ERDescription" destination="fx4-aX-V4a" id="cvT-jz-yGA"/>
+                <outlet property="ERJobNo" destination="d8y-By-Upd" id="Lxh-aJ-Kom"/>
+                <outlet property="ERType" destination="T2h-UG-G0T" id="2BR-1w-ma2"/>
+                <outlet property="ERdate6" destination="GBD-La-rHU" id="1xN-MQ-r31"/>
+                <outlet property="header" destination="RbU-3E-zls" id="xcW-XQ-2sO"/>
                 <outlet property="headerView" destination="i5M-Pr-FkT" id="HmZ-E1-RWG"/>
+                <outlet property="imgSignature" destination="gG6-Ek-hVM" id="TOQ-2P-oyO"/>
                 <outlet property="tblView" destination="DBB-ME-MMz" id="Cua-eK-ab3"/>
+                <outlet property="txtApprovedBy" destination="jZ7-rP-fnR" id="3kJ-Mi-h8R"/>
+                <outlet property="txtCashAdvance" destination="hLR-q6-vDY" id="MJE-UK-1O1"/>
+                <outlet property="txtCheckNumber" destination="lwX-FI-ATR" id="qyR-nU-PaI"/>
+                <outlet property="txtDate" destination="wkd-mg-tqp" id="Azm-6o-UVU"/>
+                <outlet property="txtEmpName" destination="40k-Ja-Bh8" id="T6B-Vf-axF"/>
+                <outlet property="txtMil1" destination="Dh1-du-7Y6" id="j9j-Uj-M9m"/>
+                <outlet property="txtRate1" destination="uvp-Ea-Rl8" id="EFi-2E-DAc"/>
+                <outlet property="txtReimbursement" destination="bVT-3C-IDp" id="3qe-cb-L7N"/>
+                <outlet property="txtTotal1" destination="uHS-gf-cQL" id="Niv-3M-tmt"/>
+                <outlet property="txtWeakEnding" destination="T8v-wd-f0g" id="cJD-yL-DjW"/>
                 <outlet property="view" destination="eP5-O5-abt" id="9c4-gX-GJx"/>
             </connections>
         </placeholder>
