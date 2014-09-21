@@ -58,7 +58,7 @@
     [lblContractorRes.layer setCornerRadius:8.0f];
     
     self.tblView.scrollsToTop=YES;
-     self.tblView.tableHeaderView = headerView;
+    self.tblView.tableHeaderView = headerView;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
@@ -121,10 +121,15 @@
         
         txtTitle.text=[nonComplianceReportObject valueForKey:@"non_ComHeader"];
         nonComNotNo.text=[nonComplianceReportObject valueForKey:@"non_ComplianceNoticeNo"];
-        lblProjDec.text=[nonComplianceReportObject valueForKey:@"projectDescription"];
+        
+        id project = [PRIMECMController getProjectFromID:[nonComplianceReportObject valueForKey:@"project_id"]];
+        if (project !=  NULL){
+            lblProjDec.text=[project valueForKey:@"p_description"];
+            txtProject.text=[project valueForKey:@"p_name"];
+        }
         txtContactNo.text=[nonComplianceReportObject valueForKey:@"contractNo"];
         txtTitle.text=[nonComplianceReportObject valueForKey:@"title"];
-        txtProject.text=[nonComplianceReportObject valueForKey:@"project"];
+        
         txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[nonComplianceReportObject valueForKey:@"dateIssued"]
                                                           dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         lblContractorRes.text=[nonComplianceReportObject valueForKey:@"contractorResponsible"];
@@ -204,8 +209,9 @@
     
     if (fetchedObjects && [fetchedObjects count] > 0) {
         assp = [fetchedObjects objectAtIndex:0];
-        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_DELETED];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+       
+        [managedContext deleteObject:assp];
+        
         if (![managedContext save:&retrieveError]) {
             NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
         }else{
@@ -239,7 +245,7 @@
 -(void)printReport
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
+    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -302,7 +308,7 @@
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
+    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -414,7 +420,7 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 
 -(void)createPDFfromUIView:(UIScrollView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
@@ -462,7 +468,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
-   
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

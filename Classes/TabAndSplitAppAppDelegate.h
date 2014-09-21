@@ -59,15 +59,6 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) NSString *client;
 @property (nonatomic, retain) NSString *address_client;
-@property (nonatomic, retain) NSString *coloumn1;
-@property (nonatomic, retain) NSString *coloumn2;
-@property (nonatomic, retain) NSString *coloumn3;
-@property (nonatomic, retain) NSString *coloumn4;
-@property (nonatomic, retain) NSString *coloumn5;
-@property (nonatomic, retain) NSString *iddd;
-
-
-
 
 //edit start
 

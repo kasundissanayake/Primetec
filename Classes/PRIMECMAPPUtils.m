@@ -236,4 +236,13 @@ NSMutableArray *itemArray;
     return arr;
 }
 
++(NSArray*) getItemArray {
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (id item in itemArray){
+        [arr addObject:[item objectAtIndex:0]];
+    }
+    return arr;
+}
+
 @end

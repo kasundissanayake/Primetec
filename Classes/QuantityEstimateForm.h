@@ -20,5 +20,6 @@
 @property (nonatomic, retain) NSString * user;
 @property (nonatomic, retain) NSNumber * syncStatus;
 @property (nonatomic, retain) NSString * qtyEstID;
+@property (nonatomic, retain) NSDate * date;
 
 @end

@@ -644,11 +644,10 @@
                            lATotalHours4:lATotalHours4.text
                            lATotalHours5:lATotalHours5.text
                            pOBox:appDelegate.address
-                           printedName:appDelegate.username   //Radha
+                           printedName:appDelegate.username
                            project_id:appDelegate.projId
-                           projectNo:appDelegate.projId
                            reportNo:@""
-                           sMSheetNo:smNum    //Radha
+                           sMSheetNo:smNum
                            sSHeader:sSHeader.text
                            state:appDelegate.state
                            telephoneNo:appDelegate.tel

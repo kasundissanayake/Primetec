@@ -49,7 +49,6 @@
 @property (nonatomic, retain) NSString * lATotalHours5;
 @property (nonatomic, retain) NSString * pOBox;
 @property (nonatomic, retain) NSString * project_id;
-@property (nonatomic, retain) NSString * projectNo;
 @property (nonatomic, retain) NSString * reportNo;
 @property (nonatomic, retain) NSString * sMSheetNo;
 @property (nonatomic, retain) NSString * sSHeader;

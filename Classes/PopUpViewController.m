@@ -147,7 +147,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
         //NSLog(@"Project Form - populating update for projId: %@", [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"projecct_id"]);
         
-       
+        
     }
     
     
@@ -532,15 +532,8 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         
         NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
-        
         appDelegate.edit1=cell.lblpopupvalue.text;
-        NSLog(@".............Edit part.................%@",appDelegate.projId);
-        
-        
         // cell.lblpopupvalue.text=appDelegate.projId;
-        
-        
-        
     }
     
     
@@ -671,7 +664,6 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
     }
     else
     {
-        NSLog(@"selected----%@",cell.lblHeading.text);
         lblTitle.text=cell.lblHeading.text;
         [self.view addSubview:viewProjectName];
         txtViewProjectName.text=[defaults objectForKey:lblTitle.text];

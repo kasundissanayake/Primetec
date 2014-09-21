@@ -66,13 +66,13 @@
 
 @interface SDDrawingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SDLayersViewControllerDelegate, SDToolSettingsViewControllerDelegate, SDDrawingToolsViewControllerDelegate, SDLineWidthViewControllerDelegate, SDTransparencyViewControllerDelegate, SDFontSizeViewControllerDelegate, SDColorPickerViewControllerDelegate, MFMailComposeViewControllerDelegate, SDMapViewControllerDelegate, UITextFieldDelegate,UIActionSheetDelegate>
 {
-
-CMSketchDescriptionViewController *sketchViewController;
-UIButton *btnCloseShowImage;
+    
+    CMSketchDescriptionViewController *sketchViewController;
+    UIButton *btnCloseShowImage;
     NSString *imageName;
     TabAndSplitAppAppDelegate *appDelegate;
     int count;
-   
+    
 }
 
 #pragma mark - IBOutlets
@@ -145,10 +145,10 @@ UIButton *btnCloseShowImage;
     long undoFilesSize = 0;
     long drawingFilesSize = 0;
     
-    [NSFileManager subFileCount:&fileCount andSubFileSize:&undoFilesSize forDirectory:undoFilesPath];      
+    [NSFileManager subFileCount:&fileCount andSubFileSize:&undoFilesSize forDirectory:undoFilesPath];
     [NSFileManager subFileCount:&fileCount andSubFileSize:&drawingFilesSize forDirectory:drawingFilesPath];
     
-    drawingFilesSize -= undoFilesSize;    
+    drawingFilesSize -= undoFilesSize;
     
     self.fileSizeLabel.text = [NSString stringWithFormat:@"Drawing files: %@, Undo files: %@", [NSString stringWithFileSize:drawingFilesSize], [NSString stringWithFileSize:undoFilesSize]];
     
@@ -220,7 +220,7 @@ UIButton *btnCloseShowImage;
 #pragma mark - Drawing sharing
 
 - (void)shareDrawingWithActivityView:(UIImage*)imageToShare {
-
+    
     UIActivityViewController *viewController = [[UIActivityViewController alloc] initWithActivityItems:@[imageToShare] applicationActivities:nil];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -234,17 +234,17 @@ UIButton *btnCloseShowImage;
         [self presentViewController:viewController animated:YES completion:nil];
         
     }
-
+    
 }
 
 // support for iOS 5 - no UIActivityViewController available
-- (void)shareDrawingWithActionSheet:(UIImage*)imageToShare {    
+- (void)shareDrawingWithActionSheet:(UIImage*)imageToShare {
     
     UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@"How would you like to share the current drawing?"];
     [sheet setDestructiveButtonWithTitle:@"Send with Mail" handler:^{
-        if ([MFMailComposeViewController canSendMail]) {            
-            [self shareDrawingWithMail:imageToShare];            
-        } else {            
+        if ([MFMailComposeViewController canSendMail]) {
+            [self shareDrawingWithMail:imageToShare];
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
                                                             message:@"You can't send an email right now. Make sure your device has an Internet connection and you have at least one email account setup."
                                                            delegate:nil
@@ -258,7 +258,7 @@ UIButton *btnCloseShowImage;
         
         if([TWTweetComposeViewController canSendTweet])
         {
-
+            
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
                                                             message:@"You can't send a tweet right now. Make sure your device has an Internet connection and you have at least one Twitter account setup."
@@ -324,7 +324,7 @@ UIButton *btnCloseShowImage;
             
         }];
     }
-
+    
     [sheet addButtonWithTitle:@"Import Photo" handler:^{
         NSLog(@"import Photo prompt------------------------------");
         
@@ -348,15 +348,15 @@ UIButton *btnCloseShowImage;
     
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
         
-           NSLog(@"import Photo showwwww------------------------------");
+        NSLog(@"import Photo showwwww------------------------------");
         [self.popoverController presentPopoverFromBarButtonItem:self.importButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     else {
-         // NSLog(@"import Photo showwwww------------------------------");
+        // NSLog(@"import Photo showwwww------------------------------");
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
     
@@ -398,12 +398,12 @@ UIButton *btnCloseShowImage;
 #pragma mark - Directory paths
 
 - (NSString*)drawingsDirectory {
-
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
     NSString *documentsDirectory = paths[0];
     NSString *drawingsDirectory = [documentsDirectory stringByAppendingPathComponent:kSDFileDrawingsDirectory];
     return drawingsDirectory;
-
+    
 }
 
 - (NSString*)photoDirectory {
@@ -493,7 +493,7 @@ UIButton *btnCloseShowImage;
     
     if (self.isNewDrawing) {
         [self deleteCurrentDrawing];
-    }    
+    }
     [self.delegate viewControllerDidCancelDrawing:self];
     
 }
@@ -520,16 +520,16 @@ UIButton *btnCloseShowImage;
     if ([UIActivityViewController class]) {
         [self shareDrawingWithActivityView:imageToShare];
     } else {
-        [self shareDrawingWithActionSheet:imageToShare];        
+        [self shareDrawingWithActionSheet:imageToShare];
     }
     
 }
 
 - (IBAction)saveDrawingTapped:(id)sender {
-
+    
     
     [self showDecView];
- 
+    
     
 }
 -(void)saveDrawing
@@ -539,8 +539,8 @@ UIButton *btnCloseShowImage;
     NSLog(@"Saveeeeeeeeeeeeeeeeeeeeee");
     [self.delegate viewControllerDidSaveDrawing:self];
     NSLog(@"Saveeeeeeeeeeeeeeeeeeeeee");
-
-
+    
+    
 }
 
 -(void)showDecView
@@ -558,23 +558,23 @@ UIButton *btnCloseShowImage;
         storyboard = [UIStoryboard storyboardWithName:@"SDSimpleDrawing_iPhone" bundle:bundle];
     }
     //SDDrawingsViewController *viewController = [storyboard instantiateInitialViewController];
-
+    
     sketchViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"SKetch_Dec"];
     
     
     
     
-  // imgViewController=[[BISketchDescriptionViewController alloc]initWithNibName:@"BISketchDescriptionViewController" bundle:nil];
-        //placeImage=imgView.image;
-        //imgViewController.img=placeImage;
-        NSLog(@"get URL image");
+    // imgViewController=[[BISketchDescriptionViewController alloc]initWithNibName:@"BISketchDescriptionViewController" bundle:nil];
+    //placeImage=imgView.image;
+    //imgViewController.img=placeImage;
+    
     sketchViewController.imageName=imageName;
     sketchViewController.tag=self.drawingID;
-        sketchViewController.view.frame=CGRectMake(0, 0, 1024, 768);
-        [self.navigationController.view addSubview:sketchViewController.view];
-        [self createShowImageCloseBtn];
-        [self.navigationController.view addSubview:btnCloseShowImage];
-   // }
+    sketchViewController.view.frame=CGRectMake(0, 0, 1024, 768);
+    [self.navigationController.view addSubview:sketchViewController.view];
+    [self createShowImageCloseBtn];
+    [self.navigationController.view addSubview:btnCloseShowImage];
+    // }
 }
 -(void)createShowImageCloseBtn
 {
@@ -620,11 +620,11 @@ UIButton *btnCloseShowImage;
             NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
         }
     }
-   // selectedImage = image;
-//    if (image.size.width > 1000.0) {
-//        image = [self resizeImageToSize:(CGSizeMake(image.size.width/2, image.size.height/2))];
-//        NSLog(@"image croped %f",image.size.width);
-//    }
+    // selectedImage = image;
+    //    if (image.size.width > 1000.0) {
+    //        image = [self resizeImageToSize:(CGSizeMake(image.size.width/2, image.size.height/2))];
+    //        NSLog(@"image croped %f",image.size.width);
+    //    }
     //[imagesArray addObject:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     //lblImageName.text=[imagesArray objectAtIndex:0];
     //btnRemoveImage.hidden=NO;
@@ -794,7 +794,7 @@ UIButton *btnCloseShowImage;
 #pragma mark - SDDrawingToolsViewController delegate
 
 - (void)viewController:(SDDrawingToolsViewController *)viewController didPickTool:(NSString *)tool
-{    
+{
     self.toolSettings.drawingTool = tool;
     
     //cancel importing photo
@@ -803,13 +803,13 @@ UIButton *btnCloseShowImage;
     [self updateDrawingToolButton];
     [self updateDrawingToolTitle];
     
-    [self dismissCurrentPopover];    
+    [self dismissCurrentPopover];
 }
 
 #pragma mark - SDToolSettingsViewController delegate
 
 - (void)settingsViewController:(SDToolSettingsViewController*)viewController didPickTool:(NSString*)tool
-{    
+{
     self.toolSettings.drawingTool = tool;
     
     //cancel importing photo
@@ -822,13 +822,13 @@ UIButton *btnCloseShowImage;
 - (void)settingsViewController:(SDToolSettingsViewController*)viewController didPickColor1:(UIColor*)color {
     
     self.toolSettings.primaryColor = color;
-
+    
 }
 
 - (void)settingsViewController:(SDToolSettingsViewController*)viewController didPickColor2:(UIColor*)color {
     
     self.toolSettings.secondaryColor = color;
-
+    
 }
 
 - (void)settingsViewController:(SDToolSettingsViewController*)viewController didPickWidth:(int)lineWidth {
@@ -852,7 +852,7 @@ UIButton *btnCloseShowImage;
 #pragma mark - SDLayersViewController delegate
 
 - (void)viewController:(SDLayersViewController*)viewController didRenameLayer:(SDDrawingLayer*)layer {
-        
+    
 }
 
 - (void)viewController:(SDLayersViewController*)viewController didDeleteLayer:(SDDrawingLayer*)layer {
@@ -871,8 +871,8 @@ UIButton *btnCloseShowImage;
 }
 
 - (void)viewController:(SDLayersViewController*)viewController didAddLayer:(SDDrawingLayer*)layer {
-        
-    [self initializeNewLayer:layer];    
+    
+    [self initializeNewLayer:layer];
     self.activeLayerIndex = self.layers.count - 1;
     
     //add to undo stack so undoing a drawing op doesn't also undo the new layer
@@ -901,13 +901,13 @@ UIButton *btnCloseShowImage;
 #pragma mark - UIImagePickerController delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-        
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissCurrentPopover];
     }
     else {
         [picker dismissViewControllerAnimated:YES completion:nil];
-    }    
+    }
     
     UIAlertView *alert = [UIAlertView alertViewWithTitle:@"Import" message:@"How would you like to import the photo?"];
     [alert addButtonWithTitle:@"Full Size" handler:^{
@@ -1040,7 +1040,7 @@ UIButton *btnCloseShowImage;
     
     // create a new bitmap image context
     UIGraphicsBeginImageContextWithOptions(self.layerContainerView.bounds.size, NO, 0.0);
-                
+    
     // reversed as the z-order of the layer image views is the reverse of the layers array order
     for (int i = self.layers.count - 1; i >= 0; i--) {
         SDDrawingLayer *layer = (SDDrawingLayer*)self.layers[i];
@@ -1048,7 +1048,7 @@ UIButton *btnCloseShowImage;
             [layer.imageView.image drawInRect:layer.imageView.bounds blendMode:kCGBlendModeNormal alpha:1.0 - (layer.transparency / 100.0)];
         }
     }
-        
+    
     // get a UIImage from the image context
     UIImage *flatImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -1083,7 +1083,7 @@ UIButton *btnCloseShowImage;
 }
 
 - (void)deleteCurrentDrawing {
-
+    
     [[NSFileManager defaultManager] removeItemAtPath:[self photoDirectory] error:nil];
     for (int i=0;i<appDelegate.sketchesArray.count; i++) {
         //addImageTag=@"";
@@ -1097,25 +1097,25 @@ UIButton *btnCloseShowImage;
     }
     
     
-
+    
 }
 - (void)deleteDrawing:(NSNotification *)notification{
-
+    
     self.drawingID=[notification object];
-       NSLog(@"remove current Draw----------------------------------------");
+    NSLog(@"remove current Draw----------------------------------------");
     [[NSFileManager defaultManager] removeItemAtPath:[self photoDirectory] error:nil];
-//    for (int i=0;i<appDelegate.sketchesArray.count; i++) {
-//        //addImageTag=@"";
-//        if([[[appDelegate.sketchesArray objectAtIndex:i]valueForKey:@"tag"] isEqualToString:self.drawingID])
-//        {
-//            NSLog(@"remove current Draw----------------------------------------");
-//            //[appDelegate.arrayImages objectAtIndex:i];
-//            [appDelegate.sketchesArray removeObjectAtIndex:i];
-//            break;
-//        }
-//    }
-//    
-   
+    //    for (int i=0;i<appDelegate.sketchesArray.count; i++) {
+    //        //addImageTag=@"";
+    //        if([[[appDelegate.sketchesArray objectAtIndex:i]valueForKey:@"tag"] isEqualToString:self.drawingID])
+    //        {
+    //            NSLog(@"remove current Draw----------------------------------------");
+    //            //[appDelegate.arrayImages objectAtIndex:i];
+    //            [appDelegate.sketchesArray removeObjectAtIndex:i];
+    //            break;
+    //        }
+    //    }
+    //
+    
     
 }
 
@@ -1143,13 +1143,13 @@ UIButton *btnCloseShowImage;
     //do not respond to touch if the title UITextField is visible
     if (self.titleTextField && !self.titleTextField.hidden) {
         return;
-    }    
+    }
     
     UITouch *touch = [touches anyObject];
     
     if (![self shouldTrackTouch:touch]) {
         return;
-    }    
+    }
     
     if ([self tracingPhotoDestination]) {
         
@@ -1178,7 +1178,7 @@ UIButton *btnCloseShowImage;
     if (![self shouldTrackTouch:touch]) {
         return;
     }
-    	
+    
     if ([self tracingPhotoDestination]) {
         
         [self.photoTool touchMoved:touch];
@@ -1200,7 +1200,7 @@ UIButton *btnCloseShowImage;
         //resign first responder status for title UITextField
         [self.titleTextField resignFirstResponder];
         return;
-    }    
+    }
     
     UITouch *touch = [touches anyObject];
     
@@ -1209,15 +1209,15 @@ UIButton *btnCloseShowImage;
     }
     
     if ([self tracingPhotoDestination]) {
-                
-        [self.photoTool touchEnded:touch];   
+        
+        [self.photoTool touchEnded:touch];
         
     } else {
         
         SDDrawingTool *drawingTool = [self activeTool];
         if (drawingTool) {
             
-            [drawingTool touchEnded:touch];    
+            [drawingTool touchEnded:touch];
             
         }
         
@@ -1232,14 +1232,14 @@ UIButton *btnCloseShowImage;
     
     NSString *undoFilesDirectory = [self undoFilesDirectory];
     NSString *undoFileDirectory = [undoFilesDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", ++self.undoStackLocation]];
-        
+    
     self.undoStackCount = self.undoStackLocation + 1;
-       
+    
     /* this could be improved by getting copies of the current layers and current
      layer images in local variables and then passing those into a refactored
      save method in the block below
      with the current code, on slower devices, drawing operations that happen in
-     quick succession may be undone in one step 
+     quick succession may be undone in one step
      
      use background priority so this has the least impact on drawing operations*/
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -1376,14 +1376,14 @@ UIButton *btnCloseShowImage;
     [self.drawingTools addObject:tool];
     
     //text tool
-//    tool = [[SDArcTool alloc] initWithCompletion:^{
-//        
-//        [self addDrawingToUndoStack];
-//        
-//    }];
-//    tool.toolName = @"Arc";
-//    tool.imageName = @"multiple-mini.png";
-//    [self.drawingTools addObject:tool];
+    //    tool = [[SDArcTool alloc] initWithCompletion:^{
+    //
+    //        [self addDrawingToUndoStack];
+    //
+    //    }];
+    //    tool.toolName = @"Arc";
+    //    tool.imageName = @"multiple-mini.png";
+    //    [self.drawingTools addObject:tool];
     
     //text tool
     tool = [[SDTextTool alloc] initWithCompletion:^{
@@ -1391,7 +1391,7 @@ UIButton *btnCloseShowImage;
         [self addDrawingToUndoStack];
         
     }];
-
+    
     tool.toolName = @"Text";
     tool.imageName = @"text-capital-mini.png";
     [self.drawingTools addObject:tool];
@@ -1454,7 +1454,7 @@ UIButton *btnCloseShowImage;
     }];
     tool.toolName = @"Eraser";
     tool.imageName = @"eraser-mini.png";
-    [self.drawingTools addObject:tool];    
+    [self.drawingTools addObject:tool];
     
     //photo tool
     self.photoTool = [[SDPhotoTool alloc] initWithCompletion:^{
@@ -1533,7 +1533,7 @@ UIButton *btnCloseShowImage;
     
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"saveSketch" object:nil];
-     //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteSketch" object:nil];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteSketch" object:nil];
     NSLog(@"Removeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     
     [self dismissCurrentPopover];
@@ -1548,11 +1548,11 @@ UIButton *btnCloseShowImage;
 {
     [super viewDidLoad];
     
-   
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveDrawing) name:@"saveSketch" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteDrawing:) name:@"deleteSketch" object:nil];
     
-     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [self initializeLayers];
     
     [self resetUndoStack];
@@ -1582,7 +1582,7 @@ UIButton *btnCloseShowImage;
 
 - (void)viewDidUnload {
     
-
+    
     [self setLayerContainerView:nil];
     [self setFileSizeLabel:nil];
     [self setTopToolbar:nil];

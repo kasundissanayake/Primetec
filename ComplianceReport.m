@@ -15,6 +15,7 @@
 #import "PRIMECMController.h"
 #import "ComplianceViewController.h"
 #import "ComplianceForm.h"
+#import "Projects.h"
 
 @interface ComplianceReport ()
 {
@@ -136,10 +137,17 @@
         NSLog(@"Compliance Form object CNo: %@", [complianceReportObject valueForKey:@"complianceNoticeNo"]);
         txtTitle.text=[complianceReportObject valueForKey:@"comHeader"];
         comNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
-        lblProjDec.text=[complianceReportObject valueForKey:@"projectDescription"];
+        
+        id project = [PRIMECMController getProjectFromID:[complianceReportObject valueForKey:@"project_id"]];
+        if (project != NULL){
+            lblProjDec.text=[project valueForKey:@"p_description"];
+            txtProject.text=[project valueForKey:@"p_name"];
+        }
+        
+        
         txtContractNo.text=[complianceReportObject valueForKey:@"project_id"];
         txtTitle.text=[complianceReportObject valueForKey:@"title"];
-        txtProject.text=[complianceReportObject valueForKey:@"Project"];
+        
         txtDateIssued.text=[NSDateFormatter localizedStringFromDate:[complianceReportObject valueForKey:@"dateIssued"]
                                                           dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
         lblConRes.text=[complianceReportObject valueForKey:@"ContractorResponsible"];
@@ -212,8 +220,9 @@
     
     if (fetchedObjects && [fetchedObjects count] > 0) {
         assp = [fetchedObjects objectAtIndex:0];
-        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_DELETED];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+       
+        [managedContext deleteObject:assp];
+        
         if (![managedContext save:&retrieveError]) {
             NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
         }else{

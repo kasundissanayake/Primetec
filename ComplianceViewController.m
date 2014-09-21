@@ -245,7 +245,6 @@ UILabel *cno;
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -255,8 +254,7 @@ UILabel *cno;
 -(void)tapDetectedReviewer
 {
     isSignature=@"1";
-    signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
+    signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];    
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -382,9 +380,7 @@ UILabel *cno;
                            complianceNoticeNo: EditComNumber.text
                            title:txtTitle.text
                            contractNo:txtContactNo.text
-                           proDesc:txtProDesc.text
-                           comTitle:COtextTitle.text
-                           project:COtextProject.text
+                           comTitle:COtextTitle.text                          
                            dateIssued:txtDateIssued.text
                            conRespon:conRes.text
                            to:txtTo.text

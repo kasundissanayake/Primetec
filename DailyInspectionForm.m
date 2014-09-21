@@ -38,7 +38,6 @@
 @dynamic oVJTitle3;
 @dynamic oVJTitle4;
 @dynamic p_o_Box;
-@dynamic project;
 @dynamic project_id;
 @dynamic sketch_images;
 @dynamic state;
@@ -77,11 +76,8 @@
 @dynamic i_QTY4;
 @dynamic i_QTY5;
 @dynamic syncStatus;
-
-//start brin
 @dynamic signature;
 
-//end brin
 
 -(NSDictionary*) toDictionary
 {

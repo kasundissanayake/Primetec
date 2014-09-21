@@ -129,13 +129,13 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
     
-   // ERtxtEmpNum.text=appDelegate.userId;
+    // ERtxtEmpNum.text=appDelegate.userId;
     ERtxtEmpName.text=appDelegate.projPrintedName;
     ERtextDate6.text=dateString;
     ERtxtApprovedBy.text=appDelegate.pm;
     
     if(!exNUmber)
-        ExpID =  [NSString stringWithFormat:@"EX_%@",[self getCurrentDateTimeAsNSString]];  // [PRIMECMController getExpenceIdByProjID:appDelegate.projId];
+        ExpID =  [NSString stringWithFormat:@"EX_%@",[self getCurrentDateTimeAsNSString]];
     else
         ExpID = exNUmber;
     
@@ -151,10 +151,28 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
-    //Radha
-    if(exNUmber)
-    {
-        //Edit Tapped
+    
+    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
+        
+        
+        ERtxtApprovedBy.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"approvedBy"];
+        cashAdvance.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRCashAdvance"] ;
+        ERtxtCheckNum.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"checkNo"];
+        txtRate1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"date"];
+        ERtxtEmpName.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eMPName"];
+        reimburs.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRReimbursement"];
+        ERtxtWeek.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"weekEnding"];
+        
+        txtMil1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRPAMilage1"];
+        txtRate1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRPARate1"];
+        txtTotal1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRTotal1"] ;
+        header.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRFHeader"];
+        ERdate6.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRDate1"];
+        
+        ERDescription.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRDescription1"];
+        ERJobNo.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRJobNo1"];
+        ERType.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRType1"];
+        exNUmber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eXReportNo"];
         
     }
 }
@@ -200,7 +218,6 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -211,7 +228,6 @@
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
     signatureViewController.imageViewTag=@"2";
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -842,8 +858,7 @@
         
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         [format setDateFormat:@"yyyy-MM-dd"];
-        NSDate *now = [NSDate date];
-                
+        
         BOOL saveStatus = [PRIMECMController
                            saveExpenseForm:appDelegate.username
                            approvedBy:ERtxtApprovedBy.text
@@ -855,7 +870,7 @@
                            eRCashAdvance:cashAdvance.text
                            eRFHeader:header.text
                            eRReimbursement:reimburs.text
-                           eXReportNo:ERJobNo.text
+                           eXReportNo:exNUmber
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            project_id:appDelegate.projId
                            signature:sigName
@@ -872,88 +887,88 @@
         
         
         
-   ERtxtApprovedBy.text=@" ";
-    ERtextDate6.text=@" ";
-    ERtxtCheckNum.text=@" ";
-    ERdate6.text=@" ";
-    txvDescription.text=@" ";
-    ERtxtEmpName.text=@" ";
-    cashAdvance.text=@" ";
+        ERtxtApprovedBy.text=@" ";
+        ERtextDate6.text=@" ";
+        ERtxtCheckNum.text=@" ";
+        ERdate6.text=@" ";
+        txvDescription.text=@" ";
+        ERtxtEmpName.text=@" ";
+        cashAdvance.text=@" ";
     eRFHeader:header.text=@" ";
     eRReimbursement:reimburs.text=@" ";
-
-    ERtxtWeek.text=@" ";
-    ERJobNo.text=@" ";
-    txtMil1.text=@" ";
-    txtRate1.text=@" ";
-    txtTotal1.text=@" ";
-    ERType.text=@" ";
         
-            BOOL imageSaveState;
-            BOOL sketchSaveState;
-            BOOL singSaveState;
-            //Signature to coredata
+        ERtxtWeek.text=@" ";
+        ERJobNo.text=@" ";
+        txtMil1.text=@" ";
+        txtRate1.text=@" ";
+        txtTotal1.text=@" ";
+        ERType.text=@" ";
         
-            NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        BOOL imageSaveState;
+        BOOL sketchSaveState;
+        BOOL singSaveState;
+        //Signature to coredata
         
-            NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
-            
-            
-            UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
-            
-            NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
-            singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
-            
-            if(arrayImages.count>0)
-            {
-                for (int i = 0; i < arrayImages.count;i++) {
-                    
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *documentsDirectory = [paths objectAtIndex:0];
-                    NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
-                    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-                    
-                    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                    NSData *imgData = UIImageJPEGRepresentation(image,0.3);
-                    
-                    imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
-                    
-                }
+        NSArray *pathsSign = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectorySign = [pathsSign objectAtIndex:0];
+        
+        NSString *folderPathSign= [documentsDirectorySign stringByAppendingPathComponent:@"/Signature"];
+        
+        
+        UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
+        
+        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+        singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
+        
+        if(arrayImages.count>0)
+        {
+            for (int i = 0; i < arrayImages.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
+                
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                
+                imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
             
-            if(appDelegate.sketchesArray.count>0)
-            {
-                for (int i=0;i < appDelegate.sketchesArray.count;i++) {
-                    
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *documentsDirectory = [paths objectAtIndex:0];
-                    
-                    NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
-                    NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
-                    UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                    NSData *imgData = UIImageJPEGRepresentation(image,0.3);
-                    sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
-                    
-                }
+        }
+        
+        if(appDelegate.sketchesArray.count>0)
+        {
+            for (int i=0;i < appDelegate.sketchesArray.count;i++) {
+                
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                
+                NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
+                NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
+                UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
             
-            [HUD setHidden:YES];
-            
-            if (saveStatus && singSaveState){
-                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [exportAlert show];
-                [appDelegate.sketchesArray removeAllObjects];
-                [arrayImages removeAllObjects];
-                //[self deleteImageFiles];
-            }else{
-                UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [exportAlert show];
-            }
+        }
+        
+        [HUD setHidden:YES];
+        
+        if (saveStatus && singSaveState){
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
+            [appDelegate.sketchesArray removeAllObjects];
+            [arrayImages removeAllObjects];
+            //[self deleteImageFiles];
+        }else{
+            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [exportAlert show];
         }
     }
+}
 
 
 

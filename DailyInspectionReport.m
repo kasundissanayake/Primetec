@@ -5,6 +5,7 @@
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
 #import "DailyInspectionForm.h"
+#import "Projects.h"
 
 @interface DailyInspectionReport (){
     NSMutableArray *arrayImages;
@@ -125,7 +126,12 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         txtState.text=[inspectionReportObject valueForKey:@"state"];
         txtTelephone.text=[inspectionReportObject valueForKey:@"telephone_No"];
         txtCometentPerson.text=[inspectionReportObject valueForKey:@"competentPerson"];
-        lblProject.text=[inspectionReportObject valueForKey:@"project"];
+        
+        id project = [PRIMECMController getProjectFromID:[inspectionReportObject valueForKey:@"project_id"]];
+        if (project != NULL){
+            lblProject.text=  [project valueForKey:@"p_name"] ;
+        }
+        
         town.text=[inspectionReportObject valueForKey:@"town_city"];
         txtZip.text=[inspectionReportObject valueForKey:@"zip_Code"];
         txtEmail.text=[inspectionReportObject valueForKey:@"e_Mail"];
@@ -289,8 +295,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     
     if (fetchedObjects && [fetchedObjects count] > 0) {
         assp = [fetchedObjects objectAtIndex:0];
-        NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_DELETED];
-        [assp setValue:syncStatusNum forKey:@"syncStatus"];
+        [managedContext deleteObject:assp];
         if (![managedContext save:&retrieveError]) {
             NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
         } else {

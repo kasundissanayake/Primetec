@@ -24,9 +24,7 @@
 @dynamic non_ComHeader;
 @dynamic non_ComplianceNoticeNo;
 @dynamic printedName;
-@dynamic project;
 @dynamic project_id;
-@dynamic projectDescription;
 @dynamic signature;
 @dynamic sketch_images;
 @dynamic title;

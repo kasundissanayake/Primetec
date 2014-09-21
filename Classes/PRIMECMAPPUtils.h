@@ -52,4 +52,6 @@ extern int * const SYNC_STATUS_DELETED;
 
 +(NSArray*) getSuggestionArray;
 
++(NSArray*) getItemArray;
+
 @end

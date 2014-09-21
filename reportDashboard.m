@@ -151,8 +151,9 @@
         // Quantity Summary
         else if(proType==5){
             cell.lblReportName.text =@"Quantity Summary Report";
-           // cell.lblReportDate.text =[[reports valueForKey:@"date"] objectAtIndex:indexPath.row];
-           // cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"] objectAtIndex:indexPath.row];
+            cell.lblReportDate.text =[NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
+                                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+            cell.lblReportInspectedBy.text =[[reports valueForKey:@"project_id"] objectAtIndex:indexPath.row];
             cell.lblReportProjectManager.text =[[reports valueForKey:@"item_no"] objectAtIndex:indexPath.row];
             
         }
@@ -243,6 +244,13 @@
 
 -(void)loadQuantitySummary
 {
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
@@ -252,14 +260,25 @@
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
     [reports addObjectsFromArray: objects];
     [table reloadData];
+    
+    [hud setHidden:YES];
 }
 
 
 
 -(void)loadComplianceForm
 {
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm" inManagedObjectContext:context];
@@ -271,12 +290,7 @@
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:hud];
-    hud.labelText=@"";
-    hud.dimBackground = YES;
-    hud.delegate = self;
-    [hud show:YES];
+    
     
     [reports addObjectsFromArray: objects];
     [table reloadData];
@@ -286,6 +300,14 @@
 
 -(void)loadNonComplianceForm
 {
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm" inManagedObjectContext:context];
@@ -297,12 +319,7 @@
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:hud];
-    hud.labelText=@"";
-    hud.dimBackground = YES;
-    hud.delegate = self;
-    [hud show:YES];
+    
     
     [reports addObjectsFromArray: objects];
     [table reloadData];
@@ -312,6 +329,14 @@
 
 -(void)loadDailyInspectionForm
 {
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText=@"";
+    hud.dimBackground = YES;
+    hud.delegate = self;
+    [hud show:YES];
+    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm" inManagedObjectContext:context];
@@ -323,12 +348,7 @@
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:hud];
-    hud.labelText=@"";
-    hud.dimBackground = YES;
-    hud.delegate = self;
-    [hud show:YES];
+    
     
     [reports addObjectsFromArray: objects];
     [table reloadData];
@@ -340,22 +360,24 @@
 -(void)loadExpenseForm
 {
     
-    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY project_id == %@", appDelegate.projId];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
     hud.labelText=@"";
     hud.dimBackground = YES;
     hud.delegate = self;
     [hud show:YES];
+    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", appDelegate.projId];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    
     
     [reports addObjectsFromArray: objects];
     [table reloadData];
@@ -366,15 +388,6 @@
 
 -(void)loadSummeryForm
 {
-    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY project_id == %@", appDelegate.projId];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
@@ -382,6 +395,18 @@
     hud.dimBackground = YES;
     hud.delegate = self;
     [hud show:YES];
+    
+    NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet1" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", appDelegate.projId];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    
     
     [reports addObjectsFromArray: objects];
     [table reloadData];

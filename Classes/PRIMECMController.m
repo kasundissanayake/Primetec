@@ -9,6 +9,7 @@
 #import "PRIMECMController.h"
 #import "PRIMECMAPPUtils.h"
 #import "Reachability.h"
+#import "TabAndSplitAppAppDelegate.h"
 
 #import "Assign_project.h"
 #import "ComplianceForm.h"
@@ -22,7 +23,7 @@
 #import "SummarySheet3.h"
 #import "Users.h"
 #import "Image.h"
-
+#import "QuantityEstimateForm.h"
 #import "ImageSyncController.h"
 #import "DataSyncController.h"
 
@@ -96,8 +97,7 @@
 }
 
 
-+ (BOOL)saveComplianceForm:(NSString *)username complianceNoticeNo:(NSString *)complianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
-                dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
++ (BOOL)saveComplianceForm:(NSString *)username complianceNoticeNo:(NSString *)complianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo comTitle:(NSString *)comTitle dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
 {
     ComplianceForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -105,6 +105,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"complianceNoticeNo = %@", complianceNoticeNo];
     [fetchRequest setPredicate:predicate];
     
@@ -120,12 +121,19 @@
         assp = [existingIDs objectAtIndex:0];
         NSLog(@"Updating existing Compliance Report complianceNoticeNo: %@", complianceNoticeNo);
     }else{
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ComplianceForm"
+                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:entity];
+        existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
         int randNum = 0;
         BOOL hasConflicts = TRUE;
         while (hasConflicts){
             hasConflicts = FALSE;
             randNum = rand() % (100000000) + 100000; //create the random number.
-            newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, userId, randNum];
+            newIDD = [NSString stringWithFormat:@"%@-%@-CM-%d", projId, userId, randNum];
             
             for (NSDictionary *dict in existingIDs) {
                 NSString *str = [dict valueForKey:@"complianceNoticeNo"];
@@ -149,9 +157,7 @@
     
     [assp setValue:[NSNumber numberWithInt:[contractNo integerValue]] forKey:@"contractNo"];
     [assp setValue:title forKey:@"comHeader"];
-    [assp setValue:proDesc forKey:@"projectDescription"];
     [assp setValue:comTitle forKey:@"title"];
-    [assp setValue:project forKey:@"project"];
     [assp setValue:projId forKey:@"project_id"];
     [assp setValue:conRespon forKey:@"contractorResponsible"];
     [assp setValue:to forKey:@"to"];
@@ -189,8 +195,7 @@
 }
 
 
-+(BOOL)saveNonComplianceForm:(NSString *)username non_ComplianceNoticeNo:(NSString *)non_ComplianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo proDesc:(NSString *)proDesc comTitle:(NSString *)comTitle project:(NSString *)project
-                  dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
++(BOOL)saveNonComplianceForm:(NSString *)username non_ComplianceNoticeNo:(NSString *)non_ComplianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo comTitle:(NSString *)comTitle dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
 {
     
     NonComplianceForm *assp;
@@ -214,11 +219,19 @@
         assp = [existingIDs objectAtIndex:0];
         NSLog(@"Updating existing Non-Compliance Report non-ComplianceNoticeNo: %@", non_ComplianceNoticeNo);
     }else{
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"NonComplianceForm"
+                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:entity];
+        existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
+        
         BOOL hasConflicts = TRUE;
         while (hasConflicts){
             hasConflicts = FALSE;
             randNum = rand() % (100000000) + 100000; //create the random number.
-            newIDD = [NSString stringWithFormat:@"%@-%@-CM%d", projId, userId, randNum];
+            newIDD = [NSString stringWithFormat:@"%@-%@-NCM-%d", projId, userId, randNum];
             
             for (NSDictionary *dict in existingIDs) {
                 NSString *str = [dict valueForKey:@"non_ComplianceNoticeNo"];
@@ -240,9 +253,7 @@
     
     [assp setValue:contractNo forKey:@"contractNo"];
     [assp setValue:title forKey:@"non_ComHeader"];
-    [assp setValue:proDesc forKey:@"projectDescription"];
     [assp setValue:comTitle forKey:@"title"];
-    [assp setValue:project forKey:@"project"];
     [assp setValue:projId forKey:@"Project_id"];
     [assp setValue:conRespon forKey:@"contractorResponsible"];
     [assp setValue:to forKey:@"to"];
@@ -281,7 +292,7 @@
 
 
 
-+(BOOL) saveDailyInspectionForm:(NSString *)username calendar_Days_Used:(NSString *)calendar_Days_Used city:(NSString *)city competentPerson:(NSString *) competentPerson con_Name:(NSString *) con_Name contractor:(NSString *) contractor contractorsHoursOfWork:(NSNumber *) contractorsHoursOfWork date:(NSString *) date dIFHeader:(NSString *) dIFHeader e_Mail:(NSString *) e_Mail i_Desc1:(NSString *) i_Desc1 i_Desc2:(NSString *) i_Desc2 i_Desc3:(NSString *) i_Desc3 i_Desc4:(NSString *) i_Desc4 i_Desc5:(NSString *) i_Desc5 i_No1:(NSString *) i_No1 i_No2:(NSString *) i_No2 i_No3:(NSString *) i_No3 i_No4:(NSString *) i_No4 i_No5:(NSString *) i_No5 i_QTY1:(NSString *) i_QTY1 i_QTY2:(NSString *) i_QTY2 i_QTY3:(NSString *) i_QTY3 i_QTY4:(NSString *) i_QTY4 i_QTY5:(NSString *) i_QTY5 iFName1:(NSString *) iFName1 iFName2:(NSString *) iFName2 iFName3:(NSString *) iFName3 iFName4:(NSString *) iFName4 iFTitle1:(NSString *) iFTitle1 iFTitle2:(NSString *) iFTitle2 iFTitle3:(NSString *) iFTitle3 iFTitle4:(NSString *) iFTitle4 images_uploaded:(NSString *) images_uploaded inspectionID:(NSString *) inspectionID inspectorSign:(NSString *) inspectorSign signature:(NSString*)signature original_Calendar_Days:(NSString *) original_Calendar_Days oVJName1:(NSString *) oVJName1 oVJName2:(NSString *) oVJName2 oVJName3:(NSString *) oVJName3 oVJName4:(NSString *) oVJName4 oVJTitle1:(NSString *) oVJTitle1 oVJTitle2:(NSString *) oVJTitle2 oVJTitle3:(NSString *) oVJTitle3 oVJTitle4:(NSString *) oVJTitle4 p_o_Box:(NSString *) p_o_Box printedName:(NSString *) printedName project:(NSString *) project project_id:(NSString *) project_id report_No:(NSString *) report_No sketch_images:(NSString *) sketch_images state:(NSString *) state telephone_No:(NSString *) telephone_No time:(NSString *) time town_city:(NSString *) town_city wDODepartmentOrCompany1:(NSString *) wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *) wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *) wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *) wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *) wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *) wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *) wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *) wDODescriptionOfWork4 weather:(NSString *)weather workDoneBy:(NSString *) workDoneBy zip_Code:(NSString *) zip_Code{
++(BOOL) saveDailyInspectionForm:(NSString *)username calendar_Days_Used:(NSString *)calendar_Days_Used city:(NSString *)city competentPerson:(NSString *) competentPerson con_Name:(NSString *) con_Name contractor:(NSString *) contractor contractorsHoursOfWork:(NSNumber *) contractorsHoursOfWork date:(NSString *) date dIFHeader:(NSString *) dIFHeader e_Mail:(NSString *) e_Mail i_Desc1:(NSString *) i_Desc1 i_Desc2:(NSString *) i_Desc2 i_Desc3:(NSString *) i_Desc3 i_Desc4:(NSString *) i_Desc4 i_Desc5:(NSString *) i_Desc5 i_No1:(NSString *) i_No1 i_No2:(NSString *) i_No2 i_No3:(NSString *) i_No3 i_No4:(NSString *) i_No4 i_No5:(NSString *) i_No5 i_QTY1:(NSString *) i_QTY1 i_QTY2:(NSString *) i_QTY2 i_QTY3:(NSString *) i_QTY3 i_QTY4:(NSString *) i_QTY4 i_QTY5:(NSString *) i_QTY5 iFName1:(NSString *) iFName1 iFName2:(NSString *) iFName2 iFName3:(NSString *) iFName3 iFName4:(NSString *) iFName4 iFTitle1:(NSString *) iFTitle1 iFTitle2:(NSString *) iFTitle2 iFTitle3:(NSString *) iFTitle3 iFTitle4:(NSString *) iFTitle4 images_uploaded:(NSString *) images_uploaded inspectionID:(NSString *) inspectionID inspectorSign:(NSString *) inspectorSign signature:(NSString*)signature original_Calendar_Days:(NSString *) original_Calendar_Days oVJName1:(NSString *) oVJName1 oVJName2:(NSString *) oVJName2 oVJName3:(NSString *) oVJName3 oVJName4:(NSString *) oVJName4 oVJTitle1:(NSString *) oVJTitle1 oVJTitle2:(NSString *) oVJTitle2 oVJTitle3:(NSString *) oVJTitle3 oVJTitle4:(NSString *) oVJTitle4 p_o_Box:(NSString *) p_o_Box printedName:(NSString *) printedName project_id:(NSString *) project_id report_No:(NSString *) report_No sketch_images:(NSString *) sketch_images state:(NSString *) state telephone_No:(NSString *) telephone_No time:(NSString *) time town_city:(NSString *) town_city wDODepartmentOrCompany1:(NSString *) wDODepartmentOrCompany1 wDODepartmentOrCompany2:(NSString *) wDODepartmentOrCompany2 wDODepartmentOrCompany3:(NSString *) wDODepartmentOrCompany3 wDODepartmentOrCompany4:(NSString *) wDODepartmentOrCompany4 wDODescriptionOfWork1:(NSString *) wDODescriptionOfWork1 wDODescriptionOfWork2:(NSString *) wDODescriptionOfWork2 wDODescriptionOfWork3:(NSString *) wDODescriptionOfWork3 wDODescriptionOfWork4:(NSString *) wDODescriptionOfWork4 weather:(NSString *)weather workDoneBy:(NSString *) workDoneBy zip_Code:(NSString *) zip_Code{
     
     DailyInspectionForm *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -320,7 +331,6 @@
     [assp setValue:contractor forKey:@"contractor"];
     [assp setValue:contractorsHoursOfWork forKey:@"contractorsHoursOfWork"];
     [assp setValue:dIFHeader forKey:@"dIFHeader"];
-    [assp setValue:project forKey:@"project"];
     [assp setValue:project_id forKey:@"Project_id"];
     [assp setValue:e_Mail forKey:@"e_Mail"];
     
@@ -531,12 +541,13 @@
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
-                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+                                              inManagedObjectContext:managedContext];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"eXReportNo == %@", eXReportNo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K=%@)", @"eXReportNo", eXReportNo];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
-    NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
+    NSString *newIDD;
     
     if (error != nil) {
         NSLog(@"Error: %@", [error debugDescription]);
@@ -545,13 +556,37 @@
     if([existingIDs count]>0)
     {
         assp =[existingIDs firstObject];
+    }else{
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
+                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:entity];
+        existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
+        int randNum = 0;
+        BOOL hasConflicts = TRUE;
+        while (hasConflicts){
+            hasConflicts = FALSE;
+            randNum = rand() % (100000000) + 100000; //create the random number.
+            newIDD = [NSString stringWithFormat:@"%@-%@-EX-%d", project_id, username, randNum];
+            
+            for (NSDictionary *dict in existingIDs) {
+                NSString *str = [dict valueForKey:@"eXReportNo"];
+                if ([str isEqualToString:newIDD]){
+                    hasConflicts = TRUE;
+                    break;
+                }
+            }
+        }
+        NSLog(@"New ExpenseReportModel Report eXReportNo: %@", newIDD);
     }
     
     if (!assp) {
         assp = [NSEntityDescription
                 insertNewObjectForEntityForName:@"ExpenseReportModel"
                 inManagedObjectContext:managedContext];
-        [assp setValue:eXReportNo forKey:@"eXReportNo"];
+        [assp setValue:newIDD forKey:@"eXReportNo"];
     }
     
     [assp setValue:approvedBy forKey:@"approvedBy"];
@@ -627,7 +662,7 @@
 
 // summary sheet 1
 
-+ (BOOL)saveSummarySheet1:(NSString *)username city:(NSString *)city conPeWork:(NSString *) conPeWork constructionOrder:(NSString *) constructionOrder contractor:(NSString *) contractor date:(NSString *) date descr:(NSString *) descr federalAidNumber:(NSString *) federalAidNumber healWelAndPension:(NSString *) healWelAndPension insAndTaxesOnItem1:(NSString *) insAndTaxesOnItem1 itemDescount20per:(NSString *) itemDescount20per lAAmount1:(NSString *) lAAmount1 lAAmount2:(NSString *) lAAmount2 lAAmount3:(NSString *) lAAmount3 lAAmount4:(NSString *) lAAmount4 lAAmount5:(NSString *) lAAmount5 lAClass1:(NSString *) lAClass1 lAClass2:(NSString *) lAClass2 lAClass3:(NSString *) lAClass3 lAClass4:(NSString *) lAClass4 lAClass5:(NSString *) lAClass5 lANo1:(NSString *) lANo1 lANo2:(NSString *) lANo2 lANo3:(NSString *) lANo3 lANo4:(NSString *) lANo4 lANo5:(NSString *) lANo5 lARate1:(NSString *) lARate1 lARate2:(NSString *) lARate2 lARate3:(NSString *) lARate3 lARate4:(NSString *) lARate4 lARate5:(NSString *) lARate5 lATotalHours1:(NSString *) lATotalHours1 lATotalHours2:(NSString *) lATotalHours2 lATotalHours3:(NSString *) lATotalHours3 lATotalHours4:(NSString *) lATotalHours4 lATotalHours5:(NSString *) lATotalHours5 pOBox:(NSString *) pOBox printedName:(NSString *) printedName project_id:(NSString *) project_id projectNo:(NSString *) projectNo reportNo:(NSString *) reportNo sMSheetNo:(NSString *) sMSheetNo sSHeader:(NSString *) sSHeader state:(NSString *) state telephoneNo:(NSString *) telephoneNo total:(NSString *) total totalLabor:(NSString *) totalLabor zip:(NSString *) zip
++ (BOOL)saveSummarySheet1:(NSString *)username city:(NSString *)city conPeWork:(NSString *) conPeWork constructionOrder:(NSString *) constructionOrder contractor:(NSString *) contractor date:(NSString *) date descr:(NSString *) descr federalAidNumber:(NSString *) federalAidNumber healWelAndPension:(NSString *) healWelAndPension insAndTaxesOnItem1:(NSString *) insAndTaxesOnItem1 itemDescount20per:(NSString *) itemDescount20per lAAmount1:(NSString *) lAAmount1 lAAmount2:(NSString *) lAAmount2 lAAmount3:(NSString *) lAAmount3 lAAmount4:(NSString *) lAAmount4 lAAmount5:(NSString *) lAAmount5 lAClass1:(NSString *) lAClass1 lAClass2:(NSString *) lAClass2 lAClass3:(NSString *) lAClass3 lAClass4:(NSString *) lAClass4 lAClass5:(NSString *) lAClass5 lANo1:(NSString *) lANo1 lANo2:(NSString *) lANo2 lANo3:(NSString *) lANo3 lANo4:(NSString *) lANo4 lANo5:(NSString *) lANo5 lARate1:(NSString *) lARate1 lARate2:(NSString *) lARate2 lARate3:(NSString *) lARate3 lARate4:(NSString *) lARate4 lARate5:(NSString *) lARate5 lATotalHours1:(NSString *) lATotalHours1 lATotalHours2:(NSString *) lATotalHours2 lATotalHours3:(NSString *) lATotalHours3 lATotalHours4:(NSString *) lATotalHours4 lATotalHours5:(NSString *) lATotalHours5 pOBox:(NSString *) pOBox printedName:(NSString *) printedName project_id:(NSString *) project_id reportNo:(NSString *) reportNo sMSheetNo:(NSString *) sMSheetNo sSHeader:(NSString *) sSHeader state:(NSString *) state telephoneNo:(NSString *) telephoneNo total:(NSString *) total totalLabor:(NSString *) totalLabor zip:(NSString *) zip
 {
     SummarySheet1 *assp;
     NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
@@ -636,7 +671,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     // [fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sMSheetNo == %@",sMSheetNo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)",sMSheetNo];
     [fetchRequest setPredicate:predicate];
     //[fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"sMSheetNo"]];
     NSError *error = nil;
@@ -716,7 +751,6 @@
     [assp setValue:pOBox forKey:@"pOBox"];
     [assp setValue:printedName forKey:@"printedName"];
     [assp setValue:project_id forKey:@"project_id"];
-    [assp setValue:projectNo forKey:@"projectNo"];
     [assp setValue:reportNo forKey:@"reportNo"];
     [assp setValue:sSHeader forKey:@"sSHeader"];
     [assp setValue:telephoneNo forKey:@"telephoneNo"];
@@ -751,7 +785,7 @@
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sMSSheetNo == %@",sMSSheetNo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSSheetNo = %@)",sMSSheetNo];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -825,7 +859,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"SummarySheet3"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sMSheetNo == %@",sMSheetNo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(sMSheetNo = %@)",sMSheetNo];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -840,7 +874,7 @@
         NSLog(@"Error: %@", [error debugDescription]);
     }
     
-    NSLog(@"New Summary Sheet 2 Report sMSheetNo: %@", sMSheetNo);
+    NSLog(@"New Summary Sheet 3 Report sMSheetNo: %@", sMSheetNo);
     
     
     if (!assp) {
@@ -930,7 +964,7 @@
                                               inManagedObjectContext:managedContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectid = %@", projId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(projectid = %@)", projId];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
@@ -979,7 +1013,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects"
                                               inManagedObjectContext:managedContext];
     [fetchRequest setEntity:entity];
-    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"projecct_id = %@", projId];
+    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"(projecct_id = %@)", projId];
     [fetchRequest setPredicate:project_predicate];
     
     NSError *error = nil;
@@ -1019,7 +1053,7 @@
     [assp setValue:latitudeNum forKey:@"p_latitude"];
     [assp setValue:longitudeNum forKey:@"p_longitude"];
     [assp setValue:projName forKey:@"p_name"];
-    [assp setValue:projName forKey:@"p_title"];
+    [assp setValue:title forKey:@"p_title"];
     [assp setValue:phone forKey:@"phone"];
     [assp setValue:projMgr forKey:@"project_manager"];
     [assp setValue:state forKey:@"state"];
@@ -1036,9 +1070,89 @@
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
         return FALSE;
     }else{
-        NSLog(@"saved project: %@", assp);
+        NSLog(@"saved project: %@", projId);
         return TRUE;
     }
+}
+
++ (BOOL)saveQuantityEstimateForm:(NSString *)username est_qty:(NSString *)est_qty item_no:(NSString *) item_no project_id:(NSString *) project_id unit:(NSString *) unit unit_price:(NSString *) unit_price qtyEstID:(NSString *)qtyEstID {
+    
+    QuantityEstimateForm *assp;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
+                                              inManagedObjectContext:managedContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"(qtyEstID = %@)", qtyEstID];
+    [fetchRequest setPredicate:project_predicate];
+    
+    NSError *error = nil;
+    NSArray *existingIDs = [managedContext executeFetchRequest:fetchRequest error:&error];
+    NSString *newIDD;
+    
+    if ([existingIDs count] > 0){
+        assp = [existingIDs objectAtIndex:0];
+        NSLog(@"Updating QuantityEstimateForm with qtyEstID: %@", qtyEstID);
+    }else {
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"QuantityEstimateForm"
+                                                  inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+        [fetchRequest setEntity:entity];
+        existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
+        
+        int randNum = 0;
+        BOOL hasConflicts = TRUE;
+        while (hasConflicts){
+            hasConflicts = FALSE;
+            randNum = rand() % (100000000) + 100000; //create the random number.
+            newIDD = [NSString stringWithFormat:@"%@-%@-QE-%d", project_id, username, randNum];
+            
+            for (NSDictionary *dict in existingIDs) {
+                NSString *str = [dict valueForKey:@"qtyEstID"];
+                if ([str isEqualToString:newIDD]){
+                    hasConflicts = TRUE;
+                    break;
+                }
+            }
+        }
+        NSLog(@"New QuantityEstimateForm qtyEstID: %@", newIDD);
+    }
+    
+    if (error != nil) {
+        NSLog(@"Error: %@", [error debugDescription]);
+    }
+    
+    
+    if (assp == NULL) {
+        NSLog(@"Creating a new QuantityEstimateForm with qtyEstID: %@", qtyEstID);
+        assp = [NSEntityDescription
+                insertNewObjectForEntityForName:@"QuantityEstimateForm"
+                inManagedObjectContext:managedContext];
+        [assp setValue:newIDD forKey:@"qtyEstID"];
+        
+    }
+    
+    [assp setValue:[NSNumber numberWithDouble:[est_qty intValue]] forKey:@"est_qty"];
+    [assp setValue:item_no forKey:@"item_no"];
+    [assp setValue:project_id forKey:@"project_id"];
+    [assp setValue:[NSDate date] forKey:@"date"];
+    [assp setValue:unit forKey:@"unit"];
+    [assp setValue:[NSNumber numberWithDouble:[unit_price intValue]] forKey:@"unit_price"];
+    [assp setValue:username forKey:@"user"];
+    
+    NSError *saveError;
+    if (![managedContext save:&saveError]) {
+        NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
+        return FALSE;
+    }else{
+        NSLog(@"saved QuantityEstimateForm: %@", qtyEstID);
+        return TRUE;
+    }
+    
 }
 
 + (BOOL) saveAllImages:(NSString *)imgName img:(NSData *)img syncStatus:(int*)syncStatus {
@@ -1080,24 +1194,60 @@
     
 }
 
-+(NSArray *)getQuantitySummaryDetailsForInspectionID:(NSString *)inspectionId AndItemNum:(NSString *)item_no
++(NSArray *)getInspectionsForProject:(NSString *)projID {
+    
+    NSError *retrieveError;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+   // [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", projID];
+    [fetchRequest setPredicate:predicate];
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"inspectionID"]];
+    
+    
+    NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    if (fetchedObjects && [fetchedObjects count] > 0){
+        
+        for (id obj in fetchedObjects){
+            [arr addObject:[obj valueForKey:@"inspectionID"]];
+        }
+        return arr;
+    }
+    return NULL;
+}
+
+
++(NSArray *)getInspectionSummaryForItemID:(NSString *)itemNo
 {
     NSError *retrieveError;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionItem"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
-    [fetchRequest setResultType:NSDictionaryResultType];
+    //[fetchRequest setResultType:NSDictionaryResultType];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@) AND (%K == %@)",@"no", item_no, @"inspectionID", inspectionId];
-    [fetchRequest setPredicate:predicate];
+    TabAndSplitAppAppDelegate *appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
+    NSArray *inspectionArr = [self getInspectionsForProject:appDelegate.projId];
+   
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K=%@) AND (%K IN %@)", @"no", itemNo, @"inspectionID", inspectionArr];
+   [fetchRequest setPredicate:predicate];
     
     NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
     
-    NSLog(@"Quantity Table View Data is %@",fetchedObjects);
     return fetchedObjects;
 }
 
++(NSArray *)getQuantitySummaryDetailsForItem:(NSString *)itemNo {
+    return nil;
+}
 
 + (UIImage *) getTheImage:(NSString *)imgName{
     
@@ -1119,6 +1269,26 @@
     
     return nil;
     
+}
+
++(id) getProjectFromID:(NSString*)projID {
+    NSError *retrieveError;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Projects"
+                                              inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(projecct_id = %@)", projID];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
+    
+    if (fetchedObjects && [fetchedObjects count] >0){
+        id project = [fetchedObjects firstObject];
+        return project;
+    }
+    return NULL;
 }
 
 @end

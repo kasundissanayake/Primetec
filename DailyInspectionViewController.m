@@ -196,16 +196,18 @@
         des3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc3"];
         des4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc4"];
         des5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc5"];
+                
         qua1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY1"];
         qua2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY2"];
         qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY3"];
         qua4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY4"];
         qua5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY5"];
-        textField0.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No1"];
-        textField1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No2"];
-        textField2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No3"];
-        textField3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No4"];
-        textFiel4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No5"];
+        
+        q_itemNo1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No1"];
+        q_itemNo2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No2"];
+        q_itemNo3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No3"];
+        q_itemNo4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No4"];
+        q_itemNo5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No5"];
     }
     
     NSArray *array = [PRIMECMAPPUtils getSuggestionArray];
@@ -700,7 +702,6 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -711,7 +712,6 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -799,7 +799,7 @@
 -(IBAction)saveDailyInspection:(id)sender{
     uploading = NO;
     uploadingsketch=NO;
-    if(txtHours.text==NULL || txtHours.text.length==0 || contractor.text==NULL || contractor.text.length==0 ||txtAddress.text==NULL || txtAddress.text.length==0 ||txtCity.text==NULL || txtCity.text.length==0 || txtState.text==NULL || txtState.text.length==0 ||txtTel.text==NULL|| txtTel.text.length==0||txtDateIN.text==NULL|| txtDateIN.text.length==0 ||txtCompetent.text==NULL || txtCompetent.text.length==0 ||txtProject.text==NULL || txtProject.text.length==0 ||txtWrkDone.text==NULL || txtWrkDone.text.length==0 || imgSignatureDaily.image==NULL)
+    if(txtHours.text==NULL || txtHours.text.length==0 || contractor.text==NULL || contractor.text.length==0 ||txtAddress.text==NULL || txtAddress.text.length==0 ||txtCity.text==NULL || txtCity.text.length==0 || txtState.text==NULL || txtState.text.length==0 ||txtTel.text==NULL|| txtTel.text.length==0||txtDateIN.text==NULL|| txtDateIN.text.length==0 ||txtCompetent.text==NULL || txtCompetent.text.length==0 ||txtProject.text==NULL || txtProject.text.length==0 ||txtWrkDone.text==NULL || txtWrkDone.text.length==0 || imgSignatureDaily.image==NULL || repNo.text==NULL || repNo.text.length==0)
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -902,7 +902,6 @@
                            
                            p_o_Box:txtAddress.text
                            printedName:appDelegate.projPrintedName
-                           project:txtProject.text
                            project_id:appDelegate.projId
                            report_No:repNo.text
                            sketch_images:[sketchesNameArray componentsJoinedByString:@","]
@@ -1288,11 +1287,8 @@
 
 -(IBAction)itemDescChange:(id)sender
 {
-    
-    
     if (sender == textField0){
         NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField0.text];
-        NSLog(@"suggest item %@", arr);
         if (arr && [arr count] >0){
             q_itemNo1.text = [arr objectAtIndex:0];
         }

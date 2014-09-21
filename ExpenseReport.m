@@ -8,6 +8,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
+#import "ExpenseReportModel.h"
 
 @interface ExpenseReport (){
     NSMutableArray *arrayImages;
@@ -76,6 +77,18 @@
                                target:self
                                action:@selector(showSCompliance:)];
     
+    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Edit", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnEdit:)];
+    
+    UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Delete", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnDelete:)];
+    
     self.navigationItem.rightBarButtonItem = Button;
     arrayImages=[[NSMutableArray alloc]init];
     sketchesArray=[[NSMutableArray alloc]init];
@@ -87,6 +100,7 @@
     btnPrint = [[UIBarButtonItem alloc]
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:hud];
@@ -114,20 +128,19 @@
     NSError *error = nil;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
     
-    NSLog(@"obbbbbjjjjjjjjjjctttsssss%@",objects);
-    
     if([objects count] > 0){
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Compliance Form object CNo: %@", [expensedataObject valueForKey:@"eXReportNo"]);
-        
         
         txtApprovedBy.text=[expensedataObject valueForKey:@"approvedBy"];
         txtCashAdvance.text=[[expensedataObject valueForKey:@"eRCashAdvance"]stringValue];
         txtCheckNumber.text=[expensedataObject valueForKey:@"checkNo"];
         txtDate.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"date"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
-         txtEmpName.text=[expensedataObject valueForKey:@"eMPName"];
+        txtEmpName.text=[expensedataObject valueForKey:@"eMPName"];
         txtReimbursement.text=[[expensedataObject valueForKey:@"eRReimbursement"]stringValue];
-        txtWeakEnding.text=[NSDateFormatter localizedStringFromDate:[expensedataObject valueForKey:@"weekEnding"] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];;
+        txtWeakEnding.text=[NSDateFormatter
+                            localizedStringFromDate:[expensedataObject valueForKey:@"weekEnding"]
+                            dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];;
         txtMil1.text=[expensedataObject valueForKey:@"eRPAMilage1"];
         txtRate1.text=[[expensedataObject valueForKey:@"eRPARate1"]stringValue];
         txtTotal1.text=[[expensedataObject valueForKey:@"eRTotal1"] stringValue];
@@ -137,11 +150,8 @@
         ERDescription.text=[expensedataObject valueForKey:@"eRDescription1"];
         ERJobNo.text=[expensedataObject valueForKey:@"eRJobNo1"];
         ERType.text=[expensedataObject valueForKey:@"eRType1"];
-        
-        
-        
-arrayImages  = [[[expensedataObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
-sigImgName = [expensedataObject valueForKey:@"signature"];
+        arrayImages  = [[[expensedataObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
+        sigImgName = [expensedataObject valueForKey:@"signature"];
         imgSignature.image=[PRIMECMController getTheImage:sigImgName];
         NSLog(@"array Images---%@",arrayImages);
         NSLog(@"array Sketches---%@",sketchesArray);
@@ -150,8 +160,65 @@ sigImgName = [expensedataObject valueForKey:@"signature"];
     }
     
     [self.tblView reloadData];
-   
+    
 }
+
+-(IBAction)fnEdit:(id)sender
+{
+    NSMutableDictionary *expenseReportDTO = [[NSMutableDictionary alloc] init];
+    
+    [expenseReportDTO setValue:txtApprovedBy.text forKey:@"approvedBy"];
+    [expenseReportDTO setValue:txtCashAdvance.text forKey:@"eRCashAdvance"];
+    [expenseReportDTO setValue:txtCheckNumber.text forKey:@"checkNo"];
+    [expenseReportDTO setValue:txtDate.text forKey:@"date"];
+    [expenseReportDTO setValue:txtEmpName.text forKey:@"eMPName"];
+    [expenseReportDTO setValue:txtReimbursement.text forKey:@"eRReimbursement"];
+    [expenseReportDTO setValue:txtWeakEnding.text forKey:@"weekEnding"];
+    [expenseReportDTO setValue:txtMil1.text forKey:@"eRPAMilage1"];
+    [expenseReportDTO setValue:txtRate1.text forKey:@"eRPARate1"];
+    [expenseReportDTO setValue:txtTotal1.text forKey:@"eRTotal1"];
+    [expenseReportDTO setValue:header.text forKey:@"eRFHeader"];
+    [expenseReportDTO setValue:ERdate6.text forKey:@"eRDate1"];
+    [expenseReportDTO setValue:ERDescription.text forKey:@"eRDescription1"];
+    [expenseReportDTO setValue:ERJobNo.text forKey:@"eRJobNo1"];
+    [expenseReportDTO setValue:ERType.text forKey:@"eRType1"];
+    [expenseReportDTO setValue:ExNo forKey:@"eXReportNo"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeExpenceForm" object:nil userInfo:expenseReportDTO];
+}
+
+
+-(IBAction)fnDelete:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+    
+    ExpenseReportModel *assp;
+    NSError *retrieveError;
+    
+    NSManagedObjectContext *managedContext = [PRIMECMAPPUtils getManagedObjectContext];
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExpenseReportModel"
+                                              inManagedObjectContext:managedContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %@)", ExNo];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [managedContext executeFetchRequest:fetchRequest error:&retrieveError];
+    
+    if (fetchedObjects && [fetchedObjects count] > 0) {
+        assp = [fetchedObjects objectAtIndex:0];
+        [managedContext deleteObject:assp];
+        if (![managedContext save:&retrieveError]) {
+            NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
+        } else {
+            NSLog(@"Deleted: %@", ExNo);
+        }
+    }
+}
+
 
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
@@ -180,7 +247,7 @@ sigImgName = [expensedataObject valueForKey:@"signature"];
 {
     
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
+    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -246,7 +313,7 @@ sigImgName = [expensedataObject valueForKey:@"signature"];
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
+    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -359,7 +426,7 @@ sigImgName = [expensedataObject valueForKey:@"signature"];
     
     // Remove the mail view
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 
 
@@ -442,47 +509,47 @@ sigImgName = [expensedataObject valueForKey:@"signature"];
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-        if((indexPath.section==0 && indexPath.row==0) || (indexPath.section==1 && indexPath.row==0))
+    
+    if((indexPath.section==0 && indexPath.row==0) || (indexPath.section==1 && indexPath.row==0))
+    {
+        static NSString *simpleTableIdentifier = @"ImageHeaderCell";
+        ImageHeaderCell *cell = (ImageHeaderCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
         {
-            static NSString *simpleTableIdentifier = @"ImageHeaderCell";
-            ImageHeaderCell *cell = (ImageHeaderCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-            if (cell == nil)
-            {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageHeaderCell" owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }
-            
-            if(indexPath.section==0)
-            {
-                cell.lblAttachement.text=@"Image attachments";
-            }
-                        return cell;
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageHeaderCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        if(indexPath.section==0)
+        {
+            cell.lblAttachement.text=@"Image attachments";
+        }
+        return cell;
+    }
+    else
+    {
+        static NSString *simpleTableIdentifier = @"ImageCell";
+        
+        ImageCell *cell = (ImageCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        if(indexPath.section==0)
+        {
+            // cell.lblTitle.hidden=NO;
+            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row-1]]];
         }
         else
         {
-            static NSString *simpleTableIdentifier = @"ImageCell";
-            
-            ImageCell *cell = (ImageCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-            if (cell == nil)
-            {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ImageCell" owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }
-            
-            if(indexPath.section==0)
-            {
-               // cell.lblTitle.hidden=NO;
-                cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[arrayImages objectAtIndex:indexPath.row-1]]];
-            }
-            else
-            {
-                //cell.lblTitle.hidden=YES;
-                cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[[sketchesArray objectAtIndex:indexPath.row]valueForKey:@"name"]]];
-            }
-            return cell;
+            //cell.lblTitle.hidden=YES;
+            cell.imgView.image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg",[[sketchesArray objectAtIndex:indexPath.row]valueForKey:@"name"]]];
         }
+        return cell;
     }
+}
 
 
 

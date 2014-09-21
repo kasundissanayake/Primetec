@@ -48,7 +48,6 @@
 @dynamic lATotalHours5;
 @dynamic pOBox;
 @dynamic project_id;
-@dynamic projectNo;
 @dynamic reportNo;
 @dynamic sMSheetNo;
 @dynamic sSHeader;

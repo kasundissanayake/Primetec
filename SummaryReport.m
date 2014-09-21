@@ -64,7 +64,11 @@
                                 target:self
                                 action:@selector(fnEdit:)];
     
-    
+    UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Delete", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnDelete:)];
     
     UIBarButtonItem  *btnEmail = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(createPDF)];
@@ -75,7 +79,7 @@
     
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    self.navigationItem.leftBarButtonItem=Button2;
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];
     [self populateSummerySheet];
 }
 

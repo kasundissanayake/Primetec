@@ -39,7 +39,6 @@
 @property (nonatomic, retain) NSString * oVJTitle3;
 @property (nonatomic, retain) NSString * oVJTitle4;
 @property (nonatomic, retain) NSString * p_o_Box;
-@property (nonatomic, retain) NSString * project;
 @property (nonatomic, retain) NSString * project_id;
 @property (nonatomic, retain) NSString * sketch_images;
 @property (nonatomic, retain) NSString * state;

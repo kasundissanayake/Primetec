@@ -357,10 +357,8 @@
         }
         
         [assp setContractNo:[NSNumber numberWithInt:[[payload objectForKey:@"ContractNo"] intValue]]];
-        [assp setComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"comHeader"]]];        
-        [assp setProjectDescription:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ProjectDescription"]]];
+        [assp setComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"comHeader"]]];
         [assp setTitle:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Title"]]];
-        [assp setProject:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setContractorResponsible:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ContractorResponsible"]]];
         [assp setTo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"To"]]];
@@ -445,7 +443,6 @@
         [assp setDIFHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"DIFHeader"]]];
         [assp setContractor:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Contractor"]]];
         [assp setCon_Name:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"con_Name"]]];
-        [assp setProject:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setWeather:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"weather"]]];
         [assp setTime:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"time"]]];
@@ -705,6 +702,13 @@
         [assp setUnit_price:[payload objectForKey:@"unit_price"] ];
         [assp setUser:[payload objectForKey:@"user"] ];
         
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        if ([payload objectForKey:@"date"]) {
+            [assp setDate:[dateFormatter dateFromString:[payload objectForKey:@"date"]]];
+        }
+        
         NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_OK];
         [assp setSyncStatus:syncStatusNum];
         
@@ -747,10 +751,8 @@
         
         [assp setNon_ComHeader:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Non_ComHeader"]]];
         [assp setContractNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ContractNo"]]];
-        [assp setProjectDescription:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ProjectDescription"]]];
         [assp setImages_uploaded:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"images_uploaded"]]];
         [assp setTitle:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Title"]]];
-        [assp setProject:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project"]]];
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setContractorResponsible:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ContractorResponsible"]]];
         [assp setTo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"To"]]];
@@ -932,7 +934,6 @@
         [assp setFederalAidNumber:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"FederalAidNumber"]]];
         [assp setCity:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"City"]]];
         [assp setState:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"State"]]];
-        [assp setProjectNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ProjectNo"]]];
         [assp setDescr:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Description"]]];
         [assp setConstructionOrder:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ConstructionOrder"]]];
         [assp setLAClass1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass1"]]];

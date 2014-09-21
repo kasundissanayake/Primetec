@@ -385,10 +385,8 @@
                            saveNonComplianceForm:appDelegate.username
                            non_ComplianceNoticeNo:EditNonNoticeNo.text
                            title:txtTitle.text
-                           contractNo:txtContactNo.text
-                           proDesc:projectDesc.text
+                           contractNo:txtContactNo.text                           
                            comTitle:txtTitle.text
-                           project:nonCOtextProject.text
                            dateIssued:NtxtDateIssued.text
                            conRespon:contractorResp.text
                            to:txtTo.text
@@ -536,7 +534,6 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -546,8 +543,7 @@
 -(void)tapDetectedReviewer
 {
     isSignature=@"1";
-    signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    NSLog(@"get URL image");
+    signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];   
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];

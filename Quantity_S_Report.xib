@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Quantity_S_Report">
@@ -11,6 +11,7 @@
                 <outlet property="itemNo" destination="epC-pF-K4g" id="V8I-vX-DpA"/>
                 <outlet property="price" destination="iwE-3p-l0b" id="F2s-3p-QoP"/>
                 <outlet property="project" destination="1Ee-hW-hpz" id="fjJ-HG-vyN"/>
+                <outlet property="quantityTable" destination="cUX-Dr-Q9M" id="Dwb-6x-BWO"/>
                 <outlet property="scrollView" destination="iym-9X-rGU" id="uz5-0t-2uA"/>
                 <outlet property="tblView" destination="Grq-zI-9BB" id="P9z-y7-aF3"/>
                 <outlet property="unit" destination="WLA-Gz-6xm" id="xOm-JW-jNd"/>
@@ -62,8 +63,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cUX-Dr-Q9M">
-                            <rect key="frame" x="24" y="349" width="644" height="588"/>
+                            <rect key="frame" x="24" y="414" width="644" height="588"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="rJ0-If-d98"/>
+                                <outlet property="delegate" destination="-1" id="zhT-9E-QYb"/>
+                            </connections>
                         </tableView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CardinalLogoWeb2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gm7-5o-05H">
                             <rect key="frame" x="542" y="30" width="114" height="52"/>
@@ -102,7 +107,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item Number" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yqn-MB-mXd">
-                            <rect key="frame" x="38" y="378" width="105" height="35"/>
+                            <rect key="frame" x="41" y="378" width="105" height="35"/>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -149,7 +154,6 @@
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="RZb-cX-pOY">
@@ -166,7 +170,6 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>

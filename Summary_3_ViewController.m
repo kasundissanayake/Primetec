@@ -207,7 +207,6 @@
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
     signatureViewController.imageViewTag=@"1";
-    NSLog(@"get URL image");
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -218,8 +217,7 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    signatureViewController.imageViewTag=@"2";
-    NSLog(@"get URL image");
+    signatureViewController.imageViewTag=@"2";    
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];

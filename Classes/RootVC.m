@@ -964,6 +964,25 @@ typedef enum {
     });
 }
 
+- (void)changeQTY_S_Report:(NSNotification *)notification
+{
+    
+    [self showInfoAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary *dict = [notification userInfo];
+        NSString *CNo=[dict valueForKey:@"ConNo"];
+        Quantity_S_Report *qtySR=[[Quantity_S_Report alloc] init];
+        qtySR.title=[NSString stringWithFormat:@"Quantity Summary Report"];
+        qtySR.QNo=CNo;
+        
+        [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtySR]];
+        self.proStatusSeg.hidden=TRUE;
+        [self hudWasHidden];
+    });
+}
+
 
 - (void)changeSummary:(NSNotification *)notification
 {
@@ -1033,16 +1052,6 @@ typedef enum {
 }
 
 
-
-- (void)changeQTY_S_Report:(NSDictionary *)sourceDictionary
-{   
-    Quantity_S_Report *qtySR=[[Quantity_S_Report alloc]initWithData:sourceDictionary];
-    qtySR.title=[NSString stringWithFormat:@"Quantity Summary Report"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtySR]];
-}
-
-
-//end brin
 
 - (void)changeDashboard:(NSNotification *)notification
 {
