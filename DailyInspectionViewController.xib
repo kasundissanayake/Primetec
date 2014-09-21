@@ -622,7 +622,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <action selector="itemDescChange:" destination="-1" eventType="editingDidBegin" id="vOh-56-ql7"/>
+                                <action selector="itemDescChange:" destination="-1" eventType="editingDidEnd" id="n1j-4p-eK1"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="goS-WO-7cU">

@@ -423,23 +423,28 @@
     // save daily inspection items
     BOOL *saveItems = TRUE;
     
-    if ( ![@"" isEqualToString:i_No1] &&  ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc1 inspectionID:inspectionID no:i_No1 qty:i_QTY1]){
+    if ( ![@"" isEqualToString:i_No1] && ![@"" isEqualToString:i_QTY1] &&
+        ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc1 inspectionID:inspectionID no:i_No1 qty:i_QTY1]){
         saveItems = FALSE;
     }
     
-    if (![@"" isEqualToString:i_No2] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc2 inspectionID:inspectionID no:i_No2 qty:i_QTY2]){
+    if (![@"" isEqualToString:i_No2] &&  ![@"" isEqualToString:i_QTY2] &&
+        ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc2 inspectionID:inspectionID no:i_No2 qty:i_QTY2]){
         saveItems = FALSE;
     }
     
-    if (![@"" isEqualToString:i_No3] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc3 inspectionID:inspectionID no:i_No3 qty:i_QTY3]){
+    if (![@"" isEqualToString:i_No3] && ![@"" isEqualToString:i_QTY3] &&
+        ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc3 inspectionID:inspectionID no:i_No3 qty:i_QTY3]){
         saveItems = FALSE;
     }
     
-    if (![@"" isEqualToString:i_No4] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc4 inspectionID:inspectionID no:i_No4 qty:i_QTY4]){
+    if (![@"" isEqualToString:i_No4] && ![@"" isEqualToString:i_QTY4] &&
+        ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc4 inspectionID:inspectionID no:i_No4 qty:i_QTY4]){
         saveItems = FALSE;
     }
     
-    if (![@"" isEqualToString:i_No5] &&   ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc5 inspectionID:inspectionID no:i_No5 qty:i_QTY5]){
+    if (![@"" isEqualToString:i_No5] &&  ![@"" isEqualToString:i_QTY5] &&
+        ![PRIMECMController saveDailyInspectionItem:username date:date desc:i_Desc5 inspectionID:inspectionID no:i_No5 qty:i_QTY5]){
         saveItems = FALSE;
     }
     
@@ -822,7 +827,7 @@
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sMSheetNo == %@",sMSheetNo];
     [fetchRequest setPredicate:predicate];
-  
+    
     NSError *error = nil;
     NSArray *existingIDs = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
     

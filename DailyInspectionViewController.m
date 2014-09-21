@@ -841,40 +841,6 @@
         NSLog(@"sketches names %@", sketchesNameArray);
         NSLog(@"images names %@", imgNameArray);
         
-        
-        NSArray *item1Arr = [des1.text componentsSeparatedByString:@"--,"];
-        NSArray *item2Arr = [des2.text componentsSeparatedByString:@"--,"];
-        NSArray *item3Arr = [des3.text componentsSeparatedByString:@"--,"];
-        NSArray *item4Arr = [des4.text componentsSeparatedByString:@"--,"];
-        NSArray *item5Arr = [des5.text componentsSeparatedByString:@"--,"];
-        
-        NSString *i_no1= @"", *i_no2= @"", *i_no3= @"", *i_no4= @"", *i_no5= @"", *i_desc1= @"", *i_desc2= @"", *i_desc3= @"", *i_desc4= @"", *i_desc5 = @"";
-        
-        if ([item1Arr count] > 1){
-            i_no1 = [item1Arr objectAtIndex:1];
-            i_desc1 = [item1Arr objectAtIndex:0];
-        }
-        
-        if ([item2Arr count] > 1){
-            i_no2 = [item2Arr objectAtIndex:1];
-            i_desc2 = [item2Arr objectAtIndex:0];
-        }
-        
-        if ([item3Arr count] > 1){
-            i_no3 = [item3Arr objectAtIndex:1];
-            i_desc3 = [item3Arr objectAtIndex:0];
-        }
-        
-        if ([item4Arr count] > 1){
-            i_no4 = [item4Arr objectAtIndex:1];
-            i_desc4 = [item4Arr objectAtIndex:0];
-        }
-        
-        if ([item5Arr count] > 1){
-            i_no5 = [item5Arr objectAtIndex:1];
-            i_desc5 = [item5Arr objectAtIndex:0];
-        }
-        
         NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
         [f setNumberStyle:NSNumberFormatterDecimalStyle];
         
@@ -890,17 +856,17 @@
                            dIFHeader:txtHeader.text
                            e_Mail:txtEmail.text
                            
-                           i_Desc1:i_desc1
-                           i_Desc2:i_desc2
-                           i_Desc3:i_desc3
-                           i_Desc4:i_desc4
-                           i_Desc5:i_desc5
+                           i_Desc1:des1.text
+                           i_Desc2:des2.text
+                           i_Desc3:des3.text
+                           i_Desc4:des4.text
+                           i_Desc5:des5.text
                            
-                           i_No1:i_no1
-                           i_No2:i_no2
-                           i_No3:i_no3
-                           i_No4:i_no4
-                           i_No5:i_no5
+                           i_No1:q_itemNo1.text
+                           i_No2:q_itemNo2.text
+                           i_No3:q_itemNo3.text
+                           i_No4:q_itemNo4.text
+                           i_No5:q_itemNo5.text
                            
                            i_QTY1:qua1.text
                            i_QTY2:qua2.text
@@ -1340,19 +1306,19 @@
     else if (sender == textField2){
         NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField2.text];
         if (arr && [arr count] >0){
-            q_itemNo2.text = [arr objectAtIndex:0];
+            q_itemNo3.text = [arr objectAtIndex:0];
         }
     }
     else if (sender == textField3){
         NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textField3.text];
         if (arr && [arr count] >0){
-            q_itemNo2.text = [arr objectAtIndex:0];
+            q_itemNo4.text = [arr objectAtIndex:0];
         }
     }
     else if (sender == textFiel4){
         NSArray *arr = [PRIMECMAPPUtils getItemFromDesc:textFiel4.text];
         if (arr && [arr count] >0){
-            q_itemNo2.text = [arr objectAtIndex:0];
+            q_itemNo5.text = [arr objectAtIndex:0];
         }
     }
 }
