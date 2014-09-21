@@ -164,7 +164,6 @@
     [exportAlert show];
 }
 
-
 -(void)getImageReviewer
 {
     [self removeSignatureView];
@@ -960,80 +959,6 @@
 
 
 
-
-
-
-
-
-//
-//- (IBAction)butExp:(id)sender {
-//    //Radha
-//    NSLog(@"ExpID is %@",ExpID);
-//    uploading = NO;
-//    uploadingsketch=NO;
-//    if(ERdate6.text==NULL || ERdate6.text.length==0 || ERDescription.text==NULL || ERDescription.text.length==0 || ERJobNo.text==NULL || ERJobNo.text.length==0 || ERType.text==NULL ||  ERType.text.length==0 || txtMil1.text.length==0 || txtMil1.text==NULL || txtRate1.text==NULL || txtRate1.text.length==0 || txtTotal1.text==NULL || txtTotal1.text.length==0)
-//    {
-//
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
-//                                                        message:@"Please fill all the fields"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//    }
-//    else
-//    {
-//
-//        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-//        [self.navigationController.view addSubview:HUD];
-//        HUD.labelText=@"";
-//        HUD.dimBackground = YES;
-//        HUD.delegate = self;
-//        [HUD show:YES];
-//        
-//        BOOL saveStatus = [PRIMECMController
-//                           saveExpenseData:appDelegate.username
-//                           eRDate1:ERdate6.text
-//                           eRDescription1:ERDescription.text
-//                           eRJobNo1:ERJobNo.text
-//                           eRPAMilage1:txtMil1.text
-//                           eRPARate1:txtRate1.text
-//                           eRTotal1:txtTotal1.text
-//                           eRType1:ERType.text
-//                           eXReportNo:ExpID
-//                           images_uploaded:imgPath
-//                           project_id:appDelegate.projId
-//                           imgPath:imgPath
-//                           ];
-//        
-//        
-//        [HUD setHidden:YES];
-//        
-//        if (saveStatus){
-//            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//            [exportAlert show];
-//            [appDelegate.sketchesArray removeAllObjects];
-//            [arrayImages removeAllObjects];
-//            
-//            ERdate6.text=NULL;
-//            ERDescription.text=NULL;
-//            ERJobNo.text=NULL;
-//            ERType.text=NULL;
-//            txtMil1.text=NULL ;
-//            txtRate1.text=NULL;
-//            txtTotal1.text=NULL;
-//            ERType.text=NULL;
-//            imgPath = NULL;
-//            
-//        }else{
-//            UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save expense report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//            [exportAlert show];
-//        }
-//        
-//        
-//    }
-//}
-//
 
 -(UIImage *)getSignatureFromFileName:(NSString *)fileName
 {
