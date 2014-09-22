@@ -90,8 +90,113 @@
 {
     NSMutableDictionary *summaryReportDTO = [[NSMutableDictionary alloc] init];
     
-    [summaryReportDTO setValue:txtContractor.text forKey:@"contractor"];
+    //[summaryReportDTO setValue:txtContractor.text forKey:@"contractor"];
+    [summaryReportDTO setValue:txtContactorPerform.text forKey:@"conPeWork"];
+    [summaryReportDTO setValue:txtFederalAid.text forKey:@"federalAidNumber"];
+    [summaryReportDTO setValue:txvDesWork.text forKey:@"descr"];
+    [summaryReportDTO setValue:txvConsOrder.text forKey:@"constructionOrder"];
+    [summaryReportDTO setValue:txtClass1.text forKey:@"lAClass1"];
+    [summaryReportDTO setValue:txtClass2.text forKey:@"lAClass2"];
+    [summaryReportDTO setValue:txtClass3.text forKey:@"lAClass3"];
+    [summaryReportDTO setValue:txtClass4.text forKey:@"lAClass4"];
+    [summaryReportDTO setValue:txtClass5.text forKey:@"lAClass5"];
+    [summaryReportDTO setValue:txtNo1.text forKey:@"lANo1"];
+    [summaryReportDTO setValue:txtNo2.text forKey:@"lANo2"];
+    [summaryReportDTO setValue:txtNo3.text forKey:@"lANo3"];
+    [summaryReportDTO setValue:txtNo4.text forKey:@"lANo4"];
+    [summaryReportDTO setValue:txtNo5.text forKey:@"lANo5"];
+    [summaryReportDTO setValue:txtTotal1.text forKey:@"lATotalHours1"];
+    [summaryReportDTO setValue:txtTotal2.text forKey:@"lATotalHours2"];
+    [summaryReportDTO setValue:txtTotal3.text forKey:@"lATotalHours3"];
+    [summaryReportDTO setValue:txtTotal4.text forKey:@"lATotalHours4"];
+    [summaryReportDTO setValue:txtTotal5.text forKey:@"lATotalHours5"];
+    [summaryReportDTO setValue:txtRate1.text forKey:@"lARate1"];
+    [summaryReportDTO setValue:txtRate2.text forKey:@"lARate2"];
+    [summaryReportDTO setValue:txtRate3.text forKey:@"lARate3"];
+    [summaryReportDTO setValue:txtRate4.text forKey:@"lARate4"];
+    [summaryReportDTO setValue:txtRate5.text forKey:@"lARate5"];
+    [summaryReportDTO setValue:txtAmt1.text forKey:@"lAAmount1"];
+    [summaryReportDTO setValue:txtAmt2.text forKey:@"lAAmount2"];
+    [summaryReportDTO setValue:txtAmt3.text forKey:@"lAAmount3"];
+    [summaryReportDTO setValue:txtAmt4.text forKey:@"lAAmount4"];
+    [summaryReportDTO setValue:txtAmt5.text forKey:@"lAAmount5"];
+    [summaryReportDTO setValue:txtTotalLabor.text forKey:@"totalLabor"];
+    [summaryReportDTO setValue:txtHealth.text forKey:@"healWelAndPension"];
+    [summaryReportDTO setValue:txtInsTax.text forKey:@"insAndTaxesOnItem1"];
+    [summaryReportDTO setValue:txt20Items.text forKey:@"itemDescount20per"];
+    [summaryReportDTO setValue:txtTotalItems.text forKey:@"total"];
     
+    
+    [summaryReportDTO setValue:txtDes1.text forKey:@"mEDescription1"];
+    [summaryReportDTO setValue:txtDes2.text forKey:@"mEDescription2"];
+    [summaryReportDTO setValue:txtDes3.text forKey:@"mEDescription3"];
+    [summaryReportDTO setValue:txtDes4.text forKey:@"mEDescription4"];
+    [summaryReportDTO setValue:txtDES5.text forKey:@"mEDescription5"];
+    [summaryReportDTO setValue:txtQuantity1.text forKey:@"mEQuantity1"];
+    [summaryReportDTO setValue:txtQuantity2.text forKey:@"mEQuantity2"];
+    [summaryReportDTO setValue:txtQuantity3.text forKey:@"mEQuantity3"];
+    [summaryReportDTO setValue:txtQuantity4.text forKey:@"mEQuantity4"];
+    [summaryReportDTO setValue:txtQuantity5.text forKey:@"mEQuantity5"];
+    [summaryReportDTO setValue:txtUnitPrice1.text forKey:@"mEUnitPrice1"];
+    [summaryReportDTO setValue:txtUnitPrice2.text forKey:@"mEUnitPrice2"];
+    [summaryReportDTO setValue:txtUnitPrice3.text forKey:@"mEUnitPrice3"];
+    [summaryReportDTO setValue:txtUnitPrice4.text forKey:@"mEUnitPrice4"];
+    [summaryReportDTO setValue:txtUnitPrice5.text forKey:@"mEUnitPrice5"];
+    [summaryReportDTO setValue:txtMAmt1.text forKey:@"mEAmount1"];
+    [summaryReportDTO setValue:txtMAmt2.text forKey:@"mEAmount2"];
+    [summaryReportDTO setValue:txtMAmt3.text forKey:@"mEAmount3"];
+    [summaryReportDTO setValue:txtMAmt4.text forKey:@"mEAmount4"];
+    [summaryReportDTO setValue:txtMAmt5.text forKey:@"mEAmount5"];
+    [summaryReportDTO setValue:txtTotalMeterial.text forKey:@"total1"];
+    [summaryReportDTO setValue:txtLessDiscount.text forKey:@"lessDiscount"];
+    [summaryReportDTO setValue:txtLessDisTotal.text forKey:@"total2"];
+    [summaryReportDTO setValue:txtAdditional.text forKey:@"additionalDiscount"];
+    [summaryReportDTO setValue:txtAddTotal.text forKey:@"total3"];
+//
+//    
+//    
+    [summaryReportDTO setValue:txtSize1.text forKey:@"eQSizeandClass1"];
+    [summaryReportDTO setValue:txtSize2.text forKey:@"eQSizeandClass2"];
+    [summaryReportDTO setValue:txtSize3.text forKey:@"eQSizeandClass3"];
+    [summaryReportDTO setValue:txtSize4.text forKey:@"eQSizeandClass4"];
+    [summaryReportDTO setValue:txtSize5.text forKey:@"eQSizeandClass5"];
+    [summaryReportDTO setValue:txtActive1.text forKey:@"eQIdleActive1"];
+    [summaryReportDTO setValue:txtActive2.text forKey:@"eQIdleActive2"];
+    [summaryReportDTO setValue:txtActive3.text forKey:@"eQIdleActive3"];
+    [summaryReportDTO setValue:txtActive4.text forKey:@"eQIdleActive4"];
+    [summaryReportDTO setValue:txtActive5.text forKey:@"eQIdleActive5"];
+    [summaryReportDTO setValue:txtENo1.text forKey:@"eQNo1"];
+    [summaryReportDTO setValue:txtENo2.text forKey:@"eQNo2"];
+    [summaryReportDTO setValue:txtENo3.text forKey:@"eQNo3"];
+    [summaryReportDTO setValue:txtENo4.text forKey:@"eQNo4"];
+    [summaryReportDTO setValue:txtENo5.text forKey:@"eQNo5"];
+    [summaryReportDTO setValue:txtETotal1.text forKey:@"eQTotalHours1"];
+    [summaryReportDTO setValue:txtETotal2.text forKey:@"eQTotalHours2"];
+    [summaryReportDTO setValue:txtEtotal3.text forKey:@"eQTotalHours3"];
+    [summaryReportDTO setValue:txtETotal4.text forKey:@"eQTotalHours4"];
+    [summaryReportDTO setValue:txtETotal5.text forKey:@"eQTotalHours5"];
+    
+    
+      [summaryReportDTO setValue:txtRate1.text forKey:@"eQRAte1"];
+      [summaryReportDTO setValue:txtRate2.text forKey:@"eQRAte2"];
+      [summaryReportDTO setValue:txtRate3.text forKey:@"eQRAte3"];
+      [summaryReportDTO setValue:txtRate4.text forKey:@"eQRAte4"];
+      [summaryReportDTO setValue:txtRate5.text forKey:@"eQRAte5"];
+    [summaryReportDTO setValue:txtEAmt1.text forKey:@"eQAmount1"];
+    [summaryReportDTO setValue:txtEAmt2.text forKey:@"eQAmount2"];
+    [summaryReportDTO setValue:txtEAmt3.text forKey:@"eQAmount3"];
+    [summaryReportDTO setValue:txtEAmt4.text forKey:@"eQAmount4"];
+    [summaryReportDTO setValue:txtEAmt5.text forKey:@"eQAmount5"];
+    [summaryReportDTO setValue:txtDailyTotal.text forKey:@"dailyTotal"];
+    [summaryReportDTO setValue:txtTotalDate.text forKey:@"total_to_date"];
+
+
+//
+//
+
+
+
+
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSummaryForm" object:nil userInfo:summaryReportDTO];
 }

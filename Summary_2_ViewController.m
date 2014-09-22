@@ -34,6 +34,9 @@
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
     
+    NSDictionary *sourceDictionary;
+
+    
 }
 @end
 
@@ -91,6 +94,15 @@
     }
     return self;
 }
+
+
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -484,6 +496,8 @@
                            mEUnitPrice4:mEUnitPrice4.text
                            mEUnitPrice5:mEUnitPrice5.text
                            project_id:appDelegate.projId
+                           
+                           //pass summary sheet number
                            sMSSheetNo:smSheetNumber
 
                            total1:total1.text
@@ -501,6 +515,8 @@
             
             Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
             su.title=@"Summary Sheet";
+            
+            //brin-passing summary sheet no
             su.smSheetNumber = smSheetNumber;
 
             [self.navigationController pushViewController:su animated:YES];
@@ -513,15 +529,53 @@
         }
         
     }
+    
+
+    //brin - report editing part
+    
+    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
+        
+        
+        mEDescription1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
+        mEDescription2.text = [[sourceDictionary valueForKey:@"mEDescription2"] valueForKey:@"federalAidNumber"];
+        mEDescription3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];
+        mEDescription4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription4"];
+        mEDescription5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription5"];
+        mEQuantity1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity1"];
+        mEQuantity2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity2"];
+        mEQuantity3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity3"];
+        mEQuantity4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity4"];
+        mEQuantity5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity5"];
+        mEUnitPrice1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice1"];
+        mEUnitPrice2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice2"];
+        mEUnitPrice3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice3"];
+        mEUnitPrice4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice4"];
+        mEUnitPrice5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice5"];
+        mEAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount1"];
+        mEAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount2"];
+        mEAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount3"];
+        mEAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount4"];
+        mEAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount5"];
+        total1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total1"];
+        lessDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lessDiscount"];
+        total2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total2"];
+        additionalDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"additionalDiscount"];
+        total3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total3"];
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+}
 
     
     
     
-    
-    
-    
-    
-    }
+
 
 
 -(NSString*)getCurrentDateTimeAsNSString

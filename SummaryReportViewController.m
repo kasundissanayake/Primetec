@@ -168,6 +168,73 @@
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 //    self.navigationController.navigationBar.translucent = NO;
     
+    
+    
+    //brin - report editing part
+    
+    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
+        
+        
+        conPeWork.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"conPeWork"];
+        federalAidNumber.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"federalAidNumber"];
+         descr.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"descr"];
+        constructionOrder.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"constructionOrder"];
+        lAClass1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass1"];
+        lAClass2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass2"];
+        lAClass3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass3"];
+        lAClass4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass4"];
+        lAClass5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass5"];
+        lANo1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lANo1"];
+        lANo2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lANo2"];
+        lANo3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lANo3"];
+        lANo4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lANo4"];
+        lANo5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lANo5"];
+        lATotalHours1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lATotalHours1"];
+        lATotalHours2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lATotalHours2"];
+        lATotalHours3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lATotalHours3"];
+        lATotalHours4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lATotalHours4"];
+        lATotalHours5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lATotalHours5"];
+        lARate1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lARate1"];
+        lARate2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lARate2"];
+        lARate3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lARate3"];
+        lARate4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lARate4"];
+        lARate5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lARate5"];
+        lAAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAAmount1"];
+        lAAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAAmount2"];
+        lAAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAAmount3"];
+        lAAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAAmount4"];
+        lAAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAAmount5"];
+        totalLabor.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"totalLabor"];
+        healWelAndPension.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"healWelAndPension"];
+        insAndTaxesOnItem1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"insAndTaxesOnItem1"];
+        itemDescount20per.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"itemDescount20per"];
+        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
+//
+//
+
+
+
+    }
+
+    
+    
+    
+    
 }
 
 

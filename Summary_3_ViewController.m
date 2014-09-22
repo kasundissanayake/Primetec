@@ -56,6 +56,11 @@
     NSString *sigName1;
     NSString *sigName2;
     
+    
+    NSDictionary *sourceDictionary;
+
+    
+    
 }
 
 @end
@@ -116,6 +121,19 @@
     return self;
 }
 
+
+
+
+- (id)initWithData:(NSDictionary *)sourceDictionaryParam
+{
+    self = [super init];
+    sourceDictionary = sourceDictionaryParam;
+    return self;
+}
+
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -150,14 +168,65 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:today];
-    inspector.text=appDelegate.projPrintedName;
+    inspector.text=appDelegate.username;
     date1.text=dateString;
     date2.text= dateString;
     contractorRepresentative.text = appDelegate.pm;
-    if(isEdit)
-    {
-        [self populateValues];
+//    if(isEdit)
+//    {
+//        [self populateValues];
+//    }
+//    
+    
+    
+    
+    //brin - report editing part
+    
+    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
+        
+        
+        eQSizeandClass1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass1"];
+        eQSizeandClass2.text = [[sourceDictionary valueForKey:@"eQSizeandClass2"] valueForKey:@"federalAidNumber"];
+        eQSizeandClass3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass3"];
+        eQSizeandClass4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass4"];
+        eQSizeandClass5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass5"];
+        eQIdleActive1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive1"];
+        eQIdleActive2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive2"];
+        eQIdleActive3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive3"];
+        eQIdleActive4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive4"];
+        eQIdleActive5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive5"];
+        eQNo1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo1"];
+        eQNo2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo2"];
+        eQNo3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo3"];
+        eQNo4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo4"];
+        eQNo5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo5"];
+        eQTotalHours1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours1"];
+        eQTotalHours2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours2"];
+        eQTotalHours3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours3"];
+        eQTotalHours4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours4"];
+        eQTotalHours5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours5"];
+        
+        eQRAte1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte1"];
+        eQRAte2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte2"];
+        eQRAte3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte3"];
+        eQRAte4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte4"];
+        eQRAte5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte5"];
+        eQAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount1"];
+        eQAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount2"];
+        eQAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount3"];
+        eQAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount4"];
+        eQAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount5"];
+        dailyTotal.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
+        total_to_date.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
+
+        
+        
     }
+    
+    
+    
+    
+    
 }
 -(void)populateValues
 {
@@ -667,7 +736,7 @@
                            eQTotalHours3:eQTotalHours3.text
                            eQTotalHours4:eQTotalHours4.text
                            eQTotalHours5:eQTotalHours5.text
-                           inspector:appDelegate.projPrintedName
+                           inspector:appDelegate.username
                            project_id:appDelegate.projId
                            signature1:sigName1
                            signature2:sigName2
