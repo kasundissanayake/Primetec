@@ -113,19 +113,19 @@
     imgSignature.userInteractionEnabled = YES;
     [imgSignature addGestureRecognizer:singleTapInspec];
     
-    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Exit", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(exit)];
-    
-    self.navigationItem.rightBarButtonItem = Button;
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    self.navigationController.navigationBar.translucent = NO;
-    defaults= [NSUserDefaults standardUserDefaults];
+//    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+//                               initWithTitle:NSLocalizedString(@"Exit", @"")
+//                               style:UIBarButtonItemStyleDone
+//                               target:self
+//                               action:@selector(exit)];
+//    
+//    self.navigationItem.rightBarButtonItem = Button;
+//    
+//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+//    self.navigationController.navigationBar.translucent = NO;
+//    defaults= [NSUserDefaults standardUserDefaults];
     
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

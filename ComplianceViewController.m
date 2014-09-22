@@ -178,7 +178,7 @@ UILabel *cno;
 
 
 
--(void)exit{
+/*-(void)exit{
     
     NSString* textField1Text = txtDateIssued.text;
     [defaults setObject:textField1Text forKey:@"dateIssued"];
@@ -199,7 +199,7 @@ UILabel *cno;
     [defaults synchronize];
     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
     [exportAlert show];
-}
+}*/
 
 -(void)tapDetectedTextField
 {

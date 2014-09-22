@@ -62,25 +62,25 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Exit", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(exit)];
-    
-    self.navigationItem.rightBarButtonItem = Button;
-    
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormat stringFromDate:today];
-    date1.text=dateString;
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    self.navigationController.navigationBar.translucent = NO;
-    
+//    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+//                               initWithTitle:NSLocalizedString(@"Exit", @"")
+//                               style:UIBarButtonItemStyleDone
+//                               target:self
+//                               action:@selector(exit)];
+//    
+//    self.navigationItem.rightBarButtonItem = Button;
+//    
+//    NSDate *today = [NSDate date];
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+//    NSString *dateString = [dateFormat stringFromDate:today];
+//    date1.text=dateString;
+//    
+//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+//    self.navigationController.navigationBar.translucent = NO;
+//    
     // Do any additional setup after loading the view from its nib.
     scrollView.frame = CGRectMake(0,0, 720, 1800);
     [scrollView setContentSize:CGSizeMake(700, 2300)];
