@@ -70,11 +70,11 @@
 //    
 //    self.navigationItem.rightBarButtonItem = Button;
 //    
-//    NSDate *today = [NSDate date];
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-//    NSString *dateString = [dateFormat stringFromDate:today];
-//    date1.text=dateString;
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    date1.text=dateString;
 //    
 //    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 //    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -109,11 +109,6 @@
                                                         getInspectionSummaryForItemID:i_number.text]];
         
         [qtyTable reloadData];
-        
-        
-        
-        
-        
     }
 }
 
@@ -223,7 +218,7 @@
     value=i_number.text;
     
     NSArray *arr = [PRIMECMAPPUtils getItemFromNo:i_number.text];
-    if ([arr count] > 0){
+    if (arr && [arr count] > 0){
         item.text = [arr objectAtIndex:1];
     }
     
