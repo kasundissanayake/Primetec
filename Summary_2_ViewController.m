@@ -72,6 +72,8 @@
 
 @synthesize sMSSheetNo;
 
+@synthesize smSheetNumber;
+
 
 
 
@@ -482,7 +484,8 @@
                            mEUnitPrice4:mEUnitPrice4.text
                            mEUnitPrice5:mEUnitPrice5.text
                            project_id:appDelegate.projId
-                           sMSSheetNo:@""
+                           sMSSheetNo:smSheetNumber
+
                            total1:total1.text
                            total2:total2.text
                            total3:total3.text];
@@ -498,6 +501,8 @@
             
             Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
             su.title=@"Summary Sheet";
+            su.smSheetNumber = smSheetNumber;
+
             [self.navigationController pushViewController:su animated:YES];
             
 

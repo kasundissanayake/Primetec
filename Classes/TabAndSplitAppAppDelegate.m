@@ -37,6 +37,9 @@
 @synthesize edit1,edit2;
 @synthesize sMSheetNo;
 
+//brin
+@synthesize sumSheet;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
     [toolbar setHidden:YES];

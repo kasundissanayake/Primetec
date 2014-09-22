@@ -69,6 +69,15 @@
 
 //edit end
 
+
+
+//brin
+
+@property(nonatomic,retain)  NSString *sumSheet;
+
+
+//
+
 - (NSURL *)applicationDocumentsDirectory;
 
 @end

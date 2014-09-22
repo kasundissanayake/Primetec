@@ -28,6 +28,15 @@
 #import "DataSyncController.h"
 
 @implementation PRIMECMController
+{
+
+
+    TabAndSplitAppAppDelegate *appDelegate;
+
+
+
+
+}
 
 + (int)synchronizeDataWithServer {
     
@@ -772,6 +781,10 @@
         return FALSE;
     }else{
         NSLog(@"saved summary1: %@", sMSheetNo);
+        
+        
+
+        
         return TRUE;
     }
     

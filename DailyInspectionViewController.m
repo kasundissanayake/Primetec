@@ -1239,6 +1239,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    
+    
+    //brin
+    scrollView.scrollEnabled = NO;
+    
+    
+    
     if(textField==txtCompetent)
     {
         [txtCompetent resignFirstResponder];
@@ -1322,6 +1329,9 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     
+    //brin
+    scrollView.scrollEnabled = YES;
+
     
 }
 
