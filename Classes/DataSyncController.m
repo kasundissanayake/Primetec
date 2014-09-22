@@ -591,7 +591,7 @@
 
 + (void)parseExpenseReportModel:(id)payload {
     
-    if ([payload objectForKey:@"eXReportNo"]) {
+    if ([payload objectForKey:@"EXReportNo"]) {
         
         ExpenseReportModel *assp;
         
@@ -603,7 +603,7 @@
                                                   inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %@)", [[payload objectForKey:@"EXReportNo"] intValue]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(eXReportNo = %@)", [payload objectForKey:@"EXReportNo"]];
         [fetchRequest setPredicate:predicate];
         
         NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
@@ -695,11 +695,11 @@
         }
         
         
-        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_qty"] intValue]]];
-        [assp setItem_no:[payload objectForKey:@"item_no"] ];
-        [assp setProject_id:[payload objectForKey:@"project_id"] ];
+        [assp setEst_qty:[NSNumber numberWithInt:[[payload objectForKey:@"est_Quantity"] intValue]]];
+        [assp setItem_no:[payload objectForKey:@"itemNo"] ];
+        [assp setProject_id:[payload objectForKey:@"Project_id"] ];
         [assp setUnit:[payload objectForKey:@"unit"] ];
-        [assp setUnit_price:[payload objectForKey:@"unit_price"] ];
+        [assp setUnit_price:[NSNumber numberWithInt:[[payload objectForKey:@"unitPrice"] intValue]]];
         [assp setUser:[payload objectForKey:@"user"] ];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -721,7 +721,7 @@
 
 + (void)parsenonComplianceForm:(id)payload {
     
-    if ([payload objectForKey:@"non_ComplianceNoticeNo"]) {
+    if ([payload objectForKey:@"Non_ComplianceNoticeNo"]) {
         
         NonComplianceForm *assp;
         
@@ -868,7 +868,7 @@
         // delete existing assign_project records for this project ID
         NSError *error;
         NSEntityDescription *assignProject = [NSEntityDescription entityForName:@"Assign_project"
-                                                                     inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
+                                                         inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
         [fetchRequest setEntity:assignProject];
         NSPredicate *assignProjectPredicate = [NSPredicate predicateWithFormat:@"(projectid=%@)", [payload objectForKey:@"projecct_id"]];
         [fetchRequest setPredicate:assignProjectPredicate];

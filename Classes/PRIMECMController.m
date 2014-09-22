@@ -195,7 +195,7 @@
 }
 
 
-+(BOOL)saveNonComplianceForm:(NSString *)username non_ComplianceNoticeNo:(NSString *)non_ComplianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo comTitle:(NSString *)comTitle dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
++(BOOL)saveNonComplianceForm:(NSString *)username non_ComplianceNoticeNo:(NSString *)non_ComplianceNoticeNo title:(NSString *)title contractNo:(NSString *)contractNo comTitle:(NSString *)comTitle dateIssued:(NSString *)dateIssued conRespon:(NSString *)conRespon to:(NSString *)to dateDCRC:(NSString *)dateDCRC dateConStarted:(NSString *)dateConStarted dateConComplteted:(NSString *)dateConCopleted dateRawReport:(NSString *)dateRawReport userId:(NSString *)userId correctiveAction:(NSString *)correctiveAct signature:(NSString *)signature printedName:(NSString *)printedName projId:(NSString *)projId sketchImg:(NSString *)sketchImg images_uploaded:(NSString *)images_uploaded
 {
     
     NonComplianceForm *assp;
@@ -268,11 +268,13 @@
     NSDate *dateContractorStarted_Date = [myXMLdateReader dateFromString:dateConStarted];
     NSDate *dateContractorCompleted_Date = [myXMLdateReader dateFromString:dateConCopleted];
     NSDate *dateOfDWRReported_Date = [myXMLdateReader dateFromString:dateRawReport];
+    NSDate *dateDCRC_Date = [myXMLdateReader dateFromString:dateDCRC];
     
     [assp setValue:dateIssued_Date forKey:@"dateIssued"];
     [assp setValue:dateContractorStarted_Date forKey:@"dateContractorStarted"];
     [assp setValue:dateContractorCompleted_Date forKey:@"dateContractorCompleted"];
     [assp setValue:dateOfDWRReported_Date forKey:@"dateOfDWRReported"];
+    [assp setValue:dateDCRC_Date forKey:@"dateCRTCB"];
     [assp setValue:[NSDate date] forKeyPath:@"date"];
     
     [assp setValue:images_uploaded forKey:@"images_uploaded"];
@@ -759,6 +761,9 @@
     [assp setValue:zip forKey:@"zip"];
     [assp setValue:state forKey:@"state"];
     
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
+    
     NSLog(@"Added Record is %@",assp);
     
     NSError *saveError;
@@ -835,6 +840,9 @@
     [assp setValue:total1 forKey:@"total1"];
     [assp setValue:total2 forKey:@"total2"];
     [assp setValue:total3 forKey:@"total3"];
+    
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
     
     NSLog(@"Summary 2 saved Data is %@",assp);
     NSError *saveError;
@@ -943,6 +951,9 @@
     [assp setValue:date2Type forKey:@"date2"];
     [assp setValue:dailyTotal forKey:@"dailyTotal"];
     [assp setValue:total_to_date forKey:@"total_to_date"];
+    
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
     
     NSError *saveError;
     if (![managedContext save:&saveError]) {
@@ -1061,6 +1072,9 @@
     [assp setValue:0 forKey:@"status"];
     [assp setValue:zip forKey:@"zip"];
     
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
+    
     NSError *saveError;
     
     BOOL projSave = [managedContext save:&saveError];
@@ -1144,6 +1158,9 @@
     [assp setValue:[NSNumber numberWithDouble:[unit_price intValue]] forKey:@"unit_price"];
     [assp setValue:username forKey:@"user"];
     
+    NSNumber* syncStatusNum = [NSNumber numberWithInt:SYNC_STATUS_PENDING];
+    [assp setValue:syncStatusNum forKey:@"syncStatus"];
+    
     NSError *saveError;
     if (![managedContext save:&saveError]) {
         NSLog(@"Whoops, couldn't save: %@", [saveError debugDescription]);
@@ -1201,7 +1218,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DailyInspectionForm"
                                               inManagedObjectContext:[PRIMECMAPPUtils getManagedObjectContext]];
     [fetchRequest setEntity:entity];
-   // [fetchRequest setResultType:NSDictionaryResultType];
+    // [fetchRequest setResultType:NSDictionaryResultType];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(project_id = %@)", projID];
     [fetchRequest setPredicate:predicate];
@@ -1236,9 +1253,9 @@
     
     
     NSArray *inspectionArr = [self getInspectionsForProject:appDelegate.projId];
-   
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K=%@) AND (%K IN %@)", @"no", itemNo, @"inspectionID", inspectionArr];
-   [fetchRequest setPredicate:predicate];
+    [fetchRequest setPredicate:predicate];
     
     NSArray *fetchedObjects = [[PRIMECMAPPUtils getManagedObjectContext] executeFetchRequest:fetchRequest error:&retrieveError];
     

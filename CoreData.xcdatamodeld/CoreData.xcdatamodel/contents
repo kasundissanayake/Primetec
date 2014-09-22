@@ -179,7 +179,7 @@
         <attribute name="syncStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="QuantityEstimateForm" representedClassName="QuantitySummaryDetails" syncable="YES">
+    <entity name="QuantityEstimateForm" representedClassName="QuantityEstimateForm" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="est_qty" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="item_no" optional="YES" attributeType="String" syncable="YES"/>
@@ -332,7 +332,7 @@
         <element name="Image" positionX="0" positionY="144" width="128" height="103"/>
         <element name="NonComplianceForm" positionX="36" positionY="189" width="128" height="343"/>
         <element name="Projects" positionX="-9" positionY="135" width="128" height="345"/>
-        <element name="QuantityEstimateForm" positionX="0" positionY="144" width="128" height="178"/>
+        <element name="QuantityEstimateForm" positionX="0" positionY="144" width="128" height="180"/>
         <element name="SummarySheet1" positionX="0" positionY="144" width="128" height="750"/>
         <element name="SummarySheet2" positionX="9" positionY="153" width="128" height="465"/>
         <element name="SummarySheet3" positionX="18" positionY="162" width="128" height="660"/>
