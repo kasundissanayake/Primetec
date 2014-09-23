@@ -495,7 +495,7 @@
             [self displayPopupView];
             appDelegate.Tag=5;
         }
-        if(indexPath.section==0 && indexPath.row==1 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
+        if(indexPath.section==0 && indexPath.row==1 && ([appDelegate.userType isEqualToString:@"S"] || [appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
             
         {
             
@@ -529,7 +529,7 @@
             self.navigationItem.rightBarButtonItem.enabled = NO;
         }
         
-        if (indexPath.section == 0 && indexPath.row == 2 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
+        if (indexPath.section == 0 && indexPath.row == 2 && ([appDelegate.userType isEqualToString:@"S"] || [appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.primetgrp.com/technical-support/"]];
         }
@@ -540,7 +540,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.primetgrp.com/technical-support/"]];
         }
         
-        if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
+        if (indexPath.section == 0 && indexPath.row == 3 && ([appDelegate.userType isEqualToString:@"S"] || [appDelegate.userType isEqualToString:@"I"] || [appDelegate.userTypeOffline isEqualToString:@"I"]))
         {
             [self syncAll];
         }

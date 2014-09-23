@@ -41,13 +41,13 @@
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
     NSDictionary *sourceDictionary;
+    NSString *smNum;
 }
 
 @end
 
 @implementation SummaryReportViewController
 
-@synthesize isEdit;
 @synthesize city;
 @synthesize conPeWork;
 @synthesize constructionOrder;
@@ -113,7 +113,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];  
+    [super viewDidLoad];
     
     comNoticeNo=@"";
     count=0;
@@ -155,18 +155,18 @@
     date.text=dateString;
     telephoneNo.text=appDelegate.tel;
     
-//    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-//                               initWithTitle:NSLocalizedString(@"Exit", @"")
-//                               style:UIBarButtonItemStyleDone
-//                               target:self
-//                               action:@selector(exit)];
-//    
-//    self.navigationItem.rightBarButtonItem = Button;
-//    
-//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-//    self.navigationController.navigationBar.translucent = NO;
+    //    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
+    //                               initWithTitle:NSLocalizedString(@"Exit", @"")
+    //                               style:UIBarButtonItemStyleDone
+    //                               target:self
+    //                               action:@selector(exit)];
+    //
+    //    self.navigationItem.rightBarButtonItem = Button;
+    //
+    //    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    //    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    //    self.navigationController.navigationBar.translucent = NO;
     
     
     
@@ -177,7 +177,7 @@
         
         conPeWork.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"conPeWork"];
         federalAidNumber.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"federalAidNumber"];
-         descr.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"descr"];
+        descr.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"descr"];
         constructionOrder.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"constructionOrder"];
         lAClass1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass1"];
         lAClass2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lAClass2"];
@@ -209,44 +209,17 @@
         insAndTaxesOnItem1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"insAndTaxesOnItem1"];
         itemDescount20per.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"itemDescount20per"];
         total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//        total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
-//
-//
-
-
-
+        
+        smNum = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+        
     }
-
-    
-    
-    
-    
 }
 
-
--(void)populateValues
-{
-    
-}
 
 
 //-(void)exit{
 //    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-//    [exportAlert show];    
+//    [exportAlert show];
 //}
 
 
@@ -276,14 +249,11 @@
                 healWelAndPension.enabled=YES;
                 insAndTaxesOnItem1.enabled=YES;
                 
-                
                 return NO;
             }
             
             else{
-                
                 //  federalAidNumber.enabled=NO;
-                
             }
             
         }
@@ -294,9 +264,6 @@
     return YES;
 }
 
-
-
-/*************************************************************/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -347,9 +314,6 @@
 }
 
 
-
-
-//brin
 -(IBAction)selectType:(id)sender
 {
     
@@ -370,7 +334,6 @@
     [popoverController presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
                               permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
-//end
 
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -442,8 +405,6 @@
     
     appDelegate.str1=total.text;
     
-    
-    
     if(textField.text.length==0)
     {
         textField.text=@" ";
@@ -457,16 +418,12 @@
 }
 
 - (IBAction)next:(id)sender {
+    
     int totalRecords = [PRIMECMController totalObjectsOfSummarySheet];
-    NSString *smNum;
-    if(!isEdit)
-    {
+    
+    if (sourceDictionary == nil || [sourceDictionary valueForKey:@"userInfo"] == nil) {
         //New Record
         smNum = [NSString stringWithFormat:@"SM_%d_%d",arc4random()%10000,totalRecords+1];
-    }
-    else
-    {
-        smNum =  appDelegate.sMSheetNo;
     }
     
     if(contractor.text==NULL || contractor.text.length==0 || pOBox.text==NULL || pOBox.text.length==0 || city.text==NULL || city.text.length==0 || state.text==NULL || state.text.length==0 || telephoneNo.text==NULL || telephoneNo.text.length==0 || date.text==NULL || date.text.length==0 || conPeWork.text==NULL || conPeWork.text.length==0 || federalAidNumber.text==NULL || federalAidNumber.text.length==0 || projectNo.text==NULL || projectNo.text.length==0 || descr.text==NULL || descr.text.length==0 || constructionOrder.text==NULL || constructionOrder.text.length==0 || total.text==NULL || total.text.length==0 || healWelAndPension.text==NULL || healWelAndPension.text.length==0 || insAndTaxesOnItem1.text==NULL || insAndTaxesOnItem1.text.length==0 || totalLabor.text==NULL || totalLabor.text.length==0 ||  itemDescount20per.text==NULL || itemDescount20per.text.length==0  || zip.text==NULL ||zip.text.length==0  )
@@ -483,7 +440,6 @@
     }
     else
     {
-        
         
         NSString *field1=@" ";
         NSString *field2=@" ";
@@ -510,9 +466,6 @@
         NSString *field23=@" ";
         NSString *field24=@" ";
         NSString *field25=@" ";
-        
-        
-        
         
         if (lAClass1.text!=NULL && lAClass1.text.length!=0 ) {
             
@@ -720,17 +673,13 @@
                            telephoneNo:appDelegate.tel
                            total:total.text
                            totalLabor:totalLabor.text
-                           zip:appDelegate.zip                           
+                           zip:appDelegate.zip
                            ];
         
         [HUD setHidden:YES];
         
         if (saveStatus){
-            NSString *msg;
-            if(isEdit)
-                msg  = @"Updated Summary Sheet Report";
-            else
-                msg = @"Sheet1 is Saved.Fill the Sheet 2";
+            NSString *msg = @"Sheet1 is Saved. Fill the Sheet 2";
             
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
@@ -740,7 +689,6 @@
             
             Summary_2_ViewController *su=[[Summary_2_ViewController alloc] init];
             su.title=@"Summary Sheet";
-            su.isEdit = isEdit;
             su.smSheetNumber = smNum;
             [self.navigationController pushViewController:su animated:YES];
             
@@ -770,7 +718,6 @@
     totalLabor.text=NULL;
     itemDescount20per.text=NULL;
     itemDescount20per.text=@"";
-    
     
     lAClass1.text=NULL;
     lAClass2.text=NULL;

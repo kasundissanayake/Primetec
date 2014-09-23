@@ -637,7 +637,7 @@
 -(IBAction)saveImage:(id)sender
 {
     //Radha
-    NSString *imgName=[NSString stringWithFormat:@"CM_%d_%i",arc4random()%10000, count];
+    NSString *imgName=[NSString stringWithFormat:@"EX_%d_%i",arc4random()%100000, count];
     
     if(txvDescription.text.length==0)
     {

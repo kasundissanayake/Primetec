@@ -35,10 +35,7 @@
 @synthesize address_client;
 @synthesize client;
 @synthesize edit1,edit2;
-@synthesize sMSheetNo;
 
-//brin
-@synthesize sumSheet;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    	//create split view controller
@@ -56,6 +53,7 @@
     window.rootViewController = msc;
     [window makeKeyAndVisible];
     
+    /*
     NSError *error;
     NSManagedObjectContext *context = [self managedObjectContext];
     NSEntityDescription *entitydesc = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:context];
@@ -86,7 +84,25 @@
     [userData setValue:@"12345" forKey:@"password"];
     [userData setValue:@"I" forKey:@"user_type"];
     [context save:&error];
-
+*/
+    
+    NSError *error;
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSEntityDescription *entitydesc = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:context];
+    NSManagedObject *userData;
+    
+    // Create first object:
+    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
+    [userData setValue:@"system" forKey:@"username"];
+    [userData setValue:@"12345" forKey:@"password"];
+    [userData setValue:@"S" forKey:@"user_type"];
+    
+    [userData setValue:@"system" forKey:@"firstname"];
+    [userData setValue:@"user" forKey:@"lastname"];
+    [userData setValue:@"000" forKey:@"id_no"];   
+    
+    [context save:&error];
+    
     
     return YES;
 }

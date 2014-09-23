@@ -64,19 +64,8 @@
 
 @property (nonatomic, retain) NSString *edit1;
 @property (nonatomic, retain) NSString *edit2;
-@property(nonatomic,retain)  NSString *sMSheetNo;
-@property(nonatomic,retain)  NSString *inspectionID;
 
 //edit end
-
-
-
-//brin
-
-@property(nonatomic,retain)  NSString *sumSheet;
-
-
-//
 
 - (NSURL *)applicationDocumentsDirectory;
 

@@ -626,7 +626,6 @@
         [assp setERCashAdvance:[NSNumber numberWithInt:[[payload objectForKey:@"ERCashAdvance"] intValue]]];
         [assp setERReimbursement:[NSNumber numberWithInt:[[payload objectForKey:@"ERReimbursement"] intValue]]];
         [assp setSignature:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature"]]];
-        [assp setEMPName:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EmployeeNo"]]];
         [assp setApprovedBy:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ApprovedBy"]]];
         [assp setCheckNo:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"CheckNo"]]];
         [assp setERDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ERDescription1"]]];
@@ -936,31 +935,37 @@
         [assp setState:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"State"]]];
         [assp setDescr:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Description"]]];
         [assp setConstructionOrder:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"ConstructionOrder"]]];
-        [assp setLAClass1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass1"]]];
+        
         [assp setLANo1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LANo1"]]];
         [assp setLANo2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LANo2"]]];
         [assp setLANo3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LANo3"]]];
         [assp setLANo4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LANo4"]]];
         [assp setLANo5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LANo5"]]];
+        
         [assp setLARate1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LARate1"]]];
         [assp setLARate2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LARate2"]]];
         [assp setLARate3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LARate3"]]];
         [assp setLARate4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LARate4"]]];
         [assp setLARate5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LARate5"]]];
+        
         [assp setLAAmount1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAAmount1"]]];
         [assp setLAAmount2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAAmount2"]]];
         [assp setLAAmount3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAAmount3"]]];
         [assp setLAAmount4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAAmount4"]]];
         [assp setLAAmount5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAAmount5"]]];
+        
+        [assp setLAClass1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass1"]]];
         [assp setLAClass2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass2"]]];
         [assp setLAClass3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass3"]]];
         [assp setLAClass4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass4"]]];
         [assp setLAClass5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LAClass5"]]];
+        
         [assp setLATotalHours1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LATotalHours1"]]];
         [assp setLATotalHours2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LATotalHours2"]]];
         [assp setLATotalHours3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LATotalHours3"]]];
         [assp setLATotalHours4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LATotalHours4"]]];
         [assp setLATotalHours5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LATotalHours5"]]];
+        
         [assp setTotalLabor:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"TotalLabor"]]];
         [assp setHealWelAndPension:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"HealWelAndPension"]]];
         [assp setInsAndTaxesOnItem1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"InsAndTaxesOnItem1"]]];
@@ -1018,26 +1023,31 @@
         
         [assp setAdditionalDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"AdditionalDiscount"]]];
         [assp setLessDiscount:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"LessDiscount"]]];
+        
         [assp setMEDescription1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription1"]]];
         [assp setMEDescription2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription2"]]];
         [assp setMEDescription3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription3"]]];
         [assp setMEDescription4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription4"]]];
         [assp setMEDescription5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEDescription5"]]];
+        
         [assp setMEQuantity1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEQuantity1"]]];
         [assp setMEQuantity2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEQuantity2"]]];
         [assp setMEQuantity3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEQuantity3"]]];
         [assp setMEQuantity4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEQuantity4"]]];
         [assp setMEQuantity5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEQuantity5"]]];
+        
         [assp setMEUnitPrice1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEUnitPrice1"]]];
         [assp setMEUnitPrice2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEUnitPrice2"]]];
         [assp setMEUnitPrice3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEUnitPrice3"]]];
         [assp setMEUnitPrice4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEUnitPrice4"]]];
         [assp setMEUnitPrice5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEUnitPrice5"]]];
+        
         [assp setMEAmount1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount1"]]];
         [assp setMEAmount2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount2"]]];
         [assp setMEAmount3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount3"]]];
         [assp setMEAmount4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount4"]]];
         [assp setMEAmount5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"MEAmount5"]]];
+        
         [assp setProject_id:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Project_id"]]];
         [assp setTotal1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total1"]]];
         [assp setTotal2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Total2"]]];
@@ -1089,31 +1099,37 @@
         [assp setEQSizeandClass3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQSizeandClass3"]]];
         [assp setEQSizeandClass4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQSizeandClass4"]]];
         [assp setEQSizeandClass5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQSizeandClass5"]]];
+        
         [assp setEQIdleActive1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQIdleActive1"]]];
         [assp setEQIdleActive2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQIdleActive2"]]];
         [assp setEQIdleActive3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQIdleActive3"]]];
         [assp setEQIdleActive4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQIdleActive4"]]];
         [assp setEQIdleActive5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQIdleActive5"]]];
+        
         [assp setEQNo1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQNo1"]]];
         [assp setEQNo2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQNo2"]]];
         [assp setEQNo3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQNo3"]]];
         [assp setEQNo4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQNo4"]]];
         [assp setEQNo5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQNo5"]]];
+        
         [assp setEQTotalHours1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQTotalHours1"]]];
         [assp setEQTotalHours2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQTotalHours2"]]];
         [assp setEQTotalHours3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQTotalHours3"]]];
         [assp setEQTotalHours4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQTotalHours4"]]];
         [assp setEQTotalHours5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQTotalHours5"]]];
+        
         [assp setEQRAte1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQRAte1"]]];
         [assp setEQRAte2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQRAte2"]]];
         [assp setEQRAte3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQRAte3"]]];
         [assp setEQRAte4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQRAte4"]]];
         [assp setEQRAte5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQRAte5"]]];
+        
         [assp setEQAmount1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQAmount1"]]];
         [assp setEQAmount2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQAmount2"]]];
         [assp setEQAmount3:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQAmount3"]]];
         [assp setEQAmount4:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQAmount4"]]];
         [assp setEQAmount5:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"EQAmount5"]]];
+        
         [assp setInspector:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Inspector"]]];
         [assp setSignature1:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature1"]]];
         [assp setSignature2:[PRIMECMAPPUtils filterValue:[payload objectForKey:@"Signature2"]]];
