@@ -55,17 +55,17 @@
 {
     UIViewController *currentVC = self.navigationController.visibleViewController;
     
-    if(proType==0 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ComplianceViewController"])
+    if (proType==0 && ![NSStringFromClass([currentVC class]) isEqualToString:@"DailyInspectionViewController"] )
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:NULL];
+    }
+    if(proType==1 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ComplianceViewController"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:NULL];
     }
-    else if (proType==1 && ![NSStringFromClass([currentVC class]) isEqualToString:@"nonComplianceViewController"])
+    else if (proType==2 && ![NSStringFromClass([currentVC class]) isEqualToString:@"nonComplianceViewController"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo:NULL];
-    }
-    else if (proType==2 && ![NSStringFromClass([currentVC class]) isEqualToString:@"DailyInspectionViewController"] )
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:NULL];
     }
     else if (proType==3 && ![NSStringFromClass([currentVC class]) isEqualToString:@"ExpenceViewController"])
     {
@@ -118,7 +118,7 @@
     
     if (indexPath.section == 0) {
         
-        if(proType==2)
+        if(proType==0)
         {
             cell.lblReportName.text =[[reports valueForKey:@"dIFHeader"]objectAtIndex:indexPath.row];
             cell.lblReportDate.text = [NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
@@ -158,7 +158,7 @@
         }
         
         // Compliance and Non-compliance Reports
-        else if (proType==0 || proType==1)
+        else if (proType==1 || proType==2)
         {
             cell.lblReportName.text =[[reports valueForKey:@"title"]objectAtIndex:indexPath.row];
             cell.lblReportDate.text =[NSDateFormatter localizedStringFromDate:[[reports valueForKey:@"date"]objectAtIndex:indexPath.row]
@@ -186,8 +186,18 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *noticeNo;
-    // Compliance Report
+    
+    // Daily Inspection Report
     if (proType == 0)
+    {
+        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"inspectionID"];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspection" object:nil userInfo:dict];
+    }
+
+    
+    // Compliance Report
+    if (proType == 1)
     {
         NSLog(@"report at index: %@",  [[reports objectAtIndex: indexPath.row]valueForKey:@"complianceNoticeNo"] );
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"complianceNoticeNo"];
@@ -196,20 +206,13 @@
     }
     
     // Non-compliance Report
-    if (proType == 1)
+    if (proType == 2)
     {
         noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"non_ComplianceNoticeNo"];
         NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonCompliance" object:nil userInfo:dict];
     }
     
-    // Daily Inspection Report
-    if (proType == 2)
-    {
-        noticeNo=[[reports objectAtIndex: indexPath.row]valueForKey:@"inspectionID"];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject: noticeNo forKey:@"ConNo"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspection" object:nil userInfo:dict];
-    }
     
     // Expense Report
     if (proType == 3)
@@ -416,16 +419,18 @@
     [reports removeAllObjects];
     if(type==0)
     {
-        [self loadComplianceForm];
+        [self loadDailyInspectionForm];
+        
     }
     else if(type==1)
     {
-        [self loadNonComplianceForm];
+        [self loadComplianceForm];
+        
     }
     
     else if(type==2)
     {
-        [self loadDailyInspectionForm];
+        [self loadNonComplianceForm];
     }
     else if(type==3)
     {        [self loadExpenseForm];
@@ -448,16 +453,19 @@
     [reports removeAllObjects];
     if(type==0)
     {
-        [self loadComplianceForm];
-    }
+        [self loadDailyInspectionForm];
+        
+            }
     else if(type==1)
     {
-        [self loadNonComplianceForm];
+        [self loadComplianceForm];
+
+       
     }
     
     else if(type==2)
     {
-        [self loadDailyInspectionForm];
+        [self loadNonComplianceForm]; 
     }
     else if(type==3)
     {

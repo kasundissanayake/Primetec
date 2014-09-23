@@ -66,7 +66,7 @@
     }
     if (indexPath.section == 0) {
         
-          NSArray *titles = @[@"Compliance Report", @"Non-Compliance Report", @"Daily Inspection Report", @"Expense Report", @"Summary Sheet",@"Quantity Summary", @"", @""];
+          NSArray *titles = @[@"Daily Inspection Report",@"Compliance Report", @"Non-Compliance Report", @"Expense Report", @"Summary Sheet",@"Quantity Summary", @"", @""];
         cell.textLabel.text = titles[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }

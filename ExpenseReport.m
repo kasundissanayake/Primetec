@@ -132,6 +132,8 @@
         NSManagedObject *expensedataObject = (NSManagedObject *) [objects objectAtIndex:0];
         NSLog(@"Compliance Form object CNo: %@", [expensedataObject valueForKey:@"eXReportNo"]);
         
+        //NSLog(@"TEST EMPNAME%@",expensedataObject);
+        
         NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
         [dateFormater setDateFormat:@"yyyy-MM-dd"];
         

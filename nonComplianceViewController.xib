@@ -338,11 +338,11 @@
                                 <action selector="gotoSketches:" destination="-1" eventType="touchUpInside" id="0lm-Pn-Srq"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Connecticut Department of Transportation" textAlignment="center" minimumFontSize="17" id="FbX-VZ-bNf">
-                            <rect key="frame" x="71" y="132" width="555" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mattabasset" textAlignment="center" minimumFontSize="17" id="FbX-VZ-bNf">
+                            <rect key="frame" x="227" y="66" width="246" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Yji-E0-Edg"/>
@@ -373,6 +373,16 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Non-Compliance Report" textAlignment="center" minimumFontSize="17" id="gFv-6s-tLW">
+                            <rect key="frame" x="192" y="104" width="317" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="0vY-KU-XCu"/>
+                            </connections>
+                        </textField>
                     </subviews>
                 </scrollView>
             </subviews>
