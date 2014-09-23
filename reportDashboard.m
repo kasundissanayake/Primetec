@@ -41,7 +41,7 @@
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProjectList:) name:@"reloadProjectList" object:nil];
     [self reloadProjectInLoad];
-    
+    table.contentInset=UIEdgeInsetsMake(0, 0, 350, 0);
     UIBarButtonItem  *newButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(addNewForm)];
     self.navigationItem.rightBarButtonItem = newButton;
     //UIBarButtonItem  *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(DeleteReport)];

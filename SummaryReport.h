@@ -139,4 +139,6 @@
 
 @property(nonatomic,retain)NSString *SMNo;
 
+@property (weak, nonatomic) IBOutlet UITextField *reportNoForEdit;
+
 @end

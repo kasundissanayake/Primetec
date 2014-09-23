@@ -142,7 +142,7 @@ typedef enum {
     [toolbar setItems:toolbarItems];
     [toolbarItems removeObject: btnDelete];
     toolbar.items = toolbarItems;
-    
+    table.contentInset=UIEdgeInsetsMake(0, 0, 350, 0);
     
     [[UIToolbar appearance] setBackgroundImage:toolbarBackground
                             forToolbarPosition:UIToolbarPositionAny

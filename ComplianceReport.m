@@ -86,11 +86,11 @@
                                style:UIBarButtonItemStyleDone
                                target:self
                                action:@selector(showSCompliance:)];
-    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
-                                initWithTitle:NSLocalizedString(@"Edit", @"")
-                                style:UIBarButtonItemStyleDone
-                                target:self
-                                action:@selector(fnEdit:)];
+//    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
+//                                initWithTitle:NSLocalizedString(@"Edit", @"")
+//                                style:UIBarButtonItemStyleDone
+//                                target:self
+//                                action:@selector(fnEdit:)];
     
     UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
                                 initWithTitle:NSLocalizedString(@"Delete", @"")
@@ -102,7 +102,7 @@
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];;
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, nil];;
        
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

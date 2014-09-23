@@ -81,6 +81,13 @@
     [userData setValue:@"R" forKey:@"user_type"];
     [context save:&error];
     
+    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
+    [userData setValue:@"Rich" forKey:@"username"];
+    [userData setValue:@"12345" forKey:@"password"];
+    [userData setValue:@"I" forKey:@"user_type"];
+    [context save:&error];
+
+    
     return YES;
 }
 
