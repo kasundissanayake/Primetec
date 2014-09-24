@@ -8,6 +8,7 @@
 
 #import "CMShowImagesViewController.h"
 #import "TabAndSplitAppAppDelegate.h"
+#import "PRIMECMController.h"
 
 @interface CMShowImagesViewController ()
 {
@@ -15,7 +16,7 @@
     NSString *tag;
     UIButton *btnCloseShowImage;
     TabAndSplitAppAppDelegate *appDelegate;
- 
+    
 }
 
 @end
@@ -44,17 +45,17 @@
     self.scrollView.scrollsToTop=NO;
     self.scrollView.delegate=self;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
-   
-        folderName=@"DECK";
-        //self.navigationItem.title=[NSString stringWithFormat:@"Add Images - %@",folderName];
+    
+    folderName=@"DECK";
+    //self.navigationItem.title=[NSString stringWithFormat:@"Add Images - %@",folderName];
     NSLog(@"Arrayyy -----");
-   
+    
     
     viewGallery.layer.borderColor = [UIColor lightGrayColor].CGColor;
     viewGallery.layer.borderWidth = 3.0f;
     [self setLibrary];
-
-
+    
+    
 }
 -(void)setLibrary
 {
@@ -65,8 +66,13 @@
         frame.origin.y = 0;
         frame.size = self.scrollView.frame.size;
         UIImageView* imgView = [[UIImageView alloc] init];
-        imgView.image =[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:i]valueForKey:@"name"]]];
-        //[images objectAtIndex:i];
+        imgView.image = [self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", [[arrayImages objectAtIndex:i]valueForKey:@"name"]]];
+        
+        if (imgView.image == nil){
+            imgView.image = [PRIMECMController getTheImage:[[arrayImages objectAtIndex:i]valueForKey:@"name"]];
+        }
+        
+        
         imgView.frame = frame;
         [scrollView addSubview:imgView];
     }
@@ -74,11 +80,11 @@
     if(arrayImages.count>0)
     {
         txtDescription.text=[[arrayImages objectAtIndex:0]valueForKey:@"description"];
-         }
+    }
     if(!isFromSketches)
     {
         
-    
+        
     }
     else
     {
@@ -142,7 +148,7 @@
     int page=self.pageControl.currentPage;
     
     txtDescription.text=[[arrayImages objectAtIndex:page]valueForKey:@"description"];
-     pageControlBeingUsed = YES;
+    pageControlBeingUsed = YES;
 }
 -(IBAction)doneViewImages:(id)sender
 {

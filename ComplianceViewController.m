@@ -160,18 +160,11 @@ UILabel *cno;
         txtDateContractorStarted.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dateContractorStarted"];
         txtDateIssued.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dateIssued"];
         txtDateofRawReprote.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dateOfDWRReported"];
-        txtTo.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"to"];
-        
-<<<<<<< HEAD
+        txtTo.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"to"];        
+
         appDelegate.sketchesArray = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] mutableCopy];
         arrayImages = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] mutableCopy];
-=======
-        appDelegate.sketchesArray = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] componentsSeparatedByString:@","] mutableCopy];
-        
-        arrayImages = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] componentsSeparatedByString:@","] mutableCopy];
-        
-        
->>>>>>> FETCH_HEAD
+       
     }
 }
 

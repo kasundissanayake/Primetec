@@ -103,13 +103,10 @@
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-<<<<<<< HEAD
+
     self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, Button2, nil];;
     
-=======
-    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];;
-       
->>>>>>> FETCH_HEAD
+
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -213,7 +210,7 @@
     }
     
     NSMutableArray *arrM2 = [[NSMutableArray alloc] init];
-    
+    i = 0;
     for (id obj in sketchesArray){
         
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
@@ -225,7 +222,7 @@
         
         
         [arrM2 addObject:imageDictionary];
-        
+        i++;
     }
     
     [complianceReportDTO1 setValue:sigImgName forKey:@"signature"];
@@ -282,10 +279,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath]){
         
         NSError *error;
-        if(  [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error])
-            ;// success
-        else
-        {
+        if( ! [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error]) {
             NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
         }
     }
