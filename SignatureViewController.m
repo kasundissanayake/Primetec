@@ -214,7 +214,7 @@ static NSMutableArray *colors;
     //[imagesArray addObject:[NSString stringWithFormat:@"%@.jpg", imgName]];
     
     //NSData *imageData = UIImagePNGRepresentation(image);
-    NSData *imageData = UIImageJPEGRepresentation(image,0.75f);
+    NSData *imageData = UIImageJPEGRepresentation(image,1.0);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgName]];
     [fileManager createFileAtPath:fullPath contents:imageData attributes:nil];

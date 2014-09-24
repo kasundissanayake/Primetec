@@ -307,7 +307,7 @@
         
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
-        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,1.0);
         singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
         
         if(arrayImages.count>0)
@@ -320,7 +320,7 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 
                 imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
@@ -338,7 +338,7 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
@@ -830,7 +830,7 @@
             NSLog(@"[%@] ERROR: attempting to write create Images directory", [self class]);
     }
     
-    NSData *imagData = UIImageJPEGRepresentation(image,0.75f);
+    NSData *imagData = UIImageJPEGRepresentation(image,1.0);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];

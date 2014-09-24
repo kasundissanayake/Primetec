@@ -27,7 +27,7 @@
     NSArray *resPonse;
     MBProgressHUD *hud;
     TabAndSplitAppAppDelegate *appDelegate;
-   // ComplianceViewController *CompliForm;
+    // ComplianceViewController *CompliForm;
     UIBarButtonItem  *btnPrint;
 }
 
@@ -103,8 +103,8 @@
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
-    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, nil];;
-       
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, Button2, nil];;
+    
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -161,6 +161,7 @@
         txtPrintedName.text=[complianceReportObject valueForKey:@"printedName"];
         txtdate.text=[dateFormater stringFromDate:[complianceReportObject valueForKey:@"date"]];
         txtNoticeNo.text=[complianceReportObject valueForKey:@"complianceNoticeNo"];
+        
         arrayImages  = [[[complianceReportObject valueForKey:@"images_uploaded"] componentsSeparatedByString:@","]mutableCopy];
         sketchesArray  = [[[complianceReportObject valueForKey:@"sketch_images"] componentsSeparatedByString:@","]mutableCopy];
         
@@ -189,9 +190,44 @@
     [complianceReportDTO1 setValue:txtDateContracStarted.text forKey:@"dateContractorStarted"];
     [complianceReportDTO1 setValue:txtDateIssued.text forKey:@"dateIssued"];
     [complianceReportDTO1 setValue:txtDateRawReport.text forKey:@"dateOfDWRReported"];
-    [complianceReportDTO1 setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
+    
+    NSMutableArray *arrM1 = [[NSMutableArray alloc] init];
+    int i = 0;
+    for (id obj in arrayImages){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM1 addObject:imageDictionary];
+        i++;
+    }
+    
+    NSMutableArray *arrM2 = [[NSMutableArray alloc] init];
+    
+    for (id obj in sketchesArray){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM2 addObject:imageDictionary];
+        
+    }
+    
     [complianceReportDTO1 setValue:sigImgName forKey:@"signature"];
-    [complianceReportDTO1 setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
+    [complianceReportDTO1 setValue:arrM2 forKey:@"sketch_images"];
+    [complianceReportDTO1 setValue:arrM1 forKey:@"images_uploaded"];
+    
+    
     [complianceReportDTO1 setValue:txtTo.text forKey:@"to"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeComplianceForm" object:nil userInfo:complianceReportDTO1];
 }
@@ -218,7 +254,7 @@
     
     if (fetchedObjects && [fetchedObjects count] > 0) {
         assp = [fetchedObjects objectAtIndex:0];
-       
+        
         [managedContext deleteObject:assp];
         
         if (![managedContext save:&retrieveError]) {
@@ -249,7 +285,7 @@
         }
     }
     
-    NSData *imagData = UIImageJPEGRepresentation(imageNew,0.75f);
+    NSData *imagData = UIImageJPEGRepresentation(imageNew,1.0);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:imgName];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];

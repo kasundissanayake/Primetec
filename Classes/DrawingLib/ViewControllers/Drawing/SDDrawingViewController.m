@@ -631,7 +631,7 @@
     //btnShowImage.hidden=NO;
     
     //NSData *imageData = UIImagePNGRepresentation(image);
-    NSData *imageData = UIImageJPEGRepresentation(image,0.75f);
+    NSData *imageData = UIImageJPEGRepresentation(image,1.0);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     [fileManager createFileAtPath:fullPath contents:imageData attributes:nil];

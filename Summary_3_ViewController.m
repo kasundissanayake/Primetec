@@ -804,8 +804,8 @@
         
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
-        NSData *imaDataSign1 = UIImageJPEGRepresentation(imageSign,0.3);
-        NSData *imaDataSign2 = UIImageJPEGRepresentation(imageSign,0.3);
+        NSData *imaDataSign1 = UIImageJPEGRepresentation(imageSign,1.0);
+        NSData *imaDataSign2 = UIImageJPEGRepresentation(imageSign,1.0);
         
         singSaveState = [PRIMECMController saveAllImages:sigName1 img:imaDataSign1 syncStatus:SYNC_STATUS_PENDING];
         

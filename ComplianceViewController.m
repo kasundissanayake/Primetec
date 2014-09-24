@@ -174,8 +174,8 @@ UILabel *cno;
         txtDateofRawReprote.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dateOfDWRReported"];
         txtTo.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"to"];
         
-        appDelegate.sketchesArray = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] componentsSeparatedByString:@","] mutableCopy];
-        arrayImages = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] componentsSeparatedByString:@","] mutableCopy];
+        appDelegate.sketchesArray = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] mutableCopy];
+        arrayImages = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] mutableCopy];
     }
 }
 
@@ -430,7 +430,7 @@ UILabel *cno;
         
         UIImage *imageSign=[self getSignatureFromFileName:[NSString stringWithFormat:@"%@.jpg",@"Signature_R"] folderPath:folderPathSign];
         
-        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,0.3);
+        NSData *imaDataSign = UIImageJPEGRepresentation(imageSign,1.0);
         singSaveState = [PRIMECMController saveAllImages:sigName img:imaDataSign syncStatus:SYNC_STATUS_PENDING];
         
         if(arrayImages.count>0)
@@ -443,7 +443,12 @@ UILabel *cno;
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
+                NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 
                 imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
@@ -461,7 +466,12 @@ UILabel *cno;
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
-                NSData *imgData = UIImageJPEGRepresentation(image,0.3);
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
+                NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
             }
@@ -793,10 +803,7 @@ UILabel *cno;
     imageAddSubView.layer.borderWidth = 3.0f;
     
     [self.navigationController.view addSubview:imageAddSubView];
-    [self.navigationController.view bringSubviewToFront:imageAddSubView];
-    
-    NSLog(@"hello");
-    // NSLog(@"Add Image----------------%@",imgName);
+    [self.navigationController.view bringSubviewToFront:imageAddSubView];  
 }
 
 
@@ -876,7 +883,7 @@ UILabel *cno;
         
     }
     
-    NSData *imagData = UIImageJPEGRepresentation(image,0.75f);
+    NSData *imagData = UIImageJPEGRepresentation(image,1.0);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imgNam]];
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
@@ -899,7 +906,7 @@ UILabel *cno;
     }
     else
     {
-        NSLog(@"Add Image----------------%@",imgName);
+      
         NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
         imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i",count], @"tag",
@@ -908,7 +915,6 @@ UILabel *cno;
                          nil];
         
         
-        NSLog(@"Add Image objjjjjjj-------");
         [arrayImages addObject:imageDictionary];
         [self saveImageTaken:imgViewAdd.image imgName:imgName];
         [self removeAddImageView];
@@ -922,7 +928,7 @@ UILabel *cno;
     {
         CMShowImagesViewController *nextView= [[CMShowImagesViewController alloc]initWithNibName:@"CMShowImagesViewController" bundle:nil];
         //nextView.tag=[NSString stringWithFormat:@"%i",btn.tag];
-        NSLog(@"Arrayyy--------- %i",arrayImages.count);
+        NSLog(@"Image Array %@",arrayImages);
         nextView.arrayImages=arrayImages;
         nextView.isFromSketches=NO;
         nextView.isFromReport=NO;
@@ -950,7 +956,7 @@ UILabel *cno;
     {
         CMShowImagesViewController *nextView= [[CMShowImagesViewController alloc]initWithNibName:@"CMShowImagesViewController" bundle:nil];
         //nextView.tag=@"0";
-        NSLog(@"Arrayyy--------- %i",appDelegate.sketchesArray.count);
+        NSLog(@"Sketch Array %@",appDelegate.sketchesArray);
         nextView.arrayImages=appDelegate.sketchesArray;
         nextView.isFromSketches=YES;
         nextView.isFromReport=NO;
@@ -976,7 +982,7 @@ UILabel *cno;
 {
     //get images from document directory
     NSLog(@"image name......%@",fileName);
-    UIImage *current_img;
+    UIImage *current_img = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     NSString *folderPath;
@@ -987,13 +993,20 @@ UILabel *cno;
     }
     else
     {
-        
         folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
     }
     
     NSString *fullPath = [folderPath stringByAppendingPathComponent:fileName];
     current_img=[UIImage imageWithContentsOfFile:fullPath];
+    
+    
+    if (current_img == nil || current_img == NULL){
+        current_img = [PRIMECMController getTheImage:fileName];
+        NSLog(@"Retrieved image from DB: %@", current_img);
+    }
+    
     NSLog(@"current_img %@",current_img);
+    
     return current_img;
 }
 
