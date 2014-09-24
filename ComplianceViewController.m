@@ -96,19 +96,7 @@ UILabel *cno;
 - (void)viewDidLoad
 {    
     [super viewDidLoad];
-    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"Exit", @"")
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(exit)];
-    
-    self.navigationItem.rightBarButtonItem = Button;
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    self.navigationController.navigationBar.translucent = NO;
-    
-    comNoticeNo=@"";
+   comNoticeNo=@"";
     count=0;
     count1=0;
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -175,34 +163,13 @@ UILabel *cno;
         txtTo.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"to"];
         
         appDelegate.sketchesArray = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] componentsSeparatedByString:@","] mutableCopy];
+        
         arrayImages = [[[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] componentsSeparatedByString:@","] mutableCopy];
+        
+        
     }
 }
 
-
-
-/*-(void)exit{
-    
-    NSString* textField1Text = txtDateIssued.text;
-    [defaults setObject:textField1Text forKey:@"dateIssued"];
-    NSString* textField2Text = conRes.text;
-    [defaults setObject:textField2Text forKey:@"conRes"];
-    NSString* textField3Text = txtTo.text;
-    [defaults setObject:textField3Text forKey:@"to"];
-    NSString* textField4Text = txtDateContractorStarted.text;
-    [defaults setObject:textField4Text forKey:@"dateContStart"];
-    NSString* textField5Text = txtDateContractorCompleted.text;
-    [defaults setObject:textField5Text forKey:@"dateContCompleted"];
-    NSString* textField6Text = txtDateofRawReprote.text;
-    [defaults setObject:textField6Text forKey:@"rawReport"];
-    NSString* textField7Text = correctAction.text;
-    [defaults setObject:textField7Text forKey:@"correctAction"];
-    UIImage* textField8Text = txtSignature.image;
-    [defaults setObject:UIImagePNGRepresentation(textField8Text) forKey:@"complianceSignature"];
-    [defaults synchronize];
-    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    [exportAlert show];
-}*/
 
 -(void)tapDetectedTextField
 {

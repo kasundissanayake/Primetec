@@ -256,8 +256,8 @@
                             <rect key="frame" x="41" y="13" width="109" height="62"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mattabasset" textAlignment="center" minimumFontSize="17" id="y7L-Vh-HRR">
-                            <rect key="frame" x="223" y="42" width="246" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mattabassett" textAlignment="center" minimumFontSize="17" id="y7L-Vh-HRR">
+                            <rect key="frame" x="223" y="42" width="246" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>

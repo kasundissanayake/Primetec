@@ -139,19 +139,6 @@
     else
         ExpID = exNUmber;
     
-//    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-//                               initWithTitle:NSLocalizedString(@"Exit", @"")
-//                               style:UIBarButtonItemStyleDone
-//                               target:self
-//                               action:@selector(exit)];
-//    
-//    self.navigationItem.rightBarButtonItem = Button;
-//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-//    self.navigationController.navigationBar.translucent = NO;
-    
-    
     if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
         
         
@@ -177,10 +164,7 @@
     }
 }
 
--(void)exit{
-    UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-    [exportAlert show];
-}
+
 
 -(void)getImageReviewer
 {
