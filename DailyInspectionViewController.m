@@ -803,7 +803,7 @@
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString *documentsDirectory = [paths objectAtIndex:0];
-                NSString* imggName = [[arrayImages objectAtIndex:count1] valueForKey:@"name"];
+                NSString* imggName = [[arrayImages objectAtIndex:i] valueForKey:@"name"];
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
