@@ -219,7 +219,9 @@
         dailyTotal.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
         total_to_date.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
 
-        smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+        //smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+        
+        //NSLog(@"Editing Summary Sheet3 sMSheetNo: %@", smSheetNumber);
         
     }
     

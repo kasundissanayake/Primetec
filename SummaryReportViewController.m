@@ -421,7 +421,7 @@
     
     int totalRecords = [PRIMECMController totalObjectsOfSummarySheet];
     
-    if (sourceDictionary == nil || [sourceDictionary valueForKey:@"userInfo"] == nil) {
+    if (sourceDictionary == nil || [sourceDictionary valueForKey:@"userInfo"] == nil || smNum == nil || [smNum isEqualToString:@""]) {
         //New Record
         smNum = [NSString stringWithFormat:@"SM_%d_%d",arc4random()%10000,totalRecords+1];
     }
