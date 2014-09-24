@@ -178,9 +178,45 @@
     [nonComplianceReportDTO setValue:lblCorrectiveActionComp.text forKey:@"descriptionOfNonCompliance"];
     [nonComplianceReportDTO setValue:txtPrintedName.text forKey:@"printedName"];
     [nonComplianceReportDTO setValue:txtDate.text forKey:@"date"];
-    [nonComplianceReportDTO setValue:[arrayImages componentsJoinedByString:@","] forKey:@"images_uploaded"];
+    
+    
+    NSMutableArray *arrM1 = [[NSMutableArray alloc] init];
+    int i = 0;
+    for (id obj in arrayImages){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM1 addObject:imageDictionary];
+        i++;
+    }
+    
+    NSMutableArray *arrM2 = [[NSMutableArray alloc] init];
+    i = 0;
+    for (id obj in sketchesArray){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM2 addObject:imageDictionary];
+        i++;
+    }
+    
+    [nonComplianceReportDTO setValue:arrM1 forKey:@"images_uploaded"];
+    [nonComplianceReportDTO setValue:arrM2 forKey:@"sketch_images"];
+    
     [nonComplianceReportDTO setValue:signName forKey:@"signature"];
-    [nonComplianceReportDTO setValue:[sketchesArray componentsJoinedByString:@","] forKey:@"sketch_images"];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNonComplianceForm" object:nil userInfo: nonComplianceReportDTO];
 }
 

@@ -140,6 +140,9 @@
         txtTo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"to"];
         txtNonCompNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
         EditNonNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
+        
+        appDelegate.sketchesArray = [[[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"sketch_images"] mutableCopy];
+        arrayImages = [[[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] mutableCopy];
     }
 }
 
@@ -274,6 +277,11 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 
                 imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
@@ -292,6 +300,11 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 
@@ -813,7 +826,6 @@
                          nil];
         
         
-        NSLog(@"Add Image objjjjjjj-------");
         [arrayImages addObject:imageDictionary];
         [self saveImageTaken:imgViewAdd.image imgName:imgName];
         [self removeAddImageView];

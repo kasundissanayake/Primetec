@@ -161,6 +161,8 @@
         ERType.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eRType1"];
         exNUmber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eXReportNo"];
         
+        appDelegate.sketchesArray = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] mutableCopy];
+        arrayImages = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] mutableCopy];
     }
 }
 
@@ -865,12 +867,6 @@
                            eRTotal1:txtTotal1.text
                            eRType1:ERType.text];
         
-        
-        
-        
-        
-        
-        
         ERtxtApprovedBy.text=@" ";
         ERtextDate6.text=@" ";
         ERtxtCheckNum.text=@" ";
@@ -878,8 +874,8 @@
         txvDescription.text=@" ";
         ERtxtEmpName.text=@" ";
         cashAdvance.text=@" ";
-    eRFHeader:header.text=@" ";
-    eRReimbursement:reimburs.text=@" ";
+        eRFHeader:header.text=@" ";
+        eRReimbursement:reimburs.text=@" ";
         
         ERtxtWeek.text=@" ";
         ERJobNo.text=@" ";
@@ -914,6 +910,12 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,0.3);
                 
                 imageSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
@@ -932,6 +934,12 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 sketchSaveState = [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING];
                 

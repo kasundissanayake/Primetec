@@ -55,7 +55,7 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSLog(@"Sync pull request body json data: %@", data);
+    NSLog(@"Sync image pull request body json data: %@", data);
     
     
     NSHTTPURLResponse* urlResponse = nil;
@@ -69,7 +69,7 @@
     {
         
         NSString *responsestr = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
-        NSLog(@"Successfully downloaded sync pull json");
+        NSLog(@"Successfully downloaded sync image pull json");
         NSError *jsonError;
         id jsonResponse = [NSJSONSerialization JSONObjectWithData:[responsestr dataUsingEncoding:NSUTF8StringEncoding]
                                                           options:NSJSONReadingMutableContainers
@@ -82,7 +82,7 @@
             if ([msgStatus isEqualToString:@"success"]){
                 return [self downloadImageFromServer:[responseDictionary objectForKey:@"Image"]];
             }else{
-                NSLog(@"%@", [jsonError description]);
+                NSLog(@"Error in response status: %@", msgStatus);
                 return FALSE;
             }
         }else{
@@ -135,6 +135,10 @@
         
         UIImage* img = [UIImage imageWithData:[imageObj valueForKey:@"img"]];
         NSData *imageData = UIImageJPEGRepresentation(img, 1.0);
+        
+        if (imageData == nil){
+            continue;
+        }
         
         if ([self pushImageToServer:[imageObj valueForKey:@"imgName"] data:imageData ]){
             

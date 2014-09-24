@@ -208,6 +208,9 @@
         q_itemNo3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No3"];
         q_itemNo4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No4"];
         q_itemNo5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_No5"];
+        
+        appDelegate.sketchesArray = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sketch_images"] mutableCopy];
+        arrayImages = [[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"images_uploaded"] mutableCopy];
     }
     
     NSArray *array = [PRIMECMAPPUtils getSuggestionArray];
@@ -804,6 +807,11 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/Images"];
                 
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 
                 if (! [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING]){
@@ -823,6 +831,11 @@
                 NSString *folderPath= [documentsDirectory stringByAppendingPathComponent:@"/DESK"];
                 NSString *imggName = [[appDelegate.sketchesArray objectAtIndex:i] valueForKey:@"name"];
                 UIImage *image=[self getImageFromFileName:[NSString stringWithFormat:@"%@.jpg", imggName] folderPath:folderPath];
+                
+                if (image == nil) {
+                    image = [PRIMECMController getTheImage:imggName];
+                }
+                
                 NSData *imgData = UIImageJPEGRepresentation(image,1.0);
                 
                 if (! [PRIMECMController saveAllImages:imggName img:imgData syncStatus:SYNC_STATUS_PENDING]){

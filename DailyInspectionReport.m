@@ -270,6 +270,41 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     [dailyInspectionReportDTO setValue:_qua5.text forKey:@"i_QTY5"];
     [dailyInspectionReportDTO setValue:_itemno5.text forKey:@"i_No5"];
     
+    NSMutableArray *arrM1 = [[NSMutableArray alloc] init];
+    int i = 0;
+    for (id obj in arrayImages){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM1 addObject:imageDictionary];
+        i++;
+    }
+    
+    NSMutableArray *arrM2 = [[NSMutableArray alloc] init];
+    i = 0;
+    for (id obj in sketchesArray){
+        
+        NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
+        imageDictionary=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i",i], @"tag",
+                         @"", @"description",
+                         obj, @"name",
+                         nil];
+        
+        
+        [arrM2 addObject:imageDictionary];
+        i++;
+    }
+    
+    [dailyInspectionReportDTO setValue:arrM1 forKey:@"images_uploaded"];
+    [dailyInspectionReportDTO setValue:arrM2 forKey:@"sketch_images"];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInspectionForm" object:nil userInfo:dailyInspectionReportDTO];
 }
 
