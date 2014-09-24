@@ -58,7 +58,7 @@
     
     
     NSDictionary *sourceDictionary;
-
+    
     
     
 }
@@ -110,6 +110,8 @@
 @synthesize total_to_date;
 @synthesize  scrollView;
 
+@synthesize sm3class1,sm3class2,sm3class3,sm3class4,sm3class5,sm3act1,sm3act2,sm3act3,sm3act4,sm3act5,sm3no1,sm3no2,sm3no3,sm3no4,sm3no5,sm3hr1,sm3hr2,sm3hr3,sm3hr4,sm3hr5,sm3rate1,sm3rate2,sm3rate3,sm3rate4,sm3rate5,sm3amt1,sm3amt2,sm3amt3,sm3amt4,sm3amt5,sm3dtotal,sm3dtotaldate;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -137,6 +139,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    eQSizeandClass1.text=sm3class1;
+    eQSizeandClass2.text=sm3class2;
+    eQSizeandClass3.text=sm3class3;
+    eQSizeandClass4.text=sm3class4;
+    eQSizeandClass5.text=sm3class5;
+    
+    eQIdleActive1.text=sm3act1;
+    eQIdleActive2.text=sm3act2;
+    eQIdleActive3.text=sm3act3;
+    eQIdleActive4.text=sm3act4;
+    eQIdleActive5.text=sm3act5;
+    
+    eQNo1.text=sm3no1;
+    eQNo2.text=sm3no2;
+    eQNo3.text=sm3no3;
+    eQNo4.text=sm3no4;
+    eQNo5.text=sm3no5;
+    
+    eQTotalHours1.text=sm3hr1;
+    eQTotalHours2.text=sm3hr2;
+    eQTotalHours3.text=sm3hr3;
+    eQTotalHours4.text=sm3hr4;
+    eQTotalHours5.text=sm3hr5;
+    
+    eQRAte1.text=sm3rate1;
+    eQRAte2.text=sm3rate2;
+    eQRAte3.text=sm3rate3;
+    eQRAte4.text=sm3rate4;
+    eQRAte5.text=sm3rate5;
+    
+    eQAmount1.text=sm3amt1;
+    eQAmount2.text=sm3amt2;
+    eQAmount3.text=sm3amt3;
+    eQAmount4.text=sm3amt4;
+    eQAmount5.text=sm3amt5;
+    
+    dailyTotal.text= sm3dtotal;
+    total_to_date.text= sm3dtotaldate;
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer1) name:@"DoneSignatureReviewer" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageInspector1) name:@"DoneSignatureInspector" object:nil];
     
@@ -172,58 +217,58 @@
     date1.text=dateString;
     date2.text= dateString;
     contractorRepresentative.text = appDelegate.pm;
-//    if(isEdit)
-//    {
-//        [self populateValues];
-//    }
-//    
+    //    if(isEdit)
+    //    {
+    //        [self populateValues];
+    //    }
+    //
     
     
     
     //brin - report editing part
     
-    if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
-        
-        
-        eQSizeandClass1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass1"];
-        eQSizeandClass2.text = [[sourceDictionary valueForKey:@"eQSizeandClass2"] valueForKey:@"federalAidNumber"];
-        eQSizeandClass3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass3"];
-        eQSizeandClass4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass4"];
-        eQSizeandClass5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass5"];
-        eQIdleActive1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive1"];
-        eQIdleActive2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive2"];
-        eQIdleActive3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive3"];
-        eQIdleActive4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive4"];
-        eQIdleActive5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive5"];
-        eQNo1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo1"];
-        eQNo2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo2"];
-        eQNo3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo3"];
-        eQNo4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo4"];
-        eQNo5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo5"];
-        eQTotalHours1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours1"];
-        eQTotalHours2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours2"];
-        eQTotalHours3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours3"];
-        eQTotalHours4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours4"];
-        eQTotalHours5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours5"];
-        
-        eQRAte1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte1"];
-        eQRAte2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte2"];
-        eQRAte3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte3"];
-        eQRAte4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte4"];
-        eQRAte5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte5"];
-        eQAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount1"];
-        eQAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount2"];
-        eQAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount3"];
-        eQAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount4"];
-        eQAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount5"];
-        dailyTotal.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
-        total_to_date.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
-
-        //smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
-        
-        //NSLog(@"Editing Summary Sheet3 sMSheetNo: %@", smSheetNumber);
-        
-    }
+    /*  if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
+     
+     
+     eQSizeandClass1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass1"];
+     eQSizeandClass2.text = [[sourceDictionary valueForKey:@"eQSizeandClass2"] valueForKey:@"federalAidNumber"];
+     eQSizeandClass3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass3"];
+     eQSizeandClass4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass4"];
+     eQSizeandClass5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass5"];
+     eQIdleActive1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive1"];
+     eQIdleActive2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive2"];
+     eQIdleActive3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive3"];
+     eQIdleActive4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive4"];
+     eQIdleActive5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive5"];
+     eQNo1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo1"];
+     eQNo2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo2"];
+     eQNo3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo3"];
+     eQNo4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo4"];
+     eQNo5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo5"];
+     eQTotalHours1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours1"];
+     eQTotalHours2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours2"];
+     eQTotalHours3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours3"];
+     eQTotalHours4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours4"];
+     eQTotalHours5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours5"];
+     
+     eQRAte1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte1"];
+     eQRAte2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte2"];
+     eQRAte3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte3"];
+     eQRAte4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte4"];
+     eQRAte5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte5"];
+     eQAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount1"];
+     eQAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount2"];
+     eQAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount3"];
+     eQAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount4"];
+     eQAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount5"];
+     dailyTotal.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
+     total_to_date.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
+     
+     //smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+     
+     //NSLog(@"Editing Summary Sheet3 sMSheetNo: %@", smSheetNumber);
+     
+     }*/
     
     
     
@@ -288,7 +333,7 @@
 {
     isSignature=@"1";
     signatureViewController=[[SignatureViewController alloc]initWithNibName:@"SignatureViewController" bundle:nil];
-    signatureViewController.imageViewTag=@"2";    
+    signatureViewController.imageViewTag=@"2";
     [self.navigationController.view addSubview:signatureViewController.view];
     [self createSignatureCloseBtn];
     [self.navigationController.view addSubview:btnCloseSignView];
@@ -743,7 +788,7 @@
                            signature1:sigName1
                            signature2:sigName2
                            sMSheetNo:smSheetNumber
-                           total_to_date:total_to_date.text                           
+                           total_to_date:total_to_date.text
                            ];
         
         [HUD setHidden:YES];

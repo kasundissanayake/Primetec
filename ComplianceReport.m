@@ -86,11 +86,12 @@
                                style:UIBarButtonItemStyleDone
                                target:self
                                action:@selector(showSCompliance:)];
-//    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
-//                                initWithTitle:NSLocalizedString(@"Edit", @"")
-//                                style:UIBarButtonItemStyleDone
-//                                target:self
-//                                action:@selector(fnEdit:)];
+    
+    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
+                                initWithTitle:NSLocalizedString(@"Edit", @"")
+                                style:UIBarButtonItemStyleDone
+                                target:self
+                                action:@selector(fnEdit:)];
     
     UIBarButtonItem *Button3 = [[UIBarButtonItem alloc]
                                 initWithTitle:NSLocalizedString(@"Delete", @"")

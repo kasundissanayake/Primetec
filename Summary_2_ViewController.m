@@ -35,7 +35,11 @@
     TabAndSplitAppAppDelegate *appDelegate;
     
     NSDictionary *sourceDictionary;
-
+    
+    NSString *sm3value1,*value2,*value3,*value4,*value5,*value6,*value7,*value8,*value9,*value10,*value11,*value12,*value13,*value14,*value15,*value16,*value17,*value18,*value19,*value20,*value21,*value22,*value23,*value24,*value25,*value26,*value27,*value28,*value29,*value30,*value31,*value32;
+    
+    
+    
     
 }
 @end
@@ -76,7 +80,7 @@
 @synthesize sMSSheetNo;
 
 @synthesize smSheetNumber;
-
+@synthesize sm2description1,sm2description2,sm2description3,sm2description4,sm2description5,sm2Qty1,sm2Qty2,sm2Qty3,sm2Qty4,sm2Qty5,sm2price1,sm2price2,sm2price3,sm2price4,sm2price5,sm2amt1,sm2amt2,sm2amt3,sm2amt4,sm2amt5,sm2total1,sm2total2,sm2total3,sm2additional;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -102,6 +106,34 @@
     [super viewDidLoad];
     
     
+    mEDescription1.text=sm2description1;
+    mEDescription2.text=sm2description2;
+    mEDescription3.text=sm2description3;
+    mEDescription4.text=sm2description4;
+    mEDescription5.text=sm2description5;
+    mEQuantity1.text=sm2Qty1;
+    mEQuantity2.text=sm2Qty2;
+    mEQuantity3.text=sm2Qty3;
+    mEQuantity4.text=sm2Qty4;
+    mEQuantity5.text=sm2Qty5;
+    mEUnitPrice1.text=sm2price1;
+    mEUnitPrice2.text=sm2price2;
+    mEUnitPrice3.text=sm2price3;
+    mEUnitPrice4.text=sm2price4;
+    mEUnitPrice5.text=sm2price5;
+    mEAmount1.text=sm2amt1;
+    mEAmount2.text=sm2amt2;
+    mEAmount3.text=sm2amt3;
+    mEAmount4.text=sm2amt4;
+    mEAmount5.text=sm2amt5;
+    total1.text=sm2total1;
+    total2.text=sm2total2;
+    total3.text=sm2total3;
+    lessDiscount.text=sm2description1;
+    additionalDiscount.text=sm2additional;
+    
+    
+    
     scrollView.frame = CGRectMake(0,-10, 770, 2088);
     [scrollView setContentSize:CGSizeMake(620, 2300)];
     popoverContent=[[UIViewController alloc] init];
@@ -120,36 +152,94 @@
     if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
         
         
-        mEDescription1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
-        mEDescription2.text = [[sourceDictionary valueForKey:@"mEDescription2"] valueForKey:@"federalAidNumber"];
-        mEDescription3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];
-        mEDescription4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription4"];
-        mEDescription5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription5"];
-        mEQuantity1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity1"];
-        mEQuantity2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity2"];
-        mEQuantity3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity3"];
-        mEQuantity4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity4"];
-        mEQuantity5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity5"];
-        mEUnitPrice1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice1"];
-        mEUnitPrice2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice2"];
-        mEUnitPrice3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice3"];
-        mEUnitPrice4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice4"];
-        mEUnitPrice5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice5"];
-        mEAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount1"];
-        mEAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount2"];
-        mEAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount3"];
-        mEAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount4"];
-        mEAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount5"];
-        total1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total1"];
-        lessDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lessDiscount"];
-        total2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total2"];
-        additionalDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"additionalDiscount"];
-        total3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total3"];
-        
+        //        mEDescription1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
+        //        mEDescription2.text = [[sourceDictionary valueForKey:@"mEDescription2"] valueForKey:@"federalAidNumber"];
+        //        mEDescription3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];
+        //        mEDescription4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription4"];
+        //        mEDescription5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription5"];
+        //        mEQuantity1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity1"];
+        //        mEQuantity2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity2"];
+        //        mEQuantity3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity3"];
+        //        mEQuantity4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity4"];
+        //        mEQuantity5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity5"];
+        //        mEUnitPrice1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice1"];
+        //        mEUnitPrice2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice2"];
+        //        mEUnitPrice3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice3"];
+        //        mEUnitPrice4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice4"];
+        //        mEUnitPrice5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice5"];
+        //        mEAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount1"];
+        //        mEAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount2"];
+        //        mEAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount3"];
+        //        mEAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount4"];
+        //        mEAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount5"];
+        //        total1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total1"];
+        //        lessDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lessDiscount"];
+        //        total2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total2"];
+        //        additionalDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"additionalDiscount"];
+        //        total3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total3"];
+        //
         smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+        //
+        
+        
+        
+        //sample
+        
+        //sample
+        sm3value1=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass1"];
+        
+        NSLog(@"Past saved valll=========%@",sm3value1);
+        
+        
+        value2=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass2"];
+        value3=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass3"];
+        value4=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass4"];
+        value5=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass5"];
+        
+        value6=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive1"];
+        value7=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive2"];
+        value8=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive3"];
+        value9=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive4"];
+        value10=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQIdleActive5"];
+        
+        value11=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo1"];
+        value12=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo2"];
+        value13=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo3"];
+        value14=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo4"];
+        value15=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQNo5"];
+        
+        value16=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours1"];
+        value17=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours2"];
+        value18=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours3"];
+        value19=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours4"];
+        value20=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQTotalHours5"];
+        
+        value21=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte1"];
+        value22=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte2"];
+        value23=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte3"];
+        value24=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte4"];
+        value25=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQRAte5"];
+        value26=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount1"];
+        value27=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount2"];
+        value28=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount3"];
+        value29=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount4"];
+        value30=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount5"];
+        value31=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
+        value32=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
-
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -220,14 +310,14 @@
                 total2.enabled=YES;
                 additionalDiscount.enabled=YES;
                 total3.enabled=YES;
-
+                
                 
                 return NO;
             }
             else{
                 
-             
-             
+                
+                
             }
         }
         
@@ -304,7 +394,7 @@
     
     additionalDiscount.text = [NSString stringWithFormat:@"%.2f",t20];
     total2.text = [NSString stringWithFormat:@"%.2f",calcpersentage];
-        
+    
     total3.text = [NSString stringWithFormat:@"%.2f",gtotal];
     
     appDelegate.str2=total3.text;
@@ -322,7 +412,7 @@
 -(IBAction)shownext
 {
     
-      if(total1.text==NULL || total1.text.length==0 || lessDiscount.text==NULL || lessDiscount.text.length==0 || total2.text==NULL || total2.text.length==0  || additionalDiscount.text==NULL || additionalDiscount.text.length==0 || total3.text==NULL || total3.text.length==0     )
+    if(total1.text==NULL || total1.text.length==0 || lessDiscount.text==NULL || lessDiscount.text.length==0 || total2.text==NULL || total2.text.length==0  || additionalDiscount.text==NULL || additionalDiscount.text.length==0 || total3.text==NULL || total3.text.length==0     )
     {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty"
@@ -496,8 +586,8 @@
             
         }
         
-       
-    
+        
+        
         BOOL saveStatus = [PRIMECMController
                            saveSummery2:appDelegate.username
                            additionalDiscount:additionalDiscount.text
@@ -526,7 +616,7 @@
                            
                            //pass summary sheet number
                            sMSSheetNo:smSheetNumber
-
+                           
                            total1:total1.text
                            total2:total2.text
                            total3:total3.text];
@@ -537,18 +627,65 @@
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [exportAlert show];
             [appDelegate.sketchesArray removeAllObjects];
-           // [arrayImages removeAllObjects];
-           // [self clearFormFields];
+            // [arrayImages removeAllObjects];
+            // [self clearFormFields];
             
             Summary_3_ViewController *su=[[Summary_3_ViewController alloc] init];
             su.title=@"Summary Sheet";
             
             //brin-passing summary sheet no
             su.smSheetNumber = smSheetNumber;
-
+            
+            
+            NSLog(@"xdsdfsdfsfsd%@", sm3value1);
+            //sample
+            su.sm3class1=sm3value1;
+            su.sm3class2=value2;
+            su.sm3class3=value3;
+            su.sm3class4=value4;
+            su.sm3class5=value5;
+            
+            su.sm3act1=value6;
+            su.sm3act2=value7;
+            su.sm3act3=value8;
+            su.sm3act4=value9;
+            su.sm3act5=value10;
+            
+            su.sm3no1=value11;
+            su.sm3no2=value12;
+            su.sm3no3=value13;
+            su.sm3no4=value14;
+            su.sm3no5=value15;
+            
+            su.sm3hr1=value16;
+            su.sm3hr2=value17;
+            su.sm3hr3=value18;
+            su.sm3hr4=value19;
+            su.sm3hr5=value20;
+            
+            su.sm3rate1=value21;
+            su.sm3rate2=value22;
+            su.sm3rate3=value23;
+            su.sm3rate4=value24;
+            su.sm3rate5=value25;
+            
+            su.sm3amt1=value26;
+            su.sm3amt2=value27;
+            su.sm3amt3=value28;
+            su.sm3amt4=value29;
+            su.sm3amt5=value30;
+            
+            su.sm3dtotal=value31;
+            su.sm3dtotaldate=value32;
+            
+            
+            
+            
+            
+            
             [self.navigationController pushViewController:su animated:YES];
             
-
+            
             
         }else{
             UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to save summary sheet report." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

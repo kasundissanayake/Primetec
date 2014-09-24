@@ -42,6 +42,12 @@
     TabAndSplitAppAppDelegate *appDelegate;
     NSDictionary *sourceDictionary;
     NSString *smNum;
+    
+    
+    
+    //sample
+    NSString *value1,*value2,*value3,*value4,*value5,*value6,*value7,*value8,*value9,*value10,*value11,*value12,*value13,*value14,*value15,*value16,*value17,*value18,*value19,*value20,*value21,*value22,*value23,*value24,*value25;
+    
 }
 
 @end
@@ -211,6 +217,44 @@
         total.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total"];
         
         smNum = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
+        
+        
+        
+        
+        //sample
+        value1=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
+        value2=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription2"];
+        value3=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];
+        value4=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription4"];
+        value5=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription5"];
+        
+        value6=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity1"];
+        value7=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity2"];
+        value8=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity3"];
+        value9=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity4"];
+        value10=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity5"];
+        
+        value11=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice1"];
+        value12=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice2"];
+        value13=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice3"];
+        value14=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice4"];
+        value15=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice5"];
+        
+        value16=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount1"];
+        value17=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount2"];
+        value18=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount3"];
+        value19=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount4"];
+        value20=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount5"];
+        
+        value21=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total1"];
+        value22=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lessDiscount"];
+        value23=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total2"];
+        value24=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"additionalDiscount"];
+        value25=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total3"];
+        
+        
+        
+        NSLog(@"sample fetch value----------%@",value1);
         
     }
 }
@@ -690,6 +734,46 @@
             Summary_2_ViewController *su=[[Summary_2_ViewController alloc] init];
             su.title=@"Summary Sheet";
             su.smSheetNumber = smNum;
+            
+            //sample
+            su.sm2description1=value1;
+            su.sm2description2=value2;
+            su.sm2description3=value3;
+            su.sm2description4=value4;
+            su.sm2description5=value5;
+            
+            su.sm2Qty1=value6;
+            su.sm2Qty2=value7;
+            su.sm2Qty3=value8;
+            su.sm2Qty4=value9;
+            su.sm2Qty5=value10;
+            
+            su.sm2price1=value11;
+            su.sm2price2=value12;
+            su.sm2price3=value13;
+            su.sm2price4=value14;
+            su.sm2price5=value15;
+            
+            su.sm2amt1=value16;
+            su.sm2amt2=value17;
+            su.sm2amt3=value18;
+            su.sm2amt4=value19;
+            su.sm2amt5=value20;
+            
+            su.sm2total1=value21;
+            su.sm2total2=value22;
+            su.sm2total3=value23;
+            
+            su.sm2lessdiscount=value24;
+            su.sm2additional=value25;
+            
+            
+            
+            
+            
+            
+            
+            
             [self.navigationController pushViewController:su animated:YES];
             
         }else{

@@ -12,7 +12,55 @@
 @interface Summary_2_ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
 
 @property BOOL isEdit;
+
+
 @property(nonatomic,strong) NSString *smSheetNumber;
+
+
+
+@property(nonatomic,strong) NSString *sm2description1;
+@property(nonatomic,strong) NSString *sm2description2;
+@property(nonatomic,strong) NSString *sm2description3;
+@property(nonatomic,strong) NSString *sm2description4;
+@property(nonatomic,strong) NSString *sm2description5;
+
+@property(nonatomic,strong) NSString *sm2Qty1;
+@property(nonatomic,strong) NSString *sm2Qty2;
+@property(nonatomic,strong) NSString *sm2Qty3;
+@property(nonatomic,strong) NSString *sm2Qty4;
+@property(nonatomic,strong) NSString *sm2Qty5;
+
+@property(nonatomic,strong) NSString *sm2price1;
+@property(nonatomic,strong) NSString *sm2price2;
+@property(nonatomic,strong) NSString *sm2price3;
+@property(nonatomic,strong) NSString *sm2price4;
+@property(nonatomic,strong) NSString *sm2price5
+;
+@property(nonatomic,strong) NSString *sm2amt1;
+@property(nonatomic,strong) NSString *sm2amt2;
+@property(nonatomic,strong) NSString *sm2amt3;
+@property(nonatomic,strong) NSString *sm2amt4;
+@property(nonatomic,strong) NSString *sm2amt5;
+
+@property(nonatomic,strong) NSString *sm2total1;
+@property(nonatomic,strong) NSString *sm2lessdiscount;
+@property(nonatomic,strong) NSString *sm2total2;
+@property(nonatomic,strong) NSString *sm2additional;
+@property(nonatomic,strong) NSString *sm2total3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 
