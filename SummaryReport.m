@@ -189,6 +189,8 @@
     [summaryReportDTO setValue:txtEAmt5.text forKey:@"eQAmount5"];
     [summaryReportDTO setValue:txtDailyTotal.text forKey:@"dailyTotal"];
     [summaryReportDTO setValue:txtTotalDate.text forKey:@"total_to_date"];
+    
+    [summaryReportDTO setValue:SMNo forKey:@"sMSheetNo"];
 
 
 //
