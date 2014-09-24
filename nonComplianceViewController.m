@@ -113,20 +113,6 @@
     imgSignature.userInteractionEnabled = YES;
     [imgSignature addGestureRecognizer:singleTapInspec];
     
-//    UIBarButtonItem *Button = [[UIBarButtonItem alloc]
-//                               initWithTitle:NSLocalizedString(@"Exit", @"")
-//                               style:UIBarButtonItemStyleDone
-//                               target:self
-//                               action:@selector(exit)];
-//    
-//    self.navigationItem.rightBarButtonItem = Button;
-//    
-//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-//    self.navigationController.navigationBar.translucent = NO;
-//    defaults= [NSUserDefaults standardUserDefaults];
-    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
@@ -156,38 +142,6 @@
         EditNonNoticeNo.text = [[sourceDictionary1 valueForKey:@"userInfo"] valueForKey:@"non_ComplianceNoticeNo"];
     }
 }
-
-
-
--(void)exit{
-    
-    /*  NSString* textField1Text = NtxtDateIssued.text;
-     [defaults setObject:textField1Text forKey:@"NtxtDateIssued"];
-     NSString* textField2Text = contractorResp.text;
-     [defaults setObject:textField2Text forKey:@"contractorResp"];
-     NSString* textField3Text = txtTo.text;
-     [defaults setObject:textField3Text forKey:@"txtTo"];
-     NSString* textField4Text = DCRC.text;
-     [defaults setObject:textField4Text forKey:@"DCRC"];
-     NSString* textField5Text = NtxtDateContractorStarted.text;
-     [defaults setObject:textField5Text forKey:@"NtxtDateContractorStarted"];
-     NSString* textField6Text = NtxtDateContractorCompleted.text;
-     [defaults setObject:textField6Text forKey:@"NtxtDateContractorCompleted"];
-     NSString* textField7Text = NtxtDateofRawReprote.text;
-     [defaults setObject:textField7Text forKey:@"NtxtDateofRawReprote"];
-     NSString* textField8Text = correctiveAction.text;
-     [defaults setObject:textField8Text forKey:@"correctiveAction"];
-     [defaults synchronize];
-     UIAlertView *exportAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Data Cached." delegate:self cancelButtonTitle:@"EXIT" otherButtonTitles: nil];
-     [exportAlert show];
-     */
-    
-}
-
-
-
-
-
 
 -(void)getImageReviewer
 {

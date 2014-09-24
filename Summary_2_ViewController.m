@@ -151,44 +151,10 @@
     
     if (sourceDictionary != nil && [sourceDictionary valueForKey:@"userInfo"] != nil){
         
-        
-        //        mEDescription1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
-        //        mEDescription2.text = [[sourceDictionary valueForKey:@"mEDescription2"] valueForKey:@"federalAidNumber"];
-        //        mEDescription3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];
-        //        mEDescription4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription4"];
-        //        mEDescription5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription5"];
-        //        mEQuantity1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity1"];
-        //        mEQuantity2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity2"];
-        //        mEQuantity3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity3"];
-        //        mEQuantity4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity4"];
-        //        mEQuantity5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEQuantity5"];
-        //        mEUnitPrice1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice1"];
-        //        mEUnitPrice2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice2"];
-        //        mEUnitPrice3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice3"];
-        //        mEUnitPrice4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice4"];
-        //        mEUnitPrice5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEUnitPrice5"];
-        //        mEAmount1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount1"];
-        //        mEAmount2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount2"];
-        //        mEAmount3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount3"];
-        //        mEAmount4.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount4"];
-        //        mEAmount5.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEAmount5"];
-        //        total1.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total1"];
-        //        lessDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"lessDiscount"];
-        //        total2.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total2"];
-        //        additionalDiscount.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"additionalDiscount"];
-        //        total3.text = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total3"];
-        //
         smSheetNumber = [[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"sMSheetNo"];
-        //
-        
-        
-        
-        //sample
-        
-        //sample
         sm3value1=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass1"];
         
-        NSLog(@"Past saved valll=========%@",sm3value1);
+        
         
         
         value2=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQSizeandClass2"];

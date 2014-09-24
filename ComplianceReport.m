@@ -103,8 +103,13 @@
                 initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(printReport)];
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
+<<<<<<< HEAD
     self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, Button2, nil];;
     
+=======
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button2, Button3, nil];;
+       
+>>>>>>> FETCH_HEAD
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
