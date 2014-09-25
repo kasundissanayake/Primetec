@@ -87,7 +87,7 @@
                                target:self
                                action:@selector(showSCompliance:)];
     
-    UIBarButtonItem *Button2 = [[UIBarButtonItem alloc]
+    UIBarButtonItem *Button02 = [[UIBarButtonItem alloc]
                                 initWithTitle:NSLocalizedString(@"Edit", @"")
                                 style:UIBarButtonItemStyleDone
                                 target:self
@@ -104,7 +104,7 @@
     
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:Button, btnEmail,btnPrint, nil];
 
-    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, Button2, nil];;
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:Button3, Button02, nil];;
     
 
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];

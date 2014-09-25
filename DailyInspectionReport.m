@@ -425,6 +425,9 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 }
 
 
+
+
+/*
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
@@ -448,6 +451,14 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     }
     
     CGContextRef pdfContext = [self createPDFContext:self.tblView.bounds path:(CFStringRef)filePath];
+    
+    
+    
+    
+    
+    
+    
+    
     NSLog(@"PDF Context created");
     int count=4+arrayImages.count+sketchesArray.count;
     for (int i = 0 ; i<count ; i++)
@@ -497,6 +508,101 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         
     }
     [self.tblView setContentOffset:CGPointMake(self.tblView.contentOffset.x, -self.tblView.contentInset.top) animated:YES];
+}*/
+
+
+
+-(void)createPDF
+{
+    
+    [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *directroyPath = nil;
+    directroyPath = [documentsDirectory stringByAppendingPathComponent:@"PDF"];
+    NSString *fileName=[NSString stringWithFormat:@"%@.pdf",@"Report"];
+    NSString *filePath = [directroyPath stringByAppendingPathComponent:fileName];
+    
+    // check for the "PDF" directory
+    NSError *error;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        
+    } else {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directroyPath
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error:&error];
+    }
+    
+    //  CGContextRef pdfContext = [self createPDFContext:self.tblView.bounds path:(CFStringRef)filePath];
+    
+    CGContextRef pdfContext = [self createPDFContext:CGRectMake(-100, 0, 900, 1250) path:(CFStringRef)filePath];
+    
+    
+    //UIFont*font = [UIFont fontWithName:@"HelveticaNeue-Light" size:30.0];
+    
+    NSLog(@"PDF Context created");
+    long count=4+arrayImages.count+sketchesArray.count;
+    for (int i = 0 ; i<count ; i++)
+    {
+        
+        // page 1
+        CGContextBeginPage (pdfContext,nil);
+        
+        //turn PDF upsidedown
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        transform = CGAffineTransformMakeTranslation(0, (i+1) *1065);
+        transform = CGAffineTransformScale(transform, 1.0, -1.0);
+        CGContextConcatCTM(pdfContext, transform);
+        
+        //Draw view into PDF
+        
+        [self.tblView.layer renderInContext:pdfContext];
+        [self.headerView.layer renderInContext:pdfContext];
+        
+        
+        
+        CGContextEndPage (pdfContext);
+        [self.tblView setContentOffset:CGPointMake(0, (i+1) * 470) animated:YES];
+        
+        
+    }
+    CGContextRelease (pdfContext);
+    // [self createImagesPDF];
+    
+    
+    NSData *pdfData = [NSData dataWithContentsOfFile:filePath];
+    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+        mailer.mailComposeDelegate = self;
+        [mailer setSubject:@"Inspection Report"];
+        
+        [mailer addAttachmentData:pdfData mimeType:@"application/pdf" fileName:[NSString stringWithFormat:@"%@.pdf",self.navigationItem.title]];
+        
+        NSString *emailBody = [NSString stringWithFormat:@"Inspection Report of  %@",@"Pro 001"];
+        [mailer setMessageBody:emailBody isHTML:NO];
+        [self presentViewController:mailer animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                        message:@"Your device doesn't support the composer sheet"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+    
+    [self.tblView setContentOffset:CGPointMake(self.tblView.contentOffset.x, -self.tblView.contentInset.top) animated:YES];
+    
+    
+    
 }
 
 

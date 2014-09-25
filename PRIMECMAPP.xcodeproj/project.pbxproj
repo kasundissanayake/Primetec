@@ -185,6 +185,7 @@
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
+		94A6BA5219D4048B0008547B /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */; };
 		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
 		94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E0026F19A9E3870068D862 /* BidSummaryForm.xib */; };
 		94E0027A19A9F2670068D862 /* quantitySummarySheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0027819A9F2670068D862 /* quantitySummarySheet.m */; };
@@ -587,6 +588,8 @@
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
+		94A6BA5019D4048B0008547B /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		94E0026D19A9E3870068D862 /* BidSummaryForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidSummaryForm.h; sourceTree = "<group>"; };
 		94E0026E19A9E3870068D862 /* BidSummaryForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidSummaryForm.m; sourceTree = "<group>"; };
 		94E0026F19A9E3870068D862 /* BidSummaryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidSummaryForm.xib; sourceTree = "<group>"; };
@@ -1399,6 +1402,8 @@
 		98D14A7E199F201E0091D5D8 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				94A6BA5019D4048B0008547B /* TPKeyboardAvoidingScrollView.h */,
+				94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */,
 				98D14A7B199F20100091D5D8 /* PRIMECMAPPUtils.h */,
 				98D14A7C199F20100091D5D8 /* PRIMECMAPPUtils.m */,
 			);
@@ -1866,6 +1871,7 @@
 				FC181BF718EC58320084F7C5 /* nonComplianceViewController.m in Sources */,
 				4B8CE25219418749001F8E3B /* SDFontSizeViewController.m in Sources */,
 				4B929FFB1935A86400BDF012 /* ReportDetailsCell.m in Sources */,
+				94A6BA5219D4048B0008547B /* TPKeyboardAvoidingScrollView.m in Sources */,
 				4B8CE1EB19418749001F8E3B /* BitmapContextRep.m in Sources */,
 				55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */,
 				4B8CE21819418749001F8E3B /* SDPenTool.m in Sources */,
