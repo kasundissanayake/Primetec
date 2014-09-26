@@ -186,6 +186,8 @@
 		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
 		94A6BA5219D4048B0008547B /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */; };
+		94A6BA5619D40BE90008547B /* DailyInspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */; };
+		94A6BA5719D40BE90008547B /* DailyInspectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */; };
 		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
 		94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E0026F19A9E3870068D862 /* BidSummaryForm.xib */; };
 		94E0027A19A9F2670068D862 /* quantitySummarySheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0027819A9F2670068D862 /* quantitySummarySheet.m */; };
@@ -217,8 +219,6 @@
 		E9876B94146295E300F37F99 /* RootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9876B92146295E300F37F99 /* RootVC.xib */; };
 		FC181BF718EC58320084F7C5 /* nonComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */; };
 		FC181BF818EC58320084F7C5 /* nonComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */; };
-		FC245AB118EC60C200950C49 /* DailyInspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AAF18EC60C200950C49 /* DailyInspectionViewController.m */; };
-		FC245AB218EC60C200950C49 /* DailyInspectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC245AB018EC60C200950C49 /* DailyInspectionViewController.xib */; };
 		FC245AB618EC60DB00950C49 /* ExpenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB418EC60DB00950C49 /* ExpenceViewController.m */; };
 		FC245AB718EC60DB00950C49 /* ExpenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */; };
 		FC245ABB18EC60FA00950C49 /* SummaryReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB918EC60FA00950C49 /* SummaryReportViewController.m */; };
@@ -590,6 +590,9 @@
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
 		94A6BA5019D4048B0008547B /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DailyInspectionViewController.h; path = ../DailyInspectionViewController.h; sourceTree = "<group>"; };
+		94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyInspectionViewController.m; path = ../DailyInspectionViewController.m; sourceTree = "<group>"; };
+		94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DailyInspectionViewController.xib; path = ../DailyInspectionViewController.xib; sourceTree = "<group>"; };
 		94E0026D19A9E3870068D862 /* BidSummaryForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidSummaryForm.h; sourceTree = "<group>"; };
 		94E0026E19A9E3870068D862 /* BidSummaryForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidSummaryForm.m; sourceTree = "<group>"; };
 		94E0026F19A9E3870068D862 /* BidSummaryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidSummaryForm.xib; sourceTree = "<group>"; };
@@ -644,9 +647,6 @@
 		FC181BF418EC58320084F7C5 /* nonComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nonComplianceViewController.h; path = ../nonComplianceViewController.h; sourceTree = "<group>"; };
 		FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = nonComplianceViewController.m; path = ../nonComplianceViewController.m; sourceTree = "<group>"; };
 		FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = nonComplianceViewController.xib; path = ../nonComplianceViewController.xib; sourceTree = "<group>"; };
-		FC245AAE18EC60C200950C49 /* DailyInspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DailyInspectionViewController.h; path = ../DailyInspectionViewController.h; sourceTree = "<group>"; };
-		FC245AAF18EC60C200950C49 /* DailyInspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyInspectionViewController.m; path = ../DailyInspectionViewController.m; sourceTree = "<group>"; };
-		FC245AB018EC60C200950C49 /* DailyInspectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DailyInspectionViewController.xib; path = ../DailyInspectionViewController.xib; sourceTree = "<group>"; };
 		FC245AB318EC60DB00950C49 /* ExpenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpenceViewController.h; path = ../ExpenceViewController.h; sourceTree = "<group>"; };
 		FC245AB418EC60DB00950C49 /* ExpenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpenceViewController.m; path = ../ExpenceViewController.m; sourceTree = "<group>"; };
 		FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpenceViewController.xib; path = ../ExpenceViewController.xib; sourceTree = "<group>"; };
@@ -1413,6 +1413,9 @@
 		FC181BF318EC57C30084F7C5 /* UISandClasses */ = {
 			isa = PBXGroup;
 			children = (
+				94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */,
+				94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */,
+				94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */,
 				4B9124411936D7EF00974943 /* PopUpViewController.h */,
 				4B9124421936D7EF00974943 /* PopUpViewController.m */,
 				4B9124431936D7EF00974943 /* PopUpViewController.xib */,
@@ -1429,9 +1432,6 @@
 				FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */,
 				FC245AB418EC60DB00950C49 /* ExpenceViewController.m */,
 				FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */,
-				FC245AAE18EC60C200950C49 /* DailyInspectionViewController.h */,
-				FC245AAF18EC60C200950C49 /* DailyInspectionViewController.m */,
-				FC245AB018EC60C200950C49 /* DailyInspectionViewController.xib */,
 				FC181BF418EC58320084F7C5 /* nonComplianceViewController.h */,
 				FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */,
 				FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */,
@@ -1747,6 +1747,7 @@
 				FC245AC618EC856800950C49 /* menu.png in Resources */,
 				FCBE1514190CC8C4003D7A85 /* butt.png in Resources */,
 				4B914CA319343D8300F6E1F4 /* ProjectDetailsCell.xib in Resources */,
+				94A6BA5719D40BE90008547B /* DailyInspectionViewController.xib in Resources */,
 				52225B81197917820012E102 /* check_selected@2x.png in Resources */,
 				94E0027B19A9F2670068D862 /* quantitySummarySheet.xib in Resources */,
 				FC245ACB18EC892700950C49 /* Summary_2_ViewController.xib in Resources */,
@@ -1823,7 +1824,6 @@
 				5200C6761953E48600566674 /* projectList.png in Resources */,
 				4BF5325E193B6DBC0096E687 /* ImageCell.xib in Resources */,
 				FCBE1535190F6700003D7A85 /* back.jpg in Resources */,
-				FC245AB218EC60C200950C49 /* DailyInspectionViewController.xib in Resources */,
 				FCAFB07D191745F50027A362 /* SearchProject.xib in Resources */,
 				4B8CE24519418749001F8E3B /* ruler-triangle-mini.png in Resources */,
 				FCD7AA0218EB30A6006008D9 /* CalloutPopoverBottomRight.png in Resources */,
@@ -1906,6 +1906,7 @@
 				4B8CE1F319418749001F8E3B /* BitmapRotationManipulator.m in Sources */,
 				FCBE154319136EC2003D7A85 /* NonComplianceReport.m in Sources */,
 				4B8C478C1940402F0075338B /* CMShowImagesViewController.m in Sources */,
+				94A6BA5619D40BE90008547B /* DailyInspectionViewController.m in Sources */,
 				4B8CE21319418749001F8E3B /* SDEllipseFillTool.m in Sources */,
 				98D14A58199F19040091D5D8 /* PRIMECMController.m in Sources */,
 				94E0028919AA0F3C0068D862 /* Quantity_S_Report.m in Sources */,
@@ -1976,7 +1977,6 @@
 				980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */,
 				4B8CE21519418749001F8E3B /* SDEraserTool.m in Sources */,
 				4B8CE1F619418749001F8E3B /* BGRSLoupeLayer.m in Sources */,
-				FC245AB118EC60C200950C49 /* DailyInspectionViewController.m in Sources */,
 				4B8CE1F719418749001F8E3B /* RSBrightnessSlider.m in Sources */,
 				5563F51F19CE1BE000A66013 /* ImageSyncController.m in Sources */,
 				4BF5325F193B6DBC0096E687 /* ImageHeaderCell.m in Sources */,

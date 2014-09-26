@@ -213,6 +213,8 @@
     
     [self populateDrawings];
     
+
+    
 }
 
 #pragma mark - Memory management
@@ -227,6 +229,8 @@
     self.carousel.type = iCarouselTypeCoverFlow;
     
     [self cleanupOrphanedDrawings];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

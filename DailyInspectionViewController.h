@@ -1,11 +1,3 @@
-//
-//  DailyInspectionViewController.h
-//  TabAndSplitApp
-//
-//  Created by Lingeswaran Kandasamy on 4/2/14.
-//
-//
-
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "SuggestiveTextField.h"

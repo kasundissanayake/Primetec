@@ -196,7 +196,7 @@
         des3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc3"];
         des4.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc4"];
         des5.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_Desc5"];
-                
+        
         qua1.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY1"];
         qua2.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY2"];
         qua3.text=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"i_QTY3"];
@@ -231,7 +231,7 @@
     defaults= [NSUserDefaults standardUserDefaults];
     
     
-
+    
 }
 
 
@@ -485,7 +485,7 @@
 {
     [self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     if([popoverController isPopoverVisible])
-	{
+    {
         [popoverController dismissPopoverAnimated:YES];
     }
     if([popoverController isPopoverVisible])
@@ -1108,7 +1108,7 @@
     
     
     //brin
-   // scrollView.scrollEnabled = NO;
+    // scrollView.scrollEnabled = NO;
     
     
     
@@ -1197,7 +1197,7 @@
     
     //brin
     scrollView.scrollEnabled = YES;
-
+    
     
 }
 
@@ -1250,8 +1250,8 @@
 // tell the picker the width of each row for a given component
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     CGFloat componentWidth = 0.0;
-	componentWidth = 320.0;
-	return componentWidth;
+    componentWidth = 320.0;
+    return componentWidth;
 }
 
 
