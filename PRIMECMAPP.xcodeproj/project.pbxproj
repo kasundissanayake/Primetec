@@ -219,6 +219,7 @@
 		FC20AE8D19D6967D0060CF76 /* nonComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC20AE8B19D6967D0060CF76 /* nonComplianceViewController.xib */; };
 		FC20AE9119D7360E0060CF76 /* ComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC20AE8F19D7360E0060CF76 /* ComplianceViewController.m */; };
 		FC20AE9219D7360E0060CF76 /* ComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC20AE9019D7360E0060CF76 /* ComplianceViewController.xib */; };
+		FC20AE9419D873F40060CF76 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC20AE9319D873F40060CF76 /* MainWindow.xib */; };
 		FC245AB618EC60DB00950C49 /* ExpenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB418EC60DB00950C49 /* ExpenceViewController.m */; };
 		FC245AB718EC60DB00950C49 /* ExpenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */; };
 		FC245ABB18EC60FA00950C49 /* SummaryReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB918EC60FA00950C49 /* SummaryReportViewController.m */; };
@@ -646,6 +647,7 @@
 		FC20AE8E19D7360E0060CF76 /* ComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceViewController.h; path = ../ComplianceViewController.h; sourceTree = "<group>"; };
 		FC20AE8F19D7360E0060CF76 /* ComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceViewController.m; path = ../ComplianceViewController.m; sourceTree = "<group>"; };
 		FC20AE9019D7360E0060CF76 /* ComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComplianceViewController.xib; path = ../ComplianceViewController.xib; sourceTree = "<group>"; };
+		FC20AE9319D873F40060CF76 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		FC245AB318EC60DB00950C49 /* ExpenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpenceViewController.h; path = ../ExpenceViewController.h; sourceTree = "<group>"; };
 		FC245AB418EC60DB00950C49 /* ExpenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpenceViewController.m; path = ../ExpenceViewController.m; sourceTree = "<group>"; };
 		FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpenceViewController.xib; path = ../ExpenceViewController.xib; sourceTree = "<group>"; };
@@ -1575,6 +1577,7 @@
 		FC20AE8819D5D2A70060CF76 /* CoreDataTables */ = {
 			isa = PBXGroup;
 			children = (
+				FC20AE9319D873F40060CF76 /* MainWindow.xib */,
 				5234B57D196B9AFC00FAB5B2 /* CoreData.xcdatamodeld */,
 			);
 			name = CoreDataTables;
@@ -1854,6 +1857,7 @@
 				94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */,
 				521B8D821952AFB200C206BF /* linSe.png in Resources */,
 				FCD36C011965750F00422E34 /* Icon.png in Resources */,
+				FC20AE9419D873F40060CF76 /* MainWindow.xib in Resources */,
 				4B8CE24319418749001F8E3B /* ruler-mini.png in Resources */,
 				4B8CE22319418749001F8E3B /* brush5.png in Resources */,
 				4B8CE24019418749001F8E3B /* paint-mini@2x.png in Resources */,
