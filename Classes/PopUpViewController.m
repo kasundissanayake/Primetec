@@ -532,7 +532,7 @@ imgViewAttach7,imgViewAttach8,imgViewAttach9,imgViewAttach10,imgViewAttach11,img
         
         NSLog(@"projectid %@",[defaults objectForKey:@"Project Id"]);
         cell.lblHeading.text =[tableData objectAtIndex:indexPath.row];
-        appDelegate.edit1=cell.lblpopupvalue.text;
+        //appDelegate.edit1=cell.lblpopupvalue.text;
         // cell.lblpopupvalue.text=appDelegate.projId;
     }
     

@@ -17,7 +17,6 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property(nonatomic,strong)IBOutlet UILabel *lblImageAttachmentTitle;
 @property(nonatomic,strong)IBOutlet UIView *viewImageAttachmentTitle;
 @property (weak, nonatomic) IBOutlet UITextField *txtContractor;
@@ -31,8 +30,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtReportNum;
 @property (weak, nonatomic) IBOutlet UITextField *txtContactorPerform;
 @property (weak, nonatomic) IBOutlet UITextField *txtFederalAid;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *txtProjectNo;
 @property (weak, nonatomic) IBOutlet UITextView *txvDesWork;
 @property (weak, nonatomic) IBOutlet UITextView *txvConsOrder;
@@ -51,8 +48,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTotal3;
 @property (weak, nonatomic) IBOutlet UITextField *txtTotal4;
 @property (weak, nonatomic) IBOutlet UITextField *txtTotal5;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *txtRate1;
 @property (weak, nonatomic) IBOutlet UITextField *txtRate2;
 @property (weak, nonatomic) IBOutlet UITextField *txtRate3;
@@ -68,20 +63,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtInsTax;
 @property (weak, nonatomic) IBOutlet UITextField *txt20Items;
 @property (weak, nonatomic) IBOutlet UITextField *txtTotalItems;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtDes1;
 @property (weak, nonatomic) IBOutlet UITextField *txtDes2;
 @property (weak, nonatomic) IBOutlet UITextField *txtDes3;
 @property (weak, nonatomic) IBOutlet UITextField *txtDes4;
 @property (weak, nonatomic) IBOutlet UITextField *txtDES5;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtQuantity3;
 @property (weak, nonatomic) IBOutlet UITextField *txtQuantity1;
 @property (weak, nonatomic) IBOutlet UITextField *txtQuantity4;
 @property (weak, nonatomic) IBOutlet UITextField *txtQuantity5;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtQuantity2;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtUnitPrice1;
 @property (weak, nonatomic) IBOutlet UITextField *txtUnitPrice2;
 @property (weak, nonatomic) IBOutlet UITextField *txtUnitPrice3;
@@ -136,9 +127,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEAmt3;
 @property (weak, nonatomic) IBOutlet UITextField *txtEAmt4;
 @property (weak, nonatomic) IBOutlet UITextField *txtEAmt5;
-
 @property(nonatomic,retain)NSString *SMNo;
-
 @property (weak, nonatomic) IBOutlet UITextField *reportNoForEdit;
 
 @end

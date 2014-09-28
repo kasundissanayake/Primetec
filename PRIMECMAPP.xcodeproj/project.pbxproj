@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* TabAndSplitAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* SecondView.xib */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		4B4EB9E3193831C1009917E8 /* TapHereSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4EB9E1193831C1009917E8 /* TapHereSubViewController.m */; };
 		4B4EB9E4193831C1009917E8 /* TapHereSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B4EB9E2193831C1009917E8 /* TapHereSubViewController.xib */; };
 		4B4EB9E619384F4F009917E8 /* DotedLineBorder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4B4EB9E519384F4F009917E8 /* DotedLineBorder.jpg */; };
@@ -217,8 +215,10 @@
 		E98754671462A4D800E603C6 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98754651462A4D800E603C6 /* FirstViewController.m */; };
 		E98754691462A4E100E603C6 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98754681462A4E100E603C6 /* FirstView.xib */; };
 		E9876B94146295E300F37F99 /* RootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9876B92146295E300F37F99 /* RootVC.xib */; };
-		FC181BF718EC58320084F7C5 /* nonComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */; };
-		FC181BF818EC58320084F7C5 /* nonComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */; };
+		FC20AE8C19D6967D0060CF76 /* nonComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC20AE8A19D6967D0060CF76 /* nonComplianceViewController.m */; };
+		FC20AE8D19D6967D0060CF76 /* nonComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC20AE8B19D6967D0060CF76 /* nonComplianceViewController.xib */; };
+		FC20AE9119D7360E0060CF76 /* ComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC20AE8F19D7360E0060CF76 /* ComplianceViewController.m */; };
+		FC20AE9219D7360E0060CF76 /* ComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC20AE9019D7360E0060CF76 /* ComplianceViewController.xib */; };
 		FC245AB618EC60DB00950C49 /* ExpenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB418EC60DB00950C49 /* ExpenceViewController.m */; };
 		FC245AB718EC60DB00950C49 /* ExpenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */; };
 		FC245ABB18EC60FA00950C49 /* SummaryReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC245AB918EC60FA00950C49 /* SummaryReportViewController.m */; };
@@ -230,8 +230,6 @@
 		FC245AD018EC899E00950C49 /* Summary_3_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC245ACE18EC899E00950C49 /* Summary_3_ViewController.xib */; };
 		FC612DCC1920CB9100573DA0 /* LineBlack3x200.gif in Resources */ = {isa = PBXBuildFile; fileRef = FC612DCB1920CB9100573DA0 /* LineBlack3x200.gif */; };
 		FC69DADC18EB51FC0055A535 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		FC69DAE018EB5BAE0055A535 /* ComplianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC69DADE18EB5BAE0055A535 /* ComplianceViewController.m */; };
-		FC69DAE118EB5BAE0055A535 /* ComplianceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69DADF18EB5BAE0055A535 /* ComplianceViewController.xib */; };
 		FC7381831961D3DE00EF516B /* CardinalLogoWeb2.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */; };
 		FC7381851961D3EB00EF516B /* Prime-Tech-Logo[1].png in Resources */ = {isa = PBXBuildFile; fileRef = FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */; };
 		FCAFB078191744B00027A362 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAFB077191744B00027A362 /* search.png */; };
@@ -308,9 +306,7 @@
 		1D3623240D0F684500981E51 /* TabAndSplitAppAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabAndSplitAppAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabAndSplitAppAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* PRIMECMAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRIMECMAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		282CCBFD0DB6C98000C4EA27 /* SecondView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4B4EB9E0193831C1009917E8 /* TapHereSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapHereSubViewController.h; sourceTree = "<group>"; };
 		4B4EB9E1193831C1009917E8 /* TapHereSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapHereSubViewController.m; sourceTree = "<group>"; };
@@ -632,21 +628,24 @@
 		98D14ABF199F6A0C0091D5D8 /* SummarySheet2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummarySheet2.m; path = ../SummarySheet2.m; sourceTree = "<group>"; };
 		98D14AC1199F6DB10091D5D8 /* SummarySheet3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummarySheet3.h; path = ../SummarySheet3.h; sourceTree = "<group>"; };
 		98D14AC2199F6DB10091D5D8 /* SummarySheet3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummarySheet3.m; path = ../SummarySheet3.m; sourceTree = "<group>"; };
-		E98753681462963300E603C6 /* DetailedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedVC.xib; sourceTree = "<group>"; };
+		E98753681462963300E603C6 /* DetailedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailedVC.xib; path = ../DetailedVC.xib; sourceTree = "<group>"; };
 		E987536B1462965000E603C6 /* DetailedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedVC.m; sourceTree = "<group>"; };
 		E987536C1462965000E603C6 /* DetailedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedVC.h; sourceTree = "<group>"; };
 		E987536D1462965000E603C6 /* RootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootVC.m; sourceTree = "<group>"; };
 		E987536E1462965000E603C6 /* RootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootVC.h; sourceTree = "<group>"; };
-		E98753F2146297F900E603C6 /* MySplitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MySplitViewController.xib; sourceTree = "<group>"; };
+		E98753F2146297F900E603C6 /* MySplitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MySplitViewController.xib; path = ../MySplitViewController.xib; sourceTree = "<group>"; };
 		E98753F41462982200E603C6 /* MySplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySplitViewController.m; sourceTree = "<group>"; };
 		E98753F51462982200E603C6 /* MySplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySplitViewController.h; sourceTree = "<group>"; };
 		E98754651462A4D800E603C6 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		E98754661462A4D800E603C6 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		E98754681462A4E100E603C6 /* FirstView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
-		E9876B92146295E300F37F99 /* RootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootVC.xib; sourceTree = "<group>"; };
-		FC181BF418EC58320084F7C5 /* nonComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nonComplianceViewController.h; path = ../nonComplianceViewController.h; sourceTree = "<group>"; };
-		FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = nonComplianceViewController.m; path = ../nonComplianceViewController.m; sourceTree = "<group>"; };
-		FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = nonComplianceViewController.xib; path = ../nonComplianceViewController.xib; sourceTree = "<group>"; };
+		E98754681462A4E100E603C6 /* FirstView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FirstView.xib; path = ../FirstView.xib; sourceTree = "<group>"; };
+		E9876B92146295E300F37F99 /* RootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootVC.xib; path = ../RootVC.xib; sourceTree = "<group>"; };
+		FC20AE8919D6967D0060CF76 /* nonComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nonComplianceViewController.h; path = ../nonComplianceViewController.h; sourceTree = "<group>"; };
+		FC20AE8A19D6967D0060CF76 /* nonComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = nonComplianceViewController.m; path = ../nonComplianceViewController.m; sourceTree = "<group>"; };
+		FC20AE8B19D6967D0060CF76 /* nonComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = nonComplianceViewController.xib; path = ../nonComplianceViewController.xib; sourceTree = "<group>"; };
+		FC20AE8E19D7360E0060CF76 /* ComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceViewController.h; path = ../ComplianceViewController.h; sourceTree = "<group>"; };
+		FC20AE8F19D7360E0060CF76 /* ComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceViewController.m; path = ../ComplianceViewController.m; sourceTree = "<group>"; };
+		FC20AE9019D7360E0060CF76 /* ComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComplianceViewController.xib; path = ../ComplianceViewController.xib; sourceTree = "<group>"; };
 		FC245AB318EC60DB00950C49 /* ExpenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpenceViewController.h; path = ../ExpenceViewController.h; sourceTree = "<group>"; };
 		FC245AB418EC60DB00950C49 /* ExpenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpenceViewController.m; path = ../ExpenceViewController.m; sourceTree = "<group>"; };
 		FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpenceViewController.xib; path = ../ExpenceViewController.xib; sourceTree = "<group>"; };
@@ -661,18 +660,15 @@
 		FC245ACD18EC899E00950C49 /* Summary_3_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Summary_3_ViewController.m; path = ../Summary_3_ViewController.m; sourceTree = "<group>"; };
 		FC245ACE18EC899E00950C49 /* Summary_3_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Summary_3_ViewController.xib; path = ../Summary_3_ViewController.xib; sourceTree = "<group>"; };
 		FC612DCB1920CB9100573DA0 /* LineBlack3x200.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LineBlack3x200.gif; sourceTree = "<group>"; };
-		FC69DADD18EB5BAE0055A535 /* ComplianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComplianceViewController.h; path = ../ComplianceViewController.h; sourceTree = "<group>"; };
-		FC69DADE18EB5BAE0055A535 /* ComplianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComplianceViewController.m; path = ../ComplianceViewController.m; sourceTree = "<group>"; };
-		FC69DADF18EB5BAE0055A535 /* ComplianceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComplianceViewController.xib; path = ../ComplianceViewController.xib; sourceTree = "<group>"; };
-		FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CardinalLogoWeb2.png; sourceTree = "<group>"; };
-		FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Prime-Tech-Logo[1].png"; path = "Classes/Prime-Tech-Logo[1].png"; sourceTree = "<group>"; };
+		FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CardinalLogoWeb2.png; path = ../../CardinalLogoWeb2.png; sourceTree = "<group>"; };
+		FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Prime-Tech-Logo[1].png"; path = "../../Prime-Tech-Logo[1].png"; sourceTree = "<group>"; };
 		FCAFB077191744B00027A362 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCAFB079191745F50027A362 /* SearchProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProject.h; sourceTree = "<group>"; };
 		FCAFB07A191745F50027A362 /* SearchProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProject.m; sourceTree = "<group>"; };
 		FCAFB07B191745F50027A362 /* SearchProject.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchProject.xib; sourceTree = "<group>"; };
 		FCAFB08019177DAB0027A362 /* textBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textBack.png; sourceTree = "<group>"; };
 		FCB3961F1904C8B5009E30B8 /* home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = home.jpg; path = ../../home.jpg; sourceTree = "<group>"; };
-		FCB3BD05194A9E7E0001D9DB /* llo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = llo1.png; sourceTree = "<group>"; };
+		FCB3BD05194A9E7E0001D9DB /* llo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = llo1.png; path = ../../../llo1.png; sourceTree = "<group>"; };
 		FCBE1513190CC8C4003D7A85 /* butt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butt.png; sourceTree = "<group>"; };
 		FCBE1534190F6700003D7A85 /* back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back.jpg; sourceTree = "<group>"; };
 		FCBE15361910A886003D7A85 /* download.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = download.jpeg; path = ../../download.jpeg; sourceTree = "<group>"; };
@@ -750,8 +746,8 @@
 		FCD7A9E918EB30A6006008D9 /* CalloutPopoverTopRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutPopoverTopRight.png; sourceTree = "<group>"; };
 		FCD7A9EA18EB30A6006008D9 /* CalloutTableBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutTableBackground.png; sourceTree = "<group>"; };
 		FCD7A9EB18EB30A6006008D9 /* Hotels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Hotels.plist; sourceTree = "<group>"; };
-		FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GIKMapView.xib; sourceTree = "<group>"; };
-		FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotelDetailTableView.xib; sourceTree = "<group>"; };
+		FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GIKMapView.xib; path = ../NIBs/GIKMapView.xib; sourceTree = "<group>"; };
+		FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HotelDetailTableView.xib; path = ../NIBs/HotelDetailTableView.xib; sourceTree = "<group>"; };
 		FCD7AA1618EB30FE006008D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FCD7AA1818EB3159006008D9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FCD7AA1A18EB3161006008D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -789,20 +785,12 @@
 				4B8CE10519418749001F8E3B /* DrawingLib */,
 				4B914CA119343D1A00F6E1F4 /* CustomCells */,
 				FCD7A9BF18EB30A6006008D9 /* Resources */,
-				E98753F51462982200E603C6 /* MySplitViewController.h */,
-				E98753F41462982200E603C6 /* MySplitViewController.m */,
-				E987536E1462965000E603C6 /* RootVC.h */,
-				E987536D1462965000E603C6 /* RootVC.m */,
-				E987536C1462965000E603C6 /* DetailedVC.h */,
-				E987536B1462965000E603C6 /* DetailedVC.m */,
-				E98754661462A4D800E603C6 /* FirstViewController.h */,
-				E98754651462A4D800E603C6 /* FirstViewController.m */,
-				1D3623240D0F684500981E51 /* TabAndSplitAppAppDelegate.h */,
-				1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */,
-				FCCE5B57190A3538009ECF16 /* MenuOption.h */,
-				FCCE5B58190A3539009ECF16 /* MenuOption.m */,
-				52E73C811973DADF004A0418 /* Reachability.h */,
-				52E73C821973DADF004A0418 /* Reachability.m */,
+				FC20AE7819D5B71E0060CF76 /* MySplitViewController */,
+				FC20AE7919D5B79C0060CF76 /* RootVCon */,
+				FC20AE7B19D5B7EB0060CF76 /* FirstViewCon */,
+				FC20AE7A19D5B7C80060CF76 /* DetailVCon */,
+				FC20AE7C19D5C93E0060CF76 /* AppDelegate */,
+				FC20AE7D19D5C9BC0060CF76 /* Reachability */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -818,14 +806,13 @@
 		29B97314FDCFA39411CA2CEA /* TabAndSplitApp */ = {
 			isa = PBXGroup;
 			children = (
-				5234B57D196B9AFC00FAB5B2 /* CoreData.xcdatamodeld */,
+				FC20AE8819D5D2A70060CF76 /* CoreDataTables */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				FCD71F731918DF8D00413A3D /* ReportTables */,
 				FCBE153A19136DB4003D7A85 /* ReportViews */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				FC612DC81920898200573DA0 /* signature */,
 				FC181BF318EC57C30084F7C5 /* UISandClasses */,
 			);
@@ -836,23 +823,9 @@
 			isa = PBXGroup;
 			children = (
 				29B97316FDCFA39411CA2CEA /* main.m */,
-			);
-			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E98754681462A4E100E603C6 /* FirstView.xib */,
-				E98753F2146297F900E603C6 /* MySplitViewController.xib */,
-				E98753681462963300E603C6 /* DetailedVC.xib */,
-				E9876B92146295E300F37F99 /* RootVC.xib */,
-				FCB3BD05194A9E7E0001D9DB /* llo1.png */,
-				282CCBFD0DB6C98000C4EA27 /* SecondView.xib */,
-				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */,
 			);
-			name = Resources;
+			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -1332,6 +1305,9 @@
 				4B8F6BEF1963E8E1002E50D4 /* ExpenseReportCell.h */,
 				4B8F6BF01963E8E1002E50D4 /* ExpenseReportCell.m */,
 				4B8F6BF11963E8E1002E50D4 /* ExpenseReportCell.xib */,
+				523CDC881946AFBC008C2C9B /* popupcell.h */,
+				523CDC891946AFBC008C2C9B /* popupcell.m */,
+				523CDC8A1946AFBC008C2C9B /* popupcell.xib */,
 				4BF53257193B6DBC0096E687 /* ImageCell.h */,
 				4BF53258193B6DBC0096E687 /* ImageCell.m */,
 				4BF53259193B6DBC0096E687 /* ImageCell.xib */,
@@ -1413,12 +1389,104 @@
 		FC181BF318EC57C30084F7C5 /* UISandClasses */ = {
 			isa = PBXGroup;
 			children = (
-				94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */,
-				94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */,
+				FC20AE7E19D5CD2F0060CF76 /* DailyInspectionReport */,
+				FC20AE7F19D5CEA10060CF76 /* PopupViewController */,
+				FC20AE8019D5CEC90060CF76 /* SummarySheetVC */,
+				FC20AE8119D5CF000060CF76 /* ExpenseReportVC */,
+				FC20AE8219D5CF1D0060CF76 /* ComplianceAndNonCompliance */,
+				FC20AE8319D5D0D00060CF76 /* TapHere */,
+				FC20AE8419D5D0F00060CF76 /* CMShowImages */,
+				FC20AE8519D5D10A0060CF76 /* SuggestiveTextField */,
+				FC20AE8619D5D12A0060CF76 /* BidSummaryForm */,
+				FC20AE8719D5D1470060CF76 /* QuantitySummaryForm */,
+			);
+			name = UISandClasses;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FC20AE7819D5B71E0060CF76 /* MySplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E98753F2146297F900E603C6 /* MySplitViewController.xib */,
+				E98753F41462982200E603C6 /* MySplitViewController.m */,
+				E98753F51462982200E603C6 /* MySplitViewController.h */,
+			);
+			name = MySplitViewController;
+			sourceTree = "<group>";
+		};
+		FC20AE7919D5B79C0060CF76 /* RootVCon */ = {
+			isa = PBXGroup;
+			children = (
+				E987536E1462965000E603C6 /* RootVC.h */,
+				E9876B92146295E300F37F99 /* RootVC.xib */,
+				E987536D1462965000E603C6 /* RootVC.m */,
+			);
+			name = RootVCon;
+			sourceTree = "<group>";
+		};
+		FC20AE7A19D5B7C80060CF76 /* DetailVCon */ = {
+			isa = PBXGroup;
+			children = (
+				E98754681462A4E100E603C6 /* FirstView.xib */,
+				E987536C1462965000E603C6 /* DetailedVC.h */,
+				E98753681462963300E603C6 /* DetailedVC.xib */,
+				E987536B1462965000E603C6 /* DetailedVC.m */,
+			);
+			name = DetailVCon;
+			sourceTree = "<group>";
+		};
+		FC20AE7B19D5B7EB0060CF76 /* FirstViewCon */ = {
+			isa = PBXGroup;
+			children = (
+				E98754651462A4D800E603C6 /* FirstViewController.m */,
+				E98754661462A4D800E603C6 /* FirstViewController.h */,
+			);
+			name = FirstViewCon;
+			sourceTree = "<group>";
+		};
+		FC20AE7C19D5C93E0060CF76 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623250D0F684500981E51 /* TabAndSplitAppAppDelegate.m */,
+				1D3623240D0F684500981E51 /* TabAndSplitAppAppDelegate.h */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		FC20AE7D19D5C9BC0060CF76 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				FCCE5B57190A3538009ECF16 /* MenuOption.h */,
+				FCCE5B58190A3539009ECF16 /* MenuOption.m */,
+				52E73C821973DADF004A0418 /* Reachability.m */,
+				52E73C811973DADF004A0418 /* Reachability.h */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		FC20AE7E19D5CD2F0060CF76 /* DailyInspectionReport */ = {
+			isa = PBXGroup;
+			children = (
 				94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */,
+				94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */,
+				94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */,
+			);
+			name = DailyInspectionReport;
+			sourceTree = "<group>";
+		};
+		FC20AE7F19D5CEA10060CF76 /* PopupViewController */ = {
+			isa = PBXGroup;
+			children = (
 				4B9124411936D7EF00974943 /* PopUpViewController.h */,
-				4B9124421936D7EF00974943 /* PopUpViewController.m */,
 				4B9124431936D7EF00974943 /* PopUpViewController.xib */,
+				4B9124421936D7EF00974943 /* PopUpViewController.m */,
+			);
+			name = PopupViewController;
+			sourceTree = "<group>";
+		};
+		FC20AE8019D5CEC90060CF76 /* SummarySheetVC */ = {
+			isa = PBXGroup;
+			children = (
 				FC245ACC18EC899E00950C49 /* Summary_3_ViewController.h */,
 				FC245ACD18EC899E00950C49 /* Summary_3_ViewController.m */,
 				FC245ACE18EC899E00950C49 /* Summary_3_ViewController.xib */,
@@ -1428,42 +1496,93 @@
 				FC245AB818EC60FA00950C49 /* SummaryReportViewController.h */,
 				FC245AB918EC60FA00950C49 /* SummaryReportViewController.m */,
 				FC245ABA18EC60FA00950C49 /* SummaryReportViewController.xib */,
+			);
+			name = SummarySheetVC;
+			sourceTree = "<group>";
+		};
+		FC20AE8119D5CF000060CF76 /* ExpenseReportVC */ = {
+			isa = PBXGroup;
+			children = (
 				FC245AB318EC60DB00950C49 /* ExpenceViewController.h */,
-				FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */,
-				FC245AB418EC60DB00950C49 /* ExpenceViewController.m */,
 				FC245AB518EC60DB00950C49 /* ExpenceViewController.xib */,
-				FC181BF418EC58320084F7C5 /* nonComplianceViewController.h */,
-				FC181BF518EC58320084F7C5 /* nonComplianceViewController.m */,
-				FC181BF618EC58320084F7C5 /* nonComplianceViewController.xib */,
-				FC69DADD18EB5BAE0055A535 /* ComplianceViewController.h */,
-				FC69DADE18EB5BAE0055A535 /* ComplianceViewController.m */,
-				FC69DADF18EB5BAE0055A535 /* ComplianceViewController.xib */,
+				FC245AB418EC60DB00950C49 /* ExpenceViewController.m */,
+			);
+			name = ExpenseReportVC;
+			sourceTree = "<group>";
+		};
+		FC20AE8219D5CF1D0060CF76 /* ComplianceAndNonCompliance */ = {
+			isa = PBXGroup;
+			children = (
+				FC20AE8E19D7360E0060CF76 /* ComplianceViewController.h */,
+				FC20AE8F19D7360E0060CF76 /* ComplianceViewController.m */,
+				FC20AE9019D7360E0060CF76 /* ComplianceViewController.xib */,
+				FC20AE8919D6967D0060CF76 /* nonComplianceViewController.h */,
+				FC20AE8A19D6967D0060CF76 /* nonComplianceViewController.m */,
+				FC20AE8B19D6967D0060CF76 /* nonComplianceViewController.xib */,
+			);
+			name = ComplianceAndNonCompliance;
+			sourceTree = "<group>";
+		};
+		FC20AE8319D5D0D00060CF76 /* TapHere */ = {
+			isa = PBXGroup;
+			children = (
 				4B4EB9E0193831C1009917E8 /* TapHereSubViewController.h */,
 				4B4EB9E1193831C1009917E8 /* TapHereSubViewController.m */,
 				4B4EB9E2193831C1009917E8 /* TapHereSubViewController.xib */,
-				4B8C47891940402F0075338B /* CMShowImagesViewController.h */,
+			);
+			name = TapHere;
+			sourceTree = "<group>";
+		};
+		FC20AE8419D5D0F00060CF76 /* CMShowImages */ = {
+			isa = PBXGroup;
+			children = (
 				4B8C478A1940402F0075338B /* CMShowImagesViewController.m */,
 				4B8C478B1940402F0075338B /* CMShowImagesViewController.xib */,
-				523CDC881946AFBC008C2C9B /* popupcell.h */,
-				523CDC891946AFBC008C2C9B /* popupcell.m */,
-				523CDC8A1946AFBC008C2C9B /* popupcell.xib */,
+				4B8C47891940402F0075338B /* CMShowImagesViewController.h */,
+			);
+			name = CMShowImages;
+			sourceTree = "<group>";
+		};
+		FC20AE8519D5D10A0060CF76 /* SuggestiveTextField */ = {
+			isa = PBXGroup;
+			children = (
 				94188A9919A9BA0600F35759 /* SuggestiveTextField.h */,
 				94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */,
+			);
+			name = SuggestiveTextField;
+			sourceTree = "<group>";
+		};
+		FC20AE8619D5D12A0060CF76 /* BidSummaryForm */ = {
+			isa = PBXGroup;
+			children = (
 				94E0026D19A9E3870068D862 /* BidSummaryForm.h */,
 				94E0026E19A9E3870068D862 /* BidSummaryForm.m */,
 				94E0026F19A9E3870068D862 /* BidSummaryForm.xib */,
+			);
+			name = BidSummaryForm;
+			sourceTree = "<group>";
+		};
+		FC20AE8719D5D1470060CF76 /* QuantitySummaryForm */ = {
+			isa = PBXGroup;
+			children = (
 				94E0027719A9F2670068D862 /* quantitySummarySheet.h */,
 				94E0027819A9F2670068D862 /* quantitySummarySheet.m */,
 				94E0027919A9F2670068D862 /* quantitySummarySheet.xib */,
 			);
-			name = UISandClasses;
-			path = Classes;
+			name = QuantitySummaryForm;
+			sourceTree = "<group>";
+		};
+		FC20AE8819D5D2A70060CF76 /* CoreDataTables */ = {
+			isa = PBXGroup;
+			children = (
+				5234B57D196B9AFC00FAB5B2 /* CoreData.xcdatamodeld */,
+			);
+			name = CoreDataTables;
 			sourceTree = "<group>";
 		};
 		FC612DC81920898200573DA0 /* signature */ = {
 			isa = PBXGroup;
 			children = (
-				FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */,
 				FCD71F82191B63AF00413A3D /* SignatureViewController.h */,
 				FCD71F83191B63AF00413A3D /* SignatureViewController.m */,
 				FCD71F84191B63AF00413A3D /* SignatureViewController.xib */,
@@ -1538,6 +1657,8 @@
 				FCD7A9D618EB30A6006008D9 /* HotelAnnotation.m */,
 				FCD7A9D718EB30A6006008D9 /* HotelDetailViewController.h */,
 				FCD7A9D818EB30A6006008D9 /* HotelDetailViewController.m */,
+				FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */,
+				FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1566,6 +1687,9 @@
 		FCD7A9DD18EB30A6006008D9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FC7381821961D3DE00EF516B /* CardinalLogoWeb2.png */,
+				FC7381841961D3EB00EF516B /* Prime-Tech-Logo[1].png */,
+				FCB3BD05194A9E7E0001D9DB /* llo1.png */,
 				52225B7A197917820012E102 /* check_selected@2x.png */,
 				52225B7B197917820012E102 /* check@2x.png */,
 				52225B7C197917820012E102 /* frame_left@2x.png */,
@@ -1624,8 +1748,6 @@
 		FCD7A9EC18EB30A6006008D9 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
-				FCD7A9EE18EB30A6006008D9 /* GIKMapView.xib */,
-				FCD7A9EF18EB30A6006008D9 /* HotelDetailTableView.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -1696,13 +1818,11 @@
 				4B8CE20119418749001F8E3B /* placeholder.png in Resources */,
 				521B8D801952A8D500C206BF /* search-3-xxl.png in Resources */,
 				4B8CE22819418749001F8E3B /* arrow-enter-right-mini@2x.png in Resources */,
-				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				FCBE154E19136F26003D7A85 /* ExpenseReport.xib in Resources */,
 				FCBE155F1913A247003D7A85 /* Dashboard.xib in Resources */,
 				4B8CE24A19418749001F8E3B /* text-enlarge-mini@2x.png in Resources */,
 				FCD71F811919D61B00413A3D /* reportDashboard.xib in Resources */,
 				FCCE5B50190920B2009ECF16 /* Bar.png in Resources */,
-				282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */,
 				4B8CE21F19418749001F8E3B /* brush1.png in Resources */,
 				52225B84197917820012E102 /* frame_middle@2x.png in Resources */,
 				FCD7AA0B18EB30A6006008D9 /* CalloutTableBackground.png in Resources */,
@@ -1741,8 +1861,8 @@
 				4B902F5B1908CBA3008E717E /* tabbar.png in Resources */,
 				4B8CE22719418749001F8E3B /* arrow-enter-right-mini.png in Resources */,
 				E98753F3146297F900E603C6 /* MySplitViewController.xib in Resources */,
-				FC181BF818EC58320084F7C5 /* nonComplianceViewController.xib in Resources */,
 				4B8CE24819418749001F8E3B /* text-capital-mini@2x.png in Resources */,
+				FC20AE8D19D6967D0060CF76 /* nonComplianceViewController.xib in Resources */,
 				4B8CE23A19418749001F8E3B /* layer-mini@2x.png in Resources */,
 				FC245AC618EC856800950C49 /* menu.png in Resources */,
 				FCBE1514190CC8C4003D7A85 /* butt.png in Resources */,
@@ -1793,7 +1913,6 @@
 				4B8CE22619418749001F8E3B /* arrow-enter-left-mini@2x.png in Resources */,
 				4B8CE21E19418749001F8E3B /* transparent-checkerboard.png in Resources */,
 				4B8CE25819418749001F8E3B /* SDSimpleDrawing_iPad.storyboard in Resources */,
-				FC69DAE118EB5BAE0055A535 /* ComplianceViewController.xib in Resources */,
 				FCCE5B3419076AE9009ECF16 /* 11.jpg in Resources */,
 				FCD71F8B191B7AC900413A3D /* closeBtn.png in Resources */,
 				FCAFB08119177DAB0027A362 /* textBack.png in Resources */,
@@ -1805,6 +1924,7 @@
 				521B8D8C1952F44200C206BF /* prl2.png in Resources */,
 				FC245AB718EC60DB00950C49 /* ExpenceViewController.xib in Resources */,
 				FCD7AA0718EB30A6006008D9 /* CalloutPopoverMiddleRight.png in Resources */,
+				FC20AE9219D7360E0060CF76 /* ComplianceViewController.xib in Resources */,
 				4B8CE20319418749001F8E3B /* hud_error@2x.png in Resources */,
 				4B8CE23319418749001F8E3B /* eraser-mini.png in Resources */,
 				FCB3BD06194A9E7E0001D9DB /* llo1.png in Resources */,
@@ -1868,7 +1988,6 @@
 				4B8CE21D19418749001F8E3B /* SDToolSettings.m in Sources */,
 				55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */,
 				98D14A9C199F3CFD0091D5D8 /* DailyInspectionForm.m in Sources */,
-				FC181BF718EC58320084F7C5 /* nonComplianceViewController.m in Sources */,
 				4B8CE25219418749001F8E3B /* SDFontSizeViewController.m in Sources */,
 				4B929FFB1935A86400BDF012 /* ReportDetailsCell.m in Sources */,
 				94A6BA5219D4048B0008547B /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -1927,7 +2046,6 @@
 				FCD71F89191B688B00413A3D /* MyView.m in Sources */,
 				98D14ABD199F67F50091D5D8 /* SummarySheet1.m in Sources */,
 				4B8CE20F19418749001F8E3B /* SDMapAnnotation.m in Sources */,
-				FC69DAE018EB5BAE0055A535 /* ComplianceViewController.m in Sources */,
 				E98753701462965000E603C6 /* RootVC.m in Sources */,
 				4B8CE21019418749001F8E3B /* SDArcTool.m in Sources */,
 				4B8CE20619418749001F8E3B /* MBProgressHUD.m in Sources */,
@@ -1958,6 +2076,7 @@
 				FCD7A9FB18EB30A6006008D9 /* HotelAnnotation.m in Sources */,
 				FCD7A9F418EB30A6006008D9 /* GIKAnnotationView.m in Sources */,
 				4B8CE25119418749001F8E3B /* SDDrawingToolsViewController.m in Sources */,
+				FC20AE9119D7360E0060CF76 /* ComplianceViewController.m in Sources */,
 				E98753F61462982200E603C6 /* MySplitViewController.m in Sources */,
 				5563F52219CE1EBF00A66013 /* DataSyncController.m in Sources */,
 				4B8CE1F219418749001F8E3B /* BitmapCropManipulator.m in Sources */,
@@ -1977,6 +2096,7 @@
 				980D518319A1E55400EBD57D /* ComplianceForm.m in Sources */,
 				4B8CE21519418749001F8E3B /* SDEraserTool.m in Sources */,
 				4B8CE1F619418749001F8E3B /* BGRSLoupeLayer.m in Sources */,
+				FC20AE8C19D6967D0060CF76 /* nonComplianceViewController.m in Sources */,
 				4B8CE1F719418749001F8E3B /* RSBrightnessSlider.m in Sources */,
 				5563F51F19CE1BE000A66013 /* ImageSyncController.m in Sources */,
 				4BF5325F193B6DBC0096E687 /* ImageHeaderCell.m in Sources */,

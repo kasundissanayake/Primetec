@@ -25,7 +25,7 @@
 @synthesize projContractNo,projDescription,projName,projPrintedName,projTitle;
 @synthesize userId;
 @synthesize address,city,state,tel,pm,zip;
-@synthesize saveVal;
+
 @synthesize str1, str2, reImp;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -34,7 +34,7 @@
 @synthesize imageArray;
 @synthesize address_client;
 @synthesize client;
-@synthesize edit1,edit2;
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -52,39 +52,6 @@
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.rootViewController = msc;
     [window makeKeyAndVisible];
-    
-    /*
-    NSError *error;
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSEntityDescription *entitydesc = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:context];
-    NSManagedObject *userData;
-    
-    // Create first object:
-    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
-    [userData setValue:@"Lin" forKey:@"username"];
-    [userData setValue:@"12345" forKey:@"password"];
-    [userData setValue:@"I" forKey:@"user_type"];
-    [context save:&error];
-    
-    // Create second object:
-    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
-    [userData setValue:@"Roy" forKey:@"username"];
-    [userData setValue:@"12345" forKey:@"password"];
-    [userData setValue:@"I" forKey:@"user_type"];
-    
-    [context save:&error];
-    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
-    [userData setValue:@"Art" forKey:@"username"];
-    [userData setValue:@"12345" forKey:@"password"];
-    [userData setValue:@"R" forKey:@"user_type"];
-    [context save:&error];
-    
-    userData = [[NSManagedObject alloc]initWithEntity:entitydesc insertIntoManagedObjectContext:context];
-    [userData setValue:@"Rich" forKey:@"username"];
-    [userData setValue:@"12345" forKey:@"password"];
-    [userData setValue:@"I" forKey:@"user_type"];
-    [context save:&error];
-*/
     
     NSError *error;
     NSManagedObjectContext *context = [self managedObjectContext];

@@ -29,6 +29,7 @@
 @property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
 @property (weak, nonatomic) IBOutlet UIView *newt;
 @property (nonatomic, assign) NSInteger Tag;
+
 @property(nonatomic,retain)NSMutableArray *sketchesArray;
 @property(nonatomic,retain)NSMutableArray *imageArray;
 @property(nonatomic,retain)NSMutableArray *projectsArray;
@@ -48,7 +49,6 @@
 @property (nonatomic, retain) NSString *tel;
 @property (nonatomic, retain) NSString *pm;
 @property (nonatomic, retain) NSString *zip;
-@property (nonatomic, retain) NSString *saveVal;
 @property (nonatomic, retain) NSString *str1;
 @property (nonatomic, retain) NSString *str2;
 @property (nonatomic, retain) NSString *reImp;
@@ -59,13 +59,6 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) NSString *client;
 @property (nonatomic, retain) NSString *address_client;
-
-//edit start
-
-@property (nonatomic, retain) NSString *edit1;
-@property (nonatomic, retain) NSString *edit2;
-
-//edit end
 
 - (NSURL *)applicationDocumentsDirectory;
 

@@ -33,9 +33,7 @@
     NSString *comNoticeNo;
     BOOL isUploadingSignature;
     TabAndSplitAppAppDelegate *appDelegate;
-    
     NSDictionary *sourceDictionary;
-    
     NSString *sm3value1,*value2,*value3,*value4,*value5,*value6,*value7,*value8,*value9,*value10,*value11,*value12,*value13,*value14,*value15,*value16,*value17,*value18,*value19,*value20,*value21,*value22,*value23,*value24,*value25,*value26,*value27,*value28,*value29,*value30,*value31,*value32;
     
     
@@ -192,16 +190,6 @@
         value30=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"eQAmount5"];
         value31=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"dailyTotal"];
         value32=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"total_to_date"];
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
     }
@@ -464,8 +452,7 @@
             
         }
         
-        
-        //
+  
         
         if (mEDescription3.text!=NULL && mEDescription3.text.length!=0 ) {
             
@@ -492,9 +479,7 @@
             field12=mEAmount3.text;
             
         }
-        
-        
-        //
+
         
         if (mEDescription4.text!=NULL && mEDescription4.text.length!=0 ) {
             
@@ -521,9 +506,7 @@
             
         }
         
-        
-        
-        //
+     
         
         
         

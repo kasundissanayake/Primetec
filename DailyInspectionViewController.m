@@ -57,8 +57,11 @@
 @synthesize arrayImages;
 @synthesize imageAddSubView;
 @synthesize imgViewAdd,txvDescription,datePicker;
-@synthesize txtName1,txtName2,txtName3,txtName4,txtName5,txtname6,txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8,txtCompany1,txtCompany2,txtCompany3,txtCompany4,txtName7,txtName8,txtHours,contractor,txtAddress,txtState,txtCity,txtTel,txtCompetent,txtProject,txtTwn,txtEmail,txtWrkDone,txtHeader,zip;
+
+@synthesize txtName1,txtName2,txtName3,txtName4,txtName5,txtname6,txtDescription1,txtDescription2,txtDescription3,txtDescription4,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8,txtCompany1,txtCompany2,txtCompany3,txtCompany4,txtName7,txtName8,txtHours,contractor,txtAddress,txtState,txtCity,txtTel,txtCompetent,txtProject,txtEmail,txtWrkDone,txtHeader,zip;
+
 @synthesize oriCalDays,usedCalDays,ConName,repNo,time,Town,weather,des1,des2,des3,des4,des5,qua1,qua2,qua3,qua4,qua5;
+
 @synthesize textField0,textField1,textField2,textField3,textFiel4;
 @synthesize q_itemNo1;
 @synthesize q_itemNo2;

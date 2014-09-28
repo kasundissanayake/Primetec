@@ -27,10 +27,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtCheckNumber;
 @property(nonatomic,retain)NSString *ExNo;
 
-
-@property (strong, nonatomic) IBOutlet UITextField *txtMil1;
-@property (strong, nonatomic) IBOutlet UITextField *txtRate1;
-@property (strong, nonatomic) IBOutlet UITextField *txtTotal1;
+@property (weak, nonatomic) IBOutlet UITextField *txtMil1;
+@property (weak, nonatomic) IBOutlet UITextField *txtRate1;
+@property (weak, nonatomic) IBOutlet UITextField *txtTotal1;
 
 @property (weak, nonatomic) IBOutlet UILabel *header;
 @property (weak, nonatomic) IBOutlet UITextField *ERdate6;

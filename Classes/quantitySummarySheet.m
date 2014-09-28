@@ -11,6 +11,7 @@
 #import "TabAndSplitAppAppDelegate.h"
 #import "PRIMECMAPPUtils.h"
 #import "PRIMECMController.h"
+
 @interface quantitySummarySheet (){
     UIPopoverController *popoverController;
     BOOL isSubTableView;
@@ -38,9 +39,15 @@
 @end
 
 @implementation quantitySummarySheet
-@synthesize qtyTable,isEdit;
+@synthesize qtyTable;
 @synthesize scrollView;
-@synthesize i_number,item,est_quantity,project,unit,unit_price,date1;
+@synthesize i_number;
+@synthesize item;
+@synthesize est_quantity;
+@synthesize project;
+@synthesize unit;
+@synthesize unit_price;
+@synthesize date1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -107,7 +114,6 @@
     
     
 }
-
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     

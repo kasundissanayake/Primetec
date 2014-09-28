@@ -15,22 +15,15 @@
 
 @interface quantitySummarySheet : UIViewController<MFMailComposeViewControllerDelegate,MBProgressHUDDelegate,UIPrintInteractionControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
-@property BOOL isEdit;
-@property (strong, nonatomic) NSDictionary *selectedDict;
 
+@property (strong, nonatomic) NSDictionary *selectedDict;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *qtyTable;
-
 @property (weak, nonatomic) IBOutlet UITextField *project;
-
 @property (weak, nonatomic) IBOutlet UITextField *i_number;
-
 @property (weak, nonatomic) IBOutlet UITextField *item;
-
 @property (weak, nonatomic) IBOutlet UITextField *est_quantity;
-
 @property (weak, nonatomic) IBOutlet UITextField *unit;
-
 @property (weak, nonatomic) IBOutlet UITextField *unit_price;
 @property (weak, nonatomic) IBOutlet UITextField *date1;
 

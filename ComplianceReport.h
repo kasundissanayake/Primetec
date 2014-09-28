@@ -38,6 +38,5 @@
 @property(nonatomic,retain)IBOutlet UIImageView *imgSignature;
 @property (strong, nonatomic) IBOutlet UITextField *comNoticeNo;
 
-//- (void) populateComplianceForm;
 
 @end

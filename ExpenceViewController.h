@@ -41,7 +41,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *ERtxtCheckNum;
 @property (weak, nonatomic) IBOutlet UITextField *ERdate6;
 
-//@property (weak, nonatomic) IBOutlet UITextField *ERtxtEmpNum;
 @property (weak, nonatomic) IBOutlet UITextField *ERDescription;
 @property (weak, nonatomic) IBOutlet UITextField *ERJobNo;
 @property (weak, nonatomic) IBOutlet UITextField *ERType;

@@ -42,10 +42,6 @@
     TabAndSplitAppAppDelegate *appDelegate;
     NSDictionary *sourceDictionary;
     NSString *smNum;
-    
-    
-    
-    //sample
     NSString *value1,*value2,*value3,*value4,*value5,*value6,*value7,*value8,*value9,*value10,*value11,*value12,*value13,*value14,*value15,*value16,*value17,*value18,*value19,*value20,*value21,*value22,*value23,*value24,*value25;
     
 }
@@ -207,7 +203,7 @@
         
         
         
-        //sample
+      
         value1=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription1"];
         value2=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription2"];
         value3=[[sourceDictionary valueForKey:@"userInfo"] valueForKey:@"mEDescription3"];

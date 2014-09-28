@@ -34,8 +34,7 @@ typedef enum {
 	kNUMBER_OF_SECTIONS
 } TableSections;
 
-@interface RootVC ()
-{
+@interface RootVC (){
     TabAndSplitAppAppDelegate *appDelegate;
     NSMutableArray *projectDetails;
     NSMutableArray *projectDetailsSearch;
@@ -57,7 +56,6 @@ typedef enum {
 @property (weak, nonatomic, readonly) NSArray *directions;
 @property (strong) NSMutableArray *devices;
 @end
-
 @implementation RootVC
 @synthesize detailedNavigationController;
 @synthesize directions, table, Frontimage;
@@ -65,8 +63,7 @@ typedef enum {
 @synthesize searchBar;
 @synthesize hud;
 
--(IBAction)showFirst:(id)sender
-{
+-(IBAction)showFirst:(id)sender{
     appDelegate.Tag=4;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeView" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTableView" object:nil];
@@ -80,8 +77,7 @@ typedef enum {
 	return self;
 }
 
--(id) init
-{
+-(id) init{
     self = [super init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showToolbar) name:@"showToolbar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeDashboard:) name:@"changeDashboard" object:nil];
@@ -109,7 +105,7 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeExpenceForm:) name:@"changeExpenceForm" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSummaryForm:) name:@"changeSummaryForm" object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showComplianceForm) name:@"showComplianceForm" object:nil];
+   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"reload_table_data" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPopupView) name:@"displayPopupView" object:nil];
     
@@ -123,7 +119,6 @@ typedef enum {
 
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     table.contentInset=UIEdgeInsetsMake(0, 0, 250, 0);
     appDelegate=(TabAndSplitAppAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -152,14 +147,10 @@ typedef enum {
     [self.view addSubview:toolbar];
     toolbar.hidden=TRUE;
     defaults=[NSUserDefaults standardUserDefaults];
-    // start brin
     table.hidden = TRUE;
-    //end brin
     appDelegate.Tag=4;
     self.table.backgroundColor = [UIColor clearColor];
     self.table.opaque = NO;
-    
-
     
     [proStatusSeg addTarget:self action:@selector(pickOne:) forControlEvents:UIControlEventValueChanged];
     
@@ -172,8 +163,7 @@ typedef enum {
 }
 
 
-- (void)didMoveToParentViewController:(UIViewController *)parent
-{
+- (void)didMoveToParentViewController:(UIViewController *)parent{
     BOOL found = FALSE;
     for (UIViewController* viewController in self.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[SearchProject class]] ||
@@ -191,21 +181,15 @@ typedef enum {
     }
 }
 
-
-
-//start brin
 -(void)hidebutton
 {
     [toolbarItems removeObject: btnEdit];
     toolbar.items = toolbarItems;
-    
 }
 
 -(void)btnEdit{    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"displayPopupView" object:nil];
 }
-
-
 
 -(void)btnDelete{
     [self.table setEditing:NO animated:YES];
@@ -214,22 +198,15 @@ typedef enum {
     toolbar.items = toolbarItems;
 }
 
-
-
-
--(void)hideToolbar
-{
+-(void)hideToolbar{
     toolbar.hidden=TRUE;
 }
 
--(void)showToolbar
-{
+-(void)showToolbar{
     toolbar.hidden=FALSE;
 }
 
-
--(void) reloadTableData
-{
+-(void) reloadTableData{
     appDelegate.Tag = 4;
     [self populateProjectList];
     
@@ -238,35 +215,26 @@ typedef enum {
     });
 }
 
--(void) populateProjectList
-{
+-(void) populateProjectList{
     NSError *error = nil;
-    
     NSManagedObjectContext *context = [PRIMECMAPPUtils getManagedObjectContext];
     NSFetchRequest *assign_project_fetchRequest = [[NSFetchRequest alloc] init];
     NSFetchRequest *project_fetchRequest = [[NSFetchRequest alloc] init];
-    
-    
     NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Projects" inManagedObjectContext:context];
     NSEntityDescription *assign_project_Entity = [NSEntityDescription entityForName:@"Assign_project" inManagedObjectContext:context];
-    
     NSPredicate *user_predicate = [NSPredicate predicateWithFormat:@"ANY username == %@", appDelegate.username];
     [assign_project_fetchRequest setPredicate:user_predicate];
     [assign_project_fetchRequest setEntity:assign_project_Entity];
     NSArray *assign_project_Objects = [context executeFetchRequest:assign_project_fetchRequest error:&error];
-    
     NSMutableArray * projectIDs = [NSMutableArray array];
-    
     id assign_project_Instance;
     for (assign_project_Instance in assign_project_Objects){
         [projectIDs addObject:[assign_project_Instance valueForKey:@"projectid"]];
     }
-    
     [project_fetchRequest setEntity:projectEntity];
     NSPredicate *project_predicate = [NSPredicate predicateWithFormat:@"ANY projecct_id in %@ or project_manager == %@", projectIDs, appDelegate.username];
     [project_fetchRequest setPredicate:project_predicate];
     NSArray *projectObjects = [context executeFetchRequest:project_fetchRequest error:&error];
-    
     [projectDetails removeAllObjects];
     [projectDetailsFiltered removeAllObjects];
     [projectDetailsSearch removeAllObjects];
@@ -300,12 +268,10 @@ typedef enum {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     NSString *text = [segmentedControl titleForSegmentAtIndex: [segmentedControl selectedSegmentIndex]];
     NSString *status=@"";
-    if([text isEqualToString:@"Current"])
-    {
+    if([text isEqualToString:@"Current"]){
         status=@"0";
     }
-    else
-    {
+    else{
         status=@"1";
     }
     
@@ -315,8 +281,7 @@ typedef enum {
     [projectDetails removeAllObjects];
     [projectDetails addObjectsFromArray:filteredProjects];
     
-    if([text isEqualToString:@""]|| text ==NULL || [segmentedControl selectedSegmentIndex]==0)
-    {
+    if([text isEqualToString:@""]|| text ==NULL || [segmentedControl selectedSegmentIndex]==0){
         [projectDetails removeAllObjects];
         [projectDetails addObjectsFromArray:projectDetailsSearch];
         
@@ -331,18 +296,14 @@ typedef enum {
         [projectDetails removeAllObjects];
         [projectDetails addObjectsFromArray:filteredProjects];
     }
-    else if([searchBar.text isEqualToString:@""]|| searchBar.text ==NULL )
-    {
+    else if([searchBar.text isEqualToString:@""]|| searchBar.text ==NULL ){
         [projectDetails removeAllObjects];
         [projectDetails addObjectsFromArray:projectDetailsFiltered];
         
     }
     
-    
-    for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
             [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -355,28 +316,20 @@ typedef enum {
     [self.table reloadData];
 }
 
--(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
-{
+-(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text{
     appDelegate.Tag=4;
-    
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"(p_name contains[c] %@ OR projecct_id contains[c] %@ OR address contains[c] %@)",
                          text,text,text];
     filteredProjects = [projectDetails filteredArrayUsingPredicate:pred];
-    
     [projectDetails removeAllObjects];
     [projectDetails addObjectsFromArray:filteredProjects];
-    
-    if([text isEqualToString:@""]|| text ==NULL )
-    {
+    if([text isEqualToString:@""]|| text ==NULL ){
         [projectDetails removeAllObjects];
         [projectDetails addObjectsFromArray:projectDetailsFiltered];
         
     }
-    
-    for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
             [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -389,8 +342,7 @@ typedef enum {
 }
 
 
--(BOOL)shouldAutorotate
-{
+-(BOOL)shouldAutorotate{
     if (UIInterfaceOrientationIsLandscape( [[UIDevice currentDevice] orientation])) {
         return  YES;
     }
@@ -400,8 +352,7 @@ typedef enum {
 
 
 // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return YES;
 }
 
@@ -445,8 +396,7 @@ typedef enum {
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIdentifier = @"ProjectDetailsCell";
     ProjectDetailsCell *cell =(ProjectDetailsCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
@@ -455,8 +405,7 @@ typedef enum {
         cell=[nib objectAtIndex:0];
     }
     
-    if(appDelegate.Tag==1)
-    {
+    if(appDelegate.Tag==1){
         if (indexPath.section == 0) {
             
             NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet",@"Bid Summary Sheet",@"Quantity Summary Sheet" ,@"",@"",@""];
@@ -468,8 +417,7 @@ typedef enum {
             self.searchBar.hidden=true;
         }
     }
-    else if (appDelegate.Tag==4)
-    {
+    else if (appDelegate.Tag==4){
         if (indexPath.section == 0) {
             if ([projectDetails count] > indexPath.row) {
                 cell.lblProjectName.text = [[projectDetails objectAtIndex:indexPath.row ]valueForKey:@"p_name"];
@@ -479,12 +427,12 @@ typedef enum {
             }
         }
     }
-    return cell;
+    
+       return cell;
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == [projectDetails count] -1){
         return 100;
@@ -492,24 +440,21 @@ typedef enum {
     return 100;
 }
 
--(void)changeView
-{
+-(void)changeView{
     FirstViewController*fdvc=[[FirstViewController alloc] init];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
     fdvc.title=[NSString stringWithFormat:@"Map"];
 }
 
 
--(void)dashboard
-{
+-(void)dashboard{
     ComplianceReport*comR=[[ComplianceReport alloc] init];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:comR]];
     comR.title=[NSString stringWithFormat:@"Map"];
 }
 
 
--(void)changeTableView
-{
+-(void)changeTableView{
     
     for (NSInteger j = 0; j < [table numberOfSections]; ++j)
     {
@@ -571,21 +516,13 @@ typedef enum {
     }
     
     //===============================================================
-    
-    
-    
-    
-    
 }
 
 
--(void)changeDashboardTable
-{
+-(void)changeDashboardTable{
     
-    for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
             [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -601,8 +538,7 @@ typedef enum {
 }
 
 
--(void)popchangeView
-{
+-(void)popchangeView{
     ComplianceViewController *cmpV=[[ComplianceViewController alloc] init];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:cmpV]];
     cmpV.title=[NSString stringWithFormat:@"Compliance View"];
@@ -611,13 +547,10 @@ typedef enum {
 }
 
 
--(void)popchangeTableView
-{
+-(void)popchangeTableView{
     appDelegate.Tag=1;
-    for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
             [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -634,11 +567,9 @@ typedef enum {
 }
 
 
--(void)logoutView
-{
+-(void)logoutView{
     DetailedVC*dvc=[[DetailedVC alloc] init];
     [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:dvc]];
-    
     UIBarButtonItem *Button = [[UIBarButtonItem alloc]
                                initWithTitle:NSLocalizedString(@"", @"")
                                style:UIBarButtonItemStyleDone
@@ -650,13 +581,10 @@ typedef enum {
     
 }
 
--(void)logouttableView
-{
+-(void)logouttableView{
     appDelegate.Tag=2;
-    for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
             [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -682,8 +610,7 @@ typedef enum {
 }
 
 
-- (BOOL)connected
-{
+- (BOOL)connected{
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
@@ -692,12 +619,9 @@ typedef enum {
 
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    for (NSInteger j = 0; j < [tableView numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [tableView numberOfRowsInSection:j]; ++i)
-        {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    for (NSInteger j = 0; j < [tableView numberOfSections]; ++j){
+        for (NSInteger i = 0; i < [tableView numberOfRowsInSection:j]; ++i){
             [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
             ProjectDetailsCell *cell=(ProjectDetailsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             cell.lblCity.textColor=[UIColor blackColor];
@@ -718,76 +642,61 @@ typedef enum {
     selectedCell.lblProjectName.textColor=[UIColor whiteColor];
     selectedCell.lblProjectNo.textColor=[UIColor whiteColor];
     
-    if(appDelegate.Tag==1)
-    {
+    if(appDelegate.Tag==1){
         proStatusSeg.hidden=true;
-        if (indexPath.section == 0 && indexPath.row == 0)
-        {
+        if (indexPath.section == 0 && indexPath.row == 0){
             ComplianceViewController *com= [[ComplianceViewController alloc]initWithNibName:@"ComplianceViewController" bundle:nil];
             com.title=[NSString stringWithFormat:@"Compliance Form"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
         }
         
-        if (indexPath.section == 0 && indexPath.row == 1)
-        {
+        if (indexPath.section == 0 && indexPath.row == 1){
             nonComplianceViewController *noncom= [[nonComplianceViewController alloc]initWithNibName:@"nonComplianceViewController" bundle:nil];
             noncom.title=[NSString stringWithFormat:@"Non-Compliance Form"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:noncom]];
         }
         
         
-        if (indexPath.section == 0 && indexPath.row == 2)
-        {
+        if (indexPath.section == 0 && indexPath.row == 2){
             DailyInspectionViewController *daily=[[DailyInspectionViewController alloc]init];
             daily.title=[NSString stringWithFormat:@"Daily Inspection Form"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:daily]];
         }
         
-        if (indexPath.section == 0 && indexPath.row == 3)
-        {
+        if (indexPath.section == 0 && indexPath.row == 3){
             ExpenceViewController *expence=[[ExpenceViewController alloc]init];
             expence.title=[NSString stringWithFormat:@"Expense Report"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:expence]];
         }
         
-        if (indexPath.section == 0 && indexPath.row == 4)
-        {
+        if (indexPath.section == 0 && indexPath.row == 4){
             SummaryReportViewController *summary=[[SummaryReportViewController alloc]init];
             summary.title=[NSString stringWithFormat:@"Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:summary]];
         }
         
-        if (indexPath.section == 0 && indexPath.row == 5)
-        {
+        if (indexPath.section == 0 && indexPath.row == 5){
             
             BidSummaryForm *bidsummary=[[BidSummaryForm alloc]init];
             bidsummary.title=[NSString stringWithFormat:@"Bid Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:bidsummary]];
         }
         
-        
-        
-        if (indexPath.section == 0 && indexPath.row == 6)
-        {
+        if (indexPath.section == 0 && indexPath.row == 6){
             
             quantitySummarySheet *qtysummary=[[quantitySummarySheet alloc]init];
             qtysummary.title=[NSString stringWithFormat:@"Quantity Summary Sheet"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:qtysummary]];
         }
         
-        
-        
-        if (indexPath.section == 0 && indexPath.row == 9)
-        {
+        if (indexPath.section == 0 && indexPath.row == 9){
             appDelegate.Tag=2;
             DetailedVC *dvc=[[DetailedVC alloc]init];
             dvc.title=[NSString stringWithFormat:@"Login"];
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:dvc]];
             
-            for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-            {
-                for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-                {
+            for (NSInteger j = 0; j < [table numberOfSections]; ++j){
+                for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i){
                     [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].backgroundColor=[UIColor clearColor];
                     ProjectDetailsCell *cell=(ProjectDetailsCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
                     cell.lblCity.textColor=[UIColor blackColor];
@@ -822,29 +731,24 @@ typedef enum {
             
         }
         
-        else if (appDelegate.Tag==4)
-        {
+        else if (appDelegate.Tag==4){
             FirstViewController* fdvc=[[FirstViewController alloc] init];
             fdvc.title=[NSString stringWithFormat:@"Map View"];
             NSLog(@"RootVC, in Tag == 1 / 4");
             
             [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:fdvc]];
         }
-        else if (appDelegate.Tag==5)
-        {
-            if (indexPath.section == 0 && indexPath.row == 0)
-            {
+        else if (appDelegate.Tag==5){
+            if (indexPath.section == 0 && indexPath.row == 0){
                 ComplianceReport*comR=[[ComplianceReport alloc] init];
                 [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:comR]];
                 comR.title=[NSString stringWithFormat:@"Dashboard"];
             }
         }
     }
-    else if(appDelegate.Tag==4)
-    {
+    else if(appDelegate.Tag==4){
         NSMutableDictionary *selectedValueDic = [[NSMutableDictionary alloc] init];
         selectedValueDic=[NSMutableDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%i", indexPath.row],@"mapId", nil];
-        
         appDelegate.projId=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"projecct_id"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerAReloadData" object:nil userInfo:selectedValueDic];
         appDelegate.projDescription=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"p_description"];
@@ -856,18 +760,8 @@ typedef enum {
         appDelegate.tel=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"phone"];
         appDelegate.pm=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"project_manager"];
         appDelegate.zip=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"zip"];
-        
-        //start brin
-        
         appDelegate.address_client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"address"];
         appDelegate.client=[[projectDetails objectAtIndex:indexPath.row]valueForKey:@"client_name"];
-        
-        
-        
-        
-        
-        //end brin
-        
         
         
         NSLog(@"RootVC, in TAg == 4 ");
@@ -890,8 +784,7 @@ typedef enum {
 }
 
 
-- (void)changeCompliance:(NSNotification *)notification
-{
+- (void)changeCompliance:(NSNotification *)notification{
     [self showInfoAlert];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1111,21 +1004,6 @@ typedef enum {
         NSLog(@"In RootVC, showSProject, not found");
     }
     NSLog(@"In RootVC, showSProject");
-}
-
-
--(IBAction)showSCompliance:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showCompliance" object:nil];
-}
-
-
--(void)showCompliance
-{
-    ComplianceViewController *com=[[ComplianceViewController alloc]init];
-    com.title=[NSString stringWithFormat:@"Compliance View"];
-    [self.detailedNavigationController setViewControllers:[NSArray arrayWithObject:com]];
-    
 }
 
 -(void)displayPopupView

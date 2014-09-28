@@ -16,14 +16,10 @@
      UIPrintInteractionController *printController;
 }
 @property (strong, nonatomic) IBOutlet UITextView *lblProjDec;
-
 @property(nonatomic,strong)IBOutlet UITableView *tblView;
 @property(nonatomic,strong)IBOutlet UIView *headerView;
-
-
 @property(nonatomic,retain)NSString *CNo;
 @property (weak, nonatomic) IBOutlet UITextField *txtContactNo;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 @property (weak, nonatomic) IBOutlet UITextField *txtProject;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateIssued;
@@ -32,15 +28,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtDateContractorStarted;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateOfRawReport;
 @property (weak, nonatomic) IBOutlet UITextField *txtDateContractCompleted;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (weak, nonatomic) IBOutlet UIImageView *imgSignature;
-
 @property (strong, nonatomic) IBOutlet UITextView *lblContractorRes;
-
 @property (strong, nonatomic) IBOutlet UITextField *nonComNotNo;
-
 @property (strong, nonatomic) IBOutlet UITextField *dateCRC;
 
 -(void)populateNonComplianceForm;

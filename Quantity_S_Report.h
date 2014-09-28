@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextView *item;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
-
 @property (weak, nonatomic) IBOutlet UITextField *date;
 
 - (id)initWithData:(NSDictionary *)sourceDictionary;

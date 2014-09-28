@@ -66,7 +66,7 @@
 @end
 
 @implementation Summary_3_ViewController
-@synthesize smSheetNumber,isEdit;
+@synthesize smSheetNumber;
 @synthesize contractorRepresentative;
 @synthesize dailyTotal;
 @synthesize date1;

@@ -1,8 +1,8 @@
 //
 //  nonComplianceViewController.h
-//  TabAndSplitApp
+//  PRIMECMAPP
 //
-//  Created by Lingeswaran Kandasamy on 4/2/14.
+//  Created by Lingeswaran Kandasamy on 9/27/14.
 //
 //
 
@@ -11,6 +11,13 @@
 
 
 @interface nonComplianceViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,MBProgressHUDDelegate>
+
+@property(nonatomic,assign)BOOL isFromSketches;
+@property(nonatomic,assign)BOOL isFromReport;
+@property(nonatomic,strong)NSMutableArray *arrayImages;
+@property(nonatomic,strong)UIImagePickerController *imagePicker;
+
+- (id)initWithData:(NSDictionary *)sourceDictionary1;
 
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextView *projectDesc;
@@ -25,22 +32,15 @@
 @property(nonatomic,strong)IBOutlet UIImageView *imgSignature;
 @property(nonatomic,strong)IBOutlet UITextField *nonCOtextTitle;
 @property(nonatomic,strong)IBOutlet UITextField *nonCOtextProject;
-@property(nonatomic,strong)UIImagePickerController *imagePicker;
-@property(nonatomic,assign)BOOL isFromSketches;
-@property(nonatomic,assign)BOOL isFromReport;
-@property(nonatomic,strong)NSMutableArray *arrayImages;
 @property(nonatomic,strong)IBOutlet UITextField *txtTitle;
 @property(nonatomic,strong)IBOutlet UIView *imageAddSubView;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAdd;
 @property(nonatomic,strong)IBOutlet UITextView *txvDescription;
 @property (weak, nonatomic) IBOutlet UITextField *txtContactNo;
-@property (weak, nonatomic) IBOutlet UITextField *txtNonCompNoticeNo;
 @property (weak, nonatomic) IBOutlet UITextField *txtTo;
 @property (weak, nonatomic) IBOutlet UITextField *txtUserId;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrintedName;
 @property (weak, nonatomic) IBOutlet UITextField *EditNonNoticeNo;
-
-- (id)initWithData:(NSDictionary *)sourceDictionary1;
 
 
 @end
