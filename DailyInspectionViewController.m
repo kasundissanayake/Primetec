@@ -613,7 +613,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
+    if ([tableData count] > indexPath.row){
+        cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 
