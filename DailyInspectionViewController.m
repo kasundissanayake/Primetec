@@ -325,6 +325,21 @@
 }
 
 
+
+
+
+
+
+- (IBAction)CancelImage:(id)sender {
+  
+    [self removeAddImageView];
+ 
+}
+
+
+
+
+
 -(IBAction)saveImage:(id)sender
 {
     NSString *imgName=[NSString stringWithFormat:@"daily_inspection_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
@@ -613,7 +628,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
+   // cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
+    if ([tableData count] > indexPath.row){
+               cell.textLabel.text =[tableData objectAtIndex:indexPath.row];
+          }
     return cell;
 }
 

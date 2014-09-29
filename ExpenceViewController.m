@@ -620,6 +620,14 @@
 }
 
 
+- (IBAction)CancelImage:(id)sender {
+    
+    [self removeAddImageView];
+    
+}
+
+
+
 -(IBAction)saveImage:(id)sender
 {
     //Radha

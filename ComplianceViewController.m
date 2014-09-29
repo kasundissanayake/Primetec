@@ -724,6 +724,18 @@ UILabel *cno;
     [fileManager createFileAtPath:fullPath contents:imagData attributes:nil];
 }
 
+
+
+
+- (IBAction)CancelImage:(id)sender {
+    
+    [self removeAddImageView];
+    
+}
+
+
+
+
 -(IBAction)saveImage:(id)sender{
     NSString *imgName=[NSString stringWithFormat:@"compliance_%@_%@_%d",appDelegate.projId, appDelegate.username, arc4random()%10000];
     if(txvDescription.text.length==0)
