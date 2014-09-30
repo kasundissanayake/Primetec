@@ -24,6 +24,11 @@
 @property(nonatomic,assign)BOOL isFromReport;
 @property(nonatomic,strong)NSMutableArray *arrayImages;
 
+
+
+@property (weak, nonatomic) IBOutlet UILabel *lblComNotNum;
+
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)IBOutlet UITextField *txtDateIssued;
 @property(nonatomic,strong)IBOutlet UITextField *txtDateContractorStarted;

@@ -379,7 +379,7 @@ typedef enum {
 {
     if(appDelegate.Tag==1)
     {
-        return 8;
+        return 7;
         self.proStatusSeg.hidden=true;
     }
     else if (appDelegate.Tag==4)
@@ -408,7 +408,7 @@ typedef enum {
     if(appDelegate.Tag==1){
         if (indexPath.section == 0) {
             
-            NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet",@"Bid Summary Sheet",@"Quantity Summary Sheet" ,@"",@"",@""];
+            NSArray *titles = @[@"Compliance Form", @"Non-Compliance Form", @"Daily Inspection Form", @"Expense Report", @"Summary Sheet",@"Bid Summary Sheet",@"Quantity Summary Sheet",@""];
             cell.lblProjectName.text = titles[indexPath.row];
             cell.lblProjectNo.text =@"";
             cell.lblProjectAddress.text=@"";

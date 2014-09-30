@@ -659,6 +659,17 @@
 }
 
 
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+
 -(IBAction)selectType:(id)sender
 {
     tableData = [NSArray arrayWithObjects:@"",@"Dashboard", @"Help",nil];
@@ -677,7 +688,15 @@
 }
 
 
+
+
+
 -(IBAction)saveDailyInspection:(id)sender{
+    
+    
+    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    
     uploading = NO;
     uploadingsketch=NO;
     if(txtHours.text==NULL || txtHours.text.length==0 || contractor.text==NULL || contractor.text.length==0 ||txtAddress.text==NULL || txtAddress.text.length==0 ||txtCity.text==NULL || txtCity.text.length==0 || txtState.text==NULL || txtState.text.length==0 ||txtTel.text==NULL|| txtTel.text.length==0||txtDateIN.text==NULL|| txtDateIN.text.length==0 ||txtCompetent.text==NULL || txtCompetent.text.length==0 ||txtProject.text==NULL || txtProject.text.length==0 ||txtWrkDone.text==NULL || txtWrkDone.text.length==0 || imgSignatureDaily.image==NULL || repNo.text==NULL || repNo.text.length==0)
@@ -690,6 +709,24 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+    
+    
+    else if ([emailTest evaluateWithObject:txtEmail.text] == NO){
+    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                        message:@"Email not in proper format"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    
+    
+    
+    
+    }
+    
+
+
     else
     {
         
@@ -942,6 +979,14 @@
     qua5.text=@"";
     oriCalDays.text=@"";
     usedCalDays.text=@"";
+    
+    q_itemNo1.text=@"";
+    q_itemNo2.text=@"";
+    q_itemNo3.text=@"";
+    q_itemNo4.text=@"";
+    q_itemNo5.text=@"";
+
+   
 }
 
 
@@ -1162,7 +1207,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField==txtHours )
+    if(textField==txtHours || textField==qua1 || textField==qua2 || textField==qua3 || textField==qua4 || textField==qua5 || textField==oriCalDays || textField==usedCalDays)
     {
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
         for (int i = 0; i < [string length]; i++)

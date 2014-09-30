@@ -249,6 +249,14 @@
             NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
         }else{
             NSLog(@"Deleted: %@", CNo);
+            
+            //[self.navigationController popViewControllerAnimated:TRUE];
+           // [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
+            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+
+
+
         }
     }
     

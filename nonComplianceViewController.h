@@ -19,6 +19,12 @@
 
 - (id)initWithData:(NSDictionary *)sourceDictionary1;
 
+
+
+
+@property (weak, nonatomic) IBOutlet UILabel *lblCom;
+
+
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextView *projectDesc;
 @property (strong, nonatomic) IBOutlet UITextView *contractorResp;

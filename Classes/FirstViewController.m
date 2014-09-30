@@ -80,6 +80,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+
+    
     defaults=[NSUserDefaults standardUserDefaults];
     addPinsTrue = @"0";
     isDisplayBottomBar=NO;
@@ -124,7 +127,7 @@
 	startupRegion.center = CLLocationCoordinate2DMake(41.650639, -72.665895);
 	startupRegion.span = MKCoordinateSpanMake(0.003515, 0.007129);
 	[self.mapView setRegion:startupRegion animated:YES];
-	[self.mapView setShowsUserLocation:YES];
+	//[self.mapView setShowsUserLocation:YES];
     
 	self.detailDataSource = self;
 	HotelDetailViewController *controller = [[HotelDetailViewController alloc] initWithNibName:@"HotelDetailTableView" bundle:nil];
@@ -474,7 +477,11 @@
         }
         else if (indexPath.section == 0 && indexPath.row == 2)
         {
-            self.mapView.mapType=MKMapTypeHybrid;
+            //self.mapView.mapType=MKMapTypeHybrid;
+           // [self.mapView showsUserLocation];
+            mapView.showsUserLocation = YES;
+
+
         }
         else if (indexPath.section == 1 && indexPath.row == 0)
         {
@@ -754,6 +761,7 @@
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
+    
 }
 
 

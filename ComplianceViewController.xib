@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <objects>
@@ -13,6 +14,7 @@
                 <outlet property="correctAction" destination="Mmg-SB-3im" id="DWd-nk-7d6"/>
                 <outlet property="imageAddSubView" destination="muX-ZL-BUN" id="E7z-i8-5b5"/>
                 <outlet property="imgViewAdd" destination="g6u-yT-pow" id="s7T-0t-OxM"/>
+                <outlet property="lblComNotNum" destination="ZbZ-nz-vZW" id="VWh-Ce-6LP"/>
                 <outlet property="scrollView" destination="TuL-ys-3zb" id="Gg8-cl-5D5"/>
                 <outlet property="txtContactNo" destination="597-Hd-hCL" id="XOa-Ns-U2J"/>
                 <outlet property="txtDate" destination="7UN-No-TRH" id="kcJ-tx-nok"/>
@@ -163,7 +165,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="597-Hd-hCL">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="597-Hd-hCL">
                             <rect key="frame" x="38" y="188" width="311" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -199,6 +201,9 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="6FO-fE-uSf"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="7eA-9N-Fgn">
                             <rect key="frame" x="38" y="735" width="618" height="42"/>
@@ -218,18 +223,27 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="TrF-M8-Hq9"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="Tqd-Vw-1fm">
                             <rect key="frame" x="38" y="880" width="618" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="JYn-ej-NxJ"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="E1J-qF-dgj">
                             <rect key="frame" x="38" y="948" width="389" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="ymi-yG-1bG"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="f2r-i0-f1G">
                             <rect key="frame" x="426" y="948" width="230" height="42"/>
@@ -305,11 +319,11 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="keg-hw-uCo">
-                            <rect key="frame" x="38" y="1256" width="448" height="124"/>
+                            <rect key="frame" x="38" y="1256" width="400" height="124"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XPE-RP-LnP">
-                                    <rect key="frame" x="-5" y="0.0" width="453" height="129"/>
+                                    <rect key="frame" x="-5" y="0.0" width="405" height="129"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </imageView>

@@ -9,7 +9,7 @@
 #import "GIKCalloutContentView.h"
 
 #define INSET_TOP					4.0f
-#define INSET_LEFT                  4.0f
+#define INSET_LEFT                  0.0f
 
 #define DEFAULT_CONTENT_HEIGHT		35.0f
 #define ACCESSORY_BUFFER			4.0f

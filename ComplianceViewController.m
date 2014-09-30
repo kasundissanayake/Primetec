@@ -69,6 +69,7 @@ UILabel *cno;
 @synthesize datePicker;
 @synthesize EditComNumber;
 @synthesize title,txtContactNo,txtPrintedName,txtProDesc,txtTo,txtUserId;
+@synthesize lblComNotNum;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,6 +87,10 @@ UILabel *cno;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    EditComNumber.hidden=TRUE;
+    lblComNotNum.hidden=TRUE;
+    
     comNoticeNo=@"";
     count=0;
     count1=0;
@@ -309,12 +314,7 @@ UILabel *cno;
                            sketchImg:[sketchesNameArray componentsJoinedByString:@","]
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]];
         
-        txtContactNo.text = @"";
-        txtProDesc.text=@"";
-        COtextTitle.text=@"";
-        COtextProject.text=@"";
-        COtextTitle.text=@"";
-        COtextProject.text=@"";
+       
         txtDateIssued.text=@"";
         conRes.text=@"";
         txtTo.text=@"";
@@ -323,8 +323,7 @@ UILabel *cno;
         txtDateofRawReprote.text=@"";
         correctAction.text=@"";
         txtSignature.image=NULL;
-        txtPrintedName.text=@"";
-        txtDate.text=@"";
+
         
         [hud setHidden:YES];
         BOOL imageSaveState;

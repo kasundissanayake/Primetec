@@ -23,7 +23,7 @@
 #define SIDE_ARROW_CENTER				18.0f
 #define SIDE_ARROW_ANNOTATION_OFFSET	9.0f
 
-#define SIDE_WIDTH						15.0f
+#define SIDE_WIDTH						0.0f
 #define SIDE_INSET						5.0f
 #define CONTENT_HORIZONTAL_INSET		13.0f
 #define CONTENT_VERTICAL_INSET			4.0f

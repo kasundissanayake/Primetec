@@ -310,7 +310,9 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 
 -(IBAction)fnDelete:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+[[NSNotificationCenter defaultCenter] postNotificationName:@"changeDashboard" object:nil];
+    
+
     
     DailyInspectionForm *assp;
     NSError *retrieveError;
@@ -335,9 +337,33 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
             NSLog(@"Whoops, couldn't delete: %@", [retrieveError localizedDescription]);
         } else {
             NSLog(@"Deleted: %@", CNo);
+            
+
+            [self.navigationController popViewControllerAnimated:TRUE];
+
+            
+
+            
         }
+        
+        
+        
+    
     }
     
+    
+
+    
+}
+
+
+-(void) dealloc
+{
+ 
+        self.navigationController.delegate = nil;
+    
+
+
 }
 
 -(void)saveImageTaken:(UIImage *)imageNew imgName:(NSString *)imgName
@@ -427,7 +453,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
 
 
 
-/*
+
 -(void)createPDF
 {
     [self.tblView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
@@ -508,10 +534,10 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
         
     }
     [self.tblView setContentOffset:CGPointMake(self.tblView.contentOffset.x, -self.tblView.contentInset.top) animated:YES];
-}*/
+}
 
 
-
+/*
 -(void)createPDF
 {
     
@@ -603,7 +629,7 @@ txtWorkDoneDepart1,txtWorkDoneDepart2,txtWorkDoneDepart3;
     
     
     
-}
+} */
 
 
 - (CGContextRef) createPDFContext:(CGRect)inMediaBox path:(CFStringRef) path

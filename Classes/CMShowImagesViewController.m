@@ -120,11 +120,11 @@
     return current_img;
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
+    pageControlBeingUsed = YES;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
+    pageControlBeingUsed = YES;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     if (!pageControlBeingUsed) {
