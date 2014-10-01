@@ -228,7 +228,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="jcW-YO-JXK">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="jcW-YO-JXK">
                             <rect key="frame" x="381" y="498" width="260" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -290,7 +290,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="QTY" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="lxg-jv-oG9">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="QTY" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="lxg-jv-oG9">
                             <rect key="frame" x="543" y="1107" width="98" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.22930918350000001" green="0.54763540860000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -431,16 +431,7 @@
                                 <outlet property="delegate" destination="-1" id="frY-pA-XO9"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Official Visitors to Job" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="gge-Vt-Y0E">
-                            <rect key="frame" x="35" y="1369" width="608" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="qKT-pp-jYf">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="qKT-pp-jYf">
                             <rect key="frame" x="35" y="1409" width="445" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -448,7 +439,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="9pc-GS-KMW">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="9pc-GS-KMW">
                             <rect key="frame" x="479" y="1409" width="164" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -488,7 +479,7 @@
                                 <outlet property="delegate" destination="-1" id="RCb-HL-WZT"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Workn Done By Others" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="N1e-h9-KEj">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Workn Done By Others" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="N1e-h9-KEj">
                             <rect key="frame" x="35" y="2003" width="608" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -496,7 +487,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Department or Company" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="A1y-WQ-YEd">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Department or Company" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="A1y-WQ-YEd">
                             <rect key="frame" x="35" y="2041" width="291" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -504,7 +495,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description of Work" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="uWJ-Xc-B9t">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description of Work" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="uWJ-Xc-B9t">
                             <rect key="frame" x="324" y="2041" width="319" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -560,7 +551,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Inspection Force" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="KeT-2h-Agv">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Inspection Force" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="KeT-2h-Agv">
                             <rect key="frame" x="35" y="1641" width="608" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -568,7 +559,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="dvK-Zf-u6t">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="dvK-Zf-u6t">
                             <rect key="frame" x="35" y="1681" width="445" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -576,7 +567,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="gs4-Kg-b1F">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="gs4-Kg-b1F">
                             <rect key="frame" x="479" y="1681" width="164" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -680,7 +671,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Contractors" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="SzN-ug-mBe">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Contractors" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="SzN-ug-mBe">
                             <rect key="frame" x="35" y="2281" width="606" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -816,7 +807,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item No" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="Qra-RY-Q0B">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Item No" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="Qra-RY-Q0B">
                             <rect key="frame" x="33" y="1107" width="97" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.22930918350000001" green="0.54763540860000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -824,10 +815,19 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description " borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="4rS-eS-nWT">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description " borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="4rS-eS-nWT">
                             <rect key="frame" x="130" y="1107" width="413" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.22930918350000001" green="0.54763540860000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Official Visitors to Job" borderStyle="bezel" textAlignment="center" minimumFontSize="17" id="gge-Vt-Y0E">
+                            <rect key="frame" x="35" y="1369" width="608" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.21595900069999999" green="0.50834479079999995" blue="0.91663128400000005" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>

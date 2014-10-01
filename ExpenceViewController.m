@@ -418,7 +418,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField==txtMil1 || textField==txtRate1 || textField==cashAdvance )
+    if(textField==txtMil1 || textField==txtRate1 || textField==cashAdvance || textField== reimburs || textField== ERtxtCheckNum  )
     {
         
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];

@@ -211,12 +211,8 @@
                            sketchImg:[sketchesNameArray componentsJoinedByString:@","]
                            images_uploaded:[imgNameArray componentsJoinedByString:@","]
                            ];
-        txtContactNo.text = @"";
-        projectDesc.text=@"";
-        nonCOtextTitle.text=@"";
+
         NtxtDateIssued.text=@"";
-        nonCOtextTitle.text=@"";
-        nonCOtextProject.text=@"";
         contractorResp.text=@"";
         txtTo.text=@"";
         txtTo.text=@"";
@@ -227,8 +223,7 @@
         txtUserId.text=@"";
         correctiveAction.text=@"";
         imgSignature.image=NULL;
-        txtPrintedName.text=@"";
-        NtxtDate.text=@"";
+       
         
         [hud setHidden:YES];
         BOOL imageSaveState;
