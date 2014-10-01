@@ -461,7 +461,9 @@
     
 }
 
-
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -477,13 +479,20 @@
         }
         else if (indexPath.section == 0 && indexPath.row == 2)
         {
-            //self.mapView.mapType=MKMapTypeHybrid;
+            self.mapView.mapType=MKMapTypeHybrid;
            // [self.mapView showsUserLocation];
-            mapView.showsUserLocation = YES;
-
+           // mapView.showsUserLocation = YES;
+            
+//            mapView.showsUserLocation = YES;
+//            mapView.zoomEnabled = YES;
+//            mapView.scrollEnabled = YES;
+//            mapView.mapType = MKMapTypeStandard;
+//            mapView.delegate = self;
+            
+   
 
         }
-        else if (indexPath.section == 1 && indexPath.row == 0)
+        else if (indexPath.section == 1 && indexPath.row == 4)
         {
             [self.mapView showsUserLocation];
         }
