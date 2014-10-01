@@ -183,9 +183,9 @@
 		55F3096719A5D05D0094C25F /* ExpenseReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D14A63199F1EF80091D5D8 /* ExpenseReportModel.m */; };
 		55FD290E19BAC8FD0002FEA5 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD290D19BAC8FD0002FEA5 /* Projects.m */; };
 		94188A9B19A9BA0600F35759 /* SuggestiveTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */; };
+		942376C819DBA8D10006647D /* DailyInspectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942376C719DBA8D10006647D /* DailyInspectionViewController.xib */; };
 		94A6BA5219D4048B0008547B /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */; };
 		94A6BA5619D40BE90008547B /* DailyInspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */; };
-		94A6BA5719D40BE90008547B /* DailyInspectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */; };
 		94E0027019A9E3870068D862 /* BidSummaryForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0026E19A9E3870068D862 /* BidSummaryForm.m */; };
 		94E0027119A9E3870068D862 /* BidSummaryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E0026F19A9E3870068D862 /* BidSummaryForm.xib */; };
 		94E0027A19A9F2670068D862 /* quantitySummarySheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0027819A9F2670068D862 /* quantitySummarySheet.m */; };
@@ -585,11 +585,11 @@
 		8D1107310486CEB800E47090 /* PRIMECMAPP-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRIMECMAPP-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		94188A9919A9BA0600F35759 /* SuggestiveTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestiveTextField.h; sourceTree = "<group>"; };
 		94188A9A19A9BA0600F35759 /* SuggestiveTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestiveTextField.m; sourceTree = "<group>"; };
+		942376C719DBA8D10006647D /* DailyInspectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyInspectionViewController.xib; sourceTree = "<group>"; };
 		94A6BA5019D4048B0008547B /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		94A6BA5119D4048B0008547B /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DailyInspectionViewController.h; path = ../DailyInspectionViewController.h; sourceTree = "<group>"; };
 		94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyInspectionViewController.m; path = ../DailyInspectionViewController.m; sourceTree = "<group>"; };
-		94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DailyInspectionViewController.xib; path = ../DailyInspectionViewController.xib; sourceTree = "<group>"; };
 		94E0026D19A9E3870068D862 /* BidSummaryForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidSummaryForm.h; sourceTree = "<group>"; };
 		94E0026E19A9E3870068D862 /* BidSummaryForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidSummaryForm.m; sourceTree = "<group>"; };
 		94E0026F19A9E3870068D862 /* BidSummaryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidSummaryForm.xib; sourceTree = "<group>"; };
@@ -1469,7 +1469,7 @@
 		FC20AE7E19D5CD2F0060CF76 /* DailyInspectionReport */ = {
 			isa = PBXGroup;
 			children = (
-				94A6BA5519D40BE90008547B /* DailyInspectionViewController.xib */,
+				942376C719DBA8D10006647D /* DailyInspectionViewController.xib */,
 				94A6BA5419D40BE90008547B /* DailyInspectionViewController.m */,
 				94A6BA5319D40BE90008547B /* DailyInspectionViewController.h */,
 			);
@@ -1871,7 +1871,7 @@
 				FC245AC618EC856800950C49 /* menu.png in Resources */,
 				FCBE1514190CC8C4003D7A85 /* butt.png in Resources */,
 				4B914CA319343D8300F6E1F4 /* ProjectDetailsCell.xib in Resources */,
-				94A6BA5719D40BE90008547B /* DailyInspectionViewController.xib in Resources */,
+				942376C819DBA8D10006647D /* DailyInspectionViewController.xib in Resources */,
 				52225B81197917820012E102 /* check_selected@2x.png in Resources */,
 				94E0027B19A9F2670068D862 /* quantitySummarySheet.xib in Resources */,
 				FC245ACB18EC892700950C49 /* Summary_2_ViewController.xib in Resources */,
