@@ -1011,4 +1011,51 @@
     return current_img;
 }
 
+
+
+-(void)viewDidUnload
+{
+    
+    
+    self->imgPath=nil;
+    self.exNUmber=nil;
+    self.arrayImages=nil;
+    self.imageAddSubView=nil;
+    imgViewAdd=nil;
+    self.imgSignatureEx=nil;
+    self->popoverController=nil;
+    self->pickerViewCities=nil;
+    self->pickerDataArray=nil;
+    self->hotelAnnotations=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self.imagePicker=nil;
+    self->pickerTag=nil;
+    self->pickerView=nil;
+    self->isSignature=nil;
+    self->btnCloseSignView=nil;
+    self->ifImage=nil;
+    self->appDelegate=nil;
+    self->count=nil;
+    self->count1=nil;
+    self->count2=nil;
+    self->uploading=nil;
+    self->uploadingsketch=nil;
+    self->comNoticeNo=nil;
+    self->isUploadingSignature=nil;
+    self->HUD=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->ExpID=nil;
+    self->RecID=nil;
+    self->first=nil;
+    self->Second=nil;
+    self->third=nil;
+    self->sourceDictionary=nil;
+    
+    
+}
+
 @end

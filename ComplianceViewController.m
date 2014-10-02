@@ -67,9 +67,8 @@ UILabel *cno;
 @synthesize arrayImages;
 @synthesize txtTitle;
 @synthesize datePicker;
-@synthesize EditComNumber;
+@synthesize EditComNumber,lblnoNum;
 @synthesize title,txtContactNo,txtPrintedName,txtProDesc,txtTo,txtUserId;
-@synthesize lblComNotNum;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -89,8 +88,7 @@ UILabel *cno;
     [super viewDidLoad];
     
     EditComNumber.hidden=TRUE;
-    lblComNotNum.hidden=TRUE;
-    
+    lblnoNum.hidden=TRUE;
     comNoticeNo=@"";
     count=0;
     count1=0;
@@ -859,13 +857,13 @@ UILabel *cno;
     return current_img;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
-}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//    pageControlBeingUsed = NO;
+//}
+//
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    pageControlBeingUsed = NO;
+//}
 
 
 -(IBAction)doneViewImages:(id)sender{
@@ -953,4 +951,50 @@ UILabel *cno;
         // Error handling
     }
 }
+
+
+-(void)viewDidUnload
+{
+    
+    self.datePicker = nil;
+    self.imagePicker = nil;
+    self.isFromSketches= nil;
+    self.isFromReport =nil;
+    self.arrayImages = nil;
+    self.imageAddSubView = nil;
+    self.imgViewAdd = nil;
+    self.CNo = nil;
+    self.scrollView = nil;
+    self->popoverController =nil;
+    self->pickerView1=nil;
+    self->pickerDataArray = nil;
+    self->hotelAnnotations=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self->pickerTag=nil;
+    self.txtSignature = nil;
+    self->btnCloseSignView = nil;
+    self->pickerViewCities = nil;
+    self->ifImage= nil;
+    self->appDelegate =nil;
+    self->imgName = nil;
+    self->count = nil;
+    self->hud=nil;
+    self->_receivedData = nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->uploading=nil;
+    self->uploadingsketch=nil;
+    self->count1=nil;
+    self->count2=nil;
+    self->comNoticeNo=nil;
+    self->isUploadingSignature=nil;
+    self->defaults=nil;
+    self->sourceDictionary=nil;
+    
+}
+
+
+
 @end

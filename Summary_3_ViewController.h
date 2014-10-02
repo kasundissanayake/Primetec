@@ -15,7 +15,7 @@
 
 
 
-@property(nonatomic,strong) NSString *smSheetNumber;
+
 
 
 @property(nonatomic,weak) NSString *sm3class1;
@@ -53,22 +53,20 @@
 @property(nonatomic,weak) NSString *sm3amt3;
 @property(nonatomic,weak) NSString *sm3amt4;
 @property(nonatomic,weak) NSString *sm3amt5;
-
 @property(nonatomic,weak) NSString *sm3dtotal;
 @property(nonatomic,weak) NSString *sm3dtotaldate;
 
 
-
-
-
+@property(nonatomic,strong) NSString *smSheetNumber;
+@property(nonatomic,strong)NSMutableArray *arrayImages;
+@property(nonatomic,strong)IBOutlet UIImageView *signature1;
+@property(nonatomic,strong)IBOutlet UIImageView *signature2;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,weak)IBOutlet UITextField *contractorRepresentative;
 @property(nonatomic,weak)IBOutlet UITextField *dailyTotal;
-
 @property(nonatomic,weak)IBOutlet UITextField *date1;
 @property(nonatomic,weak)IBOutlet UITextField *date2;
-
 @property (weak, nonatomic) IBOutlet UITextField *eQAmount1;
 @property (weak, nonatomic) IBOutlet UITextField *eQAmount2;
 @property (weak, nonatomic) IBOutlet UITextField *eQAmount3;
@@ -91,7 +89,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *eQRAte5;
 @property (weak, nonatomic) IBOutlet UITextField *eQSizeandClass1;
 @property (weak, nonatomic) IBOutlet UITextField *eQSizeandClass2;
-@property(nonatomic,strong)NSMutableArray *arrayImages;
 @property (weak, nonatomic) IBOutlet UITextField *eQSizeandClass3;
 @property (weak, nonatomic) IBOutlet UITextField *eQSizeandClass4;
 @property (weak, nonatomic) IBOutlet UITextField *eQSizeandClass5;
@@ -102,8 +99,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *eQTotalHours5;
 @property (weak, nonatomic) IBOutlet UITextField *inspector;
 @property (weak, nonatomic) IBOutlet UITextField *project_id;
-@property(nonatomic,strong)IBOutlet UIImageView *signature1;
-@property(nonatomic,strong)IBOutlet UIImageView *signature2;
 @property (weak, nonatomic) IBOutlet UITextField *sMSheetNo;
 @property (weak, nonatomic) IBOutlet UITextField *total_to_date;
 

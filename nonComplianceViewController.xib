@@ -18,7 +18,7 @@
                 <outlet property="imageAddSubView" destination="WOd-9w-4qm" id="RNd-9S-HR5"/>
                 <outlet property="imgSignature" destination="uw6-7i-Cac" id="18z-pF-ZoQ"/>
                 <outlet property="imgViewAdd" destination="ZA9-8Q-nk6" id="IAp-dZ-dwf"/>
-                <outlet property="lblCom" destination="wH7-Wc-4Kc" id="6wg-Uo-NRo"/>
+                <outlet property="lblCom" destination="wH7-Wc-4Kc" id="N1A-S7-cAK"/>
                 <outlet property="nonCOtextProject" destination="cF6-58-LoU" id="xgl-3K-Bj5"/>
                 <outlet property="nonCOtextTitle" destination="icQ-u5-QgY" id="bBa-nN-Rbn"/>
                 <outlet property="projectDesc" destination="YPC-1o-hcj" id="b4N-mb-sbt"/>

@@ -318,4 +318,32 @@
     [super didReceiveMemoryWarning];
 }
 
+
+-(void)viewDidUnload
+{
+    self.scrollView=nil;
+    self.selectedDict=nil;
+    self->popoverController = nil;
+    self->isSubTableView = nil;
+    self->arrayItems=nil;
+    self->itemDetails=nil;
+    self->HUD=nil;
+    self->appDelegate=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->btnPrint=nil;
+    self->itemNo=nil;
+    self->itemDes=nil;
+    self->value=nil;
+    self->pickerDataArray=nil;
+    self->pickerTag=nil;
+    self->pickerView1=nil;
+    self->pickerViewCities=nil;
+    self->isSaved=nil;
+    self->sourceDictionary=nil;
+    self->qtyEstID=nil;
+}
+
 @end

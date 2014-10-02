@@ -18,7 +18,7 @@
 @property(nonatomic,strong)IBOutlet UIImageView *imgSignatureDaily;
 @property(nonatomic,strong)IBOutlet UIView *imageAddSubView;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAdd;
-@property(nonatomic,strong)IBOutlet UITextView *txvDescription;
+@property(nonatomic,weak)IBOutlet UITextView *txvDescription;
 @property (weak, nonatomic) IBOutlet UITextField *txtName1;
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle1;
 @property (weak, nonatomic) IBOutlet UITextField *txtName2;

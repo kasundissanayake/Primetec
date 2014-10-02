@@ -14,6 +14,7 @@
 
 
 @property(nonatomic,strong) NSString *smSheetNumber;
+@property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 
 @property(nonatomic,weak) NSString *sm2description1;
@@ -48,7 +49,6 @@
 
 
 
-@property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UITextField *additionalDiscount;
 @property (weak, nonatomic) IBOutlet UITextField *lessDiscount;

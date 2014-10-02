@@ -821,4 +821,71 @@
 }
 
 
+
+-(void)viewDidUnload
+{
+    self.scrollView=nil;
+    self.arrayImages=nil;
+    
+    self->hotelAnnotations=nil;
+    self->popoverController=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self->datePicker=nil;
+    self->pickerTag=nil;
+    
+    self->pickerView=nil;
+    self->pickerDataArray=nil;
+    self->signatureViewController=nil;
+    self->isSignature=nil;
+    self->btnCloseSignView=nil;
+    self->count=nil;
+    self->HUD=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    
+    self->resPonse=nil;
+    self->uploading=nil;
+    self->uploadingsketch=nil;
+    self->count1=nil;
+    self->count2=nil;
+    self->comNoticeNo=nil;
+    self->isUploadingSignature=nil;
+    self->appDelegate=nil;
+    self->sourceDictionary=nil;
+    
+    self->smNum=nil;
+    self->value1=nil;
+    self->value2=nil;
+    self->value3=nil;
+    self->value4=nil;
+    self->value5=nil;
+    
+    self->value6=nil;
+    self->value7=nil;
+    self->value8=nil;
+    self->value9=nil;
+    self->value10=nil;
+    self->value11=nil;
+    self->value12=nil;
+    self->value13=nil;
+    self->value14=nil;
+    self->value15=nil;
+    
+    self->value16=nil;
+    self->value17=nil;
+    self->value18=nil;
+    self->value19=nil;
+    self->value20=nil;
+    self->value21=nil;
+    self->value22=nil;
+    self->value23=nil;
+    self->value24=nil;
+    self->value25=nil;
+}
+
+
+
+
 @end

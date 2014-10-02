@@ -13,39 +13,41 @@
 
 @interface ComplianceViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,MBProgressHUDDelegate>{
     UIScrollView *scrollView;
-    UIPageControl *pageControl;
-    BOOL pageControlBeingUsed;
+    
 }
 
 @property(nonatomic,retain) UIDatePicker *datePicker;
-@property (strong, nonatomic) IBOutlet UILabel *CNo;
+
 @property(nonatomic,strong)UIImagePickerController *imagePicker;
 @property(nonatomic,assign)BOOL isFromSketches;
 @property(nonatomic,assign)BOOL isFromReport;
 @property(nonatomic,strong)NSMutableArray *arrayImages;
 
 
+@property (weak, nonatomic) IBOutlet UILabel *lblnoNum;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblComNotNum;
 
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property(nonatomic,strong)IBOutlet UITextField *txtDateIssued;
-@property(nonatomic,strong)IBOutlet UITextField *txtDateContractorStarted;
-@property(nonatomic,strong)IBOutlet UITextField *txtDateContractorCompleted;
-@property(nonatomic,strong)IBOutlet UITextField *txtDateofRawReprote;
-@property(nonatomic,strong)IBOutlet UITextField *txtDate;
-@property(nonatomic,strong)IBOutlet UIImageView *txtSignature;
-@property (strong, nonatomic) IBOutlet UITextView *conRes;
-@property (strong, nonatomic) IBOutlet UITextView *correctAction;
-@property(nonatomic,strong)IBOutlet UITextField *EditComNumber;
-@property(nonatomic,strong)IBOutlet UITextField *COtextTitle;
-@property(nonatomic,strong)IBOutlet UITextField *COtextProject;
 @property(nonatomic,strong)IBOutlet UIView *imageAddSubView;
 @property(nonatomic,strong)IBOutlet UIImageView *imgViewAdd;
-@property(nonatomic,strong)IBOutlet UITextView *txvDescription;
-@property(nonatomic,strong) IBOutlet UIView *viewGallery;
-@property(nonatomic,strong)IBOutlet UITextField *txtTitle;
+@property (strong, nonatomic) IBOutlet UILabel *CNo;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property(nonatomic,weak)IBOutlet UITextField *txtDateIssued;
+@property(nonatomic,weak)IBOutlet UITextField *txtDateContractorStarted;
+@property(nonatomic,weak)IBOutlet UITextField *txtDateContractorCompleted;
+@property(nonatomic,weak)IBOutlet UITextField *txtDateofRawReprote;
+@property(nonatomic,weak)IBOutlet UITextField *txtDate;
+@property(nonatomic,weak)IBOutlet UIImageView *txtSignature;
+@property (weak, nonatomic) IBOutlet UITextView *conRes;
+@property (weak, nonatomic) IBOutlet UITextView *correctAction;
+@property(nonatomic,weak)IBOutlet UITextField *EditComNumber;
+@property(nonatomic,weak)IBOutlet UITextField *COtextTitle;
+@property(nonatomic,weak)IBOutlet UITextField *COtextProject;
+
+@property(nonatomic,weak)IBOutlet UITextView *txvDescription;
+@property(nonatomic,weak) IBOutlet UIView *viewGallery;
+@property(nonatomic,weak)IBOutlet UITextField *txtTitle;
 @property (weak, nonatomic) IBOutlet UITextField *txtContactNo;
 @property (weak, nonatomic) IBOutlet UITextView *txtProDesc;
 @property (weak, nonatomic) IBOutlet UITextField *txtTo;

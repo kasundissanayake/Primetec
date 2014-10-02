@@ -666,4 +666,80 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)viewDidUnload
+{
+    
+    self.scrollView=nil;
+    
+    
+    self.scrollView=nil;
+    self->hotelAnnotations=nil;
+    
+    self->popoverController=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self->popoverContent=nil;
+    self->count=nil;
+    
+    self->HUD=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->count=nil;
+    self->HUD=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    
+    self->resPonse=nil;
+    self->uploading=nil;
+    self->uploadingsketch=nil;
+    self->count1=nil;
+    self->count2=nil;
+    self->comNoticeNo=nil;
+    self->isUploadingSignature=nil;
+    self->appDelegate=nil;
+    self->sourceDictionary=nil;
+    
+    self->sm3value1=nil;
+    self->value2=nil;
+    self->value3=nil;
+    self->value4=nil;
+    self->value5=nil;
+    
+    self->value6=nil;
+    self->value7=nil;
+    self->value8=nil;
+    self->value9=nil;
+    self->value10=nil;
+    self->value11=nil;
+    self->value12=nil;
+    self->value13=nil;
+    self->value14=nil;
+    self->value15=nil;
+    
+    self->value16=nil;
+    self->value17=nil;
+    self->value18=nil;
+    self->value19=nil;
+    self->value20=nil;
+    self->value21=nil;
+    self->value22=nil;
+    self->value23=nil;
+    self->value24=nil;
+    self->value25=nil;
+    
+    self->value26=nil;
+    self->value27=nil;
+    self->value28=nil;
+    self->value29=nil;
+    self->value30=nil;
+    self->value31=nil;
+    self->value32=nil;
+    
+}
+
+
 @end

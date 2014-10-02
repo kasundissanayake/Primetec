@@ -13,9 +13,6 @@
 @interface SummaryReportViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, MBProgressHUDDelegate>
 
 
-
-
-
 @property(nonatomic,strong)IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *arrayImages;
 

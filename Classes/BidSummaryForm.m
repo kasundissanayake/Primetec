@@ -37,6 +37,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidUnload
+{
+    self.scrollView=nil;
+    
+}
+
 /*
 #pragma mark - Navigation
 

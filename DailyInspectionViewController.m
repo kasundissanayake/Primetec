@@ -45,6 +45,16 @@
     NSUserDefaults *defaults;
     NSDictionary *sourceDictionary;
     MBProgressHUD *hud;
+    
+    NSDate *today ;
+    NSDateFormatter *dateFormat;
+
+    NSString *dateString;
+    
+    NSDate *today1;
+    NSDateFormatter *dateFormat1;
+    
+    NSString *dateString1;
 }
 @end
 
@@ -117,18 +127,18 @@
     imgSignatureDaily.userInteractionEnabled = YES;
     [imgSignatureDaily addGestureRecognizer:singleTapInspec];
     
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+   today = [NSDate date];
+    dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormat stringFromDate:today];
+  dateString = [dateFormat stringFromDate:today];
     
     
-    NSDate *today1 = [NSDate date];
-    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+ today1 = [NSDate date];
+   dateFormat1 = [[NSDateFormatter alloc] init];
     
     
     [dateFormat1 setDateFormat:@"hh:mm"];
-    NSString *dateString1 = [dateFormat1 stringFromDate:today1];
+   dateString1 = [dateFormat1 stringFromDate:today1];
     
     time.text=dateString1;
     ConName.text=appDelegate.client;
@@ -1330,5 +1340,60 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+-(void)viewDidUnload
+{
+    
+   // self.imagePicker=nil;
+    self.isFromSketches=nil;
+    self.isFromReport=nil;
+    self.arrayImages=nil;
+    self.sketchesArray=nil;
+    self.scrollView=nil;
+   // self.datePicker=nil;
+    //self.txtDateIN=nil;
+    self.imgSignatureDaily=nil;
+    self.imageAddSubView=nil;
+    self.imgViewAdd=nil;
+    self->hotelAnnotations=nil;
+    self->popoverController=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self->pickerTag=nil;
+    self->pickerView1=nil;
+    self->pickerDataArray=nil;
+    self->signatureViewController=nil;
+    self->isSignature=nil;
+    self->btnCloseSignView=nil;
+    self->pickerViewCities=nil;
+    self->ifImage=nil;
+    self->appDelegate=nil;
+    self->imgName=nil;
+    self->count=nil;
+    self->HUD=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->uploading=nil;
+    self->count1=nil;
+    self->comNoticeNo=nil;
+    self->uploadingsketch=nil;
+    self->count2=nil;
+    self->defaults=nil;
+    self->sourceDictionary=nil;
+    self->hud=nil;
+    self->today=nil;
+    self->dateFormat=nil;
+    self->dateString1=nil;
+    self->today1=nil;
+    self->dateFormat1=nil;
+    self->dateString1=nil;
+    
+}
+
 
 @end

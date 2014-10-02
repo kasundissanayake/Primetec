@@ -61,7 +61,7 @@
 @synthesize arrayImages,txtTitle;
 @synthesize imageAddSubView;
 @synthesize imgViewAdd,txvDescription;
-@synthesize txtContactNo,txtUserId,txtPrintedName,txtTo,EditNonNoticeNo;
+@synthesize txtContactNo,txtUserId,txtPrintedName,txtTo,EditNonNoticeNo,lblCom;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -78,6 +78,10 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    lblCom.hidden=TRUE;
+    EditNonNoticeNo.hidden=TRUE;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageReviewer) name:@"DoneSignatureReviewer" object:nil];
     
     count=0;
@@ -877,5 +881,48 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+-(void)viewDidUnload
+{
+    
+    self.isFromSketches=nil;
+    self.isFromReport=nil;
+    self.arrayImages=nil;
+    self.imagePicker=nil;
+    self.imageAddSubView=nil;
+    self.imgViewAdd=nil;
+    self.scrollView=nil;
+    self.imagePicker=nil;
+    self->hotelAnnotations=nil;
+    self->popoverController=nil;
+    self->tblView=nil;
+    self->tableData=nil;
+    self->pickerTag=nil;
+    self->pickerDataArray=nil;
+    
+    self.imgSignature=nil;
+    self->btnCloseSignView=nil;
+    self->pickerViewCities=nil;
+    self->ifImage=nil;
+    self->appDelegate=nil;
+    self->count=nil;
+    self->hud=nil;
+    self->_receivedData=nil;
+    self->_receivedResponse=nil;
+    self->_connectionError=nil;
+    self->resPonse=nil;
+    self->uploading=nil;
+    self->count1=nil;
+    self->comNoticeNo=nil;
+    self->count2=nil;
+    self->uploadingsketch=nil;
+    self->isUploadingSignature=nil;
+    self->defaults=nil;
+    self->sourceDictionary1=nil;
+    
+}
+
 
 @end
